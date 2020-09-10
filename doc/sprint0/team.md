@@ -6,5 +6,6 @@
 | Brian Kim  | `kimbri15` | `1004260541`  | briank.kim@mail.utoronto.ca  | Discord: `Ludaeos#6432` |
 | Samyak Mehta | `mehtas28`| `1006298542` | samyak.mehta@mail.utoronto.ca | Discord: `AlphA#2730` |
 | Divyam Patel | `pate1006`| `1006139698` | divyam.patel@mail.utoronto.ca | Discord: `Divyam#1532` |
+| Aryan Patel | `pate1065`| `1006273514` | aryan.patel@mail.utoronto.ca | Discord: `Apolord#3974` |
 
 https://discord.gg/Y72f3yr
