@@ -103,7 +103,7 @@ We accept these guidelines and intend to fulfill them:
 
 `Clara Chick`: Clara Chick <3
 
-`Winson Yuan`: _______________________________  
+`Winson Yuan`: Winson Yuan 
 
 `Brian Kim`: _________________________________  
 
