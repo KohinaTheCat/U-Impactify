@@ -101,7 +101,7 @@ We accept these guidelines and intend to fulfill them:
 
 `Navinn Ravindaran`: Navinn Ravindaran
 
-`Clara Chick`: _______________________________  
+`Clara Chick`: Clara Chick <3
 
 `Winson Yuan`: _______________________________  
 
