@@ -105,7 +105,7 @@ We accept these guidelines and intend to fulfill them:
 
 `Winson Yuan`: Winson Yuan 
 
-`Brian Kim`: _________________________________  
+`Brian Kim`: Brian Kim  
 
 `Samyak Mehta`: Samyak Mehta
 
