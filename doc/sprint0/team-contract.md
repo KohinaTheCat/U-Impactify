@@ -107,7 +107,7 @@ We accept these guidelines and intend to fulfill them:
 
 `Brian Kim`: _________________________________  
 
-`Samyak Mehta`: _______________________________
+`Samyak Mehta`: Samyak Mehta
 
 `Divyam Patel`: _______________________________  
 
