@@ -39,9 +39,13 @@
 #### Other Meetings
 
 - Daily Standup 
-  - Would take approx. 5+ minutes every weekday.
-  - If a member cannot attend, they must say beforehand (preferably in the Discord chat) what the plan on working on.
+  - Would take approx. 5+ minutes every weekday, no more than 15.
+  - If a member cannot attend, they must say beforehand (preferably in the Discord chat) what they plan on working on.
   - Meeting time would take place between 17:00 - 19:00 (**TBD**)
+  - **Important Manadatory Questions**
+      1. What have you done since yesterday?
+      2. What are you planning on doing today?
+      3. Any impediments or stumbling blocks?
 
 ## Version Control
 > What to/not to commit, content of log messages, ...
@@ -85,9 +89,26 @@
 
 ## Contingency Planning
 
-* contingency planning (what if a team member drops out, what if a team member consistently misses meetings, what if a team member is academically dishonest, .  .  .  )  We suggest that in these cases, a team promptly seeks help from the instructor.  It is important not to let such situations escalate. 
-  * We snitch on them
-  * Don't have bias (in terms of treatment)
-  * Inform the rest of the team
+- As suggested, the team will promptly seek help from the instructor and/or TA. 
+- All members must be informed regarding the matter at hand.
+- **_Do not have a bias_**
+  - Do not cloud your own judgement of an under-preforming member based on past personal relations 
 
+
+--------------------------------------------------------------------------------------------------------
 ​              
+We accept these guidelines and intend to fulfill them:
+
+`Navinn Ravindaran`: Navinn Ravindaran
+
+`Clara Chick`: _______________________________  
+
+`Winson Yuan`: _______________________________  
+
+`Brian Kim`: _________________________________  
+
+`Samyak Mehta`: _______________________________
+
+`Divyam Patel`: _______________________________  
+
+`Aryan Patel`: _______________________________ 
