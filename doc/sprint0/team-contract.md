@@ -111,4 +111,4 @@ We accept these guidelines and intend to fulfill them:
 
 `Divyam Patel`: _______________________________  
 
-`Aryan Patel`: _______________________________ 
+`Aryan Patel`: Aryan Patel
