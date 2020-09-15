@@ -109,6 +109,6 @@ We accept these guidelines and intend to fulfill them:
 
 `Samyak Mehta`: Samyak Mehta
 
-`Divyam Patel`: _______________________________  
+`Divyam Patel`: Divyam Patel 
 
 `Aryan Patel`: Aryan Patel
