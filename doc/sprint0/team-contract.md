@@ -1,5 +1,6 @@
 # Team Expectations Agreement 
-*Tentative* (Sept 12 2020)
+~~*Tentative* (Sept 12 2020)~~  
+**Finalized** as of Sept. 15th 2020
 
 ## Methods of Communication
 > Email, Phone, Messenger, Text, ...
