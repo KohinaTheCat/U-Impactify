@@ -1,4 +1,4 @@
-<img src="./doc/sprint0/images/image.png" width="300"/>
+<img src="./images/image.png" width="300"/>
 
 ## Impact Learner
 > Rodrigo Rodrigues age 57 
@@ -20,7 +20,7 @@
 
 
 
-<img src="./doc/sprint0/images/image2.png" width="300"/>
+<img src="./images/image2.png" width="300"/>
 
 ## Impact Consultant
 > Moe Lester age 34
@@ -39,4 +39,4 @@
 - He wants to share the analysis he gets from this tailored course directly with the organization. They can use that info to analyize their employees more.
 
 
-<img src="./doc/sprint0/images/image1.png" width="300"/>
+<img src="./images/image1.png" width="300"/>
