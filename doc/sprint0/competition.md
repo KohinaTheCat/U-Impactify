@@ -59,7 +59,6 @@
   - It requires a lot of trust in our customer base
     - there would be a myriad of false reports, and this would cost a lot of man-power to verify the validity of each application
   - We will require an extensive application process, video interview and A.I. technology
-    - We're just so fucking cool. :sunglasses: 
 
 ##### Gamified and Accessible Learning :video_game:
 
