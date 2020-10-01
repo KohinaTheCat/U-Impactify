@@ -1,42 +1,38 @@
-<img src="./images/image.png" width="300"/>
+# Personas
+> *All persona headshots in this document were sourced from* `https://thispersondoesnotexist.com/`
 
 ## Impact Learner
-> Rodrigo Rodrigues age 57 
+> `Rodrigo Rodrigues`: age 57
 
-- He was in an accounting firm for 30 years, recently quit his job
-- Wants to be more knowledgeable in the social purpose sector but he doesn't know where to start
-- Searches for learning platforms (competitors) and realizes most do not cater to the social purpose sector
-- Stumbles across UImpactify, hesitant on joining because its new 
-- Looks at the core values of the company and he finds that it aligns with what he wants, so he joins as an impact learner
-- He's not well versed in the sector and therefore does alot of searching on the platform to find what he wants
-- He enrolls in the standard `x` courses that he was suggested to enroll in by the platform 
-- After completing a few courses, He sorta knows what he wants and is interested in.
-- He wants to offer his feedback and give an overall rating to each course that he completed
-- He wants to view courses related to what he has already completed and/or taught by the same instructor(s)
-- In one of his courses, one part of that course is a refresher to a course he already took before. He wants to be able to outright skip that part of the course.
-- After his first run of courses, he takes another `x - 2` and thinks he can take on the challenge of 2 more courses later on. He wants to be able to take those courses without affecting the base subscription fee
-- After learning alot about the sector, he enjoys using the platform and wants to give back. Fortunately he is wealthy enough to do so and donates some money to the giving garden so other impact learners who are unable to join the platform would *now* get the same oppertunities that he had  
+<img src="./images/image.png" width="300" style="margin-right: 1rem;" />
 
+**Rodrigo**, or **_Rod_** as he goes by, is married with 2 kids and was a CPA for an accounting firm for 30 years. Developped from his time working, he embraces the importance in direct feedback, review and social equality. He decided to retire early and now wants to spend *more* time with his family. <br>  
+Due to him being financially well off, he also decides to give back to his local community as well as other social purpose projects. In particular, he donates money to not-for-profit organizations/charities whose values are aligned with his. However, before he embarks in his journey, he wants to be more knowledgable in the social purpose sector and he does not know where to start. <br>  
+As a result, he spends a decent amount of time searching for mediums for him to be further educated about the sector. He realises he wants personal recommendations on where to start, and many platforms *do* offer this, but they **_do not_** cater to the social pupose sector specifically. Just like the organizations he wants to donate and support, he *also* wants the platform he learns on to also have core values that support his own.
 
-
-
-<img src="./images/image2.png" width="300"/>
+---
 
 ## Impact Consultant
-> Moe Lester age 34
-
-- Freelancer who is passionate about the social purpose sector
-- Loves to volunteer and has a lot of experiences and wants to share them with others who are just as passionate as him
-- He has tried using services like Youtube and Udemy but they both lacked the engagement and the target userbase he ultamately wanted
-- He finds UImpactify and sees that the platform's ideal users are exactly the target audience he wants
-- He joins as a Content Creator / Impact Consultant 
-- He then goes on to create a couple of courses that attract alot of users
-- He wants to see an overall analysis for each course he makes 
-  - User feedbacks + overall rating
-  - User Engagement (What parts of the courses are users paying more attention to)
-- After making a few courses and generating a good amount of revenue, UImpactify contacts him saying "there is a SI that we think is a good fit for you" and wants him to join that initiative. He joins it and gets payed by the platform
-- He works closely with the SI and produces tailored courses for the Initiatives employees/volunteers. 
-- He wants to share the analysis he gets from this tailored course directly with the organization. They can use that info to analyize their employees more.
+> `Moe Lester`: age 34
 
 
-<img src="./images/image1.png" width="300"/>
+<img src="./images/image2.png" width="300" style="margin-right: 1rem;" />
+
+**Moe**, **_just Moe_**, is a freelancer, content creator and influencer who is passionate about the social purpose sector. He loves to volunteer and has many experiences and wants to share them with others who are *just as* passionate as him. <br>   
+He has tried using popular content creation platforms like `YouTube` and `Udemy` but to no avail, as they **_both_** lacked the engagement and the target user base we ultimately wanted. For his newest venture into the social purpose sector, he wants to be able to create and manage educational courses. <br>  
+*Preferably*, on a platform where he can teach and **actively** participate in the improvement of his students by providing feedback and answering any and all questions they have. Although he is inexperienced in mentoring and coaching, he feels strongly about 1-to-1 communication sessions where he shares his experiences, have a conversation, and just share any insights he has for the student. <br>  
+If the shoe fits, branching from this new venture, he would also like to work alongside non-profit organizations to develop both of their capacities by sharing *tailored* content and services with them, at a cost **_of course_**.
+
+---
+
+## Social Initiative
+> `Karen Chan`: age 28
+
+<img src="./images/image1.png" width="300" style="margin-right: 1rem;" />
+
+**Karen**, whose father **_isn't_** Jackie, is an up-and-coming networker who is currently working for a newly formed non-profit organization as the Head of Recruiting for both volunteers and regular employees. This organization recently came into contact with initial funding as they ran a `GoFundMe` campaign. This initial funding however is sadly not enough for long term capacity development and growth. <br>   
+After the snowballing frustration by using job boards like `Indeed`, `Monster` to hire employees and volunteer boards such as `VolunteerMatch.com`, she wants a centralized platform for *both* new recruits. She wants to be able to showcase and share employment, learning and volunteer oppertunites that her organization offers on said platform. <br>  
+Now by switching to this new platform, she has to figure out how to handle onboarding for employees and the required general learning for volunteers. Ideally, this would be handled in the same platform. In her dream scenario, the recruitment flow of  <br>  
+  `networking => hiring => onboarding/learning => working/volunteering` <br>  
+ would be **_as seamless as possible_** and the tools needed for this would speak more towards the purpose of her organization.
+
