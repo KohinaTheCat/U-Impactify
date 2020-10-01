@@ -81,8 +81,6 @@
 
 - Dedicated Capacity Development Concierge 
 
-  - We will be your slaves :bow:
-
   ###### but why?
 
   - we plan to make our customer's lives easier by keeping everything they need in one place
@@ -95,10 +93,4 @@
 The social sector is terribly underfunded, so we plan to give rising and current non-profits a platform to help train and boost the customer base. We want to provide them all the support they need by integrating everything on the same site. We also want to attract customers by making learning engaging and accessible.
 
 This site would be available to all demographics. Unlike Canvas, you don't have to be a big organization to have access to our services.
-
-
-
-> "Why do one thing very well, if you can do 5 things crappily" - Navinn
-
-> slap some of this, we got a start-up https://careerfoundry.com/en/blog/web-development/tech-buzzwords-to-learn/
 
