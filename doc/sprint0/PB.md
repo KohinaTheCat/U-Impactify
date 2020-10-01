@@ -170,3 +170,44 @@
     ###### Acceptance Criteria:
 
     - Be able to donate money to the website that distributes it amongst courses
+    
+    
+18.) **As a user I want to be able to privately message another user so that I can keep my privacy.**
+
+###### Acceptance Criteria:   
+
+    -  Be able to donate money to support the learning of others
+    
+19.) **As a social Initiative I want to be able to donate to the giving garden so that I can support those in need**
+
+###### Acceptance Criteria:   
+
+ 		-  Be able to donate money to support the learning of others
+
+ 		-  Popup window allows you to navigate to the donations page
+
+ 		- Amount donated and available tracked by the database
+      
+
+20.) **As an administrator, I want to be able to delete courses so that I can ensure a productive environment**
+
+###### Acceptance Criteria:   
+
+###### 		- Be able to delete courses that I think are not appropriate
+
+######         - Notify the instructor of the removal of their course 
+
+######         - Have the removal of the course from the dashboard for all users
+
+
+21.) **As an social initiative I want to be able to create a profile for my organization so that users can view my organization**
+
+###### Acceptance Criteria:   
+
+###### 		- Be able to create my own profile containing my information
+
+###### 		- Be able to view other peoples profiles
+
+
+
+
