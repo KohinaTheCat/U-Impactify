@@ -1,25 +1,26 @@
-## :books: done
+# Definition of Done (DoD)
+> We must meet the definition of done to ensure quality :white_check_mark:
 
-###### /dən/
+### For a given story
 
-*verb*
+1. Each development subtask must be reviewed and approved by *at least* one other team member depending on the story points assigned.   
 
-> If something is done, or you are done with it, it is finished, or you have finished doing it. It does not mean it should not be refactored. 
+3. All acceptance criteria of what was set for the story *must* be met.  
 
-​	every development sub-task should be peer-reviewed, tested and documented.
+5. Unit testing can be handled by any team member, *including the member(s) who worked on the development of the story* and must pass all tests.  
 
-​	the product owner approves of it.
+7. Manual testing must be handled **by another team member** and must pass all tests.  
 
-*adjective*
+9. (User Stories only) The product owner must approve/accept the story.  
 
-	1. (for user stories)
+### For a given epic  
 
-    > must meet the acceptance criteria of what the team set which is reviewed by one other. it refers to the criteria that have to be fulfilled for the user story to be declared. 
+- All stories (User/Technical/Bug) allocated for the epic not including stretch goals, must be done. Stretch goals not done in the epic will be pushed for the next sprint. 
 
-	2. (for a sprint)
+### For a given sprint  
+  
+- All epics allocated for the sprint must be done.  
 
-    >  this refers to the set of conditions and list of items that have to be checked to display a Sprint as done or completed. 
+---
 
-	3. (for a release)
-
-    > this is the set of checklist items that have to be crossed to release the update to the product.
+**_The Product is done when all planned sprints are done._**
