@@ -27,7 +27,7 @@
 
 - Khan Academy - https://www.khanacademy.org/
 
-  - free, we love Sal :heart:	
+  - free to learn
   - monitor Progress of the learning/engagement and upgrade
 
 - Future Learn - https://www.futurelearn.com/
@@ -50,7 +50,7 @@
 
 - A social initiative can ask for support in Giving Garden if they cannot afford to get any service/support
 
-  - A low subscription fees for impact learners to take a fixed number of courses simultaneously
+  - A low subscription fee for impact learners to take a fixed number of courses simultaneously
 
 - External donors can donate to the Giving Garden for impact learners and social initiatives get support for free/subsidized costs
 
@@ -86,7 +86,6 @@
   - other places have no need to integrate it
 
   
-
 ##### Overall  :angel:
 
 The social sector is terribly underfunded, so we plan to give rising and current non-profits a platform to help train and boost the customer base. We want to provide them all the support they need by integrating everything on the same site. We also want to attract customers by making learning engaging and accessible.
