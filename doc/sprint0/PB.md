@@ -6,6 +6,7 @@
 1. **As a user, I want to create an account, so that I can access the platform.**
 
    Story Points: 3
+   Priority: 1
 
    ###### Acceptance Criteria:  
 
@@ -18,6 +19,7 @@
 2. **As an instructor, I want to be able to switch my course page to a user view, so that I can see how my content looks like as a student.**
 
     Story Points: 5
+    Priority: 3
 
    ###### Acceptance Criteria:  
 
@@ -28,6 +30,7 @@
 3. **As an instructor, I want to create a course, so that users are able to enroll/view.**
 
    Story Points: 5
+   Priority: 1
 
    ###### Acceptance Criteria:  
 
@@ -39,6 +42,7 @@
 4. **As an instructor, I want to be able to update my course content, so that students are up to date.**
 
     Story Points: 5
+    Priority: 1
 
    ###### Acceptance Criteria:  
 
@@ -49,6 +53,7 @@
 5. **As a user, I want to be able to see a preview of the courses I am taking, so that I can get the general idea of the course.**
 
     Story Points: 3
+    Priority: 1
 
    ###### Acceptance Criteria:  
 
@@ -59,6 +64,7 @@
 6. **As a student, I want to be able to enroll in a course, so that I can access the course content and lessons.**
 
     Story Points: 2
+    Priority: 1
 
    ###### Acceptance Criteria:  
 
@@ -70,6 +76,7 @@
 7. **As a student, I want to be able to see instructor created assessment, so that I can work on them.**
 
     Story Points: 8
+    Priority: 1
 
    ###### Acceptance Criteria:  
 
@@ -82,6 +89,7 @@
 8. **As an instructor, I want to be able to create assessments, so that I can test my student’s knowledge .**
 
     Story Points: 5
+    Priority: 1
 
    ###### Acceptance Criteria:
 
@@ -93,6 +101,7 @@
 9.  **As a user, I want to be able to live stream, so that students can view my shared content.**
 
     Story Points: 13
+    Priority: 3
 
    ###### Acceptance Criteria:
 
@@ -104,6 +113,7 @@
 10. **As a user, I want to be able to drop a course if I am not satisfied, so that I have the ability to choose what I want to learn.**
 
     Story Points: 3
+    Priority: 1/2 (Depends on terms and conditions)
 
     ###### Acceptance Criteria:
 
@@ -115,6 +125,7 @@
 11. **As a instructor, I want to be able to see the analytics on my students for each of my courses, so that I can improve my course.**
 
     Story Points: 8 (not including watch time)
+    Priority: 2
 
     ###### Acceptance Criteria:
 
@@ -126,6 +137,7 @@
 12. **As a user, I want to be able to delete my account, so that none of my information is stored by a corporation.**
 
     Story points: 5
+    Priority: 2
 
     ###### Acceptance Criteria:
 
@@ -137,6 +149,7 @@
 13. **As an instructor, I want to be able to get feedback on my courses, so that I know how to improve.**
 
     Story Points: 5
+    Priority: 2
 
     ###### Acceptance Criteria:
 
@@ -148,6 +161,7 @@
 14. **As a social initiative, I want to be able to hire an impact consultant, so that I could use them.**
 
     Story Points: 5
+    Priority: 1
 
     ###### Acceptance Criteria:
 
@@ -161,6 +175,7 @@
 15. **As a student, I want to be able to rate my courses and add reviews, so that I can give effective feedback to the instructor.**
 
     Story Points: 5
+    Priority: 2
 
     ###### Acceptance Criteria:
 
@@ -171,7 +186,8 @@
 
 16. **As a user I want to be able to privately message another user so that I can keep my privacy.**
 
-    Story points: 5/8 depending on implementatino
+    Story points: 5/8 depending on implementation
+    Priority: 2
 
     ###### Acceptance Criteria:
 
@@ -182,6 +198,7 @@
 17. **As a social Initiative I want to be able to donate to the giving garden so that I can support those in need**
 
     Story Points: 5/8 depending on implementation
+    Priority: 1
 
     ###### Acceptance Criteria:
 
@@ -189,10 +206,11 @@
     - popup window allows you to navigate to the donations page 
     - amount donated and avaliable is tracked by the database 
     
-    DISCUSS WITH PO
+    **DISCUSS WITH PO**
 18. **As an administrator, I want to be able to delete courses so that I can ensure a productive environment**
 
     Story Points: 8/13 implementation/PO
+    Priority: 1
 
     ###### Acceptance Criteria:
     
@@ -203,6 +221,7 @@
 19. **As an social initiative I want to be able to create a profile for my organization so that users can view my organization**
 
     Story Points: 3
+    Priority: 1
 
     ###### Acceptance Criteria:
     
@@ -212,6 +231,7 @@
 20. **As a Impact Consultant, I should be able to join a social initiative, so that I could be helpful.**
 
     Story Points: 5
+    Priority: 1
 
     ###### Acceptance Criteria:
     
