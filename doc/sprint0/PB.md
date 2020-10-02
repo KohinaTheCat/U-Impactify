@@ -211,6 +211,7 @@
 
 20. **As a Impact Consultant, I should be able to join a social initiative, so that I could be helpful.**
 
+    Story Points: 5
 
     ###### Acceptance Criteria:
     
