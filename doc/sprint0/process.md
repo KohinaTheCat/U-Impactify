@@ -1,6 +1,6 @@
 **Reflect on how your team worked together.**
 
-- Team worked resonably well
+- Team worked reasonably well
 - Finished all task 24 hours before any due dates 
 - Distributed work to finish efficiently 
 
@@ -11,7 +11,7 @@
 
 **How did you make decisions?**
 
-- Discuessed amongst team 
+- Discussed amongst team 
 - Members were given the opportunity to provide their insight on each decision
 - Once the majority approved, the decision was finalized 
 
