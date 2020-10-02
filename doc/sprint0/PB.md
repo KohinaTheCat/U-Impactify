@@ -5,7 +5,7 @@
 
 ## User Stories :weary:
 
-1. ##### **As a user, I want to create an account, so that I can access the platform.**
+1. **As a user, I want to create an account, so that I can access the platform.**
 
    ###### Acceptance Criteria:  
 
@@ -15,7 +15,7 @@
    - After you login/sign-up you must be redirected to a homepage
 
 
-2.  **As an instructor, I want to be able to switch my course page to a user view, so that I can see how my content looks like as a student.**
+2. **As an instructor, I want to be able to switch my course page to a user view, so that I can see how my content looks like as a student.**
 
    ###### Acceptance Criteria:  
 
