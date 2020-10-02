@@ -28,7 +28,7 @@
 
 **How frequently did you meet?**
 
-- Daily from 9pm onwards 
+- We met Daily from 9pm onwards starting September 29th 
 
 **What lessions should you take forward to the next phase?**
 
