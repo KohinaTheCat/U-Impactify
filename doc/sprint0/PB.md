@@ -127,8 +127,7 @@
 
     - Be able to customize a job posting with the information of the job
     - Have users be able to be lead to the site of the job posting, or sign up to that job application
-    - Have a hub to display the people who applied (Interviewer) ? interviewee? 
-    - Have a hub to display where they applied to (Interviewee) ? place? 
+    - Have a hub to display the people who applied (Interviewer)
     - Have this information stored in a database
 
 
@@ -173,3 +172,12 @@
     - Be able to create a profile containing the organizations information 
     - Be able to view other organizations profiles 
 
+20. **As a Impact Consultant, I should be able to join a social initiative, so that I could be helpful.**
+
+
+    ###### Acceptance Criteria:
+    
+    - Be able to apply to different social initiatives through my dashboard
+    - Have a hub to display where the impact consultant applied to (Interviewee)
+    
+    
