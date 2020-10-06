@@ -14,8 +14,9 @@
 
 - Definition of Done (DoD) has been met for the release
   - See `../sprint0/done.md` for precise defintion
-  - If applicable, all allocated epics must meet DoD
-    - *Discuss with TA if project is using epics*
+  - ~~If applicable, all allocated epics must meet DoD~~
+    - ~~*Discuss with TA if project is using epics*~~
+    - TA said not necessary
 
 - **Important**: Finish all stories with `Highest` priority
 
