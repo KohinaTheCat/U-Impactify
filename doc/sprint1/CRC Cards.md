@@ -1,26 +1,27 @@
-## "CRC Cards"
+## CRC Cards
 
-Class name: **User**
+Class name: **Users**
 
 Parent class (if any): None
 
-Subclasses (if any): ImpactLearner, ImpactConsultant, SocialInitiative, Administrator 
+Subclasses (if any): Impact Learner, Impact Consultant, Social Initiative, Administrator 
 
 Responsibilities: 
 
 - Create an account
 - Communicate with other users
-- Knows their login credentials
+- Able to access the Giving Garden
+  - Donate to the Giving Garden
 
 Collaborators: 
 
-- Course
+- None
 
 
 
-Class name: **ImpactLearner**
+Class name: **Impact Learner**
 
-Parent class (if any): User
+Parent class (if any): Users
 
 Subclasses (if any): None
 
@@ -35,14 +36,15 @@ Responsibilities:
 Collaborators: 
 
 - Course
-- ImpactConsultant
-- SocialInitiative
+- Profile
+- Impact Consultant
+- Social Initiative
 
 
 
-Class name: **ImpactConsultant**
+Class name: **Impact Consultant**
 
-Parent class (if any): User
+Parent class (if any): Users
 
 Subclasses (if any): None
 
@@ -55,14 +57,15 @@ Responsibilities:
 Collaborators: 
 
 - Course
-- ImpactLearner
-- SocialInitiative
+- Profile
+- Impact Learner
+- Social Initiative
 
 
 
-Class name: **SocialInitiative**
+Class name: **Social Initiative**
 
-Parent class (if any): User
+Parent class (if any): Users
 
 Subclasses (if any): None
 
@@ -74,15 +77,17 @@ Responsibilities:
 
 Collaborators: 
 
-- ImpactConsultant
+- Profile
 
-- ImpactLearner
+- Impact Consultant
+
+- Impact Learner
 
   
 
 Class name: **Administrator**
 
-Parent class (if any): User
+Parent class (if any): Users
 
 Subclasses (if any): None
 
@@ -92,7 +97,7 @@ Responsibilities:
 
 Collaborators: 
 
-- None
+- Course List
 
 
 
@@ -111,7 +116,58 @@ Responsibilities:
 
 Collaborators: 
 
-- User
+- Course List
+
+
+
+Class name: **Course List**
+
+Parent class (if any): None
+
+Subclasses (if any): None
+
+Responsibilities: 
+
+- Store all the courses
+- Allow users to view the courses that are available 
+
+Collaborators: 
+
+- Course
+
+
+
+Class name: **Profile**
+
+Parent class (if any): None
+
+Subclasses (if any): None
+
+Responsibilities: 
+
+- Show user generated information (profile picture, skill summary, contact information, etc.)
+
+Collaborators: 
+
+- None
+
+
+
+Class name: **Giving Garden**
+
+Parent class (if any): None
+
+Subclasses (if any): None
+
+Responsibilities: 
+
+- Allow users to ask for support for a course or service
+- Allow users to support other users or social initiatives
+
+Collaborators: 
+
+- None
+
 
 
 
