@@ -23,7 +23,7 @@ connection.once("open", () => {
 })
 
 const Router = require("./routes/main")
-app.use("/transactions", Router)
+app.use("/", Router)
 
 const PORT = process.env.PORT || 5000;
 

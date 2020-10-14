@@ -11,11 +11,13 @@ router.route('/').get((req, res) => {
     .catch(err => res.status(400).json('Error ' + err))
 })
 
+// adding user
 router.route('/').post((req, res) =>{
-    const name = req.body.name;
+    const username = req.body.username;
 
+    // populate with finalized schema
     const newUser = new User({
-        name,
+        username,
     })
 
     newUser.save()
@@ -40,7 +42,7 @@ router.route('/:id').delete((req, res) => {
 router.route('/update/:id').post((req, res) =>{
     User.findById(req.params.id)
     .then(v =>{
-        v.name = req.body.name;
+        v.username = req.body.username;
         //find the current main and update it
         //we overwrite the old main with new data
 
