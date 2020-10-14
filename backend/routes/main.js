@@ -5,6 +5,8 @@ boiler
 const router = require('express').Router();
 let User = require('../models/user.model');
 
+/*
+
 router.route('/').get((req, res) => {
     User.find()
     .then(v => res.json(v))
@@ -51,5 +53,7 @@ router.route('/update/:id').post((req, res) =>{
         .catch(err => res.status(400).json('Error ' + err))
     })
 })
+
+*/
 
 module.exports = router;
