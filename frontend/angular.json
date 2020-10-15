@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "uimpactify-app"
+    }
+  },
+  "defaultProject": "uimpactify-app",
+  "cli": {
+    "analytics": false
+  }
 }
