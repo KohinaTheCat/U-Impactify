@@ -1,0 +1,31 @@
+input {
+  min-height: 25px;
+  margin-top: 5px;
+}
+
+label {
+  display: flex;
+  text-align: left;
+  margin: 10px;
+  min-width: 20vw;
+  flex-direction: column;
+}
+
+form {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 10px;
+  background-color: #ffecb8;
+}
+
+align-row{
+    flex-direction: row;
+    display: flex;
+    align-items: center;
+}
+
+button{
+    padding: 10px;
+    margin: 10px;
+}
