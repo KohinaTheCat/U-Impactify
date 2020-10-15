@@ -7,11 +7,10 @@ import { FormDisplay } from './FormDisplay';
   styleUrls: ['./login-signup.component.css'],
 })
 export class LoginSignupComponent implements OnInit {
-  form: FormDisplay = {
-    greeting: 'Create an Account',
-    linkPrompt: 'Already have an account?',
-    link: 'Login',
-  };
+  email: string = "";
+  username: string = "";
+  password: string ="";
+
   constructor() {}
 
   ngOnInit(): void {}

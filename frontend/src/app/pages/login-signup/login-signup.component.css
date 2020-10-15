@@ -1,12 +1,12 @@
 .container {
-  background-color: #fffbf0;
+  background-color: #fcfcfb;
   flex-direction: row;
   display: flex;
   height: 100vh;
 }
 
 .side-img {
-  background-color: #ad99ff;
+  /* background-color: #ad99ff; */
   width: 100%;
   height: 100%;
 }
@@ -29,22 +29,27 @@ form {
   align-items: center;
   flex-direction: column;
   justify-content: center;
-  padding: 10px;
-  background-color: #ffecb8;
   width: 40vw;
   height: 100vh;
+  background: #eae4f1;
+  border-radius: 6px;
 }
 
 /* ask why I have multiple css props. in one class */
-align-row {
+.align-row {
   flex-direction: row;
   display: flex;
   align-items: center;
 }
 
 button {
-  padding: 10px;
   margin: 10px;
+}
+
+@media only screen and (max-width: 1000px) {
+  .align-row {
+    flex-direction: column;
+  }
 }
 
 @media only screen and (max-width: 850px) {

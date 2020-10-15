@@ -2,33 +2,39 @@
   <div class="side-img"></div>
 
   <div >
-    <form>
-      <h3>{{form.greeting}}</h3>
-      <label>
-        email:
-        <input placeholder="email" />
-      </label>
-      <label>
-        username:
-        <input placeholder="username" />
-      </label>
-      <label>
-        password:
-        <input placeholder="password" />
-      </label>
+    <form clrForm>
+      <h3>Create an Account</h3>
+      <clr-input-container>
+        <label>
+          email:
+          <input clrInput type="text" [(ngModel)]="email" name="email" />
+        </label>
+      </clr-input-container>
+      <clr-input-container>
+        <label>
+          username:
+          <input clrInput type="text" [(ngModel)]="username" name="username" />
+        </label>
+      </clr-input-container>
+      <clr-input-container>
+        <label>
+          password:
+          <input clrInput type="text" [(ngModel)]="password" name="password" />
+        </label>
+      </clr-input-container>
 
       Please select your role below:
       <div class="align-row">
-        <button>Student</button>
-        <button>Instructor</button>
-        <button>Social Intiative</button>
+        <button class="btn btn-outline">Student</button>
+        <button class="btn btn-outline">Instructor</button>
+        <button class="btn btn-outline">Social Intiative</button>
       </div>
 
       <div class="align-row">
-        {{form.linkPrompt}} <a href="#">{{form.link}}</a>
+        Already have an account? <a href="#">Login</a>
       </div>
 
-      <button>SIGN UP</button>
+      <button class="btn btn-primary">Sign Up</button>
     </form>
   </div>
 </div>

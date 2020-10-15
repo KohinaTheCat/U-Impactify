@@ -4,7 +4,7 @@ import { LandingComponent } from './pages/landing/landing.component';
 import { LoginSignupComponent } from './pages/login-signup/login-signup.component';
 
 const routes: Routes = [
-  { path: 'login-signup', component: LoginSignupComponent },
+  { path: 'login', component: LoginSignupComponent },
   { path: 'landing', component: LandingComponent },
 ];
 
