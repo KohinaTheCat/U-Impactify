@@ -12,11 +12,12 @@ import { Observable } from 'rxjs';
 export class CreateCourseService {
 
   course : Course = JSON.parse(localStorage.getItem('course') || null);
+
   constructor(private http: HttpClient) { }
 
   postNewCourse(newCourse): Observable<any> {
     const { title, description } = newCourse;
-    return this.http.post('localhost:5000/course/add', 
+    return this.http.post('http://localhost:5000/course/add', 
       {
         title,
         student: [],
