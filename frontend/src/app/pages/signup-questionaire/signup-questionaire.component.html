@@ -1,10 +1,8 @@
 <div class="page">
   <div class="clr-form-control">
-    <h1>Welcome to U-Impactify!</h1>
-    <hr />
-    <hr />
-    <label id="title" class="clr-control-label">Check all that apply. Do you identify as a:</label>
+    <h1 id="MainTitle">Welcome to U-Impactify!</h1>
     <div class="clr-control-container">
+      <label id="title" class="clr-control-label">Check all that apply. Do you identify as a:</label>
       <div class="clr-checkbox-wrapper">
         <input type="checkbox" id="vertical-checkbox1" name="checkbox-full" value="option1" class="clr-checkbox" />
         <label for="vertical-checkbox1" class="clr-control-label">Coach</label>
@@ -23,14 +21,10 @@
           <label id="labelOne" for="vertical-checkbox4" class="clr-control-label">Other: Please enter:</label>
         </div>
         <div class="line">
-          <input clrInput type="text" name="example" id="actualline"/>
+          <input clrInput type="text" name="example" id="actualline" />
         </div>
       </div>
-    </div>
-    <hr />
-    <hr />
-    <label id="title" class="clr-control-label">What do you need U-Impactify for?</label>
-    <div class="clr-control-container">
+      <label id="title" class="clr-control-label">What do you need U-Impactify for?</label>
       <div class="clr-checkbox-wrapper">
         <input type="checkbox" id="vertical-checkbox5" name="checkbox-full" value="option1" class="clr-checkbox" />
         <label for="vertical-checkbox5" class="clr-control-label">Conduct Lessons Live</label>
@@ -44,7 +38,16 @@
         <label for="vertical-checkbox7" class="clr-control-label">Plan my lessons and sessions</label>
       </div>
     </div>
-    <button class="btn btn-primary" id="submitlocation">Submit</button>
+    <div class="buttonsflex">
+      <div class="submitbutton">
+        <button class="btn btn-primary" id="submitlocation">Submit</button>
+      </div>
+      <div class="skipbutton">
+        <a id="skip">Skip this step</a>
+      </div>
+    </div>
   </div>
-  <img src="../../../assets/questionairePic.JPG" id="image">
+  <div class="imagetemp">
+    <img src="../../../assets/signup-questionaire/undraw_questions_75e0 1.svg" id="image">
+  </div>
 </div>

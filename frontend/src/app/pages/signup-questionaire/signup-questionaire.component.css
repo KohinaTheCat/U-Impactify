@@ -2,21 +2,30 @@
   display: flex;
 }
 
+.imagetemp{
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  width: 50vw;
+}
+
 #image{
-  width:50%;
-  margin-right: 5%;
-  margin-top: 5%;
-  margin-bottom: 2%;
+  width: inherit;
+  height: inherit;
 }
 
 .clr-form-control{
-  display:flex;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
-  width: 40%;
-  margin-top: 10%;
-  margin-left: 5%;
-  margin-right: 5%;
-  margin-bottom: 5%;
+  width: 50vw;
+}
+
+#MainTitle{
+  padding-bottom: 1rem;
 }
 
 .clr-form-control{
@@ -37,64 +46,21 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
+  padding-bottom: 1rem;
 }
 
-
-/*
-.clr-form-control{
+.buttonsflex{
   display: flex;
   flex-direction: row;
-  margin-left: 5rem;
-  margin-top: 5rem;
-  width: 30%;
-  float: left;
+  justify-content: flex-start;
 }
 
-#image{
-  width: 50%;
-  float: right;
-  margin-top: 5%;
-  margin-bottom: 5%;
-  vertical-align: middle;
-  margin-right: 5%;
-  margin-left: 5%;
+.skipbutton{
+  margin-left: 1rem;
+  margin-top: 0.5rem;
 }
 
-.clr-control-container{
-  width: 50%;
-  width: 20rem;
+.submitbutton{
+  padding-right: 2rem;
 }
-.clr-checkbox-wrapper{
-  padding: 0.5rem;
-}
-
-.clr-control-label{
-  font-size: 1rem;
-}
-
-#title{
-  padding-bottom: 0.5rem;
-
-}
-
-.question1{
-  float:left;
-  width:60%;
-}
-
-.line{
-  float: right;
-}
-
-#actualline{
-  position: relative;
-  bottom: 0.75rem;
-  line-height: 0.5rem;
-}
-
-@media only screen and (max-width: 1000px){
-  .clr-form-control{
-    flex-direction: column;
-  }
-}
-*/
