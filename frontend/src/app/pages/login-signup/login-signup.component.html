@@ -1,16 +1,16 @@
 <div class="container">
   <div class="side-img"></div>
 
-  <div >
+  <div>
     <form clrForm>
-      <h3>Create an Account</h3>
+      <h3>{{ form.greeting }}</h3>
       <clr-input-container>
         <label>
           email:
           <input clrInput type="text" [(ngModel)]="email" name="email" />
         </label>
       </clr-input-container>
-      <clr-input-container>
+      <clr-input-container *ngIf="!logged">
         <label>
           username:
           <input clrInput type="text" [(ngModel)]="username" name="username" />
@@ -23,18 +23,20 @@
         </label>
       </clr-input-container>
 
-      Please select your role below:
-      <div class="align-row">
-        <button class="btn btn-outline">Student</button>
-        <button class="btn btn-outline">Instructor</button>
-        <button class="btn btn-outline">Social Intiative</button>
+      <div *ngIf="!logged">
+        Please select your role below:
+        <div class="align-row">
+          <button class="btn btn-outline">Student</button>
+          <button class="btn btn-outline">Instructor</button>
+          <button class="btn btn-outline">Social Intiative</button>
+        </div>
       </div>
 
       <div class="align-row">
-        Already have an account? <a href="#">Login</a>
+        {{ form.linkPrompt }}<a (click)="onToggle()">{{ form.link }}</a>
       </div>
 
-      <button class="btn btn-primary">Sign Up</button>
+      <button class="btn btn-primary">{{form.submit}}</button>
     </form>
   </div>
 </div>

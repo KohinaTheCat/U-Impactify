@@ -33,6 +33,7 @@ form {
   height: 100vh;
   background: #eae4f1;
   border-radius: 6px;
+  text-align: center;
 }
 
 /* ask why I have multiple css props. in one class */
@@ -40,6 +41,12 @@ form {
   flex-direction: row;
   display: flex;
   align-items: center;
+}
+
+a {
+  padding: 0px 10px;
+  word-wrap: normal;
+  display: inline-block;
 }
 
 button {
