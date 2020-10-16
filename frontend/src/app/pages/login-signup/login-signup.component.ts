@@ -54,7 +54,6 @@ export class LoginSignupComponent implements OnInit {
     this.userService.postNewUser(user).subscribe(
       (res) => {
         this.location.go(this.location.path()),
-        console.log(res)
         this.router.navigate(['/user/' + res.id], { skipLocationChange: true });
       },
       (err) => {
