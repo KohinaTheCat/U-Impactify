@@ -7,11 +7,13 @@ import { LoginSignupComponent } from './pages/login-signup/login-signup.componen
 import { LandingComponent } from './pages/landing/landing.component';
 import { ClarityModule } from '@clr/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FrontPageHeaderComponent } from './components/front-page-header/front-page-header.component';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
+    FrontPageHeaderComponent,
     LoginSignupComponent,
     LandingComponent
   ],
