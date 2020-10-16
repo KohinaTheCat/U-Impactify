@@ -14,8 +14,18 @@
 
 #title{
   padding-bottom: 0.5rem;
+  
 }
 
 #submitlocation{
   margin-left: 1rem;
+}
+
+
+
+
+
+.image{
+  display: incline;
+  float: right;
 }
