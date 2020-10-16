@@ -1,6 +1,259 @@
-body {
+* {
   margin: 0;
   padding: 0;
-  font-family: 'Open Sans', sans-serif;
+  box-sizing: border-box;
 }
 
+body {
+  font-family: "Open Sans", sans-serif;
+}
+
+/*        CSS FROM UIMPACTIFY FIGMA         */
+
+:root {
+  /* Gray · 20% */
+  --gray20: #f5f7fa;
+
+  /* Gray · 30% */
+  --gray30: #e3e5e6;
+
+  /* Gray · 40% */
+  --gray40: #c6cacc;
+
+  /* Gray · 60% */
+  --gray60: #919699;
+
+  /* Gray · 80% */
+  --gray80: #5e6366;
+
+  /* Gray · 90% */
+  --gray90: #3e4345;
+
+  /* Gray · 10% */
+  --gray10: #fafafa;
+
+  /* Red Smooth */
+  --red-smooth: #ffe7e8;
+
+  /* Purple Smooth */
+  --purple-smooth: #eae4f1;
+
+  /* Yellow Smooth */
+  --yellow-smooth: #fff5dd;
+
+  /* Teal Smooth */
+  --teal-smooth: #e2f4f4;
+
+  /* Blue 2 Smooth */
+  --blue2-smooth: #e7f3ff;
+
+  /* Red Base */
+  --red-base: #ff979c;
+
+  /* Yellow Base */
+  --yellow-base: #f9d475;
+
+  /*  Purple Base */
+  --purple-base: #a78ec3;
+
+  /* Teal Base */
+  --teal-base: #9ed9d9;
+
+  /* Green Base */
+  --green-base: #c0d18c;
+
+  /* Green Smooth */
+  --green-smooth: #eff3e2;
+
+  /* Blue 2 Base */
+  --blue2-base: #93c8ff;
+
+  /* Orange Smooth */
+  --orange-smooth: #ffebe1;
+
+  /* Orange Base */
+  --orange-base: #ffb08a;
+}
+
+h1 {
+  /* 96 sp • H1 Open Sans • Website */
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 96px;
+  line-height: 131px;
+  display: flex;
+  align-items: center;
+  letter-spacing: -1.5px;
+
+  /* Gray · 90% */
+  color: #3e4345;
+}
+
+h2 {
+  /* 62 sp • H2 Open Sans • Website */
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 62px;
+  line-height: 84px;
+  display: flex;
+  align-items: center;
+
+  /* Gray · 90% */
+  color: #3e4345;
+}
+
+h4 {
+  /* 53 sp • H3 Open Sans  • Website */
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 53.71px;
+  line-height: 73px;
+  display: flex;
+  align-items: center;
+
+  /* Gray · 90% */
+  color: #3e4345;
+}
+
+h4 {
+  /* 42 sp • H4 Open Sans  • Website */
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 42.87px;
+  line-height: 58px;
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.25px;
+
+  /* Gray · 90% */
+  color: #3e4345;
+}
+
+h5 {
+  /* 34 sp • H5 Open Sans  • Website */
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 34.38px;
+  line-height: 47px;
+  display: flex;
+  align-items: center;
+
+  /* Gray · 90% */
+  color: #3e4345;
+}
+
+h6 {
+  /* 27 sp • H6 Open Sans  • Website */
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 600;
+  font-size: 27.5px;
+  line-height: 28px;
+  /* or 102% */
+  display: flex;
+  align-items: center;
+  letter-spacing: 0.15px;
+
+  /* Gray · 90% */
+  color: #3e4345;
+}
+
+p {
+  /* 22 sp • Body 1 Open Sans  • Website */
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 22px;
+  line-height: 32px;
+  /* or 145% */
+  letter-spacing: 0.44px;
+
+  /* Gray · 90% */
+  color: #3e4345;
+}
+
+.box-shadow-1 {
+  /* Shadow Dark · 2dp */
+  box-shadow: 0px 2px 4px rgba(120, 98, 188, 0.24);
+  border-radius: 6px;
+}
+.box-shadow-2 {
+  /* Shadow Dark · 4dp */
+  box-shadow: 0px 4px 8px rgba(120, 98, 188, 0.24);
+  border-radius: 6px;
+}
+.box-shadow-3 {
+  /* Shadow Dark · 8dp */
+  box-shadow: 0px 8px 16px rgba(120, 98, 188, 0.2);
+  border-radius: 6px;
+}
+.box-shadow-4 {
+  /* Shadow Dark · 16dp */
+  box-shadow: 0px 8px 24px rgba(120, 98, 188, 0.16);
+  border-radius: 6px;
+}
+.box-shadow-5 {
+  /* Shadow Dark · 24dp */
+  box-shadow: 0px 24px 32px rgba(120, 98, 188, 0.12);
+  border-radius: 6px;
+}
+
+.btn-filled {
+  /* Button (Website) */
+  border-radius: 60px;
+
+  /*  Purple Base */
+  background: #a78ec3;
+  /* Shadow Dark · 16dp */
+  box-shadow: 0px 8px 24px rgba(120, 98, 188, 0.16);
+
+  /* 20 sp • BUTTON  • Website */
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 27px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.75px;
+  text-transform: uppercase;
+
+  /* White Base */
+  color: #ffffff;
+}
+
+.btn-line {
+  /* Button (Website) */
+
+  border-radius: 60px;
+
+  /* White Base */
+  background: #ffffff;
+  opacity: 0.48;
+  /*  Purple Base */
+  border: 2px solid #a78ec3;
+  box-sizing: border-box;
+  /* Shadow Dark · 16dp */
+  box-shadow: 0px 8px 24px rgba(120, 98, 188, 0.16);
+
+  /* 20 sp • BUTTON  • Website */
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 27px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.75px;
+  text-transform: uppercase;
+
+  /*  Purple Base */
+  color: #a78ec3;
+}
