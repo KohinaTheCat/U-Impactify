@@ -1,3 +1,4 @@
+import { SignupService } from './../../services/signup.service';
 import { Component, OnInit } from '@angular/core';
 import { FormDisplay } from './FormDisplay';
 
@@ -8,6 +9,11 @@ import { FormDisplay } from './FormDisplay';
 })
 export class LoginSignupComponent implements OnInit {
   logged: boolean = false;
+
+  constructor(private signupService: SignupService) {}
+  // usage: this.signupService.postNewUser
+
+  // TODO: errorChecking!!!!
 
   signup: FormDisplay = {
     greeting: 'Create an Account',
@@ -33,8 +39,6 @@ export class LoginSignupComponent implements OnInit {
     this.logged = !this.logged;
     this.form = this.logged ? this.login : this.signup;
   }
-
-  constructor() {}
 
   ngOnInit(): void {}
 }
