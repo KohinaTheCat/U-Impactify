@@ -1,44 +1,72 @@
-*{
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    text-decoration: none;
+.flexbox-container {
+  width: 100%;
+  height: 7rem;
+  display: flex;
+  background-color: #fcfcfb;
+  justify-content: space-between;
+  align-items: center;
 }
-.container{
+
+.flexbox-container2 {
+  width: 50%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.flexbox-container22 {
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.flexbox-item {
+  width: 300px;
+  margin: 10px;
+}
+
+button {
+  padding-bottom: 2rem;
+  margin: 2rem;
+  font-size: 1.3rem;
+  text-transform: none;
+}
+.btn-outline,
+.btn-primary {
+  margin-right: 6rem;
+  font-size: 1rem;
+  box-sizing: border-box;
+  border-radius: 0.5rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 0.5rem;
+  padding-bottom: 2.2rem;
+}
+
+@media only screen and (max-width: 1250px) {
+  .flexbox-container {
+    flex-direction: column;
+  }
+
+  .flexbox-container2 {
+    transform: translate(1rem);
+    margin-top: 1rem;
     width: 100%;
-    height: 6.5rem;
-    flex-direction: row;
-    display: flex;
-    background-color: #E2F4F4;
-   
+  }
+  .flexbox-container22 {
+    justify-content: space-evenly;
+    flex-shrink: 0;
+    width: none;
+  }
+
+  .btn-outline,
+  .btn-primary {
+    margin: 1rem;
+  }
+
+  .btn-outline,
+  .btn-primary {
+    margin: 0;
+  }
 }
-
-.innerHeader{
-    width: 1000px;
-    height: 100%;
-    display: block;
-    margin: 0 auto;
-    background-color: red;
-}
-
-.logo{
-
-    height: 100%;
-    display: table;
-    float: left;
-}
-.align-row {
-    flex-direction: row;
-    display: flex;
-    align-items: center;
-}
-
-button{
-    font-size: 1rem;
-    margin: 15rem;
-    text-transform: none;
-
-
-}
-
-
