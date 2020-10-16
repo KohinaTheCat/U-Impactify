@@ -22,8 +22,8 @@ connection.once("open", () => {
     console.log("MongoDB connected!")
 })
 
-const Router = require("./routes/main")
-app.use("/", Router)
+const courseRouter = require("./routes/course")
+app.use("/course", courseRouter)
 
 const PORT = process.env.PORT || 5000;
 
