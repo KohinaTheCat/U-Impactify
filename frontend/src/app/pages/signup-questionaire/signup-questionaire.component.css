@@ -1,9 +1,12 @@
 .clr-form-control{
   margin-left: 5rem;
   margin-top: 5rem;
-  position: relative;
 }
 
+.clr-control-container{
+  width: 50%;
+  width: 20rem;
+}
 .clr-checkbox-wrapper{
   padding: 0.5rem;
 }
@@ -14,18 +17,28 @@
 
 #title{
   padding-bottom: 0.5rem;
-  
+
 }
 
 #submitlocation{
   margin-left: 1rem;
 }
 
-
-
-
-
 .image{
   display: incline;
   float: right;
+}
+
+.question1{
+  float:left;
+  width:60%;
+}
+
+.line{
+  float: right;
+}
+
+#actualline{
+  height: 1rem;
+  line-height: 2rem;
 }
