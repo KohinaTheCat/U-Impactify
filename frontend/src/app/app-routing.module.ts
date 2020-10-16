@@ -1,3 +1,4 @@
+import { CreateCourseComponent } from './pages/create-course/create-course.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LandingComponent } from './pages/landing/landing.component';
@@ -8,9 +9,10 @@ import {
 
 const routes: Routes = [
   { path: 'signup', component: LoginSignupComponent },
-  { path: '', component: LoginSignupComponent },
-  { path: 'landing', component: LandingComponent },
   { path: 'user/:id', component: LandingComponent },
+  { path: 'createcourse', component: CreateCourseComponent },
+  { path: '', component: LoginSignupComponent },
+
 ];
 
 //canActivate: [AuthGuard] add this for routes that require auth.
