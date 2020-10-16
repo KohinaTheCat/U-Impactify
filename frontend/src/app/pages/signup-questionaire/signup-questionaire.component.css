@@ -1,6 +1,18 @@
 .clr-form-control{
   margin-left: 5rem;
   margin-top: 5rem;
+  width: 30%;
+  float: left;
+}
+
+#image{
+  width: 50%;
+  float: right;
+  margin-top: 5%;
+  margin-bottom: 5%;
+  vertical-align: middle;
+  margin-right: 5%;
+  margin-left: 5%;
 }
 
 .clr-control-container{
@@ -20,10 +32,6 @@
 
 }
 
-#submitlocation{
-  margin-left: 1rem;
-}
-
 .image{
   display: incline;
   float: right;
@@ -39,6 +47,7 @@
 }
 
 #actualline{
-  height: 1rem;
-  line-height: 2rem;
+  position: relative;
+  bottom: 0.75rem;
+  line-height: 0.5rem;
 }
