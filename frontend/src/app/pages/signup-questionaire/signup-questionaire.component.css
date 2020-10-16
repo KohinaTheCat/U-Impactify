@@ -1,0 +1,21 @@
+.clr-form-control{
+  margin-left: 5rem;
+  margin-top: 5rem;
+  position: relative;
+}
+
+.clr-checkbox-wrapper{
+  padding: 0.5rem;
+}
+
+.clr-control-label{
+  font-size: 1rem;
+}
+
+#title{
+  padding-bottom: 0.5rem;
+}
+
+#submitlocation{
+  margin-left: 1rem;
+}
