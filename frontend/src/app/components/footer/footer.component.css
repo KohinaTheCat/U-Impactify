@@ -1,0 +1,8 @@
+.flexbox-container {
+  width: 100%;
+  height: 20rem;
+  background-color: darkkhaki;
+  justify-content: space-evenly;
+  flex-direction: row;
+  align-items: center;
+}
