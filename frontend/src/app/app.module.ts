@@ -8,12 +8,14 @@ import { LandingComponent } from './pages/landing/landing.component';
 import { ClarityModule } from '@clr/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { CreateCourseComponent } from './pages/create-course/create-course.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginSignupComponent,
-    LandingComponent
+    LandingComponent,
+    CreateCourseComponent
   ],
   imports: [
     BrowserModule,
