@@ -1,3 +1,4 @@
+import { CreateCourseService } from './../../services/create-course.service';
 import { CourseForm } from './CourseForm';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,10 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateCourseComponent implements OnInit {
 
-  constructor() { }
-
-  
-  
+  constructor(private createCourseService: CreateCourseService) { }
 
   testform : CourseForm = {
     title: "",
@@ -22,6 +20,18 @@ export class CreateCourseComponent implements OnInit {
   description: string = '';
 
   ngOnInit(): void {
+  }
+
+  
+  registerHandler() {
+    const course = {
+      title: this.title,
+      description: this.description,
+    };
+     this.createCourseService.postNewCourse(course).subscribe(res => {
+     }, err => {
+      console.log(err); 
+      });
   }
 
 }
