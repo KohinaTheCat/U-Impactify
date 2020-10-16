@@ -19,14 +19,17 @@ mongoose.connect(uri, {
 
 const connection = mongoose.connection;
 connection.once("open", () => {
-    console.log("MongoDB connected!")
-})
+  console.log("MongoDB connected!");
+});
 
-const courseRouter = require("./routes/course")
-app.use("/course", courseRouter)
+const courseRouter = require("./routes/course");
+const userRouter = require("./routes/user")
+
+app.use("/course", courseRouter);
+app.use("/user", userRouter);
 
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-    console.log(`server is running on port: ${PORT}`)
-})
+  console.log(`server is running on port: ${PORT}`);
+});
