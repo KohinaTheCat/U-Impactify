@@ -1,4 +1,49 @@
+.page{
+  display: flex;
+}
+
+#image{
+  width:50%;
+  margin-right: 5%;
+  margin-top: 5%;
+  margin-bottom: 2%;
+}
+
 .clr-form-control{
+  display:flex;
+  flex-direction: column;
+  width: 40%;
+  margin-top: 10%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-bottom: 5%;
+}
+
+.clr-form-control{
+  display: flex;
+}
+
+.line{
+  flex: 1;
+  display: flex;
+}
+
+.labelField{
+  display: flex;
+  flex: 1;
+}
+
+.question{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+
+/*
+.clr-form-control{
+  display: flex;
+  flex-direction: row;
   margin-left: 5rem;
   margin-top: 5rem;
   width: 30%;
@@ -32,11 +77,6 @@
 
 }
 
-.image{
-  display: incline;
-  float: right;
-}
-
 .question1{
   float:left;
   width:60%;
@@ -51,3 +91,10 @@
   bottom: 0.75rem;
   line-height: 0.5rem;
 }
+
+@media only screen and (max-width: 1000px){
+  .clr-form-control{
+    flex-direction: column;
+  }
+}
+*/
