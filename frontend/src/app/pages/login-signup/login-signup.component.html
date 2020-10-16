@@ -36,7 +36,7 @@
         {{ form.linkPrompt }}<a (click)="onToggle()">{{ form.link }}</a>
       </div>
 
-      <button class="btn btn-primary">{{form.submit}}</button>
+      <button (click)="onSubmit()" class="btn btn-primary">{{form.submit}}</button>
     </form>
   </div>
 </div>

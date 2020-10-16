@@ -1,7 +1,8 @@
-import { LoginServiceService } from './../../services/login-service.service';
-import { SignupService } from './../../services/signup.service';
+import { UserService } from './../../services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { FormDisplay } from './FormDisplay';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-login-signup',
@@ -12,11 +13,10 @@ export class LoginSignupComponent implements OnInit {
   logged: boolean = false;
 
   constructor(
-    private signupService: SignupService,
-    private loginServiceService: LoginServiceService
+    private userService: UserService,
+    private router: Router,
+    private location: Location,
   ) {}
-  // usage: this.signupService.postNewUser
-
   // TODO: errorChecking!!!!
 
   signup: FormDisplay = {
@@ -42,6 +42,25 @@ export class LoginSignupComponent implements OnInit {
   onToggle() {
     this.logged = !this.logged;
     this.form = this.logged ? this.login : this.signup;
+  }
+
+  onSubmit(){
+    const user = {
+      username: this.username,
+      email: this.email,
+      password: this.password,
+      type: "IL" //change this
+    };
+    this.userService.postNewUser(user).subscribe(
+      (res) => {
+        this.location.go(this.location.path()),
+        console.log(res)
+        this.router.navigate(['/user/' + res.id], { skipLocationChange: true });
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
 
   ngOnInit(): void {}
