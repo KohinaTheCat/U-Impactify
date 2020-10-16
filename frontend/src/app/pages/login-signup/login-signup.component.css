@@ -47,6 +47,7 @@ a {
   padding: 0px 10px;
   word-wrap: normal;
   display: inline-block;
+  text-decoration: underline;
 }
 
 button {
