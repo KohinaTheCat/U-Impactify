@@ -1,10 +1,14 @@
+
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { FrontPageHeaderComponent } from './components/front-page-header/front-page-header.component';
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path: 'header', component: FrontPageHeaderComponent },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

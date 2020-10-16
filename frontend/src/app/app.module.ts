@@ -5,10 +5,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ClarityModule } from '@clr/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FrontPageHeaderComponent } from './components/front-page-header/front-page-header.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FrontPageHeaderComponent
   ],
   imports: [
     BrowserModule,
