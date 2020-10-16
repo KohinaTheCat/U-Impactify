@@ -1,10 +1,12 @@
 
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { FrontPageHeaderComponent } from './components/front-page-header/front-page-header.component';
+import { LandingComponent } from './pages/landing/landing.component';
+import { LoginSignupComponent } from './pages/login-signup/login-signup.component';
 
 const routes: Routes = [
-  { path: 'header', component: FrontPageHeaderComponent },
+  { path: 'signup', component: LoginSignupComponent },
+  { path: 'landing', component: LandingComponent },
 ];
 
 @NgModule({
