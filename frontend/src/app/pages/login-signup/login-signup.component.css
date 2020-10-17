@@ -5,14 +5,27 @@
   height: 100vh;
 }
 
+#slogan{
+  position: relative;
+  top: 10%;
+  font-size: 2.5vw;
+}
+
 .side-img {
   width: 100%;
   height: 100%;
+  text-align: center;
+  overflow: hidden;
 }
 
 input {
   min-height: 1.5rem;
   margin-top: 0.5rem;
+}
+
+img{
+  height: 100%;
+  width: 100%;
 }
 
 label {
@@ -35,7 +48,17 @@ form {
   text-align: center;
 }
 
+.radio_label{
+  min-width: 0;
+}
+
 .align-row {
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+}
+
+.align-row-radio {
   flex-direction: row;
   display: flex;
   align-items: center;
@@ -56,15 +79,20 @@ button {
   .align-row {
     flex-direction: column;
   }
+
+  .side-img {
+    height: 100vh;
+  }
 }
 
 @media only screen and (max-width: 850px) {
   .container {
     flex-direction: column;
   }
-
   form {
     width: 100vw;
-    height: 100%;
+  }
+  .side-img {
+    height: 100vh;
   }
 }

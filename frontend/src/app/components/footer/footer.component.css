@@ -1,0 +1,102 @@
+.flexbox-container {
+  width: 100%;
+  height: 15rem;
+  display: flex;
+  background-color: #fcfcfb;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: row;
+}
+.alignTop {
+  margin-top: 2rem;
+}
+
+.together {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.info {
+  margin-left: 1rem;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  margin-right: 4rem;
+}
+
+.product {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-right: 4rem;
+}
+
+.useCases {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-right: 4rem;
+}
+
+.about {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-right: 4rem;
+}
+
+.follow {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.imgg {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+button {
+  margin: 0rem;
+  font-size: 0.6rem;
+  text-transform: none;
+}
+
+h3 {
+  margin: 0rem;
+  padding: 0rem;
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 16px;
+  text-align: center;
+  color: #000000;
+}
+#side {
+  transform: translateY(-0.6rem);
+}
+
+@media only screen and (max-width: 1000px) {
+  .flexbox-container {
+    align-items: wrap;
+    flex-wrap: wrap;
+    height: 25rem;
+  }
+  .together {
+    justify-content: center;
+    align-items: center;
+  }
+  #side {
+    transform: translateY(0);
+  }
+  .product {
+    margin-right: 1rem;
+  }
+  .info {
+    margin-right: 1rem;
+  }
+}

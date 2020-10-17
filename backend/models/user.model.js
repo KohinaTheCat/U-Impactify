@@ -24,7 +24,7 @@ const userSchema = new Schema({
     match: [/.+\@.+\..+/, "Valid email required"],
   },
   /**
-   * "IL": Impact Learner, "IC": Impact Consultant, "I":
+   * "IL": Impact Learner, "IC": Impact Consultant, "SI": Social Initiative
    */
   type: {
     type: String,
