@@ -2,10 +2,12 @@ const router = require("express").Router();
 let userSchema = require("../models/user.model");
 
 // POST login user
-router.route("/:id").post((req, res) => {
+router.route("/:email").post((req, res) => {
   const { password } = req.body;
-  console.log(req.params.id);
-  userSchema.findById(req.params.id)
+  userSchema
+    .findOne({
+      email: req.params.email,
+    })
     .then((user) => {
       user.comparePassword(password, function (err, isMatch) {
         if (err) return res.status(400).json(`${err}`);
@@ -23,12 +25,11 @@ router.route("/").post((req, res) => {
     password,
     email,
     type,
+    classes: [],
   });
   newUser
     .save()
-    .then(() => res.json({
-      id: newUser._id
-    }))
+    .then(() => res.json(newUser))
     .catch((err) => res.status(400).json(err));
 });
 
