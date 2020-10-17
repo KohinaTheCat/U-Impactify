@@ -7,6 +7,7 @@ import { LoginSignupComponent } from './pages/login-signup/login-signup.componen
 import { LandingComponent } from './pages/landing/landing.component';
 import { ClarityModule } from '@clr/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FrontPageHeaderComponent } from './components/front-page-header/front-page-header.component';
 import { FormsModule } from '@angular/forms';
 import { CreateCourseComponent } from './pages/create-course/create-course.component';
 import {HttpClientModule} from '@angular/common/http';
@@ -15,6 +16,7 @@ import {HttpClientModule} from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
+    FrontPageHeaderComponent,
     LoginSignupComponent,
     LandingComponent,
     CreateCourseComponent
