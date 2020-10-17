@@ -9,7 +9,7 @@ const mongoose = require("mongoose");
 const GridFsStorage = require("multer-gridfs-storage");
 const { connect } = require("http2");
 
-var Grid = require('gridfs-stream');
+var Grid = require("gridfs-stream");
 Grid.mongo = mongoose.mongo;
 //
 
@@ -123,15 +123,14 @@ router.post("/:id/upload", upload.single("document"), (req, res, next) => {
 
 //get document by filename
 router.get("/document/:filename", (req, res) => {
-  // console.log('id', req.params.id)
   const file = gfs
     .find({
-      filename: req.params.filename
+      filename: req.params.filename,
     })
     .toArray((err, files) => {
       if (!files || files.length === 0) {
         return res.status(404).json({
-          err: "no files exist"
+          err: "no files exist",
         });
       }
       gfs.openDownloadStreamByName(req.params.filename).pipe(res);
@@ -142,10 +141,9 @@ router.get("/document/:filename", (req, res) => {
 router.post("/document/del/:id", (req, res) => {
   gfs.delete(new mongoose.Types.ObjectId(req.params.id), (err, data) => {
     if (err) return res.status(404).json({ err: err.message });
-    res.json("document deleted")
+    res.json("document deleted");
   });
-})
-
+});
 
 //getting all the document filenames of a course, :id to course id
 router.get("/documents/course/:id", (req, res, next) => {
