@@ -1,6 +1,7 @@
+// idt we even need this
 export interface CourseForm{
-    // change
     title: string,
     description: string,
-
+    level: string,
+    tags: string,
 }

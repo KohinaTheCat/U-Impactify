@@ -11,13 +11,17 @@ export class CreateCourseComponent implements OnInit {
 
   constructor(private createCourseService: CreateCourseService) { }
 
-  testform : CourseForm = {
-    title: "",
-    description: "",
-  };
+  // testform : CourseForm = {
+  //   title: "",
+  //   description: "",
+  //   level: "",
+  //   tags: "",
+  // };
 
   title: string = '';
   description: string = '';
+  level: string = "";
+  tags: string = "";
 
   ngOnInit(): void {
   }

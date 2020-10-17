@@ -20,28 +20,53 @@
 <div class="container">
     <div>
       <form clrForm>
-        <!-- <h3>Create a New Course</h3> -->
+        <h3>Create the Course</h3>
         <clr-input-container>
           <label>
-            Course Name:
+            Course Name
             <input clrInput type="text" [(ngModel)]="title" name="title"/>
         </label>
         </clr-input-container>
 
         <clr-input-container >
           <label>
-            Course Description:
+            Course Description
             <input clrInput type="text" [(ngModel)]="description" name="description"/>
         </label>
         </clr-input-container>
 
         <clr-input-container >
+            <!-- <label>
+              Difficulty Level
+              <input clrInput type="text" [(ngModel)]="level" name="level"/>
+          </label> -->
+          <clr-radio-container>
+            <label>Full radio</label>
+            <clr-radio-wrapper>
+              <input type="radio" clrRadio name="options" required value="option1" [(ngModel)]="level" />
+              <label>Easy</label>
+            </clr-radio-wrapper>
+            <clr-radio-wrapper>
+              <input type="radio" clrRadio name="options" required value="option2" [(ngModel)]="level" />
+              <label>Difficult</label>
+            </clr-radio-wrapper>
+            <clr-radio-wrapper>
+                <input type="radio" clrRadio name="options" required value="option2" [(ngModel)]="level" />
+                <label>Advanced</label>
+              </clr-radio-wrapper>
+            <clr-control-helper>Helper text</clr-control-helper>
+            <clr-control-error>This field is required!</clr-control-error>
+          </clr-radio-container>
+          </clr-input-container>
+
+          <clr-input-container >
             <label>
-              Pre-Requesite(s):
-              <input clrInput type="text" [(ngModel)]="prereq" name="prereq"/>
+              Tags
+              <input clrInput type="text" [(ngModel)]="tags" name="tags"/>
           </label>
           </clr-input-container>
 
+        
         <button class="btn btn-primary" (click)="registerHandler()">Create Course</button>
       </form>
     </div>

@@ -16,13 +16,12 @@ form {
     border-radius: 2rem;
 }
 
-/* apart of header? */
-/* 
+
 h3 {
     font-size: 1.5rem;
     color: #a78ec3;
-
-} */
+    margin-bottom: 2rem;
+} 
 
 input {
     margin-top: 0.5rem;
@@ -40,6 +39,6 @@ label {
     display: flex;
     text-align: left;
     margin: 10px;
-    min-width: 50rem;
+    min-width: 30rem;
     flex-direction: column;
   }
