@@ -44,6 +44,7 @@ export class LoginSignupComponent implements OnInit {
   username: string = '';
   password: string = '';
   type: string = '';
+  error: string = '';
 
   onToggle() {
     this.logged = !this.logged;
@@ -66,6 +67,7 @@ export class LoginSignupComponent implements OnInit {
             });
         },
         (err) => {
+          this.error = err.message;
           console.log(err);
         }
       );
@@ -85,6 +87,7 @@ export class LoginSignupComponent implements OnInit {
           }
         },
         (err) => {
+          this.error = err.message;
           console.log(err);
         }
       );
