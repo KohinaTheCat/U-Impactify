@@ -5,10 +5,9 @@ import { Observable } from 'rxjs';
 import { User } from '../models/user.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
-
   constructor(private http: HttpClient) {}
 
   // save username and password into local storage, so they can stay logged in
@@ -21,15 +20,28 @@ export class UserService {
       username,
       password,
       email,
-      type
+      type,
     });
   }
 
   loginUser(email: string, password: string): Observable<User | boolean> {
-    return this.http.post<User | boolean>(`http://localhost:5000/user/${email}`, {
-      email,
-      password,
-    });
+    return this.http.post<User | boolean>(
+      `http://localhost:5000/user/${email}`,
+      {
+        email,
+        password,
+      }
+    );
   }
 
+  // Sets the user
+  setUser(user: User): void {
+    this.user = user;
+    localStorage.setItem('user', JSON.stringify(user));
+  }
+
+  // gets the user
+  getCurrentUser(): User {
+    return this.user;
+  }
 }
