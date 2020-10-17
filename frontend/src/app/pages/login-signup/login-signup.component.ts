@@ -79,10 +79,8 @@ export class LoginSignupComponent implements OnInit {
           } else {
             // user logged in, navigate to page, changed below
             this.location.go(this.location.path()),
-              // change route to login page after
-            this.router.navigate(['/createcourse/'], {
+            this.router.navigate(['/user/' + this.email], {
 
-            // this.router.navigate(['/user/' + this.email], {
               skipLocationChange: true,
             });
           }
