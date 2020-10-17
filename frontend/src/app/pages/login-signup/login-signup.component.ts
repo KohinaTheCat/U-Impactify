@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormDisplay } from './FormDisplay';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
+import { CompileShallowModuleMetadata } from '@angular/compiler';
 
 @Component({
   selector: 'app-login-signup',
@@ -15,7 +16,7 @@ export class LoginSignupComponent implements OnInit {
   constructor(
     private userService: UserService,
     private router: Router,
-    private location: Location,
+    private location: Location
   ) {}
   // TODO: errorChecking!!!!
 
@@ -44,22 +45,45 @@ export class LoginSignupComponent implements OnInit {
     this.form = this.logged ? this.login : this.signup;
   }
 
-  onSubmit(){
+  onSubmit() {
     const user = {
       username: this.username,
       email: this.email,
       password: this.password,
-      type: "IL" //change this
+      type: 'IL', //change this
     };
-    this.userService.postNewUser(user).subscribe(
-      (res) => {
-        this.location.go(this.location.path()),
-        this.router.navigate(['/user/' + res.id], { skipLocationChange: true });
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+    if (!this.logged) {
+      this.userService.postNewUser(user).subscribe(
+        (res) => {
+          this.location.go(this.location.path()),
+            this.router.navigate(['/user/' + res.id], {
+              skipLocationChange: true,
+            });
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+    } else {
+      this.userService.loginUser(this.email, this.password).subscribe(res => {
+          if (res === false) {
+            // couldn't match the email with password
+            console.log("incorrect password")
+          } else {
+            // user logged in, navigate to page, changed below
+            this.location.go(this.location.path()),
+            this.router.navigate(['/createcourse/'], {
+
+            // this.router.navigate(['/user/' + this.email], {
+              skipLocationChange: true,
+            });
+          }
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+    }
   }
 
   ngOnInit(): void {}

@@ -24,4 +24,12 @@ export class UserService {
       type
     });
   }
+
+  loginUser(email: string, password: string): Observable<User | boolean> {
+    return this.http.post<User | boolean>(`http://localhost:5000/user/${email}`, {
+      email,
+      password,
+    });
+  }
+
 }
