@@ -1,3 +1,5 @@
+import { LoginServiceService } from './../../services/login-service.service';
+import { SignupService } from './../../services/signup.service';
 import { Component, OnInit } from '@angular/core';
 import { FormDisplay } from './FormDisplay';
 
@@ -9,18 +11,26 @@ import { FormDisplay } from './FormDisplay';
 export class LoginSignupComponent implements OnInit {
   logged: boolean = false;
 
+  constructor(
+    private signupService: SignupService,
+    private loginServiceService: LoginServiceService
+  ) {}
+  // usage: this.signupService.postNewUser
+
+  // TODO: errorChecking!!!!
+
   signup: FormDisplay = {
     greeting: 'Create an Account',
     linkPrompt: 'Already have an account?',
     link: 'Login',
-    submit: 'Sign Up'
+    submit: 'Sign Up',
   };
 
   login: FormDisplay = {
     greeting: 'Welcome Back',
     linkPrompt: "Don't have an account?",
     link: 'Sign Up',
-    submit: 'Log In'
+    submit: 'Log In',
   };
 
   form: FormDisplay = this.signup;
@@ -33,8 +43,6 @@ export class LoginSignupComponent implements OnInit {
     this.logged = !this.logged;
     this.form = this.logged ? this.login : this.signup;
   }
-
-  constructor() {}
 
   ngOnInit(): void {}
 }
