@@ -7,6 +7,8 @@ require("dotenv").config();
 const app = express();
 
 app.use(cors());
+// app.use(express.static('uploads'))
+app.set("view engine", "ejs");
 app.use(express.json());
 
 const uri = process.env.ATLAS_URI;
@@ -19,14 +21,17 @@ mongoose.connect(uri, {
 
 const connection = mongoose.connection;
 connection.once("open", () => {
-    console.log("MongoDB connected!")
-})
+  console.log("MongoDB connected!");
+});
 
-const Router = require("./routes/main")
-app.use("/", Router)
+const courseRouter = require("./routes/course");
+const userRouter = require("./routes/user")
+
+app.use("/course", courseRouter);
+app.use("/user", userRouter);
 
 const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
-    console.log(`server is running on port: ${PORT}`)
-})
+  console.log(`server is running on port: ${PORT}`);
+});
