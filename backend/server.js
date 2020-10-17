@@ -7,6 +7,8 @@ require("dotenv").config();
 const app = express();
 
 app.use(cors());
+// app.use(express.static('uploads'))
+app.set("view engine", "ejs");
 app.use(express.json());
 
 const uri = process.env.ATLAS_URI;

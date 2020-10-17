@@ -15,6 +15,10 @@ const courseSchema = new Schema({
   description: {
     type: String,
   },
+  documents: {
+    type: [String],
+    unique: "document already added",
+  }
 });
 
 const Course = mongoose.model("Course", courseSchema);
