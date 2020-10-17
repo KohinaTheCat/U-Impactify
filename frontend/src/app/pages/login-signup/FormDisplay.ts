@@ -3,4 +3,6 @@ export interface FormDisplay{
     linkPrompt: string,
     link: string,
     submit: string,
+    img: string,
+    slogan: string,
 }

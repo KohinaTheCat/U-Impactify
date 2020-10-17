@@ -1,5 +1,11 @@
 <div class="container">
-  <div class="side-img"></div>
+  <div class="side-img">
+    <div id="slogan">
+      <b>{{ form.slogan }}</b>
+    </div>
+
+    <img src="{{ form.img }}" />
+  </div>
 
   <div>
     <form clrForm>
@@ -26,9 +32,18 @@
       <div *ngIf="!logged">
         Please select your role below:
         <div class="align-row">
-          <button class="btn btn-outline">Student</button>
-          <button class="btn btn-outline">Instructor</button>
-          <button class="btn btn-outline">Social Intiative</button>
+          <clr-radio-wrapper>
+            <input type="radio" clrRadio value="IL" name="options" [(ngModel)]="type" />
+            <label class="radio_label">Student</label>
+          </clr-radio-wrapper>
+          <clr-radio-wrapper>
+            <input type="radio" clrRadio value="IC" name="options" [(ngModel)]="type" />
+            <label class="radio_label">Instructor</label>
+          </clr-radio-wrapper>
+          <clr-radio-wrapper>
+            <input type="radio" clrRadio value="SI" name="options" [(ngModel)]="type" />
+            <label class="radio_label">Social Intiative</label>
+          </clr-radio-wrapper>
         </div>
       </div>
 

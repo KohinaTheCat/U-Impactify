@@ -25,6 +25,8 @@ export class LoginSignupComponent implements OnInit {
     linkPrompt: 'Already have an account?',
     link: 'Login',
     submit: 'Sign Up',
+    img: '../../assets/login-signup/signup.svg',
+    slogan: 'join the movement, change the world'
   };
 
   login: FormDisplay = {
@@ -32,6 +34,8 @@ export class LoginSignupComponent implements OnInit {
     linkPrompt: "Don't have an account?",
     link: 'Sign Up',
     submit: 'Log In',
+    img: '../../assets/login-signup/login.svg',
+    slogan: 'a system you can rely on'
   };
 
   form: FormDisplay = this.signup;
@@ -39,6 +43,7 @@ export class LoginSignupComponent implements OnInit {
   email: string = '';
   username: string = '';
   password: string = '';
+  type: string = '';
 
   onToggle() {
     this.logged = !this.logged;
@@ -50,13 +55,13 @@ export class LoginSignupComponent implements OnInit {
       username: this.username,
       email: this.email,
       password: this.password,
-      type: 'IL', //change this
+      type: this.type, //change this
     };
     if (!this.logged) {
       this.userService.postNewUser(user).subscribe(
         (res) => {
           this.location.go(this.location.path()),
-            this.router.navigate(['/user/' + res.id], {
+            this.router.navigate(['/user/' + res._id], {
               skipLocationChange: true,
             });
         },
