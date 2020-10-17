@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-root',
@@ -6,5 +8,13 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'uimpactify app';
+
+  constructor(private router: Router) {}
+  
+  /**
+   * Determines if navbar should appear
+   */
+  isLoggedIn = (): Boolean => {
+    return this.router.url !== "/signup";
+  }
 }
