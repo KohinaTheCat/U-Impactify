@@ -15,5 +15,4 @@ export class LandingComponent implements OnInit {
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get("id")
   }
-
 }
