@@ -7,11 +7,13 @@ import { SignupQuestionaireComponent } from './pages/signup-questionaire/signup-
 import { ClarityModule } from '@clr/angular';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { SignupQuestionaire2Component } from './pages/signup-questionaire2/signup-questionaire2.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SignupQuestionaireComponent
+    SignupQuestionaireComponent,
+    SignupQuestionaire2Component
   ],
   imports: [
     BrowserModule,

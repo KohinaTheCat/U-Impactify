@@ -1,0 +1,92 @@
+.page{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+
+.Image{
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  width: 50vw;
+}
+
+#image{
+  width: inherit;
+  height: inherit;
+}
+
+.clr-form-control{
+  height: 100vh;
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  padding-top: 40vh;
+  padding-bottom: 5vh;
+}
+
+.clr-control-label{
+  font-size: 0.8rem;
+}
+
+.clr-checkbox-wrapper{
+  margin-bottom: 2px;
+}
+
+#label1{
+  margin-top: 20px;
+}
+#label1, #label2, #label3{
+  font-size: 1rem;
+  margin-bottom: 5px;
+}
+
+#Header{
+  font-size: 2rem;
+}
+
+.ConnectOne{
+  display: flex;
+  flex-direction: row;
+}
+
+.ConnectTwo{
+  display: flex;
+  flex-direction: row;
+}
+
+.ConnectThree{
+  display: flex;
+  flex-direction: row;
+}
+
+.buttonsflex{
+  display: flex;
+  flex-direction: row;
+}
+
+.skipbutton{
+  margin-left: 1rem;
+  margin-top: 0.5rem;
+}
+
+.submitbutton{
+  padding-right: 2rem;
+}
+
+@media only screen and (max-width: 600px) {
+  .page{
+    flex-direction: column;
+  }
+  .clr-form-control{
+    margin-top: 20vh;
+  }
+}
