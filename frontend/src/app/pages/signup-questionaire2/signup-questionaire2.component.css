@@ -19,6 +19,7 @@
   height: inherit;
 }
 
+
 .clr-form-control{
   height: 100vh;
   width: 50vw;
@@ -38,15 +39,16 @@
 }
 
 .clr-checkbox-wrapper{
-  margin-bottom: 2px;
+  padding-top: 2vh;
 }
 
 #label1{
-  margin-top: 20px;
+  padding-top: 5vh;
 }
 #label1, #label2, #label3{
   font-size: 1rem;
-  margin-bottom: 5px;
+  padding-top: 2rem;
+  /* margin-bottom: 5px; */
 }
 
 #Header{
@@ -56,16 +58,31 @@
 .ConnectOne{
   display: flex;
   flex-direction: row;
+  align-items: center;
+  flex-direction: row;
+  padding-bottom: 1rem;
+  padding-top: 2vh;
+  max-height: 2rem;
 }
 
 .ConnectTwo{
   display: flex;
   flex-direction: row;
+  align-items: center;
+  flex-direction: row;
+  padding-bottom: 1rem;
+  padding-top: 2vh;
+  max-height: 2rem;
 }
 
 .ConnectThree{
   display: flex;
   flex-direction: row;
+  align-items: center;
+  flex-direction: row;
+  padding-bottom: 1rem;
+  padding-top: 2vh;
+  max-height: 2rem;
 }
 
 .buttonsflex{
@@ -81,6 +98,28 @@
 .submitbutton{
   padding-right: 2rem;
 }
+
+.LineOne{
+  flex: 1;
+  display: flex;
+  padding-bottom: 0.75rem;
+  padding-left: 0.5rem;
+}
+
+.LineTwo{
+  flex: 1;
+  display: flex;
+  padding-bottom: 0.5rem;
+  padding-left: 0.5rem;
+}
+
+.LineThree{
+  flex: 1;
+  display: flex;
+  padding-bottom: 0.5rem;
+  padding-left: 0.5rem;
+}
+
 
 @media only screen and (max-width: 600px) {
   .page{

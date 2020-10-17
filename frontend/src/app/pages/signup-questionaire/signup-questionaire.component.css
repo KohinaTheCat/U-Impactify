@@ -18,23 +18,26 @@
 .clr-form-control{
   display: flex;
   height: 100vh;
-  justify-content: center;
+  justify-content: center; 
   align-items: center;
   flex-direction: column;
   width: 50vw;
 }
 
 #MainTitle{
-  padding-bottom: 1rem;
+  padding-bottom: 3rem;
 }
 
 .clr-form-control{
+  font-size: larger;
   display: flex;
 }
 
 .line{
   flex: 1;
   display: flex;
+  padding-bottom: 0.5rem;
+  padding-left: 0.25rem;
 }
 
 .labelField{
@@ -46,21 +49,58 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  flex-direction: row;
   padding-bottom: 1rem;
+  padding-top: 2vh;
+  max-height: 2rem;
 }
 
 .buttonsflex{
+  /* padding-top: 2vh;
+  padding-right: 40vh; */
   display: flex;
+  padding-right: 13rem;
   flex-direction: row;
-  justify-content: flex-start;
+  margin-top: 1rem;
 }
 
 .skipbutton{
-  margin-left: 1rem;
-  margin-top: 0.5rem;
+  margin-left: 0.5rem;
+  margin-top: 0.75rem;
 }
 
-.submitbutton{
-  padding-right: 2rem;
+
+h1{
+  
+  font-size: 6vh;
+}
+
+.clr-control-label{
+  font-size: 2vh;
+} 
+
+.clr-checkbox-wrapper{
+  padding-top: 2vh;
+}
+
+#title2{
+  padding-top: 5vh;
+  font-size: 2.5vh;
+}
+
+#title{
+  font-size: 2.5vh;
+}
+
+@media only screen and (max-width: 600px) {
+  .page{
+    flex-direction: column;
+  }
+  .clr-form-control{
+    margin-top: 20vh;
+  }
+
+  .buttonsflex{
+    padding-right: 3rem;
+  }
 }
