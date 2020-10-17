@@ -13,25 +13,25 @@
       <clr-input-container>
         <label>
           email:
-          <input clrInput type="email" [(ngModel)]="email" name="email" />
+          <input clrInput type="email" [(ngModel)]="email" name="email" required/>
         </label>
       </clr-input-container>
       <clr-input-container *ngIf="!logged">
         <label>
           username:
-          <input clrInput type="username" [(ngModel)]="username" name="username" />
+          <input clrInput type="username" [(ngModel)]="username" name="username" required/>
         </label>
       </clr-input-container>
       <clr-input-container>
         <label>
           password:
-          <input clrInput type="password" [(ngModel)]="password" name="password" />
+          <input clrInput type="password" [(ngModel)]="password" name="password" required/>
         </label>
       </clr-input-container>
 
       <div *ngIf="!logged">
         Please select your role below:
-        <div class="align-row">
+        <div class="align-row-radio">
           <clr-radio-wrapper>
             <input type="radio" clrRadio value="IL" name="options" [(ngModel)]="type" />
             <label class="radio_label">Student</label>
@@ -52,6 +52,7 @@
       </div>
 
       <button (click)="onSubmit()" class="btn btn-primary">{{form.submit}}</button>
+      <clr-control-error>{{this.error}}</clr-control-error>
     </form>
   </div>
 </div>

@@ -58,6 +58,12 @@ form {
   align-items: center;
 }
 
+.align-row-radio {
+  flex-direction: row;
+  display: flex;
+  align-items: center;
+}
+
 a {
   padding: 0rem 1rem;
   word-wrap: normal;
@@ -73,6 +79,7 @@ button {
   .align-row {
     flex-direction: column;
   }
+
   .side-img {
     height: 100vh;
   }
@@ -82,7 +89,6 @@ button {
   .container {
     flex-direction: column;
   }
-
   form {
     width: 100vw;
   }
