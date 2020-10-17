@@ -1,16 +1,48 @@
-<p>create-course works!</p>
-<div class = "container">
+<!-- <div class = "container">
     <div>
         <form clrForm>
-            <label>
-                title:
-                <input clrInput type="text" [(ngModel)]="title" name="title" />
-            </label>
-            <label>
-                description:
-                <input clrInput type="text" [(ngModel)]="description" name="description" />
-            </label>  
+            <clr-input-container>
+                <label>
+                    <h3> Course Name: </h3>
+                    <input clrInput type="text" [(ngModel)]="title" name="title"/>
+                </label>
+                <label>
+                    <h3> Course Description: </h3>
+                    <input clrInput type="text" [(ngModel)]="description" name="description"/>
+                </label>  
+            </clr-input-container>
         </form>
-        <button (click)="registerHandler()">reeeee</button>
+        <button class="btn btn-primary" (click)="registerHandler()">Create Course</button>
     </div>
-</div>
+    
+</div> -->
+
+<div class="container">
+    <div>
+      <form clrForm>
+        <!-- <h3>Create a New Course</h3> -->
+        <clr-input-container>
+          <label>
+            Course Name:
+            <input clrInput type="text" [(ngModel)]="title" name="title"/>
+        </label>
+        </clr-input-container>
+
+        <clr-input-container >
+          <label>
+            Course Description:
+            <input clrInput type="text" [(ngModel)]="description" name="description"/>
+        </label>
+        </clr-input-container>
+
+        <clr-input-container >
+            <label>
+              Pre-Requesite(s):
+              <input clrInput type="text" [(ngModel)]="prereq" name="prereq"/>
+          </label>
+          </clr-input-container>
+
+        <button class="btn btn-primary" (click)="registerHandler()">Create Course</button>
+      </form>
+    </div>
+  </div>
