@@ -1,2 +1,18 @@
-<!-- Do not remove below. Used for routing. -->
-<router-outlet></router-outlet>
+<div class="main-container">
+  <div class="content-container">
+    <clr-vertical-nav *ngIf="isLoggedIn()">
+      <img src="../assets/uLogo.png" id="logo">
+      <a clrVerticalNavLink routerLink="./dashboard" routerLinkActive="active"><clr-icon shape="home"></clr-icon> Dashboard</a>
+      <a clrVerticalNavLink routerLink="./scheduling"><clr-icon shape="calendar"></clr-icon> Scheduling</a>
+      <a clrVerticalNavLink routerLink="./classes"><clr-icon shape="book"></clr-icon> Classes</a>
+      <a clrVerticalNavLink routerLink="./community"><clr-icon shape="talk-bubbles"></clr-icon> Community</a>
+      <a clrVerticalNavLink routerLink="./mailbox"><clr-icon shape="envelope"></clr-icon> Mailbox</a>
+      <a clrVerticalNavLink routerLink="./feedback"><clr-icon shape="thumbs-up"></clr-icon> Reviews & Feedback</a>
+      <a clrVerticalNavLink routerLink="./billing"><clr-icon shape="dollar-bill"></clr-icon> Billing & Marketing</a>
+      <a clrVerticalNavLink routerLink="./settings"><clr-icon shape="cog"></clr-icon> Settings</a>
+    </clr-vertical-nav>
+    <div class="content-area">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

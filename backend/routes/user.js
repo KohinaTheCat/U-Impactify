@@ -25,7 +25,8 @@ router.route("/").post((req, res) => {
     password,
     email,
     type,
-    classes: [],
+    classesEnrolled: [],
+    classesTeaching: []
   });
   newUser
     .save()

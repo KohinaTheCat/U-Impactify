@@ -2,7 +2,7 @@
   background-color: #fcfcfb;
   flex-direction: row;
   display: flex;
-  height: 100vh;
+  height: calc(100vh - 7rem);
 }
 
 #slogan{
@@ -42,7 +42,7 @@ form {
   flex-direction: column;
   justify-content: center;
   width: 40vw;
-  height: 100vh;
+  height: calc(100vh - 7rem);
   background: #eae4f1;
   border-radius: 6px;
   text-align: center;

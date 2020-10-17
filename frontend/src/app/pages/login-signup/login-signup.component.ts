@@ -1,9 +1,9 @@
-import { UserService } from './../../services/user.service';
-import { Component, OnInit } from '@angular/core';
-import { FormDisplay } from './FormDisplay';
-import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { CompileShallowModuleMetadata } from '@angular/compiler';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { User } from 'src/app/models/user.model';
+import { UserService } from './../../services/user.service';
+import { FormDisplay } from './FormDisplay';
 
 @Component({
   selector: 'app-login-signup',
@@ -26,7 +26,7 @@ export class LoginSignupComponent implements OnInit {
     link: 'Login',
     submit: 'Sign Up',
     img: '../../assets/login-signup/signup.svg',
-    slogan: 'join the movement, change the world'
+    slogan: 'join the movement, change the world',
   };
 
   login: FormDisplay = {
@@ -35,7 +35,7 @@ export class LoginSignupComponent implements OnInit {
     link: 'Sign Up',
     submit: 'Log In',
     img: '../../assets/login-signup/login.svg',
-    slogan: 'a system you can rely on'
+    slogan: 'a system you can rely on',
   };
 
   form: FormDisplay = this.signup;
@@ -51,6 +51,36 @@ export class LoginSignupComponent implements OnInit {
     this.form = this.logged ? this.login : this.signup;
   }
 
+  loginHandler(user: any) {
+    this.userService.loginUser(this.email, this.password).subscribe(
+      (res) => {
+        if (res === false) {
+          console.log('incorrect password');
+        } else {
+          this.userService.setUser(<User>res);
+          this.router.navigate(['dashboard']);
+        }
+      },
+      (err) => {
+        this.error = err.message;
+        console.log(err);
+      }
+    );
+  }
+
+  registerHandler(user: any) {
+    this.userService.postNewUser(user).subscribe(
+      (res) => {
+        this.userService.setUser(<User>res);
+        this.router.navigate(['dashboard']);
+      },
+      (err) => {
+        this.error = err.message;
+        console.log(err);
+      }
+    );
+  }
+
   onSubmit() {
     const user = {
       username: this.username,
@@ -59,39 +89,9 @@ export class LoginSignupComponent implements OnInit {
       type: this.type, //change this
     };
     if (!this.logged) {
-      this.userService.postNewUser(user).subscribe(
-        (res) => {
-          this.location.go(this.location.path()),
-            this.router.navigate(['/user/' + res._id], {
-              skipLocationChange: true,
-            });
-        },
-        (err) => {
-          this.error = err.message;
-          console.log(err);
-        }
-      );
+      this.registerHandler(user);
     } else {
-      this.userService.loginUser(this.email, this.password).subscribe(res => {
-          if (res === false) {
-            // couldn't match the email with password
-            console.log("incorrect password")
-          } else {
-            // user logged in, navigate to page, changed below
-            this.location.go(this.location.path()),
-              // change route to login page after
-            this.router.navigate(['/createcourse/'], {
-
-            // this.router.navigate(['/user/' + this.email], {
-              skipLocationChange: true,
-            });
-          }
-        },
-        (err) => {
-          this.error = err.message;
-          console.log(err);
-        }
-      );
+      this.loginHandler(user);
     }
   }
 

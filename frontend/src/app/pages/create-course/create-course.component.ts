@@ -1,4 +1,4 @@
-import { CreateCourseService } from './../../services/create-course.service';
+import { CourseService } from './../../services/course.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateCourseComponent implements OnInit {
 
-  constructor(private createCourseService: CreateCourseService) { }
+  constructor(private courseService: CourseService) { }
 
   title: string = '';
   description: string = '';
@@ -26,7 +26,7 @@ export class CreateCourseComponent implements OnInit {
       title: this.title,
       description: this.description,
     };
-     this.createCourseService.postNewCourse(course).subscribe(res => {
+     this.courseService.postNewCourse(course).subscribe(res => {
      }, err => {
       console.log(err); 
       });
