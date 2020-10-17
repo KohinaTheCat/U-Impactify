@@ -13,14 +13,18 @@ export class LoginSignupComponent implements OnInit {
     greeting: 'Create an Account',
     linkPrompt: 'Already have an account?',
     link: 'Login',
-    submit: 'Sign Up'
+    submit: 'Sign Up',
+    img: '../../assets/login-signup/signup.svg',
+    slogan: 'join the movement, change the world'
   };
 
   login: FormDisplay = {
     greeting: 'Welcome Back',
     linkPrompt: "Don't have an account?",
     link: 'Sign Up',
-    submit: 'Log In'
+    submit: 'Log In',
+    img: '../../assets/login-signup/login.svg',
+    slogan: 'a system you can rely on'
   };
 
   form: FormDisplay = this.signup;
@@ -28,6 +32,7 @@ export class LoginSignupComponent implements OnInit {
   email: string = '';
   username: string = '';
   password: string = '';
+  type: string = '';
 
   onToggle() {
     this.logged = !this.logged;
