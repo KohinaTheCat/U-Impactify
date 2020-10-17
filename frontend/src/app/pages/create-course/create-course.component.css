@@ -42,3 +42,7 @@ label {
     min-width: 30rem;
     flex-direction: column;
   }
+
+  .rlabel {
+      font-size: 0.75rem;
+  }

@@ -1,22 +1,3 @@
-<!-- <div class = "container">
-    <div>
-        <form clrForm>
-            <clr-input-container>
-                <label>
-                    <h3> Course Name: </h3>
-                    <input clrInput type="text" [(ngModel)]="title" name="title"/>
-                </label>
-                <label>
-                    <h3> Course Description: </h3>
-                    <input clrInput type="text" [(ngModel)]="description" name="description"/>
-                </label>  
-            </clr-input-container>
-        </form>
-        <button class="btn btn-primary" (click)="registerHandler()">Create Course</button>
-    </div>
-    
-</div> -->
-
 <div class="container">
     <div>
       <form clrForm>
@@ -35,37 +16,22 @@
         </label>
         </clr-input-container>
 
-        <clr-input-container >
-            <!-- <label>
-              Difficulty Level
-              <input clrInput type="text" [(ngModel)]="level" name="level"/>
-          </label> -->
-          <clr-radio-container>
-            <label>Full radio</label>
+           <clr-radio-container>
+            <label>Difficulty</label>
             <clr-radio-wrapper>
-              <input type="radio" clrRadio name="options" required value="option1" [(ngModel)]="level" />
-              <label>Easy</label>
+              <input type="radio" clrRadio name="easy" required value="easy" [(ngModel)]="level" />
+              <label class = "rlabel">Easy</label>
             </clr-radio-wrapper>
             <clr-radio-wrapper>
-              <input type="radio" clrRadio name="options" required value="option2" [(ngModel)]="level" />
-              <label>Difficult</label>
-            </clr-radio-wrapper>
-            <clr-radio-wrapper>
-                <input type="radio" clrRadio name="options" required value="option2" [(ngModel)]="level" />
-                <label>Advanced</label>
+                <input type="radio" clrRadio name="difficult" required value="difficult" [(ngModel)]="level" />
+                <label class = "rlabel">Difficult</label>
               </clr-radio-wrapper>
-            <clr-control-helper>Helper text</clr-control-helper>
-            <clr-control-error>This field is required!</clr-control-error>
-          </clr-radio-container>
-          </clr-input-container>
-
-          <clr-input-container >
-            <label>
-              Tags
-              <input clrInput type="text" [(ngModel)]="tags" name="tags"/>
-          </label>
-          </clr-input-container>
-
+              <clr-radio-wrapper>
+                <input type="radio" clrRadio name="advanced" required value="advanced" [(ngModel)]="level" />
+                <label class = "rlabel">Advanced</label>
+              </clr-radio-wrapper>
+            <clr-control-error>Please pick a difficulty level!</clr-control-error>
+          </clr-radio-container> 
         
         <button class="btn btn-primary" (click)="registerHandler()">Create Course</button>
       </form>

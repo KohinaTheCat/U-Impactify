@@ -12,6 +12,7 @@ const routes: Routes = [
   { path: 'landing', component: LandingComponent },
   { path: 'user/:id', component: LandingComponent },
   { path: '', component: LoginSignupComponent },
+  { path: 'createcourse', component: CreateCourseComponent },
 ];
 
 //canActivate: [AuthGuard] add this for routes that require auth.
