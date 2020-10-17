@@ -1,5 +1,4 @@
 import { CreateCourseService } from './../../services/create-course.service';
-import { CourseForm } from './CourseForm';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -11,17 +10,12 @@ export class CreateCourseComponent implements OnInit {
 
   constructor(private createCourseService: CreateCourseService) { }
 
-  // testform : CourseForm = {
-  //   title: "",
-  //   description: "",
-  //   level: "",
-  //   tags: "",
-  // };
-
   title: string = '';
   description: string = '';
   level: string = "";
   tags: string = "";
+  documents : string [] = [];
+  basic: boolean = true;
 
   ngOnInit(): void {
   }

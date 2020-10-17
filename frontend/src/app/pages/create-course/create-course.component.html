@@ -1,39 +1,57 @@
-<div class="container">
-    <div>
+  <clr-modal [(clrModalOpen)]="basic" [clrModalSize]="'lg'">
+    <h3 class="modal-title">Create a course</h3>
+    <div class="modal-body">
       <form clrForm>
-        <h3>Create the Course</h3>
-        <clr-input-container>
-          <label>
-            Course Name
-            <input clrInput type="text" [(ngModel)]="title" name="title"/>
-        </label>
-        </clr-input-container>
-
-        <clr-input-container >
-          <label>
-            Course Description
-            <input clrInput type="text" [(ngModel)]="description" name="description"/>
-        </label>
-        </clr-input-container>
-
-           <clr-radio-container>
-            <label>Difficulty</label>
-            <clr-radio-wrapper>
-              <input type="radio" clrRadio name="easy" required value="easy" [(ngModel)]="level" />
-              <label class = "rlabel">Easy</label>
-            </clr-radio-wrapper>
-            <clr-radio-wrapper>
-                <input type="radio" clrRadio name="difficult" required value="difficult" [(ngModel)]="level" />
-                <label class = "rlabel">Difficult</label>
+          <clr-input-container>
+            <label>Course Name
+            <input clrInput type="text" [(ngModel)]="title" name="title" required/>
+            </label>
+            <clr-control-error>This field is required!</clr-control-error>
+          </clr-input-container>
+          <clr-input-container>
+            <label>Course Description
+            <input clrInput type="text" [(ngModel)]="description" name="description" required/>
+            </label>
+            <clr-control-error>This field is required!</clr-control-error>
+          </clr-input-container>
+            <clr-radio-container>
+              <label>Difficulty</label>
+              <clr-radio-wrapper>
+                <input type="radio" clrRadio name="easy" required value="easy" [(ngModel)]="level" />
+                <label class = "rlabel">Easy</label>
               </clr-radio-wrapper>
               <clr-radio-wrapper>
-                <input type="radio" clrRadio name="advanced" required value="advanced" [(ngModel)]="level" />
-                <label class = "rlabel">Advanced</label>
-              </clr-radio-wrapper>
-            <clr-control-error>Please pick a difficulty level!</clr-control-error>
-          </clr-radio-container> 
-        
-        <button class="btn btn-primary" (click)="registerHandler()">Create Course</button>
-      </form>
+                  <input type="radio" clrRadio name="difficult" required value="difficult" [(ngModel)]="level" />
+                  <label class = "rlabel">Difficult</label>
+                </clr-radio-wrapper>
+                <clr-radio-wrapper>
+                  <input type="radio" clrRadio name="advanced" required value="advanced" [(ngModel)]="level" />
+                  <label class = "rlabel">Advanced</label>
+                </clr-radio-wrapper>
+              <clr-control-error>Please pick a difficulty level!</clr-control-error>
+            </clr-radio-container>
+          
+           
+          <clr-input-container>
+            <label>Tags
+            <input clrInput type="text" [(ngModel)]="tags" name="tags" required/>
+            </label>
+            <clr-control-error>This field is required!</clr-control-error>
+          </clr-input-container>
+
+          <!-- FIX DOCUMENT UPLOAD SOMEHOW TO TAKE FILE-->
+          <clr-input-container>
+            <label>Documents
+            <input clrInput type="text" [(ngModel)]="documents" name="documents" required/>
+            </label>
+            <clr-control-error>This field is required!</clr-control-error>
+          </clr-input-container>
+
+
+      </form>    
     </div>
-  </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="basic = false">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="registerHandler()" (click)="basic = false">Create Course</button>
+    </div>
+  </clr-modal>

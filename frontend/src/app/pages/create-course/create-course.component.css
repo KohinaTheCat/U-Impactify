@@ -1,13 +1,15 @@
-.container {
+/* .container {
     background: #F5F7FA;
     border-radius: 1rem;
     justify-content: center;
     align-items: center;
     display: flex;
     text-size-adjust: 1rem;
-    /* text-align: center;  */
-    /* position: absolute; */
-}
+    text-align: center;  
+    position: absolute;
+    max-width: 50rem;
+
+} */
 
 form {
     /* display: flex; */
@@ -17,10 +19,10 @@ form {
 }
 
 
-h3 {
-    font-size: 1.5rem;
+.modal-title {
+    font-size: 1.75rem;
     color: #a78ec3;
-    margin-bottom: 2rem;
+    /* margin-bottom: 2rem; */
 } 
 
 input {
@@ -46,3 +48,5 @@ label {
   .rlabel {
       font-size: 0.75rem;
   }
+
+
