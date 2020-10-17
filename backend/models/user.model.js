@@ -31,9 +31,12 @@ const userSchema = new Schema({
     trim: true,
     required: "Specify Type of User",
   },
-  classes: {
+  classesEnrolled: {
     type: [String],
   },
+  classesTeaching:{
+    type: [String],
+  }
 });
 
 /* 

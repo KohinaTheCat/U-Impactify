@@ -1,26 +1,25 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-
+import { FormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ClarityModule } from '@clr/angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginSignupComponent } from './pages/login-signup/login-signup.component';
-import { LandingComponent } from './pages/landing/landing.component';
-import { ClarityModule } from '@clr/angular';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FrontPageHeaderComponent } from './components/front-page-header/front-page-header.component';
-import { FormsModule } from '@angular/forms';
 import { FooterComponent } from './components/footer/footer.component';
+import { FrontPageHeaderComponent } from './components/front-page-header/front-page-header.component';
 import { CreateCourseComponent } from './pages/create-course/create-course.component';
-import {HttpClientModule} from '@angular/common/http';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { LoginSignupComponent } from './pages/login-signup/login-signup.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FrontPageHeaderComponent,
     LoginSignupComponent,
-    LandingComponent,
     FooterComponent,
-    CreateCourseComponent
+    CreateCourseComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,6 +30,6 @@ import {HttpClientModule} from '@angular/common/http';
     HttpClientModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

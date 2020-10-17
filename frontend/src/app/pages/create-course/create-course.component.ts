@@ -1,4 +1,4 @@
-import { CreateCourseService } from './../../services/create-course.service';
+import { CourseService } from './../../services/course.service';
 import { CourseForm } from './CourseForm';
 import { Component, OnInit } from '@angular/core';
 
@@ -9,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateCourseComponent implements OnInit {
 
-  constructor(private createCourseService: CreateCourseService) { }
+  constructor(private courseService: CourseService) { }
 
   testform : CourseForm = {
     title: "",
@@ -28,7 +28,7 @@ export class CreateCourseComponent implements OnInit {
       title: this.title,
       description: this.description,
     };
-     this.createCourseService.postNewCourse(course).subscribe(res => {
+     this.courseService.postNewCourse(course).subscribe(res => {
      }, err => {
       console.log(err); 
       });

@@ -23,6 +23,9 @@ body {
   /* Gray · 60% */
   --gray60: #919699;
 
+  /* Gray · 70% */
+  --gray70: #7A7A7A;
+
   /* Gray · 80% */
   --gray80: #5e6366;
 
@@ -73,6 +76,9 @@ body {
 
   /* Orange Base */
   --orange-base: #ffb08a;
+
+  --clr-vertical-nav-item-active-color: #fff;
+  --clr-vertical-nav-active-bg-color: #A78EC3;
 }
 
 h1 {
