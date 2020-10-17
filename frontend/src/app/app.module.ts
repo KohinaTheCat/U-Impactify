@@ -19,7 +19,7 @@ import {HttpClientModule} from '@angular/common/http';
     FrontPageHeaderComponent,
     LoginSignupComponent,
     LandingComponent,
-    FooterComponent
+    FooterComponent,
     CreateCourseComponent
   ],
   imports: [
