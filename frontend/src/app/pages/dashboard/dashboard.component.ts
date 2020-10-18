@@ -17,4 +17,11 @@ export class DashboardComponent implements OnInit {
     this.user = this.userService.getCurrentUser();
   }
 
+  /**
+   * TODO: Setup
+   */
+  addNewCourse(): void {
+    console.log("adding New Course...");
+  }
+
 }
