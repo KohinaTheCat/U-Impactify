@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-global-search',
@@ -6,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./global-search.component.css'],
 })
 export class GlobalSearchComponent implements OnInit {
-  constructor() {}
+  constructor(private userService: UserService, private router: Router) {}
 
   title: String = '';
 
@@ -18,5 +20,10 @@ export class GlobalSearchComponent implements OnInit {
   ngOnChanges(): void {
     this.title =
       location.pathname === '/' ?  'Dashboard': location.pathname.substring(1);
+  }
+
+  logOut(): void {
+    this.userService.setUser(null);
+    this.router.navigate(['signup']);
   }
 }

@@ -95,5 +95,9 @@ export class LoginSignupComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if(!!this.userService.getCurrentUser()) {
+      this.router.navigate(['dashboard']);
+    }
+  }
 }
