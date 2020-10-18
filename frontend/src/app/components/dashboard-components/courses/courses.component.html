@@ -1,0 +1,18 @@
+<div class="courses-container">
+    <h2>Your Classes</h2>
+    <div class="courses">
+    <!-- This is a dummy course, it must be replaced with *ngFor="let course of user.classes" -->
+      <div class="course-card">
+        <div class="course-image plus">
+          <clr-icon shape="code"></clr-icon>
+        </div>
+        Computer Science
+      </div>
+      <div class="course-card" (click)="addNewCourse()" id="new-course">
+        <div class="course-image plus">
+          <clr-icon shape="plus"></clr-icon>
+        </div>
+        Add a New Course
+      </div>
+    </div>
+  </div>
