@@ -1,15 +1,18 @@
 import { CourseService } from './../../services/course.service';
 import { Component, OnInit } from '@angular/core';
-import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
+import {
+  NgxFileDropEntry,
+  FileSystemFileEntry,
+  FileSystemDirectoryEntry,
+} from 'ngx-file-drop';
 
 @Component({
   selector: 'app-create-course',
   templateUrl: './create-course.component.html',
-  styleUrls: ['./create-course.component.css']
+  styleUrls: ['./create-course.component.css'],
 })
 export class CreateCourseComponent implements OnInit {
-
-  constructor(private courseService: CourseService) { }
+  constructor(private courseService: CourseService) {}
 
   title: string = '';
   description: string = '';
@@ -18,34 +21,34 @@ export class CreateCourseComponent implements OnInit {
   documents: NgxFileDropEntry[] = [];
   basic: boolean = true;
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
-  
   registerHandler() {
     const course = {
       title: this.title,
       description: this.description,
     };
-     this.courseService.postNewCourse(course).subscribe(res => {
-     }, err => {
-      console.log(err); 
-      });
+    this.courseService.postNewCourse(course).subscribe(
+      (res) => {
+        console.log("success!")
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }
-  
+
   // usage code from - https://www.npmjs.com/package/ngx-file-drop
   public dropped(documents: NgxFileDropEntry[]) {
     this.documents = documents;
     for (const droppedFile of documents) {
- 
       // Is it a file?
       if (droppedFile.fileEntry.isFile) {
         const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
         fileEntry.file((documents: File) => {
- 
           // Here you can access the real file
           console.log(droppedFile.relativePath, documents);
- 
+
           /**
           // You could upload it like this:
           const formData = new FormData()
@@ -61,7 +64,6 @@ export class CreateCourseComponent implements OnInit {
             // Sanitized logo returned from backend
           })
           **/
- 
         });
       } else {
         // It was a directory (empty directories are added, otherwise only files)
@@ -72,12 +74,12 @@ export class CreateCourseComponent implements OnInit {
   }
 
   // usage code from - https://www.npmjs.com/package/ngx-file-drop
-  public fileOver(event){
+  public fileOver(event) {
     console.log(event);
   }
 
   // usage code from - https://www.npmjs.com/package/ngx-file-drop
-  public fileLeave(event){
+  public fileLeave(event) {
     console.log(event);
   }
 }
