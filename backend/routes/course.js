@@ -113,14 +113,13 @@ router.post("/:id/upload", upload.single("documents"), (req, res, next) => {
   Course.findById(req.params.id)
     .then((course) => {
       console.log(req.file);
-      console.log(course.files)
       course.files = course.files.concat([req.file.filename]);
       course
         .save()
         .then(() => res.json(`Document Added`))
         .catch((err) => res.json(err));
     })
-    .catch((err) => res.status(400).json(`Error: ${err}`));
+    .catch((err) => res.status(400).json(`Error finding Course: ${err}`));
 });
 
 //get document by filename
