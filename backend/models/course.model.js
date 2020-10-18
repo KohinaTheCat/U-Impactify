@@ -16,7 +16,7 @@ const courseSchema = new Schema({
     type: String,
   },
   files: {
-    type: [String]
+    type: [String],
   }
 });
 

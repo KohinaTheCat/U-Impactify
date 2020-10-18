@@ -33,7 +33,8 @@ import  {  PdfViewerModule  }  from  'ng2-pdf-viewer';
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
-    PdfViewerModule
+    PdfViewerModule,
+    NgxFileDropModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

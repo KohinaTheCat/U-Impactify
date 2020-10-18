@@ -81,6 +81,7 @@ router.route("/add").post((req, res) => {
   const students = req.body.students;
   const teachers = req.body.teachers;
   const description = req.body.description;
+  const files = req.body.files;
 
   // populate with finalized schema
   const newCourse = new Course({
@@ -88,7 +89,7 @@ router.route("/add").post((req, res) => {
     students,
     teachers,
     description,
-    documents: [],
+    files,
   });
 
   newCourse
@@ -108,7 +109,7 @@ router.get("/:id", (req, res, next) => {
 });
 
 //uploading document to a course
-router.post("/:id/upload", upload.single("document"), (req, res, next) => {
+router.post("/:id/upload", upload.single("documents"), (req, res, next) => {
   Course.findById(req.params.id)
     .then((course) => {
       console.log(req.file);
@@ -123,7 +124,7 @@ router.post("/:id/upload", upload.single("document"), (req, res, next) => {
 });
 
 //get document by filename
-router.get("/document/:filename", (req, res) => {
+router.get("/documents/:filename", (req, res) => {
   const file = gfs
     .find({
       filename: req.params.filename,
@@ -139,7 +140,7 @@ router.get("/document/:filename", (req, res) => {
 });
 
 //delete files by id
-router.post("/document/del/:id", (req, res) => {
+router.post("/documents/del/:id", (req, res) => {
   gfs.delete(new mongoose.Types.ObjectId(req.params.id), (err, data) => {
     if (err) return res.status(404).json({ err: err.message });
     res.json("document deleted");
