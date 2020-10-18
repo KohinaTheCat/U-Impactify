@@ -24,6 +24,7 @@
     "@clr/icons": "4.0.4",
     "@clr/ui": "4.0.4",
     "@webcomponents/webcomponentsjs": "^2.0.0",
+    "ngx-file-drop": "^10.0.0",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

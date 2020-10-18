@@ -11,6 +11,8 @@ import { FrontPageHeaderComponent } from './components/front-page-header/front-p
 import { CreateCourseComponent } from './pages/create-course/create-course.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { LoginSignupComponent } from './pages/login-signup/login-signup.component';
+import { NgxFileDropModule } from 'ngx-file-drop';
+
 
 @NgModule({
   declarations: [
@@ -28,6 +30,7 @@ import { LoginSignupComponent } from './pages/login-signup/login-signup.componen
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
+    NgxFileDropModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

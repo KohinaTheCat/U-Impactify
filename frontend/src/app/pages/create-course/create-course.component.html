@@ -39,13 +39,29 @@
             <clr-control-error>This field is required!</clr-control-error>
           </clr-input-container>
 
-          <!-- FIX DOCUMENT UPLOAD SOMEHOW TO TAKE FILE-->
-          <clr-input-container>
-            <label>Documents
-            <input clrInput type="text" [(ngModel)]="documents" name="documents" required/>
-            </label>
-            <clr-control-error>This field is required!</clr-control-error>
-          </clr-input-container>
+          <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)" 
+          (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+              <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+                <label>Upload Course Files (optional)</label>
+                <button class="btn btn-primary" (click)="openFileSelector()">Browse Files</button>
+
+                <!-- <button type="button" (click)="openFileSelector()">Browse Files</button> -->
+              </ng-template>
+          </ngx-file-drop>
+          <div class="upload-table">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name of file(s) uploaded:</th>
+                    </tr>
+                </thead>
+                <tbody class="upload-name-style">
+                    <tr *ngFor="let item of documents; let i=index">
+                        <td><strong>{{ item.relativePath }}</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
 
       </form>    

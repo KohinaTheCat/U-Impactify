@@ -9,26 +9,23 @@
     position: absolute;
     max-width: 50rem;
 
-} */
+}
 
 form {
-    /* display: flex; */
     align-items: center;
-    /* min-width: 10rem; */
     border-radius: 2rem;
-}
+} */
 
 
 .modal-title {
+    margin-top: 1rem;
     font-size: 1.75rem;
     color: #a78ec3;
-    /* margin-bottom: 2rem; */
 } 
 
 input {
     margin-top: 0.5rem;
     margin-bottom: 1rem;
-
     min-height: 2rem;
     font-size: 0.8rem;
 }
@@ -48,5 +45,4 @@ label {
   .rlabel {
       font-size: 0.75rem;
   }
-
 

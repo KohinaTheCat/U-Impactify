@@ -2,6 +2,8 @@ import { Course } from './../models/course.model';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { NgxFileDropEntry, FileSystemFileEntry, FileSystemDirectoryEntry } from 'ngx-file-drop';
+
 
 @Injectable({
   providedIn: 'root',
@@ -12,12 +14,15 @@ export class CourseService {
   constructor(private http: HttpClient) {} 
 
   postNewCourse(newCourse): Observable<any> {
-    const { title, description } = newCourse;
+    const { title, description, level, tags, documents } = newCourse;
     return this.http.post('http://localhost:5000/course/add', {
       title,
       student: [],
       teachers: ['bobby'],
       description,
+      level,
+      tags,
+      documents: [],
     });
   }
 }
