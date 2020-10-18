@@ -11,7 +11,11 @@ import { FrontPageHeaderComponent } from './components/front-page-header/front-p
 import { CreateCourseComponent } from './pages/create-course/create-course.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { LoginSignupComponent } from './pages/login-signup/login-signup.component';
+import { NgxFileDropModule } from 'ngx-file-drop';
+import { CourseComponent } from './pages/course/course.component';
+import  {  PdfViewerModule  }  from  'ng2-pdf-viewer';
 import { GlobalSearchComponent } from './components/global-search/global-search.component';
+
 
 @NgModule({
   declarations: [
@@ -21,6 +25,7 @@ import { GlobalSearchComponent } from './components/global-search/global-search.
     FooterComponent,
     CreateCourseComponent,
     DashboardComponent,
+    CourseComponent,
     GlobalSearchComponent,
   ],
   imports: [
@@ -30,6 +35,8 @@ import { GlobalSearchComponent } from './components/global-search/global-search.
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
+    PdfViewerModule,
+    NgxFileDropModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
