@@ -13,10 +13,9 @@ export class CreateCourseComponent implements OnInit {
 
   title: string = '';
   description: string = '';
-  level: string = "";
-  tags: string = "";
+  level: string = '';
+  tags: string = '';
   documents: NgxFileDropEntry[] = [];
-
   basic: boolean = true;
 
   ngOnInit(): void {
@@ -33,6 +32,7 @@ export class CreateCourseComponent implements OnInit {
       console.log(err); 
       });
   }
+  
   // usage code from - https://www.npmjs.com/package/ngx-file-drop
   public dropped(documents: NgxFileDropEntry[]) {
     this.documents = documents;
