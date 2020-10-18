@@ -15,6 +15,9 @@ import { NgxFileDropModule } from 'ngx-file-drop';
 import { CourseComponent } from './pages/course/course.component';
 import  {  PdfViewerModule  }  from  'ng2-pdf-viewer';
 import { GlobalSearchComponent } from './components/global-search/global-search.component';
+import { CoursesComponent } from './components/dashboard-components/courses/courses.component';
+import { IcUpcomingEventsComponent } from './components/dashboard-components/ic-upcoming-events/ic-upcoming-events.component';
+import { SiProfileComponent } from './components/dashboard-components/si-profile/si-profile.component';
 
 
 @NgModule({
@@ -27,6 +30,9 @@ import { GlobalSearchComponent } from './components/global-search/global-search.
     DashboardComponent,
     CourseComponent,
     GlobalSearchComponent,
+    CoursesComponent,
+    IcUpcomingEventsComponent,
+    SiProfileComponent,
   ],
   imports: [
     BrowserModule,
