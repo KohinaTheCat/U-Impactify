@@ -14,6 +14,7 @@ import { LoginSignupComponent } from './pages/login-signup/login-signup.componen
 import { NgxFileDropModule } from 'ngx-file-drop';
 import { CourseComponent } from './pages/course/course.component';
 import  {  PdfViewerModule  }  from  'ng2-pdf-viewer';
+import { GlobalSearchComponent } from './components/global-search/global-search.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import  {  PdfViewerModule  }  from  'ng2-pdf-viewer';
     CreateCourseComponent,
     DashboardComponent,
     CourseComponent,
+    GlobalSearchComponent,
   ],
   imports: [
     BrowserModule,
