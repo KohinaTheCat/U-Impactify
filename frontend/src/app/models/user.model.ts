@@ -5,4 +5,5 @@ export interface User{
   "password": string,
   "type": string,
   "classes": [string]
+  "questionaire": [string]
 }
