@@ -1,0 +1,61 @@
+h2 {
+  line-height: initial;
+  font-size: 2rem;
+}
+
+.dashboard {
+  padding-left: 2rem;
+}
+
+.courses {
+  display: flex;
+  height: 24rem;
+  align-items: center;
+}
+
+#new-course {
+  color: var(--gray60);
+  background: #ffffff;
+  opacity: 0.9;
+  border: 0.125rem dashed var(--gray40);
+  filter: drop-shadow(0px 2px 4px rgba(120, 98, 188, 0.24));
+}
+
+.course-card:hover, #new-course:hover {
+  background: var(--gray20);
+  cursor: pointer;
+}
+
+.plus {
+  border: 1px solid var(--gray40);
+}
+
+.plus clr-icon {
+  width: 4rem;
+  height: 4rem;
+}
+
+.course-image {
+  border-radius: 10px;
+  height: 12rem;
+  width: 12rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.course-card {
+  height: 20rem;
+  width: 14rem;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex-direction: column;
+  background: #ffffff;
+  filter: drop-shadow(0px 8px 16px rgba(120, 98, 188, 0.2));
+  border-radius: 20px;
+  margin-right: 2rem;
+  color: rgba(0, 0, 0, 0.87);
+
+  font-size: 1.125rem;
+}
