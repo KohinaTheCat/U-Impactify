@@ -11,6 +11,7 @@ import { FrontPageHeaderComponent } from './components/front-page-header/front-p
 import { CreateCourseComponent } from './pages/create-course/create-course.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { LoginSignupComponent } from './pages/login-signup/login-signup.component';
+import { GlobalSearchComponent } from './components/global-search/global-search.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { LoginSignupComponent } from './pages/login-signup/login-signup.componen
     FooterComponent,
     CreateCourseComponent,
     DashboardComponent,
+    GlobalSearchComponent,
   ],
   imports: [
     BrowserModule,
