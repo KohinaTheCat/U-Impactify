@@ -35,67 +35,32 @@ export class CreateCourseComponent implements OnInit {
       // files: this.files,
     };
     this.addDocument();
-    // this.courseService.postNewCourse(course).subscribe(
-    //   (res) => {
-    //     console.log("success!")
-    //   },
-    //   (err) => {
-    //     console.log(err);
-    //   }
-    // );
-    // call the postnewdocument function in services
-    // for (const droppedFile of this.files) {
-    //   if (droppedFile.fileEntry.isFile) {
-    //     const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
-    //     fileEntry.file((files: File) => {
-    //       console.log(droppedFile.relativePath, files);
-    //       const formData = new FormData()
-    //       formData.append(droppedFile.relativePath, files)
-    //       console.log("form data in component.ts")
-
-    //       console.log(formData)
-    //       this.courseService.postNewFile(formData).subscribe(
-    //         (res) => {
-    //           console.log("success!")
-    //         },
-    //         (err) => {
-    //           console.log(err);
-    //         }
-    //       );
-    //     });
-    //   }
-
-    // }
   }
 
-  addDocument() {}
+  addDocument() {
+
+  }
 
   // usage code from - https://www.npmjs.com/package/ngx-file-drop
   public dropped(files: NgxFileDropEntry[]) {
     this.files = files;
     for (const droppedFile of files) {
-      // Is it a file?
       if (droppedFile.fileEntry.isFile) {
         const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
         fileEntry.file((file: File) => {
-          // Here you can access the real file
-          // console.log(droppedFile.relativePath, files);
 
           const formData = new FormData();
-          formData.append('logo', file, droppedFile.relativePath);
-
-          const headers = new HttpHeaders({
-            'security-token': 'mytoken',
-          });
+          formData.append('documents', file, droppedFile.relativePath);
 
           this.courseService.postNewFile(formData).subscribe(
             (res) => {
-              console.log('file added');
+              console.log('Clara said yes.');
             },
             (err) => {
-              console.log('uplaoidng file', err);
+              console.log("Navinn said no.", err);
             }
           );
+
         });
       } else {
         // It was a directory (empty directories are added, otherwise only files)

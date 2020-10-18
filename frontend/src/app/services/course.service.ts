@@ -1,12 +1,7 @@
 import { Course } from './../models/course.model';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import {
-  NgxFileDropEntry,
-  FileSystemFileEntry,
-  FileSystemDirectoryEntry,
-} from 'ngx-file-drop';
 
 @Injectable({
   providedIn: 'root',
@@ -31,17 +26,9 @@ export class CourseService {
   }
 
   postNewFile(file: any) {
-    const formData = new FormData();
-
-    // formData.append("filename", file.name);
-    formData.append('file', file);
-
-    const headers = new HttpHeaders({
-      'security-token': 'mytoken'
-    }) 
     return this.http.post(
       'http://localhost:5000/course/5f8baf446c6a05444459a50e/upload',
-      {documents: file, headers: headers, responseType: 'blob' }
+      file
     );
   }
 
