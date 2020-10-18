@@ -109,11 +109,12 @@ router.get("/:id", (req, res, next) => {
 });
 
 //uploading document to a course
-router.post("/:id/upload", upload.single("documents"), (req, res, next) => {
+router.post("/:id/upload", upload.array("documents", 10), (req, res, next) => {
   Course.findById(req.params.id)
     .then((course) => {
-      console.log(req.file);
-      course.files = course.files.concat([req.file.filename]);
+      console.log(req.files);
+      console.log(req.files.map(k => k.filename))
+      course.files = course.files.concat(req.files.map(k => k.filename));
       course
         .save()
         .then(() => res.json(`Document Added`))

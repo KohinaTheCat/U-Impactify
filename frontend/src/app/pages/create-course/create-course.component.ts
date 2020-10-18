@@ -5,11 +5,6 @@ import {
   FileSystemFileEntry,
   FileSystemDirectoryEntry,
 } from 'ngx-file-drop';
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpHeaders,
-} from '@angular/common/http';
 
 @Component({
   selector: 'app-create-course',
@@ -34,11 +29,6 @@ export class CreateCourseComponent implements OnInit {
       description: this.description,
       // files: this.files,
     };
-    this.addDocument();
-  }
-
-  addDocument() {
-
   }
 
   // usage code from - https://www.npmjs.com/package/ngx-file-drop
