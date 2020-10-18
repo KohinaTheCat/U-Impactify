@@ -36,6 +36,9 @@ const userSchema = new Schema({
   },
   classesTeaching:{
     type: [String],
+  },
+  questionaire: {
+    type: [String],
   }
 });
 
