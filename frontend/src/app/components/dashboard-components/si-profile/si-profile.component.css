@@ -59,3 +59,19 @@ font-size: initial;
     background: var(--purple-smooth);
 }
 
+
+@media (max-width: 1100px) {
+    .inner {
+        grid-template-columns: auto;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .info {
+        text-align: justify;
+    }
+
+    .btn-container {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
+}
