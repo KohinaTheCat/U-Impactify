@@ -20,4 +20,8 @@ export class CourseService {
       description,
     });
   }
+
+  getCourseFiles(CourseId): Observable<any>{
+    return this.http.get(`http://localhost:5000/documents/${CourseId}`, {})
+  } 
 }

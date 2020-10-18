@@ -15,9 +15,8 @@ const courseSchema = new Schema({
   description: {
     type: String,
   },
-  documents: {
-    type: [String],
-    unique: "document already added",
+  files: {
+    type: [String]
   }
 });
 

@@ -112,7 +112,8 @@ router.post("/:id/upload", upload.single("document"), (req, res, next) => {
   Course.findById(req.params.id)
     .then((course) => {
       console.log(req.file);
-      course.documents = course.documents.concat([req.file.filename]);
+      console.log(course.files)
+      course.files = course.files.concat([req.file.filename]);
       course
         .save()
         .then(() => res.json(`Document Added`))
@@ -146,7 +147,7 @@ router.post("/document/del/:id", (req, res) => {
 });
 
 //getting all the document filenames of a course, :id to course id
-router.get("/documents/course/:id", (req, res, next) => {
+router.get("/document/course/:id", (req, res, next) => {
   Course.findById(req.params.id)
     .select("documents")
     .exec()
