@@ -13,15 +13,23 @@ export class CourseService {
   constructor(private http: HttpClient) {} 
 
   postNewCourse(newCourse): Observable<any> {
-    const { title, description} = newCourse;
+    const { title, description, level, tags} = newCourse;
     return this.http.post('http://localhost:5000/course/add', {
       // NgxFileDropEntry : documents[],
       title,
       students: [],
       teachers: ["Winson"],
       description,
-      files: []
+      files: [],
+      level,
+      tags,
     });
+  }
+
+  postNewFile(file : FormData) {
+    var formData: any = file;
+    console.log(formData)
+    return this.http.post('http://localhost:5000/:id/upload', formData);
   }
 
   getCourseFiles(CourseId): Observable<any>{
