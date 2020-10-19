@@ -1,3 +1,4 @@
+import { SignupQuestionaireComponent } from './pages/signup-questionaire/signup-questionaire.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
@@ -12,6 +13,8 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'questionaire', component: SignupQuestionaireComponent},
+  { path: 'questionaire2', component: SignupQuestionaireComponent},
 ];
 
 @NgModule({

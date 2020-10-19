@@ -72,7 +72,7 @@ export class LoginSignupComponent implements OnInit {
     this.userService.postNewUser(user).subscribe(
       (res) => {
         this.userService.setUser(<User>res);
-        this.router.navigate(['dashboard']);
+        this.router.navigate(['questionaire']);
       },
       (err) => {
         this.error = err.message;

@@ -48,7 +48,6 @@
 #label1, #label2, #label3{
   font-size: 1rem;
   padding-top: 2rem;
-  /* margin-bottom: 5px; */
 }
 
 #Header{
@@ -56,27 +55,7 @@
   margin-top: 20vh;
 }
 
-.ConnectOne{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  flex-direction: row;
-  padding-bottom: 1rem;
-  padding-top: 2vh;
-  max-height: 2rem;
-}
-
-.ConnectTwo{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  flex-direction: row;
-  padding-bottom: 1rem;
-  padding-top: 2vh;
-  max-height: 2rem;
-}
-
-.ConnectThree{
+.ConnectOne, .ConnectTwo, .ConnectThree{
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -100,33 +79,23 @@
   padding-right: 2rem;
 }
 
-.LineOne{
+.LineOne, .LineTwo, .LineThree{
   flex: 1;
   display: flex;
   padding-bottom: 0.75rem;
   padding-left: 0.5rem;
 }
 
-.LineTwo{
-  flex: 1;
-  display: flex;
-  padding-bottom: 0.5rem;
-  padding-left: 0.5rem;
-}
-
-.LineThree{
-  flex: 1;
-  display: flex;
-  padding-bottom: 0.5rem;
-  padding-left: 0.5rem;
-}
-
-
 @media only screen and (max-width: 600px) {
   .page{
     flex-direction: column;
+    justify-content: center;
   }
   .clr-form-control{
     margin-top: 20vh;
+  }
+  #Header{
+    padding-top: 20vh;
+    align-content: center;
   }
 }
