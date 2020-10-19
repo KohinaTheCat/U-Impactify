@@ -13,6 +13,13 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { LoginSignupComponent } from './pages/login-signup/login-signup.component';
 import { SignupQuestionaireComponent } from './pages/signup-questionaire/signup-questionaire.component';
 import { SignupQuestionaire2Component } from './pages/signup-questionaire2/signup-questionaire2.component';
+import { NgxFileDropModule } from 'ngx-file-drop';
+import { CourseComponent } from './pages/course/course.component';
+import  {  PdfViewerModule  }  from  'ng2-pdf-viewer';
+import { GlobalSearchComponent } from './components/global-search/global-search.component';
+import { CoursesComponent } from './components/dashboard-components/courses/courses.component';
+import { IcUpcomingEventsComponent } from './components/dashboard-components/ic-upcoming-events/ic-upcoming-events.component';
+import { SiProfileComponent } from './components/dashboard-components/si-profile/si-profile.component';
 
 
 @NgModule({
@@ -25,6 +32,11 @@ import { SignupQuestionaire2Component } from './pages/signup-questionaire2/signu
     FooterComponent,
     CreateCourseComponent,
     DashboardComponent,
+    CourseComponent,
+    GlobalSearchComponent,
+    CoursesComponent,
+    IcUpcomingEventsComponent,
+    SiProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,6 +45,8 @@ import { SignupQuestionaire2Component } from './pages/signup-questionaire2/signu
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
+    PdfViewerModule,
+    NgxFileDropModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

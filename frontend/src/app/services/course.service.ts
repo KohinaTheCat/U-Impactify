@@ -9,15 +9,29 @@ import { Observable } from 'rxjs';
 export class CourseService {
   course: Course = JSON.parse(localStorage.getItem('course') || null);
 
-  constructor(private http: HttpClient) {} 
+  constructor(private http: HttpClient) {}
 
   postNewCourse(newCourse): Observable<any> {
-    const { title, description } = newCourse;
+    const { title, description, level, tags } = newCourse;
     return this.http.post('http://localhost:5000/course/add', {
       title,
-      student: [],
-      teachers: ['bobby'],
+      students: [],
+      teachers: ['Winson'],
       description,
+      files: [],
+      level,
+      tags,
     });
+  }
+
+  postNewFile(file: any, CourseId) {
+    return this.http.post(
+      `http://localhost:5000/course/${CourseId}/upload`,
+      file
+    );
+  }
+
+  getCourseFiles(CourseId): Observable<any> {
+    return this.http.get(`http://localhost:5000/document/${CourseId}`, {});
   }
 }

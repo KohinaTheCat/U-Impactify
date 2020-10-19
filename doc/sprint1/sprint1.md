@@ -36,7 +36,7 @@
 
 
 
-### User Stories to be Completed
+### User Stories to be Completed, and Task Break Down
 
 > Key Terms to Note
 
@@ -107,11 +107,36 @@
   - Postman/Insomnia
   - Robot
 
+> BOUN-21: Boilerplate of Website
+
+`Story Points: 5`
+
+- Frontend
+  - Setup frontend with Angular
+    - https://angular.io/
+  - Migrate Figma to Angular *(if possible)*
+- Backend
+  - Setup backend with MongoDB, Express, Node
+
 
 
 > Team Capacity
 
-`TOTAL STORY POINTS: 10`
+`TOTAL STORY POINTS: 15`
+
+
+
+### Details About Tasks Per Member
+
+> All
+
+- Learn all technologies that will be used in this project
+  - mentioned in `Goal`
+- Everyone is given the full-stack role, everyone will work on both front-end and back-end
+
+
+
+> See Jira board for more detail about tasks assigned
 
 
 

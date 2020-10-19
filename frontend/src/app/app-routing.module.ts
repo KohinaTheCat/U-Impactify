@@ -1,9 +1,11 @@
 import { SignupQuestionaireComponent } from './pages/signup-questionaire/signup-questionaire.component';
+import { CreateCourseComponent } from './pages/create-course/create-course.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { LoginSignupComponent } from './pages/login-signup/login-signup.component';
+import { CourseComponent } from './pages/course/course.component';
 
 const routes: Routes = [
   { path: 'signup', component: LoginSignupComponent },
@@ -15,6 +17,9 @@ const routes: Routes = [
   { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'questionaire', component: SignupQuestionaireComponent},
   { path: 'questionaire2', component: SignupQuestionaireComponent},
+  { path: 'course', component: CourseComponent },
+  { path: 'createcourse', component: CreateCourseComponent },
+
 ];
 
 @NgModule({

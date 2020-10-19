@@ -77,10 +77,14 @@ const upload = multer({ storage: storage /*fileFiler: fileFiler*/ });
 
 // adding course
 router.route("/add").post((req, res) => {
+  // add user id to course route
   const title = req.body.title;
   const students = req.body.students;
   const teachers = req.body.teachers;
   const description = req.body.description;
+  const files = req.body.files;
+  const tags = req.body.tags;
+  const level = req.body.level;
 
   // populate with finalized schema
   const newCourse = new Course({
@@ -88,12 +92,14 @@ router.route("/add").post((req, res) => {
     students,
     teachers,
     description,
-    documents: [],
+    files,
+    tags,
+    level,
   });
 
   newCourse
     .save()
-    .then(() => res.json("Course added!"))
+    .then((r) => res.json(r._id))
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
@@ -108,21 +114,22 @@ router.get("/:id", (req, res, next) => {
 });
 
 //uploading document to a course
-router.post("/:id/upload", upload.single("document"), (req, res, next) => {
+router.post("/:id/upload", upload.array("documents", 10), (req, res, next) => {
   Course.findById(req.params.id)
     .then((course) => {
-      console.log(req.file);
-      course.documents = course.documents.concat([req.file.filename]);
+      console.log(req.files);
+      console.log(req.files.map(k => k.filename))
+      course.files = course.files.concat(req.files.map(k => k.filename));
       course
         .save()
         .then(() => res.json(`Document Added`))
         .catch((err) => res.json(err));
     })
-    .catch((err) => res.status(400).json(`Error: ${err}`));
+    .catch((err) => res.status(400).json(`Error finding Course: ${err}`));
 });
 
 //get document by filename
-router.get("/document/:filename", (req, res) => {
+router.get("/documents/:filename", (req, res) => {
   const file = gfs
     .find({
       filename: req.params.filename,
@@ -138,7 +145,7 @@ router.get("/document/:filename", (req, res) => {
 });
 
 //delete files by id
-router.post("/document/del/:id", (req, res) => {
+router.post("/documents/del/:id", (req, res) => {
   gfs.delete(new mongoose.Types.ObjectId(req.params.id), (err, data) => {
     if (err) return res.status(404).json({ err: err.message });
     res.json("document deleted");
@@ -146,7 +153,7 @@ router.post("/document/del/:id", (req, res) => {
 });
 
 //getting all the document filenames of a course, :id to course id
-router.get("/documents/course/:id", (req, res, next) => {
+router.get("/document/course/:id", (req, res, next) => {
   Course.findById(req.params.id)
     .select("documents")
     .exec()

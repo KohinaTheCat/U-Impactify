@@ -1,23 +1,23 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreateCourseComponent } from './create-course.component';
+import { IcUpcomingEventsComponent } from './ic-upcoming-events.component';
 
-describe('CreateCourseComponent', () => {
-  let component: CreateCourseComponent;
-  let fixture: ComponentFixture<CreateCourseComponent>;
+describe('IcUpcomingEventsComponent', () => {
+  let component: IcUpcomingEventsComponent;
+  let fixture: ComponentFixture<IcUpcomingEventsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CreateCourseComponent ]
+      declarations: [ IcUpcomingEventsComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CreateCourseComponent);
+    fixture = TestBed.createComponent(IcUpcomingEventsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  }); 
+  });
 
   it('should create', () => {
     expect(component).toBeTruthy();

@@ -1,7 +1,5 @@
-<pre>
-    id: {{user._id}}
-    username: {{user.username}}
-    email: {{user.email}}
-    password: {{user.password}}
-    type: {{user.type}}
-</pre>
+<div class="dashboard">
+  <app-ic-upcoming-events *ngIf="user.type === 'IC'"></app-ic-upcoming-events>
+  <app-si-profile *ngIf="user.type === 'SI'"></app-si-profile>
+  <app-courses *ngIf="user.type !== 'SI'"></app-courses>
+</div>

@@ -1,23 +1,23 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreateCourseComponent } from './create-course.component';
+import { GlobalSearchComponent } from './global-search.component';
 
-describe('CreateCourseComponent', () => {
-  let component: CreateCourseComponent;
-  let fixture: ComponentFixture<CreateCourseComponent>;
+describe('GlobalSearchComponent', () => {
+  let component: GlobalSearchComponent;
+  let fixture: ComponentFixture<GlobalSearchComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CreateCourseComponent ]
+      declarations: [ GlobalSearchComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CreateCourseComponent);
+    fixture = TestBed.createComponent(GlobalSearchComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  }); 
+  });
 
   it('should create', () => {
     expect(component).toBeTruthy();

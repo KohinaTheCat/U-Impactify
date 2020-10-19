@@ -75,6 +75,10 @@ button {
   margin: 1rem;
 }
 
+#link-prompt {
+  cursor: pointer;
+}
+
 @media only screen and (max-width: 1000px) {
   .align-row {
     flex-direction: column;

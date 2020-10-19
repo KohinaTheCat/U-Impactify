@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from './services/user.service';
 
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -16,6 +15,6 @@ export class AppComponent {
    * Determines if navbar should appear
    */
   isLoggedIn = (): Boolean => {
-    return !!this.userService.getCurrentUser();
-  } 
+    return !!this.userService.getCurrentUser() && this.router.url !== '/signup';
+  };
 }
