@@ -12,6 +12,7 @@ export class SignupQuestionaireComponent implements OnInit {
   other:string = "";
   toAdd:string = "";
   toAdd2 = "";
+  error: string = '';
   checked:boolean = false;
   constructor(private userService : UserService, private router:Router) {
     for(let i = 0; i < 7; i++){
@@ -48,9 +49,25 @@ export class SignupQuestionaireComponent implements OnInit {
         this.toAdd2+="Plan my lessons and sessions,"
       }
       //for testing
-      const user = {username: "test103", password: "******", email: "test103.patel@hotmail.com", type: "IL", questionaire: [this.toAdd, this.toAdd2]};
-      this.userService.postNewUser(user).subscribe();
+      //const user = {username: "test103", password: "******", email: "test103.patel@hotmail.com", type: "IL", questionaire: [this.toAdd, this.toAdd2]};
+      //this.userService.postNewUser(user).subscribe();
+      const user = this.userService.getCurrentUser();
+      user.questionaire[0] = this.toAdd;
+      //user.questionaire[1] = this.toAdd2;
+      this.userService.postNewUser(user).subscribe(
+        (res) => {
+          this.router.navigate(['dashboard']);
+        },
+        (err) => {
+          this.error = err.message;
+          console.log(err);
+        }
+      );
     }
+  }
+
+  onSkip(){
+    this.router.navigate(['dashboard']);
   }
 
   ngOnInit(): void {

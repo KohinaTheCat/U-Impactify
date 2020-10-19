@@ -69,16 +69,28 @@ export class LoginSignupComponent implements OnInit {
   }
 
   registerHandler(user: any) {
-    this.userService.postNewUser(user).subscribe(
-      (res) => {
-        this.userService.setUser(<User>res);
-        this.router.navigate(['questionaire']);
-      },
-      (err) => {
-        this.error = err.message;
-        console.log(err);
-      }
-    );
+    this.userService.setUser(user);
+    if(user.type == "IL"){
+      this.router.navigate(['questionaire']);
+    }
+    else{
+      this.router.navigate(['questionaire2']);
+    }
+    // this.userService.postNewUser(user).subscribe(
+    //   (res) => {
+    //     this.userService.setUser(<User>res);
+    //     if(user.type == "IL"){
+    //       this.router.navigate(['questionaire']);
+    //     }
+    //     else{
+    //       this.router.navigate(['questionaire2']);
+    //     }
+    //   },
+    //   (err) => {
+    //     this.error = err.message;
+    //     console.log(err);
+    //   }
+    // );
   }
 
   onSubmit() {

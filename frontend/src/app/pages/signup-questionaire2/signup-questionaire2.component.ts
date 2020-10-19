@@ -86,9 +86,14 @@ export class SignupQuestionaire2Component implements OnInit {
         this.toAdd3+=this.other3+",";
       }
       //for testing
-      const user = {username: "test108", password: "******", email: "test108.patel@hotmail.com", type: "IL", questionaire: [this.toAdd, this.toAdd2, this.toAdd3]};
-      this.userService.postNewUser(user).subscribe();
+      //const user = {username: "test108", password: "******", email: "test108.patel@hotmail.com", type: "IL", questionaire: [this.toAdd, this.toAdd2, this.toAdd3]};
+      //this.userService.postNewUser(user).subscribe();
+      this.router.navigate(['dashboard']);
     }
+  }
+
+  onSkip(){
+    this.router.navigate(['dashboard']);
   }
 
   ngOnInit(): void {
