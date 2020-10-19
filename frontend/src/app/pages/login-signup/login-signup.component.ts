@@ -76,21 +76,6 @@ export class LoginSignupComponent implements OnInit {
     else{
       this.router.navigate(['questionaire2']);
     }
-    // this.userService.postNewUser(user).subscribe(
-    //   (res) => {
-    //     this.userService.setUser(<User>res);
-    //     if(user.type == "IL"){
-    //       this.router.navigate(['questionaire']);
-    //     }
-    //     else{
-    //       this.router.navigate(['questionaire2']);
-    //     }
-    //   },
-    //   (err) => {
-    //     this.error = err.message;
-    //     console.log(err);
-    //   }
-    // );
   }
 
   onSubmit() {

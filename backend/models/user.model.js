@@ -38,7 +38,7 @@ const userSchema = new Schema({
     type: [String],
   },
   questionaire: {
-    type: [String],
+    type: [[String]],
   }
 });
 

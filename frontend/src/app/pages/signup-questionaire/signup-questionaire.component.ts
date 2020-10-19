@@ -10,10 +10,9 @@ import { Component, OnInit } from '@angular/core';
 export class SignupQuestionaireComponent implements OnInit {
   checkbox = new Array() as boolean[];
   other:string = "";
-  toAdd:string = "";
-  toAdd2 = "";
   error: string = '';
   checked:boolean = false;
+  array: string[][] = [[], []];
   constructor(private userService : UserService, private router:Router) {
     for(let i = 0; i < 7; i++){
       this.checkbox[i] = false;
@@ -28,46 +27,44 @@ export class SignupQuestionaireComponent implements OnInit {
     }
     if(this.checked){
       if(this.checkbox[0]){
-        this.toAdd+="Coach,";
+        this.array[0].push("Coach");
       }
       if(this.checkbox[1]){
-        this.toAdd+="Teacher,";
+        this.array[0].push("Teacher");
       }
       if(this.checkbox[2]){
-        this.toAdd+="Facilitator,";
+        this.array[0].push("Facilitator");
       }
       if(this.checkbox[3]){
-        this.toAdd+=this.other += ",";
+        this.array[0].push(this.other);
       }
       if(this.checkbox[4]){
-        this.toAdd2+="Conduct Lessons Live,"
+        this.array[1].push("Conduct Lessons Live");
       }
       if(this.checkbox[5]){
-        this.toAdd2+="Handle Administrative Tasks,"
+        this.array[1].push("Handle Administrative Tasks");
       }
       if(this.checkbox[6]){
-        this.toAdd2+="Plan my lessons and sessions,"
+        this.array[1].push("Plan my lessons and sessions");
       }
-      //for testing
-      //const user = {username: "test103", password: "******", email: "test103.patel@hotmail.com", type: "IL", questionaire: [this.toAdd, this.toAdd2]};
-      //this.userService.postNewUser(user).subscribe();
-      const user = this.userService.getCurrentUser();
-      user.questionaire[0] = this.toAdd;
-      //user.questionaire[1] = this.toAdd2;
-      this.userService.postNewUser(user).subscribe(
-        (res) => {
+      this.addToDatabase();
+    }
+  }
+
+  addToDatabase(): void{
+    const user = this.userService.getCurrentUser();
+    user.questionaire = this.array;
+    this.userService.postNewUser(user).subscribe((res) => {
+          this.userService.setUser(res);
           this.router.navigate(['dashboard']);
         },
         (err) => {
           this.error = err.message;
           console.log(err);
-        }
-      );
-    }
+        });
   }
-
   onSkip(){
-    this.router.navigate(['dashboard']);
+    this.addToDatabase();
   }
 
   ngOnInit(): void {

@@ -18,7 +18,7 @@
 .clr-form-control{
   display: flex;
   height: 100vh;
-  justify-content: center; 
+  justify-content: center;
   align-items: center;
   flex-direction: column;
   width: 50vw;
@@ -56,8 +56,6 @@
 }
 
 .buttonsflex{
-  /* padding-top: 2vh;
-  padding-right: 40vh; */
   display: flex;
   padding-right: 13rem;
   flex-direction: row;
@@ -71,13 +69,13 @@
 
 
 h1{
-  
+
   font-size: 6vh;
 }
 
 .clr-control-label{
   font-size: 2vh;
-} 
+}
 
 .clr-checkbox-wrapper{
   padding-top: 2vh;
