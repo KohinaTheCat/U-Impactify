@@ -50,8 +50,6 @@ export class CreateCourseComponent implements OnInit {
               console.log(res);
               this.courseService.postNewFile(formData, res).subscribe(
                 (res) => {
-                  console.log('Clara said yes.');
-                  // add the update classes teaching method here
                   this.userService
                     .updateClassesTeaching(
                       this.userService.getCurrentUser()._id,

@@ -70,8 +70,8 @@ router.route("/:id").delete((req, res) => {
     .catch((err) => res.json(err));
 });
 
-// POST update classesTeaching
-router.route("/updateClassesTeaching").post((req, res) => {
+// PUT update classesTeaching
+router.route("/updateClassesTeaching").put((req, res) => {
   userSchema
     .findById(req.body.userId)
     .then((user) => {
