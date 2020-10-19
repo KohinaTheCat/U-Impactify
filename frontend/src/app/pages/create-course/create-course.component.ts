@@ -5,6 +5,8 @@ import {
   FileSystemFileEntry,
   FileSystemDirectoryEntry,
 } from 'ngx-file-drop';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-create-course',
@@ -12,7 +14,7 @@ import {
   styleUrls: ['./create-course.component.css'],
 })
 export class CreateCourseComponent implements OnInit {
-  constructor(private courseService: CourseService) {}
+  constructor(private courseService: CourseService, private router: Router) {}
 
   title: string = '';
   description: string = '';
@@ -20,9 +22,13 @@ export class CreateCourseComponent implements OnInit {
   tags: string = '';
   files: NgxFileDropEntry[] = [];
   basic: boolean = true;
+  error : string = '';
 
   ngOnInit(): void {}
 
+  cancel(){
+    this.router.navigate(['dashboard']);
+  }
   registerHandler() {
     // add teachers to the new course
     // add this course id to teachers course list
@@ -60,12 +66,13 @@ export class CreateCourseComponent implements OnInit {
           }
         }
         console.log('success!');
+        this.router.navigate(['dashboard']);
       },
       (err) => {
-        console.log(err);
+        this.error = err.message;
+        this.basic = true;
       }
     );
-    
 
   }
 

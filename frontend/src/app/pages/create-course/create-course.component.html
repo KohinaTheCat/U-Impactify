@@ -1,7 +1,9 @@
-  <clr-modal [(clrModalOpen)]="basic" [clrModalSize]="'lg'">
+  <clr-modal [(clrModalOpen)]="basic" [clrModalSize]="'lg'" [clrModalClosable]="false" >
     <h3 class="modal-title">Create a course</h3>
     <div class="modal-body">
       <form clrForm>
+        <clr-control-error>{{ error }}</clr-control-error>
+
           <clr-input-container>
             <label>Course Name
             <input clrInput type="text" [(ngModel)]="title" name="title" required/>
@@ -34,7 +36,7 @@
            
           <clr-input-container>
             <label>Tags
-            <input clrInput type="text" [(ngModel)]="tags" name="tags" required/>
+            <input clrInput type="text" [(ngModel)]="tags" name="tags"/>
             </label>
             <clr-control-error>This field is required!</clr-control-error>
           </clr-input-container>
@@ -67,7 +69,7 @@
       </form>    
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline" (click)="basic = false">Cancel</button>
+        <button type="button" class="btn btn-outline" (click)="basic = false" (click)="cancel()">Cancel</button>
         <button type="button" class="btn btn-primary" (click)="registerHandler()" (click)="basic = false">Create Course</button>
     </div>
   </clr-modal>

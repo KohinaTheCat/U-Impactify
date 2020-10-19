@@ -1,6 +1,8 @@
+import { CreateCourseComponent } from './../../../pages/create-course/create-course.component';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-courses',
@@ -10,7 +12,7 @@ import { UserService } from 'src/app/services/user.service';
 export class CoursesComponent implements OnInit {
   user: User;
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
     this.user = this.userService.getCurrentUser();
@@ -24,6 +26,7 @@ export class CoursesComponent implements OnInit {
       console.log("ADD NEW COURSE STUDENT");
     } else if(this.user.type === 'IC') {
       console.log("CREATE NEW COURSE TEACHER");
+      this.router.navigate(['createcourse']);
     }
   }
 }
