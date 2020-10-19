@@ -15,12 +15,13 @@ export class UserService {
 
   //kinda like async
   postNewUser(newUser): Observable<any> {
-    const { username, password, email, type } = newUser;
+    const { username, password, email, type, questionaire} = newUser;
     return this.http.post('http://localhost:5000/user/', {
       username,
       password,
       email,
       type,
+      questionaire,
     });
   }
 

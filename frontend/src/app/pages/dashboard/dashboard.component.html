@@ -1,5 +1,6 @@
 <div class="dashboard">
   <app-ic-upcoming-events *ngIf="user.type === 'IC'"></app-ic-upcoming-events>
   <app-si-profile *ngIf="user.type === 'SI'"></app-si-profile>
-  <app-courses *ngIf="user.type !== 'SI'"></app-courses>
+  <app-courses *ngIf="user.type == 'IC' || user.type == 'IL'" ></app-courses>
+  <!-- <app-courses *ngIf="user.type !== 'SI'"></app-courses> -->
 </div>
