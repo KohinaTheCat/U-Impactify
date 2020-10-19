@@ -69,7 +69,55 @@ Collaborators:
 - Course (Services)
 ```
 
-### Services 
+Messaging Service 
+
+```
+Component name: Messaging  
+
+Parent class (if any): None
+Subclasses (if any): None
+
+Responsibilities: 
+- Send message to registered users 
+
+Collaborators: 
+- User (Services)
+```
+
+Feedback
+
+```
+Component name: Feedback  
+
+Parent class (if any): None
+Subclasses (if any): None
+
+Responsibilities: 
+- Display feedback for courses from registered users 
+
+Collaborators: 
+- User (Services)
+```
+
+Giving Garden 
+
+```
+Component name: Giving Garden  
+
+Parent class (if any): None
+Subclasses (if any): None
+
+Responsibilities: 
+- Donate money to a non-profit organization 
+- Recieve Funding 
+
+Collaborators: 
+- User (Services)
+```
+
+
+
+**Services**
 
 ```
 Component name: User
