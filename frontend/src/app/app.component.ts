@@ -10,11 +10,11 @@ import { UserService } from './services/user.service';
 export class AppComponent {
 
   constructor(private router: Router, private userService: UserService) {}
-  
+
   /**
    * Determines if navbar should appear
    */
   isLoggedIn = (): Boolean => {
-    return !!this.userService.getCurrentUser() && this.router.url !== '/signup';
+    return !!this.userService.getCurrentUser() && this.router.url !== '/signup' && this.router.url !== '/questionaire' && this.router.url !== '/questionaire2';
   };
 }
