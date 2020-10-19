@@ -44,4 +44,12 @@ export class UserService {
   getCurrentUser(): User {
     return this.user;
   }
+
+  // updates the classesteaching array
+  updateClassesTeaching(userId: string, courseId: string): Observable<any> {
+    return this.http.post('http://localhost:5000/user/updateClassesTeaching', {
+      userId,
+      courseId,
+    });
+  }
 }
