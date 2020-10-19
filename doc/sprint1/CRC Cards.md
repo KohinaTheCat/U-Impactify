@@ -109,7 +109,8 @@ Subclasses (if any): None
 
 Responsibilities: 
 - Donate money to a non-profit organization 
-- Recieve Funding 
+- Recieve Funding from individuals and larger organizations 
+- Support Impact Learners in courses financially
 
 Collaborators: 
 - User (Services)
@@ -280,4 +281,4 @@ Resposiblity:
 Collaborators: None
 ```
 
-![](./SoftwareArchitectureDesign.png)
+![SAD](./SoftwareArchitectureDesign.png)
