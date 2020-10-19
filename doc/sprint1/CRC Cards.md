@@ -2,368 +2,233 @@
 
 
 
-### Frontend
+### **Frontend**
 
-Home Page
+**Pages**
+
+Login/Signup
 
 ```
-Component name: Navbar
+Component name: LoginSignup
 
-Parent class: None
-Subclasses:  None
+Parent class (if any): None
+Subclasses (if any): None
 
 Responsibilities: 
-- Allow the user navigate to the main areas of the website
-- Display the logo
+- Contains form for the user to submit their login/signup information
+- Gives user the option to login/signup with other methods
 
 Collaborators: 
-- All pages
-
-Modules:
-- Angular Router
+- User (Services)
 ```
 
-```
-Component name: LandingPage
+Questionaire 
 
-Parent class: None
-Subclasses:  None
+```
+Component name: Questionaire 
+
+Parent class (if any): None
+Subclasses (if any): None
 
 Responsibilities: 
-- Contains all infor
+- Display questions based on the type of user you signup as
+- Gather information based on questions submited
 
-Collaborators: 
-- All pages
-
-Modules:
-- Angular Router
-
-```
-
-Login
-
-```
-Navbar [refer to Home Page]
-```
-
-```
-Component name: LoginCard
-
-Parent class: None
-Subclasses:  None
-
-Responsibilities: 
-- Contains form for the user to submit their login information
-- Gives user the option to login with other methods
-
-Collaborators: 
-- N/A
-```
-
-Signup
-
-```
-Navbar [refer to Home Page]
-```
-
-```
-Component name: SignupCard
-
-Parent class: None
-Subclasses:  None
-
-Responsibilities: 
-- Contains form for the user to submit their signup information
-- Gives user the option to signup with other methods
-
-Collaborators: 
-- N/A
-
-```
-
-```
-Component name: Question
-
-Parent class: None
-Subclasses:  None
-
-Responsibilities: 
-- Display a question to the user
-- Give the user options to select as their answer
-
-Collaborators: 
-- N/A
-
+Collaborators:
+- Users (Services)
 ```
 
 Dashboard
 
 ```
-Component name: Sidebar
+Component name: Dashboard
 
-Parent class: None
-Subclasses:  None
-
-Responsibilities: 
-- Contains form for the user to submit their signup information
-- Gives user the option to signup with other methods
-
-Collaborators: 
-- N/A
-
-```
-
-```
-Component name: ClassesCard
-
-Parent class: None
-Subclasses:  None
+Parent class (if any): None
+Subclasses (if any): None
 
 Responsibilities: 
-- Gives a user a shortcut to their class
-- Gives a user a short description of their class
+- Display all pages
+- Used to quickly navigate through different pages  
 
 Collaborators: 
-- N/A
+- User (Services)
 ```
 
-```
-Component name: LoggedInHeader
+Course
 
-Parent class: None
-Subclasses:  None
+```
+Component name: Course
+
+Parent class (if any): None
+Subclasses (if any): None
 
 Responsibilities: 
-- Allows search feature
-- Gives shortcuts to 
+- Display Course information 
 
 Collaborators: 
-- N/A
-
-Service:
-- User
+- Course (Services)
 ```
-
-Classes
-
-```
-LoggedInHeader [refer to Dashboard]
-```
-
-```
-Component name: CoursePage
-
-Parent class: None
-Subclasses:  None
-
-Responsibilities: 
-- Page for a course
-
-Collaborators: 
-- N/A
-
-Service:
-- Course
-```
-
-Social Initiatives
-
-```
-Component name: SocialInitiatives
-
-Parent class: None
-Subclasses:  None
-
-Responsibilities: 
-- Page for a SocialInitiatives
-
-Collaborators: 
-- N/A
-
-Service:
-- SocialInitiaitve
-```
-
-Messaging
-
-```
-Component name: ChatHistory
-
-Parent class: None
-Subclasses:  None
-
-Responsibilities: 
-- Displaying the messages between two users
-
-Collaborators: 
-- N/A
-
-Service:
-- User
-```
-
-Profile
-
-```
-Component name: ProfilePage
-
-Parent class: None
-Subclasses:  None
-
-Responsibilities: 
-- Page for a Profile
-
-Collaborators: 
-- N/A
-
-Service:
-- User
-```
-
-Create New Course
-
-```
-Component name: NewCourse
-
-Parent class: None
-Subclasses:  None
-
-Responsibilities: 
-- Contains a form for the Instructor to submit a new course
-
-Collaborators: 
-- N/A
-
-Service:
-- Course
-- Instructor
-```
-
-Social Initiative Job Board
-
-```
-Component name: JobCard
-
-Parent class: None
-Subclasses:  None
-
-Responsibilities: 
-- Hows description of a job
-
-Collaborators: 
-- N/A
-
-Service:
-- Course
-- User
-```
-
-
 
 ### Services 
 
-REST API
-
 ```
-Class name: User
+Component name: User
 
 Parent class (if any): None
-
-Subclasses (if any): ImpactLearner, ImpactConsultant, SocialInitiative, Administrator 
+Subclasses (if any): None
 
 Responsibilities: 
-
 - Create an account
-- Communicate with other users
-- Knows their login credentials
+- Delete an account
+- Get current user informations
 
 Collaborators: 
-- Course
+- User (from Backend)
 ```
 
 ```
-Class name: ImpactLearner
-
-Parent class (if any): User
-
-Subclasses (if any): None
-
-Responsibilities: 
-- Enroll in a course
-- Submit assessments 
-- Leave a review for a course/instructor
-- Request support from the Giving Garden
-- Apply for a position at a Social Initiative 
-
-Collaborators: 
-- Course
-- ImpactConsultant
-- SocialInitiative
-```
-
-```
-Class name: ImpactConsultant
-
-Parent class (if any): User
-
-Subclasses (if any): None
-
-Responsibilities: 
-- Create a course
-- Create assessments 
-- Getting involved with a Social Initiative 
-
-Collaborators: 
-- Course
-- ImpactLearner
-- SocialInitiative
-```
-
-```
-Class name: SocialInitiative
-
-Parent class (if any): User
-
-Subclasses (if any): None
-
-Responsibilities: 
-- Create their own organization page
-- Post new volunteer / job opportunities
-- Request support from the Giving Garden
-
-Collaborators: 
-- ImpactConsultant
-- ImpactLearner
-```
-
-```
-Class name: Administrator
-
-Parent class (if any): User
-
-Subclasses (if any): None
-
-Responsibilities: 
-- Delete courses
-
-Collaborators: 
-- None
-```
-
-```
-Class name: **Course**
+Component name: Course
 
 Parent class (if any): None
-
 Subclasses (if any): None
 
 Responsibilities: 
-- Store all course content
-- Store all assessments 
-- Store list of students
+- Create a course 
+- Modify a course 
+- Delete a course 
+- Post a file 
 - Provide overview of course content
 
+Collaborators:
+- Course (From Backend)
+```
+
+**Components**
+
+Dashboard Course Componenet (only for impact learner and impact consultant)
+
+```
+Component name: course 
+
+Parent class (if any): None
+Subclasses (if any): None
+
+Responsibilities: 
+- Display the courses the user is taking/teaching 
+- Redirects you to create a course for easy access 
+
 Collaborators: 
-- User
+- User (Services)
+```
+
+Create Course
+
+```
+Component name: Create Course 
+
+Parent class (if any): None
+Subclasses (if any): None
+
+Responsibilities: 
+- Contains a form for the Instructor to create a new course
+
+Collaborators: 
+- Course (Service)
+- User (Service)
+```
+
+Front Page Header 
+
+```
+Component name: Front Page Header 
+
+Parent class (if any): None
+Subclasses (if any): None
+
+Responsibilities: 
+- Display Sign-in and login-in buttons
+- Easy accessible application infromation
+
+Collaborators: 
+- User (Service)
+```
+
+Footer 
+
+```
+Component name: Footer 
+
+Parent class (if any): None
+Subclasses (if any): None
+
+Responsibilities: 
+- Display contact information
+- Links to social media accounts 
+- Provide links to legal informations 
+
+Collaborators: None
+```
+
+Global Search 
+
+```
+Component name: Global Search
+
+Parent class (if any): None
+Subclasses (if any): None
+
+Responsibilities: 
+- Search for Users
+- Search for Courses
+- Search for Document
+
+Collaborators: None
+```
+
+**Guards**
+
+```
+Component name: Auth Guard 
+
+Parent class (if any): None
+Subclasses (if any): None
+
+Resposiblity:
+- Only logged in user are able to have access to the application
+
+Collaborators: 
+- User (Services)
+```
+
+**Backend**
+
+User Routes 
+
+```
+Component name: User 
+
+Parent class (if any): None
+Subclasses (if any): None
+
+Resposiblity:
+- Get information from the database 
+- Update information from the database
+
+Collaborators: None
+```
+
+Course Routes
+
+```
+Component name: User 
+
+Parent class (if any): None
+Subclasses (if any): None
+
+Resposiblity:
+- Upload files and course information to the database 
+- Recieve files and course information from the database
+
+Collaborators: None
 ```
 
