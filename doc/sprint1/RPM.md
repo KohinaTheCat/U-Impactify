@@ -5,7 +5,7 @@
 > The main objective for the project
 
 ### Completion of the Minimum Viable Product (MVP)
-> Product can be developped *beyond* the MVP **_iff_** the timebox for the project allows for it
+> Product can be developed *beyond* the MVP **_iff_** the timebox for the project allows for it
 
 #### Main Objectives
 
@@ -13,7 +13,7 @@
   - Should include **_at least_** the **Specific Features** mentioned below
 
 - Definition of Done (DoD) has been met for the release
-  - See `../sprint0/done.md` for precise defintion
+  - See `../sprint0/done.md` for precise definition
   - ~~If applicable, all allocated epics must meet DoD~~
     - ~~*Discuss with TA if project is using epics*~~
     - TA said not necessary
@@ -63,12 +63,12 @@
 - Employment/Volunteer Management
   - Enrolling employees/volunteers as Impact Learners
   - Add and Modify mandatory courses for the Learners
-
 - Impact Consultant Service Management
   - Hiring Impact Consultants as employees 
   - Using Consultants for their services
-
 - Donation Requests via the Giving Garden
+
+
 
 ## Participants  
 
