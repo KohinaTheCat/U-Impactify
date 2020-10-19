@@ -15,6 +15,12 @@ const courseSchema = new Schema({
   description: {
     type: String,
   },
+  tags: {
+    type: String,
+  },
+  level: {
+    type: String,
+  },
   files: {
     type: [String],
   }

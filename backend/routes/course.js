@@ -77,11 +77,14 @@ const upload = multer({ storage: storage /*fileFiler: fileFiler*/ });
 
 // adding course
 router.route("/add").post((req, res) => {
+  // add user id to course route
   const title = req.body.title;
   const students = req.body.students;
   const teachers = req.body.teachers;
   const description = req.body.description;
   const files = req.body.files;
+  const tags = req.body.tags;
+  const level = req.body.level;
 
   // populate with finalized schema
   const newCourse = new Course({
@@ -90,11 +93,13 @@ router.route("/add").post((req, res) => {
     teachers,
     description,
     files,
+    tags,
+    level,
   });
 
   newCourse
     .save()
-    .then(() => res.json("Course added!"))
+    .then((r) => res.json(r._id))
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
@@ -109,18 +114,18 @@ router.get("/:id", (req, res, next) => {
 });
 
 //uploading document to a course
-router.post("/:id/upload", upload.single("documents"), (req, res, next) => {
+router.post("/:id/upload", upload.array("documents", 10), (req, res, next) => {
   Course.findById(req.params.id)
     .then((course) => {
-      console.log(req.file);
-      console.log(course.files)
-      course.files = course.files.concat([req.file.filename]);
+      console.log(req.files);
+      console.log(req.files.map(k => k.filename))
+      course.files = course.files.concat(req.files.map(k => k.filename));
       course
         .save()
         .then(() => res.json(`Document Added`))
         .catch((err) => res.json(err));
     })
-    .catch((err) => res.status(400).json(`Error: ${err}`));
+    .catch((err) => res.status(400).json(`Error finding Course: ${err}`));
 });
 
 //get document by filename
