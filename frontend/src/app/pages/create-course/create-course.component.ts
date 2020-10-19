@@ -24,11 +24,49 @@ export class CreateCourseComponent implements OnInit {
   ngOnInit(): void {}
 
   registerHandler() {
+    // add teachers to the new course
+    // add this course id to teachers course list
     const course = {
+      //teachers: [user.id],
       title: this.title,
       description: this.description,
-      // files: this.files,
+      level: this.level,
+      tags: this.tags,
+      files: this.files,
     };
+    
+    this.courseService.postNewCourse(course).subscribe(
+      (res) => {
+        for (const droppedFile of course.files) {
+          if (droppedFile.fileEntry.isFile) {
+            const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
+            fileEntry.file((file: File) => {
+              const formData = new FormData();
+              formData.append('documents', file, droppedFile.relativePath);
+              console.log(res)
+              this.courseService.postNewFile(formData, res).subscribe(
+                (res) => {
+                  console.log('Clara said yes.');
+                },
+                (err) => {
+                  console.log('Navinn said no.', err);
+                }
+              );
+            });
+          } else {
+            // It was a directory (empty directories are added, otherwise only files)
+            const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
+            console.log(droppedFile.relativePath, fileEntry);
+          }
+        }
+        console.log('success!');
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+    
+
   }
 
   // usage code from - https://www.npmjs.com/package/ngx-file-drop
@@ -38,19 +76,7 @@ export class CreateCourseComponent implements OnInit {
       if (droppedFile.fileEntry.isFile) {
         const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
         fileEntry.file((file: File) => {
-
-          const formData = new FormData();
-          formData.append('documents', file, droppedFile.relativePath);
-
-          this.courseService.postNewFile(formData).subscribe(
-            (res) => {
-              console.log('Clara said yes.');
-            },
-            (err) => {
-              console.log("Navinn said no.", err);
-            }
-          );
-
+          console.log(file)
         });
       } else {
         // It was a directory (empty directories are added, otherwise only files)

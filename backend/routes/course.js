@@ -77,11 +77,14 @@ const upload = multer({ storage: storage /*fileFiler: fileFiler*/ });
 
 // adding course
 router.route("/add").post((req, res) => {
+  // add user id to course route
   const title = req.body.title;
   const students = req.body.students;
   const teachers = req.body.teachers;
   const description = req.body.description;
   const files = req.body.files;
+  const tags = req.body.tags;
+  const level = req.body.level;
 
   // populate with finalized schema
   const newCourse = new Course({
@@ -90,11 +93,13 @@ router.route("/add").post((req, res) => {
     teachers,
     description,
     files,
+    tags,
+    level,
   });
 
   newCourse
     .save()
-    .then(() => res.json("Course added!"))
+    .then((r) => res.json(r._id))
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
