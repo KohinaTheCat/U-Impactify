@@ -24,6 +24,7 @@ export class CoursesComponent implements OnInit {
   addNewCourse(): void {
     if(this.user.type === 'IL') {
       console.log("ADD NEW COURSE STUDENT");
+      this.router.navigate(['enrollcourse']);
     } else if(this.user.type === 'IC') {
       console.log("CREATE NEW COURSE TEACHER");
       this.router.navigate(['createcourse']);

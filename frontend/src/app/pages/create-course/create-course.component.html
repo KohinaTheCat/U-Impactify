@@ -35,10 +35,9 @@
           
            
           <clr-input-container>
-            <label>Tags
+            <label>Tags (optional)
             <input clrInput type="text" [(ngModel)]="tags" name="tags"/>
             </label>
-            <clr-control-error>This field is required!</clr-control-error>
           </clr-input-container>
 
           <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="dropped($event)" 
