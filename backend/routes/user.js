@@ -37,7 +37,9 @@ router.route("/").post((req, res) => {
 
 // POST update password
 router.route("/password/:id").post((req, res) => {
-  userSchema.findById(req.params.id).then((user) => {
+  userSchema
+    .findById(req.params.id)
+    .then((user) => {
       user.password = req.body.password;
       user
         .save()
@@ -49,7 +51,8 @@ router.route("/password/:id").post((req, res) => {
 
 // POST update email
 router.route("/email/:id").post((req, res) => {
-  userSchema.findById(req.params.id)
+  userSchema
+    .findById(req.params.id)
     .then((user) => {
       user.email = req.body.email;
       user
@@ -62,9 +65,24 @@ router.route("/email/:id").post((req, res) => {
 
 // DELETE user
 router.route("/:id").delete((req, res) => {
-  userSchema.findById(req.params.id)
+  userSchema
+    .findById(req.params.id)
     .then(() => res.json(`User Deleted`))
     .catch((err) => res.json(err));
+});
+
+// PUT update classesTeaching
+router.route("/updateClassesTeaching").put((req, res) => {
+  userSchema
+    .findById(req.body.userId)
+    .then((user) => {
+      user.classesTeaching.push(req.body.courseId);
+      user
+        .save()
+        .then(() => res.json(`User Updated`))
+        .catch((err) => res.json(err));
+    })
+    .catch((err) => res.status(400).json(`Error: ${err}`));
 });
 
 module.exports = router;

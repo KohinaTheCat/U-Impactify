@@ -6,6 +6,7 @@ import {
   FileSystemFileEntry,
   FileSystemDirectoryEntry,
 } from 'ngx-file-drop';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-create-course',
@@ -13,7 +14,10 @@ import {
   styleUrls: ['./create-course.component.css'],
 })
 export class CreateCourseComponent implements OnInit {
-  constructor(private courseService: CourseService) {}
+  constructor(
+    private courseService: CourseService,
+    private userService: UserService
+  ) {}
 
   title: string = '';
   description: string = '';
@@ -35,7 +39,7 @@ export class CreateCourseComponent implements OnInit {
       tags: this.tags,
       files: this.files,
     };
-    
+
     this.courseService.postNewCourse(course).subscribe(
       (res) => {
         for (const droppedFile of course.files) {
@@ -44,10 +48,18 @@ export class CreateCourseComponent implements OnInit {
             fileEntry.file((file: File) => {
               const formData = new FormData();
               formData.append('documents', file, droppedFile.relativePath);
-              console.log(res)
+              console.log(res);
               this.courseService.postNewFile(formData, res).subscribe(
                 (res) => {
-                  console.log('Clara said yes.');
+                  this.userService
+                    .updateClassesTeaching(
+                      this.userService.getCurrentUser()._id,
+                      <string>res
+                    )
+                    .subscribe(
+                      (res) => console.log('Clara said yes again.'),
+                      (err) => console.log('Navinn said no again.')
+                    );
                 },
                 (err) => {
                   console.log('Navinn said no.', err);
@@ -66,8 +78,6 @@ export class CreateCourseComponent implements OnInit {
         console.log(err);
       }
     );
-    
-
   }
 
   // usage code from - https://www.npmjs.com/package/ngx-file-drop
@@ -77,7 +87,7 @@ export class CreateCourseComponent implements OnInit {
       if (droppedFile.fileEntry.isFile) {
         const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
         fileEntry.file((file: File) => {
-          console.log(file)
+          console.log(file);
         });
       } else {
         // It was a directory (empty directories are added, otherwise only files)
