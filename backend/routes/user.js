@@ -71,4 +71,18 @@ router.route("/:id").delete((req, res) => {
     .catch((err) => res.json(err));
 });
 
+// PUT update classesTeaching
+router.route("/updateClassesTeaching").put((req, res) => {
+  userSchema
+    .findById(req.body.userId)
+    .then((user) => {
+      user.classesTeaching.push(req.body.courseId);
+      user
+        .save()
+        .then(() => res.json(`User Updated`))
+        .catch((err) => res.json(err));
+    })
+    .catch((err) => res.status(400).json(`Error: ${err}`));
+});
+
 module.exports = router;
