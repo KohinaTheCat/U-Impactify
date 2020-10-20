@@ -40,12 +40,19 @@ export class EnrollCourseComponent implements OnInit {
     const courseName = this.courses.filter(
       (course) => course._id === this.selectedId
     )[0];
+    
+    this.courseService.enrollInCourse(
+      this.userService.getCurrentUser()._id,
+      this.selectedId
+    ).subscribe(res => {
+      console.log(res);
+      this.userService.enrollInCourse(this.userService.getCurrentUser()._id, {
+        _id: this.selectedId,
+        name: courseName,
+      }).subscribe(res => console.log(res), err => console.log(err));
 
-    this.userService.enrollInCourse(this.userService.getCurrentUser()._id, {
-      _id: this.selectedId,
-      name: courseName,
-    });
+    }, err => console.log(err));
 
-    this.courseService.enrollInCourse(this.userService.getCurrentUser()._id, this.selectedId);
+    this.router.navigate(['dashboard']);
   }
 }
