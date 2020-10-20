@@ -168,8 +168,11 @@ router.get("/document/course/:id", (req, res, next) => {
 
 
 
-router.route('/').get((req, res) => {
-  Course.find().then(course => res.json(course)).catch(err => res.status(400).json(`Error: ${err}`));
+router.route('/').get((req, res) => 
+{
+  Course.find()
+  .then(course => res.json(course))
+  .catch(err => res.status(400).json(`Error: ${err}`));
 });
 
 

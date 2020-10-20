@@ -24,7 +24,6 @@ export class EnrollCourseComponent implements OnInit {
     console.log("I made it !");
     this.courseService.getAllCourses().subscribe(
       (res) => {
-        console.log("I am : ");
         for(let i=0; i<res.length; i++){
           console.log(res[i].title);
         }

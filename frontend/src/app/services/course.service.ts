@@ -36,7 +36,7 @@ export class CourseService {
   }
 
   getAllCourses(): Observable<any>{
-    return this.http.get(`http://localhost:5000/course/`, {});
+    return this.http.get(`http://localhost:5000/course`, {});
   }
 
 }
