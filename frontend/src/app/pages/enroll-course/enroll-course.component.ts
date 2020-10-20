@@ -13,14 +13,18 @@ export class EnrollCourseComponent implements OnInit {
   error: string = '';
   courses: any[] = [];
 
-  selectedId: string = "";
+  selectedId: string = '';
 
-  constructor(private router: Router, private courseService: CourseService, private userService: UserService) {}
+  constructor(
+    private router: Router,
+    private courseService: CourseService,
+    private userService: UserService
+  ) {}
 
   ngOnInit(): void {
     this.courseService.getAllCourses().subscribe((res) => {
-      res.forEach(course => {
-        const {_id, title, description, level} = course;
+      res.forEach((course) => {
+        const { _id, title, description, level } = course;
         this.courses.push({ _id, title, description, level });
       });
     });
@@ -31,6 +35,17 @@ export class EnrollCourseComponent implements OnInit {
   }
 
   courseHandler() {
-     // this.courseService.enrollUser(this.userService.getCurrentUser()._id, selectedId);
+    if (!this.selectedId) return;
+
+    const courseName = this.courses.filter(
+      (course) => course._id === this.selectedId
+    )[0];
+
+    this.userService.enrollInCourse(this.userService.getCurrentUser()._id, {
+      _id: this.selectedId,
+      name: courseName,
+    });
+
+    this.courseService.enrollInCourse(this.userService.getCurrentUser()._id, this.selectedId);
   }
 }

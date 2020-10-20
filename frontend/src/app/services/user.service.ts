@@ -15,7 +15,7 @@ export class UserService {
 
   //kinda like async
   postNewUser(newUser): Observable<any> {
-    const { username, password, email, type, questionaire} = newUser;
+    const { username, password, email, type, questionaire } = newUser;
     return this.http.post('http://localhost:5000/user/', {
       username,
       password,
@@ -44,5 +44,15 @@ export class UserService {
   // gets the user
   getCurrentUser(): User {
     return this.user;
+  }
+
+  enrollInCourse(userId: string, course: any): Observable<any> {
+    this.user.classesEnrolled.push(course._id);
+    this.setUser(this.user);
+
+    return this.http.post(
+      `http://localhost:5000/user/enroll/${course._id}/${course.name}/${userId}`,
+      {}
+    );
   }
 }
