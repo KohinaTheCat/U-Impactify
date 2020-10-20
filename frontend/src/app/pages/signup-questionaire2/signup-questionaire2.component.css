@@ -1,12 +1,11 @@
-.page{
+.page {
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: space-evenly;
 }
 
-
-.Image{
+.Image {
   display: flex;
   height: 100vh;
   justify-content: center;
@@ -14,40 +13,44 @@
   width: 50vw;
 }
 
-#image{
+#image {
   width: inherit;
   height: inherit;
 }
 
-
-.clr-form-control{
-  height: 100vh;
+.clr-form-control {
+  height: 100%;
   width: 50vw;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 0;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
 }
 
-.clr-control-label{
+.clr-control-label {
   font-size: 0.8rem;
 }
 
-.clr-checkbox-wrapper{
+.clr-checkbox-wrapper {
   padding-top: 1rem;
 }
 
-#label1, #label2, #label3{
+#label1,
+#label2,
+#label3 {
   font-size: 1rem;
   padding-top: 2rem;
 }
 
-#Header{
+#Header {
   font-size: 2rem;
 }
 
-.ConnectOne, .ConnectTwo, .ConnectThree{
+.ConnectOne,
+.ConnectTwo,
+.ConnectThree {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -57,13 +60,13 @@
   height: 2rem;
 }
 
-.buttonsflex{
+.buttonsflex {
   display: flex;
   flex-direction: row;
   margin-top: 2rem;
 }
 
-.skipbutton{
+.skipbutton {
   margin-left: 1rem;
   margin-top: 0.5rem;
 }
@@ -72,11 +75,13 @@
   cursor: pointer;
 }
 
-.submitbutton{
+.submitbutton {
   padding-right: 2rem;
 }
 
-.LineOne, .LineTwo, .LineThree{
+.LineOne,
+.LineTwo,
+.LineThree {
   flex: 1;
   display: flex;
   padding-bottom: 0.75rem;
@@ -84,15 +89,17 @@
 }
 
 @media only screen and (max-width: 1000px) {
-  .page{
+  .page {
     flex-direction: column;
     justify-content: center;
   }
-  #Header{
+  #Header {
     align-items: center;
   }
 
-  #image, .Image, .imageTemp {
+  #image,
+  .Image,
+  .imageTemp {
     display: none;
   }
 
