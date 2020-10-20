@@ -82,7 +82,7 @@ router.route("/add").post((req, res) => {
 
   newCourse
     .save()
-    .then((r) => res.json(r._id))
+    .then((r) => res.json(r))
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
@@ -114,7 +114,7 @@ router.post("/:id/upload", upload.array("documents", 10), (req, res) => {
       course.files = course.files.concat(req.files.map((k) => k.filename));
       course
         .save()
-        .then(() => res.json(`Document Added`))
+        .then(() => res.json("Document Added!"))
         .catch((err) => res.json(err));
     })
     .catch((err) => res.status(400).json(`Error finding Course: ${err}`));

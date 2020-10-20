@@ -9,7 +9,6 @@ import {
 } from 'ngx-file-drop';
 import { Router } from '@angular/router';
 
-
 @Component({
   selector: 'app-create-course',
   templateUrl: './create-course.component.html',
@@ -19,7 +18,7 @@ export class CreateCourseComponent implements OnInit {
   constructor(
     private courseService: CourseService,
     private userService: UserService,
-    private router: Router,
+    private router: Router
   ) {}
 
   title: string = '';
@@ -28,11 +27,11 @@ export class CreateCourseComponent implements OnInit {
   tags: string = '';
   files: NgxFileDropEntry[] = [];
   basic: boolean = true;
-  error : string = '';
+  error: string = '';
 
   ngOnInit(): void {}
 
-  cancel(){
+  cancel() {
     this.router.navigate(['dashboard']);
   }
   registerHandler() {
@@ -51,6 +50,15 @@ export class CreateCourseComponent implements OnInit {
       .postNewCourse(course, this.userService.getCurrentUser()._id)
       .subscribe(
         (res) => {
+          this.userService
+            .updateClassesTeaching(
+              this.userService.getCurrentUser()._id,
+              {"_id": res._id, "title": res.title}
+            )
+            .subscribe(
+              (res) => console.log('Clara said yes again.'),
+              (err) => console.log('Navinn said no again.')
+            );
           for (const droppedFile of course.files) {
             if (droppedFile.fileEntry.isFile) {
               const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
@@ -60,7 +68,7 @@ export class CreateCourseComponent implements OnInit {
                 console.log(res);
                 this.courseService.postNewFile(formData, res).subscribe(
                   (res) => {
-                    console.log('Clara said yes.');
+                    console.log(res);
                   },
                   (err) => {
                     console.log('Navinn said no.', err);
@@ -76,12 +84,11 @@ export class CreateCourseComponent implements OnInit {
           console.log('success!');
           this.router.navigate(['dashboard']);
         },
-      (err) => {
-        this.error = err.message;
-        this.basic = true;
-      }
-    );
-
+        (err) => {
+          this.error = err.message;
+          this.basic = true;
+        }
+      );
   }
 
   // usage code from - https://www.npmjs.com/package/ngx-file-drop

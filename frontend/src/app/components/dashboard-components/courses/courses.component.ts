@@ -22,6 +22,14 @@ export class CoursesComponent implements OnInit {
         ? this.user.classesEnrolled
         : this.user.classesTeaching;
   }
+  
+  ngOnChanges(): void {
+    this.user = this.userService.getCurrentUser();
+    this.courses =
+      this.user.type === 'IL'
+        ? this.user.classesEnrolled
+        : this.user.classesTeaching;
+  }
 
   /**
    * TODO: Setup
