@@ -20,6 +20,7 @@ import { GlobalSearchComponent } from './components/global-search/global-search.
 import { CoursesComponent } from './components/dashboard-components/courses/courses.component';
 import { IcUpcomingEventsComponent } from './components/dashboard-components/ic-upcoming-events/ic-upcoming-events.component';
 import { SiProfileComponent } from './components/dashboard-components/si-profile/si-profile.component';
+import { EnrollCourseComponent } from './pages/enroll-course/enroll-course.component';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { SiProfileComponent } from './components/dashboard-components/si-profile
     CoursesComponent,
     IcUpcomingEventsComponent,
     SiProfileComponent,
+    EnrollCourseComponent,
   ],
   imports: [
     BrowserModule,
