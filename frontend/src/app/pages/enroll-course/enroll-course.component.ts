@@ -1,5 +1,6 @@
 import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
+import { CourseService } from 'src/app/services/course.service';
 
 @Component({
   selector: 'app-enroll-course',
@@ -10,7 +11,7 @@ export class EnrollCourseComponent implements OnInit {
 
   basic: boolean = true;
   error : string = '';
-  constructor(private router: Router) { }
+  constructor(private router: Router, private courseService: CourseService) { }
 
   ngOnInit(): void {
   }
@@ -18,5 +19,20 @@ export class EnrollCourseComponent implements OnInit {
   cancel(){
     this.router.navigate(['dashboard']);
   }
+
+  courseHandler(){
+    console.log("I made it !");
+    this.courseService.getAllCourses().subscribe(
+      (res) => {
+        console.log("I am : ");
+        for(let i=0; i<res.length; i++){
+          console.log(res[i].title);
+        }
+      }
+    )
+
+  }
+
+
 
 }

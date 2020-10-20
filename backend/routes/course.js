@@ -165,4 +165,13 @@ router.get("/document/course/:id", (req, res, next) => {
     .catch((err) => res.json(err));
 });
 
+
+
+
+router.route('/').get((req, res) => {
+  Course.find().then(course => res.json(course)).catch(err => res.status(400).json(`Error: ${err}`));
+});
+
+
+
 module.exports = router;
