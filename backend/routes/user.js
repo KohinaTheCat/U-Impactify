@@ -35,6 +35,20 @@ router.route("/").post((req, res) => {
     .catch((err) => res.status(400).json(err));
 });
 
+// POST enroll course, id refers to course id, title refers to course title, userId refers to user id
+router.route("/enroll/:id/:title/:uid").post((req, res) => {
+  userSchema.findById(req.params.uid).then((user) => {
+    user.classesEnrolled = user.classesEnrolled.concat({
+      _id: req.params.id,
+      name: req.params.title,
+    });
+    user
+      .save()
+      .then(() => res.json("Course added Successfully!"))
+      .catch((err) => res.json.status(404).json(err));
+  });
+});
+
 // POST update password
 router.route("/password/:id").post((req, res) => {
   userSchema
