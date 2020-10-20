@@ -59,6 +59,7 @@ export class UserService {
   // updates the classesteaching array
   updateClassesTeaching(userId: string, course: any): Observable<any> {
     this.user.classesTeaching.push({"_id": course._id, "name": course.title})
+    this.setUser(this.user)
     return this.http.put('http://localhost:5000/user/updateClassesTeaching', {
       userId,
       course,
