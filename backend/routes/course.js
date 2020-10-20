@@ -51,23 +51,6 @@ const storage = new GridFsStorage({
   },
 });
 
-// const storage = multer.diskStorage({
-//   destination: function (req, file, cb) {
-//     cb(null, "./uploads/");
-//   },
-//   filename: function (req, file, cb) {
-//     cb(null, file.originalname);
-//   },
-// });
-
-// const fileFiler = (req, file, cb) => {
-//   if (file.mimetype === "image/jpeg" || "image/png") {
-//     cb(null, true);
-//   } else {
-//     cb(null, false);
-//   }
-// };
-
 const upload = multer({ storage: storage /*fileFiler: fileFiler*/ });
 
 // Multer is a node.js middleware for handling multipart/form-data, which is primarily used for uploading files.
@@ -99,12 +82,12 @@ router.route("/add").post((req, res) => {
 
   newCourse
     .save()
-    .then((r) => res.json(r._id))
+    .then((r) => res.json(r))
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-//getting a course
-router.get("/:id", (req, res, next) => {
+//GET getting a course, id refers to course id
+router.get("/:id", (req, res) => {
   Course.findById(req.params.id)
     .exec()
     .then((doc) => {
@@ -113,24 +96,34 @@ router.get("/:id", (req, res, next) => {
     .catch((err) => res.json(err));
 });
 
-//uploading document to a course
-router.post("/:id/upload", upload.array("documents", 10), (req, res, next) => {
+// POST add a student to a course, id refers to course id, uid refers to userid
+router.post("/addStudent/:id/:uid", (req, res) => {
+  Course.findById(req.params.id).then((course) => {
+    course.students = course.students.concat(req.params.uid);
+    course
+      .save()
+      .then(() => res.json("Student added Successfully!"))
+      .catch((err) => res.status(400).json(err));
+  });
+});
+
+//POST uploading document to a course, id refers to course id
+router.post("/:id/upload", upload.array("documents", 10), (req, res) => {
   Course.findById(req.params.id)
     .then((course) => {
-      console.log(req.files);
-      console.log(req.files.map((k) => k.filename));
       course.files = course.files.concat(req.files.map((k) => k.filename));
       course
         .save()
-        .then(() => res.json(`Document Added`))
+        .then(() => res.json("Document Added!"))
         .catch((err) => res.json(err));
     })
     .catch((err) => res.status(400).json(`Error finding Course: ${err}`));
 });
 
-//get document by filename
+//GET document by filename, filename refers to filename LOL
+// TODO: change this to id of document, and then change in user-route
 router.get("/documents/:filename", (req, res) => {
-  const file = gfs
+  gfs
     .find({
       filename: req.params.filename,
     })
@@ -144,7 +137,7 @@ router.get("/documents/:filename", (req, res) => {
     });
 });
 
-//delete files by id
+// POST delete files by id, id refers to document id
 router.post("/documents/del/:id", (req, res) => {
   gfs.delete(new mongoose.Types.ObjectId(req.params.id), (err, data) => {
     if (err) return res.status(404).json({ err: err.message });
@@ -152,7 +145,7 @@ router.post("/documents/del/:id", (req, res) => {
   });
 });
 
-//getting all the document filenames of a course, :id to course id
+// GET all the document filenames of a course, :id to course id
 router.get("/document/course/:id", (req, res, next) => {
   Course.findById(req.params.id)
     .select("documents")
@@ -163,6 +156,14 @@ router.get("/document/course/:id", (req, res, next) => {
       });
     })
     .catch((err) => res.json(err));
+});
+
+// GET ALL courses
+// TODO: RENAME THIS
+router.route("/").get((req, res) => {
+  Course.find()
+    .then((course) => res.json(course))
+    .catch((err) => res.status(400).json(`Error: ${err}`));
 });
 
 module.exports = router;

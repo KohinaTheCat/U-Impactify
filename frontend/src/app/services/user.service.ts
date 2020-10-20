@@ -15,7 +15,7 @@ export class UserService {
 
   //kinda like async
   postNewUser(newUser): Observable<any> {
-    const { username, password, email, type, questionaire} = newUser;
+    const { username, password, email, type, questionaire } = newUser;
     return this.http.post('http://localhost:5000/user/', {
       username,
       password,
@@ -46,11 +46,23 @@ export class UserService {
     return this.user;
   }
 
+  enrollInCourse(userId: string, course: any): Observable<any> {
+    this.user.classesEnrolled.push(course);
+    this.setUser(this.user);
+
+    return this.http.post(
+      `http://localhost:5000/user/enroll/${course._id}/${course.name}/${userId}`,
+      {}
+    );
+  }
+
   // updates the classesteaching array
-  updateClassesTeaching(userId: string, courseId: string): Observable<any> {
+  updateClassesTeaching(userId: string, course: any): Observable<any> {
+    this.user.classesTeaching.push({"_id": course._id, "name": course.title})
+    this.setUser(this.user)
     return this.http.put('http://localhost:5000/user/updateClassesTeaching', {
       userId,
-      courseId,
+      course,
     });
   }
 }

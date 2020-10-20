@@ -1,6 +1,8 @@
+import { CreateCourseComponent } from './../../../pages/create-course/create-course.component';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-courses',
@@ -11,9 +13,19 @@ export class CoursesComponent implements OnInit {
   user: User;
   courses: object[];
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
+    this.user = this.userService.getCurrentUser();
+    this.courses =
+      this.user.type === 'IL'
+        ? this.user.classesEnrolled
+        : this.user.classesTeaching;
+
+    console.log("kist", this.user)
+  }
+  
+  ngOnChanges(): void {
     this.user = this.userService.getCurrentUser();
     this.courses =
       this.user.type === 'IL'
@@ -25,10 +37,12 @@ export class CoursesComponent implements OnInit {
    * TODO: Setup
    */
   addNewCourse(): void {
-    if (this.user.type === 'IL') {
-      console.log('ADD NEW COURSE STUDENT');
-    } else if (this.user.type === 'IC') {
-      console.log('CREATE NEW COURSE TEACHER');
+    if(this.user.type === 'IL') {
+      console.log("ADD NEW COURSE STUDENT");
+      this.router.navigate(['enrollcourse']);
+    } else if(this.user.type === 'IC') {
+      console.log("CREATE NEW COURSE TEACHER");
+      this.router.navigate(['createcourse']);
     }
   }
 }

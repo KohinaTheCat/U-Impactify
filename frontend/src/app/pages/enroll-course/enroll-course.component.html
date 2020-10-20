@@ -1,0 +1,51 @@
+<clr-modal
+  [(clrModalOpen)]="basic"
+  [clrModalSize]="'lg'"
+  [clrModalClosable]="false"
+>
+  <h3 class="modal-title">Enroll in Courses</h3>
+  <div class="modal-body">
+    <form clrForm>
+      <clr-control-error>{{ error }}</clr-control-error>
+      <div class="clr-form-control">
+        <div class="clr-control-container">
+          <div
+            class="clr-radio-wrapper"
+            *ngFor="let course of courses; index as i"
+          >
+            <input
+              type="radio"
+              [id]="'vertical-checkbox' + i"
+              name="options"
+              [value]="course._id"
+              (click)="selectedId = course._id"
+              class="clr-radio"
+            />
+            <label [for]="'vertical-checkbox' + i" class="clr-control-label">{{
+              course.title
+            }}</label>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-outline"
+      (click)="basic = false"
+      (click)="cancel()"
+    >
+      Cancel
+    </button>
+    <button
+      type="button"
+      class="btn btn-outline"
+      (click)="basic = true"
+      (click)="courseHandler()"
+    >
+      Click me!
+    </button>
+    <!-- <button type="button" class="btn btn-primary" (click)="registerHandler()" (click)="basic = false">Create Course</button> -->
+  </div>
+</clr-modal>

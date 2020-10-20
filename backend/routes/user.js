@@ -35,6 +35,20 @@ router.route("/").post((req, res) => {
     .catch((err) => res.status(400).json(err));
 });
 
+// POST enroll course, id refers to course id, title refers to course title, userId refers to user id
+router.route("/enroll/:id/:title/:uid").post((req, res) => {
+  userSchema.findById(req.params.uid).then((user) => {
+    user.classesEnrolled = user.classesEnrolled.concat({
+      _id: req.params.id,
+      name: req.params.title,
+    });
+    user
+      .save()
+      .then(() => res.json("Course added Successfully!"))
+      .catch((err) => res.json.status(404).json(err));
+  });
+});
+
 // POST update password
 router.route("/password/:id").post((req, res) => {
   userSchema
@@ -49,34 +63,16 @@ router.route("/password/:id").post((req, res) => {
     .catch((err) => res.status(400).json(`Error: ${err}`));
 });
 
-// POST update email
-router.route("/email/:id").post((req, res) => {
-  userSchema
-    .findById(req.params.id)
-    .then((user) => {
-      user.email = req.body.email;
-      user
-        .save()
-        .then(() => res.json(`Email Updated`))
-        .catch((err) => res.json(err));
-    })
-    .catch((err) => res.status(400).json(`Error: ${err}`));
-});
-
-// DELETE user
-router.route("/:id").delete((req, res) => {
-  userSchema
-    .findById(req.params.id)
-    .then(() => res.json(`User Deleted`))
-    .catch((err) => res.json(err));
-});
-
 // PUT update classesTeaching
 router.route("/updateClassesTeaching").put((req, res) => {
   userSchema
     .findById(req.body.userId)
     .then((user) => {
-      user.classesTeaching.push(req.body.courseId);
+      user.classesTeaching = user.classesTeaching.concat({
+        _id: req.body.course._id,
+        name: req.body.course.title,
+        img: "this is a placehodler",
+      });
       user
         .save()
         .then(() => res.json(`User Updated`))

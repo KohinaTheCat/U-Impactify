@@ -1,6 +1,7 @@
+import { EnrollCourseComponent } from './pages/enroll-course/enroll-course.component';
 import { SignupQuestionaireComponent } from './pages/signup-questionaire/signup-questionaire.component';
 import { CreateCourseComponent } from './pages/create-course/create-course.component';
-import { NgModule } from '@angular/core';
+import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'questionaire2', component: SignupQuestionaire2Component},
   { path: 'course', component: CourseComponent },
   { path: 'createcourse', component: CreateCourseComponent },
+  { path: 'enrollcourse', component: EnrollCourseComponent},
 
 ];
 
