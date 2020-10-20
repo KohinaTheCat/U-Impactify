@@ -55,4 +55,12 @@ export class UserService {
       {}
     );
   }
+
+  // updates the classesteaching array
+  updateClassesTeaching(userId: string, course: any): Observable<any> {
+    return this.http.put('http://localhost:5000/user/updateClassesTeaching', {
+      userId,
+      course,
+    });
+  }
 }

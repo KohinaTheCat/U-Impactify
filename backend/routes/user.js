@@ -63,26 +63,22 @@ router.route("/password/:id").post((req, res) => {
     .catch((err) => res.status(400).json(`Error: ${err}`));
 });
 
-// POST update email
-router.route("/email/:id").post((req, res) => {
+// PUT update classesTeaching
+router.route("/updateClassesTeaching").put((req, res) => {
   userSchema
-    .findById(req.params.id)
+    .findById(req.body.userId)
     .then((user) => {
-      user.email = req.body.email;
+      user.classesTeaching = user.classesTeaching.concat({
+        _id: req.body.course._id,
+        name: req.body.course.title,
+        img: "this is a placehodler",
+      });
       user
         .save()
-        .then(() => res.json(`Email Updated`))
+        .then(() => res.json(`User Updated`))
         .catch((err) => res.json(err));
     })
     .catch((err) => res.status(400).json(`Error: ${err}`));
-});
-
-// DELETE user
-router.route("/:id").delete((req, res) => {
-  userSchema
-    .findById(req.params.id)
-    .then(() => res.json(`User Deleted`))
-    .catch((err) => res.json(err));
 });
 
 module.exports = router;
