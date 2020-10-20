@@ -69,11 +69,11 @@ export class LoginSignupComponent implements OnInit {
   }
 
   registerHandler(user: any) {
+    if (!user.type) return;
     this.userService.setUser(user);
-    if(user.type == "IL"){
+    if (user.type == 'IL') {
       this.router.navigate(['questionaire']);
-    }
-    else{
+    } else {
       this.router.navigate(['questionaire2']);
     }
   }
@@ -93,7 +93,7 @@ export class LoginSignupComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if(!!this.userService.getCurrentUser()) {
+    if (!!this.userService.getCurrentUser()) {
       this.router.navigate(['dashboard']);
     }
   }
