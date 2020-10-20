@@ -63,7 +63,6 @@ export class LoginSignupComponent implements OnInit {
       },
       (err) => {
         this.error = err.message;
-        console.log(err);
       }
     );
   }
@@ -71,10 +70,21 @@ export class LoginSignupComponent implements OnInit {
   registerHandler(user: any) {
     if (!user.type) return;
     this.userService.setUser(user);
-    if (user.type == 'IL') {
+    if (user.type === 'IC') {
       this.router.navigate(['questionaire']);
-    } else {
+    } else if (user.type === 'SI') {
       this.router.navigate(['questionaire2']);
+    } else {
+      // logs student in
+      this.userService.postNewUser(user).subscribe(
+        (res) => {
+          this.userService.setUser(res);
+          this.router.navigate(['dashboard']);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
     }
   }
 

@@ -32,14 +32,28 @@ const userSchema = new Schema({
     required: "Specify Type of User",
   },
   classesEnrolled: {
-    type: [String],
+    // array to store course _id, name, img
+    type: [
+      {
+        _id: String,
+        name: String,
+        img: String,
+      },
+    ],
   },
-  classesTeaching:{
-    type: [String],
+  classesTeaching: {
+    // array to store course _id, name, img
+    type: [
+      {
+        _id: String,
+        name: String,
+        img: String,
+      },
+    ],
   },
   questionaire: {
     type: [[String]],
-  }
+  },
 });
 
 /* 

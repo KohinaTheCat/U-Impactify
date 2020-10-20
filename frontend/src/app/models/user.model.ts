@@ -4,7 +4,7 @@ export interface User{
   "email": string,
   "password": string,
   "type": string,
-  "classesEnrolled": string[];
-  "classesTeaching": string[];
+  "classesEnrolled": object[];
+  "classesTeaching": object[];
   "questionaire": string[][];
 }

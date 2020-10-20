@@ -19,15 +19,15 @@ router.route("/:email").post((req, res) => {
 
 // POST new user
 router.route("/").post((req, res) => {
-  const { username, password, email, type, questionaire} = req.body;
+  const { username, password, email, type, questionaire } = req.body;
   const newUser = new userSchema({
     username,
     password,
     email,
     type,
     classesEnrolled: [],
-    classesTeaching: [], 
-    questionaire, 
+    classesTeaching: [],
+    questionaire,
   });
   newUser
     .save()
@@ -37,7 +37,9 @@ router.route("/").post((req, res) => {
 
 // POST update password
 router.route("/password/:id").post((req, res) => {
-  userSchema.findById(req.params.id).then((user) => {
+  userSchema
+    .findById(req.params.id)
+    .then((user) => {
       user.password = req.body.password;
       user
         .save()
@@ -49,7 +51,8 @@ router.route("/password/:id").post((req, res) => {
 
 // POST update email
 router.route("/email/:id").post((req, res) => {
-  userSchema.findById(req.params.id)
+  userSchema
+    .findById(req.params.id)
     .then((user) => {
       user.email = req.body.email;
       user
@@ -62,7 +65,8 @@ router.route("/email/:id").post((req, res) => {
 
 // DELETE user
 router.route("/:id").delete((req, res) => {
-  userSchema.findById(req.params.id)
+  userSchema
+    .findById(req.params.id)
     .then(() => res.json(`User Deleted`))
     .catch((err) => res.json(err));
 });

@@ -23,7 +23,7 @@ const courseSchema = new Schema({
   },
   files: {
     type: [String],
-  }
+  },
 });
 
 const Course = mongoose.model("Course", courseSchema);
