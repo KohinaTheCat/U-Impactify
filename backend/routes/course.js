@@ -118,8 +118,8 @@ router.post("/:id/upload", upload.array("documents", 10), (req, res, next) => {
   Course.findById(req.params.id)
     .then((course) => {
       console.log(req.files);
-      console.log(req.files.map(k => k.filename))
-      course.files = course.files.concat(req.files.map(k => k.filename));
+      console.log(req.files.map((k) => k.filename));
+      course.files = course.files.concat(req.files.map((k) => k.filename));
       course
         .save()
         .then(() => res.json(`Document Added`))

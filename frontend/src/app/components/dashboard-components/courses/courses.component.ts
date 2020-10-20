@@ -11,11 +11,16 @@ import { Router } from '@angular/router';
 })
 export class CoursesComponent implements OnInit {
   user: User;
+  courses: object[];
 
   constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit(): void {
     this.user = this.userService.getCurrentUser();
+    this.courses =
+      this.user.type === 'IL'
+        ? this.user.classesEnrolled
+        : this.user.classesTeaching;
   }
 
   /**

@@ -1,4 +1,6 @@
+import { UserService } from './../../services/user.service';
 import { CourseService } from './../../services/course.service';
+import { CourseForm } from './CourseForm';
 import { Component, OnInit } from '@angular/core';
 import {
   NgxFileDropEntry,
@@ -14,7 +16,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./create-course.component.css'],
 })
 export class CreateCourseComponent implements OnInit {
-  constructor(private courseService: CourseService, private router: Router) {}
+  constructor(
+    private courseService: CourseService,
+    private userService: UserService,
+    private router: Router,
+  ) {}
 
   title: string = '';
   description: string = '';
@@ -40,34 +46,36 @@ export class CreateCourseComponent implements OnInit {
       tags: this.tags,
       files: this.files,
     };
-    
-    this.courseService.postNewCourse(course).subscribe(
-      (res) => {
-        for (const droppedFile of course.files) {
-          if (droppedFile.fileEntry.isFile) {
-            const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
-            fileEntry.file((file: File) => {
-              const formData = new FormData();
-              formData.append('documents', file, droppedFile.relativePath);
-              console.log(res)
-              this.courseService.postNewFile(formData, res).subscribe(
-                (res) => {
-                  console.log('Clara said yes.');
-                },
-                (err) => {
-                  console.log('Navinn said no.', err);
-                }
-              );
-            });
-          } else {
-            // It was a directory (empty directories are added, otherwise only files)
-            const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
-            console.log(droppedFile.relativePath, fileEntry);
+
+    this.courseService
+      .postNewCourse(course, this.userService.getCurrentUser()._id)
+      .subscribe(
+        (res) => {
+          for (const droppedFile of course.files) {
+            if (droppedFile.fileEntry.isFile) {
+              const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
+              fileEntry.file((file: File) => {
+                const formData = new FormData();
+                formData.append('documents', file, droppedFile.relativePath);
+                console.log(res);
+                this.courseService.postNewFile(formData, res).subscribe(
+                  (res) => {
+                    console.log('Clara said yes.');
+                  },
+                  (err) => {
+                    console.log('Navinn said no.', err);
+                  }
+                );
+              });
+            } else {
+              // It was a directory (empty directories are added, otherwise only files)
+              const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
+              console.log(droppedFile.relativePath, fileEntry);
+            }
           }
-        }
-        console.log('success!');
-        this.router.navigate(['dashboard']);
-      },
+          console.log('success!');
+          this.router.navigate(['dashboard']);
+        },
       (err) => {
         this.error = err.message;
         this.basic = true;
@@ -83,7 +91,7 @@ export class CreateCourseComponent implements OnInit {
       if (droppedFile.fileEntry.isFile) {
         const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
         fileEntry.file((file: File) => {
-          console.log(file)
+          console.log(file);
         });
       } else {
         // It was a directory (empty directories are added, otherwise only files)

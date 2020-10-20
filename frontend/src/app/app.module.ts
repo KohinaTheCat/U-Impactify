@@ -11,6 +11,8 @@ import { FrontPageHeaderComponent } from './components/front-page-header/front-p
 import { CreateCourseComponent } from './pages/create-course/create-course.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { LoginSignupComponent } from './pages/login-signup/login-signup.component';
+import { SignupQuestionaireComponent } from './pages/signup-questionaire/signup-questionaire.component';
+import { SignupQuestionaire2Component } from './pages/signup-questionaire2/signup-questionaire2.component';
 import { NgxFileDropModule } from 'ngx-file-drop';
 import { CourseComponent } from './pages/course/course.component';
 import  {  PdfViewerModule  }  from  'ng2-pdf-viewer';
@@ -24,6 +26,8 @@ import { EnrollCourseComponent } from './pages/enroll-course/enroll-course.compo
 @NgModule({
   declarations: [
     AppComponent,
+    SignupQuestionaireComponent,
+    SignupQuestionaire2Component,
     FrontPageHeaderComponent,
     LoginSignupComponent,
     FooterComponent,

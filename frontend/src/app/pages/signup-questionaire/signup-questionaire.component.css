@@ -1,0 +1,104 @@
+.page{
+  display: flex;
+}
+
+.imagetemp {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  width: 50vw;
+}
+
+#image{
+  width: inherit;
+  height: inherit;
+}
+
+.clr-form-control{
+  height: 100vh;
+  width: 50vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0;
+}
+
+#Header {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.line {
+  flex: 1;
+  display: flex;
+  padding-bottom: 0.5rem;
+  padding-left: 0.25rem;
+}
+
+.labelField {
+  display: flex;
+  flex: 1;
+}
+
+.question{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-direction: row;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+  max-height: 2rem;
+}
+
+.buttonsflex {
+  display: flex;
+  padding-right: 10rem;
+  flex-direction: row;
+  margin-top: 1rem;
+}
+
+.skipbutton{
+  margin-left: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.skipbutton:hover {
+  cursor: pointer;
+}
+
+
+h1{
+  font-size: 6vh;
+}
+
+.clr-control-label{
+  font-size: 0.8rem;
+}
+
+.clr-checkbox-wrapper{
+  padding-top: 1rem;
+}
+
+#title1, #title2 {
+  font-size: 1rem;
+  padding-top: 2rem;
+}
+
+@media only screen and (max-width: 900px) {
+  .page{
+    flex-direction: column;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .clr-form-control {
+    width: 100%;
+  }
+
+  .Image, #image, .imagetemp {
+    display: none;
+  }
+}

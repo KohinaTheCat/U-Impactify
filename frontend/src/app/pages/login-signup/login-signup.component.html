@@ -1,9 +1,7 @@
 <app-front-page-header></app-front-page-header>
 <div class="container">
   <div class="side-img">
-    <div id="slogan">
-      <b>{{ form.slogan }}</b>
-    </div>
+    <b>{{ form.slogan }}</b>
 
     <img src="{{ form.img }}" />
   </div>
@@ -14,19 +12,37 @@
       <clr-input-container>
         <label>
           email:
-          <input clrInput type="email" [(ngModel)]="email" name="email" required/>
+          <input
+            clrInput
+            type="email"
+            [(ngModel)]="email"
+            name="email"
+            required
+          />
         </label>
       </clr-input-container>
       <clr-input-container *ngIf="!logged">
         <label>
           username:
-          <input clrInput type="username" [(ngModel)]="username" name="username" required/>
+          <input
+            clrInput
+            type="username"
+            [(ngModel)]="username"
+            name="username"
+            required
+          />
         </label>
       </clr-input-container>
       <clr-input-container>
         <label>
           password:
-          <input clrInput type="password" [(ngModel)]="password" name="password" required/>
+          <input
+            clrInput
+            type="password"
+            [(ngModel)]="password"
+            name="password"
+            required
+          />
         </label>
       </clr-input-container>
 
@@ -34,26 +50,47 @@
         Please select your role below:
         <div class="align-row-radio">
           <clr-radio-wrapper>
-            <input type="radio" clrRadio value="IL" name="options" [(ngModel)]="type" />
+            <input
+              type="radio"
+              clrRadio
+              value="IL"
+              name="options"
+              [(ngModel)]="type"
+            />
             <label class="radio_label">Student</label>
           </clr-radio-wrapper>
           <clr-radio-wrapper>
-            <input type="radio" clrRadio value="IC" name="options" [(ngModel)]="type" />
+            <input
+              type="radio"
+              clrRadio
+              value="IC"
+              name="options"
+              [(ngModel)]="type"
+            />
             <label class="radio_label">Instructor</label>
           </clr-radio-wrapper>
           <clr-radio-wrapper>
-            <input type="radio" clrRadio value="SI" name="options" [(ngModel)]="type" />
+            <input
+              type="radio"
+              clrRadio
+              value="SI"
+              name="options"
+              [(ngModel)]="type"
+            />
             <label class="radio_label">Social Intiative</label>
           </clr-radio-wrapper>
         </div>
       </div>
 
       <div class="align-row">
-        {{ form.linkPrompt }}<a id="link-prompt" (click)="onToggle()">{{ form.link }}</a>
+        {{ form.linkPrompt
+        }}<a id="link-prompt" (click)="onToggle()">{{ form.link }}</a>
       </div>
 
-      <button (click)="onSubmit()" class="btn btn-primary">{{form.submit}}</button>
-      <clr-control-error>{{this.error}}</clr-control-error>
+      <button (click)="onSubmit()" class="btn btn-primary">
+        {{ form.submit }}
+      </button>
+      <clr-control-error>{{ this.error }}</clr-control-error>
     </form>
   </div>
 </div>

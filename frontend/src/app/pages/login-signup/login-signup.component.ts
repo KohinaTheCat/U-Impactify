@@ -63,22 +63,29 @@ export class LoginSignupComponent implements OnInit {
       },
       (err) => {
         this.error = err.message;
-        console.log(err);
       }
     );
   }
 
   registerHandler(user: any) {
-    this.userService.postNewUser(user).subscribe(
-      (res) => {
-        this.userService.setUser(<User>res);
-        this.router.navigate(['dashboard']);
-      },
-      (err) => {
-        this.error = err.message;
-        console.log(err);
-      }
-    );
+    if (!user.type) return;
+    this.userService.setUser(user);
+    if (user.type === 'IC') {
+      this.router.navigate(['questionaire']);
+    } else if (user.type === 'SI') {
+      this.router.navigate(['questionaire2']);
+    } else {
+      // logs student in
+      this.userService.postNewUser(user).subscribe(
+        (res) => {
+          this.userService.setUser(res);
+          this.router.navigate(['dashboard']);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+    }
   }
 
   onSubmit() {
@@ -96,7 +103,7 @@ export class LoginSignupComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if(!!this.userService.getCurrentUser()) {
+    if (!!this.userService.getCurrentUser()) {
       this.router.navigate(['dashboard']);
     }
   }

@@ -11,12 +11,12 @@ export class CourseService {
 
   constructor(private http: HttpClient) {}
 
-  postNewCourse(newCourse): Observable<any> {
+  postNewCourse(newCourse, id): Observable<any> {
     const { title, description, level, tags } = newCourse;
     return this.http.post('http://localhost:5000/course/add', {
       title,
       students: [],
-      teachers: ['Winson'],
+      teachers: [id],
       description,
       files: [],
       level,

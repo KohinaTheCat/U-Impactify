@@ -1,0 +1,53 @@
+<div class="page">
+  <div class="clr-form-control">
+    <label id="Header">Welcome to U-Impactify!</label>
+    <div class="clr-control-container">
+      <label id="title" class="clr-control-label">Check all that apply. Do you identify as a:</label>
+      <div class="clr-checkbox-wrapper">
+        <input type="checkbox" id="vertical-checkbox1" [(ngModel)]="checkbox[0]" name="checkbox-full" value="option1" class="clr-checkbox" />
+        <label for="vertical-checkbox1" class="clr-control-label">Coach</label>
+      </div>
+      <div class="clr-checkbox-wrapper">
+        <input type="checkbox" id="vertical-checkbox2" [(ngModel)]="checkbox[1]" name="checkbox-full" value="option2" class="clr-checkbox" />
+        <label for="vertical-checkbox2" class="clr-control-label">Teacher</label>
+      </div>
+      <div class="clr-checkbox-wrapper">
+        <input type="checkbox" id="vertical-checkbox3" [(ngModel)]="checkbox[2]" name="checkbox-full" value="option3" class="clr-checkbox" />
+        <label for="vertical-checkbox3" class="clr-control-label">Facilitator</label>
+      </div>
+      <div class="question">
+        <div class="clr-checkbox-wrapper" id="labelField">
+          <input type="checkbox" id="vertical-checkbox4" [(ngModel)]="checkbox[3]" name="checkbox-full" value="option4" class="clr-checkbox" />
+          <label id="labelOne" for="vertical-checkbox4" class="clr-control-label">Other: Please enter:</label>
+        </div>
+        <div class="line">
+          <input clrInput type="text" [(ngModel)]="other" name="example" id="actualline" />
+        </div>
+      </div>
+      <label id="title2" class="clr-control-label">What do you need U-Impactify for?</label>
+      <div class="clr-checkbox-wrapper">
+        <input type="checkbox" id="vertical-checkbox5" [(ngModel)]="checkbox[4]" name="checkbox-full" value="option1" class="clr-checkbox" />
+        <label for="vertical-checkbox5" class="clr-control-label">Conduct Lessons Live</label>
+      </div>
+      <div class="clr-checkbox-wrapper">
+        <input type="checkbox" id="vertical-checkbox6" [(ngModel)]="checkbox[5]" name="checkbox-full" value="option2" class="clr-checkbox" />
+        <label for="vertical-checkbox6" class="clr-control-label">Handle Administrative Tasks</label>
+      </div>
+      <div class="clr-checkbox-wrapper">
+        <input type="checkbox" id="vertical-checkbox7" [(ngModel)]="checkbox[6]" name="checkbox-full" value="option3" class="clr-checkbox" />
+        <label for="vertical-checkbox7" class="clr-control-label">Plan my lessons and sessions</label>
+      </div>
+    </div>
+    <div class="buttonsflex">
+      <div class="submitbutton">
+        <button class="btn btn-primary" (click)="onSubmit()" id="submitlocation">Submit</button>
+      </div>
+      <div class="skipbutton" (click)="onSkip()">
+        <a id="skip">Skip this step</a>
+      </div>
+    </div>
+  </div>
+  <div class="imagetemp">
+    <img src="../../../assets/signup-questionaire/undraw_questions_75e0 1.svg" id="image">
+  </div>
+</div>
