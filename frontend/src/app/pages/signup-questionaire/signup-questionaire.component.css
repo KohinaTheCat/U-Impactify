@@ -2,7 +2,7 @@
   display: flex;
 }
 
-.imagetemp{
+.imagetemp {
   display: flex;
   height: 100vh;
   justify-content: center;
@@ -16,31 +16,28 @@
 }
 
 .clr-form-control{
-  display: flex;
   height: 100vh;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
   width: 50vw;
-}
-
-#MainTitle{
-  padding-bottom: 3rem;
-}
-
-.clr-form-control{
-  font-size: larger;
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0;
 }
 
-.line{
+#Header {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.line {
   flex: 1;
   display: flex;
   padding-bottom: 0.5rem;
   padding-left: 0.25rem;
 }
 
-.labelField{
+.labelField {
   display: flex;
   flex: 1;
 }
@@ -51,13 +48,13 @@
   align-items: center;
   flex-direction: row;
   padding-bottom: 1rem;
-  padding-top: 2vh;
+  padding-top: 1rem;
   max-height: 2rem;
 }
 
-.buttonsflex{
+.buttonsflex {
   display: flex;
-  padding-right: 13rem;
+  padding-right: 10rem;
   flex-direction: row;
   margin-top: 1rem;
 }
@@ -67,38 +64,41 @@
   margin-top: 0.75rem;
 }
 
+.skipbutton:hover {
+  cursor: pointer;
+}
+
 
 h1{
-
   font-size: 6vh;
 }
 
 .clr-control-label{
-  font-size: 2vh;
+  font-size: 0.8rem;
 }
 
 .clr-checkbox-wrapper{
-  padding-top: 2vh;
+  padding-top: 1rem;
 }
 
-#title2{
-  padding-top: 5vh;
-  font-size: 2.5vh;
+#title1, #title2 {
+  font-size: 1rem;
+  padding-top: 2rem;
 }
 
-#title{
-  font-size: 2.5vh;
-}
-
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 900px) {
   .page{
     flex-direction: column;
-  }
-  .clr-form-control{
-    margin-top: 20vh;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
   }
 
-  .buttonsflex{
-    padding-right: 3rem;
+  .clr-form-control {
+    width: 100%;
+  }
+
+  .Image, #image, .imagetemp {
+    display: none;
   }
 }
