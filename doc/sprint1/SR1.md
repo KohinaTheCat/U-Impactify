@@ -1,55 +1,56 @@
-**Best Experience:**
-
-- Demo
-
-- Swarup :heart:
-
-  - > You set the bar high for the other groups 
-
-- Using the bot 
-
-- Interaction with group mates
-
-**Worst experience:**
-
-- Last minute cramming
-- Angular / JavaScript syntax
-
-**Practices that need to continue during next sprint:**
+## **Practices that Need to Continue During Next Sprint**
 
 - Everyone working around the same time zone and using the bot
+
 - Message for help the minute you need it
+
 - Group calls
-- Have fun! :smile:
 
+- Comments by `@Deadline Divyam`
 
+  - > Have fun! :smile:
 
-**Practices we should stop using:**
+  
 
-- Stop going off topic
+## **Practices we Should Stop Using**
+
+- Going off topic
 - Make sure more people go over the PR and approve before merging
 - Not commenting code
 - Writing less-readable code
 
 
 
-**Unfinished tasks** 
+## :spider: Harmful Practices
 
-- None
-
-
-
+- Sleeping late to work on C01
+- Looking at someone's screen and telling them what to do, when coding
 
 
 
+## **Best Experience** :trophy:
+
+- Demo
+
+- Using the bot 
+
+- Interaction with group mates
+
+- Swarup :heart:
+
+  - > You set the bar high for the other groups 
+
+## **Worst Experience**
+
+- Last minute cramming
+- Angular / JavaScript syntax
 
 
 
+## **Unfinished Tasks** 
 
-
-
-
-
+- N/A
+  - we are good students :smile:
 
 
 
@@ -59,3 +60,6 @@
 
 
 
+> Who deleted my apples?
+>
+> ​					- Divyam 
