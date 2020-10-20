@@ -47,7 +47,7 @@ export class UserService {
   }
 
   enrollInCourse(userId: string, course: any): Observable<any> {
-    this.user.classesEnrolled.push(course._id);
+    this.user.classesEnrolled.push(course);
     this.setUser(this.user);
 
     return this.http.post(

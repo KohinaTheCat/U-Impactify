@@ -123,7 +123,8 @@ router.post("/:id/upload", upload.array("documents", 10), (req, res) => {
 //GET document by filename, filename refers to filename LOL
 // TODO: change this to id of document, and then change in user-route
 router.get("/documents/:filename", (req, res) => {
-  gfs.find({
+  gfs
+    .find({
       filename: req.params.filename,
     })
     .toArray((err, files) => {

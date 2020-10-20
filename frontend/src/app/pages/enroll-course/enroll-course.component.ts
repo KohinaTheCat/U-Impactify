@@ -40,7 +40,7 @@ export class EnrollCourseComponent implements OnInit {
     const courseName = this.courses.filter(
       (course) => course._id === this.selectedId
     )[0].title;
-
+      console.log("name", courseName)
     this.courseService
       .enrollInCourse(this.userService.getCurrentUser()._id, this.selectedId)
       .subscribe(
