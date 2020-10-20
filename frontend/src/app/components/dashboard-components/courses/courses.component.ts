@@ -21,6 +21,8 @@ export class CoursesComponent implements OnInit {
       this.user.type === 'IL'
         ? this.user.classesEnrolled
         : this.user.classesTeaching;
+
+    console.log("kist", this.user)
   }
   
   ngOnChanges(): void {
