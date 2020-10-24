@@ -51,7 +51,7 @@
 
 <br>
 
-Page: `Login Signup`
+Class: `LoginSignup`
 
 | Responsibilities                                                      | Collaborators   |
 | --------------------------------------------------------------------- | --------------- |
@@ -60,7 +60,7 @@ Page: `Login Signup`
 
 <br>
 
-Page: `Questionaire`
+Class: `Questionaire`
 | Responsibilities                                            | Collaborators   |
 | ----------------------------------------------------------- | --------------- |
 | - Display questions based on the type of user you signup as | - `UserService` |
@@ -70,7 +70,7 @@ Page: `Questionaire`
 
 <br>
 
-Page: `Dashboard`
+Class: `Dashboard`
 
 | Responsibilities                                   | Collaborators     |
 | -------------------------------------------------- | ----------------- |
@@ -81,7 +81,7 @@ Page: `Dashboard`
 <br>
 
 
-Page: `Course`
+Class: `Course`
 
 | Responsibilities                                                  | Collaborators     |
 | ----------------------------------------------------------------- | ----------------- |
@@ -92,7 +92,7 @@ Page: `Course`
 <br>
 
 
-Page: `Messaging`
+Class: `Messaging`
 
 | Responsibilities                                      | Collaborators   |
 | ----------------------------------------------------- | --------------- |
@@ -102,7 +102,7 @@ Page: `Messaging`
 <br>
 
 
-Page: `Feedback`
+Class: `Feedback`
 
 | Responsibilities                                     | Collaborators     |
 | ---------------------------------------------------- | ----------------- |
@@ -113,7 +113,7 @@ Page: `Feedback`
 <div style="height: 15vh"></div>
 
 
-Page: `Giving Garden `
+Class: `GivingGarden`
 
 | Responsibilities                                            | Collaborators   |
 | ----------------------------------------------------------- | --------------- |
@@ -128,7 +128,7 @@ Page: `Giving Garden `
 <br>
 
 
-Service: `UserService`
+Class: `UserService`
 
 | Responsibilities                | Collaborators     |
 | ------------------------------- | ----------------- |
@@ -138,7 +138,7 @@ Service: `UserService`
 
 <br>
 
-Service: `CourseService`
+Class: `CourseService`
 
 | Responsibilities                     | Collaborators       |
 | ------------------------------------ | ------------------- |
@@ -154,7 +154,7 @@ Service: `CourseService`
 <br>
 
 
-Guard: `AuthGuard`
+Class: `AuthGuard`
 
 | Responsibilities                                                | Collaborators   |
 | --------------------------------------------------------------- | --------------- |
@@ -166,7 +166,7 @@ Guard: `AuthGuard`
 ## Frontend Components
 <br>
 
-Component: `DashboardCoursesComponent` (only for impact learner and impact consultant)
+Class: `DashboardCoursesComponent` (only for impact learner and impact consultant)
 
 | Responsibilities                                   | Collaborators |
 | -------------------------------------------------- | ------------- |
@@ -175,7 +175,7 @@ Component: `DashboardCoursesComponent` (only for impact learner and impact consu
 
 <br>
 
-Component: `CreateCourseComponent` (only for impact consultant)
+Class: `CreateCourseComponent` (only for impact consultant)
 
 | Responsibilities                                            | Collaborators     |
 | ----------------------------------------------------------- | ----------------- |
@@ -185,7 +185,7 @@ Component: `CreateCourseComponent` (only for impact consultant)
 
 <br>
 
-Component: `FrontPageHeaderComponent`
+Class: `FrontPageHeaderComponent`
 
 | Responsibilities                          | Collaborators   |
 | ----------------------------------------- | --------------- |
@@ -195,7 +195,7 @@ Component: `FrontPageHeaderComponent`
 
 <br>
 
-Component: `FooterComponent`
+Class: `FooterComponent`
 
 | Responsibilities                      | Collaborators |
 | ------------------------------------- | ------------- |
@@ -206,7 +206,7 @@ Component: `FooterComponent`
 
 <br>
 
-Component: `GlobalSearchComponent`
+Class: `GlobalSearchComponent`
 
 | Responsibilities       | Collaborators     |
 | ---------------------- | ----------------- |
