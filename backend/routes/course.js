@@ -158,11 +158,33 @@ router.get("/document/course/:id", (req, res, next) => {
     .catch((err) => res.json(err));
 });
 
+
+
 //SAMAYAK WORK ON THIS THEN WE DONE THIS 
-router.delete {
 
-}
 
+
+
+// router.delete("/delete/:id/:uid", (req, res) => {
+// //Course or CourseSchema?
+//   Course.findById(req.params.id)
+//   .select("documents")
+//   .exec()
+//   .then((course) => {
+//     course.students = course.students.findOneAndDelete(req.params.uid);
+//     course
+//     .save()
+//     .then(() => res.json("User deleted"))
+//     .catch((err) => res.status(400).json(err));
+  
+//   })
+// });  
+
+
+// Course.findOneAndDelete({
+//     id: req.params.id}).then(() => 
+//     res.json('[${req.params.id}] user deleted')).catch(err => res.json(err));
+// });
 
 // GET ALL courses
 // TODO: RENAME THIS
