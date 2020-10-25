@@ -11,12 +11,12 @@ export class CourseService {
 
   constructor(private http: HttpClient) {}
 
-  postNewCourse(newCourse, id): Observable<any> {
+  postNewCourse(newCourse, username): Observable<any> {
     const { title, description, level, tags } = newCourse;
     return this.http.post('http://localhost:5000/course/add', {
       title,
       students: [],
-      teachers: [id],
+      teachers: [username],
       description,
       files: [],
       level,
@@ -39,9 +39,9 @@ export class CourseService {
     return this.http.get(`http://localhost:5000/course`, {});
   }
 
-  enrollInCourse(userId: string, courseId: string): Observable<any> {
+  enrollInCourse(username: string, courseId: string): Observable<any> {
     return this.http.post(
-      `http://localhost:5000/course/addStudent/${courseId}/${userId}`,
+      `http://localhost:5000/course/addStudent/${courseId}/${username}`,
       {}
     );
   }

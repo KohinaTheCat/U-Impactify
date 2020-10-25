@@ -35,10 +35,8 @@ export class CreateCourseComponent implements OnInit {
     this.router.navigate(['dashboard']);
   }
   registerHandler() {
-    // add teachers to the new course
-    // add this course id to teachers course list
     const course = {
-      //teachers: [user.id],
+      teachers: [this.userService.getCurrentUser().username],
       title: this.title,
       description: this.description,
       level: this.level,
@@ -47,7 +45,7 @@ export class CreateCourseComponent implements OnInit {
     };
 
     this.courseService
-      .postNewCourse(course, this.userService.getCurrentUser()._id)
+      .postNewCourse(course, this.userService.getCurrentUser().username)
       .subscribe(
         (res) => {
           this.userService

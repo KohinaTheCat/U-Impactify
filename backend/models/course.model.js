@@ -6,7 +6,6 @@ const courseSchema = new Schema({
   title: {
     type: String,
     required: "title is required",
-    unique: "title already exists",
   },
   students: {
     type: [String],
@@ -17,7 +16,6 @@ const courseSchema = new Schema({
   description: {
     type: String,
     required: "description is required",
-    unique: "description already exists",
   },
   tags: {
     type: String,
@@ -25,7 +23,6 @@ const courseSchema = new Schema({
   level: {
     type: String,
     required: "level is required",
-    unique: "level already exists",
   },
   files: {
     type: [String],
