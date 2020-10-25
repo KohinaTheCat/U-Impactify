@@ -158,6 +158,12 @@ router.get("/document/course/:id", (req, res, next) => {
     .catch((err) => res.json(err));
 });
 
+//SAMAYAK WORK ON THIS THEN WE DONE THIS 
+router.delete {
+
+}
+
+
 // GET ALL courses
 // TODO: RENAME THIS
 router.route("/").get((req, res) => {
