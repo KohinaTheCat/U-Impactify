@@ -1,33 +1,24 @@
 <clr-modal
   [(clrModalOpen)]="basic"
-  [clrModalSize]="'lg'"
+  [clrModalSize]="'xl'"
   [clrModalClosable]="false"
 >
   <h3 class="modal-title">Enroll in Courses</h3>
   <div class="modal-body">
-    <form clrForm>
-      <clr-control-error>{{ error }}</clr-control-error>
-      <div class="clr-form-control">
-        <div class="clr-control-container">
-          <div
-            class="clr-radio-wrapper"
-            *ngFor="let course of courses; index as i"
-          >
-            <input
-              type="radio"
-              [id]="'vertical-checkbox' + i"
-              name="options"
-              [value]="course._id"
-              (click)="selectedId = course._id"
-              class="clr-radio"
-            />
-            <label [for]="'vertical-checkbox' + i" class="clr-control-label">{{
-              course.title
-            }}</label>
-          </div>
+    <div class="course-container">
+      <div class="course-card box-shadow-1" *ngFor="let course of courses; index as i" (click)="onClick(course)" [class.selected]="selectedCourse === course">
+        <div class="course-header">
+          <h3>{{course.title}}</h3>
+        </div>
+        <div class="course-body">
+          Teachers: <span *ngFor="let teacher of course.teachers">{{teacher}} </span> <br />
+          <span class="level">Level: {{course.level | uppercase}}</span>
+          <p>
+            {{course.description}}
+          </p>
         </div>
       </div>
-    </form>
+    </div>
   </div>
   <div class="modal-footer">
     <button
@@ -40,12 +31,11 @@
     </button>
     <button
       type="button"
-      class="btn btn-outline"
+      class="btn btn-primary"
       (click)="basic = true"
       (click)="courseHandler()"
     >
-      Click me!
+      Enroll
     </button>
-    <!-- <button type="button" class="btn btn-primary" (click)="registerHandler()" (click)="basic = false">Create Course</button> -->
   </div>
 </clr-modal>
