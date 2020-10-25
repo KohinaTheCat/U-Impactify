@@ -48,7 +48,7 @@ export class CourseService {
 
   dropACourse(userId: string, CourseId: string): Observable<any> {
     return this.http.delete(
-      `http://localhost:5000/course/${CourseId}/${userId}`
+      `http://localhost:5000/course/delete/${CourseId}/${userId}`
     );
   }
 }
