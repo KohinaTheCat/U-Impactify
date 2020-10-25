@@ -66,6 +66,7 @@ export class UserService {
     });
   }
 
+  // Drops a course from user's enrollment array
   dropACourse(userId: string, CourseId: string): Observable<any> {
     return this.http.delete(
       `http://localhost:5000/user/delete/${CourseId}/${userId}`
