@@ -158,8 +158,7 @@ router.get("/document/course/:id", (req, res, next) => {
     .catch((err) => res.json(err));
 });
 
-//SAMAYAK WORK ON THIS THEN WE DONE THIS
-
+// DELETE an Enrolled user in Students Array
 router.delete("/delete/:id/:uid", (req, res) => {
   Course.findById(req.params.id).then((course) => {
     course.students = course.students.remove(req.params.uid);

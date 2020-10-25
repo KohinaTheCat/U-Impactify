@@ -81,6 +81,7 @@ router.route("/updateClassesTeaching").put((req, res) => {
     .catch((err) => res.status(400).json(`Error: ${err}`));
 });
 
+// DELETE a Course in Student's classesEnrolled List
 router.delete("/delete/:id/:uid", (req, res) => {
   userSchema.findById(req.params.uid).then((user) => {
     user.classesEnrolled = user.classesEnrolled.remove(req.params.id);
@@ -90,9 +91,5 @@ router.delete("/delete/:id/:uid", (req, res) => {
       .catch((err) => res.status(400).json(err));
   });
 });
-
-
-
-
 
 module.exports = router;
