@@ -58,11 +58,18 @@ export class UserService {
 
   // updates the classesteaching array
   updateClassesTeaching(userId: string, course: any): Observable<any> {
-    this.user.classesTeaching.push({"_id": course._id, "name": course.title})
-    this.setUser(this.user)
+    this.user.classesTeaching.push({ _id: course._id, name: course.title });
+    this.setUser(this.user);
     return this.http.put('http://localhost:5000/user/updateClassesTeaching', {
       userId,
       course,
     });
+  }
+
+  // Drops a course from user's enrollment array
+  dropACourse(userId: string, CourseId: string): Observable<any> {
+    return this.http.delete(
+      `http://localhost:5000/user/delete/${CourseId}/${userId}`
+    );
   }
 }
