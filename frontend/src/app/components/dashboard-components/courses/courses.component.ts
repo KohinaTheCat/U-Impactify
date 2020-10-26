@@ -25,8 +25,6 @@ export class CoursesComponent implements OnInit {
       this.user.type === 'IL'
         ? this.user.classesEnrolled
         : this.user.classesTeaching;
-
-    console.log("kist", this.user)
   }
 
   ngOnChanges(): void {
@@ -42,10 +40,8 @@ export class CoursesComponent implements OnInit {
    */
   addNewCourse(): void {
     if(this.user.type === 'IL') {
-      console.log("ADD NEW COURSE STUDENT");
       this.router.navigate(['enrollcourse']);
     } else if(this.user.type === 'IC') {
-      console.log("CREATE NEW COURSE TEACHER");
       this.router.navigate(['createcourse']);
     }
   }
@@ -61,7 +57,6 @@ export class CoursesComponent implements OnInit {
     this.courseService.dropACourse(this.userService.getCurrentUser()._id, this.selectedCourse._id)
       .subscribe(
         (res) => {
-          console.log(res);
           this.userService
             .dropACourse(this.userService.getCurrentUser()._id, this.selectedCourse._id)
             .subscribe(
