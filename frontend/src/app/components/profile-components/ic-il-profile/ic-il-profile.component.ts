@@ -3,21 +3,20 @@ import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css'],
+  selector: 'app-ic-il-profile',
+  templateUrl: './ic-il-profile.component.html',
+  styleUrls: ['./ic-il-profile.component.css']
 })
-export class ProfileComponent implements OnInit {
+export class IcIlProfileComponent implements OnInit {
   user: User;
-  name: String = '';
-  username: String;
   email: String;
-  number: String = '';
+  username: String;
 
   constructor(private userService: UserService) {}
+
   ngOnInit(): void {
     this.user = this.userService.getCurrentUser();
-    this.username = this.user.username;
     this.email = this.user.email;
+    this.username = this.user.username;
   }
 }
