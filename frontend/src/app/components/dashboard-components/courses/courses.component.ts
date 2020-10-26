@@ -1,3 +1,5 @@
+import { CourseService } from 'src/app/services/course.service';
+import { Course } from './../../../models/course.model';
 import { CreateCourseComponent } from './../../../pages/create-course/create-course.component';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
@@ -13,7 +15,9 @@ export class CoursesComponent implements OnInit {
   user: User;
   courses: object[];
 
-  constructor(private userService: UserService, private router: Router) {}
+  selectedCourse: any;
+
+  constructor(private userService: UserService, private router: Router, private courseService: CourseService) {}
 
   ngOnInit(): void {
     this.user = this.userService.getCurrentUser();
@@ -24,7 +28,7 @@ export class CoursesComponent implements OnInit {
 
     console.log("kist", this.user)
   }
-  
+
   ngOnChanges(): void {
     this.user = this.userService.getCurrentUser();
     this.courses =
@@ -44,5 +48,29 @@ export class CoursesComponent implements OnInit {
       console.log("CREATE NEW COURSE TEACHER");
       this.router.navigate(['createcourse']);
     }
+  }
+
+  onClick($event){
+    this.selectedCourse = $event;
+    this.dropCourse();
+  }
+  dropCourse(): void {
+    if (!this.selectedCourse) return;
+
+    this.courseService.dropACourse(this.userService.getCurrentUser()._id, this.selectedCourse._id)
+      .subscribe(
+        (res) => {
+          console.log(res);
+          this.userService
+            .dropACourse(this.userService.getCurrentUser()._id, this.selectedCourse._id)
+            .subscribe(
+              (res) => console.log(res),
+              (err) => console.log(err)
+            );
+        },
+        (err) => console.log(err)
+      );
+
+    this.router.navigate(['dashboard']);
   }
 }
