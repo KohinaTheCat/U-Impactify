@@ -1,0 +1,26 @@
+<div class = "container"> 
+ <!-- <clr-icon shape="book"></clr-icon> -->
+
+  <!-- <div id="icon"><clr-icon shape="book"></clr-icon></div> -->
+  <h4> {{ course.title }} </h4>
+  
+  <img class = "courseimage" src="../../../../assets/courseimage.png"/>
+
+  <h3> Course Description </h3>
+  {{ course.description }}
+
+  <h3> Course Instructor </h3>
+  <li *ngFor = "let teacher of course.teachers; let i = index">
+    {{ teacher }}
+  </li>
+
+  <h3> Tags </h3>
+  {{ course.tags }}
+
+  <h3> Difficulty Level </h3>
+   {{ course.level }}
+
+</div>
+
+
+

@@ -1,3 +1,4 @@
+import { CoursePreviewComponent } from './pages/course-preview/course-preview.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -22,7 +23,6 @@ import { IcUpcomingEventsComponent } from './components/dashboard-components/ic-
 import { SiProfileComponent } from './components/dashboard-components/si-profile/si-profile.component';
 import { EnrollCourseComponent } from './pages/enroll-course/enroll-course.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -39,6 +39,7 @@ import { EnrollCourseComponent } from './pages/enroll-course/enroll-course.compo
     IcUpcomingEventsComponent,
     SiProfileComponent,
     EnrollCourseComponent,
+    CoursePreviewComponent,
   ],
   imports: [
     BrowserModule,

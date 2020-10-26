@@ -5,5 +5,6 @@ export interface Course {
   students: [string];
   teachers: [string];
   description: string;
+  tags: string;
 }
 

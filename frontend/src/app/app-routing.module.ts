@@ -1,3 +1,4 @@
+import { CoursePreviewComponent } from './pages/course-preview/course-preview.component';
 import { EnrollCourseComponent } from './pages/enroll-course/enroll-course.component';
 import { SignupQuestionaireComponent } from './pages/signup-questionaire/signup-questionaire.component';
 import { CreateCourseComponent } from './pages/create-course/create-course.component';
@@ -19,9 +20,11 @@ const routes: Routes = [
   { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'questionaire', component: SignupQuestionaireComponent},
   { path: 'questionaire2', component: SignupQuestionaire2Component},
-  { path: 'course', component: CourseComponent },
+  // changed path for course files
+  { path: 'coursefile', component: CourseComponent },
   { path: 'createcourse', component: CreateCourseComponent },
   { path: 'enrollcourse', component: EnrollCourseComponent},
+  { path: 'course/:id', component: CoursePreviewComponent},
 
 ];
 

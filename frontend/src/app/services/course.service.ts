@@ -39,6 +39,10 @@ export class CourseService {
     return this.http.get(`http://localhost:5000/course`, {});
   }
 
+  getCourse(CourseTitle): Observable<any> {
+    return this.http.get(`http://localhost:5000/course/${CourseTitle}`, {});
+  }
+
   enrollInCourse(username: string, courseId: string): Observable<any> {
     return this.http.post(`http://localhost:5000/course/addStudent/${courseId}/${username}`, {});
   }
