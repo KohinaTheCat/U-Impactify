@@ -58,7 +58,7 @@ const userSchema = new Schema({
   socialInitiative: 
   {
 
-    type: [
+    type:
       {
       craeatedProfile: false,
       registeredNumber: String,
@@ -67,8 +67,7 @@ const userSchema = new Schema({
       hours: String,
       phone: String,
       email: String,
-      },
-    ],
+      }
   },
 
 });

@@ -7,5 +7,5 @@ export interface User {
   classesEnrolled: object[];
   classesTeaching: object[];
   questionaire: string[][];
-  socialInitiative: string;
+  socialInitiative: object;
 }

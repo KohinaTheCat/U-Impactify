@@ -9,10 +9,20 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class SiProfileComponent implements OnInit {
   user: User;
+  socialInit = {
+    createdProfile: false,
+    registeredNumber: String,
+    businessNUmber: String,
+    location: String,
+    hours: String,
+    phone: String,
+    email: String,
+  };
 
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
     this.user = this.userService.getCurrentUser();
+    this.user.socialInitiative = this.socialInit;
   }
 }
