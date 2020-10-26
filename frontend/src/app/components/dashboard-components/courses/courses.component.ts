@@ -56,7 +56,8 @@ export class CoursesComponent implements OnInit {
   }
   dropCourse(): void {
     if (!this.selectedCourse) return;
-
+    this.user.classesEnrolled = this.user.classesEnrolled.filter((course: any) => course._id !== this.selectedCourse._id);
+    this.userService.setUser(this.user);
     this.courseService.dropACourse(this.userService.getCurrentUser()._id, this.selectedCourse._id)
       .subscribe(
         (res) => {
@@ -70,7 +71,6 @@ export class CoursesComponent implements OnInit {
         },
         (err) => console.log(err)
       );
-
-    this.router.navigate(['dashboard']);
+    this.ngOnChanges();
   }
 }
