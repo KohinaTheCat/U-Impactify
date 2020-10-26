@@ -55,15 +55,22 @@ const userSchema = new Schema({
     type: [[String]],
   },
 
-  socialInitiative: {
-    createdProfile: false,
-    registeredNumber: String,
-    businessNumber: String,
-    location: String,
-    hours: String,
-    phone: String,
-    email: String,
+  socialInitiative: 
+  {
+
+    type: [
+      {
+      craeatedProfile: false,
+      registeredNumber: String,
+      businessNUmber: String,
+      location: String,
+      hours: String,
+      phone: String,
+      email: String,
+      },
+    ],
   },
+
 });
 
 /* 

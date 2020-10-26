@@ -19,7 +19,7 @@ router.route("/:email").post((req, res) => {
 
 // POST new user
 router.route("/").post((req, res) => {
-  const { username, password, email, type, questionaire } = req.body;
+  const { username, password, email, type, questionaire, socialInitiative } = req.body;
   const newUser = new userSchema({
     username,
     password,
@@ -28,6 +28,7 @@ router.route("/").post((req, res) => {
     classesEnrolled: [],
     classesTeaching: [],
     questionaire,
+    socialInitiative,
   });
   newUser
     .save()
