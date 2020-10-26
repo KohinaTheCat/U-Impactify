@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-global-search',
@@ -8,19 +9,23 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./global-search.component.css'],
 })
 export class GlobalSearchComponent implements OnInit {
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(private userService: UserService, private router: Router) {
+    router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+       this.title =
+         event.url === '/'
+           ? 'Dashboard'
+           : event.url.substring(1);
+      });
+  }
 
   title: String = '';
 
   ngOnInit(): void {
-    this.title =
-      location.pathname === '/' ?  'Dashboard': location.pathname.substring(1);
+    this.title = location.pathname === '/' ?  'Dashboard': location.pathname.substring(1);
   }
 
-  ngOnChanges(): void {
-    this.title =
-      location.pathname === '/' ?  'Dashboard': location.pathname.substring(1);
-  }
 
   logOut(): void {
     this.userService.setUser(null);

@@ -35,7 +35,7 @@ export class CourseService {
     return this.http.get(`http://localhost:5000/document/${CourseId}`, {});
   }
 
-  getAllCourses(): Observable<any>{
+  getAllCourses(): Observable<any> {
     return this.http.get(`http://localhost:5000/course`, {});
   }
 
@@ -44,7 +44,16 @@ export class CourseService {
   }
 
   enrollInCourse(username: string, courseId: string): Observable<any> {
-    return this.http.post(`http://localhost:5000/course/addStudent/${courseId}/${username}`, {});
+    return this.http.post(
+      `http://localhost:5000/course/addStudent/${courseId}/${username}`,
+      {}
+    );
   }
 
+  // Drops students from course list
+  dropACourse(userId: string, CourseId: string): Observable<any> {
+    return this.http.delete(
+      `http://localhost:5000/course/dropCourse/${CourseId}/${userId}`
+    );
+  }
 }

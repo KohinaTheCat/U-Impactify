@@ -24,6 +24,11 @@ export class EnrollCourseComponent implements OnInit {
   ngOnInit(): void {
     this.courseService.getAllCourses().subscribe((res) => {
       res.forEach(({ _id, title, description, level, teachers }) => {
+        if(description.length > 400) {
+          description = description.slice(0, 350) + "...";
+        }
+        if(teachers.length == 1) teachers = teachers[0];
+        else teachers = teachers.join(", ");
         this.courses.push({ _id, title, description, level, teachers });
       });
     });

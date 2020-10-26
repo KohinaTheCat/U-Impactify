@@ -157,7 +157,20 @@ router.get("/document/course/:id", (req, res, next) => {
     .catch((err) => res.json(err));
 });
 
-// GET all courses
+// DELETE an Enrolled user in Students Array
+router.delete("/dropCourse/:id/:uid", (req, res) => {
+  Course.findById(req.params.id).then((course) => {
+    course.students = course.students.remove(req.params.uid);
+    console.log(course.students);
+    course
+      .save()
+      .then(() => res.json("Student Deleted From Courses List!"))
+      .catch((err) => res.status(400).json(err));
+  });
+});
+
+// GET ALL courses
+// TODO: RENAME THIS
 router.route("/").get((req, res) => {
   Course.find()
     .then((course) => res.json(course))

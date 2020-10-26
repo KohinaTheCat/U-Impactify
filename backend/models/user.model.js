@@ -54,6 +54,16 @@ const userSchema = new Schema({
   questionaire: {
     type: [[String]],
   },
+
+  socialInitiative: {
+    createdProfile: false,
+    registeredNumber: String,
+    businessNumber: String,
+    location: String,
+    hours: String,
+    phone: String,
+    email: String,
+  },
 });
 
 /* 
