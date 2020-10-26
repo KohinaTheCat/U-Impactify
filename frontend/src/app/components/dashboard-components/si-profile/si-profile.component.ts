@@ -9,6 +9,13 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class SiProfileComponent implements OnInit {
   user: User;
+  disabled = true;
+
+  current: string = 'edit';
+
+  items: string[] = ['Item1', 'Item2', 'Item3'];
+  vertical = '';
+
   socialInit = {
     createdProfile: false,
     registeredNumber: String,
@@ -24,5 +31,15 @@ export class SiProfileComponent implements OnInit {
   ngOnInit(): void {
     this.user = this.userService.getCurrentUser();
     this.user.socialInitiative = this.socialInit;
+  }
+
+  newFunction(): void {
+    if (this.disabled === false) {
+      this.disabled = true;
+      this.current = 'edit';
+    } else {
+      this.disabled = false;
+      this.current = 'save';
+    }
   }
 }

@@ -5,7 +5,29 @@
           <img src="../../../../assets/THS.png" width="400" alt="" />
       </div>
     <div class="info">
-      <div>
+
+      <clr-datalist-container class="outsideWithin">
+
+        <label>Name:</label>
+        <input required clrDatalistInput id="format" [disabled]="disabled"/>
+      </clr-datalist-container>
+      <clr-datalist-container class="outsideWithin">
+        <label>Business Number:</label>
+        <input required clrDatalistInput [disabled]="disabled"/>
+
+      </clr-datalist-container>
+        
+      
+
+
+
+
+
+
+
+
+
+      <!-- <div>
         Registered Name: <span class="value">{{user.username}}</span>
       </div>
       <div>
@@ -22,11 +44,9 @@
       </div>
       <div>
         Email: <span class="value">{{user.email}}</span>
-      </div>
+      </div> -->
     </div>
 
-
-    
     <div class="btn-container">
       <button class="btn">Visit Our Website</button>
       <button class="btn">Email Us</button>
@@ -34,7 +54,7 @@
     </div>
 
     <!--OVERHERE-->
-    <button class="edit">edit</button>
+    <button (click)="newFunction()" class="edit">{{current}}</button>
 
 
   </div>
