@@ -21,6 +21,8 @@ import { CoursesComponent } from './components/dashboard-components/courses/cour
 import { IcUpcomingEventsComponent } from './components/dashboard-components/ic-upcoming-events/ic-upcoming-events.component';
 import { SiProfileComponent } from './components/dashboard-components/si-profile/si-profile.component';
 import { EnrollCourseComponent } from './pages/enroll-course/enroll-course.component';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { IcIlProfileComponent } from './components/profile-components/ic-il-profile/ic-il-profile.component';
 
 
 @NgModule({
@@ -39,6 +41,8 @@ import { EnrollCourseComponent } from './pages/enroll-course/enroll-course.compo
     IcUpcomingEventsComponent,
     SiProfileComponent,
     EnrollCourseComponent,
+    ProfileComponent,
+    IcIlProfileComponent,
   ],
   imports: [
     BrowserModule,
