@@ -9,6 +9,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { LoginSignupComponent } from './pages/login-signup/login-signup.component';
 import { CourseComponent } from './pages/course/course.component';
 import { SignupQuestionaire2Component } from './pages/signup-questionaire2/signup-questionaire2.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 const routes: Routes = [
   { path: 'signup', component: LoginSignupComponent },
@@ -25,7 +26,7 @@ const routes: Routes = [
   { path: 'createcourse', component: CreateCourseComponent },
   { path: 'enrollcourse', component: EnrollCourseComponent},
   { path: 'course/:id', component: CoursePreviewComponent},
-
+  { path: 'profile', component: ProfileComponent },
 ];
 
 @NgModule({
