@@ -96,10 +96,10 @@ router.get("/:id", (req, res) => {
     .catch((err) => res.json(err));
 });
 
-// POST add a student to a course, id refers to course id, uid refers to userid
-router.post("/addStudent/:id/:uid", (req, res) => {
+// POST add a student to a course, id refers to course id, username refers to username of student
+router.post("/addStudent/:id/:username", (req, res) => {
   Course.findById(req.params.id).then((course) => {
-    course.students = course.students.concat(req.params.uid);
+    course.students = course.students.concat(req.params.username);
     course
       .save()
       .then(() => res.json("Student added Successfully!"))
@@ -120,7 +120,7 @@ router.post("/:id/upload", upload.array("documents", 10), (req, res) => {
     .catch((err) => res.status(400).json(`Error finding Course: ${err}`));
 });
 
-//GET document by filename, filename refers to filename LOL
+//GET document by filename
 // TODO: change this to id of document, and then change in user-route
 router.get("/documents/:filename", (req, res) => {
   gfs
@@ -156,6 +156,18 @@ router.get("/document/course/:id", (req, res, next) => {
       });
     })
     .catch((err) => res.json(err));
+});
+
+// DELETE an Enrolled user in Students Array
+router.delete("/delete/:id/:uid", (req, res) => {
+  Course.findById(req.params.id).then((course) => {
+    course.students = course.students.remove(req.params.uid);
+    console.log(course.students);
+    course
+      .save()
+      .then(() => res.json("Student Deleted From Courses List!"))
+      .catch((err) => res.status(400).json(err));
+  });
 });
 
 // GET ALL courses

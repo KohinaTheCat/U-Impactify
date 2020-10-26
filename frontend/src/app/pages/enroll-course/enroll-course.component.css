@@ -1,0 +1,82 @@
+.selected,
+.course-card:hover {
+  background-color: var(--purple-smooth) !important;
+}
+
+.selected {
+  cursor: default !important;
+}
+.enroll {
+  padding: 0 2rem;
+  width: 100%;
+  height: 100%;
+}
+
+.course-container {
+  width: 100%;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: 1rem;
+}
+
+.course-card {
+  width: 100%;
+  height: 25rem;
+  margin-top: 1rem;
+  padding: 1rem;
+  cursor: pointer;
+  background-color: #ffffff;
+}
+
+.course-picture {
+  width: 100%;
+  height: 40%;
+  background-color: var(--gray20);
+  border: 2px solid var(--purple-base);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.course-picture > clr-icon {
+  width: 3rem;
+  height: 3rem;
+}
+
+.level {
+  text-transform: capitalize;
+}
+
+.course-header {
+  border-bottom: 2px solid var(--purple-base);
+}
+
+.top {
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  font-size: 1.125rem;
+
+  width: 7rem;
+  height: 3rem;
+
+  border-radius: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+}
+
+.course-body {
+  font-size: initial;
+}
+
+p {
+  margin-top: 0.5rem;
+}
