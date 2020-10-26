@@ -3,7 +3,7 @@
   padding-right: 2rem;
 }
 
-h3 { 
+h3 {
   padding-left: 0.5rem;
   padding-bottom: 1rem;
 
@@ -18,7 +18,7 @@ h3 {
   border-radius: 2rem;
 }
 
-h3 { 
+h3 {
   padding-left: 1rem;
   padding-bottom: 2rem;
   font-size: 1rem;
@@ -31,13 +31,48 @@ h3 {
 
 /* ??????? */
 .btn.btn-primary {
+  background-color: #e7e7e7;
+  color: black;
+  border: 2px solid #e7e7e7;
+  display: inline-block;
+  transition-duration: 0.1s;
+  padding: 0px 24px;
+}
+
+.btn.btn-primary:hover {
+  background-color: #4caf50;
+  color: black;
 }
 
 #title {
-  width: 90%;
+  width: 100%;
+  justify-content: center;
 }
 
 .wrapper {
   width: 100%;
   display: flex;
 }
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd;}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {background-color: #3e8e41;}

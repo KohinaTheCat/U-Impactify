@@ -67,4 +67,8 @@ export class CoursePreviewComponent implements OnInit {
       );
     this.router.navigate(['dashboard']);
   }
+
+  settingsHandler() {
+    
+  }
 }
