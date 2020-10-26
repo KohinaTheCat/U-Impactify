@@ -13,7 +13,7 @@ import { Router } from '@angular/router';
 })
 export class CoursesComponent implements OnInit {
   user: User;
-  courses: object[];
+  courses: any[];
 
   selectedCourse: any;
 

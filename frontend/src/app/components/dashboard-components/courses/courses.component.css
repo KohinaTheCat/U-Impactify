@@ -62,3 +62,7 @@ h2 {
   width: 1.5rem;
   margin-left: 10rem;
 }
+
+#dropcourse:hover {
+  color: red;
+}

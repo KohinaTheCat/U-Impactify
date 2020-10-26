@@ -22,7 +22,9 @@ export class GlobalSearchComponent implements OnInit {
 
   title: String = '';
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.title = location.pathname === '/' ?  'Dashboard': location.pathname.substring(1);
+  }
 
 
   logOut(): void {
