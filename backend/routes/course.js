@@ -58,8 +58,8 @@ const upload = multer({ storage: storage /*fileFiler: fileFiler*/ });
 
 // https://stackoverflow.com/questions/13012444/how-to-use-mongodb-or-other-document-database-to-keep-video-files-with-options/13015213
 
-// adding course
-router.route("/add").post((req, res) => {
+// POST new course
+router.route("/").post((req, res) => {
   // add user id to course route
   const { title, students, teachers, description, files, tags, level } = req.body;
 
@@ -80,7 +80,7 @@ router.route("/add").post((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-//GET getting a course, id refers to course id
+//GET single course given id
 router.get("/:id", (req, res) => {
   Course.findById(req.params.id)
     .exec()
@@ -94,7 +94,7 @@ router.get("/:id", (req, res) => {
 router.post("/enroll", (req, res) => {
   const { userId, courseId } = req.body;
   Course.findById(courseId).then((course) => {
-    course.students = course.students.concat(_id);
+    course.students = course.students.concat(userId);
     course
       .save()
       .then(() => res.json("Student added Successfully!"))
@@ -154,10 +154,10 @@ router.get("/document/course/:id", (req, res, next) => {
 });
 
 // DELETE drop student from course
-router.delete("/dropCourse", (req, res) => {
-  const {userId, courseId} = req.body;
+router.delete("/dropCourse/:courseId/:userId", (req, res) => {
+  const { userId, courseId } = req.params;
   Course.findById(courseId).then((course) => {
-    course.students = course.students.filter(id => id !== userId);
+    course.students = course.students.filter((id) => id !== userId);
     course
       .save()
       .then(() => res.json(course))
@@ -165,9 +165,10 @@ router.delete("/dropCourse", (req, res) => {
   });
 });
 
+// GET all courses
 router.route("/").get((req, res) => {
   Course.find()
-    .then((course) => res.json(course))
+    .then((courses) => res.json(courses))
     .catch((err) => res.status(400).json(`Error: ${err}`));
 });
 

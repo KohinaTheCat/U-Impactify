@@ -13,11 +13,14 @@ export class UserService {
   // save username and password into local storage, so they can stay logged in
   user: User = JSON.parse(localStorage.getItem('user') || null);
 
-  //kinda like async
-  postNewUser(newUser): Observable<any> {
-    const { username, password, email, type, questionaire } = newUser;
-    return this.http.post('http://localhost:5000/user/', {
-      username,
+  /**
+   * POST new user
+   * @param {User} newUser the about-to-be user
+   */
+  postNewUser(newUser: User): Observable<User> {
+    const { _id, password, email, type, questionaire } = newUser;
+    return this.http.post<User>('http://localhost:5000/user/', {
+      _id,
       password,
       email,
       type,
@@ -25,51 +28,85 @@ export class UserService {
     });
   }
 
+  /**
+   * POST login user
+   * @param {string} email    email of user
+   * @param {string} password password of user
+   */
   loginUser(email: string, password: string): Observable<User | boolean> {
     return this.http.post<User | boolean>(
       `http://localhost:5000/user/${email}`,
       {
-        email,
         password,
       }
     );
   }
 
-  // Sets the user
+  /**
+   * Updates the user object stored in the service & localStorage
+   * @param {User} user the loggedIn user instance
+   */
   setUser(user: User): void {
     this.user = user;
     localStorage.setItem('user', JSON.stringify(user));
   }
 
-  // gets the user
+  /**
+   * Gets the current user stored in the service
+   */
   getCurrentUser(): User {
     return this.user;
   }
 
+  /**
+   * POST enroll course (Impact Learner only)
+   * @param {string} userId id of user
+   * @param {Object} course { _id, name }
+   */
   enrollInCourse(userId: string, course: any): Observable<any> {
     this.user.classesEnrolled.push(course);
     this.setUser(this.user);
 
-    return this.http.post(
-      `http://localhost:5000/user/enroll/${course._id}/${course.name}/${userId}`,
-      {}
-    );
-  }
-
-  // updates the classesteaching array
-  updateClassesTeaching(userId: string, course: any): Observable<any> {
-    this.user.classesTeaching.push({ _id: course._id, name: course.title });
-    this.setUser(this.user);
-    return this.http.put('http://localhost:5000/user/updateClassesTeaching', {
+    return this.http.post(`http://localhost:5000/user/enroll/`, {
       userId,
       course,
     });
   }
 
-  // Drops a course from user's enrollment array
-  dropACourse(userId: string, CourseId: string): Observable<any> {
+  /**
+   * POST update password
+   * @param {string} _id       id of user
+   * @param {string} password  new password
+   */
+  updatePassword(_id: string, password: string): Observable<any> {
+    return this.http.post(`http://localhost:5000/user/updatePassword`, {
+      _id,
+      password,
+    });
+  }
+
+  /**
+   * PUT update classesTeaching (Impact Consultant only)
+   * @param {string} _id     id of user
+   * @param {string} course  {_id, name} of course
+   */
+  updateClassesTeaching(_id: string, course: any): Observable<any> {
+    this.user.classesTeaching.push(course);
+    this.setUser(this.user);
+    return this.http.put('http://localhost:5000/user/updateClassesTeaching', {
+      _id,
+      course,
+    });
+  }
+
+  /**
+   * DELETE drop a course (Impact Learner only)
+   * @param {string} userId    id of user
+   * @param {string} courseId  id of course
+   */
+  dropACourse(userId: string, courseId: string): Observable<any> {
     return this.http.delete(
-      `http://localhost:5000/user/dropCourse/${CourseId}/${userId}`
+      `http://localhost:5000/user/dropCourse/${courseId}/${userId}`
     );
   }
 }

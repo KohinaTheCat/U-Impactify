@@ -2,13 +2,15 @@ const router = require("express").Router();
 let userSchema = require("../models/user.model");
 
 // POST login user
-router.route("/:id").post((req, res) => {
+router.route("/:email").post((req, res) => {
   const { password } = req.body;
   userSchema
-    .findById(req.params.id)
+    .findOne({
+      email: req.params.email,
+    })
     .then((user) => {
       user.comparePassword(password, function (err, isMatch) {
-        if (err) return res.status(400).json(`${err}`);
+        if (err) return res.status(400).json(err);
         return res.json(isMatch ? user : isMatch);
       });
     })
@@ -35,12 +37,13 @@ router.route("/").post((req, res) => {
 
 // POST enroll course (Impact Learner only)
 router.route("/enroll").post((req, res) => {
-  const { _id: userId, courseId: _id, courseName: name } = req.body;
+  const { userId, course } = req.body;
+  const { _id, name } = course;
   userSchema.findById(userId).then((user) => {
     user.classesEnrolled = user.classesEnrolled.concat({ _id, name });
     user
       .save()
-      .then(() => res.json("Course Added Successfully"))
+      .then(() => res.json(user))
       .catch((err) => res.status(404).json(err));
   });
 });
@@ -57,7 +60,7 @@ router.route("/password").post((req, res) => {
         .then(() => res.json(user))
         .catch((err) => res.json(err));
     })
-    .catch((err) => res.status(400).json(`Error: ${err}`));
+    .catch((err) => res.status(400).json(err));
 });
 
 // PUT update classesTeaching (Impact Consultant only)
@@ -69,25 +72,27 @@ router.route("/updateClassesTeaching").put((req, res) => {
       user.classesTeaching = user.classesTeaching.concat({
         _id: course._id,
         name: course.name,
-        img: "#", // placeholder
+        // TODO: Update after implementation
+        // img: "#",
       });
       user
         .save()
-        .then(() => res.json(`User Updated`))
+        .then(() => res.json(user))
         .catch((err) => res.json(err));
     })
-    .catch((err) => res.status(400).json(`Error: ${err}`));
+    .catch((err) => res.status(400).json(err));
 });
 
 // DELETE drop a course (Impact Learner only)
-// course = { _id, name }
-router.delete("/dropCourse", (req, res) => {
-  const {userId, course} = req.body;
+router.delete("/dropCourse/:courseId/:userId", (req, res) => {
+  const { userId, courseId } = req.params;
   userSchema.findById(userId).then((user) => {
-    user.classesEnrolled = user.classesEnrolled.filter(enrolled => course._id !== enrolled._id);
+    user.classesEnrolled = user.classesEnrolled.filter(
+      (enrolled) => courseId !== enrolled._id
+    );
     user
       .save()
-      .then(() => res.json("Course Deleted From Student List!"))
+      .then(() => res.json(user))
       .catch((err) => res.status(400).json(err));
   });
 });
