@@ -82,7 +82,7 @@ router.route("/updateClassesTeaching").put((req, res) => {
 });
 
 // DELETE a Course in Student's classesEnrolled List
-router.delete("/delete/:id/:uid", (req, res) => {
+router.delete("/dropCourse/:id/:uid", (req, res) => {
   userSchema.findById(req.params.uid).then((user) => {
     user.classesEnrolled = user.classesEnrolled.remove(req.params.id);
     user

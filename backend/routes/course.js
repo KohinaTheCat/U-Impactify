@@ -159,7 +159,7 @@ router.get("/document/course/:id", (req, res, next) => {
 });
 
 // DELETE an Enrolled user in Students Array
-router.delete("/delete/:id/:uid", (req, res) => {
+router.delete("/dropCourse/:id/:uid", (req, res) => {
   Course.findById(req.params.id).then((course) => {
     course.students = course.students.remove(req.params.uid);
     console.log(course.students);
