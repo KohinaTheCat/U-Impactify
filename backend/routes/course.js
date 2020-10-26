@@ -61,13 +61,7 @@ const upload = multer({ storage: storage /*fileFiler: fileFiler*/ });
 // adding course
 router.route("/add").post((req, res) => {
   // add user id to course route
-  const title = req.body.title;
-  const students = req.body.students;
-  const teachers = req.body.teachers;
-  const description = req.body.description;
-  const files = req.body.files;
-  const tags = req.body.tags;
-  const level = req.body.level;
+  const { title, students, teachers, description, files, tags, level } = req.body;
 
   // populate with finalized schema
   const newCourse = new Course({
@@ -82,7 +76,7 @@ router.route("/add").post((req, res) => {
 
   newCourse
     .save()
-    .then((r) => res.json(r))
+    .then((course) => res.json(course))
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
@@ -90,16 +84,17 @@ router.route("/add").post((req, res) => {
 router.get("/:id", (req, res) => {
   Course.findById(req.params.id)
     .exec()
-    .then((doc) => {
-      res.json(doc);
+    .then((course) => {
+      res.json(course);
     })
     .catch((err) => res.json(err));
 });
 
-// POST add a student to a course, id refers to course id, username refers to username of student
-router.post("/addStudent/:id/:username", (req, res) => {
-  Course.findById(req.params.id).then((course) => {
-    course.students = course.students.concat(req.params.username);
+// POST enroll student
+router.post("/enroll", (req, res) => {
+  const { userId, courseId } = req.body;
+  Course.findById(courseId).then((course) => {
+    course.students = course.students.concat(_id);
     course
       .save()
       .then(() => res.json("Student added Successfully!"))
@@ -158,20 +153,18 @@ router.get("/document/course/:id", (req, res, next) => {
     .catch((err) => res.json(err));
 });
 
-// DELETE an Enrolled user in Students Array
-router.delete("/dropCourse/:id/:uid", (req, res) => {
-  Course.findById(req.params.id).then((course) => {
-    course.students = course.students.remove(req.params.uid);
-    console.log(course.students);
+// DELETE drop student from course
+router.delete("/dropCourse", (req, res) => {
+  const {userId, courseId} = req.body;
+  Course.findById(courseId).then((course) => {
+    course.students = course.students.filter(id => id !== userId);
     course
       .save()
-      .then(() => res.json("Student Deleted From Courses List!"))
+      .then(() => res.json(course))
       .catch((err) => res.status(400).json(err));
   });
 });
 
-// GET ALL courses
-// TODO: RENAME THIS
 router.route("/").get((req, res) => {
   Course.find()
     .then((course) => res.json(course))
