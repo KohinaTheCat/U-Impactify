@@ -11,12 +11,6 @@ h3 {
   /* display:inline-block; margin-right: 1rem; */
 }
 
-#icon clr-icon{
-  height : 1rem;
-  width : 1rem;
-  display: inline-block 
-}  
-
 .courseimage {
   padding-top: 1rem;
   height: 20rem;
@@ -24,8 +18,26 @@ h3 {
   border-radius: 2rem;
 }
 
-h3.coursedescription { 
+h3 { 
   padding-left: 1rem;
   padding-bottom: 2rem;
   font-size: 1rem;
+}
+
+#text {
+  padding-left: 1rem;
+  font-size: 1rem;
+}
+
+/* ??????? */
+.btn.btn-primary {
+}
+
+#title {
+  width: 90%;
+}
+
+.wrapper {
+  width: 100%;
+  display: flex;
 }

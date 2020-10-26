@@ -1,24 +1,29 @@
 <div class = "container"> 
- <!-- <clr-icon shape="book"></clr-icon> -->
 
-  <!-- <div id="icon"><clr-icon shape="book"></clr-icon></div> -->
-  <h4> {{ course.title }} </h4>
-  
+  <div class = "wrapper"> 
+    <h4 id = "title"> {{ course.title }} </h4>
+    <div *ngIf="user.type == 'IL'">
+      <button class="btn btn-primary" (click)="enrollHandler()">Enroll</button>
+    </div>
+  </div>
+
   <img class = "courseimage" src="../../../../assets/courseimage.png"/>
 
-  <h3> Course Description </h3>
-  {{ course.description }}
+  <h4> Course Description </h4>
+  <p id = "text">{{ course.description }}</p>
 
-  <h3> Course Instructor </h3>
-  <li *ngFor = "let teacher of course.teachers; let i = index">
+  <h4> Course Instructor </h4>
+  <p id= "text" *ngFor = "let teacher of course.teachers; let i = index">
     {{ teacher }}
-  </li>
+  </p>
 
-  <h3> Tags </h3>
-  {{ course.tags }}
+  <div *ngIf = "course.tags != ''">
+    <h4> Tags </h4>
+    <p id = "text">{{ course.tags }}</p>
+  </div>
 
-  <h3> Difficulty Level </h3>
-   {{ course.level }}
+  <h4> Difficulty Level </h4>
+   <p id = "text"> {{ course.level }}</p>
 
 </div>
 
