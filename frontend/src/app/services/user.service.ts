@@ -46,6 +46,10 @@ export class UserService {
     return this.user;
   }
 
+  getAnotherUser(uid): Observable<any> {
+    return this.http.get("http://localhost:5000/user/get/" + uid, {});
+  }
+
   enrollInCourse(userId: string, course: any): Observable<any> {
     this.user.classesEnrolled.push(course);
     this.setUser(this.user);
