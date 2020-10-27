@@ -3,7 +3,7 @@
   <div class="courses">
     <!-- This is a dummy course, it must be replaced with *ngFor="let course of user.classes" -->
     <div *ngFor="let course of courses" class="course-card" (click)="previewCourse(course)">
-      <div (click)="onClick(course)" *ngIf="this.user.type === 'IL'">
+      <div (click)="onClickDropCourse(course)" *ngIf="this.user.type === 'IL'">
         <clr-icon shape="trash" id="dropcourse"></clr-icon>
       </div>
       <div class="course-image plus">

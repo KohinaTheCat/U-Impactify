@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { CourseService } from 'src/app/services/course.service';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user.model';
+import { Course } from 'src/app/models/course.model';
 
 @Component({
   selector: 'app-enroll-course',
@@ -27,17 +28,20 @@ export class EnrollCourseComponent implements OnInit {
     this.user = this.userService.getCurrentUser();
     this.courseService.getAllCourses().subscribe((res) => {
       this.user.classesEnrolled.forEach((course: any) => {
-        res = res.filter((resCourse: any) => course._id !== resCourse._id);
+        res = res.filter((resCourse: Course) => course._id !== resCourse._id);
       });
-      res.forEach(({ _id, title, description, level, teachers }) => {
-        if(description.length > 400) {
-          description = description.slice(0, 350) + "...";
+      res.forEach(({ _id, name, description, level, teachers }) => {
+        if (description.length > 400) {
+          description = description.slice(0, 350) + '...';
         }
-        if(teachers.length == 1) teachers = teachers[0];
-        else teachers = teachers.join(", ");
 
-        console.log(!this.user.classesEnrolled.includes({ _id, name: title }));
-        if(!this.user.classesEnrolled.includes({ _id, name: title })) this.courses.push({ _id, title, description, level, teachers });
+        let allTeachers: string;
+        if (teachers.length == 1) allTeachers = teachers[0];
+        else allTeachers = teachers.join(', ');
+
+        console.log(!this.user.classesEnrolled.includes({ _id, name }));
+        if (!this.user.classesEnrolled.includes({ _id, name }))
+          this.courses.push({ _id, name, description, level, allTeachers });
       });
     });
   }
@@ -52,23 +56,22 @@ export class EnrollCourseComponent implements OnInit {
 
   courseHandler() {
     if (!this.selectedCourse) return;
+    const { _id, name } = this.selectedCourse;
 
-    this.courseService
-      .enrollInCourse(this.user._id, this.selectedCourse._id)
-      .subscribe(
-        (res) => {
-          this.userService
-            .enrollInCourse(this.user._id, {
-              _id: this.selectedCourse._id,
-              name: this.selectedCourse.title,
-            })
-            .subscribe(
-              (res) => console.log(res),
-              (err) => console.log(err)
-            );
-        },
-        (err) => console.log(err)
-      );
+    this.courseService.enrollInCourse(this.user._id, _id).subscribe(
+      (res) => {
+        this.userService
+          .enrollInCourse(this.user._id, {
+            _id,
+            name,
+          })
+          .subscribe(
+            (res) => console.log(res),
+            (err) => console.log(err)
+          );
+      },
+      (err) => console.log(err)
+    );
 
     this.router.navigate(['dashboard']);
   }

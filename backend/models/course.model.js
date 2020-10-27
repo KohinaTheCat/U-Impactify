@@ -2,10 +2,20 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
+/**
+ * Schema for Course
+ * @property {String}   name        name of course
+ * @property {[String]} students    array of _id's of students
+ * @property {[String]} teachers    array of _id's of teachers
+ * @property {String}   description desc. of course
+ * @property {String}   tags        tags of course
+ * @property {String}   level       "ADVANCED", "EASY", "DIFFICULT"
+ * @property {[String]} files       Files that would be used in the course (vids, pdfs, etc)
+ */
 const courseSchema = new Schema({
-  title: {
+  name: {
     type: String,
-    required: "title is required",
+    required: "name is required",
   },
   students: {
     type: [String],

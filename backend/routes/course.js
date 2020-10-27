@@ -58,20 +58,14 @@ const upload = multer({ storage: storage /*fileFiler: fileFiler*/ });
 
 // https://stackoverflow.com/questions/13012444/how-to-use-mongodb-or-other-document-database-to-keep-video-files-with-options/13015213
 
-// adding course
-router.route("/add").post((req, res) => {
+// POST new course
+router.route("/").post((req, res) => {
   // add user id to course route
-  const title = req.body.title;
-  const students = req.body.students;
-  const teachers = req.body.teachers;
-  const description = req.body.description;
-  const files = req.body.files;
-  const tags = req.body.tags;
-  const level = req.body.level;
+  const { name, students, teachers, description, files, tags, level } = req.body;
 
   // populate with finalized schema
   const newCourse = new Course({
-    title,
+    name,
     students,
     teachers,
     description,
@@ -82,35 +76,24 @@ router.route("/add").post((req, res) => {
 
   newCourse
     .save()
-    .then((r) => res.json(r))
+    .then((course) => res.json(course))
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-//GET getting a course by title, title refers to course title
-// router.get("/:title", (req, res) => {
-//   Course.find({ title: req.params.title})
-//     .then((course) => {
-//       if(JSON.stringify(course) == '[]'){
-//         res.status(400).json("Course not found" + err)
-//       } else {
-//         res.json(course);
-//       }
-//     })
-//     .catch((err) => res.status(404).json(err));
-// });
+// GET getting a course by id, id refers to course id
 router.get("/:id", (req, res) => {
   Course.findById(req.params.id)
-  // Course.find({ _id: req.params.id })
     .then((course) => {
-      res.json(course);
+      res.json(course);    
     })
     .catch((err) => res.status(404).json(err));
 });
 
-// POST add a student to a course, id refers to course id, username refers to username of student
-router.post("/addStudent/:id/:username", (req, res) => {
-  Course.findById(req.params.id).then((course) => {
-    course.students = course.students.concat(req.params.username);
+// POST enroll student
+router.put("/enroll", (req, res) => {
+  const { userId, courseId } = req.body;
+  Course.findById(courseId).then((course) => {
+    course.students = course.students.concat(userId);
     course
       .save()
       .then(() => res.json("Student added Successfully!"))
@@ -159,33 +142,32 @@ router.post("/documents/del/:id", (req, res) => {
 // GET all the document filenames of a course, :id to course id
 router.get("/document/course/:id", (req, res, next) => {
   Course.findById(req.params.id)
-    .select("documents")
+    .select("files")
     .exec()
     .then((doc) => {
       res.json({
-        documents: doc.documents,
+        documents: doc.files,
       });
     })
     .catch((err) => res.json(err));
 });
 
-// DELETE an Enrolled user in Students Array
-router.delete("/dropCourse/:id/:uid", (req, res) => {
-  Course.findById(req.params.id).then((course) => {
-    course.students = course.students.remove(req.params.uid);
-    console.log(course.students);
+// DELETE drop student from course
+router.delete("/dropCourse/:courseId/:userId", (req, res) => {
+  const { userId, courseId } = req.params;
+  Course.findById(courseId).then((course) => {
+    course.students = course.students.filter((id) => id !== userId);
     course
       .save()
-      .then(() => res.json("Student Deleted From Courses List!"))
+      .then(() => res.json(course))
       .catch((err) => res.status(400).json(err));
   });
 });
 
-// GET ALL courses
-// TODO: RENAME THIS
+// GET all courses
 router.route("/").get((req, res) => {
   Course.find()
-    .then((course) => res.json(course))
+    .then((courses) => res.json(courses))
     .catch((err) => res.status(400).json(`Error: ${err}`));
 });
 
