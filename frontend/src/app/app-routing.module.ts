@@ -8,6 +8,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { LoginSignupComponent } from './pages/login-signup/login-signup.component';
 import { CourseComponent } from './pages/course/course.component';
 import { SignupQuestionaire2Component } from './pages/signup-questionaire2/signup-questionaire2.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 const routes: Routes = [
   { path: 'signup', component: LoginSignupComponent },
@@ -17,12 +18,12 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: 'questionaire', component: SignupQuestionaireComponent},
-  { path: 'questionaire2', component: SignupQuestionaire2Component},
+  { path: 'questionaire', component: SignupQuestionaireComponent },
+  { path: 'questionaire2', component: SignupQuestionaire2Component },
   { path: 'course', component: CourseComponent },
   { path: 'createcourse', component: CreateCourseComponent },
-  { path: 'enrollcourse', component: EnrollCourseComponent},
-
+  { path: 'enrollcourse', component: EnrollCourseComponent },
+  { path: 'profile', component: ProfileComponent },
 ];
 
 @NgModule({

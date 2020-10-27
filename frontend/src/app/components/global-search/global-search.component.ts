@@ -31,4 +31,8 @@ export class GlobalSearchComponent implements OnInit {
     this.userService.setUser(null);
     this.router.navigate(['signup']);
   }
+
+  goToProfile(): void{
+    this.router.navigate(['profile']);
+  }
 }

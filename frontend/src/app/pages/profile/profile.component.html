@@ -1,0 +1,5 @@
+<div class="dashboard">
+  <app-ic-il-profile *ngIf="user.type == 'IC' || user.type == 'IL'">
+  </app-ic-il-profile>
+  <app-si-profile *ngIf="user.type === 'SI'"></app-si-profile>
+</div>

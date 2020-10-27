@@ -77,8 +77,8 @@ body {
   /* Orange Base */
   --orange-base: #ffb08a;
 
-  --clr-vertical-nav-item-active-color: #fff;
   --clr-vertical-nav-active-bg-color: #A78EC3;
+  --clr-vertical-nav-item-active-color: white;
   --clr-vertical-nav-hover-bg-color: #A78EC3;
 }
 
@@ -265,7 +265,24 @@ p {
   color: #a78ec3;
 }
 
-
 .clr-vertical-nav .nav-trigger-icon {
     margin-right: 1rem;
+}
+
+.col{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.row{
+  display: flex;
+  flex-direction: row;
+}
+
+@media (max-width: 1100px) {
+  .row{
+    display: flex;
+    flex-direction: column;
+  }
 }
