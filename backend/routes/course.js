@@ -87,14 +87,22 @@ router.route("/add").post((req, res) => {
 });
 
 //GET getting a course by title, title refers to course title
-router.get("/:title", (req, res) => {
-  Course.find({ title: req.params.title})
+// router.get("/:title", (req, res) => {
+//   Course.find({ title: req.params.title})
+//     .then((course) => {
+//       if(JSON.stringify(course) == '[]'){
+//         res.status(400).json("Course not found" + err)
+//       } else {
+//         res.json(course);
+//       }
+//     })
+//     .catch((err) => res.status(404).json(err));
+// });
+router.get("/:id", (req, res) => {
+  Course.findById(req.params.id)
+  // Course.find({ _id: req.params.id })
     .then((course) => {
-      if(JSON.stringify(course) == '[]'){
-        res.status(400).json("Course not found" + err)
-      } else {
-        res.json(course);
-      }
+      res.json(course);
     })
     .catch((err) => res.status(404).json(err));
 });

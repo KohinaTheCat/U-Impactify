@@ -12,9 +12,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './course-preview.component.html',
   styleUrls: ['./course-preview.component.css'],
 })
-
 export class CoursePreviewComponent implements OnInit {
-
   course = {
     _id: '',
     title: '',
@@ -25,50 +23,48 @@ export class CoursePreviewComponent implements OnInit {
     level: '',
   };
 
-  valid : boolean;
-  alreadyEnrolled : boolean = false;
-  error : string;
+  valid: boolean;
+  alreadyEnrolled: boolean = false;
+  error: string;
   user: User;
 
   constructor(
     private userService: UserService,
     private activatedRouter: ActivatedRoute,
     private courseService: CourseService,
-    private router: Router,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.user = this.userService.getCurrentUser();
-    const title = this.activatedRouter.snapshot.params['id'];
-    this.courseService.getCourse(title).subscribe(
-    (incomingCourse: Course) => {
-      this.valid = true;
-      this.course.title = incomingCourse[0].title;
-      this.course.description = incomingCourse[0].description;
-      this.course.students = incomingCourse[0].students;
-      this.course.teachers = incomingCourse[0].teachers;
-      this.course.tags = incomingCourse[0].tags;
-      this.course.level = incomingCourse[0].level;
-      this.course._id = incomingCourse[0]._id;
-
-      for(let i=0;i<this.course.students.length ;i++){ 
-        if(this.course.students[i] == this.user._id){
-          this.alreadyEnrolled = true;
+    const id = this.activatedRouter.snapshot.params['id'];
+    this.courseService.getCourse(id).subscribe(
+      (incomingCourse: Course) => {
+        this.valid = true;
+        this.course.title = incomingCourse.title;
+        this.course.description = incomingCourse.description;
+        this.course.students = incomingCourse.students;
+        this.course.teachers = incomingCourse.teachers;
+        this.course.tags = incomingCourse.tags;
+        this.course.level = incomingCourse.level;
+        this.course._id = incomingCourse._id;
+        for (let i = 0; i < this.course.students.length; i++) {
+          if (this.course.students[i] == this.user._id) {
+            this.alreadyEnrolled = true;
+            break;
+          }
         }
-     }
-    },
-    (err) => {
-      this.valid = false;
-      this.error = err.message;
-      console.log("error message")
-    }
+      },
+      (err) => {
+        this.valid = false;
+        this.error = err.message;
+        console.log('error message' + this.error);
+      }
     );
-    
-    //console.log(this.course);
   }
 
+  // user type was IL and wasn't enrolled in course, and now decided to enroll in course
   enrollHandler() {
-    // call another services to check if user already enrolled in course
     this.courseService
       .enrollInCourse(this.userService.getCurrentUser()._id, this.course._id)
       .subscribe(

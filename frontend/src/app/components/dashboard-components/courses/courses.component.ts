@@ -68,4 +68,9 @@ export class CoursesComponent implements OnInit {
       );
     this.ngOnChanges();
   }
+
+  previewCourse($event) : void {
+    this.selectedCourse = $event;
+    this.router.navigate([`course/${this.selectedCourse._id}`]);
+  }
 }
