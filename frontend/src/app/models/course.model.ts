@@ -1,9 +1,16 @@
+/**
+ * Course Frontend model
+ *  - synchronous with `~/backend/models/course.model.js`
+ * 
+ * @property {String} _id mongoDB ObjectId
+ */
 export interface Course {
   _id: string;
-  level: string;
-  title: string;
-  students: [string];
-  teachers: [string];
+  name: string;
+  students: string[];
+  teachers: string[];
   description: string;
+  tags: string;
+  level: string;
+  files: string[]
 }
-

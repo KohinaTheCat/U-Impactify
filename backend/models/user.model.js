@@ -4,13 +4,22 @@ const bcrypt = require("bcrypt");
 
 const saltFactor = 10;
 
+/**
+ * Schema for user
+ * @property {String}     _id               username of user
+ * @property {String}     password          password of user
+ * @property {String}     email             email of user
+ * @property {String}     type              "IL": Impact Learner, "IC": Impact Consultant, "SI": Social Initiative
+ * @property {{Object}}   classesEnrolled   array to store course _id, name, img
+ * @property {[Object]}   classesTeaching   array to store course _id, name, img
+ * @property {[[String]]} questionaire      for the user questionnaire
+ * @property {Object}     socialInitiative  for SI Profile
+ *
+ */
 const userSchema = new Schema({
-  username: {
+  _id: {
     type: String,
-    required: "username is required",
-    unique: "username already exists",
     trim: true,
-    minlength: 3,
   },
   password: {
     type: String,
@@ -23,16 +32,12 @@ const userSchema = new Schema({
     unique: "email already registered",
     match: [/.+\@.+\..+/, "Valid email required"],
   },
-  /**
-   * "IL": Impact Learner, "IC": Impact Consultant, "SI": Social Initiative
-   */
   type: {
     type: String,
     trim: true,
     required: "Specify Type of User",
   },
   classesEnrolled: {
-    // array to store course _id, name, img
     type: [
       {
         _id: String,
@@ -42,7 +47,6 @@ const userSchema = new Schema({
     ],
   },
   classesTeaching: {
-    // array to store course _id, name, img
     type: [
       {
         _id: String,
@@ -66,14 +70,13 @@ const userSchema = new Schema({
   },
 });
 
-/* 
-    https://www.mongodb.com/blog/post/password-authentication-with-mongoose-part-1
 
-    Compare Password 
-    - newPass: the new password
-    - callBack: function(err, isMatch)
-        - Can be just any function you pass, err passed for error handling
-*/
+/**
+ * https://www.mongodb.com/blog/post/password-authentication-with-mongoose-part-1
+ * 
+ * @param {String}   newPass  the new password
+ * @param {function} callBack any function you pass, err passed for error handling
+ */
 userSchema.methods.comparePassword = function (newPass, callBack) {
   bcrypt.compare(newPass, this.password, function (err, isMatch) {
     if (err) return callBack(err);

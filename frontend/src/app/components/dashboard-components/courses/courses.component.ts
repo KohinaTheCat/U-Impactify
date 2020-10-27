@@ -48,8 +48,15 @@ export class CoursesComponent implements OnInit {
 
   onClick($event){
     this.selectedCourse = $event;
-    this.dropCourse();
+    // TODO: Implement redirect route here
   }
+
+  onClickDropCourse($event) {
+    this.selectedCourse = $event;
+    this.dropCourse();
+  };
+
+
   dropCourse(): void {
     if (!this.selectedCourse) return;
     this.user.classesEnrolled = this.user.classesEnrolled.filter((course: any) => course._id !== this.selectedCourse._id);

@@ -1,4 +1,3 @@
-import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user.model';
@@ -16,7 +15,6 @@ export class LoginSignupComponent implements OnInit {
   constructor(
     private userService: UserService,
     private router: Router,
-    private location: Location
   ) {}
   // TODO: errorChecking!!!!
 
@@ -52,7 +50,7 @@ export class LoginSignupComponent implements OnInit {
   }
 
   loginHandler(user: any) {
-    this.userService.loginUser(this.email, this.password).subscribe(
+    this.userService.loginUser(user.email, user.password).subscribe(
       (res) => {
         if (res === false) {
           console.log('incorrect password');
@@ -90,10 +88,10 @@ export class LoginSignupComponent implements OnInit {
 
   onSubmit() {
     const user = {
-      username: this.username,
+      _id: this.username,
       email: this.email,
       password: this.password,
-      type: this.type, //change this
+      type: this.type, 
     };
     if (!this.logged) {
       this.registerHandler(user);
