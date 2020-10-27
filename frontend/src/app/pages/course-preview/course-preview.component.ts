@@ -15,7 +15,7 @@ import { ActivatedRoute } from '@angular/router';
 export class CoursePreviewComponent implements OnInit {
   course = {
     _id: '',
-    title: '',
+    name: '',
     description: '',
     students: [],
     teachers: [],
@@ -41,7 +41,7 @@ export class CoursePreviewComponent implements OnInit {
     this.courseService.getCourse(id).subscribe(
       (incomingCourse: Course) => {
         this.valid = true;
-        this.course.title = incomingCourse.title;
+        this.course.name = incomingCourse.name;
         this.course.description = incomingCourse.description;
         this.course.students = incomingCourse.students;
         this.course.teachers = incomingCourse.teachers;
@@ -73,7 +73,7 @@ export class CoursePreviewComponent implements OnInit {
           this.userService
             .enrollInCourse(this.userService.getCurrentUser()._id, {
               _id: this.course._id,
-              name: this.course.title,
+              name: this.course.name,
             })
             .subscribe(
               (res) => console.log(res),
