@@ -1,50 +1,30 @@
 <div class="profile-container">
   <h2>Profile</h2>
   <div class="inner">
-      <div id="image">
-          <img src="../../../../assets/THS.png" width="400" alt="" />
-      </div>
+    <div id="image">
+      <img src="../../../../assets/THS.png" width="400" alt="" />
+    </div>
+
     <div class="info">
-
-      <clr-datalist-container class="outsideWithin">
-
-        <label>Name:</label>
-        <input required clrDatalistInput id="format" [disabled]="disabled"/>
-      </clr-datalist-container>
-      <clr-datalist-container class="outsideWithin">
-        <label>Business Number:</label>
-        <input required clrDatalistInput [disabled]="disabled"/>
-
-      </clr-datalist-container>
-        
-      
-
-
-
-
-
-
-
-
-
-      <!-- <div>
-        Registered Name: <span class="value">{{user.username}}</span>
+      <div>
+        Registered Name: <span class="value">{{ user.username }}</span>
       </div>
       <div>
-        Business Number: <span class="value">{{user._id}}</span>
+        Business Number: <span class="value">{{ businessNumber }}</span>
       </div>
       <div>
-        Location: <span class="value">11 River Street, Toronto, ON , M5A 4C2</span>
+        Location:
+        <span class="value">{{ location }}</span>
       </div>
       <div>
-        Hours: <span class="value">Mon to Fri 11am - 6pm</span>
+        Hours: <span class="value">{{ hours }}</span>
       </div>
       <div>
-        Phone: <span class="value">416.392.2273</span>
+        Phone: <span class="value">{{ phone }}</span>
       </div>
       <div>
-        Email: <span class="value">{{user.email}}</span>
-      </div> -->
+        Email: <span class="value">{{ email }}</span>
+      </div>
     </div>
 
     <div class="btn-container">
@@ -54,9 +34,32 @@
     </div>
 
     <!--OVERHERE-->
-    <button (click)="newFunction()" class="edit">{{current}}</button>
+    <button (click)="basic = true" class="edit">{{ current }}</button>
 
-
+    <clr-modal [(clrModalOpen)]="basic">
+      <h3 class="modal-dialog">I have a nice title</h3>
+      <div class="modal-body">
+        <form clrForm>
+          <clr-input-container class="side">
+            <label class="addRight">Registered Number</label>
+            <input
+              clrInput
+              placeholder="{{ registeredNumber }}"
+              name="name"
+              [(ngModel)]="registeredNumber"
+            />
+          </clr-input-container>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline" (click)="basic = false">
+          Cancel
+        </button>
+        <button type="button" class="btn btn-primary" (click)="basic = false">
+          Ok
+        </button>
+      </div>
+    </clr-modal>
   </div>
   <!-- Here should go the Tabs Container as shown in the mockup -->
 </div>

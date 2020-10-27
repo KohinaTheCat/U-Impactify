@@ -10,27 +10,23 @@ import { UserService } from 'src/app/services/user.service';
 export class SiProfileComponent implements OnInit {
   user: User;
   disabled = true;
+  basic = false;
+  registeredNumber = 'thisistheregisterednumber';
+  businessNumber = '12312423423';
+  location = '1050 Markham Road';
+  hours = '10-5';
+  phone = '647-804-6678';
+  email = 'aryan.patel@mail.com';
 
   current: string = 'edit';
 
   items: string[] = ['Item1', 'Item2', 'Item3'];
   vertical = '';
 
-  socialInit = {
-    createdProfile: false,
-    registeredNumber: String,
-    businessNUmber: String,
-    location: String,
-    hours: String,
-    phone: String,
-    email: String,
-  };
-
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
     this.user = this.userService.getCurrentUser();
-    this.user.socialInitiative = this.socialInit;
   }
 
   newFunction(): void {
