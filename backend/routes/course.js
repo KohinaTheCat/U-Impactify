@@ -80,9 +80,9 @@ router.route("/").post((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-// GET getting a course by name, name refers to course name
-router.get("/:name", (req, res) => {
-  Course.find({ name: req.params.name})
+// GET getting a course by id, id refers to course id
+router.get("/:id", (req, res) => {
+  Course.findById(req.params.id)
     .then((course) => {
       if(JSON.stringify(course) == '[]'){
         res.status(400).json("Course not found" + err)
