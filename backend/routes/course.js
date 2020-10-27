@@ -89,10 +89,14 @@ router.route("/add").post((req, res) => {
 //GET getting a course by title, title refers to course title
 router.get("/:title", (req, res) => {
   Course.find({ title: req.params.title})
-    .then((doc) => {
-      res.json(doc);
+    .then((course) => {
+      if(JSON.stringify(course) == '[]'){
+        res.status(400).json("Course not found" + err)
+      } else {
+        res.json(course);
+      }
     })
-    .catch((err) => res.json(err));
+    .catch((err) => res.status(404).json(err));
 });
 
 // POST add a student to a course, id refers to course id, username refers to username of student

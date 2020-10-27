@@ -24,6 +24,8 @@ export class CoursePreviewComponent implements OnInit {
     level: '',
   };
 
+  valid : boolean;
+  error : string;
   user: User;
 
   constructor(
@@ -36,15 +38,24 @@ export class CoursePreviewComponent implements OnInit {
   ngOnInit(): void {
     this.user = this.userService.getCurrentUser();
     const title = this.activatedRouter.snapshot.params['id'];
-    this.courseService.getCourse(title).subscribe((incomingCourse: Course) => {
+    this.courseService.getCourse(title).subscribe(
+    (incomingCourse: Course) => {
+      this.valid = true;
       this.course.title = incomingCourse[0].title;
       this.course.description = incomingCourse[0].description;
       this.course.teachers = incomingCourse[0].teachers;
       this.course.tags = incomingCourse[0].tags;
       this.course.level = incomingCourse[0].level;
       this.course._id = incomingCourse[0]._id;
-    });
-    console.log(this.course);
+    },
+    (err) => {
+      this.valid = false;
+      this.error = err.message;
+      console.log("error message")
+    }
+    );
+    
+    //console.log(this.course);
   }
 
   enrollHandler() {

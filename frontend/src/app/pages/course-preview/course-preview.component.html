@@ -1,31 +1,33 @@
-<div class = "container"> 
-
-  <div class = "wrapper"> 
-    <h4 id = "title"> {{ course.title }} </h4>
-    <div *ngIf="user.type == 'IL'">
-      <button class="btn btn-primary" (click)="enrollHandler()">Enroll</button>
+<div *ngIf = "valid">
+  <div class = "container"> 
+    <div class = "wrapper"> 
+      <h4 id = "title"> {{ course.title }} </h4>
+      <div *ngIf="user.type == 'IL'">
+        <button class="btn btn-primary" (click)="enrollHandler()">Enroll</button>
+      </div>
     </div>
+    <img class = "courseimage" src="../../../../assets/courseimage.png"/>
+    <h4> Course Description </h4>
+    <p id = "text">{{ course.description }}</p>
+    <h4> Course Instructor </h4>
+    <p id= "text" *ngFor = "let teacher of course.teachers; let i = index">
+      {{ teacher }}
+    </p>
+    <div *ngIf = "course.tags != ''">
+      <h4> Tags </h4>
+      <p id = "text">{{ course.tags }}</p>
+    </div>
+    <h4> Difficulty Level </h4>
+     <p id = "text"> {{ course.level }}</p>
   </div>
-
-  <img class = "courseimage" src="../../../../assets/courseimage.png"/>
-
-  <h4> Course Description </h4>
-  <p id = "text">{{ course.description }}</p>
-
-  <h4> Course Instructor </h4>
-  <p id= "text" *ngFor = "let teacher of course.teachers; let i = index">
-    {{ teacher }}
-  </p>
-
-  <div *ngIf = "course.tags != ''">
-    <h4> Tags </h4>
-    <p id = "text">{{ course.tags }}</p>
-  </div>
-
-  <h4> Difficulty Level </h4>
-   <p id = "text"> {{ course.level }}</p>
-
 </div>
+
+<div *ngIf ="!valid">
+  <h3 id = "error">
+    {{ error }}
+  </h3>
+</div>
+
 
 
 
