@@ -84,11 +84,7 @@ router.route("/").post((req, res) => {
 router.get("/:id", (req, res) => {
   Course.findById(req.params.id)
     .then((course) => {
-      if(JSON.stringify(course) == '[]'){
-        res.status(400).json("Course not found" + err)
-      } else {
-        res.json(course);
-      }
+      res.json(course);    
     })
     .catch((err) => res.status(404).json(err));
 });
