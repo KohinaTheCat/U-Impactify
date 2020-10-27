@@ -128,8 +128,8 @@ h2 {
 .side {
   display: flex;
   flex-direction: row;
+  align-content: space-around;
   justify-content: space-evenly;
-  background-color: rebeccapurple;
 }
 
 .col {
@@ -145,4 +145,20 @@ h2 {
 
 .format {
   margin-bottom: 1rem;
+}
+
+.addLeft {
+  margin-left: 5rem;
+}
+
+.add {
+  white-space: nowrap;
+}
+
+input {
+  width: 15rem;
+}
+
+.modal-dialog {
+  background-color: red;
 }

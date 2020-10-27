@@ -36,23 +36,89 @@
     <!--OVERHERE-->
     <button (click)="basic = true" class="edit">{{ current }}</button>
 
-    <clr-modal [(clrModalOpen)]="basic">
-      <h3 class="modal-dialog">I have a nice title</h3>
+    <clr-modal [(clrModalOpen)]="basic" [clrModalSize]="'l'">
       <div class="modal-body">
+        <h3>Edit your Profile!</h3>
         <form clrForm>
           <clr-input-container class="side">
-            <label class="addRight">Registered Number</label>
+            <label class="add">Registered Number</label>
             <input
               clrInput
               placeholder="{{ registeredNumber }}"
+              class="addLeft"
               name="name"
               [(ngModel)]="registeredNumber"
             />
           </clr-input-container>
         </form>
+        <form clrForm>
+          <clr-input-container class="side">
+            <label class="add">Business Number</label>
+            <input
+              clrInput
+              placeholder="{{ businessNumber }}"
+              class="addLeft"
+              name="name"
+              [(ngModel)]="businessNumber"
+            />
+          </clr-input-container>
+        </form>
+        <form clrForm>
+          <clr-input-container class="side">
+            <label class="add">Location</label>
+            <input
+              clrInput
+              placeholder="{{ location }}"
+              class="addLeft"
+              name="name"
+              [(ngModel)]="location"
+            />
+          </clr-input-container>
+        </form>
+        <form clrForm>
+          <clr-input-container class="side">
+            <label class="add">Hours</label>
+            <input
+              clrInput
+              placeholder="{{ hours }}"
+              class="addLeft"
+              name="name"
+              [(ngModel)]="hours"
+            />
+          </clr-input-container>
+        </form>
+        <form clrForm>
+          <clr-input-container class="side">
+            <label class="add">Phone Number</label>
+            <input
+              clrInput
+              placeholder="{{ phone }}"
+              class="addLeft"
+              name="name"
+              [(ngModel)]="phone"
+            />
+          </clr-input-container>
+        </form>
+        <form clrForm>
+          <clr-input-container class="side">
+            <label class="add">Email Address</label>
+            <input
+              clrInput
+              placeholder="{{ email }}"
+              class="addLeft"
+              name="name"
+              [(ngModel)]="email"
+            />
+          </clr-input-container>
+        </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-outline" (click)="basic = false">
+        <button
+          type="button"
+          class="btn btn-outline"
+          (click)="basic = false"
+          (click)="doNotChange()"
+        >
           Cancel
         </button>
         <button type="button" class="btn btn-primary" (click)="basic = false">

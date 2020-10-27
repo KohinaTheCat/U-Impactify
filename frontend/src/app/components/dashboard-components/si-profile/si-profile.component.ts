@@ -11,12 +11,12 @@ export class SiProfileComponent implements OnInit {
   user: User;
   disabled = true;
   basic = false;
-  registeredNumber = 'thisistheregisterednumber';
-  businessNumber = '12312423423';
-  location = '1050 Markham Road';
-  hours = '10-5';
-  phone = '647-804-6678';
-  email = 'aryan.patel@mail.com';
+  registeredNumber: string;
+  businessNumber: string;
+  location: string;
+  hours: string;
+  phone: string;
+  email: string;
 
   current: string = 'edit';
 
@@ -27,6 +27,7 @@ export class SiProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.userService.getCurrentUser();
+    this.doNotChange();
   }
 
   newFunction(): void {
@@ -37,5 +38,14 @@ export class SiProfileComponent implements OnInit {
       this.disabled = false;
       this.current = 'save';
     }
+  }
+
+  doNotChange(): void {
+    this.registeredNumber = 'OriginalNumber';
+    this.businessNumber = 'OriginalBusiness';
+    this.location = 'OriginalLocation';
+    this.hours = 'OriginalHours';
+    this.phone = 'OriginalPhone';
+    this.email = 'OriginalEmail';
   }
 }
