@@ -1,6 +1,5 @@
 import { UserService } from './../../services/user.service';
 import { CourseService } from './../../services/course.service';
-import { CourseForm } from './CourseForm';
 import { Component, OnInit } from '@angular/core';
 import {
   NgxFileDropEntry,

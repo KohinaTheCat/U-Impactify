@@ -17,6 +17,6 @@ export class IcIlProfileComponent implements OnInit {
   ngOnInit(): void {
     this.user = this.userService.getCurrentUser();
     this.email = this.user.email;
-    this.username = this.user.username;
+    this.username = this.user._id;
   }
 }

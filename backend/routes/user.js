@@ -36,11 +36,10 @@ router.route("/").post((req, res) => {
 });
 
 // POST enroll course (Impact Learner only)
-router.route("/enroll").post((req, res) => {
+router.route("/enroll").put((req, res) => {
   const { userId, course } = req.body;
-  const { _id, name } = course;
   userSchema.findById(userId).then((user) => {
-    user.classesEnrolled = user.classesEnrolled.concat({ _id, name });
+    user.classesEnrolled = user.classesEnrolled.concat(course);
     user
       .save()
       .then(() => res.json(user))
@@ -72,8 +71,7 @@ router.route("/updateClassesTeaching").put((req, res) => {
       user.classesTeaching = user.classesTeaching.concat({
         _id: course._id,
         name: course.name,
-        // TODO: Update after implementation
-        // img: "#",
+        img: "#",
       });
       user
         .save()

@@ -69,7 +69,7 @@ export class CourseService {
    * @param {string} courseId  id of course
    */
   enrollInCourse(userId: string, courseId: string): Observable<any> {
-    return this.http.post(`http://localhost:5000/course/enroll`, {
+    return this.http.put(`http://localhost:5000/course/enroll`, {
       userId,
       courseId,
     });

@@ -61,11 +61,11 @@ const upload = multer({ storage: storage /*fileFiler: fileFiler*/ });
 // POST new course
 router.route("/").post((req, res) => {
   // add user id to course route
-  const { title, students, teachers, description, files, tags, level } = req.body;
+  const { name, students, teachers, description, files, tags, level } = req.body;
 
   // populate with finalized schema
   const newCourse = new Course({
-    title,
+    name,
     students,
     teachers,
     description,
@@ -91,7 +91,7 @@ router.get("/:id", (req, res) => {
 });
 
 // POST enroll student
-router.post("/enroll", (req, res) => {
+router.put("/enroll", (req, res) => {
   const { userId, courseId } = req.body;
   Course.findById(courseId).then((course) => {
     course.students = course.students.concat(userId);

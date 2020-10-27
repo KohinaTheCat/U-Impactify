@@ -67,7 +67,7 @@ export class UserService {
     this.user.classesEnrolled.push(course);
     this.setUser(this.user);
 
-    return this.http.post(`http://localhost:5000/user/enroll/`, {
+    return this.http.put(`http://localhost:5000/user/enroll/`, {
       userId,
       course,
     });

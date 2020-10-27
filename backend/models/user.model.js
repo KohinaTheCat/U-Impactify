@@ -19,10 +19,7 @@ const saltFactor = 10;
 const userSchema = new Schema({
   _id: {
     type: String,
-    required: "username is required",
-    unique: "username already exists",
     trim: true,
-    minlength: 3,
   },
   password: {
     type: String,
