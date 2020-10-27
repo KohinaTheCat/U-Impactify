@@ -1,7 +1,7 @@
 <div *ngIf = "valid">
   <div class = "container"> 
     <div class = "wrapper"> 
-      <h4 id = "title"> {{ course.title }} </h4>
+      <h4 id = "title"> {{ course.name }} </h4>
       <div *ngIf="user.type == 'IL' && !alreadyEnrolled ">
         <button class="btn btn-primary" (click)="enrollHandler()">Enroll</button>
       </div>
