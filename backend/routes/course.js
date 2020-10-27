@@ -80,14 +80,17 @@ router.route("/").post((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-//GET single course given id
-router.get("/:id", (req, res) => {
-  Course.findById(req.params.id)
-    .exec()
+// GET getting a course by name, name refers to course name
+router.get("/:name", (req, res) => {
+  Course.find({ name: req.params.name})
     .then((course) => {
-      res.json(course);
+      if(JSON.stringify(course) == '[]'){
+        res.status(400).json("Course not found" + err)
+      } else {
+        res.json(course);
+      }
     })
-    .catch((err) => res.json(err));
+    .catch((err) => res.status(404).json(err));
 });
 
 // POST enroll student
@@ -143,11 +146,11 @@ router.post("/documents/del/:id", (req, res) => {
 // GET all the document filenames of a course, :id to course id
 router.get("/document/course/:id", (req, res, next) => {
   Course.findById(req.params.id)
-    .select("documents")
+    .select("files")
     .exec()
     .then((doc) => {
       res.json({
-        documents: doc.documents,
+        documents: doc.files,
       });
     })
     .catch((err) => res.json(err));

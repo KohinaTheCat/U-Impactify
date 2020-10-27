@@ -47,8 +47,8 @@ router.route("/enroll").put((req, res) => {
   });
 });
 
-// POST update password
-router.route("/password").post((req, res) => {
+// PUT update password
+router.route("/password").put((req, res) => {
   const { _id, password } = req.body;
   userSchema
     .findById(_id)
