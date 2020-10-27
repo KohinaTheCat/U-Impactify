@@ -16,9 +16,9 @@ export class CourseService {
    * @param {string} _id    id of the teacher
    */
   postNewCourse(course: any, _id: string): Observable<Course> {
-    const { title, description, level, tags } = course;
+    const { name, description, level, tags } = course;
     return this.http.post<Course>('http://localhost:5000/course/', {
-      title,
+      name,
       students: [],
       teachers: [_id],
       description,
@@ -30,10 +30,10 @@ export class CourseService {
 
   /**
    * POST uploading document to a course
-   * @param {any} file new file
-   * @param {string} courseId id of course
+   * @param {FormData} file     new file
+   * @param {string}   courseId id of course
    */
-  postNewFile(file: any, courseId: string) {
+  postNewFile(file: FormData, courseId: string) {
     return this.http.post(
       `http://localhost:5000/course/${courseId}/upload`,
       file
@@ -77,7 +77,7 @@ export class CourseService {
 
   /**
    * DELETE drop student from course
-   * @param {string} userId id of user
+   * @param {string} userId   id of user
    * @param {string} courseId id of course
    */
   dropACourse(userId: string, courseId: string): Observable<any> {
