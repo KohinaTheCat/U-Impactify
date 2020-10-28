@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from 'src/app/services/user.service';
 import { ActivatedRoute } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-global-profile',
@@ -14,12 +14,14 @@ export class GlobalProfileComponent implements OnInit {
   global: String;
   valid: Boolean = true;
 
-  constructor(private userService: UserService, private route: ActivatedRoute) {
+  constructor(
+    private userService: UserService,
+    private route: ActivatedRoute,
+  ) {
     this.global = this.route.snapshot.paramMap.get('username');
   }
 
   ngOnInit(): void {
-    console.log(this.global);
     this.userService.getAnotherUser(this.global).subscribe(
       (res) => {
         this.email = res.email;
