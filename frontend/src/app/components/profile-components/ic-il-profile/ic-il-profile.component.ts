@@ -22,13 +22,8 @@ export class IcIlProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // if (this.global !== null) {
-      this.user = this.userService.getCurrentUser();
-      this.email = this.user.email;
-      this.username = this.user.username;
-    // } else {
-    //   this.observing = this.userService.getAnotherUser(this.global);
-    //   this.user
-    // }
+    this.user = this.userService.getCurrentUser();
+    this.email = this.user.email;
+    this.username = this.user._id;
   }
 }

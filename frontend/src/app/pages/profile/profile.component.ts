@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
-import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -10,10 +9,15 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
   user: User;
+  name: String = '';
+  username: String;
+  email: String;
+  number: String = '';
 
-  constructor(private userService: UserService) {
-  }
+  constructor(private userService: UserService) {}
   ngOnInit(): void {
     this.user = this.userService.getCurrentUser();
+    this.username = this.user._id;
+    this.email = this.user.email;
   }
 }
