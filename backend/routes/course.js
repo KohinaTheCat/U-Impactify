@@ -71,6 +71,7 @@ router.route("/").post((req, res) => {
     files,
     tags,
     level,
+    "img": "",
   });
 
   newCourse

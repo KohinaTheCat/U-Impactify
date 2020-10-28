@@ -12,5 +12,6 @@ export interface Course {
   description: string;
   tags: string;
   level: string;
+  img: string;
   files: string[]
 }

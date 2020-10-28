@@ -34,6 +34,9 @@ const courseSchema = new Schema({
     type: String,
     required: "level is required",
   },
+  img:{
+    type: String,
+  },
   files: {
     type: [String],
   },

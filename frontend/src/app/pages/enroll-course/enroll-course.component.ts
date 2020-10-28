@@ -30,7 +30,7 @@ export class EnrollCourseComponent implements OnInit {
       this.user.classesEnrolled.forEach((course: any) => {
         res = res.filter((resCourse: Course) => course._id !== resCourse._id);
       });
-      res.forEach(({ _id, name, description, level, teachers }) => {
+      res.forEach(({ _id, name, description, level, teachers, img }) => {
         if (description.length > 400) {
           description = description.slice(0, 350) + '...';
         }
@@ -39,11 +39,25 @@ export class EnrollCourseComponent implements OnInit {
         if (teachers.length == 1) allTeachers = teachers[0];
         else allTeachers = teachers.join(', ');
 
-        console.log(!this.user.classesEnrolled.includes({ _id, name }));
-        if (!this.user.classesEnrolled.includes({ _id, name }))
-          this.courses.push({ _id, name, description, level, allTeachers });
+        if (!this.user.classesEnrolled.includes({ _id, name })) {
+          this.courses.push({
+            _id,
+            name,
+            description,
+            level,
+            allTeachers,
+            img,
+          });
+        }
       });
+      this.courses.map((course) =>
+        course.img !== undefined && course.img !== ''
+          ? (course.img =
+              'http://localhost:5000/course/documents/' + course.img)
+          : (course.img = '../../../assets/uLogo.png')
+      );
     });
+    console.log(this.courses);
   }
 
   cancel() {
@@ -56,15 +70,28 @@ export class EnrollCourseComponent implements OnInit {
 
   courseHandler() {
     if (!this.selectedCourse) return;
-    const { _id, name } = this.selectedCourse;
+    const { _id, name, img } = this.selectedCourse;
+
+    // get raw img id
+    let parser = img;
+    if (parser.startsWith('http:')) {
+      parser = /[^/]*$/.exec(img)[0];
+    } else {
+      parser = undefined;
+    }
+    console.log("p", parser)
 
     this.courseService.enrollInCourse(this.user._id, _id).subscribe(
       (res) => {
         this.userService
-          .enrollInCourse(this.user._id, {
-            _id,
-            name,
-          })
+          .enrollInCourse(
+            this.user._id,
+            {
+              _id,
+              name,
+              "img": parser
+            }
+          )
           .subscribe(
             (res) => console.log(res),
             (err) => console.log(err)

@@ -37,7 +37,7 @@ router.route("/").post((req, res) => {
 
 // POST enroll course (Impact Learner only)
 router.route("/enroll").put((req, res) => {
-  const { userId, course } = req.body;
+  const { userId, course, img } = req.body;
   userSchema.findById(userId).then((user) => {
     user.classesEnrolled = user.classesEnrolled.concat(course);
     user

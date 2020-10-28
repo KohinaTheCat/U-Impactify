@@ -21,6 +21,7 @@ h2 {
 #new-course:hover {
   background: var(--gray20);
   cursor: pointer;
+  overflow: hidden;
 }
 
 .plus {
@@ -30,6 +31,13 @@ h2 {
 .plus clr-icon {
   width: 4rem;
   height: 4rem;
+}
+
+img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
 }
 
 .course-image {

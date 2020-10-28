@@ -20,7 +20,9 @@
         [class.selected]="selectedCourse === course"
       >
         <div class="course-picture">
-          <!-- COURSE IMAGE GOES HERE --><clr-icon shape="picture"></clr-icon>
+          <img src={{course.img}}>
+          <!-- COURSE IMAGE GOES HERE -->
+          <!-- <clr-icon shape="picture"></clr-icon> -->
         </div>
         <div class="course-header">
           <h3>{{ course.name }}</h3>

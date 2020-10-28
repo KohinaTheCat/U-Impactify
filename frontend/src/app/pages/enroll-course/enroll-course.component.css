@@ -21,6 +21,13 @@
   gap: 1rem;
 }
 
+img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
 .course-card {
   width: 100%;
   height: 25rem;
