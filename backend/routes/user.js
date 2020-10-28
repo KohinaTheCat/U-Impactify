@@ -28,13 +28,21 @@ router.route("/").post((req, res) => {
     classesEnrolled: [],
     classesTeaching: [],
     questionaire,
+    socialInitiative: {
+      registeredNumber: "",
+      businessNumber: "",
+      location: "",
+      hours: "",
+      phone: "",
+      email: "",
+    },
   });
   newUser
     .save()
     .then(() => res.json(newUser))
     .catch((err) => res.status(400).json(err));
 });
-
+//
 // POST enroll course (Impact Learner only)
 router.route("/enroll").put((req, res) => {
   const { userId, course } = req.body;
@@ -95,6 +103,33 @@ router.delete("/dropCourse/:courseId/:userId", (req, res) => {
   });
 });
 
+
+// PUT social initiative
+router.route("/addSocialInitiativeProfile").put((req, res) => {
+  const {
+    registeredNumber,
+    businessNumber,
+    location,
+    hours,
+    phone,
+    email,
+    _id,
+  } = req.body;
+  userSchema.findById(_id).then((user) => {
+    user.socialInitiative = {
+      registeredNumber,
+      businessNumber,
+      location,
+      hours,
+      phone,
+      email,
+    };
+    user
+      .save()
+      .then(() => res.json(user))
+      .catch((err) => res.status(400).json(err));
+  });
+
 // GET user by username
 router.route("/get/:uid").get((req, res) => {
   userSchema
@@ -104,6 +139,7 @@ router.route("/get/:uid").get((req, res) => {
       else return res.status(404).json(err);
     })
     .catch((err) => res.status(404).json("no user found" + err));
+
 });
 
 module.exports = router;
