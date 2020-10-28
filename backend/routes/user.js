@@ -93,16 +93,12 @@ router.delete("/dropCourse/:id/:uid", (req, res) => {
 });
 
 // GET user by username
-router.route("/get/:username").get((req, res) => {
+router.route("/get/:uid").get((req, res) => {
   userSchema
-    .findOne({
-      username: req.params.username,
-    })
+    .findById(req.params.uid)
     .then((user) => {
-      if(user != null)
-        return res.json(user);
-      else  
-        return res.status(404).json(err)
+      if (user != null) return res.json(user);
+      else return res.status(404).json(err);
     })
     .catch((err) => res.status(404).json("no user found" + err));
 });
