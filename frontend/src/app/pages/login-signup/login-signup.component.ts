@@ -80,8 +80,11 @@ export class LoginSignupComponent implements OnInit {
         }
       },
       (err) => {
-        console.log(err);
-        this.error = err.message;
+        console.log(err.error.message);
+        this.error = err.error.message;
+        if (err.error.message === undefined){
+          this.error = "Error : Email address already registered"
+        }
         return;
       }
     );

@@ -38,11 +38,8 @@ router.route("/").post((req, res) => {
 // PUT questionaire response
 router.route("/addQuestionaire").put((req,res)=> {
   const { _id, questionaire } = req.body;
-  console.log(_id)
-  console.log(questionaire)
   userSchema.findById(_id).then((user) => {
     user.questionaire = questionaire;
-    console.log(questionaire)
     user
       .save()
       .then(() => res.json(user))
