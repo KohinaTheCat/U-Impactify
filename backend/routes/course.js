@@ -11,7 +11,6 @@ const { connect } = require("http2");
 
 var Grid = require("gridfs-stream");
 Grid.mongo = mongoose.mongo;
-//
 
 // .env
 require("dotenv").config();
@@ -105,7 +104,7 @@ router.put("/enroll", (req, res) => {
 router.post("/:id/upload", upload.array("documents", 10), (req, res) => {
   Course.findById(req.params.id)
     .then((course) => {
-      course.files = course.files.concat(req.files.map((k) => k.filename));
+      course.files = course.files.concat(req.files.map((k) => k.id));
       course
         .save()
         .then(() => res.json("Document Added!"))
@@ -115,11 +114,10 @@ router.post("/:id/upload", upload.array("documents", 10), (req, res) => {
 });
 
 //GET document by filename
-// TODO: change this to id of document, and then change in user-route
-router.get("/documents/:filename", (req, res) => {
+router.get("/documents/:id", (req, res) => {
   gfs
     .find({
-      filename: req.params.filename,
+      _id: mongoose.Types.ObjectId(req.params.id),
     })
     .toArray((err, files) => {
       if (!files || files.length === 0) {
@@ -127,7 +125,9 @@ router.get("/documents/:filename", (req, res) => {
           err: "no files exist",
         });
       }
-      gfs.openDownloadStreamByName(req.params.filename).pipe(res);
+      gfs
+        .openDownloadStream(mongoose.Types.ObjectId(req.params.id))
+        .pipe(res);
     });
 });
 
@@ -140,7 +140,7 @@ router.post("/documents/del/:id", (req, res) => {
 });
 
 // GET all the document filenames of a course, :id to course id
-router.get("/document/course/:id", (req, res, next) => {
+router.get("/getAllFiles/:id", (req, res, next) => {
   Course.findById(req.params.id)
     .select("files")
     .exec()
