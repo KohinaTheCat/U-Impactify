@@ -23,7 +23,7 @@ export class GlobalProfileComponent implements OnInit {
     this.userService.getAnotherUser(this.global).subscribe(
       (res) => {
         this.email = res.email;
-        this.username = res.username;
+        this.username = res._id;
       },
       (err) => {
         this.valid = false;

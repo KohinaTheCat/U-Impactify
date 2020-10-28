@@ -41,3 +41,8 @@ clr-vertical-nav {
   letter-spacing: 0.44px;
   width: 15rem;
 }
+
+app-footer{
+  /* position: absolute;
+  bottom: 0; */
+}
