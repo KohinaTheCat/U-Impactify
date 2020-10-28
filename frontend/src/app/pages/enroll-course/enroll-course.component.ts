@@ -2,6 +2,7 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { CourseService } from 'src/app/services/course.service';
 import { UserService } from 'src/app/services/user.service';
+import { User } from 'src/app/models/user.model';
 
 @Component({
   selector: 'app-enroll-course',
@@ -12,6 +13,7 @@ export class EnrollCourseComponent implements OnInit {
   basic: boolean = true;
   error: string = '';
   courses: any[] = [];
+  user: User;
 
   selectedCourse: any;
 
@@ -22,14 +24,20 @@ export class EnrollCourseComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.user = this.userService.getCurrentUser();
     this.courseService.getAllCourses().subscribe((res) => {
+      this.user.classesEnrolled.forEach((course: any) => {
+        res = res.filter((resCourse: any) => course._id !== resCourse._id);
+      });
       res.forEach(({ _id, title, description, level, teachers }) => {
         if(description.length > 400) {
           description = description.slice(0, 350) + "...";
         }
         if(teachers.length == 1) teachers = teachers[0];
         else teachers = teachers.join(", ");
-        this.courses.push({ _id, title, description, level, teachers });
+
+        console.log(!this.user.classesEnrolled.includes({ _id, name: title }));
+        if(!this.user.classesEnrolled.includes({ _id, name: title })) this.courses.push({ _id, title, description, level, teachers });
       });
     });
   }
@@ -39,7 +47,6 @@ export class EnrollCourseComponent implements OnInit {
   }
 
   onClick($event) {
-    console.log($event);
     this.selectedCourse = $event;
   }
 
@@ -47,12 +54,11 @@ export class EnrollCourseComponent implements OnInit {
     if (!this.selectedCourse) return;
 
     this.courseService
-      .enrollInCourse(this.userService.getCurrentUser()._id, this.selectedCourse._id)
+      .enrollInCourse(this.user._id, this.selectedCourse._id)
       .subscribe(
         (res) => {
-          console.log(res);
           this.userService
-            .enrollInCourse(this.userService.getCurrentUser()._id, {
+            .enrollInCourse(this.user._id, {
               _id: this.selectedCourse._id,
               name: this.selectedCourse.title,
             })
