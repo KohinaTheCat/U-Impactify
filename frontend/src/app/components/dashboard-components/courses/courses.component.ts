@@ -59,15 +59,13 @@ export class CoursesComponent implements OnInit {
 
   dropCourse(): void {
     if (!this.selectedCourse) return;
-    this.user.classesEnrolled = this.user.classesEnrolled.filter((course: any) => course._id !== this.selectedCourse._id);
-    this.userService.setUser(this.user);
     this.courseService.dropACourse(this.userService.getCurrentUser()._id, this.selectedCourse._id)
       .subscribe(
         (res) => {
           this.userService
             .dropACourse(this.userService.getCurrentUser()._id, this.selectedCourse._id)
             .subscribe(
-              (res) => console.log(res),
+              (res) => this.userService.setUser(res),
               (err) => console.log(err)
             );
         },

@@ -147,8 +147,7 @@ router.route("/get/:uid").get((req, res) => {
   userSchema
     .findById(req.params.uid)
     .then((user) => {
-      if (user != null) return res.json(user);
-      else return res.status(404).json(err);
+      return res.json(user);
     })
     .catch((err) => res.status(404).json("no user found" + err));
 });

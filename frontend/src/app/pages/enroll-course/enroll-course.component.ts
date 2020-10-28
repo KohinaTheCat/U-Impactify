@@ -57,7 +57,6 @@ export class EnrollCourseComponent implements OnInit {
   courseHandler() {
     if (!this.selectedCourse) return;
     const { _id, name } = this.selectedCourse;
-
     this.courseService.enrollInCourse(this.user._id, _id).subscribe(
       (res) => {
         this.userService
@@ -66,7 +65,7 @@ export class EnrollCourseComponent implements OnInit {
             name,
           })
           .subscribe(
-            (res) => console.log(res),
+            (res) => this.userService.setUser(res),
             (err) => console.log(err)
           );
       },

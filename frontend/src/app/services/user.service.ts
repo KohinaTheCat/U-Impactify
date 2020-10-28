@@ -30,9 +30,9 @@ export class UserService {
 
   /**
    * PUT questionaire response
-   * @param {User} user 
+   * @param {User} user
    */
-  putQuestionaire(user : User): Observable<any> {
+  putQuestionaire(user: User): Observable<any> {
     const { _id, questionaire } = user;
     return this.http.put(`http://localhost:5000/user/addQuestionaire/`, {
       _id,
@@ -40,7 +40,7 @@ export class UserService {
     });
   }
 
-  /** 
+  /**
    * Get existing user
    * @param {String} uid uid of the user
    */
@@ -75,7 +75,7 @@ export class UserService {
    * Gets the current user stored in the service
    */
   getCurrentUser(): User {
-    return this.user;
+    return JSON.parse(localStorage.getItem('user') || null);
   }
 
   /**
@@ -84,9 +84,6 @@ export class UserService {
    * @param {Object} course { _id, name }
    */
   enrollInCourse(userId: string, course: any): Observable<any> {
-    this.user.classesEnrolled.push(course);
-    this.setUser(this.user);
-
     return this.http.put(`http://localhost:5000/user/enroll/`, {
       userId,
       course,
@@ -111,8 +108,6 @@ export class UserService {
    * @param {string} course  {_id, name} of course
    */
   updateClassesTeaching(_id: string, course: any): Observable<any> {
-    this.user.classesTeaching.push(course);
-    this.setUser(this.user);
     return this.http.put('http://localhost:5000/user/updateClassesTeaching', {
       _id,
       course,
@@ -130,6 +125,16 @@ export class UserService {
     );
   }
 
+  /**
+   * PUT adds the social initiative profile to the user
+   * @param {string} registeredNumber registered number of SI
+   * @param {string} businessNumber   business number of SI
+   * @param {string} location         location of SI
+   * @param {string} hours            working hours
+   * @param {string} phone            phone to contact SI
+   * @param {string} email            email to contact SI
+   * @param {string} _id              userId of SI Account
+   */
   addSocialInitiativeProfile(
     registeredNumber: string,
     businessNumber: string,
