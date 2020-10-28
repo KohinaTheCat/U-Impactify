@@ -15,7 +15,7 @@
       <app-front-page-header *ngIf="!isLoggedIn()"></app-front-page-header>
       <app-global-search *ngIf="isLoggedIn()"></app-global-search>
       <router-outlet></router-outlet>
-      <app-footer *ngIf="!isLoggedIn()"></app-footer>
+      <app-footer *ngIf="isLoggedIn()"></app-footer>
     </div>
   </div>
 </div>

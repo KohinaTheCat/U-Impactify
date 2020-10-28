@@ -23,6 +23,7 @@ import { SiProfileComponent } from './components/dashboard-components/si-profile
 import { EnrollCourseComponent } from './pages/enroll-course/enroll-course.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { IcIlProfileComponent } from './components/profile-components/ic-il-profile/ic-il-profile.component';
+import { GlobalProfileComponent } from './components/profile-components/global-profile/global-profile.component';
 
 
 @NgModule({
@@ -43,6 +44,7 @@ import { IcIlProfileComponent } from './components/profile-components/ic-il-prof
     EnrollCourseComponent,
     ProfileComponent,
     IcIlProfileComponent,
+    GlobalProfileComponent,
   ],
   imports: [
     BrowserModule,

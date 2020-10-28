@@ -29,6 +29,14 @@ export class UserService {
   }
 
   /**
+   * Get existing user
+   * @param {String} uid uid of the user
+   */
+  getAnotherUser(uid: String): Observable<any> {
+    return this.http.get('http://localhost:5000/user/get/' + uid, {});
+  }
+
+  /**
    * POST login user
    * @param {string} email    email of user
    * @param {string} password password of user
