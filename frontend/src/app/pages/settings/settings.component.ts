@@ -12,4 +12,9 @@ export class SettingsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  // TODO: add implementation
+  onPressDelete(): void {
+    console.log("Oopsies");
+  }
+
 }
