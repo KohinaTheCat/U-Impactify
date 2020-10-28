@@ -126,7 +126,6 @@ router.route("/addSocialInitiativeProfile").put((req, res) => {
     user
       .save()
       .then(() => res.json(user))
-      .json("Something")
       .catch((err) => res.status(400).json(err));
   });
 });

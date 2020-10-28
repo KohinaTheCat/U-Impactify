@@ -10,6 +10,9 @@
         Registered Name: <span class="value">{{ user._id }}</span>
       </div>
       <div>
+        Registered Number: <span class="value">{{ registeredNumber }}</span>
+      </div>
+      <div>
         Business Number: <span class="value">{{ businessNumber }}</span>
       </div>
       <div>
@@ -121,7 +124,12 @@
         >
           Cancel
         </button>
-        <button type="button" class="btn btn-primary" (click)="basic = false">
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="basic = false"
+          (click)="add()"
+        >
           Ok
         </button>
       </div>

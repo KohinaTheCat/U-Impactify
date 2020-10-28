@@ -112,18 +112,18 @@ export class UserService {
 
   addSocialInitiativeProfile(
     registeredNumber: string,
-    businessNUmber: string,
+    businessNumber: string,
     location: string,
     hours: string,
     phone: string,
     email: string,
     _id: string
-  ) {
-    return this.http.post(
+  ): Observable<User> {
+    return this.http.put<User>(
       `http://localhost:5000/user/addSocialInitiativeProfile`,
       {
         registeredNumber,
-        businessNUmber,
+        businessNumber,
         location,
         hours,
         phone,

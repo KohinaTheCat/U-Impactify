@@ -40,12 +40,43 @@ export class SiProfileComponent implements OnInit {
     }
   }
 
+  add(): void {
+    this.userService
+      .addSocialInitiativeProfile(
+        this.registeredNumber,
+        this.businessNumber,
+        this.location,
+        this.hours,
+        this.phone,
+        this.email,
+        this.user._id
+      )
+      .subscribe(
+        (res) => {
+          console.log(res);
+          this.userService.setUser(res);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+  }
+
   doNotChange(): void {
-    this.registeredNumber = 'OriginalNumber';
-    this.businessNumber = 'OriginalBusiness';
-    this.location = 'OriginalLocation';
-    this.hours = 'OriginalHours';
-    this.phone = 'OriginalPhone';
-    this.email = 'OriginalEmail';
+    const {
+      registeredNumber,
+      businessNumber,
+      location,
+      hours,
+      phone,
+      email,
+    } = this.user.socialInitiative;
+
+    this.registeredNumber = registeredNumber;
+    this.businessNumber = businessNumber;
+    this.location = location;
+    this.hours = hours;
+    this.phone = phone;
+    this.email = email;
   }
 }
