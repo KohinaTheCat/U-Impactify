@@ -44,7 +44,7 @@ router.route("/").post((req, res) => {
 });
 
 // PUT questionaire response
-router.route("/addQuestionaire").put((req,res)=> {
+router.route("/addQuestionaire").put((req, res) => {
   const { _id, questionaire } = req.body;
   userSchema.findById(_id).then((user) => {
     user.questionaire = questionaire;
@@ -115,7 +115,6 @@ router.delete("/dropCourse/:courseId/:userId", (req, res) => {
   });
 });
 
-
 // PUT social initiative
 router.route("/addSocialInitiativeProfile").put((req, res) => {
   const {
@@ -141,6 +140,7 @@ router.route("/addSocialInitiativeProfile").put((req, res) => {
       .then(() => res.json(user))
       .catch((err) => res.status(400).json(err));
   });
+});
 
 // GET user by username
 router.route("/get/:uid").get((req, res) => {
@@ -151,7 +151,6 @@ router.route("/get/:uid").get((req, res) => {
       else return res.status(404).json(err);
     })
     .catch((err) => res.status(404).json("no user found" + err));
-
 });
 
 module.exports = router;
