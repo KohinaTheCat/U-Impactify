@@ -117,4 +117,25 @@ export class UserService {
       `http://localhost:5000/user/dropCourse/${courseId}/${userId}`
     );
   }
+
+  addSocialInitiativeProfile(
+    registeredNumber: string,
+    businessNUmber: string,
+    location: string,
+    hours: string,
+    phone: string,
+    email: string
+  ) {
+    return this.http.post(
+      `http://localhost:5000/user/addSocialInitiativeProfile`,
+      {
+        registeredNumber,
+        businessNUmber,
+        location,
+        hours,
+        phone,
+        email,
+      }
+    );
+  }
 }

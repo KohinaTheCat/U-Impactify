@@ -59,27 +59,21 @@ const userSchema = new Schema({
     type: [[String]],
   },
 
-  socialInitiative: 
-  {
-
-    type:
-      {
-      craeatedProfile: false,
+  socialInitiative: {
+    type: {
       registeredNumber: String,
       businessNUmber: String,
       location: String,
       hours: String,
       phone: String,
       email: String,
-      }
+    },
   },
-
 });
-
 
 /**
  * https://www.mongodb.com/blog/post/password-authentication-with-mongoose-part-1
- * 
+ *
  * @param {String}   newPass  the new password
  * @param {function} callBack any function you pass, err passed for error handling
  */
