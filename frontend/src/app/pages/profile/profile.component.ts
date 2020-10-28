@@ -17,6 +17,22 @@ export class ProfileComponent implements OnInit {
   constructor(private userService: UserService) {}
   ngOnInit(): void {
     this.user = this.userService.getCurrentUser();
+    if (!this.user) {
+      /** 
+       * TODO: Delete this after URL has been implemented
+       * just a dummy user  
+       */
+      this.user = {
+        _id: 'dummyUserID',
+        password: '1234',
+        email: 'dummy@mail.utoronto.ca',
+        type: 'IL',
+        classesEnrolled: [],
+        classesTeaching: [],
+        questionaire: [[]],
+        socialInitiative: {},
+      };
+    }
     this.username = this.user._id;
     this.email = this.user.email;
   }
