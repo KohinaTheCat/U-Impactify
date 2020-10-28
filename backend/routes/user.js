@@ -35,6 +35,21 @@ router.route("/").post((req, res) => {
     .catch((err) => res.status(400).json(err));
 });
 
+// PUT questionaire response
+router.route("/addQuestionaire").put((req,res)=> {
+  const { _id, questionaire } = req.body;
+  console.log(_id)
+  console.log(questionaire)
+  userSchema.findById(_id).then((user) => {
+    user.questionaire = questionaire;
+    console.log(questionaire)
+    user
+      .save()
+      .then(() => res.json(user))
+      .catch((err) => res.status(404).json(err));
+  });
+});
+
 // POST enroll course (Impact Learner only)
 router.route("/enroll").put((req, res) => {
   const { userId, course } = req.body;

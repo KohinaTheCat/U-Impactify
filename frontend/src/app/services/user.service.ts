@@ -29,6 +29,18 @@ export class UserService {
   }
 
   /**
+   * POST questionaire response
+   * @param {User} user 
+   */
+  postQuestionaire(user : User): Observable<any> {
+    const { _id, questionaire } = user;
+    return this.http.put(`http://localhost:5000/user/addQuestionaire/`, {
+      _id,
+      questionaire,
+    });
+  }
+
+  /**
    * POST login user
    * @param {string} email    email of user
    * @param {string} password password of user
