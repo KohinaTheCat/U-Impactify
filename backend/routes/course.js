@@ -71,7 +71,7 @@ router.route("/").post((req, res) => {
     files,
     tags,
     level,
-    "img": "",
+    img: "",
   });
 
   newCourse
@@ -112,6 +112,28 @@ router.post("/:id/upload", upload.array("documents", 10), (req, res) => {
         .catch((err) => res.json(err));
     })
     .catch((err) => res.status(400).json(`Error finding Course: ${err}`));
+});
+
+//POST uploading courseImage to a course, id refers to course id
+router.post("/:id/uploadCourseImage", upload.single("image"), (req, res) => {
+  Course.findById(req.params.id)
+    .then((course) => {
+      course.img = req.file.id;
+      course
+        .save()
+        .then(() => res.json("Course Added!"))
+        .catch((err) => res.json(err));
+    })
+    .catch((err) => res.status(400).json(`Error finding Course: ${err}`));
+});
+
+//GET courseImage id
+router.get("/:id/getCourseImage", (req, res) => {
+  Course.findById(req.params.id)
+    .then((course) => {
+      res.json(course.img);
+    })
+    .catch((err) => res.status(404).json(err));
 });
 
 //GET document by filename

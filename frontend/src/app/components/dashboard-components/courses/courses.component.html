@@ -1,12 +1,12 @@
 <div class="courses-container">
   <h2>Your Classes</h2>
   <div class="courses">
-    <div *ngFor="let course of courses" class="course-card">
+    <div *ngFor="let course of courses; let i = index" [attr.data-index]="i" class="course-card">
       <div (click)="onClickDropCourse(course)" *ngIf="this.user.type === 'IL'">
         <clr-icon shape="trash" id="dropcourse"></clr-icon>
       </div>
       <div class="course-image plus">
-        <img src={{course.img}}>
+        <img src={{this.imgs[i]}}>
       </div>
       <!-- link with router using course._id -->
       <!-- add image of course -->

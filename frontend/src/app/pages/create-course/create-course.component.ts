@@ -52,6 +52,7 @@ export class CreateCourseComponent implements OnInit {
             .updateClassesTeaching(this.userService.getCurrentUser()._id, {
               _id: res._id,
               name: res.name,
+              img: res.img
             })
             .subscribe(
               (res) => console.log(res),

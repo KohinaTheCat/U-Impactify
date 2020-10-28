@@ -14,6 +14,7 @@ export class EnrollCourseComponent implements OnInit {
   basic: boolean = true;
   error: string = '';
   courses: any[] = [];
+  imgs: any[];
   user: User;
 
   selectedCourse: any;
@@ -26,11 +27,13 @@ export class EnrollCourseComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.userService.getCurrentUser();
+    this.imgs = [];
+
     this.courseService.getAllCourses().subscribe((res) => {
       this.user.classesEnrolled.forEach((course: any) => {
         res = res.filter((resCourse: Course) => course._id !== resCourse._id);
       });
-      res.forEach(({ _id, name, description, level, teachers, img }) => {
+      res.forEach(({ _id, name, description, level, teachers }) => {
         if (description.length > 400) {
           description = description.slice(0, 350) + '...';
         }
@@ -46,15 +49,24 @@ export class EnrollCourseComponent implements OnInit {
             description,
             level,
             allTeachers,
-            img,
           });
         }
+        this.imgs.push("")
       });
-      this.courses.map((course) =>
-        course.img !== undefined && course.img !== ''
-          ? (course.img =
-              'http://localhost:5000/course/documents/' + course.img)
-          : (course.img = '../../../assets/uLogo.png')
+
+      this.courses.map((course, i) =>
+        (course._id !== undefined) ?
+
+        this.courseService.getCourseImageId(course._id).subscribe(
+          (res) =>(
+            console.log(res),
+            res !== ''
+              ? (this.imgs[i] = 'http://localhost:5000/course/documents/' + res)
+              : (this.imgs[i] = '')),
+          (err) => console.log(err)
+        )
+        :
+        console.log(course)
       );
     });
     console.log(this.courses);
@@ -70,28 +82,15 @@ export class EnrollCourseComponent implements OnInit {
 
   courseHandler() {
     if (!this.selectedCourse) return;
-    const { _id, name, img } = this.selectedCourse;
-
-    // get raw img id
-    let parser = img;
-    if (parser.startsWith('http:')) {
-      parser = /[^/]*$/.exec(img)[0];
-    } else {
-      parser = undefined;
-    }
-    console.log("p", parser)
+    const { _id, name } = this.selectedCourse;
 
     this.courseService.enrollInCourse(this.user._id, _id).subscribe(
       (res) => {
         this.userService
-          .enrollInCourse(
-            this.user._id,
-            {
-              _id,
-              name,
-              "img": parser
-            }
-          )
+          .enrollInCourse(this.user._id, {
+            _id,
+            name,
+          })
           .subscribe(
             (res) => console.log(res),
             (err) => console.log(err)

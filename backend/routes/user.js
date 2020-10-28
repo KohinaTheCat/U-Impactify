@@ -71,7 +71,7 @@ router.route("/updateClassesTeaching").put((req, res) => {
       user.classesTeaching = user.classesTeaching.concat({
         _id: course._id,
         name: course.name,
-        img: "#",
+        img: course.img,
       });
       user
         .save()

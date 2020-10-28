@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 export class CoursesComponent implements OnInit {
   user: User;
   courses: any[];
-
+  imgs: any[];
   selectedCourse: any;
 
   constructor(
@@ -30,10 +30,16 @@ export class CoursesComponent implements OnInit {
         ? this.user.classesEnrolled
         : this.user.classesTeaching;
 
-    this.courses.map((course) =>
-      course.img !== undefined && course.img !== ''
-        ? (course.img = 'http://localhost:5000/course/documents/' + course.img)
-        : (course.img = '../../../assets/uLogo.png')
+    this.imgs = this.courses.map((c) => c.img);
+    this.courses.map((course, i) =>
+      this.courseService.getCourseImageId(course._id).subscribe(
+        (res) =>(
+        console.log(res),
+          res !== ''
+            ? (this.imgs[i] = 'http://localhost:5000/course/documents/' + res)
+            : (this.imgs[i] = '')),
+        (err) => console.log(err)
+      )
     );
   }
 

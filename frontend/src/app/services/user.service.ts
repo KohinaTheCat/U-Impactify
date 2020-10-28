@@ -14,6 +14,21 @@ export class UserService {
   user: User = JSON.parse(localStorage.getItem('user') || null);
 
   /**
+   * Get existing user
+   * @param {String} uid uid of the user
+   */
+  getAnotherUser(uid: String): Observable<any> {
+    return this.http.get('http://localhost:5000/user/get/' + uid, {});
+  }
+
+  /**
+   * Gets the current user stored in the service
+   */
+  getCurrentUser(): User {
+    return this.user;
+  }
+
+  /**
    * POST new user
    * @param {User} newUser the about-to-be user
    */
@@ -26,14 +41,6 @@ export class UserService {
       type,
       questionaire,
     });
-  }
-
-  /**
-   * Get existing user
-   * @param {String} uid uid of the user
-   */
-  getAnotherUser(uid: String): Observable<any> {
-    return this.http.get('http://localhost:5000/user/get/' + uid, {});
   }
 
   /**
@@ -57,13 +64,6 @@ export class UserService {
   setUser(user: User): void {
     this.user = user;
     localStorage.setItem('user', JSON.stringify(user));
-  }
-
-  /**
-   * Gets the current user stored in the service
-   */
-  getCurrentUser(): User {
-    return this.user;
   }
 
   /**
