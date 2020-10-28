@@ -60,13 +60,23 @@ const userSchema = new Schema({
   },
 
   socialInitiative: {
-    type: {
-      registeredNumber: String,
-      businessNUmber: String,
-      location: String,
-      hours: String,
-      phone: String,
-      email: String,
+    registeredNumber: {
+      type: String,
+    },
+    businessNumber: {
+      type: String,
+    },
+    location: {
+      type: String,
+    },
+    hours: {
+      type: String,
+    },
+    phone: {
+      type: String,
+    },
+    email: {
+      type: String,
     },
   },
 });
@@ -85,7 +95,7 @@ userSchema.methods.comparePassword = function (newPass, callBack) {
     callBack(null, isMatch);
   });
 };
-
+//
 userSchema.pre("save", function (next) {
   let user = this;
 

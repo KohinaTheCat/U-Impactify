@@ -12,10 +12,7 @@ import { FormDisplay } from './FormDisplay';
 export class LoginSignupComponent implements OnInit {
   logged: boolean = false;
 
-  constructor(
-    private userService: UserService,
-    private router: Router,
-  ) {}
+  constructor(private userService: UserService, private router: Router) {}
   // TODO: errorChecking!!!!
 
   signup: FormDisplay = {
@@ -91,7 +88,7 @@ export class LoginSignupComponent implements OnInit {
       _id: this.username,
       email: this.email,
       password: this.password,
-      type: this.type, 
+      type: this.type,
     };
     if (!this.logged) {
       this.registerHandler(user);

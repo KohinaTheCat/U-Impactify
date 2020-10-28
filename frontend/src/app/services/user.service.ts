@@ -18,21 +18,13 @@ export class UserService {
    * @param {User} newUser the about-to-be user
    */
   postNewUser(newUser: User): Observable<User> {
-    const {
-      _id,
-      password,
-      email,
-      type,
-      questionaire,
-      socialInitiative,
-    } = newUser;
+    const { _id, password, email, type, questionaire } = newUser;
     return this.http.post<User>('http://localhost:5000/user/', {
       _id,
       password,
       email,
       type,
       questionaire,
-      socialInitiative,
     });
   }
 
@@ -124,7 +116,8 @@ export class UserService {
     location: string,
     hours: string,
     phone: string,
-    email: string
+    email: string,
+    _id: string
   ) {
     return this.http.post(
       `http://localhost:5000/user/addSocialInitiativeProfile`,
@@ -135,6 +128,7 @@ export class UserService {
         hours,
         phone,
         email,
+        _id,
       }
     );
   }

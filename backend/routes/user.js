@@ -19,14 +19,7 @@ router.route("/:email").post((req, res) => {
 
 // POST new user
 router.route("/").post((req, res) => {
-  const {
-    _id,
-    password,
-    email,
-    type,
-    questionaire,
-    socialInitiative,
-  } = req.body;
+  const { _id, password, email, type, questionaire } = req.body;
   const newUser = new userSchema({
     _id,
     password,
@@ -35,14 +28,21 @@ router.route("/").post((req, res) => {
     classesEnrolled: [],
     classesTeaching: [],
     questionaire,
-    socialInitiative,
+    socialInitiative: {
+      registeredNumber: "",
+      businessNumber: "",
+      location: "",
+      hours: "",
+      phone: "",
+      email: "",
+    },
   });
   newUser
     .save()
     .then(() => res.json(newUser))
     .catch((err) => res.status(400).json(err));
 });
-
+//
 // POST enroll course (Impact Learner only)
 router.route("/enroll").put((req, res) => {
   const { userId, course } = req.body;
@@ -99,6 +99,34 @@ router.delete("/dropCourse/:courseId/:userId", (req, res) => {
     user
       .save()
       .then(() => res.json(user))
+      .catch((err) => res.status(400).json(err));
+  });
+});
+
+// PUT social initiative
+router.route("/addSocialInitiativeProfile").put((req, res) => {
+  const {
+    registeredNumber,
+    businessNumber,
+    location,
+    hours,
+    phone,
+    email,
+    _id,
+  } = req.body;
+  userSchema.findById(_id).then((user) => {
+    user.socialInitiative = {
+      registeredNumber,
+      businessNumber,
+      location,
+      hours,
+      phone,
+      email,
+    };
+    user
+      .save()
+      .then(() => res.json(user))
+      .json("Something")
       .catch((err) => res.status(400).json(err));
   });
 });
