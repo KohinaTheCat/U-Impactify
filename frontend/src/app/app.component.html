@@ -12,8 +12,10 @@
       <a clrVerticalNavLink><clr-icon shape="cog"></clr-icon> Settings</a>
     </clr-vertical-nav>
     <div class="content-area">
+      <app-front-page-header *ngIf="!isLoggedIn()"></app-front-page-header>
       <app-global-search *ngIf="isLoggedIn()"></app-global-search>
       <router-outlet></router-outlet>
+      <app-footer *ngIf="!isLoggedIn()"></app-footer>
     </div>
   </div>
 </div>
