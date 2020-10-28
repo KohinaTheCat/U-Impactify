@@ -24,6 +24,7 @@ import { EnrollCourseComponent } from './pages/enroll-course/enroll-course.compo
 import { ProfileComponent } from './pages/profile/profile.component';
 import { IcIlProfileComponent } from './components/profile-components/ic-il-profile/ic-il-profile.component';
 import { GlobalProfileComponent } from './components/profile-components/global-profile/global-profile.component';
+import { SettingsComponent } from './pages/settings/settings.component';
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import { GlobalProfileComponent } from './components/profile-components/global-p
     ProfileComponent,
     IcIlProfileComponent,
     GlobalProfileComponent,
+    SettingsComponent,
   ],
   imports: [
     BrowserModule,

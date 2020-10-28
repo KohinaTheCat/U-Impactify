@@ -54,7 +54,7 @@ export class CreateCourseComponent implements OnInit {
               name: res.name,
             })
             .subscribe(
-              (res) => console.log(res),
+              (res) => this.userService.setUser(res),
               (err) => console.log(err)
             );
           for (const droppedFile of course.files) {

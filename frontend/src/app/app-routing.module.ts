@@ -10,6 +10,7 @@ import { CourseComponent } from './pages/course/course.component';
 import { SignupQuestionaire2Component } from './pages/signup-questionaire2/signup-questionaire2.component';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { GlobalProfileComponent} from './components/profile-components/global-profile/global-profile.component'
+import { SettingsComponent } from './pages/settings/settings.component';
 
 const routes: Routes = [
   { path: 'signup', component: LoginSignupComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
   { path: 'questionaire', component: SignupQuestionaireComponent },
   { path: 'questionaire2', component: SignupQuestionaire2Component },
   { path: 'course', component: CourseComponent },
