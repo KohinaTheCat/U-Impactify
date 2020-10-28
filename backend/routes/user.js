@@ -103,6 +103,7 @@ router.delete("/dropCourse/:courseId/:userId", (req, res) => {
   });
 });
 
+
 // PUT social initiative
 router.route("/addSocialInitiativeProfile").put((req, res) => {
   const {
@@ -128,6 +129,17 @@ router.route("/addSocialInitiativeProfile").put((req, res) => {
       .then(() => res.json(user))
       .catch((err) => res.status(400).json(err));
   });
+
+// GET user by username
+router.route("/get/:uid").get((req, res) => {
+  userSchema
+    .findById(req.params.uid)
+    .then((user) => {
+      if (user != null) return res.json(user);
+      else return res.status(404).json(err);
+    })
+    .catch((err) => res.status(404).json("no user found" + err));
+
 });
 
 module.exports = router;

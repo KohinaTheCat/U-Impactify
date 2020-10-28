@@ -8,6 +8,7 @@
 .side-img {
   width: 100%;
   height: 100%;
+  padding-top: 2rem;
   text-align: center;
   font-size: 2.5vh;
   overflow: hidden;
