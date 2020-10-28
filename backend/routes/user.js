@@ -110,4 +110,15 @@ router.delete("/dropCourse/:courseId/:userId", (req, res) => {
   });
 });
 
+// GET user by username
+router.route("/get/:uid").get((req, res) => {
+  userSchema
+    .findById(req.params.uid)
+    .then((user) => {
+      if (user != null) return res.json(user);
+      else return res.status(404).json(err);
+    })
+    .catch((err) => res.status(404).json("no user found" + err));
+});
+
 module.exports = router;

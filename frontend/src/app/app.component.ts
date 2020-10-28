@@ -15,6 +15,6 @@ export class AppComponent {
    * Determines if navbar should appear
    */
   isLoggedIn = (): Boolean => {
-    return !!this.userService.getCurrentUser() && this.router.url !== '/signup' && this.router.url !== '/questionaire' && this.router.url !== '/questionaire2';
+    return !!this.userService.getCurrentUser() && this.router.url !== '/signup' && this.router.url !== '/questionaire' && this.router.url !== '/questionaire2' && !this.router.url.includes('/user');
   };
 }
