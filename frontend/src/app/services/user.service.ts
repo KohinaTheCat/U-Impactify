@@ -129,4 +129,27 @@ export class UserService {
       `http://localhost:5000/user/dropCourse/${courseId}/${userId}`
     );
   }
+
+  addSocialInitiativeProfile(
+    registeredNumber: string,
+    businessNumber: string,
+    location: string,
+    hours: string,
+    phone: string,
+    email: string,
+    _id: string
+  ): Observable<User> {
+    return this.http.put<User>(
+      `http://localhost:5000/user/addSocialInitiativeProfile`,
+      {
+        registeredNumber,
+        businessNumber,
+        location,
+        hours,
+        phone,
+        email,
+        _id,
+      }
+    );
+  }
 }

@@ -10,5 +10,12 @@ export interface User {
   classesEnrolled: object[];
   classesTeaching: object[];
   questionaire: string[][];
-  socialInitiative: object;
+  socialInitiative: {
+    registeredNumber: string;
+    businessNumber: string;
+    location: string;
+    hours: string;
+    phone: string;
+    email: string;
+  };
 }
