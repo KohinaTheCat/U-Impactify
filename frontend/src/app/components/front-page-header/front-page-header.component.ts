@@ -17,4 +17,8 @@ export class FrontPageHeaderComponent implements OnInit {
     return this.router.url !== "/signup";
   }
 
+  navigate(): void {
+    this.router.navigate(['signup']);
+  }
+
 }
