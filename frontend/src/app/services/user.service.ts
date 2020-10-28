@@ -29,6 +29,18 @@ export class UserService {
   }
 
   /**
+   * PUT questionaire response
+   * @param {User} user 
+   */
+  putQuestionaire(user : User): Observable<any> {
+    const { _id, questionaire } = user;
+    return this.http.put(`http://localhost:5000/user/addQuestionaire/`, {
+      _id,
+      questionaire,
+    });
+  }
+
+  /** 
    * Get existing user
    * @param {String} uid uid of the user
    */

@@ -22,10 +22,11 @@ const routes: Routes = [
   { path: 'questionaire', component: SignupQuestionaireComponent },
   { path: 'questionaire2', component: SignupQuestionaire2Component },
   { path: 'course', component: CourseComponent },
-  { path: 'createcourse', component: CreateCourseComponent },
-  { path: 'enrollcourse', component: EnrollCourseComponent },
-  { path: 'profile', component: ProfileComponent },
+  { path: 'createcourse', component: CreateCourseComponent, canActivate: [AuthGuard]  },
+  { path: 'enrollcourse', component: EnrollCourseComponent, canActivate: [AuthGuard]  },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'user/:username', component: GlobalProfileComponent },
+  {path: 'user', redirectTo: 'dashboard', canActivate: [AuthGuard]}
 ];
 
 @NgModule({

@@ -16,14 +16,17 @@ export class GlobalSearchComponent implements OnInit {
        this.title =
          event.url === '/'
            ? 'Dashboard'
-           : event.url.substring(1);
+           : event.url.substring(1).split('/')[0];
       });
   }
 
   title: String = '';
 
   ngOnInit(): void {
-    this.title = location.pathname === '/' ?  'Dashboard': location.pathname.substring(1);
+    this.title =
+      location.pathname === '/'
+        ? 'Dashboard'
+        : location.pathname.substring(1).split('/')[0];
   }
 
 
