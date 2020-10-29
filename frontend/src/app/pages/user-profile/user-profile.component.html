@@ -1,0 +1,10 @@
+<div class="err" *ngIf="!!err else profile">
+  <!-- 404 -->
+  <div class="inner">
+      <h1>404</h1>
+      <p>User Not Found.</p>
+  </div>
+</div>
+<ng-template #profile>
+    <div class="main-container">User Profile Works!</div>
+</ng-template>

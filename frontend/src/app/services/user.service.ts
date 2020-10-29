@@ -75,7 +75,7 @@ export class UserService {
    * Gets the current user stored in the service
    */
   getCurrentUser(): User {
-    return JSON.parse(localStorage.getItem('user') || null);
+    return this.user;
   }
 
   /**
