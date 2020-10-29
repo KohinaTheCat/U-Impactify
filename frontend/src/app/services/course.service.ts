@@ -54,6 +54,13 @@ export class CourseService {
     );
   }
 
+  postCourseImage(file: FormData, courseId: string) {
+    return this.http.post(
+      `http://localhost:5000/course/${courseId}/uploadCourseImage`,
+      file
+    );
+  }
+
   /**
    * GET all courses
    */

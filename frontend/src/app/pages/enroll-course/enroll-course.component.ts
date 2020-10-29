@@ -59,7 +59,6 @@ export class EnrollCourseComponent implements OnInit {
 
         this.courseService.getCourseImageId(course._id).subscribe(
           (res) =>(
-            console.log(res),
             res !== ''
               ? (this.imgs[i] = 'http://localhost:5000/course/documents/' + res)
               : (this.imgs[i] = '')),

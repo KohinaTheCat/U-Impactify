@@ -115,7 +115,7 @@ router.post("/:id/upload", upload.array("documents", 10), (req, res) => {
 });
 
 //POST uploading courseImage to a course, id refers to course id
-router.post("/:id/uploadCourseImage", upload.single("image"), (req, res) => {
+router.post("/:id/uploadCourseImage", upload.array("document", 10), (req, res) => {
   Course.findById(req.params.id)
     .then((course) => {
       course.img = req.file.id;

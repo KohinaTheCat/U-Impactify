@@ -25,6 +25,7 @@ export class CreateCourseComponent implements OnInit {
   level: string = '';
   tags: string = '';
   files: NgxFileDropEntry[] = [];
+  img: NgxFileDropEntry[] = [];
   basic: boolean = true;
   error: string = '';
 
@@ -52,7 +53,7 @@ export class CreateCourseComponent implements OnInit {
             .updateClassesTeaching(this.userService.getCurrentUser()._id, {
               _id: res._id,
               name: res.name,
-              img: res.img
+              img: res.img,
             })
             .subscribe(
               (res) => console.log(res),
@@ -79,6 +80,30 @@ export class CreateCourseComponent implements OnInit {
               console.log(droppedFile.relativePath, fileEntry);
             }
           }
+
+          // call add image
+          for (const droppedFile of this.img) {
+            if (droppedFile.fileEntry.isFile) {
+              const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
+              fileEntry.file((file: File) => {
+                const formData = new FormData();
+                formData.append('documents', file, droppedFile.relativePath);
+                this.courseService.postCourseImage(formData, res._id).subscribe(
+                  (res) => {
+                    console.log(res);
+                  },
+                  (err) => {
+                    console.log(err);
+                  }
+                );
+              });
+            } else {
+              // It was a directory (empty directories are added, otherwise only files)
+              const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
+              console.log(droppedFile.relativePath, fileEntry);
+            }
+          }
+
           this.router.navigate(['dashboard']);
         },
         (err) => {
@@ -92,6 +117,22 @@ export class CreateCourseComponent implements OnInit {
   public dropped(files: NgxFileDropEntry[]) {
     this.files = files;
     for (const droppedFile of files) {
+      if (droppedFile.fileEntry.isFile) {
+        const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
+        fileEntry.file((file: File) => {
+          console.log(file);
+        });
+      } else {
+        // It was a directory (empty directories are added, otherwise only files)
+        const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
+        console.log(droppedFile.relativePath, fileEntry);
+      }
+    }
+  }
+
+  public droppedCourseImage(image: NgxFileDropEntry) {
+    this.img = image;
+    for (const droppedFile of image) {
       if (droppedFile.fileEntry.isFile) {
         const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
         fileEntry.file((file: File) => {
