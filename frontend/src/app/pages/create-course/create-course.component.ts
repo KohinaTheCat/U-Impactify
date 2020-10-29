@@ -54,7 +54,10 @@ export class CreateCourseComponent implements OnInit {
               name: res.name,
             })
             .subscribe(
-              (res) => this.userService.setUser(res),
+              (res) => {
+                this.userService.setUser(res);
+                this.router.navigate(['dashboard']);
+              },
               (err) => console.log(err)
             );
           for (const droppedFile of course.files) {
@@ -78,7 +81,6 @@ export class CreateCourseComponent implements OnInit {
               console.log(droppedFile.relativePath, fileEntry);
             }
           }
-          this.router.navigate(['dashboard']);
         },
         (err) => {
           this.error = err.message;
