@@ -1,5 +1,6 @@
 import { CourseService } from 'src/app/services/course.service';
 import { Course } from './../../../models/course.model';
+import { CreateCourseComponent } from './../../../pages/create-course/create-course.component';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
@@ -34,6 +35,9 @@ export class CoursesComponent implements OnInit {
         : this.user.classesTeaching;
   }
 
+  /**
+   * TODO: Setup
+   */
   addNewCourse(): void {
     if(this.user.type === 'IL') {
       this.router.navigate(['enrollcourse']);
@@ -55,21 +59,21 @@ export class CoursesComponent implements OnInit {
 
   dropCourse(): void {
     if (!this.selectedCourse) return;
+    this.user.classesEnrolled = this.user.classesEnrolled.filter((course: any) => course._id !== this.selectedCourse._id);
+    this.userService.setUser(this.user);
     this.courseService.dropACourse(this.userService.getCurrentUser()._id, this.selectedCourse._id)
       .subscribe(
         (res) => {
           this.userService
             .dropACourse(this.userService.getCurrentUser()._id, this.selectedCourse._id)
             .subscribe(
-              (res) => {
-                this.userService.setUser(res);
-                this.ngOnChanges();
-              },
+              (res) => console.log(res),
               (err) => console.log(err)
             );
         },
         (err) => console.log(err)
       );
+    this.ngOnChanges();
   }
 
   previewCourse($event) : void {
