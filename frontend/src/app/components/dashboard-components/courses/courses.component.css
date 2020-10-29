@@ -5,6 +5,8 @@ h2 {
 
 .courses {
   display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
   height: 24rem;
   align-items: center;
 }
