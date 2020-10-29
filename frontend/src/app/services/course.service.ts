@@ -7,16 +7,20 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class CourseService {
-  course: Course = JSON.parse(localStorage.getItem('course') || null);
 
   constructor(private http: HttpClient) {}
 
-  postNewCourse(newCourse, username): Observable<any> {
-    const { title, description, level, tags } = newCourse;
-    return this.http.post('http://localhost:5000/course/add', {
-      title,
+  /**
+   * POST new course
+   * @param {any}    course the newly created course
+   * @param {string} _id    id of the teacher
+   */
+  postNewCourse(course: any, _id: string): Observable<Course> {
+    const { name, description, level, tags } = course;
+    return this.http.post<Course>('http://localhost:5000/course/', {
+      name,
       students: [],
-      teachers: [username],
+      teachers: [_id],
       description,
       files: [],
       level,
@@ -24,21 +28,34 @@ export class CourseService {
     });
   }
 
-  postNewFile(file: any, CourseId) {
+  /**
+   * POST uploading document to a course
+   * @param {FormData} file     new file
+   * @param {string}   courseId id of course
+   */
+  postNewFile(file: FormData, courseId: string) {
     return this.http.post(
-      `http://localhost:5000/course/${CourseId}/upload`,
+      `http://localhost:5000/course/${courseId}/upload`,
       file
     );
   }
 
-  getCourseFiles(CourseId): Observable<any> {
-    return this.http.get(`http://localhost:5000/document/${CourseId}`, {});
+  /**
+   * GET all documents for a course
+   * @param {string} courseId id of course
+   */
+  getCourseFiles(courseId: string): Observable<any> {
+    return this.http.get(`http://localhost:5000/document/${courseId}`);
   }
 
-  getAllCourses(): Observable<any> {
-    return this.http.get(`http://localhost:5000/course`, {});
+  /**
+   * GET all courses
+   */
+  getAllCourses(): Observable<Course[]> {
+    return this.http.get<Course[]>(`http://localhost:5000/course`);
   }
 
+<<<<<<< HEAD
   getCourse(CourseTitle): Observable<any> {
     return this.http.get(`http://localhost:5000/course/${CourseTitle}`, {});
   }
@@ -48,12 +65,36 @@ export class CourseService {
       `http://localhost:5000/course/addStudent/${courseId}/${username}`,
       {}
     );
+=======
+  /**
+   * GET single course given id
+   * @param {string} _id id of course
+   */
+  getCourse(_id: string): Observable<Course> {
+    return this.http.get<Course>(`http://localhost:5000/course/${_id}`);
   }
 
-  // Drops students from course list
-  dropACourse(userId: string, CourseId: string): Observable<any> {
+  /**
+   * POST enroll student
+   * @param {string} userId    id of user
+   * @param {string} courseId  id of course
+   */
+  enrollInCourse(userId: string, courseId: string): Observable<any> {
+    return this.http.put(`http://localhost:5000/course/enroll`, {
+      userId,
+      courseId,
+    });
+>>>>>>> master
+  }
+
+  /**
+   * DELETE drop student from course
+   * @param {string} userId   id of user
+   * @param {string} courseId id of course
+   */
+  dropACourse(userId: string, courseId: string): Observable<any> {
     return this.http.delete(
-      `http://localhost:5000/course/dropCourse/${CourseId}/${userId}`
+      `http://localhost:5000/course/dropCourse/${courseId}/${userId}`
     );
   }
 }

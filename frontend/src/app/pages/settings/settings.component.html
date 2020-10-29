@@ -1,0 +1,40 @@
+<div class="settings">
+    <h2>My Account</h2>
+    <div class="card" id="delete-account">
+        <h5 id="delete-title">Delete Account</h5>
+        <div id="delete-body">This will <strong>delete any and all data stored @ UImpactify</strong> and will sign you out upon completion. Please use this function if and only if you are aware of the outcome.</div>
+        <button (click)="opened = true" class="btn btn-danger">Delete my account</button>
+    </div>
+</div>
+<clr-modal [(clrModalOpen)]="opened" [clrModalSize]="'lg'">
+    <h3 class="modal-title"> <img src="../../../assets/word-logo.png" alt="" width="200"></h3>
+    <div class="modal-body">
+        Woah there! Hold your horses! You are <strong>about to delete everything</strong>, <strong><em>ever.</em></strong> <br>
+        <span *ngIf="user.type !== 'SI'">Let's see what's going to be deleted:</span> 
+        <div *ngIf="user.type === 'IL'" class="delete-modal-container">
+            You will be dropped from the following courses:
+            <ul *ngIf="user.classesEnrolled.length else none">
+                <li *ngFor="let course of user.classesEnrolled">{{course.name}}</li>
+            </ul>
+            <ng-template #none><br> <strong>No courses found</strong></ng-template>
+        </div>
+        <div *ngIf="user.type === 'IC'" class="delete-modal-container">
+            The following courses will be deleted unless there exists another teacher:
+            <ul *ngIf="user.classesTeaching.length else none">
+                <li *ngFor="let course of user.classesTeaching">{{course.name}}</li>
+            </ul>
+            <ng-template #none><br> <strong>No courses found</strong></ng-template>
+        </div>
+        <div class="delete-modal-container" *ngIf="user.type === 'SI'">
+            <strong>WARNING:</strong> This account is ran by a social initiative. This type of account <em>requires more attention than a teacher or student account</em>. Not only will the entire organization be deleted, but all volunteer and employee accounts will be removed from the organization program. Use this deletion for <em><strong>EMERGENCY ADMINISTRATIVE PURPOSES ONLY.</strong></em>
+        </div>
+        <!-- As the program gets bigger, add more data info on the user here -->
+        <div class="delete-modal-container">
+            If you <strong><em>still want</em></strong> to delete your account, press <strong>PROCEED.</strong> Once again, you will be instantly logged out and your data cannot be retrieved. The entire UImpactify team thanks you for your time on our platform. Best of luck on your future endeavours!
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-success-outline" (click)="opened = false">BACK TO SAFETY</button>
+        <button type="button" class="btn btn-danger" (click)="onPressDelete()">PROCEED</button>
+    </div>
+</clr-modal>

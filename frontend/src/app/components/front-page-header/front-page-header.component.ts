@@ -13,8 +13,12 @@ export class FrontPageHeaderComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  isLoginPage(): Boolean {
-    return this.router.url === "/signup";
+  shouldShow(): Boolean {
+    return this.router.url !== "/signup";
+  }
+
+  navigate(): void {
+    this.router.navigate(['signup']);
   }
 
 }

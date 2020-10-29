@@ -14,7 +14,15 @@ export class AppComponent {
   /**
    * Determines if navbar should appear
    */
-  isLoggedIn = (): Boolean => {
+  shouldNavShow = (): Boolean => {
     return !!this.userService.getCurrentUser() && this.router.url !== '/signup' && this.router.url !== '/questionaire' && this.router.url !== '/questionaire2';
   };
+
+  shouldHeaderShow(): Boolean {
+    return this.router.url !== '/questionaire' && this.router.url !== '/questionaire2' && !this.shouldNavShow();
+  }
+
+  shouldFooterShow(): Boolean {
+    return !this.userService.getCurrentUser() && this.router.url.includes('user');
+  }
 }

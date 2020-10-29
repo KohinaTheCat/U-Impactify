@@ -1,0 +1,43 @@
+h2 {
+  line-height: initial;
+  font-size: 2rem;
+}
+
+.settings {
+    padding-left: 2rem;
+}
+
+.card {
+background: var(--red-smooth);
+box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+border-radius: 10px;
+}
+
+
+#delete-account {
+    width: 20rem;
+    height: 15rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+#delete-title {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+button {
+    border-radius: 5px;
+}
+
+
+.delete-modal-container {
+    margin-top: 1rem;
+}
+
+.delete-modal-container>ul {
+    margin-left: 1rem;
+}

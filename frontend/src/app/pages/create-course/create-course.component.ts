@@ -1,6 +1,5 @@
 import { UserService } from './../../services/user.service';
 import { CourseService } from './../../services/course.service';
-import { CourseForm } from './CourseForm';
 import { Component, OnInit } from '@angular/core';
 import {
   NgxFileDropEntry,
@@ -21,7 +20,7 @@ export class CreateCourseComponent implements OnInit {
     private router: Router
   ) {}
 
-  title: string = '';
+  name: string = '';
   description: string = '';
   level: string = '';
   tags: string = '';
@@ -35,27 +34,31 @@ export class CreateCourseComponent implements OnInit {
     this.router.navigate(['dashboard']);
   }
   registerHandler() {
+    const { name, description, level, tags, files } = this;
     const course = {
-      teachers: [this.userService.getCurrentUser().username],
-      title: this.title,
-      description: this.description,
-      level: this.level,
-      tags: this.tags,
-      files: this.files,
+      teachers: [this.userService.getCurrentUser()._id],
+      name,
+      description,
+      level,
+      tags,
+      files,
     };
 
     this.courseService
-      .postNewCourse(course, this.userService.getCurrentUser().username)
+      .postNewCourse(course, this.userService.getCurrentUser()._id)
       .subscribe(
         (res) => {
           this.userService
-            .updateClassesTeaching(
-              this.userService.getCurrentUser()._id,
-              {"_id": res._id, "title": res.title}
-            )
+            .updateClassesTeaching(this.userService.getCurrentUser()._id, {
+              _id: res._id,
+              name: res.name,
+            })
             .subscribe(
-              (res) => console.log('Clara said yes again.'),
-              (err) => console.log('Navinn said no again.')
+              (res) => {
+                this.userService.setUser(res);
+                this.router.navigate(['dashboard']);
+              },
+              (err) => console.log(err)
             );
           for (const droppedFile of course.files) {
             if (droppedFile.fileEntry.isFile) {
@@ -63,13 +66,12 @@ export class CreateCourseComponent implements OnInit {
               fileEntry.file((file: File) => {
                 const formData = new FormData();
                 formData.append('documents', file, droppedFile.relativePath);
-                console.log(res);
-                this.courseService.postNewFile(formData, res).subscribe(
+                this.courseService.postNewFile(formData, res._id).subscribe(
                   (res) => {
                     console.log(res);
                   },
                   (err) => {
-                    console.log('Navinn said no.', err);
+                    console.log(err);
                   }
                 );
               });
@@ -79,8 +81,6 @@ export class CreateCourseComponent implements OnInit {
               console.log(droppedFile.relativePath, fileEntry);
             }
           }
-          console.log('success!');
-          this.router.navigate(['dashboard']);
         },
         (err) => {
           this.error = err.message;

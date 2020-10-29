@@ -10,7 +10,7 @@ router.route("/:email").post((req, res) => {
     })
     .then((user) => {
       user.comparePassword(password, function (err, isMatch) {
-        if (err) return res.status(400).json(`${err}`);
+        if (err) return res.status(400).json(err);
         return res.json(isMatch ? user : isMatch);
       });
     })
@@ -19,15 +19,23 @@ router.route("/:email").post((req, res) => {
 
 // POST new user
 router.route("/").post((req, res) => {
-  const { username, password, email, type, questionaire } = req.body;
+  const { _id, password, email, type, questionaire } = req.body;
   const newUser = new userSchema({
-    username,
+    _id,
     password,
     email,
     type,
     classesEnrolled: [],
     classesTeaching: [],
     questionaire,
+    socialInitiative: {
+      registeredNumber: "",
+      businessNumber: "",
+      location: "",
+      hours: "",
+      phone: "",
+      email: "",
+    },
   });
   newUser
     .save()
@@ -35,61 +43,113 @@ router.route("/").post((req, res) => {
     .catch((err) => res.status(400).json(err));
 });
 
-// POST enroll course, id refers to course id, title refers to course title, userId refers to user id
-router.route("/enroll/:id/:title/:uid").post((req, res) => {
-  userSchema.findById(req.params.uid).then((user) => {
-    user.classesEnrolled = user.classesEnrolled.concat({
-      _id: req.params.id,
-      name: req.params.title,
-    });
+// PUT questionaire response
+router.route("/addQuestionaire").put((req, res) => {
+  const { _id, questionaire } = req.body;
+  userSchema.findById(_id).then((user) => {
+    user.questionaire = questionaire;
     user
       .save()
-      .then(() => res.json("Course added Successfully!"))
-      .catch((err) => res.json.status(404).json(err));
+      .then(() => res.json(user))
+      .catch((err) => res.status(404).json(err));
   });
 });
 
-// POST update password
-router.route("/password/:id").post((req, res) => {
-  userSchema
-    .findById(req.params.id)
-    .then((user) => {
-      user.password = req.body.password;
-      user
-        .save()
-        .then(() => res.json(`Password Updated`))
-        .catch((err) => res.json(err));
-    })
-    .catch((err) => res.status(400).json(`Error: ${err}`));
+// POST enroll course (Impact Learner only)
+router.route("/enroll").put((req, res) => {
+  const { userId, course } = req.body;
+  userSchema.findById(userId).then((user) => {
+    user.classesEnrolled = user.classesEnrolled.concat(course);
+    user
+      .save()
+      .then(() => res.json(user))
+      .catch((err) => res.status(404).json(err));
+  });
 });
 
-// PUT update classesTeaching
-router.route("/updateClassesTeaching").put((req, res) => {
+// PUT update password
+router.route("/password").put((req, res) => {
+  const { _id, password } = req.body;
   userSchema
-    .findById(req.body.userId)
+    .findById(_id)
+    .then((user) => {
+      user.password = password;
+      user
+        .save()
+        .then(() => res.json(user))
+        .catch((err) => res.json(err));
+    })
+    .catch((err) => res.status(400).json(err));
+});
+
+// PUT update classesTeaching (Impact Consultant only)
+router.route("/updateClassesTeaching").put((req, res) => {
+  const { _id, course } = req.body;
+  userSchema
+    .findById(_id)
     .then((user) => {
       user.classesTeaching = user.classesTeaching.concat({
-        _id: req.body.course._id,
-        name: req.body.course.title,
-        img: "this is a placehodler",
+        _id: course._id,
+        name: course.name,
+        img: "#",
       });
       user
         .save()
-        .then(() => res.json(`User Updated`))
+        .then(() => res.json(user))
         .catch((err) => res.json(err));
     })
-    .catch((err) => res.status(400).json(`Error: ${err}`));
+    .catch((err) => res.status(400).json(err));
 });
 
-// DELETE a Course in Student's classesEnrolled List
-router.delete("/dropCourse/:id/:uid", (req, res) => {
-  userSchema.findById(req.params.uid).then((user) => {
-    user.classesEnrolled = user.classesEnrolled.remove(req.params.id);
+// DELETE drop a course (Impact Learner only)
+router.delete("/dropCourse/:courseId/:userId", (req, res) => {
+  const { userId, courseId } = req.params;
+  userSchema.findById(userId).then((user) => {
+    user.classesEnrolled = user.classesEnrolled.filter(
+      (enrolled) => courseId !== enrolled._id
+    );
     user
       .save()
-      .then(() => res.json("Course Deleted From Student List!"))
+      .then(() => res.json(user))
       .catch((err) => res.status(400).json(err));
   });
+});
+
+// PUT social initiative
+router.route("/addSocialInitiativeProfile").put((req, res) => {
+  const {
+    registeredNumber,
+    businessNumber,
+    location,
+    hours,
+    phone,
+    email,
+    _id,
+  } = req.body;
+  userSchema.findById(_id).then((user) => {
+    user.socialInitiative = {
+      registeredNumber,
+      businessNumber,
+      location,
+      hours,
+      phone,
+      email,
+    };
+    user
+      .save()
+      .then(() => res.json(user))
+      .catch((err) => res.status(400).json(err));
+  });
+});
+
+// GET user by username
+router.route("/get/:uid").get((req, res) => {
+  userSchema
+    .findById(req.params.uid)
+    .then((user) => {
+      return res.json(user);
+    })
+    .catch((err) => res.status(404).json("no user found" + err));
 });
 
 module.exports = router;
