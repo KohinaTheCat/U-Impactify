@@ -153,4 +153,21 @@ router.route("/get/:uid").get((req, res) => {
     .catch((err) => res.status(404).json("no user found" + err));
 });
 
+// DELETE any user
+router.delete("/deleteUser/:userId", (req, res) => {
+  const { userId } = req.params;
+  userSchema
+    .findById(userId)
+    .then((user) => {
+      // ask about this (can a student ever be a teacher of a course, can a instructor ever be a student of a course)
+      // if user == IL
+        // loop over classesEnrolled, and call another route that removes them from that course array
+      // if user == IC
+        // loop over classesTeaching, and call another route that removes them from that course array
+      // then delete the user from the database
+      console.log("ello")
+    })
+    .catch((err) => res.status(400).json("User couldn't be deleted" + err));
+});
+
 module.exports = router;
