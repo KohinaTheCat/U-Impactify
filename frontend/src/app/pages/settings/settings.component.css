@@ -32,3 +32,12 @@ border-radius: 10px;
 button {
     border-radius: 5px;
 }
+
+
+.delete-modal-container {
+    margin-top: 1rem;
+}
+
+.delete-modal-container>ul {
+    margin-left: 1rem;
+}
