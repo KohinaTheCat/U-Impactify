@@ -21,16 +21,6 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
-<<<<<<< HEAD
-  { path: 'questionaire', component: SignupQuestionaireComponent},
-  { path: 'questionaire2', component: SignupQuestionaire2Component},
-  // changed path for course files
-  { path: 'coursefile', component: CourseComponent },
-  { path: 'createcourse', component: CreateCourseComponent },
-  { path: 'enrollcourse', component: EnrollCourseComponent},
-  { path: 'course/:id', component: CoursePreviewComponent},
-  { path: 'profile', component: ProfileComponent },
-=======
   { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
   { path: 'questionaire', component: SignupQuestionaireComponent },
   { path: 'questionaire2', component: SignupQuestionaire2Component },
@@ -40,7 +30,6 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
   { path: 'user/:username', component: GlobalProfileComponent },
   {path: 'user', redirectTo: 'dashboard', canActivate: [AuthGuard]}
->>>>>>> master
 ];
 
 @NgModule({

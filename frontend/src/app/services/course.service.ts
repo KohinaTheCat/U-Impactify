@@ -55,17 +55,6 @@ export class CourseService {
     return this.http.get<Course[]>(`http://localhost:5000/course`);
   }
 
-<<<<<<< HEAD
-  getCourse(CourseTitle): Observable<any> {
-    return this.http.get(`http://localhost:5000/course/${CourseTitle}`, {});
-  }
-
-  enrollInCourse(username: string, courseId: string): Observable<any> {
-    return this.http.post(
-      `http://localhost:5000/course/addStudent/${courseId}/${username}`,
-      {}
-    );
-=======
   /**
    * GET single course given id
    * @param {string} _id id of course
@@ -84,7 +73,6 @@ export class CourseService {
       userId,
       courseId,
     });
->>>>>>> master
   }
 
   /**

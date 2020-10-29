@@ -80,19 +80,11 @@ router.route("/").post((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-<<<<<<< HEAD
-//GET getting a course by title, title refers to course title
-router.get("/:title", (req, res) => {
-  Course.find({ title: req.params.title})
-    .then((doc) => {
-      res.json(doc);
-=======
 // GET getting a course by id, id refers to course id
 router.get("/:id", (req, res) => {
   Course.findById(req.params.id)
     .then((course) => {
       res.json(course);    
->>>>>>> master
     })
     .catch((err) => res.status(404).json(err));
 });
