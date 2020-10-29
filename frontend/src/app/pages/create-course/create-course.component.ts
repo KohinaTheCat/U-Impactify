@@ -87,7 +87,7 @@ export class CreateCourseComponent implements OnInit {
               const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
               fileEntry.file((file: File) => {
                 const formData = new FormData();
-                formData.append('documents', file, droppedFile.relativePath);
+                formData.append('document', file, droppedFile.relativePath);
                 this.courseService.postCourseImage(formData, res._id).subscribe(
                   (res) => {
                     console.log(res);
@@ -130,7 +130,7 @@ export class CreateCourseComponent implements OnInit {
     }
   }
 
-  public droppedCourseImage(image: NgxFileDropEntry) {
+  public droppedCourseImage(image: NgxFileDropEntry[]) {
     this.img = image;
     for (const droppedFile of image) {
       if (droppedFile.fileEntry.isFile) {

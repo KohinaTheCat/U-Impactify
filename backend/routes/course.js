@@ -105,7 +105,6 @@ router.put("/enroll", (req, res) => {
 router.post("/:id/upload", upload.array("documents", 10), (req, res) => {
   Course.findById(req.params.id)
     .then((course) => {
-      course.files = course.files.concat(req.files.map((k) => k.id));
       course
         .save()
         .then(() => res.json("Document Added!"))
@@ -115,13 +114,13 @@ router.post("/:id/upload", upload.array("documents", 10), (req, res) => {
 });
 
 //POST uploading courseImage to a course, id refers to course id
-router.post("/:id/uploadCourseImage", upload.array("document", 10), (req, res) => {
+router.post("/:id/uploadCourseImage", upload.array("document", 1), (req, res) => {
   Course.findById(req.params.id)
     .then((course) => {
-      course.img = req.file.id;
+      course.img = req.files[0].id;
       course
         .save()
-        .then(() => res.json("Course Added!"))
+        .then(() => res.json("uploaded course image"))
         .catch((err) => res.json(err));
     })
     .catch((err) => res.status(400).json(`Error finding Course: ${err}`));
