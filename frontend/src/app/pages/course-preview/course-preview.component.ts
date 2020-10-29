@@ -12,41 +12,58 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './course-preview.component.html',
   styleUrls: ['./course-preview.component.css'],
 })
-
 export class CoursePreviewComponent implements OnInit {
-
   course = {
     _id: '',
-    title: '',
+    name: '',
     description: '',
+    students: [],
     teachers: [],
     tags: '',
     level: '',
   };
 
+  valid: boolean;
+  alreadyEnrolled: boolean = false;
+  error: string;
   user: User;
 
   constructor(
     private userService: UserService,
     private activatedRouter: ActivatedRoute,
     private courseService: CourseService,
-    private router: Router,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.user = this.userService.getCurrentUser();
-    const title = this.activatedRouter.snapshot.params['id'];
-    this.courseService.getCourse(title).subscribe((incomingCourse: Course) => {
-      this.course.title = incomingCourse[0].title;
-      this.course.description = incomingCourse[0].description;
-      this.course.teachers = incomingCourse[0].teachers;
-      this.course.tags = incomingCourse[0].tags;
-      this.course.level = incomingCourse[0].level;
-      this.course._id = incomingCourse[0]._id;
-    });
-    console.log(this.course);
+    const id = this.activatedRouter.snapshot.params['id'];
+    this.courseService.getCourse(id).subscribe(
+      (incomingCourse: Course) => {
+        this.valid = true;
+        this.course.name = incomingCourse.name;
+        this.course.description = incomingCourse.description;
+        this.course.students = incomingCourse.students;
+        this.course.teachers = incomingCourse.teachers;
+        this.course.tags = incomingCourse.tags;
+        this.course.level = incomingCourse.level;
+        this.course._id = incomingCourse._id;
+        for (let i = 0; i < this.course.students.length; i++) {
+          if (this.course.students[i] == this.user._id) {
+            this.alreadyEnrolled = true;
+            break;
+          }
+        }
+      },
+      (err) => {
+        this.valid = false;
+        this.error = err.message;
+        console.log('error message' + this.error);
+      }
+    );
   }
 
+  // user type was IL and wasn't enrolled in course, and now decided to enroll in course
   enrollHandler() {
     this.courseService
       .enrollInCourse(this.userService.getCurrentUser()._id, this.course._id)
@@ -56,7 +73,7 @@ export class CoursePreviewComponent implements OnInit {
           this.userService
             .enrollInCourse(this.userService.getCurrentUser()._id, {
               _id: this.course._id,
-              name: this.course.title,
+              name: this.course.name,
             })
             .subscribe(
               (res) => console.log(res),

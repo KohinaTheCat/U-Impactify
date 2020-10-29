@@ -71,4 +71,9 @@ export class CoursesComponent implements OnInit {
         (err) => console.log(err)
       );
   }
+
+  previewCourse($event) : void {
+    this.selectedCourse = $event;
+    this.router.navigate([`course/${this.selectedCourse._id}`]);
+  }
 }
