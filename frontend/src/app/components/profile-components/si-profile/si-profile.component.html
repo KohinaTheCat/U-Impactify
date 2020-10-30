@@ -1,0 +1,145 @@
+<div id="si">
+  <div class="spacer"></div>
+
+  <div class="profile-container">
+    <h2>Profile</h2>
+    <div class="inner">
+      <div id="image">
+        <img src="../../../../assets/THS.png" width="400" alt="" />
+      </div>
+
+      <div class="info">
+        <div>
+          Registered Name: <span class="value">{{ user._id }}</span>
+        </div>
+        <div>
+          Registered Number: <span class="value">{{ registeredNumber }}</span>
+        </div>
+        <div>
+          Business Number: <span class="value">{{ businessNumber }}</span>
+        </div>
+        <div>
+          Location:
+          <span class="value">{{ location }}</span>
+        </div>
+        <div>
+          Hours: <span class="value">{{ hours }}</span>
+        </div>
+        <div>
+          Phone: <span class="value">{{ phone }}</span>
+        </div>
+        <div>
+          Email: <span class="value">{{ email }}</span>
+        </div>
+      </div>
+
+      <div class="btn-container">
+        <button class="btn">Visit Our Website</button>
+        <button class="btn">Email Us</button>
+        <button class="btn">Donate Now</button>
+        <button *ngIf="sameUser" (click)="basic = true" class="btn edit">
+          {{ current }}
+        </button>
+      </div>
+
+      <clr-modal *ngIf="sameUser" [(clrModalOpen)]="basic" [clrModalSize]="'l'">
+        <div class="modal-body">
+          <h3>Edit your Profile!</h3>
+          <form clrForm>
+            <clr-input-container class="side">
+              <label class="add">Registered Number</label>
+              <input
+                clrInput
+                placeholder="{{ registeredNumber }}"
+                class="addLeft"
+                name="name"
+                [(ngModel)]="registeredNumber"
+              />
+            </clr-input-container>
+          </form>
+          <form clrForm>
+            <clr-input-container class="side">
+              <label class="add">Business Number</label>
+              <input
+                clrInput
+                placeholder="{{ businessNumber }}"
+                class="addLeft"
+                name="name"
+                [(ngModel)]="businessNumber"
+              />
+            </clr-input-container>
+          </form>
+          <form clrForm>
+            <clr-input-container class="side">
+              <label class="add">Location</label>
+              <input
+                clrInput
+                placeholder="{{ location }}"
+                class="addLeft"
+                name="name"
+                [(ngModel)]="location"
+              />
+            </clr-input-container>
+          </form>
+          <form clrForm>
+            <clr-input-container class="side">
+              <label class="add">Hours</label>
+              <input
+                clrInput
+                placeholder="{{ hours }}"
+                class="addLeft"
+                name="name"
+                [(ngModel)]="hours"
+              />
+            </clr-input-container>
+          </form>
+          <form clrForm>
+            <clr-input-container class="side">
+              <label class="add">Phone Number</label>
+              <input
+                clrInput
+                placeholder="{{ phone }}"
+                class="addLeft"
+                name="name"
+                [(ngModel)]="phone"
+              />
+            </clr-input-container>
+          </form>
+          <form clrForm>
+            <clr-input-container class="side">
+              <label class="add">Email Address</label>
+              <input
+                clrInput
+                placeholder="{{ email }}"
+                class="addLeft"
+                name="name"
+                [(ngModel)]="email"
+              />
+            </clr-input-container>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-outline"
+            (click)="basic = false"
+            (click)="doNotChange()"
+          >
+            Cancel
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="basic = false"
+            (click)="add()"
+          >
+            Ok
+          </button>
+        </div>
+      </clr-modal>
+    </div>
+    <!-- Here should go the Tabs Container as shown in the mockup -->
+  </div>
+
+  <div class="spacer"></div>
+</div>
