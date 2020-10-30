@@ -41,11 +41,11 @@ export class UserService {
   }
 
   /**
-   * Get existing user
-   * @param {String} uid uid of the user
+   * Get existing user by id
+   * @param {String} id username of the user
    */
-  getAnotherUser(uid: String): Observable<any> {
-    return this.http.get('http://localhost:5000/user/get/' + uid, {});
+  getAnotherUser(id: String): Observable<User> {
+    return this.http.get<User>('http://localhost:5000/user/' + id);
   }
 
   /**

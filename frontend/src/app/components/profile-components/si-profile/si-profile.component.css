@@ -36,7 +36,7 @@ h2 {
 
 .btn-container {
   display: grid;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-rows: repeat(auto-fit, 1fr);
   height: 75%;
 }
 
@@ -74,55 +74,26 @@ h2 {
   }
 
   .btn-container {
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, 1fr);
   }
 }
 
 .edit {
   /* Edit */
   justify-content: center;
-  position: absolute;
-  width: 102px;
-  height: 31px;
-  left: 1746px;
-  top: 204px;
 
-  /* Button BG */
+  background: var(--purple-base);
+  color: #FFF;
 
-  position: absolute;
-  left: 90.94%;
-  right: 3.75%;
-  top: 18.89%;
-  bottom: 78.24%;
-
-  /*  Purple Base */
-  background: #a78ec3;
   /* Shadow Dark · 16dp */
   box-shadow: 0px 8px 24px rgba(120, 98, 188, 0.16);
   border-radius: 7px;
 
-  /* Caption */
+}
 
-  position: absolute;
-  left: 92.82%;
-  right: 5.57%;
-  top: 19.35%;
-  bottom: 78.8%;
-
-  /* 15 sp • Button • App */
-  font-family: Open Sans;
-  font-style: normal;
-  font-weight: 600;
-  font-size: 15px;
-  line-height: 20px;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  letter-spacing: 0.75px;
-  text-transform: capitalize;
-
-  /* White Base */
-  color: #ffffff;
+.edit:hover {
+  background: var(--purple-smooth);
+  color: var(--gray-60);
 }
 
 .side {
@@ -161,4 +132,13 @@ input {
 
 .modal-dialog {
   background-color: red;
+}
+
+#si {
+  display: flex;
+  padding-left:2rem;
+}
+
+.spacer {
+  flex: 1 1 auto;
 }
