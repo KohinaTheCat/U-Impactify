@@ -4,8 +4,6 @@
       <h4 id = "title"> {{ course.name }} </h4>
       <div *ngIf="user.type == 'IL' && !alreadyEnrolled ">
         <button class="btn btn-primary" (click)="enrollHandler()">Enroll</button>
-      </div>
-      <div *ngIf="user.type == 'IC' ">
         <div class="dropdown">
           <clr-icon shape="cog">  </clr-icon>
           <div class="dropdown-content">

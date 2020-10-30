@@ -1,4 +1,3 @@
-
 import { CoursePreviewComponent } from './pages/course-preview/course-preview.component';
 import { EnrollCourseComponent } from './pages/enroll-course/enroll-course.component';
 import { SignupQuestionaireComponent } from './pages/signup-questionaire/signup-questionaire.component';
@@ -11,6 +10,8 @@ import { LoginSignupComponent } from './pages/login-signup/login-signup.componen
 import { CourseComponent } from './pages/course/course.component';
 import { SignupQuestionaire2Component } from './pages/signup-questionaire2/signup-questionaire2.component';
 import { ProfileComponent } from './pages/profile/profile.component';
+import { GlobalProfileComponent} from './components/profile-components/global-profile/global-profile.component'
+import { SettingsComponent } from './pages/settings/settings.component';
 
 const routes: Routes = [
   { path: 'signup', component: LoginSignupComponent },
@@ -20,14 +21,15 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
-  { path: 'questionaire', component: SignupQuestionaireComponent},
-  { path: 'questionaire2', component: SignupQuestionaire2Component},
-  // changed path for course files
-  { path: 'coursefile', component: CourseComponent },
-  { path: 'createcourse', component: CreateCourseComponent },
-  { path: 'enrollcourse', component: EnrollCourseComponent},
-  { path: 'course/:id', component: CoursePreviewComponent},
-  { path: 'profile', component: ProfileComponent },
+  { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
+  { path: 'questionaire', component: SignupQuestionaireComponent },
+  { path: 'questionaire2', component: SignupQuestionaire2Component },
+  { path: 'course', component: CourseComponent },
+  { path: 'createcourse', component: CreateCourseComponent, canActivate: [AuthGuard]  },
+  { path: 'enrollcourse', component: EnrollCourseComponent, canActivate: [AuthGuard]  },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: 'user/:username', component: GlobalProfileComponent },
+  {path: 'user', redirectTo: 'dashboard', canActivate: [AuthGuard]}
 ];
 
 @NgModule({

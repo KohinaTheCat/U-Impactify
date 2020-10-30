@@ -1,5 +1,6 @@
 import { CourseService } from 'src/app/services/course.service';
 import { Course } from './../../../models/course.model';
+import { CreateCourseComponent } from './../../../pages/create-course/create-course.component';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
@@ -34,6 +35,9 @@ export class CoursesComponent implements OnInit {
         : this.user.classesTeaching;
   }
 
+  /**
+   * TODO: Setup
+   */
   addNewCourse(): void {
     if(this.user.type === 'IL') {
       this.router.navigate(['enrollcourse']);

@@ -29,6 +29,7 @@ h3 {
   font-size: 1rem;
 }
 
+/* ??????? */
 .btn.btn-primary {
   background-color: #e7e7e7;
   color: black;
@@ -51,6 +52,7 @@ h3 {
 .wrapper {
   width: 100%;
   text-align: center;
+  display: flex;
 }
 
 .dropdown {
