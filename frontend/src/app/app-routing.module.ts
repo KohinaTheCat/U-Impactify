@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
   { path: 'questionaire', component: SignupQuestionaireComponent },
   { path: 'questionaire2', component: SignupQuestionaire2Component },
-  { path: 'course', component: CourseComponent },
+  { path: 'course/:id', component: CourseComponent },
   { path: 'createcourse', component: CreateCourseComponent, canActivate: [AuthGuard]  },
   { path: 'enrollcourse', component: EnrollCourseComponent, canActivate: [AuthGuard]  },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
