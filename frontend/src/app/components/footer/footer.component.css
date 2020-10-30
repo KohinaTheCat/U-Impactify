@@ -84,7 +84,6 @@ h3 {
   .flexbox-container {
     align-items: wrap;
     flex-wrap: wrap;
-    height: 25rem;
   }
   .together {
     justify-content: center;

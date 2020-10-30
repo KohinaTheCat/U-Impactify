@@ -59,6 +59,7 @@ export class SignupQuestionaireComponent implements OnInit {
     if (!this.skipped) user.questionaire = this.array;
     this.userService.putQuestionaire(user).subscribe(
       (res) => {
+        this.userService.setUser(res);
         this.router.navigate(['dashboard']);
       },
       (err) => {
