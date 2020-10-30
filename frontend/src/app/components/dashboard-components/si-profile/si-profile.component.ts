@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 
@@ -8,13 +8,6 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./si-profile.component.css'],
 })
 export class SiProfileComponent implements OnInit {
-
-  @Input()
-  searchedUser?: User;
-
-  @Input()
-  sameUser?: boolean = false;
-
   user: User;
   disabled = true;
   basic = false;
@@ -33,12 +26,7 @@ export class SiProfileComponent implements OnInit {
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    if(!!this.searchedUser)
-      this.user = this.searchedUser;
-    else {
-      this.sameUser = true;
-      this.user = this.userService.getCurrentUser();
-    }
+    this.user = this.userService.getCurrentUser();
     this.doNotChange();
   }
 
@@ -65,8 +53,8 @@ export class SiProfileComponent implements OnInit {
       )
       .subscribe(
         (res) => {
+          console.log(res);
           this.userService.setUser(res);
-          this.user = res;
         },
         (err) => {
           console.log(err);

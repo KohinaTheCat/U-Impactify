@@ -36,6 +36,6 @@ export class GlobalSearchComponent implements OnInit {
   }
 
   goToProfile(): void{
-    this.router.navigate([`user/${this.userService.getCurrentUser()._id}`]);
+    this.router.navigate(['profile']);
   }
 }

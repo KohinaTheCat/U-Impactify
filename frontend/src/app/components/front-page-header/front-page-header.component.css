@@ -45,11 +45,6 @@ button {
 }
 
 @media only screen and (max-width: 1250px) {
-  :host {
-    display: flex;
-    height: 10rem;
-  }
-
   .flexbox-container {
     flex-direction: column;
   }
@@ -61,6 +56,8 @@ button {
   }
   .flexbox-container22 {
     justify-content: space-evenly;
+    flex-shrink: 0;
+    width: none;
   }
 
   .btn-outline,

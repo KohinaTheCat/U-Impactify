@@ -8,13 +8,13 @@
       </div>
       <div class="sub-card">
         <div class="heading">User Name</div>
-        <div class="sub-heading">{{ user._id }}</div>
+        <div class="sub-heading">{{ this.username }}</div>
       </div>
     </div>
     <div class="clr-row">
       <div class="sub-card">
         <div class="heading">Email</div>
-        <div class="sub-heading">{{ user.email }}</div>
+        <div class="sub-heading">{{ this.email }}</div>
       </div>
       <div class="sub-card">
         <div class="heading">Phone Number</div>
@@ -28,7 +28,7 @@
           <div class="row">
             <clr-icon class="image" shape="image"></clr-icon>
 
-            <div class="col" *ngIf="sameUser">
+            <div class="col">
               <button class="btn btn-primary">
                 <clr-icon shape="upload"></clr-icon> upload
               </button>
@@ -48,7 +48,7 @@
       </div>
     </div>
     
-    <div class="edit-container" *ngIf="sameUser">
+    <div class="r">
       <button class="btn btn-primary">
         <clr-icon shape="pencil"></clr-icon>Edit Profile
       </button>
