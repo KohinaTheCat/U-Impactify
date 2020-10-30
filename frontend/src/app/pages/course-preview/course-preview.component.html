@@ -4,12 +4,6 @@
       <h4 id = "title"> {{ course.name }} </h4>
       <div *ngIf="user.type == 'IL' && !alreadyEnrolled ">
         <button class="btn btn-primary" (click)="enrollHandler()">Enroll</button>
-        <div class="dropdown">
-          <clr-icon shape="cog">  </clr-icon>
-          <div class="dropdown-content">
-            <a>Update Course Content</a>
-  
-          </div>
       </div>
     </div>
     <img class = "courseimage" src="../../../../assets/courseimage.png"/>
