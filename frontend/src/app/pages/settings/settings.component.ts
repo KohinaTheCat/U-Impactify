@@ -25,7 +25,7 @@ export class SettingsComponent implements OnInit {
     this.userService.deleteUser(this.user._id).subscribe(
       (res) => {
         console.log("Deleted User Successfully")
-        this.userService.setUser(null);
+        this.userService.setUser(res)
         this.router.navigate([''])
       },
       (err) => console.log(err)

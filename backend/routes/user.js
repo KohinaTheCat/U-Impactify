@@ -163,40 +163,37 @@ router.delete("/deleteUser/:userId", (req, res) => {
     .then((user) => {
       // impact learner, remove them from every course they're enrolled in
       if (user.type === "IL") {
-        for (let i = 0; i < user.classesEnrolled.length; i++) {
-          courseSchema.findById(user.classesEnrolled[i]._id).then((course) => {
+        user.classesEnrolled.forEach(element => {
+          courseSchema.findById(element._id).then((course) => {
             course.students = course.students.filter((id) => id !== userId);
             course.save().catch((err) => res.status(400).json(err));
           })
           .catch((err) => res.status(400).json(err));
-          console.log(user.classesEnrolled[i]._id);
-        }
+        });
       // impact consultant, remove them from every course they're teaching
       } else if (user.type === "IC") {
         for (let i = 0; i < user.classesTeaching.length; i++) {
           courseSchema.findById(user.classesTeaching[i]._id).then((course) => {
             // only teacher in the course, remove the course and un-enroll all students in that course
             if (course.teachers.length === 1) {
-              for (let j = 0; j < course.students.length; j++) {
-                userSchema.findById(course.students[j]).then((user) => {
+              course.students.forEach(element => {
+                userSchema.findById(element).then((user) => {
                   // remove from coursesEnrolled from student
                   user.classesEnrolled = user.classesEnrolled.filter((courses) => courses.id !== course.id)
                   user.save().catch((err) => res.status(400).json(err));
                 });
-              }
+              });
               // remove the whole course
               courseSchema.findByIdAndRemove(course._id, function (err) {
                 if (!err) {
                   res.status(200).send();
                 } else {
-                  console.log(err);
                   return res.status(400).send();
                 }
               });
             // remove single teacher from the course list
             } else {
               course.teachers = course.teachers.filter((id) => id !== userId);
-              console.log(course.teachers);
               course.save().catch((err) => res.status(400).json(err));
             }
           })
@@ -207,9 +204,8 @@ router.delete("/deleteUser/:userId", (req, res) => {
     .catch((err) => res.status(400).json("User not found " + err));
   userSchema.findByIdAndRemove(userId, function (err) {
     if (!err) {
-      return res.status(200).send();
+      return res.status(200).json(null);
     }
-    console.log(err);
     return res.status(400).send();
   });
 });
