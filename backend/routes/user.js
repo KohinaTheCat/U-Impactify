@@ -159,15 +159,27 @@ router.delete("/deleteUser/:userId", (req, res) => {
   userSchema
     .findById(userId)
     .then((user) => {
-      // ask about this (can a student ever be a teacher of a course, can a instructor ever be a student of a course)
-      // if user == IL
+      if(user.type === 'IL'){
         // loop over classesEnrolled, and call another route that removes them from that course array
-      // if user == IC
+        for(let i = 0; i <user.classesEnrolled.length; i++){
+          console.log(user.classesEnrolled[i])
+        }
+      } else if(user.type === 'IC') {
         // loop over classesTeaching, and call another route that removes them from that course array
-      // then delete the user from the database
-      console.log("ello")
+        for(let i = 0; i <user.classesTeaching.length; i++){
+          console.log(user.classesTeaching[i])
+        }
+      }
     })
-    .catch((err) => res.status(400).json("User couldn't be deleted" + err));
+    .catch((err) => res.status(400).json("User not found " + err))
+  userSchema
+    .findByIdAndRemove(userId, function(err) {
+      if(!err){
+        return res.status(200).send();
+      } 
+      console.log(err);
+      return res.status(400).send();
+  });
 });
 
 module.exports = router;
