@@ -1,10 +1,8 @@
-import { CourseService } from 'src/app/services/course.service';
-import { Course } from './../../../models/course.model';
-import { CreateCourseComponent } from './../../../pages/create-course/create-course.component';
 import { Component, OnInit } from '@angular/core';
-import { User } from 'src/app/models/user.model';
-import { UserService } from 'src/app/services/user.service';
 import { Router } from '@angular/router';
+import { User } from 'src/app/models/user.model';
+import { CourseService } from 'src/app/services/course.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-courses',
@@ -41,11 +39,6 @@ export class CoursesComponent implements OnInit {
     } else if(this.user.type === 'IC') {
       this.router.navigate(['createcourse']);
     }
-  }
-
-  onClick($event){
-    this.selectedCourse = $event;
-    // TODO: Implement redirect route here
   }
 
   onClickDropCourse($event) {
