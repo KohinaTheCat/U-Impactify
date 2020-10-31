@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-settings',
@@ -12,7 +13,7 @@ export class SettingsComponent implements OnInit {
   opened: boolean = false;
   user: User;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
     this.user = this.userService.getCurrentUser();
@@ -21,6 +22,13 @@ export class SettingsComponent implements OnInit {
   // TODO: add implementation
   onPressDelete(): void {
     this.opened = false;
+    this.userService.deleteUser(this.user._id).subscribe(
+      (res) => {
+        console.log("Deleted User Successfully")
+        this.userService.setUser(null);
+        this.router.navigate([''])
+      },
+      (err) => console.log(err)
+    );
   }
-
 }
