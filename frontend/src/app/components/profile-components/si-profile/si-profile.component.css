@@ -93,8 +93,9 @@ h2 {
   /* Shadow Dark · 16dp */
   box-shadow: 0px 8px 24px rgba(120, 98, 188, 0.16);
   border-radius: 7px;
+
 }
-  /* Caption */
+
 
   .edit:hover {
     background: var(--purple-smooth);
@@ -146,4 +147,4 @@ input {
 
 .spacer {
   flex: 1 1 auto;
-} 
+}

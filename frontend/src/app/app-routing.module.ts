@@ -1,4 +1,4 @@
-import { NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
 import { CourseComponent } from './pages/course/course.component';
@@ -12,7 +12,6 @@ import { SignupQuestionaireComponent } from './pages/signup-questionaire/signup-
 import { SignupQuestionaire2Component } from './pages/signup-questionaire2/signup-questionaire2.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 
-
 const routes: Routes = [
   { path: 'signup', component: LoginSignupComponent },
   {
@@ -24,12 +23,12 @@ const routes: Routes = [
   { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
   { path: 'questionaire', component: SignupQuestionaireComponent },
   { path: 'questionaire2', component: SignupQuestionaire2Component },
-  { path: 'course', component: CourseComponent},
+  { path: 'course', component: CourseComponent },
   { path: 'course/:id', component: CoursePreviewComponent },
   { path: 'createcourse', component: CreateCourseComponent, canActivate: [AuthGuard]  },
   { path: 'enrollcourse', component: EnrollCourseComponent, canActivate: [AuthGuard]  },
   { path: 'user/:username', component: UserProfileComponent },
-  { path: 'user', redirectTo: 'dashboard', canActivate: [AuthGuard]}
+  { path: 'user', redirectTo: 'dashboard', canActivate: [AuthGuard] }
 ];
 
 @NgModule({

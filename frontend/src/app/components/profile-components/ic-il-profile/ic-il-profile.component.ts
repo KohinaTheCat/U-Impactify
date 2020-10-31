@@ -8,6 +8,8 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./ic-il-profile.component.css'],
 })
 export class IcIlProfileComponent implements OnInit {
+
+  @Input()
   user: User;
   email: String;
   username: String;
@@ -20,5 +22,4 @@ export class IcIlProfileComponent implements OnInit {
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {}
-
 }
