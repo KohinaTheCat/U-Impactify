@@ -35,9 +35,6 @@ export class CoursesComponent implements OnInit {
         : this.user.classesTeaching;
   }
 
-  /**
-   * TODO: Setup
-   */
   addNewCourse(): void {
     if(this.user.type === 'IL') {
       this.router.navigate(['enrollcourse']);
@@ -67,7 +64,10 @@ export class CoursesComponent implements OnInit {
           this.userService
             .dropACourse(this.userService.getCurrentUser()._id, this.selectedCourse._id)
             .subscribe(
-              (res) => console.log(res),
+              (res) => {
+                this.userService.setUser(res);
+                this.ngOnChanges();
+              },
               (err) => console.log(err)
             );
         },

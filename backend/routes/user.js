@@ -142,10 +142,10 @@ router.route("/addSocialInitiativeProfile").put((req, res) => {
   });
 });
 
-// GET user by username
-router.route("/get/:uid").get((req, res) => {
+// GET user by id (username)
+router.route("/:id").get((req, res) => {
   userSchema
-    .findById(req.params.uid)
+    .findById(req.params.id)
     .then((user) => {
       return res.json(user);
     })
