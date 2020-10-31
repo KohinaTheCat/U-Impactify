@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
 import { CourseComponent } from './pages/course/course.component';
 import { CreateCourseComponent } from './pages/create-course/create-course.component';
+import { CoursePreviewComponent } from './pages/course-preview/course-preview.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { EnrollCourseComponent } from './pages/enroll-course/enroll-course.component';
 import { LoginSignupComponent } from './pages/login-signup/login-signup.component';
@@ -23,6 +24,7 @@ const routes: Routes = [
   { path: 'questionaire', component: SignupQuestionaireComponent },
   { path: 'questionaire2', component: SignupQuestionaire2Component },
   { path: 'course', component: CourseComponent },
+  { path: 'course/:id', component: CoursePreviewComponent },
   { path: 'createcourse', component: CreateCourseComponent, canActivate: [AuthGuard]  },
   { path: 'enrollcourse', component: EnrollCourseComponent, canActivate: [AuthGuard]  },
   { path: 'user/:username', component: UserProfileComponent },
