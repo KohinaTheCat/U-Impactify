@@ -172,8 +172,8 @@ router.delete("/deleteUser/:userId", (req, res) => {
         });
       // impact consultant, remove them from every course they're teaching
       } else if (user.type === "IC") {
-        user.classesTeaching.forEach(element => {
-          courseSchema.findById(element._id).then((course) => {
+        user.classesTeaching.forEach(teach => {
+          courseSchema.findById(teach._id).then((course) => {
             // only teacher in the course, remove the course and un-enroll all students in that course
             if (course.teachers.length === 1) {
               course.students.forEach(element => {
