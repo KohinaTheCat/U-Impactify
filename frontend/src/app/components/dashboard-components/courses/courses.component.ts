@@ -1,5 +1,6 @@
 import { CourseService } from 'src/app/services/course.service';
 import { Course } from './../../../models/course.model';
+import { CreateCourseComponent } from './../../../pages/create-course/create-course.component';
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
@@ -55,6 +56,8 @@ export class CoursesComponent implements OnInit {
 
   dropCourse(): void {
     if (!this.selectedCourse) return;
+    this.user.classesEnrolled = this.user.classesEnrolled.filter((course: any) => course._id !== this.selectedCourse._id);
+    this.userService.setUser(this.user);
     this.courseService.dropACourse(this.userService.getCurrentUser()._id, this.selectedCourse._id)
       .subscribe(
         (res) => {
@@ -70,5 +73,11 @@ export class CoursesComponent implements OnInit {
         },
         (err) => console.log(err)
       );
+    this.ngOnChanges();
+  }
+
+  previewCourse($event) : void {
+    this.selectedCourse = $event;
+    this.router.navigate([`course/${this.selectedCourse._id}`]);
   }
 }

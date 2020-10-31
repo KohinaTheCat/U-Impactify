@@ -8,12 +8,16 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./ic-il-profile.component.css'],
 })
 export class IcIlProfileComponent implements OnInit {
-  
+
   @Input()
   user: User;
+  email: String;
+  username: String;
 
   @Input()
   sameUser: boolean;
+  global: String;
+  observing: {};
 
   constructor(private userService: UserService) {}
 

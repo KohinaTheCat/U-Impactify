@@ -1,0 +1,93 @@
+.container {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+h3 {
+  padding-left: 0.5rem;
+  padding-bottom: 1rem;
+  font-size: 2rem;
+}
+
+.courseimage {
+  padding-top: 1rem;
+  height: 20rem;
+  width: 100%;
+  border-radius: 2rem;
+}
+
+h3 {
+  padding-left: 1rem;
+  padding-bottom: 2rem;
+  font-size: 1rem;
+}
+
+#text {
+  padding-left: 1rem;
+  font-size: 1rem;
+}
+
+#title {
+  width: 100%;
+  text-align: center;
+  margin-top: 0 rem;
+}
+
+.wrapper {
+  width: 100%;
+  text-align: center;
+  display: flex;
+  margin-top: 0 rem;
+}
+
+.btn.btn-primary {
+  font-size: 1rem;
+  transform: translate(0%, 45%);
+  width: 7rem;
+  height: 3rem;
+
+  border-radius: 10px;
+  margin: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+}
+
+.btn.btn-primary:hover {
+  background-color: var(--purple-smooth);
+  color: black;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+  transform: translate(0%, 90%);
+
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd;}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {background-color: #3e8e41;}

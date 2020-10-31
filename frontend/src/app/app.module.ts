@@ -1,3 +1,4 @@
+import { CoursePreviewComponent } from './pages/course-preview/course-preview.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -41,6 +42,7 @@ import { UserProfileComponent } from './pages/user-profile/user-profile.componen
     IcUpcomingEventsComponent,
     SiProfileComponent,
     EnrollCourseComponent,
+    CoursePreviewComponent,
     IcIlProfileComponent,
     SettingsComponent,
     UserProfileComponent,
