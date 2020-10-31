@@ -286,3 +286,8 @@ p {
     flex-direction: column;
   }
 }
+
+
+.clr-vertical-nav .nav-group-text, .clr-vertical-nav .nav-text {
+  transform: scaleY(0.67) !important;
+}
