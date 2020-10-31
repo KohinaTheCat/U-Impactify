@@ -126,6 +126,19 @@ export class UserService {
   }
 
   /**
+   * DELETE user 
+   * @param {string} userId    id of user
+   */
+  deleteUser(userId: string): Observable<any> {
+    console.log(userId)
+    return this.http.delete(
+      `http://localhost:5000/user/deleteUser/${userId}`
+    );
+  }
+
+  
+
+  /**
    * PUT adds the social initiative profile to the user
    * @param {string} registeredNumber registered number of SI
    * @param {string} businessNumber   business number of SI
