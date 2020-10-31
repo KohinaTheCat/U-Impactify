@@ -172,8 +172,8 @@ router.delete("/deleteUser/:userId", (req, res) => {
         });
       // impact consultant, remove them from every course they're teaching
       } else if (user.type === "IC") {
-        for (let i = 0; i < user.classesTeaching.length; i++) {
-          courseSchema.findById(user.classesTeaching[i]._id).then((course) => {
+        user.classesTeaching.forEach(element => {
+          courseSchema.findById(element._id).then((course) => {
             // only teacher in the course, remove the course and un-enroll all students in that course
             if (course.teachers.length === 1) {
               course.students.forEach(element => {
@@ -198,7 +198,7 @@ router.delete("/deleteUser/:userId", (req, res) => {
             }
           })
           .catch((err) => res.status(400).json(err));
-        }
+        });
       }
     })
     .catch((err) => res.status(400).json("User not found " + err));
