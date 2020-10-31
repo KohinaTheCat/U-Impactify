@@ -1,5 +1,7 @@
 const router = require("express").Router();
 let userSchema = require("../models/user.model");
+let courseSchema = require("../models/course.model");
+
 
 // POST login user
 router.route("/:email").post((req, res) => {
@@ -159,26 +161,56 @@ router.delete("/deleteUser/:userId", (req, res) => {
   userSchema
     .findById(userId)
     .then((user) => {
-      if(user.type === 'IL'){
-        // loop over classesEnrolled, and call another route that removes them from that course array
-        for(let i = 0; i <user.classesEnrolled.length; i++){
-          console.log(user.classesEnrolled[i])
+      // impact learner, remove them from every course they're enrolled in
+      if (user.type === "IL") {
+        for (let i = 0; i < user.classesEnrolled.length; i++) {
+          courseSchema.findById(user.classesEnrolled[i]._id).then((course) => {
+            course.students = course.students.filter((id) => id !== userId);
+            course.save().catch((err) => res.status(400).json(err));
+          })
+          .catch((err) => res.status(400).json(err));
+          console.log(user.classesEnrolled[i]._id);
         }
-      } else if(user.type === 'IC') {
-        // loop over classesTeaching, and call another route that removes them from that course array
-        for(let i = 0; i <user.classesTeaching.length; i++){
-          console.log(user.classesTeaching[i])
+      // impact consultant, remove them from every course they're teaching
+      } else if (user.type === "IC") {
+        for (let i = 0; i < user.classesTeaching.length; i++) {
+          courseSchema.findById(user.classesTeaching[i]._id).then((course) => {
+            // only teacher in the course, remove the course and un-enroll all students in that course
+            if (course.teachers.length === 1) {
+              for (let j = 0; j < course.students.length; j++) {
+                userSchema.findById(course.students[j]).then((user) => {
+                  // remove from coursesEnrolled from student
+                  user.classesEnrolled = user.classesEnrolled.filter((courses) => courses.id !== course.id)
+                  user.save().catch((err) => res.status(400).json(err));
+                });
+              }
+              // remove the whole course
+              courseSchema.findByIdAndRemove(course._id, function (err) {
+                if (!err) {
+                  res.status(200).send();
+                } else {
+                  console.log(err);
+                  return res.status(400).send();
+                }
+              });
+            // remove single teacher from the course list
+            } else {
+              course.teachers = course.teachers.filter((id) => id !== userId);
+              console.log(course.teachers);
+              course.save().catch((err) => res.status(400).json(err));
+            }
+          })
+          .catch((err) => res.status(400).json(err));
         }
       }
     })
-    .catch((err) => res.status(400).json("User not found " + err))
-  userSchema
-    .findByIdAndRemove(userId, function(err) {
-      if(!err){
-        return res.status(200).send();
-      } 
-      console.log(err);
-      return res.status(400).send();
+    .catch((err) => res.status(400).json("User not found " + err));
+  userSchema.findByIdAndRemove(userId, function (err) {
+    if (!err) {
+      return res.status(200).send();
+    }
+    console.log(err);
+    return res.status(400).send();
   });
 });
 
