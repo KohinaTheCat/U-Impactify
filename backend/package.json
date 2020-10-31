@@ -11,7 +11,7 @@
     "express": "^4.17.1",
     "gridfs-stream": "^1.1.1",
     "mongodb": "^3.6.2",
-    "mongoose": "^5.10.9",
+    "mongoose": "^5.10.11",
     "multer": "^1.4.2",
     "multer-gridfs-storage": "^4.2.0"
   },
