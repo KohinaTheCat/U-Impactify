@@ -6,9 +6,7 @@
 h3 {
   padding-left: 0.5rem;
   padding-bottom: 1rem;
-
   font-size: 2rem;
-  /* display:inline-block; margin-right: 1rem; */
 }
 
 .courseimage {
@@ -29,42 +27,60 @@ h3 {
   font-size: 1rem;
 }
 
-.btn.btn-primary {
-  background-color: #e7e7e7;
-  color: black;
-  border: 2px solid #e7e7e7;
-  display: inline-block;
-  transition-duration: 0.1s;
-  padding: 0px 24px;
-}
-
-.btn.btn-primary:hover {
-  background-color: #4caf50;
-  color: black;
-}
-
-
 #title {
   width: 100%;
+  text-align: center;
+  margin-top: 0 rem;
 }
 
 .wrapper {
   width: 100%;
   text-align: center;
+  display: flex;
+  margin-top: 0 rem;
+}
+
+.btn.btn-primary {
+  font-size: 1rem;
+  transform: translate(0%, 45%);
+  width: 7rem;
+  height: 3rem;
+
+  border-radius: 10px;
+  margin: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+}
+
+.btn.btn-primary:hover {
+  background-color: var(--purple-smooth);
+  color: black;
 }
 
 .dropdown {
   position: relative;
   display: inline-block;
+  transform: translate(0%, 90%);
+
 }
 
 .dropdown-content {
   display: none;
   position: absolute;
+  right: 0;
   background-color: #f1f1f1;
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
 }
 
 /* Change color of dropdown links on hover */

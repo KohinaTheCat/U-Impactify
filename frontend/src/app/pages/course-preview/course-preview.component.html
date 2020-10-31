@@ -5,6 +5,18 @@
       <div *ngIf="user.type == 'IL' && !alreadyEnrolled ">
         <button class="btn btn-primary" (click)="enrollHandler()">Enroll</button>
       </div>
+      <div *ngIf="user.type == 'IC'">
+        <div class="dropdown" style="float:right;">
+          <clr-icon shape="cog" size="36"></clr-icon>
+          <div class="dropdown-content">
+            <a>Assessments</a> <!--This is where you want to insert request -->
+            <a>Upload/Edit Documents</a> <!--This is where you want to insert request -->
+            <a>Update Course Content</a> <!--This is where you want to insert request -->
+            <a>Student Performance Analysis</a> <!--This is where you want to insert request -->
+          </div>
+        </div>
+      </div>
+
     </div>
     <img class = "courseimage" src="../../../../assets/courseimage.png"/>
     <h4> Course Description </h4>
