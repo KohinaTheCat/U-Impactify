@@ -35,7 +35,7 @@ export class CoursePreviewComponent implements OnInit {
         this.valid = true;
         this.course = incomingCourse;
         this.course.img =
-          this.course.img === '' || this.course.img === null
+          !this.course.img || this.course.img === ''
             ? (this.course.img = '../../../../assets/courseimage.png')
             : `http://localhost:5000/course/documents/${this.course.img}`;
         for (let i = 0; i < this.course.students.length; i++) {

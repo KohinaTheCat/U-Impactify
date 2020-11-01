@@ -34,7 +34,7 @@ export class CoursesComponent implements OnInit {
     this.courses.forEach((course) => {
       this.courseService.getCourseImageId(course._id).subscribe((res) => {
         course.img =
-          res === '' ? '' : `http://localhost:5000/course/documents/${res}`;
+          res === '' || res === null ? '' : `http://localhost:5000/course/documents/${res}`;
       });
     });
   }
