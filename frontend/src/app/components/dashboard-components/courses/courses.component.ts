@@ -12,7 +12,6 @@ import { UserService } from 'src/app/services/user.service';
 export class CoursesComponent implements OnInit {
   user: User;
   courses: any[];
-  imgs: any[];
   selectedCourse: any;
 
   constructor(
@@ -22,23 +21,7 @@ export class CoursesComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.user = this.userService.getCurrentUser();
-    this.courses =
-      this.user.type === 'IL'
-        ? this.user.classesEnrolled
-        : this.user.classesTeaching;
-
-    this.imgs = this.courses.map((c) => c.img);
-    this.courses.map((course, i) =>
-      this.courseService.getCourseImageId(course._id).subscribe(
-        (res) =>(
-        console.log(res),
-          res !== ''
-            ? (this.imgs[i] = 'http://localhost:5000/course/documents/' + res)
-            : (this.imgs[i] = '')),
-        (err) => console.log(err)
-      )
-    );
+    this.ngOnChanges();
   }
 
   ngOnChanges(): void {
@@ -47,6 +30,14 @@ export class CoursesComponent implements OnInit {
       this.user.type === 'IL'
         ? this.user.classesEnrolled
         : this.user.classesTeaching;
+    this.courses.forEach((course) => {
+      this.courseService.getCourseImageId(course._id).subscribe((res) => {
+        course.img =
+          res === ''
+            ? ''
+            : `http://localhost:5000/course/documents/${res}`;
+      });
+    });
   }
 
   addNewCourse(): void {
@@ -90,10 +81,9 @@ export class CoursesComponent implements OnInit {
         },
         (err) => console.log(err)
       );
-    this.ngOnChanges();
   }
 
-  previewCourse($event) : void {
+  previewCourse($event): void {
     this.selectedCourse = $event;
     this.router.navigate([`course/${this.selectedCourse._id}`]);
   }

@@ -14,7 +14,6 @@ export class EnrollCourseComponent implements OnInit {
   basic: boolean = true;
   error: string = '';
   courses: any[] = [];
-  imgs: any[];
   user: User;
 
   selectedCourse: any;
@@ -27,7 +26,6 @@ export class EnrollCourseComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.userService.getCurrentUser();
-    this.imgs = [];
 
     this.courseService.getAllCourses().subscribe((res) => {
       this.user.classesEnrolled.forEach((course: any) => {
@@ -43,24 +41,16 @@ export class EnrollCourseComponent implements OnInit {
         else allTeachers = teachers.join(', ');
 
         if (!this.user.classesEnrolled.includes({ _id, name })) {
-          this.courses.push({ _id, name, description, level, allTeachers });
-          this.imgs.push('');
+          this.courses.push({ _id, name, description, level, allTeachers, img: '' });
         }
       });
 
-      this.courses.map((course, i) =>
-        (course._id !== undefined) ?
-
-        this.courseService.getCourseImageId(course._id).subscribe(
-          (res) =>(
-            res !== ''
-              ? (this.imgs[i] = 'http://localhost:5000/course/documents/' + res)
-              : (this.imgs[i] = '')),
-          (err) => console.log(err)
-        )
-        :
-        console.log(course)
-      );
+      this.courses.forEach((course) => {
+        this.courseService.getCourseImageId(course._id).subscribe((res) => {
+          course.img =
+            res === '' || res === null ? '' : `http://localhost:5000/course/documents/${res}`;
+        });
+      });
     });
     console.log(this.courses);
   }
