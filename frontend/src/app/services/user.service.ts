@@ -13,7 +13,6 @@ export class UserService {
   // save username and password into local storage, so they can stay logged in
   user: User = JSON.parse(localStorage.getItem('user') || null);
 
-
   /**
    * Gets the current user stored in the service
    */
@@ -127,17 +126,13 @@ export class UserService {
   }
 
   /**
-   * DELETE user 
+   * DELETE user
    * @param {string} userId    id of user
    */
   deleteUser(userId: string): Observable<any> {
-    console.log(userId)
-    return this.http.delete(
-      `http://localhost:5000/user/deleteUser/${userId}`
-    );
+    console.log(userId);
+    return this.http.delete(`http://localhost:5000/user/deleteUser/${userId}`);
   }
-
-  
 
   /**
    * PUT adds the social initiative profile to the user

@@ -30,12 +30,11 @@ export class CoursesComponent implements OnInit {
       this.user.type === 'IL'
         ? this.user.classesEnrolled
         : this.user.classesTeaching;
+        
     this.courses.forEach((course) => {
       this.courseService.getCourseImageId(course._id).subscribe((res) => {
         course.img =
-          res === ''
-            ? ''
-            : `http://localhost:5000/course/documents/${res}`;
+          res === '' ? '' : `http://localhost:5000/course/documents/${res}`;
       });
     });
   }

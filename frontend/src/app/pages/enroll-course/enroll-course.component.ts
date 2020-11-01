@@ -41,18 +41,26 @@ export class EnrollCourseComponent implements OnInit {
         else allTeachers = teachers.join(', ');
 
         if (!this.user.classesEnrolled.includes({ _id, name })) {
-          this.courses.push({ _id, name, description, level, allTeachers, img: '' });
+          this.courses.push({
+            _id,
+            name,
+            description,
+            level,
+            allTeachers,
+            img: '',
+          });
         }
       });
 
       this.courses.forEach((course) => {
         this.courseService.getCourseImageId(course._id).subscribe((res) => {
           course.img =
-            res === '' || res === null ? '' : `http://localhost:5000/course/documents/${res}`;
+            res === '' || res === null
+              ? ''
+              : `http://localhost:5000/course/documents/${res}`;
         });
       });
     });
-    console.log(this.courses);
   }
 
   cancel() {

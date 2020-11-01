@@ -62,6 +62,7 @@ export class CreateCourseComponent implements OnInit {
               },
               (err) => console.log(err)
             );
+            
           for (const droppedFile of course.files) {
             if (droppedFile.fileEntry.isFile) {
               const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
@@ -80,7 +81,6 @@ export class CreateCourseComponent implements OnInit {
             } else {
               // It was a directory (empty directories are added, otherwise only files)
               const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
-              console.log(droppedFile.relativePath, fileEntry);
             }
           }
 
