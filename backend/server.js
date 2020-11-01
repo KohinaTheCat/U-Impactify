@@ -17,6 +17,7 @@ mongoose.connect(uri, {
   useNewUrlParser: true,
   useCreateIndex: true,
   useUnifiedTopology: true,
+  useFindAndModify: false,
 });
 
 const connection = mongoose.connection;
@@ -25,7 +26,7 @@ connection.once("open", () => {
 });
 
 const courseRouter = require("./routes/course");
-const userRouter = require("./routes/user")
+const userRouter = require("./routes/user");
 
 app.use("/course", courseRouter);
 app.use("/user", userRouter);

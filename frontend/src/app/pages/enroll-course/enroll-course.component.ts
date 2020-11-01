@@ -43,15 +43,9 @@ export class EnrollCourseComponent implements OnInit {
         else allTeachers = teachers.join(', ');
 
         if (!this.user.classesEnrolled.includes({ _id, name })) {
-          this.courses.push({
-            _id,
-            name,
-            description,
-            level,
-            allTeachers,
-          });
+          this.courses.push({ _id, name, description, level, allTeachers });
+          this.imgs.push('');
         }
-        this.imgs.push("")
       });
 
       this.courses.map((course, i) =>
@@ -82,7 +76,6 @@ export class EnrollCourseComponent implements OnInit {
   courseHandler() {
     if (!this.selectedCourse) return;
     const { _id, name } = this.selectedCourse;
-
     this.courseService.enrollInCourse(this.user._id, _id).subscribe(
       (res) => {
         this.userService
@@ -91,13 +84,14 @@ export class EnrollCourseComponent implements OnInit {
             name,
           })
           .subscribe(
-            (res) => console.log(res),
+            (res) => {
+              this.userService.setUser(res);
+              this.router.navigate(['dashboard']);
+            },
             (err) => console.log(err)
           );
       },
       (err) => console.log(err)
     );
-
-    this.router.navigate(['dashboard']);
   }
 }

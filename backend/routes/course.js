@@ -20,6 +20,7 @@ const uri = process.env.ATLAS_URI;
 const conn = mongoose.createConnection(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
+  useFindAndModify: false,
 });
 
 // init gfs

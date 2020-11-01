@@ -7,26 +7,31 @@
 }
 
 #logo {
-  width: 7.75rem;
-  height: 8rem;
-  margin-left: 3.125rem;
-  margin-bottom: 1.5rem;
+  width: 5.8125rem;
+  height: 6rem;
+  margin-left: 4.1666666667rem;
+  margin-bottom: 1.125rem;
+  margin-top: 1.125rem;
 }
 
 clr-icon {
   width: 1.25rem;
   height: 1.25rem;
-  margin-right: 0.25rem;
+  margin-right: 0.5rem;
+  transform: translateY(-1px) translateX(-1px);
 }
 
 a {
-  margin: 0.75rem 0;
+  margin: 1rem 0;
+  cursor: pointer;
+  transform: scaleY(1.5);
 }
 
-a.active {
+a.active, a:hover {
   box-shadow: 0px 16px 48px rgba(120, 98, 188, 0.16);
   border-radius: 0px 10px 10px 0px;
-  margin-right: 10%;
+  margin-right: 10px;
+  transform: scaleY(1.5);
 }
 
 clr-vertical-nav {
@@ -42,7 +47,8 @@ clr-vertical-nav {
   width: 15rem;
 }
 
-app-footer{
-  /* position: absolute;
-  bottom: 0; */
+app-footer {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
 }

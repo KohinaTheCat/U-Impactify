@@ -49,13 +49,15 @@ export class SignupQuestionaireComponent implements OnInit {
         this.array[1].push('Plan my lessons and sessions');
       }
       this.addToDatabase();
+      this.router.navigate(['dashboard']);
     }
   }
 
   addToDatabase(): void {
     const user = this.userService.getCurrentUser();
+    if (this.skipped) return;
     if (!this.skipped) user.questionaire = this.array;
-    this.userService.postNewUser(user).subscribe(
+    this.userService.putQuestionaire(user).subscribe(
       (res) => {
         this.userService.setUser(res);
         this.router.navigate(['dashboard']);
@@ -66,9 +68,11 @@ export class SignupQuestionaireComponent implements OnInit {
       }
     );
   }
+  
   onSkip() {
     this.skipped = true;
     this.addToDatabase();
+    this.router.navigate(['dashboard']);
   }
 
   ngOnInit(): void {}

@@ -56,7 +56,10 @@ export class CreateCourseComponent implements OnInit {
               img: res.img,
             })
             .subscribe(
-              (res) => console.log(res),
+              (res) => {
+                this.userService.setUser(res);
+                this.router.navigate(['dashboard']);
+              },
               (err) => console.log(err)
             );
           for (const droppedFile of course.files) {

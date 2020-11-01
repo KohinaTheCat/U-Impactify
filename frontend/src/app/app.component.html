@@ -1,22 +1,24 @@
 <div class="main-container">
   <div class="content-container">
-    <clr-vertical-nav [clrVerticalNavCollapsible]="true" class="nav-trigger--bottom" *ngIf="isLoggedIn()">
-      <img src="../assets/uLogo.png" id="logo">
-      <a clrVerticalNavLink routerLink="./dashboard" routerLinkActive="active"><clr-icon shape="home"></clr-icon> Dashboard</a>
-      <a clrVerticalNavLink><clr-icon shape="calendar"></clr-icon> Scheduling</a>
-      <a clrVerticalNavLink><clr-icon shape="book"></clr-icon> Classes</a>
-      <a clrVerticalNavLink><clr-icon shape="talk-bubbles"></clr-icon> Community</a>
-      <a clrVerticalNavLink><clr-icon shape="envelope"></clr-icon> Mailbox</a>
-      <a clrVerticalNavLink><clr-icon shape="thumbs-up"></clr-icon> Reviews & Feedback</a>
-      <a clrVerticalNavLink><clr-icon shape="dollar-bill"></clr-icon> Billing & Marketing</a>
-      <a clrVerticalNavLink><clr-icon shape="cog"></clr-icon> Settings</a>
+    <clr-vertical-nav [clrVerticalNavCollapsible]="true" class="nav-trigger--bottom" *ngIf="shouldNavShow()">
+      <img src="../assets/uLogo.svg" id="logo">
+      <a clrVerticalNavLink routerLink="./dashboard" routerLinkActive="active"><clr-icon shape="home"></clr-icon> <span>Dashboard</span></a>
+      <a *ngIf="user.type === 'SI'" clrVerticalNavLink><clr-icon shape="user"></clr-icon> <span>Opportunities</span></a>
+      <a *ngIf="user.type !== 'SI'" clrVerticalNavLink><clr-icon shape="calendar"></clr-icon> <span>Scheduling</span></a>
+      <a *ngIf="user.type !== 'SI'" clrVerticalNavLink><clr-icon shape="book"></clr-icon> <span>Classes</span></a>
+      <a *ngIf="user.type !== 'SI'" clrVerticalNavLink><clr-icon shape="talk-bubbles"></clr-icon> <span>Community</span></a>
+      <a *ngIf="user.type !== 'SI'" clrVerticalNavLink><clr-icon shape="envelope"></clr-icon> <span>Mailbox</span></a>
+      <a *ngIf="user.type === 'IL'" clrVerticalNavLink><clr-icon shape="star"></clr-icon> <span>Achievements</span></a>
+      <a *ngIf="user.type === 'IL'" clrVerticalNavLink><clr-icon shape="employee-group"></clr-icon> <span>Social Initiatives</span></a>
+      <a *ngIf="user.type === 'IC'" clrVerticalNavLink><clr-icon shape="thumbs-up"></clr-icon> <span>Reviews & Feedback</span></a>
+      <a *ngIf="user.type === 'IC'" clrVerticalNavLink><clr-icon shape="dollar-bill"></clr-icon> <span>Billing & Marketing</span></a>
+      <a clrVerticalNavLink routerLink="./settings" routerLinkActive="active"><clr-icon shape="cog"></clr-icon> <span>Settings</span></a>
     </clr-vertical-nav>
     <div class="content-area">
-      <app-front-page-header *ngIf="!isLoggedIn()"></app-front-page-header>
-      <app-global-search *ngIf="isLoggedIn()"></app-global-search>
+      <app-front-page-header *ngIf="shouldHeaderShow()"></app-front-page-header>
+      <app-global-search *ngIf="shouldNavShow()"></app-global-search>
       <router-outlet></router-outlet>
-      <app-footer *ngIf="isLoggedIn()"></app-footer>
+      <app-footer *ngIf="shouldFooterShow()"></app-footer>
     </div>
   </div>
 </div>
-<!-- <app-signup-questionaire2></app-signup-questionaire2> -->

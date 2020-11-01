@@ -85,13 +85,15 @@ export class SignupQuestionaire2Component implements OnInit {
         this.array[2].push(this.other3);
       }
       this.addToDatabase();
+      this.router.navigate(['dashboard']);
     }
   }
 
   addToDatabase(): void {
     const user = this.userService.getCurrentUser();
+    if (this.skipped) return;
     if (!this.skipped) user.questionaire = this.array;
-    this.userService.postNewUser(user).subscribe(
+    this.userService.putQuestionaire(user).subscribe(
       (res) => {
         this.userService.setUser(res);
         this.router.navigate(['dashboard']);
@@ -106,6 +108,7 @@ export class SignupQuestionaire2Component implements OnInit {
   onSkip() {
     this.skipped = true;
     this.addToDatabase();
+    this.router.navigate(['dashboard']);
   }
 
   ngOnInit(): void {}

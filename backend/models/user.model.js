@@ -58,20 +58,30 @@ const userSchema = new Schema({
   },
 
   socialInitiative: {
-    createdProfile: false,
-    registeredNumber: String,
-    businessNumber: String,
-    location: String,
-    hours: String,
-    phone: String,
-    email: String,
+    registeredNumber: {
+      type: String,
+    },
+    businessNumber: {
+      type: String,
+    },
+    location: {
+      type: String,
+    },
+    hours: {
+      type: String,
+    },
+    phone: {
+      type: String,
+    },
+    email: {
+      type: String,
+    },
   },
 });
 
-
 /**
  * https://www.mongodb.com/blog/post/password-authentication-with-mongoose-part-1
- * 
+ *
  * @param {String}   newPass  the new password
  * @param {function} callBack any function you pass, err passed for error handling
  */
@@ -83,7 +93,7 @@ userSchema.methods.comparePassword = function (newPass, callBack) {
     callBack(null, isMatch);
   });
 };
-
+//
 userSchema.pre("save", function (next) {
   let user = this;
 

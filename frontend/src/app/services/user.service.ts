@@ -13,13 +13,6 @@ export class UserService {
   // save username and password into local storage, so they can stay logged in
   user: User = JSON.parse(localStorage.getItem('user') || null);
 
-  /**
-   * Get existing user
-   * @param {String} uid uid of the user
-   */
-  getAnotherUser(uid: String): Observable<any> {
-    return this.http.get('http://localhost:5000/user/get/' + uid, {});
-  }
 
   /**
    * Gets the current user stored in the service
@@ -41,6 +34,26 @@ export class UserService {
       type,
       questionaire,
     });
+  }
+
+  /**
+   * PUT questionaire response
+   * @param {User} user
+   */
+  putQuestionaire(user: User): Observable<any> {
+    const { _id, questionaire } = user;
+    return this.http.put(`http://localhost:5000/user/addQuestionaire/`, {
+      _id,
+      questionaire,
+    });
+  }
+
+  /**
+   * Get existing user by id
+   * @param {String} id username of the user
+   */
+  getAnotherUser(id: String): Observable<User> {
+    return this.http.get<User>('http://localhost:5000/user/' + id);
   }
 
   /**
@@ -72,9 +85,6 @@ export class UserService {
    * @param {Object} course { _id, name }
    */
   enrollInCourse(userId: string, course: any): Observable<any> {
-    this.user.classesEnrolled.push(course);
-    this.setUser(this.user);
-
     return this.http.put(`http://localhost:5000/user/enroll/`, {
       userId,
       course,
@@ -99,8 +109,6 @@ export class UserService {
    * @param {string} course  {_id, name} of course
    */
   updateClassesTeaching(_id: string, course: any): Observable<any> {
-    this.user.classesTeaching.push(course);
-    this.setUser(this.user);
     return this.http.put('http://localhost:5000/user/updateClassesTeaching', {
       _id,
       course,
@@ -115,6 +123,52 @@ export class UserService {
   dropACourse(userId: string, courseId: string): Observable<any> {
     return this.http.delete(
       `http://localhost:5000/user/dropCourse/${courseId}/${userId}`
+    );
+  }
+
+  /**
+   * DELETE user 
+   * @param {string} userId    id of user
+   */
+  deleteUser(userId: string): Observable<any> {
+    console.log(userId)
+    return this.http.delete(
+      `http://localhost:5000/user/deleteUser/${userId}`
+    );
+  }
+
+  
+
+  /**
+   * PUT adds the social initiative profile to the user
+   * @param {string} registeredNumber registered number of SI
+   * @param {string} businessNumber   business number of SI
+   * @param {string} location         location of SI
+   * @param {string} hours            working hours
+   * @param {string} phone            phone to contact SI
+   * @param {string} email            email to contact SI
+   * @param {string} _id              userId of SI Account
+   */
+  addSocialInitiativeProfile(
+    registeredNumber: string,
+    businessNumber: string,
+    location: string,
+    hours: string,
+    phone: string,
+    email: string,
+    _id: string
+  ): Observable<User> {
+    return this.http.put<User>(
+      `http://localhost:5000/user/addSocialInitiativeProfile`,
+      {
+        registeredNumber,
+        businessNumber,
+        location,
+        hours,
+        phone,
+        email,
+        _id,
+      }
     );
   }
 }
