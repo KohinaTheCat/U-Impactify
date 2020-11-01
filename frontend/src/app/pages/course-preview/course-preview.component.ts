@@ -13,7 +13,6 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./course-preview.component.css'],
 })
 export class CoursePreviewComponent implements OnInit {
-
   course: Course;
   valid: boolean;
   alreadyEnrolled: boolean = false;
@@ -75,7 +74,9 @@ export class CoursePreviewComponent implements OnInit {
     this.router.navigate(['dashboard']);
   }
 
-  settingsHandler() {
-    
-  }
+  settingsHandler() {}
+
+  goToInstructorProfile($event): void {
+    this.router.navigate([`/user/${$event}`]);
+  };
 }
