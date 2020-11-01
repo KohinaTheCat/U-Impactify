@@ -25,8 +25,10 @@ export class CreateCourseComponent implements OnInit {
   level: string = '';
   tags: string = '';
   files: NgxFileDropEntry[] = [];
+  img: NgxFileDropEntry[] = [];
   basic: boolean = true;
   error: string = '';
+  imageError : string ='';
 
   ngOnInit(): void {}
 
@@ -52,6 +54,7 @@ export class CreateCourseComponent implements OnInit {
             .updateClassesTeaching(this.userService.getCurrentUser()._id, {
               _id: res._id,
               name: res.name,
+              img: res.img,
             })
             .subscribe(
               (res) => {
@@ -60,6 +63,7 @@ export class CreateCourseComponent implements OnInit {
               },
               (err) => console.log(err)
             );
+            
           for (const droppedFile of course.files) {
             if (droppedFile.fileEntry.isFile) {
               const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
@@ -78,9 +82,33 @@ export class CreateCourseComponent implements OnInit {
             } else {
               // It was a directory (empty directories are added, otherwise only files)
               const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
+            }
+          }
+
+          // call add image
+          for (const droppedFile of this.img) {
+            if (droppedFile.fileEntry.isFile) {
+              const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
+              fileEntry.file((file: File) => {
+                const formData = new FormData();
+                formData.append('document', file, droppedFile.relativePath);
+                this.courseService.postCourseImage(formData, res._id).subscribe(
+                  (res) => {
+                    console.log(res);
+                  },
+                  (err) => {
+                    console.log(err);
+                  }
+                );
+              });
+            } else {
+              // It was a directory (empty directories are added, otherwise only files)
+              const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
               console.log(droppedFile.relativePath, fileEntry);
             }
           }
+
+          this.router.navigate(['dashboard']);
         },
         (err) => {
           this.error = err.message;
@@ -95,13 +123,29 @@ export class CreateCourseComponent implements OnInit {
     for (const droppedFile of files) {
       if (droppedFile.fileEntry.isFile) {
         const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
+      } else {
+        // It was a directory (empty directories are added, otherwise only files)
+        const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
+      }
+    }
+  }
+
+  public droppedCourseImage(image: NgxFileDropEntry[]) {
+    this.img = image;
+    for (const droppedFile of image) {
+      if (droppedFile.fileEntry.isFile) {
+        const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
         fileEntry.file((file: File) => {
-          console.log(file);
+          if(!file.name.endsWith('.png' || '.jpg' || '.jpeg')){
+            this.img = [];
+            this.imageError = "Bad Course Image!"
+          } else {
+            this.imageError = '';
+          }
         });
       } else {
         // It was a directory (empty directories are added, otherwise only files)
         const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
-        console.log(droppedFile.relativePath, fileEntry);
       }
     }
   }

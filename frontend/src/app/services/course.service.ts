@@ -7,7 +7,6 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class CourseService {
-
   constructor(private http: HttpClient) {}
 
   /**
@@ -16,7 +15,7 @@ export class CourseService {
    * @param {string} _id    id of the teacher
    */
   postNewCourse(course: any, _id: string): Observable<Course> {
-    const { name, description, level, tags } = course;
+    const { name, description, level, tags, img } = course;
     return this.http.post<Course>('http://localhost:5000/course/', {
       name,
       students: [],
@@ -25,6 +24,7 @@ export class CourseService {
       files: [],
       level,
       tags,
+      img,
     });
   }
 
@@ -46,6 +46,19 @@ export class CourseService {
    */
   getCourseFiles(courseId: string): Observable<any> {
     return this.http.get(`http://localhost:5000/document/${courseId}`);
+  }
+
+  getCourseImageId(courseId: string): Observable<any> {
+    return this.http.get(
+      `http://localhost:5000/course/${courseId}/getCourseImage`
+    );
+  }
+
+  postCourseImage(file: FormData, courseId: string) {
+    return this.http.post(
+      `http://localhost:5000/course/${courseId}/uploadCourseImage`,
+      file
+    );
   }
 
   /**

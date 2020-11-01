@@ -2,7 +2,6 @@ const router = require("express").Router();
 let userSchema = require("../models/user.model");
 let courseSchema = require("../models/course.model");
 
-
 // POST login user
 router.route("/:email").post((req, res) => {
   const { password } = req.body;
@@ -19,7 +18,11 @@ router.route("/:email").post((req, res) => {
     .catch((err) => res.status(400).json(`Error: User Not Found`));
 });
 
-// POST new user
+/**
+ * POST new user
+ * @param req { _id, password, email, type, questionaire }
+ * @return user
+ */
 router.route("/").post((req, res) => {
   const { _id, password, email, type, questionaire } = req.body;
   const newUser = new userSchema({
@@ -45,7 +48,13 @@ router.route("/").post((req, res) => {
     .catch((err) => res.status(400).json(err));
 });
 
-// PUT questionaire response
+/**
+ * PUT questionnaire response
+ * @param req { _id, questionaire }
+ * @param _id user id
+ * @param questionaire questionaire response
+ * @return user
+ */
 router.route("/addQuestionaire").put((req, res) => {
   const { _id, questionaire } = req.body;
   userSchema.findById(_id).then((user) => {
@@ -57,7 +66,13 @@ router.route("/addQuestionaire").put((req, res) => {
   });
 });
 
-// POST enroll course (Impact Learner only)
+/**
+ * PUT enroll course (Impact Learner only)
+ * @param req { userId, course }
+ * @param userId user id
+ * @param course course id
+ * @return user
+ */
 router.route("/enroll").put((req, res) => {
   const { userId, course } = req.body;
   userSchema.findById(userId).then((user) => {
@@ -69,7 +84,13 @@ router.route("/enroll").put((req, res) => {
   });
 });
 
-// PUT update password
+/**
+ * PUT update password
+ * @param req { _id, password }
+ * @param _id user id
+ * @param password new password
+ * @return user
+ */
 router.route("/password").put((req, res) => {
   const { _id, password } = req.body;
   userSchema
@@ -84,7 +105,13 @@ router.route("/password").put((req, res) => {
     .catch((err) => res.status(400).json(err));
 });
 
-// PUT update classesTeaching (Impact Consultant only)
+/**
+ * PUT update classesTeaching (Impact Consultant only)
+ * @param req { _id, course }
+ * @param _id user id
+ * @param course course id
+ * @return user
+ */
 router.route("/updateClassesTeaching").put((req, res) => {
   const { _id, course } = req.body;
   userSchema
@@ -93,7 +120,6 @@ router.route("/updateClassesTeaching").put((req, res) => {
       user.classesTeaching = user.classesTeaching.concat({
         _id: course._id,
         name: course.name,
-        img: "#",
       });
       user
         .save()
@@ -103,7 +129,13 @@ router.route("/updateClassesTeaching").put((req, res) => {
     .catch((err) => res.status(400).json(err));
 });
 
-// DELETE drop a course (Impact Learner only)
+/**
+ * DELETE drop a course (Impact Learner only)
+ * @param req { userId, courseId }
+ * @param userId user id
+ * @param courseId course id
+ * @return user
+ */
 router.delete("/dropCourse/:courseId/:userId", (req, res) => {
   const { userId, courseId } = req.params;
   userSchema.findById(userId).then((user) => {
@@ -117,7 +149,11 @@ router.delete("/dropCourse/:courseId/:userId", (req, res) => {
   });
 });
 
-// PUT social initiative
+/**
+ * PUT social initiative
+ * @param req const { registeredNumber, businessNumber, location, hours, phone, email,  _id }
+ * @return user
+ */
 router.route("/addSocialInitiativeProfile").put((req, res) => {
   const {
     registeredNumber,
@@ -144,18 +180,26 @@ router.route("/addSocialInitiativeProfile").put((req, res) => {
   });
 });
 
-// GET user by id (username)
+/**
+ * GET user by id (username)
+ * @param id user id
+ * @return user
+ */
 router.route("/:id").get((req, res) => {
   userSchema
     .findById(req.params.id)
     .then((user) => {
-      if(user === null) return res.status(404).json("no user found");
+      if (user === null) return res.status(404).json("no user found");
       return res.json(user);
     })
     .catch((err) => res.status(404).json("no user found" + err));
 });
 
-// DELETE any user
+/**
+ * DELETE any user
+ * @param userId user id
+ * @return user
+ */
 router.delete("/deleteUser/:userId", (req, res) => {
   const { userId } = req.params;
   userSchema
@@ -163,41 +207,47 @@ router.delete("/deleteUser/:userId", (req, res) => {
     .then((user) => {
       // impact learner, remove them from every course they're enrolled in
       if (user.type === "IL") {
-        user.classesEnrolled.forEach(element => {
-          courseSchema.findById(element._id).then((course) => {
-            course.students = course.students.filter((id) => id !== userId);
-            course.save().catch((err) => res.status(400).json(err));
-          })
-          .catch((err) => res.status(400).json(err));
-        });
-      // impact consultant, remove them from every course they're teaching
-      } else if (user.type === "IC") {
-        user.classesTeaching.forEach(teach => {
-          courseSchema.findById(teach._id).then((course) => {
-            // only teacher in the course, remove the course and un-enroll all students in that course
-            if (course.teachers.length === 1) {
-              course.students.forEach(element => {
-                userSchema.findById(element).then((user) => {
-                  // remove from coursesEnrolled from student
-                  user.classesEnrolled = user.classesEnrolled.filter((courses) => courses.id !== course.id)
-                  user.save().catch((err) => res.status(400).json(err));
-                });
-              });
-              // remove the whole course
-              courseSchema.findByIdAndRemove(course._id, function (err) {
-                if (!err) {
-                  res.status(200).send();
-                } else {
-                  return res.status(400).send();
-                }
-              });
-            // remove single teacher from the course list
-            } else {
-              course.teachers = course.teachers.filter((id) => id !== userId);
+        user.classesEnrolled.forEach((element) => {
+          courseSchema
+            .findById(element._id)
+            .then((course) => {
+              course.students = course.students.filter((id) => id !== userId);
               course.save().catch((err) => res.status(400).json(err));
-            }
-          })
-          .catch((err) => res.status(400).json(err));
+            })
+            .catch((err) => res.status(400).json(err));
+        });
+        // impact consultant, remove them from every course they're teaching
+      } else if (user.type === "IC") {
+        user.classesTeaching.forEach((teach) => {
+          courseSchema
+            .findById(teach._id)
+            .then((course) => {
+              // only teacher in the course, remove the course and un-enroll all students in that course
+              if (course.teachers.length === 1) {
+                course.students.forEach((element) => {
+                  userSchema.findById(element).then((user) => {
+                    // remove from coursesEnrolled from student
+                    user.classesEnrolled = user.classesEnrolled.filter(
+                      (courses) => courses.id !== course.id
+                    );
+                    user.save().catch((err) => res.status(400).json(err));
+                  });
+                });
+                // remove the whole course
+                courseSchema.findByIdAndRemove(course._id, function (err) {
+                  if (!err) {
+                    res.status(200).send();
+                  } else {
+                    return res.status(400).send();
+                  }
+                });
+                // remove single teacher from the course list
+              } else {
+                course.teachers = course.teachers.filter((id) => id !== userId);
+                course.save().catch((err) => res.status(400).json(err));
+              }
+            })
+            .catch((err) => res.status(400).json(err));
         });
       }
     })

@@ -14,6 +14,13 @@ export class UserService {
   user: User = JSON.parse(localStorage.getItem('user') || null);
 
   /**
+   * Gets the current user stored in the service
+   */
+  getCurrentUser(): User {
+    return this.user;
+  }
+
+  /**
    * POST new user
    * @param {User} newUser the about-to-be user
    */
@@ -72,13 +79,6 @@ export class UserService {
   }
 
   /**
-   * Gets the current user stored in the service
-   */
-  getCurrentUser(): User {
-    return this.user;
-  }
-
-  /**
    * POST enroll course (Impact Learner only)
    * @param {string} userId id of user
    * @param {Object} course { _id, name }
@@ -126,17 +126,13 @@ export class UserService {
   }
 
   /**
-   * DELETE user 
+   * DELETE user
    * @param {string} userId    id of user
    */
   deleteUser(userId: string): Observable<any> {
-    console.log(userId)
-    return this.http.delete(
-      `http://localhost:5000/user/deleteUser/${userId}`
-    );
+    console.log(userId);
+    return this.http.delete(`http://localhost:5000/user/deleteUser/${userId}`);
   }
-
-  
 
   /**
    * PUT adds the social initiative profile to the user

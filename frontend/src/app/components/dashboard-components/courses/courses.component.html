@@ -6,9 +6,11 @@
         <clr-icon shape="trash" id="dropcourse"></clr-icon>
       </div>
       <div class="course-image plus">
-        <clr-icon shape="image"></clr-icon>
+        <img *ngIf="course.img.length else icon" [src]="course.img">
+        <ng-template #icon>
+          <clr-icon shape="image"></clr-icon>
+        </ng-template>
       </div>
-      <!-- add image of course -->
       {{ course.name }}
     </div>
 

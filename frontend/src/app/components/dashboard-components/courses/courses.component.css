@@ -9,6 +9,7 @@ h2 {
   gap: 1rem;
   height: 24rem;
   align-items: center;
+  margin-top: 1.5rem;
 }
 
 #new-course {
@@ -23,6 +24,7 @@ h2 {
 #new-course:hover {
   background: var(--gray20);
   cursor: pointer;
+  overflow: hidden;
 }
 
 .plus {
@@ -32,6 +34,13 @@ h2 {
 .plus clr-icon {
   width: 4rem;
   height: 4rem;
+}
+
+img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
 }
 
 .course-image {

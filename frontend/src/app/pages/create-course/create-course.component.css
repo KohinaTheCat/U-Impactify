@@ -46,3 +46,11 @@ label {
       font-size: 0.75rem;
   }
 
+clr-control-error {
+    color: #c21d00; 
+}
+
+.uploadedImage {
+    width: 100%;
+    text-align: center;
+}

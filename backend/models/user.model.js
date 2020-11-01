@@ -42,7 +42,6 @@ const userSchema = new Schema({
       {
         _id: String,
         name: String,
-        img: String,
       },
     ],
   },
@@ -51,7 +50,6 @@ const userSchema = new Schema({
       {
         _id: String,
         name: String,
-        img: String,
       },
     ],
   },

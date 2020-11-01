@@ -12,17 +12,16 @@ import { UserService } from 'src/app/services/user.service';
 export class CoursesComponent implements OnInit {
   user: User;
   courses: any[];
-
   selectedCourse: any;
 
-  constructor(private userService: UserService, private router: Router, private courseService: CourseService) {}
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private courseService: CourseService
+  ) {}
 
   ngOnInit(): void {
-    this.user = this.userService.getCurrentUser();
-    this.courses =
-      this.user.type === 'IL'
-        ? this.user.classesEnrolled
-        : this.user.classesTeaching;
+    this.ngOnChanges();
   }
 
   ngOnChanges(): void {
@@ -31,12 +30,19 @@ export class CoursesComponent implements OnInit {
       this.user.type === 'IL'
         ? this.user.classesEnrolled
         : this.user.classesTeaching;
+        
+    this.courses.forEach((course) => {
+      this.courseService.getCourseImageId(course._id).subscribe((res) => {
+        course.img =
+          res === '' || res === null ? '' : `http://localhost:5000/course/documents/${res}`;
+      });
+    });
   }
 
   addNewCourse(): void {
-    if(this.user.type === 'IL') {
+    if (this.user.type === 'IL') {
       this.router.navigate(['enrollcourse']);
-    } else if(this.user.type === 'IC') {
+    } else if (this.user.type === 'IC') {
       this.router.navigate(['createcourse']);
     }
   }
@@ -44,18 +50,26 @@ export class CoursesComponent implements OnInit {
   onClickDropCourse($event) {
     this.selectedCourse = $event;
     this.dropCourse();
-  };
-
+  }
 
   dropCourse(): void {
     if (!this.selectedCourse) return;
-    this.user.classesEnrolled = this.user.classesEnrolled.filter((course: any) => course._id !== this.selectedCourse._id);
+    this.user.classesEnrolled = this.user.classesEnrolled.filter(
+      (course: any) => course._id !== this.selectedCourse._id
+    );
     this.userService.setUser(this.user);
-    this.courseService.dropACourse(this.userService.getCurrentUser()._id, this.selectedCourse._id)
+    this.courseService
+      .dropACourse(
+        this.userService.getCurrentUser()._id,
+        this.selectedCourse._id
+      )
       .subscribe(
         (res) => {
           this.userService
-            .dropACourse(this.userService.getCurrentUser()._id, this.selectedCourse._id)
+            .dropACourse(
+              this.userService.getCurrentUser()._id,
+              this.selectedCourse._id
+            )
             .subscribe(
               (res) => {
                 this.userService.setUser(res);
@@ -66,10 +80,9 @@ export class CoursesComponent implements OnInit {
         },
         (err) => console.log(err)
       );
-    this.ngOnChanges();
   }
 
-  previewCourse($event) : void {
+  previewCourse($event): void {
     this.selectedCourse = $event;
     this.router.navigate([`course/${this.selectedCourse._id}`]);
   }

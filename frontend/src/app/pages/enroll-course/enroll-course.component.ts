@@ -26,6 +26,7 @@ export class EnrollCourseComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.userService.getCurrentUser();
+
     this.courseService.getAllCourses().subscribe((res) => {
       this.user.classesEnrolled.forEach((course: any) => {
         res = res.filter((resCourse: Course) => course._id !== resCourse._id);
@@ -39,8 +40,25 @@ export class EnrollCourseComponent implements OnInit {
         if (teachers.length == 1) allTeachers = teachers[0];
         else allTeachers = teachers.join(', ');
 
-        if (!this.user.classesEnrolled.includes({ _id, name }))
-          this.courses.push({ _id, name, description, level, allTeachers });
+        if (!this.user.classesEnrolled.includes({ _id, name })) {
+          this.courses.push({
+            _id,
+            name,
+            description,
+            level,
+            allTeachers,
+            img: '',
+          });
+        }
+      });
+
+      this.courses.forEach((course) => {
+        this.courseService.getCourseImageId(course._id).subscribe((res) => {
+          course.img =
+            res === '' || res === null
+              ? ''
+              : `http://localhost:5000/course/documents/${res}`;
+        });
       });
     });
   }
