@@ -14,6 +14,8 @@ export class CoursesComponent implements OnInit {
   courses: any[];
   selectedCourse: any;
 
+  opened: boolean = false;
+
   constructor(
     private userService: UserService,
     private router: Router,
@@ -49,11 +51,12 @@ export class CoursesComponent implements OnInit {
 
   onClickDropCourse($event) {
     this.selectedCourse = $event;
-    this.dropCourse();
+    this.opened = true;
   }
 
   dropCourse(): void {
     if (!this.selectedCourse) return;
+    this.opened = false;
     this.user.classesEnrolled = this.user.classesEnrolled.filter(
       (course: any) => course._id !== this.selectedCourse._id
     );
