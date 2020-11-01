@@ -129,7 +129,13 @@ router.route("/updateClassesTeaching").put((req, res) => {
     .catch((err) => res.status(400).json(err));
 });
 
-// DELETE drop a course (Impact Learner only)
+/**
+ * DELETE drop a course (Impact Learner only)
+ * @param req { userId, courseId }
+ * @param userId user id
+ * @param courseId course id
+ * @return user
+ */
 router.delete("/dropCourse/:courseId/:userId", (req, res) => {
   const { userId, courseId } = req.params;
   userSchema.findById(userId).then((user) => {
@@ -143,7 +149,11 @@ router.delete("/dropCourse/:courseId/:userId", (req, res) => {
   });
 });
 
-// PUT social initiative
+/**
+ * PUT social initiative
+ * @param req const { registeredNumber, businessNumber, location, hours, phone, email,  _id }
+ * @return user
+ */
 router.route("/addSocialInitiativeProfile").put((req, res) => {
   const {
     registeredNumber,
@@ -170,7 +180,11 @@ router.route("/addSocialInitiativeProfile").put((req, res) => {
   });
 });
 
-// GET user by id (username)
+/**
+ * GET user by id (username)
+ * @param id user id
+ * @return user
+ */
 router.route("/:id").get((req, res) => {
   userSchema
     .findById(req.params.id)
@@ -181,7 +195,11 @@ router.route("/:id").get((req, res) => {
     .catch((err) => res.status(404).json("no user found" + err));
 });
 
-// DELETE any user
+/**
+ * DELETE any user
+ * @param userId user id
+ * @return user
+ */
 router.delete("/deleteUser/:userId", (req, res) => {
   const { userId } = req.params;
   userSchema
