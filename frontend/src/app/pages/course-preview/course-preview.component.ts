@@ -13,16 +13,8 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./course-preview.component.css'],
 })
 export class CoursePreviewComponent implements OnInit {
-  course = {
-    _id: '',
-    name: '',
-    description: '',
-    students: [],
-    teachers: [],
-    tags: '',
-    level: '',
-  };
 
+  course: Course;
   valid: boolean;
   alreadyEnrolled: boolean = false;
   error: string;
@@ -41,13 +33,11 @@ export class CoursePreviewComponent implements OnInit {
     this.courseService.getCourse(id).subscribe(
       (incomingCourse: Course) => {
         this.valid = true;
-        this.course.name = incomingCourse.name;
-        this.course.description = incomingCourse.description;
-        this.course.students = incomingCourse.students;
-        this.course.teachers = incomingCourse.teachers;
-        this.course.tags = incomingCourse.tags;
-        this.course.level = incomingCourse.level;
-        this.course._id = incomingCourse._id;
+        this.course = incomingCourse;
+        this.course.img =
+          this.course.img === '' || this.course.img === null
+            ? (this.course.img = '../../../../assets/courseimage.png')
+            : `http://localhost:5000/course/documents/${this.course.img}`;
         for (let i = 0; i < this.course.students.length; i++) {
           if (this.course.students[i] == this.user._id) {
             this.alreadyEnrolled = true;
