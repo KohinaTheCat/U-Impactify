@@ -64,51 +64,45 @@ export class CoursePreviewComponent implements OnInit {
       .enrollInCourse(this.userService.getCurrentUser()._id, this.course._id)
       .subscribe(
         (res) => {
-          console.log(res);
           this.userService
             .enrollInCourse(this.userService.getCurrentUser()._id, {
               _id: this.course._id,
               name: this.course.name,
             })
             .subscribe(
-              (res) => console.log(res),
+              (res) => {
+                this.userService.setUser(res);
+                this.router.navigate(['dashboard']);
+              },
               (err) => console.log(err)
             );
         },
         (err) => console.log(err)
       );
-    this.router.navigate(['dashboard']);
   }
 
   goToInstructorProfile($event): void {
     this.router.navigate([`/user/${$event}`]);
-  };
+  }
 
   updateCourseContentHandler() {
     this.opened = true;
   }
 
-  editDocumentsHandler() {
+  editDocumentsHandler() {}
 
-  }
+  assessmentsHandler() {}
 
-  assessmentsHandler() {
-
-  }
-
-  studentAnalysisHandler() {
-    
-  }
+  studentAnalysisHandler() {}
 
   cancel() {
     this.opened = false;
   }
   registerHandler() {
-    
     const { name, description, level, tags } = this;
     this.course = {
       _id: this.course._id,
-      name:  this.name,
+      name: this.name,
       description: this.description,
       students: this.course.students,
       teachers: this.course.teachers,
@@ -116,14 +110,13 @@ export class CoursePreviewComponent implements OnInit {
       level: this.level,
       img: this.course.img,
       files: this.course.files,
-    }
+    };
 
     this.opened = false;
 
-    
-    this.courseService
-      .updateCourse(this.course)
-      .subscribe(res => console.log(res), (err) => console.log(err));
-
+    this.courseService.updateCourse(this.course).subscribe(
+      (res) => console.log(res),
+      (err) => console.log(err)
+    );
   }
 }
