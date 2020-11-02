@@ -7,7 +7,7 @@
     <h4 id="title">{{ course.name }}</h4>
   </div>
   <div id="enroll-button" *ngIf="user.type == 'IL' && !alreadyEnrolled">
-    <button class="btn btn-primary" (click)="enrollHandler()">Enroll</button>
+    <button class="btn btn-secondary" (click)="enrollHandler()">Enroll</button>
   </div>
   <div
     id="settings-dropdown"
@@ -71,6 +71,13 @@
   <div class="modal-body">
     <form clrForm>
       <clr-control-error>{{ error }}</clr-control-error>
+        <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="droppedCourseImage($event)" 
+        (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+            <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+              <label>Upload Course Image (.jpg and .png)</label>
+              <button class="btn btn-primary" (click)="openFileSelector()">Browse Files</button>
+            </ng-template>
+        </ngx-file-drop>
         <clr-input-container>
           <label>Course Description
           <input clrInput type="text" placeholder="" [(ngModel)]="description" name="description" required/>
@@ -98,6 +105,6 @@
   </div>
   <div class="modal-footer">
       <button type="button" class="btn btn-outline" (click)="basic = false" (click)="cancel()">Cancel</button>
-      <button type="button" class="btn btn-outline" (click)="basic = false" (click)="registerHandler()" >Update Course</button>
+      <button type="button" class="btn btn-primary" (click)="basic = false" (click)="registerHandler()" >Update Course</button>
   </div>
 </clr-modal>

@@ -54,6 +54,12 @@ h3 {
 }
 
 .btn.btn-primary {
+  font-size: 0.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.btn.btn-secondary {
   font-size: 1rem;
   transform: translate(0%, 45%);
   width: 7rem;
@@ -67,11 +73,16 @@ h3 {
   text-transform: uppercase;
 }
 
+
 .btn.btn-primary:hover {
   background-color: var(--purple-smooth);
   color: black;
 }
 
+.btn.btn-secondary:hover {
+  background-color: var(--purple-smooth);
+  color: black;
+}
 #settings-dropdown {
   transform: translateY(-17.5rem);
 }
