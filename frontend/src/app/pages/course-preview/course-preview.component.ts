@@ -99,14 +99,14 @@ export class CoursePreviewComponent implements OnInit {
     this.opened = false;
   }
   registerHandler() {
-    const { name, description, level, tags } = this;
+    const {description, level } = this;
     this.course = {
       _id: this.course._id,
-      name: this.name,
+      name: this.course.name,
       description: this.description,
       students: this.course.students,
       teachers: this.course.teachers,
-      tags: this.tags,
+      tags: this.course.tags,
       level: this.level,
       img: this.course.img,
       files: this.course.files,
@@ -115,7 +115,11 @@ export class CoursePreviewComponent implements OnInit {
     this.opened = false;
 
     this.courseService.updateCourse(this.course).subscribe(
-      (res) => console.log(res),
+      (res) => {
+        this.userService.setUser(this.user);
+        console.log(res);
+        this.router.navigate(['dashboard']);
+      },
       (err) => console.log(err)
     );
   }
