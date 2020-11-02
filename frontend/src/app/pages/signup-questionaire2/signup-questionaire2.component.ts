@@ -93,7 +93,10 @@ export class SignupQuestionaire2Component implements OnInit {
 
   addToDatabase(): void {
     const user = this.userService.getCurrentUser();
-    if (this.skipped) return;
+    if (this.skipped){
+      this.router.navigate(['dashboard']);
+      return;
+    } 
     if (!this.skipped) user.questionaire = this.array;
     this.userService.putQuestionaire(user).subscribe(
       (res) => {

@@ -15,8 +15,6 @@ export class SignupQuestionaireComponent implements OnInit {
   skipped: boolean = false;
   array: string[][] = [[], []];
   submit: boolean = false;
-  discard: boolean = false;
-
   
   constructor(private userService: UserService, private router: Router) {
     for (let i = 0; i < 7; i++) {
@@ -54,13 +52,15 @@ export class SignupQuestionaireComponent implements OnInit {
         this.array[1].push('Plan my lessons and sessions');
       }
       this.addToDatabase();
-      // this.router.navigate(['dashboard']);
     }
   }
 
   addToDatabase(): void {
     const user = this.userService.getCurrentUser();
-    if (this.skipped) return;
+    if (this.skipped){
+      this.router.navigate(['dashboard']);
+      return;
+    } 
     if (!this.skipped) user.questionaire = this.array;
     this.userService.putQuestionaire(user).subscribe(
       (res) => {
@@ -74,12 +74,8 @@ export class SignupQuestionaireComponent implements OnInit {
     );
   }
   
-  // fat infinite loop i think its b/c of multiple navigates but idk why
   canDeactivate() {
-    console.log("Inside can deactive in questionnaire");
     if(this.skipped || this.submit){
-      console.log("navigate to dashboard in deactivate")
-      // this.router.navigate(['dashboard']);
       return true;
     } else {
       this.userService.setUser(null);
@@ -90,7 +86,6 @@ export class SignupQuestionaireComponent implements OnInit {
   onSkip() {
     this.skipped = true;
     this.addToDatabase();
-    this.router.navigate(['dashboard']);
   }
 
   ngOnInit(): void {}

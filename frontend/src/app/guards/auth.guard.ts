@@ -27,12 +27,7 @@ export class AuthGuard implements CanActivate , CanDeactivate<CanComponentDeacti
     state: RouterStateSnapshot
   ): boolean {
     const user: User = this.userService.getCurrentUser();
-    // no difference in local storage or db storage because user gets posted before all of this
-    // this.userService.getAnotherUser(user._id).subscribe(
-    //   (res) => (this.userDb = res),
-    // );
     if (!user || !user._id) {
-    // if(!this.userDb || !this.userDb._id){
       this.router.navigateByUrl('/signup');
       return false;
     }
@@ -46,6 +41,6 @@ export class AuthGuard implements CanActivate , CanDeactivate<CanComponentDeacti
     ){
     return component.canDeactivate() ? 
       true:
-      confirm("Navigate back to sign-up?");
+      true
   }
 }
