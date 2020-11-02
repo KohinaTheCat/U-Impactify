@@ -14,6 +14,10 @@ export class SignupQuestionaireComponent implements OnInit {
   checked: boolean = false;
   skipped: boolean = false;
   array: string[][] = [[], []];
+  submit: boolean = false;
+  discard: boolean = false;
+
+  
   constructor(private userService: UserService, private router: Router) {
     for (let i = 0; i < 7; i++) {
       this.checkbox[i] = false;
@@ -21,6 +25,7 @@ export class SignupQuestionaireComponent implements OnInit {
   }
 
   onSubmit() {
+    this.submit = true;
     for (let i = 0; i < 7; i++) {
       if (this.checkbox[i]) {
         this.checked = true;
@@ -49,7 +54,7 @@ export class SignupQuestionaireComponent implements OnInit {
         this.array[1].push('Plan my lessons and sessions');
       }
       this.addToDatabase();
-      this.router.navigate(['dashboard']);
+      // this.router.navigate(['dashboard']);
     }
   }
 
@@ -67,6 +72,19 @@ export class SignupQuestionaireComponent implements OnInit {
         console.log(err);
       }
     );
+  }
+  
+  // fat infinite loop i think its b/c of multiple navigates but idk why
+  canDeactivate() {
+    console.log("Inside can deactive in questionnaire");
+    if(this.skipped || this.submit){
+      console.log("navigate to dashboard in deactivate")
+      // this.router.navigate(['dashboard']);
+      return true;
+    } else {
+      this.userService.setUser(null);
+      return false;
+    }
   }
   
   onSkip() {
