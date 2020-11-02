@@ -53,13 +53,6 @@ h3 {
   text-shadow: 0px 0px 2px var(--gray80);
 }
 
-.wrapper {
-  width: 100%;
-  text-align: center;
-  display: flex;
-  margin-top: 0rem;
-}
-
 .btn.btn-primary {
   font-size: 1rem;
   transform: translate(0%, 45%);
@@ -79,19 +72,25 @@ h3 {
   color: black;
 }
 
-.dropdown {
-  position: relative;
-  display: inline-block;
-  transform: translate(0%, 90%);
+#settings-dropdown {
+  transform: translateY(-17.5rem);
+}
+
+.dropdown .settings-circle {
+  background-color: var(--clr-global-app-background);
+  border-bottom-right-radius: 37.5%;
+  border-top-right-radius: 37.5%;
+  padding: 1rem;
+  cursor: pointer;
 }
 
 .dropdown-content {
   display: none;
   position: absolute;
-  right: 0;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  top: 0;
+  left: 100%;
+  background-color: var(--gray20);
+  min-width: 180px;
   z-index: 1;
 }
 
@@ -105,16 +104,19 @@ h3 {
 /* Change color of dropdown links on hover */
 .dropdown-content a:hover {
   background-color: #ddd;
+  cursor: pointer;
 }
 
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
   display: block;
+  cursor: pointer;
 }
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {
   background-color: #3e8e41;
+  cursor: pointer;
 }
 
 .err {
@@ -144,7 +146,6 @@ h3 {
   padding: 3rem;
 }
 
-
 .body {
   width: 100%;
   height: 100%;
@@ -155,25 +156,25 @@ h4 {
   font-size: 1.5rem;
 }
 
-.teacher-card>h5{
+.teacher-card > h5 {
   font-size: 1.25rem;
   margin: 0;
 }
 
 .teacher-profile clr-icon {
-    height: 1.5rem;
-    width: 1.5rem;
+  height: 1.5rem;
+  width: 1.5rem;
 }
 
 .teacher-profile {
-    border-radius: 100%;
-    color: var(--purple-base);
-    background-color: var(--gray20);
-    width: 3rem;
-    height: 3rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  border-radius: 100%;
+  color: var(--purple-base);
+  background-color: var(--gray20);
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .teacher-card {
@@ -191,4 +192,9 @@ h4 {
 .teacher-card:hover {
   cursor: pointer;
   background-color: var(--gray20);
+}
+
+
+.shift {
+  transform: translateX(-4.5rem);
 }
