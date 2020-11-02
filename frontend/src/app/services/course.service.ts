@@ -29,6 +29,19 @@ export class CourseService {
   }
 
   /**
+   * PUT update existing course
+   * @param {any}     course    the new course information
+   * @param {string}  courseId  id of the course
+   */
+
+  updateCourse(course: any): Observable<Course> {
+
+    return this.http.put<Course>(`http://localhost:5000/course/update`, {
+      course
+    });
+  }
+
+  /**
    * POST uploading document to a course
    * @param {FormData} file     new file
    * @param {string}   courseId id of course

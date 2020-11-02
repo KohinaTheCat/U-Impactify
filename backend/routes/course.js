@@ -145,6 +145,26 @@ router.route("/").get((req, res) => {
     .catch((err) => res.status(400).json(`Error: ${err}`));
 });
 
+// PUT updates course content given the course id
+router.put("/update", (req, res) => {
+
+  const { _id, name, description, tags, level } = req.body.course;
+
+  Course.findById(_id)
+    .then((course) => {
+      course.name = name,
+      course.description = description,
+      course.tags = tags,
+      course.level = level,
+      course
+        .save()
+        .then(() => res.json("Course updated successfully"))
+        .catch((err) => res.status(400).json("Error: " + err));
+    })
+    .catch((err) => res.status(404).json(err));
+
+})
+
 /**
  * POST uploading document to a course
  * @param id course id

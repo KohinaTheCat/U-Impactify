@@ -18,6 +18,12 @@ export class CoursePreviewComponent implements OnInit {
   alreadyEnrolled: boolean = false;
   error: string;
   user: User;
+  opened: boolean;
+  name: string = '';
+  description: string = '';
+  level: string = '';
+  tags: string = '';
+  basic: boolean = true;
 
   constructor(
     private userService: UserService,
@@ -74,9 +80,50 @@ export class CoursePreviewComponent implements OnInit {
     this.router.navigate(['dashboard']);
   }
 
-  settingsHandler() {}
-
   goToInstructorProfile($event): void {
     this.router.navigate([`/user/${$event}`]);
   };
+
+  updateCourseContentHandler() {
+    this.opened = true;
+  }
+
+  editDocumentsHandler() {
+
+  }
+
+  assessmentsHandler() {
+
+  }
+
+  studentAnalysisHandler() {
+    
+  }
+
+  cancel() {
+    this.opened = false;
+  }
+  registerHandler() {
+    
+    const { name, description, level, tags } = this;
+    this.course = {
+      _id: this.course._id,
+      name:  this.name,
+      description: this.description,
+      students: this.course.students,
+      teachers: this.course.teachers,
+      tags: this.tags,
+      level: this.level,
+      img: this.course.img,
+      files: this.course.files,
+    }
+
+    this.opened = false;
+
+    
+    this.courseService
+      .updateCourse(this.course)
+      .subscribe(res => console.log(res), (err) => console.log(err));
+
+  }
 }

@@ -18,10 +18,18 @@
         <clr-icon shape="cog" size="36"></clr-icon>
       </div>
       <div class="dropdown-content">
-        <a>Assessments</a>
-        <a>Upload/Edit Documents</a>
-        <a>Update Course Content</a>
-        <a>Student Performance Analysis</a>
+        <div (click)="assessmentsHandler()"> 
+          <a>Assessments</a>
+        </div>
+        <div (click)="editDocumentsHandler()"> 
+          <a>Upload/Edit Documents</a>
+        </div>
+        <div (click)="updateCourseContentHandler()"> 
+          <a>Update Course Content</a>
+        </div>
+        <div (click)="studentAnalysisHandler()"> 
+          <a>Student Performance Analysis</a>
+        </div>
       </div>
     </div>
   </div>
@@ -57,3 +65,46 @@
     <p>Course Not Found.</p>
   </div>
 </div>
+
+<clr-modal [(clrModalOpen)]="opened" [clrModalSize]="'lg'" [clrModalClosable]="false" >
+  <h3 class="modal-title">Update this course</h3>
+  <div class="modal-body">
+    <form clrForm>
+      <clr-control-error>{{ error }}</clr-control-error>
+
+        <clr-input-container>
+          <label>Course Name
+          <input clrInput type="text" placeholder="" [(ngModel)]="name" name="name" required/>
+          </label>
+          <clr-control-error>This field is required!</clr-control-error>
+        </clr-input-container>
+        <clr-input-container>
+          <label>Course Description
+          <input clrInput type="text" placeholder="" [(ngModel)]="description" name="description" required/>
+          </label>
+          <clr-control-error>This field is required!</clr-control-error>
+        </clr-input-container>
+          <clr-radio-container>
+            <label>Difficulty</label>
+            <clr-radio-wrapper>
+              <input type="radio" clrRadio name="easy" required value="easy" [(ngModel)]="level" />
+              <label class = "rlabel">Easy</label>
+            </clr-radio-wrapper>
+            <clr-radio-wrapper>
+                <input type="radio" clrRadio name="difficult" required value="difficult" [(ngModel)]="level" />
+                <label class = "rlabel">Difficult</label>
+              </clr-radio-wrapper>
+              <clr-radio-wrapper>
+                <input type="radio" clrRadio name="advanced" required value="advanced" [(ngModel)]="level" />
+                <label class = "rlabel">Advanced</label>
+              </clr-radio-wrapper>
+            <clr-control-error>Please pick a difficulty level!</clr-control-error>
+          </clr-radio-container>
+        
+    </form>    
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-outline" (click)="basic = false" (click)="cancel()">Cancel</button>
+      <button type="button" class="btn btn-outline" (click)="basic = false" (click)="registerHandler()" >Update Course</button>
+  </div>
+</clr-modal>
