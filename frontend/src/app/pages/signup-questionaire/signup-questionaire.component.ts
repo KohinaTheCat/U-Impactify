@@ -14,6 +14,8 @@ export class SignupQuestionaireComponent implements OnInit {
   checked: boolean = false;
   skipped: boolean = false;
   array: string[][] = [[], []];
+  submit: boolean = false;
+  
   constructor(private userService: UserService, private router: Router) {
     for (let i = 0; i < 7; i++) {
       this.checkbox[i] = false;
@@ -21,6 +23,7 @@ export class SignupQuestionaireComponent implements OnInit {
   }
 
   onSubmit() {
+    this.submit = true;
     for (let i = 0; i < 7; i++) {
       if (this.checkbox[i]) {
         this.checked = true;
@@ -49,13 +52,15 @@ export class SignupQuestionaireComponent implements OnInit {
         this.array[1].push('Plan my lessons and sessions');
       }
       this.addToDatabase();
-      this.router.navigate(['dashboard']);
     }
   }
 
   addToDatabase(): void {
     const user = this.userService.getCurrentUser();
-    if (this.skipped) return;
+    if (this.skipped){
+      this.router.navigate(['dashboard']);
+      return;
+    } 
     if (!this.skipped) user.questionaire = this.array;
     this.userService.putQuestionaire(user).subscribe(
       (res) => {
@@ -69,10 +74,18 @@ export class SignupQuestionaireComponent implements OnInit {
     );
   }
   
+  canDeactivate() {
+    if(this.skipped || this.submit){
+      return true;
+    } else {
+      this.userService.setUser(null);
+      return false;
+    }
+  }
+  
   onSkip() {
     this.skipped = true;
     this.addToDatabase();
-    this.router.navigate(['dashboard']);
   }
 
   ngOnInit(): void {}
