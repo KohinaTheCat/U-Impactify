@@ -30,6 +30,8 @@ export class CreateCourseComponent implements OnInit {
   error: string = '';
   imageError: string = '';
 
+  done: boolean = false;
+
   ngOnInit(): void {}
 
   cancel() {
@@ -72,6 +74,7 @@ export class CreateCourseComponent implements OnInit {
                       .subscribe(
                         (res) => {
                           this.userService.setUser(res);
+                          this.done = true;
                           this.router.navigate(['dashboard']);
                         },
                         (err) => console.log(err)
@@ -87,6 +90,22 @@ export class CreateCourseComponent implements OnInit {
               const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
               console.log(droppedFile.relativePath, fileEntry);
             }
+          }
+
+          if(!this.img.length) {
+            this.userService
+            .updateClassesTeaching(this.userService.getCurrentUser()._id, {
+              _id: res._id,
+              name: res.name,
+              img: res.img,
+            })
+            .subscribe(
+              (res) => {
+                this.userService.setUser(res);
+                this.router.navigate(['dashboard']);
+              },
+              (err) => console.log(err)
+            );
           }
 
           for (const droppedFile of course.files) {
@@ -109,20 +128,6 @@ export class CreateCourseComponent implements OnInit {
               const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
             }
           }
-          
-          this.userService
-            .updateClassesTeaching(this.userService.getCurrentUser()._id, {
-              _id: res._id,
-              name: res.name,
-              img: res.img,
-            })
-            .subscribe(
-              (res) => {
-                this.userService.setUser(res);
-                this.router.navigate(['dashboard']);
-              },
-              (err) => console.log(err)
-            );
         },
         (err) => {
           this.error = err.message;
