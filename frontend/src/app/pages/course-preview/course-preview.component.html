@@ -23,7 +23,6 @@
       <button class="btn btn-primary" (click)="enrollHandler()">Enroll</button>
     </div>
   </div>
-
   <div
     id="settings-dropdown"
     *ngIf="!!user && course.teachers.includes(user._id)"
@@ -92,90 +91,40 @@
   <div class="modal-body">
     <form clrForm>
       <clr-control-error>{{ error }}</clr-control-error>
-
-      <clr-input-container>
-        <label
-          >Course Name
-          <input
-            clrInput
-            type="text"
-            placeholder=""
-            [(ngModel)]="name"
-            name="name"
-            required
-          />
-        </label>
-        <clr-control-error>This field is required!</clr-control-error>
-      </clr-input-container>
-      <clr-input-container>
-        <label
-          >Course Description
-          <input
-            clrInput
-            type="text"
-            placeholder=""
-            [(ngModel)]="description"
-            name="description"
-            required
-          />
-        </label>
-        <clr-control-error>This field is required!</clr-control-error>
-      </clr-input-container>
-      <clr-radio-container>
-        <label>Difficulty</label>
-        <clr-radio-wrapper>
-          <input
-            type="radio"
-            clrRadio
-            name="easy"
-            required
-            value="easy"
-            [(ngModel)]="level"
-          />
-          <label class="rlabel">Easy</label>
-        </clr-radio-wrapper>
-        <clr-radio-wrapper>
-          <input
-            type="radio"
-            clrRadio
-            name="difficult"
-            required
-            value="difficult"
-            [(ngModel)]="level"
-          />
-          <label class="rlabel">Difficult</label>
-        </clr-radio-wrapper>
-        <clr-radio-wrapper>
-          <input
-            type="radio"
-            clrRadio
-            name="advanced"
-            required
-            value="advanced"
-            [(ngModel)]="level"
-          />
-          <label class="rlabel">Advanced</label>
-        </clr-radio-wrapper>
-        <clr-control-error>Please pick a difficulty level!</clr-control-error>
-      </clr-radio-container>
-    </form>
+        <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="droppedCourseImage($event)" 
+        (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+            <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+              <label>Upload Course Image (.jpg and .png)</label>
+              <button class="btn btn-primary" (click)="openFileSelector()">Browse Files</button>
+            </ng-template>
+        </ngx-file-drop>
+        <clr-input-container>
+          <label>Course Description
+          <input clrInput type="text" placeholder="" [(ngModel)]="description" name="description" required/>
+          </label>
+          <clr-control-error>This field is required!</clr-control-error>
+        </clr-input-container>
+          <clr-radio-container>
+            <label>Difficulty</label>
+            <clr-radio-wrapper>
+              <input type="radio" clrRadio name="easy" required value="easy" [(ngModel)]="level" />
+              <label class = "rlabel">Easy</label>
+            </clr-radio-wrapper>
+            <clr-radio-wrapper>
+                <input type="radio" clrRadio name="difficult" required value="difficult" [(ngModel)]="level" />
+                <label class = "rlabel">Difficult</label>
+              </clr-radio-wrapper>
+              <clr-radio-wrapper>
+                <input type="radio" clrRadio name="advanced" required value="advanced" [(ngModel)]="level" />
+                <label class = "rlabel">Advanced</label>
+              </clr-radio-wrapper>
+            <clr-control-error>Please pick a difficulty level!</clr-control-error>
+          </clr-radio-container>
+        
+    </form>    
   </div>
   <div class="modal-footer">
-    <button
-      type="button"
-      class="btn btn-outline"
-      (click)="basic = false"
-      (click)="cancel()"
-    >
-      Cancel
-    </button>
-    <button
-      type="button"
-      class="btn btn-outline"
-      (click)="basic = false"
-      (click)="registerHandler()"
-    >
-      Update Course
-    </button>
+      <button type="button" class="btn btn-outline" (click)="basic = false" (click)="cancel()">Cancel</button>
+      <button type="button" class="btn btn-primary" (click)="basic = false" (click)="registerHandler()" >Update Course</button>
   </div>
 </clr-modal>
