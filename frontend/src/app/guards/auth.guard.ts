@@ -11,7 +11,7 @@ import { UserService } from '../services/user.service';
 import { Observable } from 'rxjs';
 
 export interface CanComponentDeactivate {
-  canDeactivate: () => Observable<boolean> | Promise<boolean> | boolean;
+  canDeactivate: () => boolean;
 }
 
 @Injectable({
