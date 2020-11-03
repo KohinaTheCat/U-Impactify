@@ -98,6 +98,10 @@
               <button class="btn btn-primary" (click)="openFileSelector()">Browse Files</button>
             </ng-template>
         </ngx-file-drop>
+        <div class="imageError">
+            <clr-control-error>{{ imageError }}</clr-control-error>
+          </div>
+        <div class = "uploadedImage" *ngIf ="img[0]">Uploaded "{{ img[0].fileEntry.name }}" </div>
         <clr-input-container>
           <label>Course Description
           <input clrInput type="text" placeholder="" [(ngModel)]="description" name="description" required/>

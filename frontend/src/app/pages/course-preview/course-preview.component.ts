@@ -24,12 +24,11 @@ export class CoursePreviewComponent implements OnInit {
   error: string;
   user: User;
   opened: boolean;
-  name: string = '';
   description: string = '';
   level: string = '';
-  tags: string = '';
   basic: boolean = true;
   img: NgxFileDropEntry[] = [];
+  imageError: string = '';
 
   constructor(
     private userService: UserService,
@@ -45,6 +44,8 @@ export class CoursePreviewComponent implements OnInit {
       (incomingCourse: Course) => {
         this.valid = true;
         this.course = incomingCourse;
+        this.description = this.course.description;
+        this.level = this.course.level;
         this.course.img =
           !this.course.img || this.course.img === ''
             ? (this.course.img = '../../../../assets/courseimage.png')
@@ -105,9 +106,8 @@ export class CoursePreviewComponent implements OnInit {
     this.opened = false;
   }
   registerHandler() {
-    const {description, level } = this;
+    const { description, level } = this;
 
-    var resp;
     // call add image
     for (const droppedFile of this.img) {
       if (droppedFile.fileEntry.isFile) {
@@ -115,15 +115,16 @@ export class CoursePreviewComponent implements OnInit {
         fileEntry.file((file: File) => {
           const formData = new FormData();
           formData.append('document', file, droppedFile.relativePath);
-          this.courseService.postCourseImage(formData, this.course._id).subscribe(
-            (res) => {
-              console.log(res);
-              resp = res;
-            },
-            (err) => {
-              console.log(err);
-            }
-          );
+          this.courseService
+            .postCourseImage(formData, this.course._id)
+            .subscribe(
+              (res: Course) => {
+                this.ngOnInit();
+              },
+              (err) => {
+                console.log(err);
+              }
+            );
         });
       } else {
         // It was a directory (empty directories are added, otherwise only files)
@@ -132,29 +133,16 @@ export class CoursePreviewComponent implements OnInit {
       }
     }
 
-    this.course = {
-      _id: this.course._id,
-      name: this.course.name,
-      description: this.description,
-      students: this.course.students,
-      teachers: this.course.teachers,
-      tags: this.course.tags,
-      level: this.level,
-      files: this.course.files,
-      img: resp,
-    };
+    this.course = { ...this.course, description, level };
 
     this.opened = false;
 
     this.courseService.updateCourse(this.course).subscribe(
-      (res) => {
-        this.userService.setUser(this.user);
-        console.log(res);
-
+      (res: Course) => {
+        this.ngOnInit();
       },
       (err) => console.log(err)
     );
-
   }
 
   public droppedCourseImage(image: NgxFileDropEntry[]) {
@@ -163,7 +151,18 @@ export class CoursePreviewComponent implements OnInit {
       if (droppedFile.fileEntry.isFile) {
         const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
         fileEntry.file((file: File) => {
-          console.log(file);
+          if (
+            !(
+              file.name.endsWith('.png') ||
+              file.name.endsWith('.jpg') ||
+              file.name.endsWith('.jpeg')
+            )
+          ) {
+            this.img = [];
+            this.imageError = 'Bad Course Image!';
+          } else {
+            this.imageError = '';
+          }
         });
       } else {
         // It was a directory (empty directories are added, otherwise only files)
@@ -182,5 +181,4 @@ export class CoursePreviewComponent implements OnInit {
   public fileLeave(event) {
     console.log(event);
   }
-
 }

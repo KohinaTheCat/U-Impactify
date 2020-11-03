@@ -277,3 +277,22 @@ label {
 .rlabel {
   font-size: 0.75rem;
 }
+
+
+clr-control-error {
+    color: #c21d00; 
+}
+
+.uploadedImage {
+  width: 100%;
+  text-align: center;
+}
+
+.imageError {
+  width: 100%;
+  text-align: center;
+}
+
+.imageError clr-control-error {
+  font-size: 0.69rem; /* nice */
+}

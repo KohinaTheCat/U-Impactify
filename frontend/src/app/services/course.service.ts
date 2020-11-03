@@ -33,9 +33,7 @@ export class CourseService {
    * @param {any}     course    the new course information
    * @param {string}  courseId  id of the course
    */
-
   updateCourse(course: any): Observable<Course> {
-
     return this.http.put<Course>(`http://localhost:5000/course/update`, {
       course
     });
@@ -67,8 +65,8 @@ export class CourseService {
     );
   }
 
-  postCourseImage(file: FormData, courseId: string) {
-    return this.http.post(
+  postCourseImage(file: FormData, courseId: string): Observable<Course> {
+    return this.http.post<Course>(
       `http://localhost:5000/course/${courseId}/uploadCourseImage`,
       file
     );

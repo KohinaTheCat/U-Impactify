@@ -158,7 +158,7 @@ router.put("/update", (req, res) => {
       course.level = level,
       course
         .save()
-        .then(() => res.json("Course updated successfully"))
+        .then(() => res.json(course))
         .catch((err) => res.status(400).json("Error: " + err));
     })
     .catch((err) => res.status(404).json(err));
@@ -193,7 +193,7 @@ router.post(
         course.img = req.files[0].id;
         course
           .save()
-          .then(() => res.json("uploaded course image"))
+          .then(() => res.json(course))
           .catch((err) => res.json(err));
       })
       .catch((err) => res.status(400).json(`Error finding Course: ${err}`));
