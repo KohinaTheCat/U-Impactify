@@ -1,4 +1,4 @@
-## Sprint 1
+## Sprint 2
 
 ### Goal
 
@@ -109,7 +109,7 @@
 
 > Team Capacity
 
-`TOTAL STORY POINTS: 27`
+`TOTAL STORY POINTS: 22`
 
 ### Details About Tasks Per Member
 
@@ -121,11 +121,6 @@
 > See Jira board for more detail about tasks assigned
 
 ### Blockers / Spikes
-
-> Learning Curve
-
-- Everyone is not completely comfortable with the technologies and libraries that we will have to use
-  - Most of our group isn't familiar with web development and the limited amount of time
 
 > Time
 
