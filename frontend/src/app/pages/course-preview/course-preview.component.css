@@ -24,6 +24,41 @@ h3 {
   filter: blur(3px) brightness(0.9);
 }
 
+.course-desc h4 {
+  margin: 0;
+}
+
+.course-desc {
+  display: flex;
+  
+  flex-direction: column;
+}
+
+.alert {
+  font-size: 1rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  width: 100%;
+  margin-right: 2rem;
+}
+
+.alert-item {
+  display: flex;
+  align-items: center;
+}
+
+.alert-icon-wrapper,
+.alert-icon {
+  width: 1.5rem;
+}
+
+.alert-icon {
+  transform: scale(1.25);
+  margin-right: 0.5rem;
+}
+
 .outer {
   height: 20rem;
   width: 100%;
@@ -53,12 +88,17 @@ h3 {
   text-shadow: 0px 0px 2px var(--gray80);
 }
 
+.enroll-alert {
+  display: flex;
+  height: 5rem;
+  align-items: center;
+  margin-top: 0.75rem;
+}
+
 .btn.btn-primary {
   font-size: 1rem;
-  transform: translate(0%, 45%);
   width: 7rem;
   height: 3rem;
-
   border-radius: 10px;
   margin: center;
   display: flex;
@@ -202,7 +242,7 @@ h4 {
   margin-top: 1rem;
   font-size: 1.75rem;
   color: #a78ec3;
-} 
+}
 
 input {
   margin-top: 0.5rem;
@@ -211,7 +251,7 @@ input {
   font-size: 0.8rem;
 }
 
-.clr-control-label {  
+.clr-control-label {
   font-size: 1rem;
 }
 
@@ -224,5 +264,5 @@ label {
 }
 
 .rlabel {
-    font-size: 0.75rem;
+  font-size: 0.75rem;
 }
