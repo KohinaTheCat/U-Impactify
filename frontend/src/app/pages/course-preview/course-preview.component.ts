@@ -155,6 +155,8 @@ export class CoursePreviewComponent implements OnInit {
             !(
               file.name.endsWith('.png') ||
               file.name.endsWith('.jpg') ||
+              file.name.endsWith('.JPG') ||
+              file.name.endsWith('.JPEG') ||
               file.name.endsWith('.jpeg')
             )
           ) {

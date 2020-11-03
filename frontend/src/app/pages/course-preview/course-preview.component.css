@@ -30,7 +30,7 @@ h3 {
 
 .course-desc {
   display: flex;
-  
+
   flex-direction: column;
 }
 
@@ -112,7 +112,6 @@ h3 {
   justify-content: center;
   text-transform: uppercase;
 }
-
 
 .btn.btn-primary:hover {
   background-color: var(--purple-smooth);
@@ -266,6 +265,18 @@ input {
   font-size: 1rem;
 }
 
+#enroll-btn {
+  font-size: 1rem;
+  width: 7rem;
+  height: 3rem;
+  border-radius: 10px;
+  margin: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+}
+
 label {
   display: flex;
   text-align: left;
@@ -278,9 +289,8 @@ label {
   font-size: 0.75rem;
 }
 
-
 clr-control-error {
-    color: #c21d00; 
+  color: #c21d00;
 }
 
 .uploadedImage {
