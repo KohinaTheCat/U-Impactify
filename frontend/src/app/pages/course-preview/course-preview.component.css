@@ -24,6 +24,13 @@ h3 {
   filter: blur(3px) brightness(0.9);
 }
 
+.loading {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .course-desc h4 {
   margin: 0;
 }

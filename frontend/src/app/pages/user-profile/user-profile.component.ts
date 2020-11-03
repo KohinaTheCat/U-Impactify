@@ -14,14 +14,18 @@ export class UserProfileComponent implements OnInit {
   err: string; // `backend/routes/user.js`
   sameUser: boolean;
   username: string;
+  loading: boolean = true;
 
-  constructor(private userService: UserService, private route: ActivatedRoute, private router: Router) {
-     router.events
-       .pipe(filter((event) => event instanceof NavigationEnd))
-       .subscribe((event: NavigationEnd) => {
-         if(event.url.includes('user/'))
-          this.initComponent();
-       });
+  constructor(
+    private userService: UserService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
+    router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event: NavigationEnd) => {
+        if (event.url.includes('user/')) this.initComponent();
+      });
   }
 
   ngOnInit(): void {
@@ -37,9 +41,9 @@ export class UserProfileComponent implements OnInit {
     this.user = this.userService.getCurrentUser();
     if (!(this.sameUser = !!this.user && this.user._id === this.username)) {
       this.userService.getAnotherUser(this.username).subscribe(
-        (res) => (this.user = res),
-        (err) => (this.err = err)
+        (res) => ((this.user = res), (this.loading = false)),
+        (err) => ((this.err = err), (this.loading = false))
       );
     }
-  } 
+  }
 }

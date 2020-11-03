@@ -29,6 +29,7 @@ export class CoursePreviewComponent implements OnInit {
   basic: boolean = true;
   img: NgxFileDropEntry[] = [];
   imageError: string = '';
+  loading: boolean = true;
 
   constructor(
     private userService: UserService,
@@ -55,9 +56,10 @@ export class CoursePreviewComponent implements OnInit {
             this.alreadyEnrolled = true;
             break;
           }
-        }
+        } this.loading = false;
       },
       (err) => {
+        this.loading = false;
         this.valid = false;
         this.error = err.message;
         console.log('error message' + this.error);
