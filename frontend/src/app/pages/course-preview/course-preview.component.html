@@ -1,46 +1,134 @@
-<div *ngIf = "valid">
-  <div class = "container"> 
-    <div class = "wrapper"> 
-      <h4 id = "title"> {{ course.name }} </h4>
-      <div *ngIf="user.type == 'IL' && !alreadyEnrolled ">
-        <button class="btn btn-primary" (click)="enrollHandler()">Enroll</button>
-      </div>
-      <div *ngIf="user.type == 'IC'">
-        <div class="dropdown" style="float:right;">
-          <clr-icon shape="cog" size="36"></clr-icon>
-          <div class="dropdown-content">
-            <a>Assessments</a> <!--This is where you want to insert request -->
-            <a>Upload/Edit Documents</a> <!--This is where you want to insert request -->
-            <a>Update Course Content</a> <!--This is where you want to insert request -->
-            <a>Student Performance Analysis</a> <!--This is where you want to insert request -->
+<div *ngIf="valid" class="container">
+  <div class="outer">
+    <div
+      class="courseimage"
+      style="background-image: url('{{ course.img }}')"
+    ></div>
+    <h4 id="title">{{ course.name }}</h4>
+  </div>
+  <div class="enroll-alert" *ngIf="user.type == 'IL' && !alreadyEnrolled">
+    <div class="alert alert-primary" role="alert">
+      <div class="alert-items">
+        <div class="alert-item static">
+          <div class="alert-icon-wrapper">
+            <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
           </div>
+          <span class="alert-text">
+            You are currently not enrolled in this course.
+          </span>
         </div>
       </div>
-
     </div>
-    <div class="courseimage" style="background-image: url('{{course.img}}')">
+    <div id="enroll-button">
+      <button class="btn btn-primary" id="enroll-btn" (click)="enrollHandler()">Enroll</button>
     </div>
-    <h4> Course Description </h4>
-    <p id = "text">{{ course.description }}</p>
-    <h4> Course Instructor </h4>
-    <p id= "text" *ngFor = "let teacher of course.teachers; let i = index">
-      {{ teacher }}
-    </p>
-    <div *ngIf = "course.tags != ''">
-      <h4> Tags </h4>
-      <p id = "text">{{ course.tags }}</p>
+  </div>
+  <div
+    id="settings-dropdown"
+    *ngIf="!!user && course.teachers.includes(user._id)"
+  >
+    <div class="dropdown" style="float: left">
+      <div class="settings-circle">
+        <clr-icon shape="cog" size="36"></clr-icon>
+      </div>
+      <div class="dropdown-content">
+        <div (click)="assessmentsHandler()">
+          <a>Assessments</a>
+        </div>
+        <div (click)="editDocumentsHandler()">
+          <a>Upload/Edit Documents</a>
+        </div>
+        <div (click)="updateCourseContentHandler()">
+          <a>Update Course Content</a>
+        </div>
+        <div (click)="studentAnalysisHandler()">
+          <a>Student Performance Analysis</a>
+        </div>
+      </div>
     </div>
-    <h4> Difficulty Level </h4>
-     <p id = "text"> {{ course.level }}</p>
+  </div>
+  <div class="body">
+    <div class="course-desc" [class]="!!user && course.teachers.includes(user._id) ? 'shift' : ''">
+      <h4>
+        Description
+      </h4>
+      <p class="text">{{ course.description }}</p>
+    </div>
+    <div class="course-teachers">
+      <h4>Instructor<span *ngIf="course.teachers.length > 1">s</span></h4>
+      <div
+        title="View Profile"
+        class="teacher-card box-shadow-1"
+        *ngFor="let teacher of course.teachers"
+        (click)="goToInstructorProfile(teacher)"
+      >
+        <div class="teacher-profile"><clr-icon shape="user"></clr-icon></div>
+        <h5>{{ teacher }}</h5>
+      </div>
+    </div>
+    <div *ngIf="course.tags != ''">
+      <h4>Tags</h4>
+      <p class="text">{{ course.tags }}</p>
+    </div>
+    <h4>Difficulty Level</h4>
+    <p class="text">{{ course.level }}</p>
   </div>
 </div>
 
-<div *ngIf ="!valid">
-  <h3 id = "error">
-    {{ error }}
-  </h3>
+<div class="err" *ngIf="!valid">
+  <div class="inner">
+    <h1>404</h1>
+    <p>Course Not Found.</p>
+  </div>
 </div>
 
-
-
-
+<clr-modal
+  [(clrModalOpen)]="opened"
+  [clrModalSize]="'lg'"
+  [clrModalClosable]="false"
+>
+  <h3 class="modal-title">Update this course</h3>
+  <div class="modal-body">
+    <form clrForm>
+      <clr-control-error>{{ error }}</clr-control-error>
+        <ngx-file-drop dropZoneLabel="Drop files here" (onFileDrop)="droppedCourseImage($event)" 
+        (onFileOver)="fileOver($event)" (onFileLeave)="fileLeave($event)">
+            <ng-template ngx-file-drop-content-tmp let-openFileSelector="openFileSelector">
+              <label>Upload Course Image (.jpg and .png)</label>
+              <button class="btn btn-primary" (click)="openFileSelector()">Browse Files</button>
+            </ng-template>
+        </ngx-file-drop>
+        <div class="imageError">
+            <clr-control-error>{{ imageError }}</clr-control-error>
+          </div>
+        <div class = "uploadedImage" *ngIf ="img[0]">Uploaded "{{ img[0].fileEntry.name }}" </div>
+        <clr-input-container>
+          <label>Course Description
+          <input clrInput type="text" placeholder="" [(ngModel)]="description" name="description" required/>
+          </label>
+          <clr-control-error>This field is required!</clr-control-error>
+        </clr-input-container>
+          <clr-radio-container>
+            <label>Difficulty</label>
+            <clr-radio-wrapper>
+              <input type="radio" clrRadio name="easy" required value="easy" [(ngModel)]="level" />
+              <label class = "rlabel">Easy</label>
+            </clr-radio-wrapper>
+            <clr-radio-wrapper>
+                <input type="radio" clrRadio name="difficult" required value="difficult" [(ngModel)]="level" />
+                <label class = "rlabel">Difficult</label>
+              </clr-radio-wrapper>
+              <clr-radio-wrapper>
+                <input type="radio" clrRadio name="advanced" required value="advanced" [(ngModel)]="level" />
+                <label class = "rlabel">Advanced</label>
+              </clr-radio-wrapper>
+            <clr-control-error>Please pick a difficulty level!</clr-control-error>
+          </clr-radio-container>
+        
+    </form>    
+  </div>
+  <div class="modal-footer">
+      <button type="button" class="btn btn-outline" (click)="basic = false" (click)="cancel()">Cancel</button>
+      <button type="button" class="btn btn-primary" (click)="basic = false" (click)="registerHandler()" >Update Course</button>
+  </div>
+</clr-modal>

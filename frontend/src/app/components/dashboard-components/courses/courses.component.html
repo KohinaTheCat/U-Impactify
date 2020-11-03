@@ -1,8 +1,8 @@
 <div class="courses-container">
-  <h2>Your Classes</h2>
+  <h2>Your Courses</h2>
   <div class="courses">
     <div *ngFor="let course of courses" class="course-card" (click)="previewCourse(course)">
-      <div (click)="onClickDropCourse(course)" *ngIf="this.user.type === 'IL'">
+      <div (click)="onClickDropCourse(course); $event.stopPropagation()" *ngIf="this.user.type === 'IL'">
         <clr-icon shape="trash" id="dropcourse"></clr-icon>
       </div>
       <div class="course-image plus">
@@ -22,3 +22,20 @@
     </div>
   </div>
 </div>
+
+
+<clr-modal [(clrModalOpen)]="opened" [clrModalSize]="'lg'" *ngIf="selectedCourse">
+    <div class="modal-title"> <img src="../../../assets/word-logo.png" alt="" style="width: 200px"></div>
+    <div class="modal-body">
+        Woah there! Hold your horses! You are <strong>about to drop this course</strong>, <strong><em>forever.</em></strong> <br>
+        Just Kidding! You can re-enroll when you see fit. <br><br>
+        Please be aware that any and all progress, documents, assessments that you have accumulated throughout your enrollment with <strong>{{selectedCourse.name}}</strong> will be deleted.
+        <div class="delete-modal-container">
+            If you <strong><em>still want</em></strong> to delete your account, press <strong>PROCEED.</strong> Once again, you will be instantly logged out and your data cannot be retrieved. The entire UImpactify team thanks you for your enrollment. Best of luck on your future courses!
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-success-outline" (click)="opened = false; selectedCourse = null;">BACK TO SAFETY</button>
+        <button type="button" class="btn btn-danger" (click)="dropCourse()">PROCEED</button>
+    </div>
+</clr-modal>

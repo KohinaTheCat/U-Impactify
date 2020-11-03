@@ -136,9 +136,17 @@ export class CreateCourseComponent implements OnInit {
       if (droppedFile.fileEntry.isFile) {
         const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
         fileEntry.file((file: File) => {
-          if(!file.name.endsWith('.png' || '.jpg' || '.jpeg')){
+          if (
+            !(
+              file.name.endsWith('.png') ||
+              file.name.endsWith('.jpg') ||
+              file.name.endsWith('.JPG') ||
+              file.name.endsWith('.JPEG') ||
+              file.name.endsWith('.jpeg')
+            )
+          ) {
             this.img = [];
-            this.imageError = "Bad Course Image!"
+            this.imageError = 'Bad Course Image!';
           } else {
             this.imageError = '';
           }

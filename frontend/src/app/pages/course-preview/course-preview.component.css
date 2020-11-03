@@ -10,14 +10,60 @@ h3 {
 }
 
 .courseimage {
-  padding-top: 1rem;
   height: 20rem;
   width: 100%;
-  border-radius: 2rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   background-size: cover;
   background-repeat: no-repeat;
-   background-position: center;
+  background-position: center;
+
+  filter: blur(3px) brightness(0.9);
+}
+
+.course-desc h4 {
+  margin: 0;
+}
+
+.course-desc {
+  display: flex;
+
+  flex-direction: column;
+}
+
+.alert {
+  font-size: 1rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  width: 100%;
+  margin-right: 2rem;
+}
+
+.alert-item {
+  display: flex;
+  align-items: center;
+}
+
+.alert-icon-wrapper,
+.alert-icon {
+  width: 1.5rem;
+}
+
+.alert-icon {
+  transform: scale(1.25);
+  margin-right: 0.5rem;
+}
+
+.outer {
+  height: 20rem;
+  width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
 }
 
 h3 {
@@ -26,30 +72,39 @@ h3 {
   font-size: 1rem;
 }
 
-#text {
+.text {
   padding-left: 1rem;
   font-size: 1rem;
+  margin-top: 0;
 }
 
 #title {
-  width: 100%;
-  text-align: center;
-  margin-top: 0 rem;
+  font-size: 4rem;
+  color: white;
+  margin-top: 0rem;
+  transform: translateY(-12rem);
+  display: flex;
+  justify-content: center;
+  text-shadow: 0px 0px 2px var(--gray80);
 }
 
-.wrapper {
-  width: 100%;
-  text-align: center;
+.enroll-alert {
   display: flex;
-  margin-top: 0 rem;
+  height: 5rem;
+  align-items: center;
+  margin-top: 0.75rem;
 }
 
 .btn.btn-primary {
+  font-size: 0.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.btn.btn-secondary {
   font-size: 1rem;
-  transform: translate(0%, 45%);
   width: 7rem;
   height: 3rem;
-
   border-radius: 10px;
   margin: center;
   display: flex;
@@ -63,19 +118,29 @@ h3 {
   color: black;
 }
 
-.dropdown {
-  position: relative;
-  display: inline-block;
-  transform: translate(0%, 90%);
+.btn.btn-secondary:hover {
+  background-color: var(--purple-smooth);
+  color: black;
+}
+#settings-dropdown {
+  transform: translateY(-17.5rem);
+}
+
+.dropdown .settings-circle {
+  background-color: var(--clr-global-app-background);
+  border-bottom-right-radius: 37.5%;
+  border-top-right-radius: 37.5%;
+  padding: 1rem;
+  cursor: pointer;
 }
 
 .dropdown-content {
   display: none;
   position: absolute;
-  right: 0;
-  background-color: #f1f1f1;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  top: 0;
+  left: 100%;
+  background-color: var(--gray20);
+  min-width: 180px;
   z-index: 1;
 }
 
@@ -89,14 +154,155 @@ h3 {
 /* Change color of dropdown links on hover */
 .dropdown-content a:hover {
   background-color: #ddd;
+  cursor: pointer;
 }
 
 /* Show the dropdown menu on hover */
 .dropdown:hover .dropdown-content {
   display: block;
+  cursor: pointer;
 }
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
 .dropdown:hover .dropbtn {
   background-color: #3e8e41;
+  cursor: pointer;
+}
+
+.err {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.inner > p {
+  font-size: 1.25rem;
+}
+
+.inner > h1 {
+  margin: 0;
+}
+
+.err .inner {
+  /* White Base */
+  background: var(--red-smooth);
+  /* Shadow Black Dark */
+  box-shadow: 0px 8px 24px #eff3f9;
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 3rem;
+}
+
+.body {
+  width: 100%;
+  height: 100%;
+  margin-bottom: 2rem;
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+
+.teacher-card > h5 {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.teacher-profile clr-icon {
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+.teacher-profile {
+  border-radius: 100%;
+  color: var(--purple-base);
+  background-color: var(--gray20);
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.teacher-card {
+  display: flex;
+  align-items: center;
+  width: 50%;
+  max-width: 20rem;
+  column-gap: 0.5rem;
+  background: #fff;
+  height: 4rem;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.teacher-card:hover {
+  cursor: pointer;
+  background-color: var(--gray20);
+}
+
+.shift {
+  transform: translateX(-4.5rem);
+}
+
+.modal-title {
+  margin-top: 1rem;
+  font-size: 1.75rem;
+  color: #a78ec3;
+}
+
+input {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  min-height: 2rem;
+  font-size: 0.8rem;
+}
+
+.clr-control-label {
+  font-size: 1rem;
+}
+
+#enroll-btn {
+  font-size: 1rem;
+  width: 7rem;
+  height: 3rem;
+  border-radius: 10px;
+  margin: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+}
+
+label {
+  display: flex;
+  text-align: left;
+  margin: 10px;
+  min-width: 30rem;
+  flex-direction: column;
+}
+
+.rlabel {
+  font-size: 0.75rem;
+}
+
+clr-control-error {
+  color: #c21d00;
+}
+
+.uploadedImage {
+  width: 100%;
+  text-align: center;
+}
+
+.imageError {
+  width: 100%;
+  text-align: center;
+}
+
+.imageError clr-control-error {
+  font-size: 0.69rem; /* nice */
 }
