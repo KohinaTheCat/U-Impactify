@@ -15,6 +15,7 @@ export class EnrollCourseComponent implements OnInit {
   error: string = '';
   courses: any[] = [];
   user: User;
+  loading: boolean = true;
 
   selectedCourse: any;
 
@@ -60,6 +61,7 @@ export class EnrollCourseComponent implements OnInit {
               : `http://localhost:5000/course/documents/${res}`;
         });
       });
+      this.loading = false;
     });
   }
 

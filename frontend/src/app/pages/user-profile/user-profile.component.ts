@@ -44,6 +44,6 @@ export class UserProfileComponent implements OnInit {
         (res) => ((this.user = res), (this.loading = false)),
         (err) => ((this.err = err), (this.loading = false))
       );
-    }
+    } else this.loading = false;
   }
 }

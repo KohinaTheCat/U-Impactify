@@ -12,6 +12,13 @@
   height: 100%;
 }
 
+.loading {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .course-container {
   width: 100%;
   display: grid;

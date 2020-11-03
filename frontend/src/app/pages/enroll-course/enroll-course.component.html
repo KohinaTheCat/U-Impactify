@@ -1,43 +1,50 @@
-<div class="enroll">
-  <div class="top">
-    <button type="button" class="btn btn-line" (click)="cancel()">BACK</button>
-    <button
-      *ngIf="selectedCourse"
-      type="button"
-      class="btn btn-filled"
-      (click)="basic = true"
-      (click)="courseHandler()"
-    >
-      Submit
-    </button>
-  </div>
-  <div class="body">
-    <div class="course-container">
-      <div
-        class="course-card box-shadow-1"
-        *ngFor="let course of courses; index as i"
-        (click)="onClick(course)"
-        [class.selected]="selectedCourse === course"
+<div class="loading" *ngIf="loading; else enroll">
+  <span class="spinner"></span>
+</div>
+<ng-template #enroll>
+  <div class="enroll">
+    <div class="top">
+      <button type="button" class="btn btn-line" (click)="cancel()">
+        BACK
+      </button>
+      <button
+        *ngIf="selectedCourse"
+        type="button"
+        class="btn btn-filled"
+        (click)="basic = true"
+        (click)="courseHandler()"
       >
-        <div class="course-picture">
-          <img *ngIf="course.img.length; else icon" [src]="course.img" />
-          <ng-template #icon>
-            <clr-icon shape="image"></clr-icon>
-          </ng-template>
-        </div>
-        <div class="course-header">
-          <h3>{{ course.name }}</h3>
-        </div>
-        <div class="course-body">
-          Teacher(s):
-          <span>{{ course.teachers }} </span>
-          <br />
-          <span class="level">Level: {{ course.level | uppercase }}</span>
-          <p>
-            {{ course.description }}
-          </p>
+        Submit
+      </button>
+    </div>
+    <div class="body">
+      <div class="course-container">
+        <div
+          class="course-card box-shadow-1"
+          *ngFor="let course of courses; index as i"
+          (click)="onClick(course)"
+          [class.selected]="selectedCourse === course"
+        >
+          <div class="course-picture">
+            <img *ngIf="course.img.length; else icon" [src]="course.img" />
+            <ng-template #icon>
+              <clr-icon shape="image"></clr-icon>
+            </ng-template>
+          </div>
+          <div class="course-header">
+            <h3>{{ course.name }}</h3>
+          </div>
+          <div class="course-body">
+            Teacher(s):
+            <span>{{ course.teachers }} </span>
+            <br />
+            <span class="level">Level: {{ course.level | uppercase }}</span>
+            <p>
+              {{ course.description }}
+            </p>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</div>
+</ng-template>
