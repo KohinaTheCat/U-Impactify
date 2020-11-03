@@ -30,6 +30,7 @@ export class CoursePreviewComponent implements OnInit {
   img: NgxFileDropEntry[] = [];
   imageError: string = '';
   loading: boolean = true;
+  tags: string[] = [];
 
   constructor(
     private userService: UserService,
@@ -47,6 +48,7 @@ export class CoursePreviewComponent implements OnInit {
         this.course = incomingCourse;
         this.description = this.course.description;
         this.level = this.course.level;
+        this.tags = this.course.tags.split(' ');
         this.course.img =
           !this.course.img || this.course.img === ''
             ? (this.course.img = '../../../../assets/courseimage.png')
