@@ -118,6 +118,9 @@
 - bug fixes
 - refactoring
 
+> Frontend and Backend 
+- everyone must do both 
+
 > See Jira board for more detail about tasks assigned
 
 ### Blockers / Spikes
