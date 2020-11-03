@@ -6,6 +6,11 @@ import { Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Course } from 'src/app/models/course.model';
 import { ActivatedRoute } from '@angular/router';
+import {
+  NgxFileDropEntry,
+  FileSystemFileEntry,
+  FileSystemDirectoryEntry,
+} from 'ngx-file-drop';
 
 @Component({
   selector: 'app-course-preview',
@@ -24,6 +29,7 @@ export class CoursePreviewComponent implements OnInit {
   level: string = '';
   tags: string = '';
   basic: boolean = true;
+  img: NgxFileDropEntry[] = [];
 
   constructor(
     private userService: UserService,
@@ -100,6 +106,32 @@ export class CoursePreviewComponent implements OnInit {
   }
   registerHandler() {
     const {description, level } = this;
+
+    var resp;
+    // call add image
+    for (const droppedFile of this.img) {
+      if (droppedFile.fileEntry.isFile) {
+        const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
+        fileEntry.file((file: File) => {
+          const formData = new FormData();
+          formData.append('document', file, droppedFile.relativePath);
+          this.courseService.postCourseImage(formData, this.course._id).subscribe(
+            (res) => {
+              console.log(res);
+              resp = res;
+            },
+            (err) => {
+              console.log(err);
+            }
+          );
+        });
+      } else {
+        // It was a directory (empty directories are added, otherwise only files)
+        const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
+        console.log(droppedFile.relativePath, fileEntry);
+      }
+    }
+
     this.course = {
       _id: this.course._id,
       name: this.course.name,
@@ -108,8 +140,8 @@ export class CoursePreviewComponent implements OnInit {
       teachers: this.course.teachers,
       tags: this.course.tags,
       level: this.level,
-      img: this.course.img,
       files: this.course.files,
+      img: resp,
     };
 
     this.opened = false;
@@ -118,9 +150,37 @@ export class CoursePreviewComponent implements OnInit {
       (res) => {
         this.userService.setUser(this.user);
         console.log(res);
-        this.router.navigate(['dashboard']);
+
       },
       (err) => console.log(err)
     );
+
   }
+
+  public droppedCourseImage(image: NgxFileDropEntry[]) {
+    this.img = image;
+    for (const droppedFile of image) {
+      if (droppedFile.fileEntry.isFile) {
+        const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
+        fileEntry.file((file: File) => {
+          console.log(file);
+        });
+      } else {
+        // It was a directory (empty directories are added, otherwise only files)
+        const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
+        console.log(droppedFile.relativePath, fileEntry);
+      }
+    }
+  }
+
+  // usage code from - https://www.npmjs.com/package/ngx-file-drop
+  public fileOver(event) {
+    console.log(event);
+  }
+
+  // usage code from - https://www.npmjs.com/package/ngx-file-drop
+  public fileLeave(event) {
+    console.log(event);
+  }
+
 }
