@@ -152,7 +152,7 @@ router.put("/update", (req, res) => {
 
   Course.findById(_id)
     .then((course) => {
-      course = { name, description, tags, level };
+      course = { ...course, name, description, tags, level };
       course
         .save()
         .then(() => res.json(course))
