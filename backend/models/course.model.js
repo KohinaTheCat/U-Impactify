@@ -46,7 +46,7 @@ const courseSchema = new Schema({
       {
         _id: String,
         courseReview: String,
-        anon: false,
+        score: String,
       },
     ],
   },
