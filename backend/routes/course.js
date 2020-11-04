@@ -95,8 +95,7 @@ router.route("/").post((req, res) => {
 router.get("/:id", (req, res) => {
   Course.findById(req.params.id)
     .then((course) => {
-      if(!course)
-        return res.status(404).json("Course Not Found");
+      if (!course) return res.status(404).json("Course Not Found");
       res.json(course);
     })
     .catch((err) => res.status(404).json(err));
@@ -149,23 +148,21 @@ router.route("/").get((req, res) => {
 
 // PUT updates course content given the course id
 router.put("/update", (req, res) => {
-
   const { _id, name, description, tags, level } = req.body.course;
 
   Course.findById(_id)
     .then((course) => {
-      course.name = name,
-      course.description = description,
-      course.tags = tags,
-      course.level = level,
-      course
-        .save()
-        .then(() => res.json(course))
-        .catch((err) => res.status(400).json("Error: " + err));
+      (course.name = name),
+        (course.description = description),
+        (course.tags = tags),
+        (course.level = level),
+        course
+          .save()
+          .then(() => res.json(course))
+          .catch((err) => res.status(400).json("Error: " + err));
     })
     .catch((err) => res.status(404).json(err));
-
-})
+});
 
 /**
  * POST uploading document to a course
@@ -260,6 +257,22 @@ router.get("/getAllFiles/:id", (req, res, next) => {
       });
     })
     .catch((err) => res.json(err));
+});
+
+router.route("/addReview").put((req, res) => {
+  const { userId, courseId, courseReview, anon } = req.body;
+  Course.findById(req.param.courseId).then((course) => {
+    (course.reviews = course.reviews),
+      concat({
+        _id: req.params.userId,
+        courseReview: req.params.courseReview,
+        anon: req.params.anon,
+      });
+    course
+      .save()
+      .then(() => res.json("Student's response Sucessfull"))
+      .catch((err) => res.status(400).json(err));
+  });
 });
 
 module.exports = router;
