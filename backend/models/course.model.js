@@ -34,11 +34,22 @@ const courseSchema = new Schema({
     type: String,
     required: "level is required",
   },
-  img:{
+  img: {
     type: String,
   },
   files: {
     type: [String],
+  },
+
+  reviews: {
+    type: [
+      {
+        _id: String,
+        courseReview: String,
+        score: Number,
+        anon: Boolean,
+      },
+    ],
   },
 });
 

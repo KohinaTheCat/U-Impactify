@@ -35,7 +35,7 @@ export class CourseService {
    */
   updateCourse(course: any): Observable<Course> {
     return this.http.put<Course>(`http://localhost:5000/course/update`, {
-      course
+      course,
     });
   }
 
@@ -108,5 +108,29 @@ export class CourseService {
     return this.http.delete(
       `http://localhost:5000/course/dropCourse/${courseId}/${userId}`
     );
+  }
+
+  /**
+   * PUT student review in course
+   * @param userId
+   * @param courseId
+   * @param courseReivew
+   * @param score
+   * @param anon
+   */
+  addAReview(
+    _id: string,
+    courseId: string,
+    courseReivew: string,
+    score: Number,
+    anon: Boolean
+  ): Observable<Course> {
+    return this.http.put<Course>(`http://localhost:5000/course/addReview`, {
+      _id,
+      courseId,
+      courseReivew,
+      score,
+      anon,
+    });
   }
 }
