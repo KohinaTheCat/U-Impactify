@@ -258,6 +258,8 @@ router.get("/getAllFiles/:id", (req, res, next) => {
 
 /**
  * PUT review on a course
+ *  @param _id the course id
+ *  @return course the course
  */
 router.put("/addReview/", (req, res) => {
   const { _id, courseReview, score, courseId } = req.body;

@@ -1,7 +1,7 @@
 /**
  * Course Frontend model
  *  - synchronous with `~/backend/models/course.model.js`
- * 
+ *
  * @property {String} _id mongoDB ObjectId
  */
 export interface Course {
@@ -13,5 +13,6 @@ export interface Course {
   tags: string;
   level: string;
   img: string;
-  files: string[]
+  files: string[];
+  reviews: string[];
 }
