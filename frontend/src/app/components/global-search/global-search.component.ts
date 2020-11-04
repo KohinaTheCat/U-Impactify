@@ -22,6 +22,7 @@ export class GlobalSearchComponent implements OnInit {
 
   title: String = '';
   searchQuery: String = '';
+  isFocused: boolean = false;
 
   ngOnInit(): void {
     this.title =
@@ -38,5 +39,10 @@ export class GlobalSearchComponent implements OnInit {
 
   goToProfile(): void{
     this.router.navigate([`user/${this.userService.getCurrentUser()._id}`]);
+  }
+
+  onPressSearch(type: string): void {
+    this.router.navigate([`search/${type}/${this.searchQuery}`]);
+    this.searchQuery = '';
   }
 }
