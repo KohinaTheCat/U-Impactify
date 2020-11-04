@@ -23,10 +23,10 @@ export class CoursePreviewComponent implements OnInit {
   alreadyEnrolled: boolean = false;
   error: string;
   user: User;
-  opened: boolean;
+  openedUpdateCourse: boolean;
+  openedRateCourse: boolean;
   description: string = '';
   level: string = '';
-  basic: boolean = true;
   img: NgxFileDropEntry[] = [];
   imageError: string = '';
   loading: boolean = true;
@@ -97,7 +97,7 @@ export class CoursePreviewComponent implements OnInit {
   }
 
   updateCourseContentHandler() {
-    this.opened = true;
+    this.openedUpdateCourse = true;
   }
 
   editDocumentsHandler() {}
@@ -107,7 +107,7 @@ export class CoursePreviewComponent implements OnInit {
   studentAnalysisHandler() {}
 
   cancel() {
-    this.opened = false;
+    this.openedUpdateCourse = false;
   }
   registerHandler() {
     const { description, level } = this;
@@ -139,7 +139,7 @@ export class CoursePreviewComponent implements OnInit {
 
     this.course = { ...this.course, description, level };
 
-    this.opened = false;
+    this.openedUpdateCourse = false;
 
     this.courseService.updateCourse(this.course).subscribe(
       (res: Course) => {

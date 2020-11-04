@@ -14,7 +14,7 @@
       <div class="alert-items">
         <div class="alert-item static">
           <div class="alert-icon-wrapper">
-            <clr-icon class="alert-icon" shape="exclamation-circle"></clr-icon>
+            <clr-icon class="alert-icon" shape="info-circle"></clr-icon>
           </div>
           <span class="alert-text">
             You are currently not enrolled in this course.
@@ -60,12 +60,75 @@
       <div class="course-desc">
         <h4>Description</h4>
         <div class="difficulty" [ngSwitch]="course.level">
-          <div class="level" id="easy" *ngSwitchCase="'easy'"><strong>EASY</strong></div>
-          <div class="level" id="difficult" *ngSwitchCase="'difficult'"><strong>DIFFICULT</strong></div>
-          <div class="level" id="advanced" *ngSwitchCase="'advanced'"><strong>ADVANCED</strong></div>
+          <div class="level" id="easy" *ngSwitchCase="'easy'">
+            <strong>EASY</strong>
+          </div>
+          <div class="level" id="difficult" *ngSwitchCase="'difficult'">
+            <strong>DIFFICULT</strong>
+          </div>
+          <div class="level" id="advanced" *ngSwitchCase="'advanced'">
+            <strong>ADVANCED</strong>
+          </div>
           <div *ngSwitchDefault></div>
         </div>
         <p class="text">{{ course.description }}</p>
+      </div>
+      <!-- Dummy Rating, TODO: Implement star rating system after backend -->
+      <div class="course-rating">
+        <h4>Rating</h4>
+        <div class="stars-container">
+          <div>
+            <clr-icon shape="star" class="is-solid"></clr-icon>
+            <clr-icon shape="star" class="is-solid"></clr-icon>
+            <clr-icon shape="star" class="is-solid"></clr-icon>
+            <clr-icon shape="half-star" class="is-solid"></clr-icon>
+            <clr-icon shape="star"></clr-icon>
+          </div>
+          <span>4.5 / 5.0</span>
+        </div>
+        <div
+          class="enroll-alert"
+          *ngIf="user.type == 'IL' && !alreadyEnrolled; else rateBtn"
+        >
+          <div class="alert alert-warning" role="alert">
+            <div class="alert-items">
+              <div class="alert-item static">
+                <div class="alert-icon-wrapper">
+                  <clr-icon
+                    class="alert-icon"
+                    shape="exclamation-triangle"
+                  ></clr-icon>
+                </div>
+                <span class="alert-text">
+                  You must be enrolled to rate this course.
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          class="enroll-alert"
+          *ngIf="!!user && course.teachers.includes(user._id)"
+        >
+          <div class="alert alert-danger" role="alert">
+            <div class="alert-items">
+              <div class="alert-item static">
+                <div class="alert-icon-wrapper">
+                  <clr-icon
+                    class="alert-icon"
+                    shape="exclamation-circle"
+                  ></clr-icon>
+                </div>
+                <span class="alert-text">
+                  Teachers cannot rate their own course.
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="rate-button" *ngIf="user.type == 'IL' && alreadyEnrolled">
+          <button class="btn btn-success-outline" (click)="openedRateCourse = true;">Rate this course</button>
+        </div>
       </div>
       <div class="course-teachers">
         <h4>Instructor<span *ngIf="course.teachers.length > 1">s</span></h4>
@@ -88,9 +151,7 @@
     </div>
     <div class="right">
       <h4>Course Outline</h4>
-      <div class="course-content">
-        Course Content Here.
-      </div>
+      <div class="course-content">Course Content Here.</div>
     </div>
   </div>
 </div>
@@ -103,11 +164,43 @@
 </div>
 
 <clr-modal
-  [(clrModalOpen)]="opened"
+  [(clrModalOpen)]="openedRateCourse"
   [clrModalSize]="'lg'"
   [clrModalClosable]="false"
 >
-  <h3 class="modal-title">Update this course</h3>
+<h3 class="modal-title">Rate This Course</h3>
+<div class="modal-body">
+  sup
+  <!-- <form clrForm>
+    <clr-input-container>
+      <label for=""></label>
+    </clr-input-container>
+  </form> -->
+</div>
+<div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-outline"
+      (click)="openedRateCourse = false"
+    >
+      Cancel
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="openedRateCourse = false"
+    >
+      Update Course
+    </button>
+  </div>
+</clr-modal>
+
+<clr-modal
+  [(clrModalOpen)]="openedUpdateCourse"
+  [clrModalSize]="'lg'"
+  [clrModalClosable]="false"
+>
+  <h3 class="modal-title">Update This Course</h3>
   <div class="modal-body">
     <form clrForm>
       <clr-control-error>{{ error }}</clr-control-error>
@@ -190,7 +283,6 @@
     <button
       type="button"
       class="btn btn-outline"
-      (click)="basic = false"
       (click)="cancel()"
     >
       Cancel
@@ -198,7 +290,6 @@
     <button
       type="button"
       class="btn btn-primary"
-      (click)="basic = false"
       (click)="registerHandler()"
     >
       Update Course
