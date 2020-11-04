@@ -259,10 +259,13 @@ router.get("/getAllFiles/:id", (req, res, next) => {
     .catch((err) => res.json(err));
 });
 
-router.route("/addReview/:id").put((req, res) => {
+router.put("/addReview/:id", (req, res) => {
   const { userId, courseReview, score } = req.body;
+
   Course.findById(req.params.id).then((course) => {
     console.log("hello");
+    console.log("dafsdfasdfa");
+    console.log(userId);
     course.reviews = course.reviews.concat({
       _id: userId,
       courseReview: courseReview,
