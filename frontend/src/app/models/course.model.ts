@@ -14,5 +14,5 @@ export interface Course {
   level: string;
   img: string;
   files: string[];
-  reviews: string[];
+  reviews: object[];
 }
