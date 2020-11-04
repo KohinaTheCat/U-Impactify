@@ -259,6 +259,9 @@ router.get("/getAllFiles/:id", (req, res, next) => {
     .catch((err) => res.json(err));
 });
 
+/**
+ * PUT review on a course
+ */
 router.put("/addReview/", (req, res) => {
   const { userId, courseReview, score, courseId } = req.body;
 
