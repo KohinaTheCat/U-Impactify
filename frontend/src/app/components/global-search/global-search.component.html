@@ -1,7 +1,7 @@
-<div class="search-bar">
+<div class="search-bar-container">
     <h1 id="title">{{title | titlecase}}</h1>
+    <div class="search-bar"><input placeholder="Search"  autocomplete="off" type="text" [(ngModel)]="searchQuery"><clr-icon shape="search"></clr-icon></div>
     <div class="bar">
-        <!-- TOOD: Add search bar here -->
         <div class="button-container">
             <!-- TODO: Replace user circle with profile image -->
             <div class="circle" (click)="goToProfile()"><clr-icon shape="user"></clr-icon></div>

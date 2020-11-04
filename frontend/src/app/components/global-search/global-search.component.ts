@@ -21,6 +21,7 @@ export class GlobalSearchComponent implements OnInit {
   }
 
   title: String = '';
+  searchQuery: String = '';
 
   ngOnInit(): void {
     this.title =
