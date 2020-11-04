@@ -211,7 +211,10 @@ router.delete("/deleteUser/:userId", (req, res) => {
           courseSchema
             .findById(element._id)
             .then((course) => {
-              course.students = course.students.filter((id) => id !== userId);
+              if(!(course.students === null)){
+                console.log("filtering IL")
+                course.students = course.students.filter((id) => id !== userId);
+              }
               course.save().catch((err) => res.status(400).json(err));
             })
             .catch((err) => res.status(400).json(err));
@@ -227,9 +230,12 @@ router.delete("/deleteUser/:userId", (req, res) => {
                 course.students.forEach((element) => {
                   userSchema.findById(element).then((user) => {
                     // remove from coursesEnrolled from student
-                    user.classesEnrolled = user.classesEnrolled.filter(
-                      (courses) => courses.id !== course.id
-                    );
+                    if(!(user.classesEnrolled === null)){
+                      console.log("filtering course")
+                      user.classesEnrolled = user.classesEnrolled.filter(
+                        (courses) => courses.id !== course.id
+                      );
+                    }
                     user.save().catch((err) => res.status(400).json(err));
                   });
                 });
@@ -243,7 +249,10 @@ router.delete("/deleteUser/:userId", (req, res) => {
                 });
                 // remove single teacher from the course list
               } else {
-                course.teachers = course.teachers.filter((id) => id !== userId);
+                if(!(course.teachers === null)){
+                  console.log("filtering teacher")
+                  course.teachers = course.teachers.filter((id) => id !== userId);
+                }
                 course.save().catch((err) => res.status(400).json(err));
               }
             })
