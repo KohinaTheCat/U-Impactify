@@ -152,14 +152,11 @@ router.put("/update", (req, res) => {
 
   Course.findById(_id)
     .then((course) => {
-      (course.name = name),
-        (course.description = description),
-        (course.tags = tags),
-        (course.level = level),
-        course
-          .save()
-          .then(() => res.json(course))
-          .catch((err) => res.status(400).json("Error: " + err));
+      course = { name, description, tags, level };
+      course
+        .save()
+        .then(() => res.json(course))
+        .catch((err) => res.status(400).json("Error: " + err));
     })
     .catch((err) => res.status(404).json(err));
 });
@@ -263,17 +260,17 @@ router.get("/getAllFiles/:id", (req, res, next) => {
  * PUT review on a course
  */
 router.put("/addReview/", (req, res) => {
-  const { userId, courseReview, score, courseId } = req.body;
+  const { _id, courseReview, score, courseId } = req.body;
 
   Course.findById(courseId).then((course) => {
     course.reviews = course.reviews.concat({
-      _id: userId,
-      courseReview: courseReview,
-      score: score,
+      _id,
+      courseReview,
+      score,
     });
     course
       .save()
-      .then(() => res.json("Student's response Sucessfull"))
+      .then(() => res.json(course))
       .catch((err) => res.status(400).json(err));
   });
 });
