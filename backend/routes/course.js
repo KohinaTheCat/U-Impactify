@@ -262,13 +262,14 @@ router.get("/getAllFiles/:id", (req, res, next) => {
  *  @return course the course
  */
 router.put("/addReview/", (req, res) => {
-  const { _id, courseReview, score, courseId } = req.body;
+  const { _id, courseReview, score, courseId, anon } = req.body;
 
   Course.findById(courseId).then((course) => {
     course.reviews = course.reviews.concat({
       _id,
       courseReview,
       score,
+      anon,
     });
     course
       .save()

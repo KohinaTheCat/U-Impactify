@@ -116,18 +116,21 @@ export class CourseService {
    * @param courseId
    * @param courseReivew
    * @param score
+   * @param anon
    */
   addAReview(
     _id: string,
     courseId: string,
     courseReivew: string,
-    score: Number
+    score: Number,
+    anon: Boolean
   ): Observable<Course> {
     return this.http.put<Course>(`http://localhost:5000/course/addReview`, {
       _id,
       courseId,
       courseReivew,
       score,
+      anon,
     });
   }
 }
