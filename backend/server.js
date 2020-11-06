@@ -11,6 +11,8 @@ app.use(cors());
 app.set("view engine", "ejs");
 app.use(express.json());
 
+/* Mongoose Connection */
+
 const uri = process.env.ATLAS_URI;
 
 mongoose.connect(uri, {
@@ -27,9 +29,24 @@ connection.once("open", () => {
 
 const courseRouter = require("./routes/course");
 const userRouter = require("./routes/user");
+// const chatRouter = require("./routes/chat");
 
+// app.use("/chat", chatRouter);
 app.use("/course", courseRouter);
 app.use("/user", userRouter);
+
+const server = require("http").createServer(app);
+
+const io = require("socket.io")(server, {
+  origins: ["http://localhost:*", "http://127.0.0.1:*"],
+});
+
+io.on("connection", (socket) => {
+  console.log("connected");
+  socket.on("message", (data) => console.log(data));
+});
+
+server.listen(8000);
 
 const PORT = process.env.PORT || 5000;
 

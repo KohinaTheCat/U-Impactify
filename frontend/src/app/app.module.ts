@@ -25,6 +25,9 @@ import { SettingsComponent } from './pages/settings/settings.component';
 import { SignupQuestionaireComponent } from './pages/signup-questionaire/signup-questionaire.component';
 import { SignupQuestionaire2Component } from './pages/signup-questionaire2/signup-questionaire2.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
+
+const config: SocketIoConfig = { url: 'http://localhost:8000', options: {} };
 
 @NgModule({
   declarations: [
@@ -56,6 +59,7 @@ import { UserProfileComponent } from './pages/user-profile/user-profile.componen
     HttpClientModule,
     PdfViewerModule,
     NgxFileDropModule,
+    SocketIoModule.forRoot(config),
   ],
   providers: [],
   bootstrap: [AppComponent],
