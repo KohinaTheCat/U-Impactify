@@ -42,7 +42,7 @@ export class GlobalSearchComponent implements OnInit {
   }
 
   onPressSearch(type: string): void {
-    this.router.navigate([`search/${type}/${this.searchQuery}`]);
+    this.router.navigate([`search/${type}/${encodeURI(this.searchQuery.trim() as string)}`]);
     this.searchQuery = '';
   }
 }

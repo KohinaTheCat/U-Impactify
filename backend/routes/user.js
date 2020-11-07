@@ -196,6 +196,16 @@ router.route("/:id").get((req, res) => {
 });
 
 /**
+ * TEMPORARY ONLY FOR BOUN-83
+ */
+router.route("/").get((req, res) => {
+  userSchema
+    .find()
+    .then((users) => res.json(users))
+    .catch((err) => res.status(404).json("None Found"));
+});
+
+/**
  * DELETE any user
  * @param userId user id
  * @return user

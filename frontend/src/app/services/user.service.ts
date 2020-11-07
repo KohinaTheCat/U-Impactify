@@ -55,6 +55,10 @@ export class UserService {
     return this.http.get<User>('http://localhost:5000/user/' + id);
   }
 
+  getAllUsers(): Observable<User[]> {
+    return this.http.get<User[]>('http://localhost:5000/user');
+  }
+
   /**
    * POST login user
    * @param {string} email    email of user
