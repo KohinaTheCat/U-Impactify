@@ -4,9 +4,9 @@
 <div *ngIf="!loading" class="results">
   <div class="body">
     <div class="results-text">
-      Found {{ results }} result<span *ngIf="results.length === 1">s</span> for "{{ query }}" in <strong>{{ type | titlecase }}</strong>
+      Found {{ results }} result<span *ngIf="results === 1">s</span> for "{{ query }}" in <strong>{{ type | titlecase }}</strong>
     </div>
-    <div class="course-container" *ngIf="results.length && type === 'course'">
+    <div class="course-container" *ngIf="results && type === 'course'">
       <div
         class="course-card box-shadow-1"
         *ngFor="let course of courses; index as i"
@@ -35,7 +35,7 @@
         </div>
       </div>
     </div>
-    <div class="user-container" *ngIf="results.length && type === 'user'">
+    <div class="user-container" *ngIf="results && type === 'user'">
         <div
           title="View Profile"
           class="user-card box-shadow-1"
