@@ -24,6 +24,8 @@ h3 {
   filter: blur(3px) brightness(0.9);
 }
 
+
+
 .loading {
   width: 100%;
   display: flex;
@@ -310,6 +312,37 @@ h4 {
   color: #a78ec3;
 }
 
+.modal-body, #rating, .anon-review, .clr-form, .clr-control-container, .clr-textarea {
+  width: 100%;
+}
+
+.anon-review {
+  display: flex;
+  margin-top: 1rem;
+}
+
+#rating {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  margin-top: 0.25rem;
+}
+
+.stars>clr-icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  color: var(--yellow-base);
+  cursor: pointer;
+}
+
+.clr-textarea {
+  font-size: 0.75rem;
+}
+
+.clr-form {
+  padding: 0;
+}
+
 input {
   margin-top: 0.5rem;
   margin-bottom: 1rem;
@@ -365,6 +398,17 @@ clr-control-error {
 
 .right {
   margin-left: 1rem;
+}
+
+.btn-container {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.err-message {
+  color: #f00;
+  width: 100%;
 }
 
 

@@ -127,7 +127,12 @@
           </div>
         </div>
         <div class="rate-button" *ngIf="user.type == 'IL' && alreadyEnrolled">
-          <button class="btn btn-success-outline" (click)="openedRateCourse = true;">Rate this course</button>
+          <button
+            class="btn btn-success-outline"
+            (click)="openedRateCourse = true"
+          >
+            Rate this course
+          </button>
         </div>
       </div>
       <div class="course-teachers">
@@ -168,30 +173,49 @@
   [clrModalSize]="'lg'"
   [clrModalClosable]="false"
 >
-<h3 class="modal-title">Rate This Course</h3>
-<div class="modal-body">
-  sup
-  <!-- <form clrForm>
-    <clr-input-container>
-      <label for=""></label>
-    </clr-input-container>
-  </form> -->
-</div>
-<div class="modal-footer">
-    <button
-      type="button"
-      class="btn btn-outline"
-      (click)="openedRateCourse = false"
-    >
-      Cancel
-    </button>
-    <button
-      type="button"
-      class="btn btn-primary"
-      (click)="openedRateCourse = false"
-    >
-      Update Course
-    </button>
+  <h3 class="modal-title">Rate This Course</h3>
+  <div class="modal-body">
+    <div id="rating">
+      <div class="stars" #reviewStars>
+        <clr-icon (click)="setScore(1)" shape="star"></clr-icon>
+        <clr-icon (click)="setScore(2)" shape="star"></clr-icon>
+        <clr-icon (click)="setScore(3)" shape="star"></clr-icon>
+        <clr-icon (click)="setScore(4)" shape="star"></clr-icon>
+        <clr-icon (click)="setScore(5)" shape="star"></clr-icon>
+      </div>
+      <button type="button" class="btn btn-danger" (click)="setScore(0)">
+        Reset
+      </button>
+    </div>
+    <form class="clr-form">
+      <div class="clr-control-container">
+        <textarea
+          class="clr-textarea"
+          name="courseReview"
+          placeholder="Give some details. (Optional)"
+          [(ngModel)]="this.courseReview"
+        ></textarea>
+      </div>
+    </form>
+    <div class="anon-review">
+      <input type="checkbox" clrToggle [(ngModel)]="anon" />
+      Anonymous Review
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="err-message" *ngIf="errorMessage.length">{{errorMessage}}</div>
+    <div class="btn-container">
+      <button
+        type="button"
+        class="btn btn-outline"
+        (click)="openedRateCourse = false"
+      >
+        Cancel
+      </button>
+      <button type="button" class="btn btn-primary" (click)="onSubmitReview()">
+        Submit
+      </button>
+    </div>
   </div>
 </clr-modal>
 
@@ -280,18 +304,10 @@
     </form>
   </div>
   <div class="modal-footer">
-    <button
-      type="button"
-      class="btn btn-outline"
-      (click)="cancel()"
-    >
+    <button type="button" class="btn btn-outline" (click)="cancel()">
       Cancel
     </button>
-    <button
-      type="button"
-      class="btn btn-primary"
-      (click)="registerHandler()"
-    >
+    <button type="button" class="btn btn-primary" (click)="registerHandler()">
       Update Course
     </button>
   </div>
