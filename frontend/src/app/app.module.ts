@@ -27,7 +27,7 @@ import { SignupQuestionaire2Component } from './pages/signup-questionaire2/signu
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 
-const config: SocketIoConfig = { url: 'http://localhost:8000', options: {} };
+const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
 
 @NgModule({
   declarations: [

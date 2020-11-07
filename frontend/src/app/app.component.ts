@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from './models/user.model';
-import { ChatService } from './services/chat.service';
 import { UserService } from './services/user.service';
 
 @Component({
@@ -12,7 +11,7 @@ import { UserService } from './services/user.service';
 export class AppComponent {
   user: User;
 
-  constructor(private router: Router, private userService: UserService, private chatService: ChatService) {}
+  constructor(private router: Router, private userService: UserService) {}
 
   /**
    * LifeCycle hook of Angular that runs literally after anything happens.
@@ -23,10 +22,6 @@ export class AppComponent {
    */
   ngDoCheck() {
     this.user = this.userService.getCurrentUser();
-  }
-
-  ngOnInit() {
-    this.chatService.sendMessage("yo it worked");
   }
 
   shouldNavShow = (): Boolean => {

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { filter } from 'rxjs/operators';
+import { ChatService } from 'src/app/services/chat.service';
 
 @Component({
   selector: 'app-global-search',
@@ -9,7 +10,7 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['./global-search.component.css'],
 })
 export class GlobalSearchComponent implements OnInit {
-  constructor(private userService: UserService, private router: Router) {
+  constructor(private userService: UserService, private router: Router, private chatService: ChatService) {
     router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
@@ -23,6 +24,7 @@ export class GlobalSearchComponent implements OnInit {
   title: String = '';
 
   ngOnInit(): void {
+    this.chatService.sendMessage('yo it worked');
     this.title =
       location.pathname === '/'
         ? 'Dashboard'
