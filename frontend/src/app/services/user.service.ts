@@ -55,8 +55,12 @@ export class UserService {
     return this.http.get<User>('http://localhost:5000/user/' + id);
   }
 
-  getAllUsers(): Observable<User[]> {
-    return this.http.get<User[]>('http://localhost:5000/user');
+  /**
+   * GET users by search query
+   * @param {String} query the search query
+   */
+  search(query: String): Observable<User[]> {
+    return this.http.get<User[]>(`http://localhost:5000/user/search/${query}`);
   }
 
   /**

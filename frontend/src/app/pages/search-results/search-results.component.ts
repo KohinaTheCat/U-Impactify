@@ -42,27 +42,15 @@ export class SearchResultsComponent implements OnInit {
     this.type = this.activatedRouter.snapshot.params['type'];
     this.query = decodeURI(this.activatedRouter.snapshot.params['query']);
 
-    /* TEMPORARY IMPLEMENTATION ONLY FOR BOUN-83 */
     if (this.type === 'user') {
-      this.userService.getAllUsers().subscribe((users: User[]) => {
-        this.users = users.filter(
-          (user) =>
-            user._id.toLowerCase().includes(this.query.toLowerCase()) ||
-            user.email === this.query ||
-            user.type === this.query.toUpperCase()
-        );
+      this.userService.search(this.query).subscribe((users: User[]) => {
+        this.users = users;
         this.results = this.users.length;
         this.loading = false;
       });
     } else if (this.type === 'course') {
-      this.courseService.getAllCourses().subscribe((courses: Course[]) => {
-        this.courses = courses.filter(
-          (course) =>
-            course._id === this.query ||
-            course.name.toLowerCase().includes(this.query.toLowerCase()) ||
-            course.teachers.includes(this.query) ||
-            course.level === this.query.toLowerCase()
-        );
+      this.courseService.search(this.query).subscribe((courses: Course[]) => {
+        this.courses = courses;
         this.courses.forEach((course) => {
           if (course.description.length > 400) {
             course.description = course.description.slice(0, 350) + '...';
