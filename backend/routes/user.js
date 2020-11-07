@@ -196,6 +196,29 @@ router.route("/:id").get((req, res) => {
 });
 
 /**
+ * GET users by search query
+ * @param query the search query
+ * @return array of users that satisfy the query
+ *
+ * TODO: Replace with filtering in db instead of backend
+ */
+router.route("/search/:query").get((req, res) => {
+  const { query } = req.params;
+  userSchema
+    .find()
+    .then((users) => {
+      users = users.filter(
+        (user) =>
+          user._id.toLowerCase().includes(query.toLowerCase()) ||
+          user.email === query ||
+          user.type === query.toUpperCase()
+      );
+      res.json(users);
+    })
+    .catch((err) => res.status(404).json("None Found"));
+});
+
+/**
  * DELETE any user
  * @param userId user id
  * @return user

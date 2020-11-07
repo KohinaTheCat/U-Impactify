@@ -146,6 +146,29 @@ router.route("/").get((req, res) => {
     .catch((err) => res.status(400).json(`Error: ${err}`));
 });
 
+/**
+ * GET courses by search query
+ * @param query the search query
+ * @return array of courses that satisfy the query
+ *
+ * TODO: Replace with filtering in db instead of backend
+ */
+router.route("/search/:query").get((req, res) => {
+  const { query } = req.params;
+  Course.find()
+    .then((courses) => {
+      courses = courses.filter(
+        (course) =>
+          course._id === query ||
+          course.name.toLowerCase().includes(query.toLowerCase()) ||
+          course.teachers.includes(query) ||
+          course.level === query.toLowerCase()
+      );
+      res.json(courses);
+    })
+    .catch((err) => res.status(404).json(err));
+});
+
 // PUT updates course content given the course id
 router.put("/update", (req, res) => {
   const { _id, name, description, tags, level } = req.body.course;

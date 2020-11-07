@@ -56,6 +56,14 @@ export class UserService {
   }
 
   /**
+   * GET users by search query
+   * @param {String} query the search query
+   */
+  search(query: String): Observable<User[]> {
+    return this.http.get<User[]>(`http://localhost:5000/user/search/${query}`);
+  }
+
+  /**
    * POST login user
    * @param {string} email    email of user
    * @param {string} password password of user

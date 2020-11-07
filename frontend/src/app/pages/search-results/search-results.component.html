@@ -1,0 +1,50 @@
+<div class="loading" *ngIf="loading">
+  <span class="spinner"></span>
+</div>
+<div *ngIf="!loading" class="results">
+  <div class="body">
+    <div class="results-text">
+      Found {{ results }} result<span *ngIf="results === 1">s</span> for "{{ query }}" in <strong>{{ type | titlecase }}</strong>
+    </div>
+    <div class="course-container" *ngIf="results && type === 'course'">
+      <div
+        class="course-card box-shadow-1"
+        *ngFor="let course of courses; index as i"
+        (click)="onClick('/course/' + course._id)"
+      >
+        <div class="course-picture">
+          <img
+            *ngIf="course.img && course.img.length; else icon"
+            [src]="course.img"
+          />
+          <ng-template #icon>
+            <clr-icon shape="image"></clr-icon>
+          </ng-template>
+        </div>
+        <div class="course-header">
+          <h3>{{ course.name }}</h3>
+        </div>
+        <div class="course-body">
+          Teacher(s):
+          <span>{{ course.teachers }} </span>
+          <br />
+          <span class="level">Level: {{ course.level | uppercase }}</span>
+          <p>
+            {{ course.description }}
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="user-container" *ngIf="results && type === 'user'">
+        <div
+          title="View Profile"
+          class="user-card box-shadow-1"
+          *ngFor="let user of users"
+          (click)="onClick('/user/' + user._id)"
+        >
+          <div class="user-profile"><clr-icon shape="user"></clr-icon></div>
+          <h5>{{ user._id }}</h5>
+        </div>
+    </div>
+  </div>
+</div>

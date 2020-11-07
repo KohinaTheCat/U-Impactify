@@ -51,7 +51,6 @@ export class CoursePreviewComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log("ON INIT")
     this.user = this.userService.getCurrentUser();
     const id = this.activatedRouter.snapshot.params['id'];
     this.courseService.getCourse(id).subscribe(

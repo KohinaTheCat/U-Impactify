@@ -1,0 +1,125 @@
+.loading {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.body {
+    padding-left: 2rem;
+    padding-right: 2rem;
+
+}
+
+.course-container {
+  width: 100%;
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: 1rem;
+}
+
+.results-text {
+    font-size: 1.25rem;
+}
+
+.course-card:hover {
+  background-color: var(--purple-smooth) !important;
+}
+
+img{
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.user-card > h5 {
+  font-size: 1.25rem;
+  margin: 0;
+}
+
+.user-profile clr-icon {
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+.user-profile {
+  border-radius: 100%;
+  color: var(--purple-base);
+  background-color: var(--gray20);
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-container {
+    margin-top: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.user-card {
+  display: flex;
+  align-items: center;
+  width: 50%;
+  max-width: 20rem;
+  column-gap: 0.5rem;
+  background: #fff;
+  height: 4rem;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.user-card:hover {
+  cursor: pointer;
+  background-color: var(--gray20);
+}
+
+.course-card {
+  width: 100%;
+  height: 25rem;
+  margin-top: 1rem;
+  padding: 1rem;
+  cursor: pointer;
+  background-color: #ffffff;
+}
+
+
+.course-picture {
+  width: 100%;
+  height: 40%;
+  background-color: var(--gray20);
+  border: 2px solid var(--purple-base);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.course-picture > clr-icon {
+  width: 3rem;
+  height: 3rem;
+}
+
+
+.level {
+  text-transform: capitalize;
+}
+
+.course-header {
+  border-bottom: 2px solid var(--purple-base);
+}
+
+.course-body {
+  font-size: initial;
+}
+
+p {
+  margin-top: 0.5rem;
+}
