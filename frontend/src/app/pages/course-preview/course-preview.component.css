@@ -24,8 +24,6 @@ h3 {
   filter: blur(3px) brightness(0.9);
 }
 
-
-
 .loading {
   width: 100%;
   display: flex;
@@ -33,7 +31,8 @@ h3 {
   align-items: center;
 }
 
-.course-desc h4, .right h4 {
+.course-desc h4,
+.right h4 {
   margin: 0;
 }
 
@@ -170,13 +169,12 @@ h3 {
   font-size: 0.875rem;
   border-radius: 10px;
   width: min-content;
-
 }
 
 #easy {
   background-color: var(--green-smooth);
   border-color: var(--green-base);
-  color:#808010;
+  color: #808010;
 }
 #difficult {
   background-color: var(--blue2-smooth);
@@ -312,7 +310,12 @@ h4 {
   color: #a78ec3;
 }
 
-.modal-body, #rating, .anon-review, .clr-form, .clr-control-container, .clr-textarea {
+.modal-body,
+#rating,
+.anon-review,
+.clr-form,
+.clr-control-container,
+.clr-textarea {
   width: 100%;
 }
 
@@ -328,7 +331,7 @@ h4 {
   margin-top: 0.25rem;
 }
 
-.stars>clr-icon {
+.stars > clr-icon {
   width: 2.25rem;
   height: 2.25rem;
   color: var(--yellow-base);
@@ -411,7 +414,6 @@ clr-control-error {
   width: 100%;
 }
 
-
 .course-content {
   border: 2px var(--gray40) dashed;
   height: 100%;
@@ -424,7 +426,7 @@ clr-control-error {
   font-size: 2rem;
 }
 
-@media(max-width: 1400px) {
+@media (max-width: 1400px) {
   .body {
     grid-template-columns: 1fr;
     grid-template-rows: auto;
@@ -458,4 +460,11 @@ clr-control-error {
 .rate-button button {
   font-size: 0.875rem;
   border-radius: 5px;
+}
+
+.no-ratings {
+  font-size: 1.25rem;
+  border: 2px var(--gray40) dashed;
+  border-radius: 10px;
+  padding: 1rem;
 }

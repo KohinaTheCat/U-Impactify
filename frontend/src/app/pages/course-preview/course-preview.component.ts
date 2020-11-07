@@ -3,7 +3,7 @@ import { User } from 'src/app/models/user.model';
 import { Observable } from 'rxjs';
 import { CourseService } from 'src/app/services/course.service';
 import { Router } from '@angular/router';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Course } from 'src/app/models/course.model';
 import { ActivatedRoute } from '@angular/router';
 import {
@@ -37,6 +37,10 @@ export class CoursePreviewComponent implements OnInit {
   score: number = 0;
   anon: boolean = false;
 
+  courseStars: number[] = [1,2,3,4,5];
+
+  averageScore: number = 0;
+
   @ViewChild('reviewStars') stars;
 
   constructor(
@@ -47,6 +51,7 @@ export class CoursePreviewComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log("ON INIT")
     this.user = this.userService.getCurrentUser();
     const id = this.activatedRouter.snapshot.params['id'];
     this.courseService.getCourse(id).subscribe(
@@ -66,6 +71,15 @@ export class CoursePreviewComponent implements OnInit {
             break;
           }
         }
+
+        this.averageScore = 0;
+
+        this.course.reviews.forEach((review: any) => {
+          this.averageScore += review.score;
+        });
+
+        this.averageScore = this.averageScore / this.course.reviews.length;
+
         this.loading = false;
       },
       (err) => {
@@ -204,12 +218,18 @@ export class CoursePreviewComponent implements OnInit {
   }
 
   onSubmitReview() {
-    if(!this.score)
-      return this.errorMessage = "You cannot give a 0 score!";
-    this.courseService.addAReview(this.user._id, this.course._id, this.courseReview.trim(), this.score, this.anon).subscribe(course => {
-      this.openedRateCourse = false;
-      this.ngOnInit();
-    });
-    
+    if (!this.score) return (this.errorMessage = 'You cannot give a 0 score!');
+    this.courseService
+      .addAReview(
+        this.user._id,
+        this.course._id,
+        this.courseReview.trim(),
+        this.score,
+        this.anon
+      )
+      .subscribe((course) => {
+        this.openedRateCourse = false;
+        this.ngOnInit();
+      });
   }
 }

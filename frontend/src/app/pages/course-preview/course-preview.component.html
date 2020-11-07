@@ -73,19 +73,21 @@
         </div>
         <p class="text">{{ course.description }}</p>
       </div>
-      <!-- Dummy Rating, TODO: Implement star rating system after backend -->
       <div class="course-rating">
         <h4>Rating</h4>
-        <div class="stars-container">
+        <div class="stars-container" *ngIf="this.averageScore; else noRatings">
           <div>
-            <clr-icon shape="star" class="is-solid"></clr-icon>
-            <clr-icon shape="star" class="is-solid"></clr-icon>
-            <clr-icon shape="star" class="is-solid"></clr-icon>
-            <clr-icon shape="half-star" class="is-solid"></clr-icon>
-            <clr-icon shape="star"></clr-icon>
+            <clr-icon shape="star" *ngFor="let star of courseStars" [ngClass]="{'is-solid' : star <= this.averageScore}"></clr-icon>
           </div>
-          <span>4.5 / 5.0</span>
+          <span>{{averageScore | number : '1.2-2'}} / 5.00</span>
         </div>
+        <ng-template #noRatings>
+          <div class="stars-container">
+            <div class="no-ratings">
+              No Ratings Found.
+            </div>
+          </div>
+        </ng-template>
         <div
           class="enroll-alert"
           *ngIf="user.type == 'IL' && !alreadyEnrolled; else rateBtn"
