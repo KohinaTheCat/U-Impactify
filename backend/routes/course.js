@@ -95,8 +95,7 @@ router.route("/").post((req, res) => {
 router.get("/:id", (req, res) => {
   Course.findById(req.params.id)
     .then((course) => {
-      if(!course)
-        return res.status(404).json("Course Not Found");
+      if (!course) return res.status(404).json("Course Not Found");
       res.json(course);
     })
     .catch((err) => res.status(404).json(err));
@@ -147,25 +146,43 @@ router.route("/").get((req, res) => {
     .catch((err) => res.status(400).json(`Error: ${err}`));
 });
 
+/**
+ * GET courses by search query
+ * @param query the search query
+ * @return array of courses that satisfy the query
+ *
+ * TODO: Replace with filtering in db instead of backend
+ */
+router.route("/search/:query").get((req, res) => {
+  const { query } = req.params;
+  Course.find()
+    .then((courses) => {
+      courses = courses.filter(
+        (course) =>
+          course._id === query ||
+          course.name.toLowerCase().includes(query.toLowerCase()) ||
+          course.teachers.includes(query) ||
+          course.level === query.toLowerCase()
+      );
+      res.json(courses);
+    })
+    .catch((err) => res.status(404).json(err));
+});
+
 // PUT updates course content given the course id
 router.put("/update", (req, res) => {
-
   const { _id, name, description, tags, level } = req.body.course;
 
   Course.findById(_id)
     .then((course) => {
-      course.name = name,
-      course.description = description,
-      course.tags = tags,
-      course.level = level,
+      course = { ...course, name, description, tags, level };
       course
         .save()
         .then(() => res.json(course))
         .catch((err) => res.status(400).json("Error: " + err));
     })
     .catch((err) => res.status(404).json(err));
-
-})
+});
 
 /**
  * POST uploading document to a course
@@ -260,6 +277,28 @@ router.get("/getAllFiles/:id", (req, res, next) => {
       });
     })
     .catch((err) => res.json(err));
+});
+
+/**
+ * PUT review on a course
+ *  @param _id the course id
+ *  @return course the course
+ */
+router.put("/addReview/", (req, res) => {
+  const { _id, courseReview, score, courseId, anon } = req.body;
+
+  Course.findById(courseId).then((course) => {
+    course.reviews = course.reviews.concat({
+      _id,
+      courseReview,
+      score,
+      anon,
+    });
+    course
+      .save()
+      .then(() => res.json(course))
+      .catch((err) => res.status(400).json(err));
+  });
 });
 
 module.exports = router;

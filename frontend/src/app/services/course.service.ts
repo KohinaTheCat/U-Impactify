@@ -35,7 +35,7 @@ export class CourseService {
    */
   updateCourse(course: any): Observable<Course> {
     return this.http.put<Course>(`http://localhost:5000/course/update`, {
-      course
+      course,
     });
   }
 
@@ -59,12 +59,31 @@ export class CourseService {
     return this.http.get(`http://localhost:5000/document/${courseId}`);
   }
 
+  /**
+   * GET courses by search query
+   * @param {String} query the search query
+   */
+  search(query: string): Observable<Course[]> {
+    return this.http.get<Course[]>(
+      `http://localhost:5000/course/search/${query}`
+    );
+  }
+
+  /**
+   * GET course image
+   * @param {string} courseId id of course
+   */
   getCourseImageId(courseId: string): Observable<any> {
     return this.http.get(
       `http://localhost:5000/course/${courseId}/getCourseImage`
     );
   }
 
+  /**
+   * POST add course image to course
+   * @param {FormData} file the course image
+   * @param {string} courseId id of course
+   */
   postCourseImage(file: FormData, courseId: string): Observable<Course> {
     return this.http.post<Course>(
       `http://localhost:5000/course/${courseId}/uploadCourseImage`,
@@ -108,5 +127,29 @@ export class CourseService {
     return this.http.delete(
       `http://localhost:5000/course/dropCourse/${courseId}/${userId}`
     );
+  }
+
+  /**
+   * PUT student review in course
+   * @param userId
+   * @param courseId
+   * @param courseReview
+   * @param score
+   * @param anon
+   */
+  addAReview(
+    _id: string,
+    courseId: string,
+    courseReview: string,
+    score: Number,
+    anon: Boolean
+  ): Observable<Course> {
+    return this.http.put<Course>(`http://localhost:5000/course/addReview`, {
+      _id,
+      courseId,
+      courseReview,
+      score,
+      anon,
+    });
   }
 }
