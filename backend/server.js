@@ -5,11 +5,6 @@ const chatSchema = require("./models/chat.model");
 
 const app = express();
 
-const http = require("http").Server(app);
-const io = require("socket.io")(http, {
-  origins: "localhost:4200:* http://localhost:4200:* http://localhost:4200:*",
-});
-
 require("dotenv").config();
 
 app.use(express.static(__dirname + "/public"));
@@ -57,14 +52,18 @@ app.post("/temp/chat/new", (req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
-io.on("connection", () => {
-  console.log("a user is connected");
-});
-
 connection.once("open", () => {
   console.log("MongoDB connected!");
 });
 
 const server = app.listen(PORT, () => {
   console.log(`server is running on port: ${PORT}`);
+});
+
+const io = require("socket.io")(server, {
+  origins: "http://localhost:*",
+});
+
+io.on("connection", () => {
+  console.log("a user is connected");
 });
