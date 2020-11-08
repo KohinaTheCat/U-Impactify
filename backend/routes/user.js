@@ -235,7 +235,6 @@ router.delete("/deleteUser/:userId", (req, res) => {
             .findById(element._id)
             .then((course) => {
               if(!(course.students === null)){
-                console.log("filtering IL")
                 course.students = course.students.filter((id) => id !== userId);
               }
               course.save().catch((err) => res.status(400).json(err));
@@ -254,7 +253,6 @@ router.delete("/deleteUser/:userId", (req, res) => {
                   userSchema.findById(element).then((user) => {
                     // remove from coursesEnrolled from student
                     if(!(user.classesEnrolled === null)){
-                      console.log("filtering course")
                       user.classesEnrolled = user.classesEnrolled.filter(
                         (courses) => courses.id !== course.id
                       );
@@ -273,7 +271,6 @@ router.delete("/deleteUser/:userId", (req, res) => {
                 // remove single teacher from the course list
               } else {
                 if(!(course.teachers === null)){
-                  console.log("filtering teacher")
                   course.teachers = course.teachers.filter((id) => id !== userId);
                 }
                 course.save().catch((err) => res.status(400).json(err));
