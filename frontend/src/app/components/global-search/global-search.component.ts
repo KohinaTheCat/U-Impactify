@@ -17,6 +17,7 @@ export class GlobalSearchComponent implements OnInit, AfterViewInit {
           event.url === '/'
             ? 'Dashboard'
             : event.url.substring(1).split('/')[0];
+        this.searchQuery = "";
       });
   }
 
@@ -26,7 +27,7 @@ export class GlobalSearchComponent implements OnInit, AfterViewInit {
 
   title: String = '';
   searchQuery: String = '';
-  isFocused: boolean = false;
+  isFocused: boolean;
 
   ngOnInit(): void {
     this.title =
@@ -38,10 +39,11 @@ export class GlobalSearchComponent implements OnInit, AfterViewInit {
   ngAfterViewInit(): void {
     // @ts-ignore
     const observer = new ResizeObserver((entries) => {
-      entries.forEach((entry) => {     
-          this.searchDropdown.nativeElement.style.left = this.getOffset(this.searchBar.nativeElement) + "px";
-          this.searchDropdown.nativeElement.style.width = this.searchBar.nativeElement.clientWidth + "px";
-          
+      entries.forEach((entry) => {
+        this.searchDropdown.nativeElement.style.left =
+          this.getOffset(this.searchBar.nativeElement).left + 'px';
+        this.searchDropdown.nativeElement.style.width =
+          this.searchBar.nativeElement.clientWidth + 'px';
       });
     });
 
@@ -66,6 +68,9 @@ export class GlobalSearchComponent implements OnInit, AfterViewInit {
 
   getOffset(el: any) {
     const rect = el.getBoundingClientRect();
-    return rect.left + window.scrollX;
+    return {
+      left: rect.left + window.scrollX,
+      top: rect.top + window.scrollY,
+    };
   }
 }
