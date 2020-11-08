@@ -77,15 +77,17 @@
         <h4>Rating</h4>
         <div class="stars-container" *ngIf="this.averageScore; else noRatings">
           <div>
-            <clr-icon shape="star" *ngFor="let star of courseStars" [ngClass]="{'is-solid' : star <= this.averageScore}"></clr-icon>
+            <clr-icon
+              shape="star"
+              *ngFor="let star of courseStars"
+              [ngClass]="{ 'is-solid': star <= this.averageScore }"
+            ></clr-icon>
           </div>
-          <span>{{averageScore | number : '1.2-2'}} / 5.00</span>
+          <span>{{ averageScore | number: "1.2-2" }} / 5.00</span>
         </div>
         <ng-template #noRatings>
           <div class="stars-container">
-            <div class="no-ratings">
-              No Ratings Found.
-            </div>
+            <div class="no-ratings">No Ratings Found.</div>
           </div>
         </ng-template>
         <div
@@ -134,6 +136,13 @@
             (click)="openedRateCourse = true"
           >
             Rate this course
+          </button>
+          <button
+            class="btn btn-success-outline"
+            id="change"
+            (click)="openedAllReviews = true"
+          >
+            See all Reviews!
           </button>
         </div>
       </div>
@@ -205,7 +214,9 @@
     </div>
   </div>
   <div class="modal-footer">
-    <div class="err-message" *ngIf="errorMessage.length">{{errorMessage}}</div>
+    <div class="err-message" *ngIf="errorMessage.length">
+      {{ errorMessage }}
+    </div>
     <div class="btn-container">
       <button
         type="button"
@@ -216,6 +227,31 @@
       </button>
       <button type="button" class="btn btn-primary" (click)="onSubmitReview()">
         Submit
+      </button>
+    </div>
+  </div>
+</clr-modal>
+
+<clr-modal
+  [(clrModalOpen)]="openedAllReviews"
+  [clrModalSize]="'lg'"
+  [clrModalClosable]="false"
+>
+  <h3 class="modal-title">All user reviews for {{ course.name }}</h3>
+  <div class="modal-body">
+    <li *ngFor="let review of reviews"></li>
+  </div>
+  <div class="modal-footer">
+    <!-- <div class="err-message" *ngIf="errorMessage.length">
+      {{ errorMessage }}
+    </div> -->
+    <div class="btn-container">
+      <button
+        type="button"
+        class="btn btn-outline"
+        (click)="openedAllReviews = false"
+      >
+        Cancel
       </button>
     </div>
   </div>
