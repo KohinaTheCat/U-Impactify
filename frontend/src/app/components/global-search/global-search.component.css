@@ -17,6 +17,7 @@
   padding: 0 1rem;
 }
 
+
 .search-dropdown {
   position: absolute;
   width: 100%;
@@ -29,7 +30,10 @@
   overflow: hidden;
   border-radius: 10px;
   filter: drop-shadow(0px 4px 12px #eff3f9);
-  transform: translateX(25vw);
+}
+
+.no-show {
+  display: none;
 }
 
 .dropdown {
