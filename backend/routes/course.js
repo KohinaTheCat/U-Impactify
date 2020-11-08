@@ -160,6 +160,7 @@ router.route("/search/:query").get((req, res) => {
       { name: { $regex: query, $options: "i" } },
       { teachers: { $regex: query, $options: "i" } },
       { level: { $regex: query, $options: "i" } },
+      { tags : { $regex: query, $options: "i"} },
     ],
   })
     .then((courses) => {
