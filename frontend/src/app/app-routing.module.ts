@@ -1,3 +1,4 @@
+import { ChatComponent } from './pages/chat/chat.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
@@ -21,14 +22,31 @@ const routes: Routes = [
   },
   { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
-  { path: 'questionaire', component: SignupQuestionaireComponent, canDeactivate: [AuthGuard] },
-  { path: 'questionaire2', component: SignupQuestionaire2Component, canDeactivate: [AuthGuard] },
+  {
+    path: 'questionaire',
+    component: SignupQuestionaireComponent,
+    canDeactivate: [AuthGuard],
+  },
+  {
+    path: 'questionaire2',
+    component: SignupQuestionaire2Component,
+    canDeactivate: [AuthGuard],
+  },
   { path: 'course', component: CourseComponent },
   { path: 'course/:id', component: CoursePreviewComponent },
-  { path: 'createcourse', component: CreateCourseComponent, canActivate: [AuthGuard]  },
-  { path: 'enrollcourse', component: EnrollCourseComponent, canActivate: [AuthGuard]  },
+  {
+    path: 'createcourse',
+    component: CreateCourseComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: 'chat', component: ChatComponent, canActivate: [AuthGuard] },
+  {
+    path: 'enrollcourse',
+    component: EnrollCourseComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'user/:username', component: UserProfileComponent },
-  { path: 'user', redirectTo: 'dashboard', canActivate: [AuthGuard] }
+  { path: 'user', redirectTo: 'dashboard', canActivate: [AuthGuard] },
 ];
 
 @NgModule({
