@@ -234,12 +234,48 @@
 
 <clr-modal
   [(clrModalOpen)]="openedAllReviews"
-  [clrModalSize]="'lg'"
+  [clrModalSize]="'xl'"
   [clrModalClosable]="false"
 >
   <h3 class="modal-title">All user reviews for {{ course.name }}</h3>
   <div class="modal-body">
-    <li *ngFor="let review of reviews"></li>
+    <li class="review-content" *ngFor="let review of reviews">
+      <span id="left-top-bottom">
+        <span class="darker"> Student Name: </span>
+        <span class="lighter" *ngIf="!review.anon"> {{ review._id }} </span>
+        <span class="lighter" *ngIf="review.anon"> Anonymous </span>
+      </span>
+      <span class="review" id="left-top-bottom">
+        <span class="darker" id="right"> Review: </span>
+        <div class="review-content-solid" id="side">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi labore
+          velit nesciunt, fuga iure, minus quis itaque sunt non accusantium
+          quidem, sint impedit culpa? Quas libero quidem accusamus iure eius
+          iste culpa omnis adipisci. Illo mollitia totam, enim culpa voluptates
+          eius nisi atque magnam exercitationem molestiae officiis, provident
+          iure ad debitis a! Fuga sequi a facilis doloremque odio ex
+          necessitatibus minima, tempora eveniet cumque optio sunt, autem
+          numquam minus provident reprehenderit nihil. Soluta, magnam? Sed
+          soluta earum id consectetur culpa veritatis hic aperiam, totam
+          explicabo quas quae labore modi, aspernatur fugiat ducimus animi?
+          Obcaecati aspernatur at suscipit ipsa laborum est ipsum asperiores
+          assumenda quo natus nihil, officia amet numquam? Amet aliquid, et
+          praesentium nobis recusandae possimus, similique, laborum accusamus ex
+          aut ad corporis! Quis dolor vitae provident. Numquam debitis provident
+          beatae a. Unde pariatur nesciunt iure quibusdam consequatur dolores
+        </div>
+      </span>
+      <div class="stars-container" id="left-bottom">
+        <div>
+          <clr-icon
+            shape="star"
+            *ngFor="let star of courseStars"
+            [ngClass]="{ 'is-solid': star <= review.score }"
+          ></clr-icon>
+        </div>
+        <span>{{ review.score }} / 5.00</span>
+      </div>
+    </li>
   </div>
   <div class="modal-footer">
     <!-- <div class="err-message" *ngIf="errorMessage.length">
