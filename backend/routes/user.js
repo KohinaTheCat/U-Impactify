@@ -205,14 +205,14 @@ router.route("/:id").get((req, res) => {
 router.route("/search/:query").get((req, res) => {
   const { query } = req.params;
   userSchema
-    .find()
+    .find({
+      $or: [
+        { _id: { $regex: query, $options: "i" } },
+        { email: { $regex: query, $options: "i" } },
+        { type: { $regex: query, $options: "i" } },
+      ],
+    })
     .then((users) => {
-      users = users.filter(
-        (user) =>
-          user._id.toLowerCase().includes(query.toLowerCase()) ||
-          user.email === query ||
-          user.type === query.toUpperCase()
-      );
       res.json(users);
     })
     .catch((err) => res.status(404).json("None Found"));

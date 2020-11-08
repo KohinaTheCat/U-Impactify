@@ -155,15 +155,15 @@ router.route("/").get((req, res) => {
  */
 router.route("/search/:query").get((req, res) => {
   const { query } = req.params;
-  Course.find()
+  Course.find({
+    $or: [
+      { name: { $regex: query, $options: "i" } },
+      { teachers: { $regex: query, $options: "i" } },
+      { level: { $regex: query, $options: "i" } },
+      { tags : { $regex: query, $options: "i"} },
+    ],
+  })
     .then((courses) => {
-      courses = courses.filter(
-        (course) =>
-          course._id === query ||
-          course.name.toLowerCase().includes(query.toLowerCase()) ||
-          course.teachers.includes(query) ||
-          course.level === query.toLowerCase()
-      );
       res.json(courses);
     })
     .catch((err) => res.status(404).json(err));
