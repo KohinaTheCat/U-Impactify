@@ -3,7 +3,7 @@ import { User } from 'src/app/models/user.model';
 import { Observable } from 'rxjs';
 import { CourseService } from 'src/app/services/course.service';
 import { Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { Course } from 'src/app/models/course.model';
 import { ActivatedRoute } from '@angular/router';
 import {
@@ -19,17 +19,31 @@ import {
 })
 export class CoursePreviewComponent implements OnInit {
   course: Course;
+  reviews: Course['reviews'];
   valid: boolean;
   alreadyEnrolled: boolean = false;
   error: string;
   user: User;
-  opened: boolean;
+  openedUpdateCourse: boolean;
+  openedRateCourse: boolean;
+  openedAllReviews: false;
   description: string = '';
   level: string = '';
-  basic: boolean = true;
   img: NgxFileDropEntry[] = [];
   imageError: string = '';
   loading: boolean = true;
+  tags: string[] = [];
+  errorMessage: string = '';
+
+  courseReview: string = '';
+  score: number = 0;
+  anon: boolean = false;
+
+  courseStars: number[] = [1, 2, 3, 4, 5];
+
+  averageScore: number = 0;
+
+  @ViewChild('reviewStars') stars;
 
   constructor(
     private userService: UserService,
@@ -45,8 +59,10 @@ export class CoursePreviewComponent implements OnInit {
       (incomingCourse: Course) => {
         this.valid = true;
         this.course = incomingCourse;
+        this.reviews = this.course.reviews;
         this.description = this.course.description;
         this.level = this.course.level;
+        this.tags = this.course.tags.split(' ');
         this.course.img =
           !this.course.img || this.course.img === ''
             ? (this.course.img = '../../../../assets/courseimage.png')
@@ -56,7 +72,17 @@ export class CoursePreviewComponent implements OnInit {
             this.alreadyEnrolled = true;
             break;
           }
-        } this.loading = false;
+        }
+
+        this.averageScore = 0;
+
+        this.course.reviews.forEach((review: any) => {
+          this.averageScore += review.score;
+        });
+
+        this.averageScore = this.averageScore / this.course.reviews.length;
+
+        this.loading = false;
       },
       (err) => {
         this.loading = false;
@@ -95,7 +121,7 @@ export class CoursePreviewComponent implements OnInit {
   }
 
   updateCourseContentHandler() {
-    this.opened = true;
+    this.openedUpdateCourse = true;
   }
 
   editDocumentsHandler() {}
@@ -105,7 +131,7 @@ export class CoursePreviewComponent implements OnInit {
   studentAnalysisHandler() {}
 
   cancel() {
-    this.opened = false;
+    this.openedUpdateCourse = false;
   }
   registerHandler() {
     const { description, level } = this;
@@ -137,7 +163,7 @@ export class CoursePreviewComponent implements OnInit {
 
     this.course = { ...this.course, description, level };
 
-    this.opened = false;
+    this.openedUpdateCourse = false;
 
     this.courseService.updateCourse(this.course).subscribe(
       (res: Course) => {
@@ -184,5 +210,28 @@ export class CoursePreviewComponent implements OnInit {
   // usage code from - https://www.npmjs.com/package/ngx-file-drop
   public fileLeave(event) {
     console.log(event);
+  }
+
+  setScore(score: number): void {
+    this.score = score;
+    this.stars.nativeElement.childNodes.forEach(
+      (star, i) => (star.className = i < this.score ? 'is-solid' : '')
+    );
+  }
+
+  onSubmitReview() {
+    if (!this.score) return (this.errorMessage = 'You cannot give a 0 score!');
+    this.courseService
+      .addAReview(
+        this.user._id,
+        this.course._id,
+        this.courseReview.trim(),
+        this.score,
+        this.anon
+      )
+      .subscribe((course) => {
+        this.openedRateCourse = false;
+        this.ngOnInit();
+      });
   }
 }

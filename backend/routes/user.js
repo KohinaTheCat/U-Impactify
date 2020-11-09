@@ -196,6 +196,29 @@ router.route("/:id").get((req, res) => {
 });
 
 /**
+ * GET users by search query
+ * @param query the search query
+ * @return array of users that satisfy the query
+ *
+ * TODO: Replace with filtering in db instead of backend
+ */
+router.route("/search/:query").get((req, res) => {
+  const { query } = req.params;
+  userSchema
+    .find({
+      $or: [
+        { _id: { $regex: query, $options: "i" } },
+        { email: { $regex: query, $options: "i" } },
+        { type: { $regex: query, $options: "i" } },
+      ],
+    })
+    .then((users) => {
+      res.json(users);
+    })
+    .catch((err) => res.status(404).json("None Found"));
+});
+
+/**
  * DELETE any user
  * @param userId user id
  * @return user
@@ -211,7 +234,9 @@ router.delete("/deleteUser/:userId", (req, res) => {
           courseSchema
             .findById(element._id)
             .then((course) => {
-              course.students = course.students.filter((id) => id !== userId);
+              if(!(course.students === null)){
+                course.students = course.students.filter((id) => id !== userId);
+              }
               course.save().catch((err) => res.status(400).json(err));
             })
             .catch((err) => res.status(400).json(err));
@@ -227,9 +252,11 @@ router.delete("/deleteUser/:userId", (req, res) => {
                 course.students.forEach((element) => {
                   userSchema.findById(element).then((user) => {
                     // remove from coursesEnrolled from student
-                    user.classesEnrolled = user.classesEnrolled.filter(
-                      (courses) => courses.id !== course.id
-                    );
+                    if(!(user.classesEnrolled === null)){
+                      user.classesEnrolled = user.classesEnrolled.filter(
+                        (courses) => courses.id !== course.id
+                      );
+                    }
                     user.save().catch((err) => res.status(400).json(err));
                   });
                 });
@@ -243,7 +270,9 @@ router.delete("/deleteUser/:userId", (req, res) => {
                 });
                 // remove single teacher from the course list
               } else {
-                course.teachers = course.teachers.filter((id) => id !== userId);
+                if(!(course.teachers === null)){
+                  course.teachers = course.teachers.filter((id) => id !== userId);
+                }
                 course.save().catch((err) => res.status(400).json(err));
               }
             })

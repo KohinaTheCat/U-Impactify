@@ -1,13 +1,34 @@
-<div class="search-bar">
-    <h1 id="title">{{title | titlecase}}</h1>
-    <div class="bar">
-        <!-- TOOD: Add search bar here -->
-        <div class="button-container">
-            <!-- TODO: Replace user circle with profile image -->
-            <div class="circle" (click)="goToProfile()"><clr-icon shape="user"></clr-icon></div>
-            <div class="circle"><clr-icon shape="chat-bubble"></clr-icon></div>
-            <div class="circle"><clr-icon shape="bell"></clr-icon></div>
-            <div class="circle" (click)="logOut()"><clr-icon shape="power"></clr-icon></div>
-        </div>
+<div class="search-bar-container" #barContainer>
+  <h1 id="title">{{ title | titlecase }}</h1>
+  <div class="search-bar" #searchBar>
+    <input
+      (focus)="isFocused = true"
+      (focusout)="isFocused=false"
+      placeholder="Search"
+      autocomplete="off"
+      type="text"
+      [(ngModel)]="searchQuery"
+    /><clr-icon shape="search"></clr-icon>
+  </div>
+  <div class="bar">
+    <div class="button-container">
+      <!-- TODO: Replace user circle with profile image -->
+      <div class="circle" (click)="goToProfile()">
+        <clr-icon shape="user"></clr-icon>
+      </div>
+      <div class="circle"><clr-icon shape="chat-bubble"></clr-icon></div>
+      <div class="circle"><clr-icon shape="bell"></clr-icon></div>
+      <div class="circle" (click)="logOut()">
+        <clr-icon shape="power"></clr-icon>
+      </div>
     </div>
+  </div>
+</div>
+<div class="search-dropdown" [ngClass]="{'no-show': !searchQuery.trim().length}" #dropdown>
+  <div class="dropdown" (click)="onPressSearch('user')">
+    Search Users for <strong>{{ searchQuery }}</strong>
+  </div>
+  <div class="dropdown" (click)="onPressSearch('course')">
+    Search Courses for <strong>{{ searchQuery }}</strong>
+  </div>
 </div>

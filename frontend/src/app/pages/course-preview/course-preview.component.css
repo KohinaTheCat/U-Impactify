@@ -31,7 +31,8 @@ h3 {
   align-items: center;
 }
 
-.course-desc h4 {
+.course-desc h4,
+.right h4 {
   margin: 0;
 }
 
@@ -76,6 +77,9 @@ h3 {
 h3 {
   padding-left: 1rem;
   padding-bottom: 2rem;
+  font-size: 1rem;
+}
+h3-special {
   font-size: 1rem;
 }
 
@@ -158,6 +162,34 @@ h3 {
   display: block;
 }
 
+.difficulty {
+  margin-bottom: 1rem;
+}
+
+.level {
+  border: 2px solid;
+  padding: 0.5rem;
+  font-size: 0.875rem;
+  border-radius: 10px;
+  width: min-content;
+}
+
+#easy {
+  background-color: var(--green-smooth);
+  border-color: var(--green-base);
+  color: #808010;
+}
+#difficult {
+  background-color: var(--blue2-smooth);
+  border-color: var(--blue2-base);
+  color: #00f;
+}
+#advanced {
+  background-color: var(--red-base);
+  border-color: #f00;
+  color: #8b0000;
+}
+
 /* Change color of dropdown links on hover */
 .dropdown-content a:hover {
   background-color: #ddd;
@@ -207,6 +239,8 @@ h3 {
   width: 100%;
   height: 100%;
   margin-bottom: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
 }
 
 h4 {
@@ -252,13 +286,67 @@ h4 {
 }
 
 .shift {
-  transform: translateX(-4.5rem);
+  transform: translateY(-4rem);
+  -webkit-transform: translateY(-2rem);
+  -moz-transform: translateY(-4rem);
+}
+
+.tag {
+  background: var(--teal-smooth);
+  color: var(--gray80);
+  border: 2px solid var(--teal-base);
+  padding: 0.75rem;
+  font-size: 1rem;
+  border-radius: 10px;
+  width: min-content;
+}
+
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
 }
 
 .modal-title {
   margin-top: 1rem;
   font-size: 1.75rem;
   color: #a78ec3;
+}
+
+.modal-body,
+#rating,
+.anon-review,
+.clr-form,
+.clr-control-container,
+.clr-textarea {
+  width: 100%;
+}
+
+.anon-review {
+  display: flex;
+  margin-top: 1rem;
+}
+
+#rating {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  margin-top: 0.25rem;
+}
+
+.stars > clr-icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  color: var(--yellow-base);
+  cursor: pointer;
+}
+
+.clr-textarea {
+  font-size: 0.75rem;
+}
+
+.clr-form {
+  padding: 0;
 }
 
 input {
@@ -312,4 +400,151 @@ clr-control-error {
 
 .imageError clr-control-error {
   font-size: 0.69rem; /* nice */
+}
+
+.right {
+  margin-left: 1rem;
+}
+
+.btn-container {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.err-message {
+  color: #f00;
+  width: 100%;
+}
+
+.course-content {
+  border: 2px var(--gray40) dashed;
+  height: 100%;
+  width: 100%;
+  color: var(--gray40);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  font-size: 2rem;
+}
+
+#left-bottom {
+  margin-left: 1rem;
+  margin-bottom: 0.5rem;
+}
+#left-top-bottom {
+  margin-left: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+#right {
+  margin-right: 0.5rem;
+}
+
+.darker {
+  color: rgb(71, 62, 62);
+}
+
+.lighter {
+  color: rgb(141, 126, 126);
+}
+
+.review {
+  display: flex;
+  justify-content: row;
+  justify-items: flex-start;
+}
+
+.box-shadow-2 {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  font-size: x-large;
+  padding: 1.5rem;
+}
+.review-content-solid {
+  border: 2px var(--gray40) dashed;
+  border-radius: 20px;
+  border: 2px solid #8a0000 dashed;
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+}
+
+.stars-container-2 clr-icon {
+  width: 2rem;
+  height: 2rem;
+  color: var(--yellow-base);
+}
+
+.stars-container-2 {
+  width: 100%;
+  font-size: 2rem;
+  color: var(--gray60);
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.small {
+  font-size: 1.2rem;
+}
+
+.big {
+  font-size: 2rem;
+}
+
+@media (max-width: 1400px) {
+  .body {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+
+  .right {
+    margin: 0;
+    margin-top: 2rem;
+  }
+}
+
+.stars-container clr-icon {
+  width: 3rem;
+  height: 3rem;
+  color: var(--yellow-base);
+}
+
+.stars-container {
+  width: 100%;
+  font-size: 2rem;
+  color: var(--gray60);
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.rate-button {
+  margin-top: 1rem;
+}
+
+.rate-button button {
+  font-size: 0.875rem;
+  border-radius: 5px;
+}
+
+.no-ratings {
+  font-size: 1.25rem;
+  border: 2px var(--gray40) dashed;
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+#change {
+  color: rgb(0, 100, 33);
+  border-color: rgb(0, 100, 33);
+}
+li {
+  list-style: none;
 }

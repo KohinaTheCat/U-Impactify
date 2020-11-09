@@ -29,6 +29,7 @@ import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { ChatComponent } from './pages/chat/chat.component';
 
 const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
+import { SearchResultsComponent } from './pages/search-results/search-results.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
     SettingsComponent,
     UserProfileComponent,
     ChatComponent,
+    SearchResultsComponent,
   ],
   imports: [
     BrowserModule,

@@ -12,6 +12,7 @@ import { SettingsComponent } from './pages/settings/settings.component';
 import { SignupQuestionaireComponent } from './pages/signup-questionaire/signup-questionaire.component';
 import { SignupQuestionaire2Component } from './pages/signup-questionaire2/signup-questionaire2.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
+import { SearchResultsComponent } from './pages/search-results/search-results.component';
 
 const routes: Routes = [
   { path: 'signup', component: LoginSignupComponent },
@@ -47,6 +48,10 @@ const routes: Routes = [
   },
   { path: 'user/:username', component: UserProfileComponent },
   { path: 'user', redirectTo: 'dashboard', canActivate: [AuthGuard] },
+  { path: 'search/:type/:query', component: SearchResultsComponent, canActivate: [AuthGuard]},
+  { path: 'search', redirectTo: 'dashboard', canActivate: [AuthGuard]},
+  { path: 'search/:type', redirectTo: 'dashboard', canActivate: [AuthGuard]}
+
 ];
 
 @NgModule({
