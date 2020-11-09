@@ -260,7 +260,15 @@
             [ngClass]="{ 'is-solid': star <= review.score }"
           ></clr-icon>
         </div>
-        <span class="small">{{ review.score }} / 5.00</span>
+        <span class="small1" *ngIf="review.score <= 2"
+          >{{ review.score }} / 5.00</span
+        >
+        <span class="small2" *ngIf="review.score > 2 && review.score <= 3"
+          >{{ review.score }} / 5.00</span
+        >
+        <span class="small3" *ngIf="review.score > 3.5"
+          >{{ review.score }} / 5.00</span
+        >
       </div>
     </li>
   </div>
