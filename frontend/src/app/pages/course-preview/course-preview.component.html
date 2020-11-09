@@ -83,7 +83,17 @@
               [ngClass]="{ 'is-solid': star <= this.averageScore }"
             ></clr-icon>
           </div>
-          <span>{{ averageScore | number: "1.2-2" }} / 5.00</span>
+          <span class="big1" *ngIf="this.averageScore <= 2"
+            >{{ averageScore | number: "1.2-2" }} / 5.00</span
+          >
+          <span
+            class="big2"
+            *ngIf="this.averageScore > 2 && this.averageScore <= 3.5"
+            >{{ averageScore | number: "1.2-2" }} / 5.00</span
+          >
+          <span class="big3" *ngIf="this.averageScore > 3.5"
+            >{{ averageScore | number: "1.2-2" }} / 5.00</span
+          >
         </div>
         <ng-template #noRatings>
           <div class="stars-container">
@@ -263,7 +273,7 @@
         <span class="small1" *ngIf="review.score <= 2"
           >{{ review.score }} / 5.00</span
         >
-        <span class="small2" *ngIf="review.score > 2 && review.score <= 3"
+        <span class="small2" *ngIf="review.score > 2 && review.score <= 3.5"
           >{{ review.score }} / 5.00</span
         >
         <span class="small3" *ngIf="review.score > 3.5"
