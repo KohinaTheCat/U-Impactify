@@ -245,10 +245,14 @@
         <span class="lighter" *ngIf="!review.anon"> {{ review._id }} </span>
         <span class="lighter" *ngIf="review.anon"> Anonymous </span>
       </span>
-      <span class="review" id="left-top-bottom">
+      <h3-special
+        class="review"
+        id="left-top-bottom"
+        *ngIf="review.courseReview"
+      >
         {{ review.courseReview }}
-      </span>
-      <div class="stars-container" id="left-bottom">
+      </h3-special>
+      <div class="stars-container-2" id="left-bottom">
         <div>
           <clr-icon
             shape="star"
@@ -256,7 +260,7 @@
             [ngClass]="{ 'is-solid': star <= review.score }"
           ></clr-icon>
         </div>
-        <span>{{ review.score }} / 5.00</span>
+        <span class="small">{{ review.score }} / 5.00</span>
       </div>
     </li>
   </div>
