@@ -19,12 +19,14 @@ import {
 })
 export class CoursePreviewComponent implements OnInit {
   course: Course;
+  reviews: Course['reviews'];
   valid: boolean;
   alreadyEnrolled: boolean = false;
   error: string;
   user: User;
   openedUpdateCourse: boolean;
   openedRateCourse: boolean;
+  openedAllReviews: false;
   description: string = '';
   level: string = '';
   img: NgxFileDropEntry[] = [];
@@ -37,7 +39,7 @@ export class CoursePreviewComponent implements OnInit {
   score: number = 0;
   anon: boolean = false;
 
-  courseStars: number[] = [1,2,3,4,5];
+  courseStars: number[] = [1, 2, 3, 4, 5];
 
   averageScore: number = 0;
 
@@ -57,6 +59,7 @@ export class CoursePreviewComponent implements OnInit {
       (incomingCourse: Course) => {
         this.valid = true;
         this.course = incomingCourse;
+        this.reviews = this.course.reviews;
         this.description = this.course.description;
         this.level = this.course.level;
         this.tags = this.course.tags.split(' ');
