@@ -41,6 +41,7 @@ router.route("/").post((req, res) => {
       phone: "",
       email: "",
     },
+    credit, 
   });
   newUser
     .save()
@@ -125,6 +126,26 @@ router.route("/updateClassesTeaching").put((req, res) => {
         .save()
         .then(() => res.json(user))
         .catch((err) => res.json(err));
+    })
+    .catch((err) => res.status(400).json(err));
+});
+
+/**
+ * PUT update credit (user)
+ * @param req {_id, credit}
+ * @param _id user id
+ * @return user 
+ */
+router.route("/updateCredit").put((req, res) => { 
+  const { _id, credit } = req.body; 
+  userSchema
+    .findById(_id)
+    .then((user) => { 
+      user.credit = credit; 
+      user
+      .save() 
+      .then(() => res.json(user))
+      .catch((err) => res.json(err));
     })
     .catch((err) => res.status(400).json(err));
 });
