@@ -127,9 +127,10 @@ export class UserService {
    * @param {string} _id        id of user
    * @param {double} credit     amount to update credit with
    */
-  updateCredit(_id: string, credit: number): Observable<any>{
+  updateCredit(_id: string, credit: number): Observable<any> {
     return this.http.put('http://localhost:5000/user/updateCredit', {
-      _id, credit,
+      _id,
+      credit,
     });
   }
 
@@ -184,5 +185,9 @@ export class UserService {
         _id,
       }
     );
+  }
+
+  getAllSI(): Observable<any> {
+    return this.http.get(`http://localhost:5000/user/getAllSI`);
   }
 }
