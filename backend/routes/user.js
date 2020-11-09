@@ -24,7 +24,7 @@ router.route("/:email").post((req, res) => {
  * @return user
  */
 router.route("/").post((req, res) => {
-  const { _id, password, email, type, questionaire } = req.body;
+  const { _id, password, email, type, questionaire, credit} = req.body;
   const newUser = new userSchema({
     _id,
     password,
@@ -141,7 +141,7 @@ router.route("/updateCredit").put((req, res) => {
   userSchema
     .findById(_id)
     .then((user) => { 
-      user.credit = credit; 
+      user.credit = user.credit + Number(credit); 
       user
       .save() 
       .then(() => res.json(user))
