@@ -496,11 +496,11 @@ clr-control-error {
 }
 .small2 {
   font-size: 1.2rem;
-  color: gold;
+  color: rgb(185, 168, 70);
 }
 .small3 {
   font-size: 1.2rem;
-  color: rgb(123, 167, 80);
+  color: rgb(124, 175, 73);
 }
 
 @media (max-width: 1400px) {
