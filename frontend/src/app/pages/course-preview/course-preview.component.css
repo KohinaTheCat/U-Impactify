@@ -79,6 +79,9 @@ h3 {
   padding-bottom: 2rem;
   font-size: 1rem;
 }
+h3-special {
+  font-size: 1rem;
+}
 
 .text {
   padding-left: 1rem;
@@ -426,6 +429,75 @@ clr-control-error {
   font-size: 2rem;
 }
 
+#left-bottom {
+  margin-left: 1rem;
+  margin-bottom: 0.5rem;
+}
+#left-top-bottom {
+  margin-left: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+}
+#right {
+  margin-right: 0.5rem;
+}
+
+.darker {
+  color: rgb(71, 62, 62);
+}
+
+.lighter {
+  color: rgb(141, 126, 126);
+}
+
+.review {
+  display: flex;
+  justify-content: row;
+  justify-items: flex-start;
+}
+
+.box-shadow-2 {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-bottom: 2rem;
+  font-size: x-large;
+  padding: 1.5rem;
+}
+.review-content-solid {
+  border: 2px var(--gray40) dashed;
+  border-radius: 20px;
+  border: 2px solid #8a0000 dashed;
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+}
+
+.stars-container-2 clr-icon {
+  width: 2rem;
+  height: 2rem;
+  color: var(--yellow-base);
+}
+
+.stars-container-2 {
+  width: 100%;
+  font-size: 2rem;
+  color: var(--gray60);
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.small {
+  font-size: 1.2rem;
+}
+
+.big {
+  font-size: 2rem;
+}
+
 @media (max-width: 1400px) {
   .body {
     grid-template-columns: 1fr;
@@ -467,4 +539,12 @@ clr-control-error {
   border: 2px var(--gray40) dashed;
   border-radius: 10px;
   padding: 1rem;
+}
+
+#change {
+  color: rgb(0, 100, 33);
+  border-color: rgb(0, 100, 33);
+}
+li {
+  list-style: none;
 }
