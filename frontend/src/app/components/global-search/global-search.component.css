@@ -52,6 +52,7 @@
 #title {
   font-size: 2rem;
   line-height: initial;
+  white-space: nowrap;
   margin: 0;
   color: var(--purple-base);
 }
