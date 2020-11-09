@@ -27,7 +27,7 @@ const routes: Routes = [
   { path: 'questionaire2', component: SignupQuestionaire2Component, canDeactivate: [AuthGuard] },
   { path: 'course', component: CourseComponent },
   { path: 'course/:id', component: CoursePreviewComponent },
-  { path: 'givinggarden', component: GivingGardenComponent },
+  { path: 'socialinitiatives', component: GivingGardenComponent },
   { path: 'createcourse', component: CreateCourseComponent, canActivate: [AuthGuard]  },
   { path: 'enrollcourse', component: EnrollCourseComponent, canActivate: [AuthGuard]  },
   { path: 'user/:username', component: UserProfileComponent },

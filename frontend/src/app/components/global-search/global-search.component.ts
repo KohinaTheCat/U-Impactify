@@ -13,10 +13,17 @@ export class GlobalSearchComponent implements OnInit {
     router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
-       this.title =
-         event.url === '/'
-           ? 'Dashboard'
-           : event.url.substring(1).split('/')[0];
+        switch (event.url) {
+          case '/':
+            this.title = 'Dashboard';
+            break;
+          case '/socialinitiatives':
+            this.title = 'Social Initiatives';
+            break;
+          default:
+            this.title = event.url.substring(1).split('/')[0];
+            break;
+        }
       });
   }
 
@@ -31,18 +38,19 @@ export class GlobalSearchComponent implements OnInit {
         : location.pathname.substring(1).split('/')[0];
   }
 
-
   logOut(): void {
     this.userService.setUser(null);
     this.router.navigate(['signup']);
   }
 
-  goToProfile(): void{
+  goToProfile(): void {
     this.router.navigate([`user/${this.userService.getCurrentUser()._id}`]);
   }
 
   onPressSearch(type: string): void {
-    this.router.navigate([`search/${type}/${encodeURI(this.searchQuery.trim() as string)}`]);
+    this.router.navigate([
+      `search/${type}/${encodeURI(this.searchQuery.trim() as string)}`,
+    ]);
     this.searchQuery = '';
   }
 }
