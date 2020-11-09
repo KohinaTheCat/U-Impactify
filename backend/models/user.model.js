@@ -15,7 +15,7 @@ const saltFactor = 10;
  * @property {[Object]}   classesTeaching   array to store course _id, name, img
  * @property {[[String]]} questionaire      for the user questionnaire
  * @property {Object}     socialInitiative  for SI Profile
- * @property {Double}     credit            mock money 
+ * @property {Number}     credit            mock money 
  */
 const userSchema = new Schema({
   _id: {
@@ -77,9 +77,10 @@ const userSchema = new Schema({
     email: {
       type: String,
     },
-    credit: { 
-      type: Double,
-    },
+  },
+
+  credit: { 
+    type: Number,
   },
 });
 
