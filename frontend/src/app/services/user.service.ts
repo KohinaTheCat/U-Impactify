@@ -123,6 +123,17 @@ export class UserService {
   }
 
   /**
+   * PUT update credit (user)
+   * @param {string} _id        id of user
+   * @param {double} credit     amount to update credit with
+   */
+  updateCredit(_id: string, credit: number): Observable<any>{
+    return this.http.put('http://localhost:5000/user/updateCredit', {
+      _id, credit,
+    });
+  }
+
+  /**
    * DELETE drop a course (Impact Learner only)
    * @param {string} userId    id of user
    * @param {string} courseId  id of course
