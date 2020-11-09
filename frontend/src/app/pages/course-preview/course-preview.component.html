@@ -83,17 +83,23 @@
               [ngClass]="{ 'is-solid': star <= this.averageScore }"
             ></clr-icon>
           </div>
-          <span class="big1" *ngIf="this.averageScore <= 2"
-            >{{ averageScore | number: "1.2-2" }} / 5.00</span
-          >
-          <span
-            class="big2"
-            *ngIf="this.averageScore > 2 && this.averageScore <= 3.5"
-            >{{ averageScore | number: "1.2-2" }} / 5.00</span
-          >
-          <span class="big3" *ngIf="this.averageScore > 3.5"
-            >{{ averageScore | number: "1.2-2" }} / 5.00</span
-          >
+          <div class="big">
+            <span
+              *ngIf="this.averageScore <= 2"
+              [ngStyle]="{ color: '#975454' }"
+              >{{ averageScore | number: "1.2-2" }} / 5.00</span
+            >
+            <span
+              *ngIf="this.averageScore > 2 && this.averageScore <= 3.5"
+              [ngStyle]="{ color: 'rgb(185, 168, 70)' }"
+              >{{ averageScore | number: "1.2-2" }} / 5.00</span
+            >
+            <span
+              *ngIf="this.averageScore > 3.5"
+              [ngStyle]="{ color: 'rgb(124, 175, 73)' }"
+              >{{ averageScore | number: "1.2-2" }} / 5.00</span
+            >
+          </div>
         </div>
         <ng-template #noRatings>
           <div class="stars-container">
@@ -270,15 +276,21 @@
             [ngClass]="{ 'is-solid': star <= review.score }"
           ></clr-icon>
         </div>
-        <span class="small1" *ngIf="review.score <= 2"
-          >{{ review.score }} / 5.00</span
-        >
-        <span class="small2" *ngIf="review.score > 2 && review.score <= 3.5"
-          >{{ review.score }} / 5.00</span
-        >
-        <span class="small3" *ngIf="review.score > 3.5"
-          >{{ review.score }} / 5.00</span
-        >
+        <div class="small">
+          <span *ngIf="review.score <= 2" [ngStyle]="{ color: '#975454' }"
+            >{{ review.score }} / 5.00</span
+          >
+          <span
+            *ngIf="review.score > 2 && review.score <= 3.5"
+            [ngStyle]="{ color: 'rgb(185, 168, 70)' }"
+            >{{ review.score }} / 5.00</span
+          >
+          <span
+            *ngIf="review.score > 3.5"
+            [ngStyle]="{ color: 'rgb(124, 175, 73)' }"
+            >{{ review.score }} / 5.00</span
+          >
+        </div>
       </div>
     </li>
   </div>

@@ -490,30 +490,12 @@ clr-control-error {
   align-items: center;
 }
 
-.small1 {
+.small {
   font-size: 1.2rem;
-  color: #975454;
-}
-.small2 {
-  font-size: 1.2rem;
-  color: rgb(185, 168, 70);
-}
-.small3 {
-  font-size: 1.2rem;
-  color: rgb(124, 175, 73);
 }
 
-.big1 {
+.big {
   font-size: 2rem;
-  color: #975454;
-}
-.big2 {
-  font-size: 2rem;
-  color: rgb(185, 168, 70);
-}
-.big3 {
-  font-size: 2rem;
-  color: rgb(124, 175, 73);
 }
 
 @media (max-width: 1400px) {
