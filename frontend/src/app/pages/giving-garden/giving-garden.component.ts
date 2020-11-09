@@ -6,10 +6,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./giving-garden.component.css']
 })
 export class GivingGardenComponent implements OnInit {
+  opened: Boolean = false;
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  donate(){
+    this.opened = !this.opened;
   }
 
 }

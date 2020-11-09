@@ -3,8 +3,11 @@
     <h3>The Giving Garden</h3>
   </div>
   <div class="row">
-    <div>
+    <div class="col">
       <img src="../../../assets/giving_garden/givinggarden.svg" />
+      <button (click)="donate()" class="btn btn-success-outline">
+        Donate to the Giving Garden Now!
+      </button>
     </div>
 
     <div class="col">
@@ -26,6 +29,38 @@
       </div>
     </div>
   </div>
-
-  <p>giving-garden works!</p>
 </div>
+
+<clr-modal [(clrModalOpen)]="opened" [clrModalSize]="'lg'">
+  <h3 class="modal-title">We Appreciate your Impact on the Community!</h3>
+  <div class="modal-body">
+    <div class="row inner_modal">
+      <div class="col">
+        <div>
+          <p>How much will you give today?</p>
+        </div>
+        <div>
+          <form class="clr-form">
+            <input
+              type="text"
+              id="basic"
+              placeholder="$100"
+              class="clr-input"
+            />
+          </form>
+        </div>
+      </div>
+      <div>
+        <img class="modal_img" src="../../../assets/giving_garden/donate.svg" />
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="opened = false">
+      Cancel
+    </button>
+    <button type="button" class="btn btn-primary" (click)="opened = false">
+      Ok
+    </button>
+  </div>
+</clr-modal>

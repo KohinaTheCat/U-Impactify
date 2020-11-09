@@ -11,6 +11,14 @@
   align-items: center;
 }
 
+.inner_modal {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  padding-right: 15%;
+  padding-left: 10%;
+}
+
 .col {
   display: flex;
   flex-direction: column;
@@ -27,11 +35,22 @@ img {
   width: 100%;
 }
 
+button {
+  margin-left: 2rem;
+  margin-right: 2 rem;
+}
+
 .question {
   height: 2rem;
   width: 2rem;
   margin: 0rem;
   padding-right: 0.5rem;
+}
+
+.modal_img {
+  height: 12rem;
+  width: 12rem;
+  margin: 0rem;
 }
 
 .rec {
