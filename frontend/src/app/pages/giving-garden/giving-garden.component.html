@@ -33,7 +33,8 @@
   <h3>Showing all Social Initiatives</h3>
   <div class="card_wrapper">
     <div *ngFor="let s of si" class="si_card">
-      <img class="si_img" src="../../../assets/giving_garden/yellow_question.svg" >
+      <!-- <img class="si_img" src="../../../assets/giving_garden/yellow_question.svg" > -->
+      <clr-icon class="si_img" shape="image"></clr-icon>
       <p>{{s._id}}</p>
       <button (click)="learnMore(s._id)" class="btn btn-success-outline">Learn More</button>
     </div>
