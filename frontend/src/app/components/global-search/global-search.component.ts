@@ -13,11 +13,17 @@ export class GlobalSearchComponent implements OnInit, AfterViewInit {
     router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
-        this.title =
-          event.url === '/'
-            ? 'Dashboard'
-            : event.url.substring(1).split('/')[0];
-        this.searchQuery = "";
+        switch (event.url) {
+          case '/':
+            this.title = 'Dashboard';
+            break;
+          case '/socialinitiatives':
+            this.title = 'Social Initiatives';
+            break;
+          default:
+            this.title = event.url.substring(1).split('/')[0];
+            break;
+        }
       });
   }
 
