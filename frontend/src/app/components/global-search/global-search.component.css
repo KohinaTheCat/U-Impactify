@@ -4,7 +4,7 @@
 
 .search-bar-container {
   /* Shadow Black Dark */
-  filter: drop-shadow(0px 16px 48px #eff3f9);
+  box-shadow: 0px 8px 24px #eff3f9, 0 -2.5rem 0 0.625rem #fafafa, 0 0.5rem 0 0.625rem #fafafa;
   /* White Base */
   background: #ffffff;
   border-radius: 10px;
@@ -15,6 +15,10 @@
   justify-content: space-between;
   margin: 2rem;
   padding: 0 1rem;
+
+  position: sticky;
+  top: 2rem;
+  z-index: 1;
 }
 
 .search-dropdown {
@@ -29,7 +33,10 @@
   overflow: hidden;
   border-radius: 10px;
   filter: drop-shadow(0px 4px 12px #eff3f9);
-  transform: translateX(25vw);
+}
+
+.no-show {
+  display: none;
 }
 
 .dropdown {
@@ -52,6 +59,7 @@
 #title {
   font-size: 2rem;
   line-height: initial;
+  white-space: nowrap;
   margin: 0;
   color: var(--purple-base);
 }

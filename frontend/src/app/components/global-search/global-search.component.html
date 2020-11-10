@@ -1,6 +1,6 @@
-<div class="search-bar-container">
+<div class="search-bar-container" #barContainer>
   <h1 id="title">{{ title | titlecase }}</h1>
-  <div class="search-bar">
+  <div class="search-bar" #searchBar>
     <input
       (focus)="isFocused = true"
       (focusout)="isFocused=false"
@@ -24,7 +24,7 @@
     </div>
   </div>
 </div>
-<div class="search-dropdown" *ngIf="searchQuery.trim().length">
+<div class="search-dropdown" [ngClass]="{'no-show': !searchQuery.trim().length}" #dropdown>
   <div class="dropdown" (click)="onPressSearch('user')">
     Search Users for <strong>{{ searchQuery }}</strong>
   </div>

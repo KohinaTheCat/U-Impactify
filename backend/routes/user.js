@@ -201,6 +201,18 @@ router.route("/addSocialInitiativeProfile").put((req, res) => {
   });
 });
 
+
+/**
+ * GET all Social Initiatives
+ * @return all Social Initiatives
+ */
+router.route("/getAllSI").get((req, res) => {
+  userSchema
+    .find({ type: "SI" })
+    .then((SI) => res.json(SI))
+    .catch((err) => res.status(400).json(`Error: ${err}`));
+});
+
 /**
  * GET user by id (username)
  * @param id user id
@@ -255,7 +267,7 @@ router.delete("/deleteUser/:userId", (req, res) => {
           courseSchema
             .findById(element._id)
             .then((course) => {
-              if(!(course.students === null)){
+              if (!(course.students === null)) {
                 course.students = course.students.filter((id) => id !== userId);
               }
               course.save().catch((err) => res.status(400).json(err));
@@ -273,7 +285,7 @@ router.delete("/deleteUser/:userId", (req, res) => {
                 course.students.forEach((element) => {
                   userSchema.findById(element).then((user) => {
                     // remove from coursesEnrolled from student
-                    if(!(user.classesEnrolled === null)){
+                    if (!(user.classesEnrolled === null)) {
                       user.classesEnrolled = user.classesEnrolled.filter(
                         (courses) => courses.id !== course.id
                       );
@@ -291,8 +303,10 @@ router.delete("/deleteUser/:userId", (req, res) => {
                 });
                 // remove single teacher from the course list
               } else {
-                if(!(course.teachers === null)){
-                  course.teachers = course.teachers.filter((id) => id !== userId);
+                if (!(course.teachers === null)) {
+                  course.teachers = course.teachers.filter(
+                    (id) => id !== userId
+                  );
                 }
                 course.save().catch((err) => res.status(400).json(err));
               }
