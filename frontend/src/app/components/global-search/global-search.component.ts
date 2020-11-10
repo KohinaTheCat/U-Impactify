@@ -35,8 +35,8 @@ export class GlobalSearchComponent implements OnInit, AfterViewInit {
   isFocused: boolean;
 
   ngOnInit(): void {
-    console.log("hahaa");
-    this.chatService.sendMessage('yo it worked');
+    this.chatService.init();
+    this.chatService.sendMessage('student', 'teacher', 'pls give marks');
     this.title =
       location.pathname === '/'
         ? 'Dashboard'
@@ -59,6 +59,7 @@ export class GlobalSearchComponent implements OnInit, AfterViewInit {
 
   logOut(): void {
     this.userService.setUser(null);
+    this.chatService.destroy();
     this.router.navigate(['signup']);
   }
 
