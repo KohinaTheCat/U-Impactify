@@ -1,0 +1,79 @@
+<div class="bg">
+  <div class="title">
+    <h3>The Giving Garden</h3>
+  </div>
+  <div class="row">
+    <div class="const_col">
+      <img src="../../../assets/giving_garden/givinggarden.svg" />
+      <button (click)="donate()" class="btn btn-success-outline">
+        Donate to the Giving Garden Now!
+      </button>
+    </div>
+
+    <div class="col">
+      <div class="rec">
+        <img
+          class="question"
+          src="../../../assets/giving_garden/purple_question.svg"
+        />
+        Once you complete a course, you may volunteer/work with our social
+        initiative partners.
+      </div>
+      <div class="rec">
+        <img
+          class="question"
+          src="../../../assets/giving_garden/purple_question.svg"
+        />
+        The Giving Garden is a gallery illustrating how much have you
+        volunteered or work with our social initiative partners.
+      </div>
+    </div>
+  </div>
+
+  <h3>Showing all Social Initiatives</h3>
+  <div class="card_wrapper">
+    <div *ngFor="let s of si" class="si_card">
+      <!-- <img class="si_img" src="../../../assets/giving_garden/yellow_question.svg" > -->
+      <clr-icon class="si_img" shape="image"></clr-icon>
+      <p>{{ s._id }}</p>
+      <button (click)="learnMore(s._id)" class="btn btn-success-outline">
+        Learn More
+      </button>
+    </div>
+  </div>
+</div>
+
+<clr-modal [(clrModalOpen)]="opened" [clrModalSize]="'lg'">
+  <h3 class="modal-title">We Appreciate your Impact on the Community!</h3>
+  <div class="modal-body">
+    <div class="row inner_modal">
+      <div class="col">
+        <div>
+          <p>How much will you give today?</p>
+        </div>
+        <div>
+          <form class="clr-form">
+            $
+            <input
+              type="text"
+              id="basic"
+              placeholder="100.00"
+              class="clr-input"
+            />
+          </form>
+        </div>
+      </div>
+      <div>
+        <img class="modal_img" src="../../../assets/giving_garden/donate.svg" />
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="opened = false">
+      Cancel
+    </button>
+    <button type="button" class="btn btn-primary" (click)="opened = false">
+      Ok
+    </button>
+  </div>
+</clr-modal>

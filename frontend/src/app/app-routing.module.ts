@@ -13,6 +13,7 @@ import { SignupQuestionaireComponent } from './pages/signup-questionaire/signup-
 import { SignupQuestionaire2Component } from './pages/signup-questionaire2/signup-questionaire2.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { SearchResultsComponent } from './pages/search-results/search-results.component';
+import { GivingGardenComponent } from './pages/giving-garden/giving-garden.component';
 
 const routes: Routes = [
   { path: 'signup', component: LoginSignupComponent },
@@ -35,6 +36,7 @@ const routes: Routes = [
   },
   { path: 'course', component: CourseComponent },
   { path: 'course/:id', component: CoursePreviewComponent },
+  { path: 'socialinitiatives', component: GivingGardenComponent },
   {
     path: 'createcourse',
     component: CreateCourseComponent,
@@ -48,10 +50,13 @@ const routes: Routes = [
   },
   { path: 'user/:username', component: UserProfileComponent },
   { path: 'user', redirectTo: 'dashboard', canActivate: [AuthGuard] },
-  { path: 'search/:type/:query', component: SearchResultsComponent, canActivate: [AuthGuard]},
-  { path: 'search', redirectTo: 'dashboard', canActivate: [AuthGuard]},
-  { path: 'search/:type', redirectTo: 'dashboard', canActivate: [AuthGuard]}
-
+  {
+    path: 'search/:type/:query',
+    component: SearchResultsComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: 'search', redirectTo: 'dashboard', canActivate: [AuthGuard] },
+  { path: 'search/:type', redirectTo: 'dashboard', canActivate: [AuthGuard] },
 ];
 
 @NgModule({

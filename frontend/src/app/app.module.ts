@@ -27,6 +27,7 @@ import { SignupQuestionaire2Component } from './pages/signup-questionaire2/signu
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { ChatComponent } from './pages/chat/chat.component';
 import { SearchResultsComponent } from './pages/search-results/search-results.component';
+import { GivingGardenComponent } from './pages/giving-garden/giving-garden.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { SearchResultsComponent } from './pages/search-results/search-results.co
     UserProfileComponent,
     ChatComponent,
     SearchResultsComponent,
+    GivingGardenComponent,
   ],
   imports: [
     BrowserModule,
