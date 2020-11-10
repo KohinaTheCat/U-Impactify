@@ -55,6 +55,8 @@
           <form class="clr-form">
             $
             <input
+              [(ngModel)]="amount"
+              [ngModelOptions]="{standalone: true}"
               type="text"
               id="basic"
               placeholder="100.00"
@@ -72,7 +74,7 @@
     <button type="button" class="btn btn-outline" (click)="opened = false">
       Cancel
     </button>
-    <button type="button" class="btn btn-primary" (click)="opened = false">
+    <button type="button" class="btn btn-primary" (click)="onOkay()" (click)="opened = false">
       Ok
     </button>
   </div>

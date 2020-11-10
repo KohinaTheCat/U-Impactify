@@ -25,13 +25,14 @@ export class UserService {
    * @param {User} newUser the about-to-be user
    */
   postNewUser(newUser: User): Observable<User> {
-    const { _id, password, email, type, questionaire } = newUser;
+    const { _id, password, email, type, questionaire, credit } = newUser;
     return this.http.post<User>('/api/user/', {
       _id,
       password,
       email,
       type,
       questionaire,
+      credit,
     });
   }
 
@@ -188,6 +189,6 @@ export class UserService {
   }
 
   getAllSI(): Observable<any> {
-    return this.http.get(`http://localhost:5000/user/getAllSI`);
+    return this.http.get(`/api/user/getAllSI`);
   }
 }
