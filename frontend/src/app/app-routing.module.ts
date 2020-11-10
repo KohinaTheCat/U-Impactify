@@ -13,6 +13,7 @@ import { SignupQuestionaire2Component } from './pages/signup-questionaire2/signu
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { SearchResultsComponent } from './pages/search-results/search-results.component';
 import { GivingGardenComponent } from './pages/giving-garden/giving-garden.component';
+import { AssessmentsComponent } from './pages/assessments/assessments.component';
 
 const routes: Routes = [
   { path: 'signup', component: LoginSignupComponent },
@@ -23,6 +24,14 @@ const routes: Routes = [
   },
   { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
   { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
+
+  // I added this here
+  {
+    path: 'course/:id/assessments',
+    component: AssessmentsComponent,
+    canActivate: [AuthGuard],
+  },
+
   {
     path: 'questionaire',
     component: SignupQuestionaireComponent,

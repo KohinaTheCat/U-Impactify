@@ -126,7 +126,9 @@ export class CoursePreviewComponent implements OnInit {
 
   editDocumentsHandler() {}
 
-  assessmentsHandler() {}
+  assessmentsHandler() {
+    this.router.navigate([`course/${this.course._id}/assessments`]);
+  }
 
   studentAnalysisHandler() {}
 
