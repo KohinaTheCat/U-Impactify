@@ -2,6 +2,7 @@ import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { filter } from 'rxjs/operators';
+import { ChatService } from 'src/app/services/chat.service';
 
 @Component({
   selector: 'app-global-search',
@@ -9,7 +10,11 @@ import { filter } from 'rxjs/operators';
   styleUrls: ['./global-search.component.css'],
 })
 export class GlobalSearchComponent implements OnInit, AfterViewInit {
-  constructor(private userService: UserService, private router: Router) {
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private chatService: ChatService
+  ) {
     router.events
       .pipe(filter((event) => event instanceof NavigationEnd))
       .subscribe((event: NavigationEnd) => {
@@ -34,8 +39,12 @@ export class GlobalSearchComponent implements OnInit, AfterViewInit {
   title: String = '';
   searchQuery: String = '';
   isFocused: boolean;
+  newMessage: boolean = false;
 
   ngOnInit(): void {
+    this.chatService.init(this.userService.getCurrentUser()._id);
+    // do new message call here
+    this.newMessage = true;
     this.title =
       location.pathname === '/'
         ? 'Dashboard'
@@ -58,6 +67,7 @@ export class GlobalSearchComponent implements OnInit, AfterViewInit {
 
   logOut(): void {
     this.userService.setUser(null);
+    this.chatService.destroy();
     this.router.navigate(['signup']);
   }
 
@@ -70,6 +80,11 @@ export class GlobalSearchComponent implements OnInit, AfterViewInit {
       `search/${type}/${encodeURI(this.searchQuery.trim() as string)}`,
     ]);
     this.searchQuery = '';
+  }
+
+  onPressChat(): void {
+    this.newMessage = false;
+    this.router.navigate(['chat']);
   }
 
   getOffset(el: any) {

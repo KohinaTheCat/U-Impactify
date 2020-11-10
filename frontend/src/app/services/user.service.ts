@@ -25,13 +25,14 @@ export class UserService {
    * @param {User} newUser the about-to-be user
    */
   postNewUser(newUser: User): Observable<User> {
-    const { _id, password, email, type, questionaire } = newUser;
-    return this.http.post<User>('http://localhost:5000/user/', {
+    const { _id, password, email, type, questionaire, credit } = newUser;
+    return this.http.post<User>('/api/user/', {
       _id,
       password,
       email,
       type,
       questionaire,
+      credit,
     });
   }
 
@@ -41,7 +42,7 @@ export class UserService {
    */
   putQuestionaire(user: User): Observable<any> {
     const { _id, questionaire } = user;
-    return this.http.put(`http://localhost:5000/user/addQuestionaire/`, {
+    return this.http.put(`/api/user/addQuestionaire/`, {
       _id,
       questionaire,
     });
@@ -52,7 +53,7 @@ export class UserService {
    * @param {String} id username of the user
    */
   getAnotherUser(id: String): Observable<User> {
-    return this.http.get<User>('http://localhost:5000/user/' + id);
+    return this.http.get<User>('/api/user/' + id);
   }
 
   /**
@@ -60,7 +61,7 @@ export class UserService {
    * @param {String} query the search query
    */
   search(query: String): Observable<User[]> {
-    return this.http.get<User[]>(`http://localhost:5000/user/search/${query}`);
+    return this.http.get<User[]>(`/api/user/search/${query}`);
   }
 
   /**
@@ -70,7 +71,7 @@ export class UserService {
    */
   loginUser(email: string, password: string): Observable<User | boolean> {
     return this.http.post<User | boolean>(
-      `http://localhost:5000/user/${email}`,
+      `/api/user/${email}`,
       {
         password,
       }
@@ -92,7 +93,7 @@ export class UserService {
    * @param {Object} course { _id, name }
    */
   enrollInCourse(userId: string, course: any): Observable<any> {
-    return this.http.put(`http://localhost:5000/user/enroll/`, {
+    return this.http.put(`/api/user/enroll/`, {
       userId,
       course,
     });
@@ -104,7 +105,7 @@ export class UserService {
    * @param {string} password  new password
    */
   updatePassword(_id: string, password: string): Observable<any> {
-    return this.http.post(`http://localhost:5000/user/updatePassword`, {
+    return this.http.post(`/api/user/updatePassword`, {
       _id,
       password,
     });
@@ -116,7 +117,7 @@ export class UserService {
    * @param {string} course  {_id, name} of course
    */
   updateClassesTeaching(_id: string, course: any): Observable<any> {
-    return this.http.put('http://localhost:5000/user/updateClassesTeaching', {
+    return this.http.put('/api/user/updateClassesTeaching', {
       _id,
       course,
     });
@@ -128,7 +129,7 @@ export class UserService {
    * @param {double} credit     amount to update credit with
    */
   updateCredit(_id: string, credit: number): Observable<any> {
-    return this.http.put('http://localhost:5000/user/updateCredit', {
+    return this.http.put('api/user/updateCredit', {
       _id,
       credit,
     });
@@ -141,7 +142,7 @@ export class UserService {
    */
   dropACourse(userId: string, courseId: string): Observable<any> {
     return this.http.delete(
-      `http://localhost:5000/user/dropCourse/${courseId}/${userId}`
+      `/api/user/dropCourse/${courseId}/${userId}`
     );
   }
 
@@ -151,7 +152,7 @@ export class UserService {
    */
   deleteUser(userId: string): Observable<any> {
     console.log(userId);
-    return this.http.delete(`http://localhost:5000/user/deleteUser/${userId}`);
+    return this.http.delete(`/api/user/deleteUser/${userId}`);
   }
 
   /**
@@ -174,7 +175,7 @@ export class UserService {
     _id: string
   ): Observable<User> {
     return this.http.put<User>(
-      `http://localhost:5000/user/addSocialInitiativeProfile`,
+      `/api/user/addSocialInitiativeProfile`,
       {
         registeredNumber,
         businessNumber,
@@ -188,6 +189,6 @@ export class UserService {
   }
 
   getAllSI(): Observable<any> {
-    return this.http.get(`http://localhost:5000/user/getAllSI`);
+    return this.http.get(`/api/user/getAllSI`);
   }
 }

@@ -1,3 +1,4 @@
+import { ChatComponent } from './pages/chat/chat.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
@@ -41,6 +42,7 @@ const routes: Routes = [
     component: CreateCourseComponent,
     canActivate: [AuthGuard],
   },
+  { path: 'chat', component: ChatComponent, canActivate: [AuthGuard] },
   {
     path: 'enrollcourse',
     component: EnrollCourseComponent,
