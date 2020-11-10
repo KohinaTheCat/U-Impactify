@@ -1,1 +1,22 @@
-<div class="container">MESSAGING PAGE</div>
+<div class="container">
+    <div class="inner box-shadow-2">
+        <div class="chat-wrapper">
+            <div class="chat-header"><span>Instant Messaging</span><button class="btn btn-link"><clr-icon shape="note"></clr-icon></button></div>
+            <div class="chats-container">
+                <div *ngFor="let user of dummyUsers" class="chat">
+                    <div class="profile-icon"><clr-icon shape="user"></clr-icon></div>
+                    <h5>{{user}}</h5>
+                </div>
+            </div>
+        </div>
+        <div class="chat-area">
+            <div class="placeholder">
+                <div class="chat-icon-circle">
+                    <clr-icon shape="chat-bubble" class="has-badge is-solid"></clr-icon>
+                </div>
+                <h5>Your Messages</h5>
+                <p>Select an existing chat, or compose a new one.</p>
+            </div>
+        </div>
+    </div>
+</div>

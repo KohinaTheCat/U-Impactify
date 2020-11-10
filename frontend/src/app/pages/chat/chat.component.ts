@@ -9,8 +9,7 @@ import { Component, OnInit } from '@angular/core';
 export class ChatComponent implements OnInit {
   constructor(private chatService: ChatService) {}
 
-  chat: string;
-  allMessages: any = [''];
+  dummyUsers = Array(100).fill('username').map((value, index) => `${value}${index}`)
 
   ngOnInit(): void {
     // this.chatService.getAllMessages().subscribe((res) => {
