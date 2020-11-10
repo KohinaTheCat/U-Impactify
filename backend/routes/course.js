@@ -301,4 +301,16 @@ router.put("/addReview/", (req, res) => {
   });
 });
 
+router.put("/surveyRequest/:id", (req, res) => {
+  Course.findById(req.params.id)
+    .then((course) => {
+      course.surveyRequest = true;
+      course
+        .save()
+        .then(() => res.json(course))
+        .catch((err) => res.status(400).json("Error: " + err));
+    })
+    .catch((err) => res.status(404).json(err));
+})
+
 module.exports = router;

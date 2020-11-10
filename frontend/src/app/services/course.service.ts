@@ -52,6 +52,16 @@ export class CourseService {
   }
 
   /**
+   * PUT 
+   * @param {any} course the course that's requesting survey
+   */
+  requestSurvey(id: string): Observable<Course> {
+    console.log(id)
+    return this.http.put<Course>(`http://localhost:5000/course/surveyRequest/${id}`, {
+    });
+  }
+
+  /**
    * GET all documents for a course
    * @param {string} courseId id of course
    */

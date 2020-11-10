@@ -34,6 +34,9 @@ export class CoursePreviewComponent implements OnInit {
   loading: boolean = true;
   tags: string[] = [];
   errorMessage: string = '';
+  surveyRequest: boolean;
+  openedSurveyRequest: boolean = false;
+  openedSurvey: boolean = false;
 
   courseReview: string = '';
   score: number = 0;
@@ -63,6 +66,7 @@ export class CoursePreviewComponent implements OnInit {
         this.description = this.course.description;
         this.level = this.course.level;
         this.tags = this.course.tags.split(' ');
+        this.surveyRequest = this.course.surveyRequest;
         this.course.img =
           !this.course.img || this.course.img === ''
             ? (this.course.img = '../../../../assets/courseimage.png')
@@ -129,6 +133,16 @@ export class CoursePreviewComponent implements OnInit {
   assessmentsHandler() {}
 
   studentAnalysisHandler() {}
+
+  registerSurveyRequest() {
+    this.openedSurveyRequest = false;
+    this.courseService.requestSurvey(this.course._id).subscribe(
+      (res: Course) => {
+        this.ngOnInit();
+      },
+      (err) => console.log(err)
+    );
+  }
 
   cancel() {
     this.openedUpdateCourse = false;

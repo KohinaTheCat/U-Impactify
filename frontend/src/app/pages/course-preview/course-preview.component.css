@@ -548,3 +548,13 @@ clr-control-error {
 li {
   list-style: none;
 }
+
+.surveybutton {
+  margin-top: 1.5rem;
+  display: flex;
+}
+
+.surveybutton button{
+  font-size: 0.875rem;
+  border-radius: 5px;
+}

@@ -49,6 +49,11 @@
         <div (click)="studentAnalysisHandler()">
           <a>Student Performance Analysis</a>
         </div>
+        <div *ngIf = "!surveyRequest">
+          <div (click)="openedSurveyRequest = true">
+            <a>Request Survey</a>
+          </div>
+        </div> 
       </div>
     </div>
   </div>
@@ -162,6 +167,18 @@
           </button>
         </div>
       </div>
+
+      <div class= "survey">
+        <h4 *ngIf  = "surveyRequest && alreadyEnrolled">
+          <h4>Survey</h4>
+          <!-- fix button placement -->
+          <div class = surveybutton>
+            <button class = "btn btn-success-outline" (click)="openedSurvey = true">Complete the Survey</button>
+            <!-- modal here to fill in survey when button clicked -->
+          </div>
+        </h4>
+      </div>
+
       <div class="course-teachers">
         <h4>Instructor<span *ngIf="course.teachers.length > 1">s</span></h4>
         <div
@@ -194,6 +211,14 @@
     <p>Course Not Found.</p>
   </div>
 </div>
+
+<clr-modal [(clrModalOpen)]="openedSurveyRequest" [clrModalClosable]="false">
+  <h3 class="modal-title">Confirming Survey to Students</h3>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="openedSurveyRequest = false">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="registerSurveyRequest()">Ok</button>
+</div>
+</clr-modal>
 
 <clr-modal
   [(clrModalOpen)]="openedRateCourse"
