@@ -118,6 +118,16 @@
   color: #919699;
 }
 
+.new-message {
+  height: 1rem;
+  width: 1rem;
+  border-radius: 100%;
+  background: var(--red-base);
+  position: absolute;
+  transform: translate(1rem, -1rem);
+}
+
+
 .search-bar input {
   width: 100%;
   border: 0;

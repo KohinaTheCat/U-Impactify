@@ -19,4 +19,5 @@ export interface User {
     email: string;
   };
   credit: number;
+  chats: string[];
 }
