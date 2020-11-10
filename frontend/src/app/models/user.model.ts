@@ -18,4 +18,5 @@ export interface User {
     phone: string;
     email: string;
   };
+  credit: number;
 }
