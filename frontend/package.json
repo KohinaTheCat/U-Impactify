@@ -26,8 +26,8 @@
     "@webcomponents/webcomponentsjs": "^2.5.0",
     "ng2-pdf-viewer": "^6.3.2",
     "ngx-file-drop": "^10.0.0",
-    "ngx-socket-io": "^3.2.0",
     "rxjs": "~6.6.0",
+    "socket.io-client": "^3.0.1",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
   },

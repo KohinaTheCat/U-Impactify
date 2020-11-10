@@ -1,25 +1,27 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Socket } from 'ngx-socket-io';
 import { Observable } from 'rxjs';
+import { io } from 'socket.io-client';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ChatService {
-  constructor(private socket: Socket, private http: HttpClient) {
-    socket.on('message', this.getAllMessages);
+  socket: any;
+  constructor(private http: HttpClient) {
+    this.socket = io("http://localhost:5000");
   }
 
-  getAllMessages(): Observable<any> {
-    return this.http.get('http://localhost:5000/temp/chat/messages');
-  }
+  // getAllMessages(): Observable<any> {
+  //   return this.http.get('http://localhost:5000/temp/chat/messages');
+  // }
 
-  sendMessage(msg: string) {
-    return this.http.post('http://localhost:5000/temp/chat/new', {
-      from: 'clara',
-      to: 'navinn',
-      message: msg,
-    });
+  sendMessage(/* from: string, to: string,  */message: string) {
+    // return this.http.post('http://localhost:5000/temp/chat/new', {
+    //   from, to, message/* , time: Date.now() */
+    // });
+    console.log(this.socket, message);
+    
+    this.socket.emit('message', message);
   }
 }

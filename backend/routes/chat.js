@@ -1,20 +1,10 @@
-const express = require('express');
-const router = express.Router();
-const chatSchema = require("../models/chat.model");
+const Chat = require("../models/chat.model");
 
-router.get("/", (req, res) => {
-  Message.find({}, (err, messages) => {
-    res.send(messages);
-  });
-});
+module.exports.listen = (server) => {
+    const io = require("socket.io")(server);
 
-router.post("/new", (req, res) => {
-  var message = new chatSchema(req.body);
-  message.save((err) => {
-    if (err) sendStatus(500);
-    io.emit("message", req.body);
-    res.sendStatus(200);
-  });
-});
-
-module.exports = router;
+    io.on("connection", (socket) => {
+      console.log("a user is connected");
+      socket.on("message", (message) => console.log(message));
+    });
+};

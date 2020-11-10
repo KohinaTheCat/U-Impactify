@@ -35,6 +35,7 @@ export class GlobalSearchComponent implements OnInit, AfterViewInit {
   isFocused: boolean;
 
   ngOnInit(): void {
+    console.log("hahaa");
     this.chatService.sendMessage('yo it worked');
     this.title =
       location.pathname === '/'

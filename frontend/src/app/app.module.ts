@@ -25,10 +25,7 @@ import { SettingsComponent } from './pages/settings/settings.component';
 import { SignupQuestionaireComponent } from './pages/signup-questionaire/signup-questionaire.component';
 import { SignupQuestionaire2Component } from './pages/signup-questionaire2/signup-questionaire2.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
-import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
 import { ChatComponent } from './pages/chat/chat.component';
-
-const config: SocketIoConfig = { url: 'http://localhost:5000', options: {} };
 import { SearchResultsComponent } from './pages/search-results/search-results.component';
 
 @NgModule({
@@ -63,7 +60,6 @@ import { SearchResultsComponent } from './pages/search-results/search-results.co
     HttpClientModule,
     PdfViewerModule,
     NgxFileDropModule,
-    SocketIoModule.forRoot(config),
   ],
   providers: [],
   bootstrap: [AppComponent],

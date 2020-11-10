@@ -1,7 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-const chatSchema = require("./models/chat.model");
+const path = require("path");
 
 const app = express();
 
@@ -12,8 +12,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(express.json());
-
-/* Mongoose Connection */
 
 const uri = process.env.ATLAS_URI;
 
@@ -28,27 +26,9 @@ const connection = mongoose.connection;
 
 const courseRouter = require("./routes/course");
 const userRouter = require("./routes/user");
-const chatRouter = require("./routes/chat");
 
-app.use("/chat", chatRouter);
-app.use("/course", courseRouter);
-app.use("/user", userRouter);
-
-
-app.get("/temp/chat/messages", (req, res) => {
-  chatSchema.find()
-    .then((chats) => res.json(chats))
-    .catch((err) => res.status(400).json(`Error: ${err}`));
-});
-
-app.post("/temp/chat/new", (req, res) => {
-  var message = new chatSchema(req.body);
-  message.save((err) => {
-    if (err) sendStatus(500);
-    io.emit("message", req.body);
-    res.sendStatus(200);
-  });
-});
+app.use("/api/course", courseRouter);
+app.use("/api/user", userRouter);
 
 const PORT = process.env.PORT || 5000;
 
@@ -56,14 +36,14 @@ connection.once("open", () => {
   console.log("MongoDB connected!");
 });
 
+app.use(express.static(path.join(__dirname, "..", "frontend", "dist", "uimpactify-app")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "frontend", "dist", "uimpactify-app", "index.html"));
+});
+
 const server = app.listen(PORT, () => {
   console.log(`server is running on port: ${PORT}`);
 });
 
-const io = require("socket.io")(server, {
-  origins: "http://localhost:*",
-});
-
-io.on("connection", () => {
-  console.log("a user is connected");
-});
+const io = require("./routes/chat").listen(server);
