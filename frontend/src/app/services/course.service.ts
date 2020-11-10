@@ -57,7 +57,7 @@ export class CourseService {
    */
   requestSurvey(id: string): Observable<Course> {
     console.log(id)
-    return this.http.put<Course>(`http://localhost:5000/course/surveyRequest/${id}`, {
+    return this.http.put<Course>(`/api/course/surveyRequest/${id}`, {
     });
   }
 
