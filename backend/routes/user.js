@@ -41,7 +41,8 @@ router.route("/").post((req, res) => {
       phone: "",
       email: "",
     },
-    credit, 
+    credit,
+    chats: [] 
   });
   newUser
     .save()

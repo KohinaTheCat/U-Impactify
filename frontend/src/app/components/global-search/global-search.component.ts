@@ -39,10 +39,12 @@ export class GlobalSearchComponent implements OnInit, AfterViewInit {
   title: String = '';
   searchQuery: String = '';
   isFocused: boolean;
+  newMessage: boolean = false;
 
   ngOnInit(): void {
-    this.chatService.init();
-    this.chatService.sendMessage('student', 'teacher', 'pls give marks');
+    this.chatService.init(this.userService.getCurrentUser()._id);
+    // do new message call here
+    this.newMessage = true;
     this.title =
       location.pathname === '/'
         ? 'Dashboard'
@@ -78,6 +80,11 @@ export class GlobalSearchComponent implements OnInit, AfterViewInit {
       `search/${type}/${encodeURI(this.searchQuery.trim() as string)}`,
     ]);
     this.searchQuery = '';
+  }
+
+  onPressChat(): void {
+    this.newMessage = false;
+    this.router.navigate(['chat']);
   }
 
   getOffset(el: any) {

@@ -13,6 +13,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(express.json());
 
+/* Mongo Connection */
+
 const uri = process.env.ATLAS_URI;
 
 mongoose.connect(uri, {
@@ -24,9 +26,11 @@ mongoose.connect(uri, {
 
 const connection = mongoose.connection;
 
+const chatRouter = require("./routes/chat");
 const courseRouter = require("./routes/course");
 const userRouter = require("./routes/user");
 
+app.use("/api/chat", chatRouter);
 app.use("/api/course", courseRouter);
 app.use("/api/user", userRouter);
 
@@ -36,14 +40,20 @@ connection.once("open", () => {
   console.log("MongoDB connected!");
 });
 
+/* Frontend Static files */
+
 app.use(express.static(path.join(__dirname, "..", "frontend", "dist", "uimpactify-app")));
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "..", "frontend", "dist", "uimpactify-app", "index.html"));
 });
 
+/* Express Server */
+
 const server = app.listen(PORT, () => {
   console.log(`server is running on port: ${PORT}`);
 });
+
+/* Socket.io Connection */
 
 const io = require("./routes/chat").listen(server);
