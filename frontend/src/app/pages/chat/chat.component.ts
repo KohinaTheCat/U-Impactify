@@ -25,6 +25,7 @@ export class ChatComponent implements OnInit {
   userSearchQuery: string = '';
   selectedChat: any;
   error: string;
+  socket: any;
 
   @ViewChild('messages') messagesContainer;
   @ViewChild('messageInput') messageInput;
@@ -35,8 +36,12 @@ export class ChatComponent implements OnInit {
 
   initChats(): void {
     this.user = this.userService.getCurrentUser();
+    this.socket = this.chatService.getSocket();
+    this.socket.on('message', (chatId: string, message: any) => {
+      this.onMessageReceived(chatId, message);
+    });
     this.user.chats.forEach((chatId) =>
-      this.chatService.getMessage(chatId).subscribe((chat) => {
+      this.chatService.getChat(chatId).subscribe((chat) => {
         chat.members = chat.members.filter(
           (member) => member !== this.user._id
         );
@@ -102,46 +107,73 @@ export class ChatComponent implements OnInit {
     return messages;
   }
 
-  onSendMessage(selectedChat: Chat, message: string) {
-    if(!message.trim().length) return;
-    selectedChat.messages.push({
+  onSendMessage(selectedChat: Chat, body: string) {
+    if (!body.trim().length) return;
+    const message = {
       from: this.user._id,
       time: new Date(),
-      body: message,
-    });
+      body,
+    };
+    selectedChat.messages.push(message);
+    this.chatService.sendMessage(message, selectedChat._id);
     this.messageInput.nativeElement.value = '';
+    if (this.messagesContainer) {
+      this.messagesContainer.nativeElement.scrollTop = this.messagesContainer.nativeElement.scrollHeight;
+    }
   }
 
   onComposeNewChat(userId: string): void {
-    if(this.user._id === userId) {
+    if (this.user._id === userId) {
       this.error = 'Cannot Message Yourself.';
       return;
     }
-    const chatsWithUser = this.chats.filter(
-      (chat) => chat.members.includes(userId)
+    const chatsWithUser = this.chats.filter((chat) =>
+      chat.members.includes(userId)
     );
-    let chat;
-    let check = false;
-    if(chatsWithUser.length) {
+    let chat: Chat;
+    if (chatsWithUser.length) {
       chat = chatsWithUser[0];
       this.userSearchQuery = '';
+      this.error = '';
       this.onSelectChat(chat);
       this.showCompose = false;
     } else {
-      this.userService.getAnotherUser(userId).subscribe(user => {
-        chat = {
-         _id: "",
-         members: [user._id],
-         messages: []
+      this.userService.getAnotherUser(userId).subscribe(
+        (user) => {
+          this.chatService
+            .postNewChat(this.user._id, user._id)
+            .subscribe((chat) => {
+              this.userService
+                .addChat(this.user._id, chat._id)
+                .subscribe((userRes) => {
+                  this.userService.setUser(userRes);
+                  this.user = userRes;
+                  this.userSearchQuery = '';
+                  this.error = '';
+                  chat.members = chat.members.filter(
+                    (member) => member !== this.user._id
+                  );
+                  this.chats.push(chat);
+                  this.onSelectChat(chat);
+                  this.userService
+                    .addChat(user._id, chat._id)
+                    .subscribe((user) => {
+                      this.showCompose = false;
+                    });
+                });
+            });
+        },
+        (err) => {
+          this.error = 'User Not Found.';
         }
-        check = true;
-        this.userSearchQuery = '';
-        this.chats.push(chat);
-        this.onSelectChat(chat);
-        this.showCompose = false;
-      }, err => {
-        this.error = "User Not Found.";
-      });
+      );
+    }
+  }
+
+  onMessageReceived(chatId: string, message: any): void {
+    this.chats.filter(chat => chat._id === chatId)[0].messages.push(message);
+    if (this.messagesContainer) {
+      this.messagesContainer.nativeElement.scrollTop = this.messagesContainer.nativeElement.scrollHeight;
     }
   }
 }

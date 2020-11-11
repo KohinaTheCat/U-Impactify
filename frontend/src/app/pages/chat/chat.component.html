@@ -69,6 +69,7 @@
           clrInput
           placeholder="username"
           name="input"
+          (keyup.enter)="onComposeNewChat(userSearchQuery)"
           [(ngModel)]="userSearchQuery"
         />
       </clr-input-container>
