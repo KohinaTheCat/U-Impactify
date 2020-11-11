@@ -173,8 +173,41 @@
           <h4>Survey</h4>
           <!-- fix button placement -->
           <div class = surveybutton>
-            <button class = "btn btn-success-outline" (click)="openedSurvey = true">Complete the Survey</button>
-            <!-- modal here to fill in survey when button clicked -->
+            <button class = "btn btn-success-outline" (click)="openedSurvey = true" (click)="xlOpen = true">Complete the Survey</button>
+            <clr-wizard #wizardxl [(clrWizardOpen)]="xlOpen">
+              <clr-wizard-title>Course Evaluation</clr-wizard-title>
+              
+              <clr-wizard-button [type]="'cancel'">Cancel</clr-wizard-button>
+              <clr-wizard-button [type]="'previous'">Back</clr-wizard-button>
+              <clr-wizard-button [type]="'next'">Next</clr-wizard-button>
+              <clr-wizard-button [type]="'finish'">Finish</clr-wizard-button>
+              <clr-wizard-page>
+              <!-- <clr-wizard-page [clrWizardPageNextDisabled]="number.pristine || !formPageTwo.valid"> -->
+                <ng-template clrPageTitle>Please rate from 1-5 how much you agree with the following statements (5-Strongly Agree, 1-Strongly Disagree)</ng-template>
+                <ng-template clrPageNavTitle>Question 1</ng-template>
+                <form #formPageOne="ngForm">
+                  <clr-input-container *ngFor="let question of surveyQuestions; let i = index">
+                    <label>{{ question }}</label>
+                    <input clrInput required type="number" [(ngModel)]="surveyAnswer[i]" name="number" #number="ngModel" />
+                    <clr-control-error>This field is required!</clr-control-error>
+                  </clr-input-container>
+                </form>
+              </clr-wizard-page>
+              <clr-wizard-page>
+                  <ng-template clrPageTitle>Page 1</ng-template>
+                  ...
+              </clr-wizard-page>
+          
+              <clr-wizard-page>
+                  <ng-template clrPageTitle>Page 2</ng-template>
+                  ...
+              </clr-wizard-page>
+          
+              <clr-wizard-page>
+                  <ng-template clrPageTitle>Page 3</ng-template>
+                  ...
+              </clr-wizard-page>
+          </clr-wizard>
           </div>
         </h4>
       </div>

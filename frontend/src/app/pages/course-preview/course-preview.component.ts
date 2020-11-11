@@ -11,6 +11,7 @@ import {
   FileSystemFileEntry,
   FileSystemDirectoryEntry,
 } from 'ngx-file-drop';
+import {ClrWizard} from "@clr/angular";
 
 @Component({
   selector: 'app-course-preview',
@@ -47,6 +48,16 @@ export class CoursePreviewComponent implements OnInit {
   averageScore: number = 0;
 
   @ViewChild('reviewStars') stars;
+  @ViewChild("wizardxl") wizardExtraLarge: ClrWizard;
+  xlOpen: boolean = false;
+  surveyAnswer : string[] = [];
+  surveyQuestions: string[] = [
+    'I found the course very fun and exciting',
+    'This course gave me a good understanding of this subject',
+    'The impact consultant designed the course such that it was easy to access resources',
+    'Course assessments allowed me to better improve myself with the course material',
+    'The overall course quality was good',
+  ];
 
   constructor(
     private userService: UserService,
