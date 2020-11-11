@@ -23,10 +23,8 @@ export class AssessmentsComponent implements OnInit {
   course: Course;
   user: User;
   openModal: boolean;
-  array: string[] = ['1', '2', '3', '4', '5', '6'];
   name: String = '';
   files: NgxFileDropEntry[] = [];
-  img: NgxFileDropEntry[] = [];
   imageError: string = '';
   visibility: boolean = false;
   error: string = '';
@@ -35,6 +33,8 @@ export class AssessmentsComponent implements OnInit {
   courseId: String = '';
   studentSubm: String[][] = [[]];
   assessArr: Assessments[] = [];
+
+  currUser: Assessments;
 
   file: String[] = [];
 
@@ -57,6 +57,34 @@ export class AssessmentsComponent implements OnInit {
     });
   }
 
+  onEdit(assess: Assessments) {}
+
+  // Ask about this. Not working :(
+  onDelete(assess: Assessments) {
+    var temp = this.assessArr.indexOf({
+      courseId: assess.courseId,
+      name: assess.name,
+      visibility: assess.visibility,
+      files: assess.files,
+      studentSubmissions: assess.studentSubmissions,
+    });
+    console.log(
+      'HEREEEE: ' +
+        temp +
+        assess.courseId +
+        ' ' +
+        assess.name +
+        ' ' +
+        assess.visibility +
+        ' ' +
+        assess.files +
+        ' ' +
+        assess.studentSubmissions
+    );
+    delete this.assessArr[temp];
+    //this.assessArr.find(({ name }) => name === assess.name);
+  }
+
   registerHandler() {
     this.assessArr.push({
       courseId: this.courseId,
@@ -66,7 +94,6 @@ export class AssessmentsComponent implements OnInit {
       studentSubmissions: this.studentSubm,
     });
 
-    console.log('Here: ' + this.assessArr[0].name);
     // const { name, visibility, files } = this;
     // const assessments = {
     //   name,

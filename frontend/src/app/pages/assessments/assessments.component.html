@@ -130,9 +130,19 @@
     <clr-dg-column>Submissions</clr-dg-column>
     <!/div>
 
-    <clr-dg-row *ngFor="let assess of assessArr">
+    <clr-dg-row *ngFor="let assess of assessArr" [clrDgItem]="currUser">
+      <clr-dg-action-overflow>
+        <button class="action-item" (click)="onEdit(assess)">Edit</button>
+        <button class="action-item" (click)="onDelete(assess)">Delete</button>
+      </clr-dg-action-overflow>
+
       <clr-dg-cell> {{ assess.name }} </clr-dg-cell>
-      <clr-dg-cell>{{ assess.name }}</clr-dg-cell>
+
+      <!-- Ask about this as well, unsure need helppppp -->
+      <clr-dg-cell *ngFor="let file of files">
+        <div class="row">{{ file.relativePath }}</div>
+      </clr-dg-cell>
+
       <clr-dg-cell>{{ assess.visibility }}</clr-dg-cell>
       <clr-dg-cell>View Submissions</clr-dg-cell>
     </clr-dg-row>

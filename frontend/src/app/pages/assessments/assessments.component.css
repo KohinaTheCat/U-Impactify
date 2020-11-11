@@ -161,3 +161,11 @@ clr-control-error {
   width: 100%;
   text-align: center;
 }
+
+.action-item :hover {
+  color: #6816c5;
+}
+
+.row {
+  display: list-item;
+}
