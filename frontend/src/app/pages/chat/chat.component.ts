@@ -21,26 +21,38 @@ export class ChatComponent implements OnInit {
   showCompose: boolean = false;
 
   user: User;
-  chats: Chat[];
+  chats: Chat[] = [];
   userSearchQuery: string = '';
   selectedChat: any;
+  error: string;
 
   @ViewChild('messages') messagesContainer;
   @ViewChild('messageInput') messageInput;
 
   ngOnInit(): void {
+    this.initChats();
+  }
+
+  initChats(): void {
     this.user = this.userService.getCurrentUser();
-    this.chats = this.createMockChats();
-    this.chats.forEach(
-      (chat) => (chat.messages = this.createMockMessages(chat.members))
+    this.user.chats.forEach((chatId) =>
+      this.chatService.getMessage(chatId).subscribe((chat) => {
+        chat.members = chat.members.filter(
+          (member) => member !== this.user._id
+        );
+        this.chats.push(chat);
+      })
     );
-    // this.onSelectChat(this.chats[0]); //remove
+    // this.chats = this.createMockChats();
+    // this.chats.forEach(
+    //   (chat) => (chat.messages = this.createMockMessages(chat.members))
+    // );
   }
 
   onSelectChat($event) {
     if (this.selectedChat === $event) return;
     this.selectedChat = $event;
-    if(this.messagesContainer) {
+    if (this.messagesContainer) {
       this.messagesContainer.nativeElement.scrollTop = this.messagesContainer.nativeElement.scrollHeight;
     }
   }
@@ -90,8 +102,46 @@ export class ChatComponent implements OnInit {
     return messages;
   }
 
-  onSendMessage(message: string) {
-    console.log(message);
+  onSendMessage(selectedChat: Chat, message: string) {
+    if(!message.trim().length) return;
+    selectedChat.messages.push({
+      from: this.user._id,
+      time: new Date(),
+      body: message,
+    });
     this.messageInput.nativeElement.value = '';
+  }
+
+  onComposeNewChat(userId: string): void {
+    if(this.user._id === userId) {
+      this.error = 'Cannot Message Yourself.';
+      return;
+    }
+    const chatsWithUser = this.chats.filter(
+      (chat) => chat.members.includes(userId)
+    );
+    let chat;
+    let check = false;
+    if(chatsWithUser.length) {
+      chat = chatsWithUser[0];
+      this.userSearchQuery = '';
+      this.onSelectChat(chat);
+      this.showCompose = false;
+    } else {
+      this.userService.getAnotherUser(userId).subscribe(user => {
+        chat = {
+         _id: "",
+         members: [user._id],
+         messages: []
+        }
+        check = true;
+        this.userSearchQuery = '';
+        this.chats.push(chat);
+        this.onSelectChat(chat);
+        this.showCompose = false;
+      }, err => {
+        this.error = "User Not Found.";
+      });
+    }
   }
 }

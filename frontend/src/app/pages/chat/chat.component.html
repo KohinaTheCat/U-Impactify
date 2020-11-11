@@ -15,7 +15,7 @@
           (click)="onSelectChat(chat)"
         >
           <div class="profile-icon"><clr-icon shape="user"></clr-icon></div>
-          <h5>{{ chat.members[1] }}</h5>
+          <h5>{{ chat.members[0] }}</h5>
         </div>
       </div>
     </div>
@@ -36,13 +36,14 @@
                 left: message.from !== user._id,
                 right: message.from === user._id
               }"
+              [title]="message.time"
             >
               {{ message.body }}
             </div>
           </div>
         </div>
         <div class="message-input">
-            <input #messageInput type="text" autocomplete="off" placeholder="Type a message..." (keyup.enter)="onSendMessage(messageInput.value)">
+            <input #messageInput type="text" autocomplete="off" placeholder="Type a message..." (keyup.enter)="onSendMessage(selectedChat, messageInput.value)">
         </div>
       </div>
       <ng-template #noChatSelected>
@@ -74,7 +75,13 @@
     </form>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-primary" (click)="showCompose = false">
+    <div class="error" *ngIf="error else spacer">
+      {{error}}
+    </div>
+    <ng-template #spacer>
+      <div style="flex: 1 1 auto;"></div>
+    </ng-template>
+    <button type="button" class="btn btn-primary" (click)="onComposeNewChat(userSearchQuery)">
       Send
     </button>
   </div>
