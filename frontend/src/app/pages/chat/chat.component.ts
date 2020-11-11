@@ -32,14 +32,15 @@ export class ChatComponent implements OnInit {
 
   ngOnInit(): void {
     this.initChats();
-  }
-
-  initChats(): void {
-    this.user = this.userService.getCurrentUser();
-    this.socket = this.chatService.getSocket();
     this.socket.on('message', (chatId: string, message: any) => {
       this.onMessageReceived(chatId, message);
     });
+  }
+
+  initChats(): void {
+    this.chats = [];
+    this.user = this.userService.getCurrentUser();
+    this.socket = this.chatService.getSocket();
     this.user.chats.forEach((chatId) =>
       this.chatService.getChat(chatId).subscribe((chat) => {
         chat.members = chat.members.filter(
@@ -171,9 +172,16 @@ export class ChatComponent implements OnInit {
   }
 
   onMessageReceived(chatId: string, message: any): void {
-    this.chats.filter(chat => chat._id === chatId)[0].messages.push(message);
-    if (this.messagesContainer) {
-      this.messagesContainer.nativeElement.scrollTop = this.messagesContainer.nativeElement.scrollHeight;
+    if(this.user.chats.includes(chatId)) {
+      this.chats.filter(chat => chat._id === chatId)[0].messages.push(message);
+      if (this.messagesContainer) {
+        this.messagesContainer.nativeElement.scrollTop = this.messagesContainer.nativeElement.scrollHeight;
+      }
+    } else {
+      this.userService.getAnotherUser(this.user._id).subscribe((user) => {
+        this.userService.setUser(user);
+        this.initChats();
+      });
     }
   }
 }
