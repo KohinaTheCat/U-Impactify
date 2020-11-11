@@ -1,6 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { iif } from 'rxjs';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
+import {
+  NgxFileDropEntry,
+  FileSystemFileEntry,
+  FileSystemDirectoryEntry,
+} from 'ngx-file-drop';
 
 @Component({
   selector: 'app-si-profile',
@@ -8,12 +14,15 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./si-profile.component.css'],
 })
 export class SiProfileComponent implements OnInit {
-
   @Input()
   searchedUser?: User;
 
   @Input()
   sameUser?: boolean = false;
+
+  changeImage: boolean = false;
+  img: NgxFileDropEntry[] = [];
+  imageError: string = 'No Image Has Been Selected';
 
   user: User;
   disabled = true;
@@ -28,7 +37,7 @@ export class SiProfileComponent implements OnInit {
   amount: number;
   socialId: string;
   current: string = 'edit';
-  error: string = "";
+  error: string = '';
 
   items: string[] = ['Item1', 'Item2', 'Item3'];
   vertical = '';
@@ -36,16 +45,55 @@ export class SiProfileComponent implements OnInit {
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    if(!!this.searchedUser){
+    if (!!this.searchedUser) {
       this.user = this.searchedUser;
       this.socialId = this.user._id;
-    }
-    else {
+    } else {
       this.sameUser = true;
       this.user = this.userService.getCurrentUser();
       this.socialId = this.user._id;
     }
     this.doNotChange();
+  }
+
+  changePicture() {
+    if (this.sameUser) {
+      this.changeImage = !this.changeImage;
+    }
+  }
+
+  onChangeImage() {
+    if (this.sameUser) {
+      this.changeImage = false;
+    }
+  }
+
+  public droppedCourseImage(image: NgxFileDropEntry[]) {
+    this.img = image;
+    for (const droppedFile of image) {
+      if (droppedFile.fileEntry.isFile) {
+        const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
+        fileEntry.file((file: File) => {
+          if (
+            !(
+              file.name.endsWith('.png') ||
+              file.name.endsWith('.jpg') ||
+              file.name.endsWith('.JPG') ||
+              file.name.endsWith('.JPEG') ||
+              file.name.endsWith('.jpeg')
+            )
+          ) {
+            this.img = [];
+            this.imageError = 'Bad Course Image!';
+          } else {
+            this.imageError = '';
+          }
+        });
+      } else {
+        // It was a directory (empty directories are added, otherwise only files)
+        const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
+      }
+    }
   }
 
   newFunction(): void {
@@ -98,14 +146,14 @@ export class SiProfileComponent implements OnInit {
     this.email = email;
   }
 
-  onDonate(){
+  onDonate() {
     this.opened = !this.opened;
   }
 
-  onOkay(){
-    if(!this.sameUser){
+  onOkay() {
+    if (!this.sameUser) {
       const user = this.userService.getCurrentUser();
-      this.userService.updateCredit(user._id, (-1)*this.amount).subscribe(
+      this.userService.updateCredit(user._id, -1 * this.amount).subscribe(
         (res) => {
           this.userService.setUser(res);
         },
@@ -114,7 +162,9 @@ export class SiProfileComponent implements OnInit {
           console.log(err);
         }
       );
-      this.userService.updateCredit(this.searchedUser._id, this.amount).subscribe();
+      this.userService
+        .updateCredit(this.searchedUser._id, this.amount)
+        .subscribe();
     }
   }
 }

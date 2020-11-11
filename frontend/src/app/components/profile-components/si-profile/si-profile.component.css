@@ -1,21 +1,71 @@
+.card {
+  background: #ffffff;
+  box-shadow: 0px 8px 24px #eff3f9;
+  border-radius: 25px;
+  padding: 1rem;
+  padding-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard {
+  padding-right: 2rem;
+}
+
+clr-control-error {
+  color: #c21d00;
+}
+
+label {
+  margin: 2rem;
+}
+
 h2 {
   line-height: initial;
   font-size: 2rem;
 }
 
+.right {
+  margin-right: 2rem;
+}
+
 .inner {
-  width: 90%;
+  width: 100%;
   height: 20rem;
   display: grid;
   grid-template-columns: 1fr 1fr 0.75fr;
-  column-gap: 1rem;
+  column-gap: 2rem;
   align-items: center;
 }
 
-#image {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.profile-pic {
+  transition: 0.3s;
+  position: relative;
+  display: inline-block;
+}
+
+.profile-pic:hover .edit_img {
+  display: block;
+}
+
+.profile-pic:hover img {
+  transition: 0.3s;
+  box-shadow: 0px 8px 16px rgba(120, 98, 188, 0.1);
+  border-radius: 1rem;
+}
+
+.edit_img {
+  padding-top: 0.5rem;
+  padding-right: 0.5rem;
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: none;
+}
+
+clr-icon {
+  height: 1rem;
+  width: 1rem;
 }
 
 .info {
@@ -25,7 +75,6 @@ h2 {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  /* Gray 70% */
   color: #7a7a7a;
 }
 
@@ -40,16 +89,22 @@ h2 {
   height: 75%;
 }
 
-.btn {
-  /* White Base */
+.btn-purple {
   background: #ffffff;
   opacity: 0.48;
-  /*  Purple Base */
   border: 1px solid var(--purple-base);
-  /* Shadow Dark · 8dp */
   box-shadow: 0px 8px 16px rgba(120, 98, 188, 0.2);
   border-radius: 7px;
+  height: 2.5rem;
+  font-size: initial;
+}
 
+.btn-ok {
+  background: #ffffff;
+  opacity: 0.48;
+  border: 1px solid var(--purple-base);
+  box-shadow: 0px 8px 16px rgba(120, 98, 188, 0.2);
+  border-radius: 7px;
   height: 2.5rem;
   font-size: initial;
 }
@@ -58,7 +113,7 @@ h2 {
   background: var(--purple-smooth);
 }
 
-.btn-primary {
+.btn-cancel {
   color: red;
 }
 
@@ -102,6 +157,10 @@ h2 {
   justify-content: space-evenly;
 }
 
+.imageError {
+  color: #c21d00;
+}
+
 .col {
   display: flex;
   flex-direction: column;
@@ -136,10 +195,6 @@ input {
 #si {
   display: flex;
   padding-left: 2rem;
-}
-
-.spacer {
-  flex: 1 1 auto;
 }
 
 #donateButton {
