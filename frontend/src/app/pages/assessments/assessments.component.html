@@ -40,9 +40,9 @@
               <input
                 type="radio"
                 clrRadio
-                name="easy"
+                name="true"
                 required
-                value="easy"
+                value="true"
                 [(ngModel)]="visibility"
               />
               <label class="rlabel">True</label>
@@ -51,9 +51,9 @@
               <input
                 type="radio"
                 clrRadio
-                name="difficult"
+                name="false"
                 required
-                value="difficult"
+                value="false"
                 [(ngModel)]="visibility"
               />
               <label class="rlabel">False</label>
@@ -130,11 +130,11 @@
     <clr-dg-column>Submissions</clr-dg-column>
     <!/div>
 
-    <clr-dg-row *ngFor="let arr of array">
-      <clr-dg-cell>RANDOM TEXT1</clr-dg-cell>
-      <clr-dg-cell>RANDOM TEXT2</clr-dg-cell>
-      <clr-dg-cell>RANDOM TEXT3</clr-dg-cell>
-      <clr-dg-cell>RANDOM TEXT4</clr-dg-cell>
+    <clr-dg-row *ngFor="let assess of assessArr">
+      <clr-dg-cell> {{ assess.name }} </clr-dg-cell>
+      <clr-dg-cell>{{ assess.name }}</clr-dg-cell>
+      <clr-dg-cell>{{ assess.visibility }}</clr-dg-cell>
+      <clr-dg-cell>View Submissions</clr-dg-cell>
     </clr-dg-row>
   </clr-datagrid>
 </div>
