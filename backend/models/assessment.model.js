@@ -28,3 +28,5 @@ const courseSchema = new Schema({
   });
 
 const Assessment = model("Assessment", assessmentSchema);
+
+module.exports = Assessment;
