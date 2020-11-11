@@ -7,9 +7,5 @@
 export interface Chat {
   _id: String;
   members: string[];
-  messages: [{
-    from: string;
-    body: string;
-    time: Date;
-  }]
+  messages: object[];
 }

@@ -1,5 +1,8 @@
 import { ChatService } from 'src/app/services/chat.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Chat } from 'src/app/models/chat.model';
+import { User } from 'src/app/models/user.model';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-chat',
@@ -7,23 +10,88 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./chat.component.css'],
 })
 export class ChatComponent implements OnInit {
-  constructor(private chatService: ChatService) {}
+  constructor(
+    private chatService: ChatService,
+    private userService: UserService
+  ) {}
 
-  dummyUsers = Array(100).fill('username').map((value, index) => `${value}${index}`)
+  dummyUsers = Array(100)
+    .fill('username')
+    .map((value, index) => `${value}${index}`);
+  showCompose: boolean = false;
+
+  user: User;
+  chats: Chat[];
+  userSearchQuery: string = '';
+  selectedChat: any;
+
+  @ViewChild('messages') messagesContainer;
+  @ViewChild('messageInput') messageInput;
 
   ngOnInit(): void {
-    // this.chatService.getAllMessages().subscribe((res) => {
-    //   this.allMessages = res;
-    //   console.log(this.allMessages);
-    // });
+    this.user = this.userService.getCurrentUser();
+    this.chats = this.createMockChats();
+    this.chats.forEach(
+      (chat) => (chat.messages = this.createMockMessages(chat.members))
+    );
+    // this.onSelectChat(this.chats[0]); //remove
   }
 
-  // onEnter() {
-  //   this.chatService.sendMessage(this.chat);
-  //   this.chat = '';
-  // }
+  onSelectChat($event) {
+    if (this.selectedChat === $event) return;
+    this.selectedChat = $event;
+    if(this.messagesContainer) {
+      this.messagesContainer.nativeElement.scrollTop = this.messagesContainer.nativeElement.scrollHeight;
+    }
+  }
 
-  // addMessages(message) {
-  //   this.allMessages.push(message);
-  // }
+  /**
+   * for mock
+   */
+  createMockChats(): Chat[] {
+    const chats = [];
+    for (let i = 0; i < 100; i++) {
+      const chat: Chat = {
+        _id: i + '',
+        members: [this.user._id, `testUser${i}`],
+        messages: [],
+      };
+      chats.push(chat);
+    }
+    return chats;
+  }
+
+  /**
+   * for mock
+   */
+  createMockMessages(members: string[]) {
+    const messages = [];
+    for (let i = 0; i < 100; i++) {
+      const message: any = {
+        from: members[Math.round(Math.random())],
+        body:
+          Math.random().toString(36).substring(2) +
+          ' ' +
+          Math.random().toString(36).substring(2) +
+          ' ' +
+          Math.random().toString(36).substring(2) +
+          ' ' +
+          Math.random().toString(36).substring(2) +
+          ' ' +
+          Math.random().toString(36).substring(2) +
+          ' ' +
+          Math.random().toString(36).substring(2) +
+          ' ' +
+          Math.random().toString(36).substring(2),
+        time: new Date(),
+      };
+      messages.push(message);
+    }
+    return messages;
+  }
+
+  onSendMessage(message: string) {
+    console.log(message);
+    this.messageInput.nativeElement.value = '';
+  }
 }
