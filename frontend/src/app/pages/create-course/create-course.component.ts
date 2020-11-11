@@ -92,20 +92,20 @@ export class CreateCourseComponent implements OnInit {
             }
           }
 
-          if(!this.img.length) {
+          if (!this.img.length) {
             this.userService
-            .updateClassesTeaching(this.userService.getCurrentUser()._id, {
-              _id: res._id,
-              name: res.name,
-              img: res.img,
-            })
-            .subscribe(
-              (res) => {
-                this.userService.setUser(res);
-                this.router.navigate(['dashboard']);
-              },
-              (err) => console.log(err)
-            );
+              .updateClassesTeaching(this.userService.getCurrentUser()._id, {
+                _id: res._id,
+                name: res.name,
+                img: res.img,
+              })
+              .subscribe(
+                (res) => {
+                  this.userService.setUser(res);
+                  this.router.navigate(['dashboard']);
+                },
+                (err) => console.log(err)
+              );
           }
 
           for (const droppedFile of course.files) {

@@ -1,16 +1,128 @@
 <div class="flexbot">
-  <h1>{{ course.name }}</h1>
-
+  <h1 class="title">
+    <span>{{ course.name }}</span>
+  </h1>
 
   <div class="btn-container">
-    <button class="createNew edit" (click)="openModal = true">Create new assessment!</button>
+    <button class="createNew edit" (click)="openModal = true">
+      Create new assessment!
+    </button>
   </div>
 
+  <div *ngIf="openModal == true">
+    <clr-modal
+      [(clrModalOpen)]="basic"
+      [clrModalSize]="'lg'"
+      [clrModalClosable]="false"
+    >
+      <h3 class="modal-title">Create an assignment</h3>
+      <div class="modal-body">
+        <form clrForm>
+          <clr-control-error>{{ error }}</clr-control-error>
 
+          <clr-input-container>
+            <label
+              >Assessment name
+              <input
+                clrInput
+                type="text"
+                [(ngModel)]="name"
+                name="name"
+                required
+              />
+            </label>
+            <clr-control-error>This field is required!</clr-control-error>
+          </clr-input-container>
 
+          <clr-radio-container>
+            <label>Visibliity</label>
+            <clr-radio-wrapper>
+              <input
+                type="radio"
+                clrRadio
+                name="easy"
+                required
+                value="easy"
+                [(ngModel)]="visibility"
+              />
+              <label class="rlabel">True</label>
+            </clr-radio-wrapper>
+            <clr-radio-wrapper>
+              <input
+                type="radio"
+                clrRadio
+                name="difficult"
+                required
+                value="difficult"
+                [(ngModel)]="visibility"
+              />
+              <label class="rlabel">False</label>
+            </clr-radio-wrapper>
+
+            <clr-control-error
+              >Please choose whether or not you want it to be
+              seen!</clr-control-error
+            >
+          </clr-radio-container>
+
+          <ngx-file-drop
+            dropZoneLabel="Drop files here"
+            (onFileDrop)="dropped($event)"
+            (onFileOver)="fileOver($event)"
+            (onFileLeave)="fileLeave($event)"
+          >
+            <ng-template
+              ngx-file-drop-content-tmp
+              let-openFileSelector="openFileSelector"
+            >
+              <label>Upload Assignment Files</label>
+              <button class="btn btn-primary" (click)="openFileSelector()">
+                Browse Files
+              </button>
+
+              <!-- <button type="button" (click)="openFileSelector()">Browse Files</button> -->
+            </ng-template>
+          </ngx-file-drop>
+          <div class="upload-table">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Name of file(s) uploaded:</th>
+                </tr>
+              </thead>
+              <tbody class="upload-name-style">
+                <tr *ngFor="let item of files; let i = index">
+                  <td>
+                    <strong>{{ item.relativePath }}</strong>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-outline"
+          (click)="openModal = false"
+          (click)="cancel()"
+        >
+          Cancel
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="registerHandler()"
+          (click)="openModal = false"
+        >
+          Create Assessment
+        </button>
+      </div>
+    </clr-modal>
+  </div>
 
   <clr-datagrid id="table">
-
     <!div class="header">
     <clr-dg-column>Name</clr-dg-column>
     <clr-dg-column>Assessment</clr-dg-column>
@@ -19,15 +131,10 @@
     <!/div>
 
     <clr-dg-row *ngFor="let arr of array">
-        <clr-dg-cell>RANDOM TEXT1</clr-dg-cell>
-        <clr-dg-cell>RANDOM TEXT2</clr-dg-cell>
-        <clr-dg-cell>RANDOM TEXT3</clr-dg-cell>
-        <clr-dg-cell>RANDOM TEXT4</clr-dg-cell>
+      <clr-dg-cell>RANDOM TEXT1</clr-dg-cell>
+      <clr-dg-cell>RANDOM TEXT2</clr-dg-cell>
+      <clr-dg-cell>RANDOM TEXT3</clr-dg-cell>
+      <clr-dg-cell>RANDOM TEXT4</clr-dg-cell>
     </clr-dg-row>
-
   </clr-datagrid>
-
-
-
-
 </div>

@@ -11,15 +11,28 @@
 
 #table {
   width: 70rem;
+  margin-top: 0.5rem;
 }
 
 #header {
   font-size: larger;
 }
 
-.h1 {
+input {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  min-height: 2rem;
+  font-size: 0.8rem;
+}
+
+.title {
   line-height: initial;
-  font-size: 2rem;
+  font-size: 5rem;
+  line-height: initial;
+  white-space: nowrap;
+  margin: 0;
+  color: var(--purple-base);
+  padding-right: 6rem;
 }
 
 .btn-container {
@@ -64,4 +77,87 @@
 .edit:hover {
   background: var(--purple-smooth);
   color: var(--gray-60);
+}
+
+clr-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  margin-right: 0.5rem;
+  transform: translateY(-1px) translateX(-1px);
+}
+
+.modal-title {
+  margin-top: 1rem;
+  font-size: 1.75rem;
+  color: #a78ec3;
+}
+
+input {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  min-height: 2rem;
+  font-size: 0.8rem;
+}
+
+.clr-control-label {
+  font-size: 1rem;
+}
+
+label {
+  display: flex;
+  text-align: left;
+  margin: 10px;
+  min-width: 30rem;
+  flex-direction: column;
+}
+
+.rlabel {
+  font-size: 0.75rem;
+}
+
+clr-control-error {
+  color: #c21d00;
+}
+
+.uploadedImage {
+  width: 100%;
+  text-align: center;
+}
+
+.modal-title {
+  margin-top: 1rem;
+  font-size: 1.75rem;
+  color: #a78ec3;
+}
+
+input {
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  min-height: 2rem;
+  font-size: 0.8rem;
+}
+
+.clr-control-label {
+  font-size: 1rem;
+}
+
+label {
+  display: flex;
+  text-align: left;
+  margin: 10px;
+  min-width: 30rem;
+  flex-direction: column;
+}
+
+.rlabel {
+  font-size: 0.75rem;
+}
+
+clr-control-error {
+  color: #c21d00;
+}
+
+.uploadedImage {
+  width: 100%;
+  text-align: center;
 }
