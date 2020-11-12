@@ -58,8 +58,17 @@ export class ChatComponent implements OnInit {
   onSelectChat($event) {
     if (this.selectedChat === $event) return;
     this.selectedChat = $event;
+    this.scrollIntoView();
+  }
+
+  scrollIntoView() {
     if (this.messagesContainer) {
-      this.messagesContainer.nativeElement.scrollTop = this.messagesContainer.nativeElement.scrollHeight;
+      const recentMessage = this.messagesContainer.nativeElement.lastElementChild;
+      recentMessage.scrollIntoView({
+        behavior: 'smooth',
+        block: 'end',
+        inline: 'nearest',
+      });
     }
   }
 
@@ -108,7 +117,7 @@ export class ChatComponent implements OnInit {
     return messages;
   }
 
-  onSendMessage(selectedChat: Chat, body: string) {
+  onSendMessage(selectedChat: Chat, body: string) {    
     if (!body.trim().length) return;
     const message = {
       from: this.user._id,
@@ -118,9 +127,7 @@ export class ChatComponent implements OnInit {
     selectedChat.messages.push(message);
     this.chatService.sendMessage(message, selectedChat._id);
     this.messageInput.nativeElement.value = '';
-    if (this.messagesContainer) {
-      this.messagesContainer.nativeElement.scrollTop = this.messagesContainer.nativeElement.scrollHeight;
-    }
+    this.scrollIntoView();
   }
 
   onComposeNewChat(userId: string): void {
@@ -174,9 +181,7 @@ export class ChatComponent implements OnInit {
   onMessageReceived(chatId: string, message: any): void {
     if(this.user.chats.includes(chatId)) {
       this.chats.filter(chat => chat._id === chatId)[0].messages.push(message);
-      if (this.messagesContainer) {
-        this.messagesContainer.nativeElement.scrollTop = this.messagesContainer.nativeElement.scrollHeight;
-      }
+      this.scrollIntoView();
     } else {
       this.userService.getAnotherUser(this.user._id).subscribe((user) => {
         this.userService.setUser(user);
