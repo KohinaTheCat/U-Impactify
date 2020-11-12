@@ -22,6 +22,10 @@
     <div class="chat-area-container">
       <div class="chat-area" *ngIf="selectedChat; else noChatSelected">
         <div class="messages" #messages>
+          <div *ngIf="!selectedChat.messages.length" class="no-messages-found">
+            <h5>No Messages Found</h5>
+            <p>Start a conversation with <strong>{{selectedChat.members[0]}}</strong></p>
+          </div>
           <div
             class="message-blip-container"
             *ngFor="let message of selectedChat.messages"

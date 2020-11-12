@@ -56,7 +56,10 @@ export class ChatComponent implements OnInit {
   }
 
   onSelectChat($event) {
-    if (this.selectedChat === $event) return;
+    if (this.selectedChat === $event) {
+      this.scrollIntoView();
+      return;
+    }
     this.selectedChat = $event;
     this.scrollIntoView();
   }
