@@ -136,7 +136,7 @@
         <button class="action-item" (click)="onDelete(assess)">Delete</button>
       </clr-dg-action-overflow>
 
-      <clr-dg-cell> {{ assess.name }} </clr-dg-cell>
+      <clr-dg-cell class="text"> {{ assess.name }} </clr-dg-cell>
 
       <!-- Ask about this as well, unsure need helppppp -->
       <clr-dg-cell>
@@ -147,19 +147,21 @@
 
       <!-- <clr-dg-cell>{{ assess.visibility }}</clr-dg-cell> -->
 
-      <clr-dg-cell *ngIf="assess.visibility == 'true'"
-        ><clr-icon shape="check" class="checkmark">{{
-          assess.visibility
-        }}</clr-icon></clr-dg-cell
-      >
+      <clr-dg-cell *ngIf="assess.visibility == 'true'" class="display">
+        <clr-icon shape="check" class="checkmark"></clr-icon>
+        <div class="text">
+          {{ assess.visibility }}
+        </div>
+      </clr-dg-cell>
 
-      <clr-dg-cell *ngIf="assess.visibility == 'false'"
-        ><clr-icon shape="times" class="wrong">
-          {{ assess.visibility }}</clr-icon
-        ></clr-dg-cell
-      >
+      <clr-dg-cell *ngIf="assess.visibility == 'false'" class="display"
+        ><clr-icon shape="times" class="wrong"></clr-icon>
+        <div class="text">
+          {{ assess.visibility }}
+        </div>
+      </clr-dg-cell>
 
-      <clr-dg-cell>View Submissions</clr-dg-cell>
+      <clr-dg-cell class="text">View Submissions</clr-dg-cell>
     </clr-dg-row>
   </clr-datagrid>
 </div>

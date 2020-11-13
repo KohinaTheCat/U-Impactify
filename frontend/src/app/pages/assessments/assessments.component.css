@@ -177,10 +177,18 @@ clr-control-error {
 
 .checkmark {
   color: green;
-  flex-direction: row;
 }
 
 .wrong {
   color: red;
+}
+
+.display {
+  display: flex;
   flex-direction: row;
+}
+
+.text {
+  /* padding-top: 0.3rem; */
+  font-size: large;
 }
