@@ -2,10 +2,10 @@
   <div class="top-container">
     <div class="left">
       <h4>Solutions</h4>
-      <p>Make an impact as you learn, give and grow with U-Impactify</p>
+      <p>Make an impact as you learn, give and grow with U-Impactify.</p>
       <div class="button-container">
-        <button class="btn" (click)="isStudent = true">Students</button
-        ><button class="btn" (click)="isStudent = false">Instructors</button>
+        <button id="student-button" [ngClass]="{'selected-button': isStudent}" (click)="isStudent = true">Students</button
+        ><button id="teacher-button" [ngClass]="{'selected-button': !isStudent}"  (click)="isStudent = false">Instructors</button>
       </div>
     </div>
     <div class="right">
@@ -13,24 +13,59 @@
     </div>
   </div>
   <div class="skills-container" *ngIf="isStudent">
-      <div class="skills-header">
-          <h5>Develop New Skills and Knowledge</h5>
-          <p>Enhance your skill set and Knowledge to advance your career</p>
+    <div class="skills-header">
+      <h5>Develop New Skills and Knowledge</h5>
+      <p>Enhance your skill set and Knowledge to advance your career</p>
+    </div>
+    <div class="skills">
+      <div class="skill">
+        <img src="../../../../assets/home-pages/Workspace.svg" alt="" />
+        <h6>Learn</h6>
       </div>
-      <div class="skills">
-        <div class="skill">
-            <img src="" alt="">
-            <h6>Learn</h6>
-        </div>
-        <div class="skill">
-            <img src="" alt="">
-            <h6>Grow</h6>
-        </div>
-        <div class="skill">
-            <img src="" alt="">
-            <h6>Give</h6>
-        </div>
+      <div class="skill">
+        <img src="../../../../assets/home-pages/Licence.svg" alt="" />
+        <h6>Grow</h6>
       </div>
+      <div class="skill">
+        <img src="../../../../assets/home-pages/Donate.svg" alt="" />
+        <h6>Give</h6>
+      </div>
+    </div>
+  </div>
+  <div class="special-container" *ngIf="isStudent">
+    <h5>What makes U-Impactify special?</h5>
+    <div class="special-card">
+      <img src="../../../../assets/home-pages/121.svg" alt="">
+      <div class="special-card-body">
+        <h4>The Giving Garden</h4>
+        <p>Volunteer or work with our Social Initiative partners.</p>
+      </div>
+    </div>
+    <div class="special-card">
+      <div class="special-card-body">
+        <h4>Collaborative Learning</h4>
+        <p>Learn as a group by participating in the chat room, whiteboard, and discussion thread.</p>
+      </div>
+      <img src="../../../../assets/home-pages/348.svg" alt="">
+    </div>
+    <div class="special-card">
+      <img src="../../../../assets/home-pages/Beyondtheclassroom.svg" alt="">
+      <div class="special-card-body">
+        <h4>Beyond the classroom</h4>
+        <p>There are a variety of online & offline meetup events available.</p>
+      </div>
+    </div>
+    <div class="special-card">
+      <div class="special-card-body">
+        <h4>Communication & Community</h4>
+        <p>Open space to connect with classmates and past students</p>
+      </div>
+      <img src="../../../../assets/home-pages/Supports.svg" alt="">
+    </div>
   </div>
   <div class="skills-container" *ngIf="!isStudent"></div>
+  <div class="special-container" *ngIf="!isStudent"></div>
+  <div class="bottom-button-container">
+        <button class="btn btn-primary" (click)="onPress()">Get Started</button>
+      </div>
 </div>
