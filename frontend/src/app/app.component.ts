@@ -25,10 +25,7 @@ export class AppComponent {
   }
 
   shouldNavShow = (): Boolean => {
-    if(
-      this.router.url === '/about' ||
-      this.router.url === '/solutions' ||
-      this.router.url === '/pricing') return false;
+    if (this.isHomePages()) return false;
     return (
       !!this.user &&
       this.router.url !== '/signup' &&
@@ -46,11 +43,12 @@ export class AppComponent {
   }
 
   shouldFooterShow(): Boolean {
-    return (
-      this.router.url === '/about' ||
-      this.router.url === '/solutions' ||
-      this.router.url === '/pricing' ||
-      (!this.user && this.router.url.includes('user'))
-    );
+    return this.isHomePages() || (!this.user && this.router.url.includes('user'));
+  }
+
+  isHomePages(): Boolean {
+    return this.router.url === '/about' ||
+    this.router.url === '/solutions' ||
+    this.router.url === '/pricing';
   }
 }
