@@ -1,1 +1,36 @@
-<p>solutions works!</p>
+<div class="solutions-container">
+  <div class="top-container">
+    <div class="left">
+      <h4>Solutions</h4>
+      <p>Make an impact as you learn, give and grow with U-Impactify</p>
+      <div class="button-container">
+        <button class="btn" (click)="isStudent = true">Students</button
+        ><button class="btn" (click)="isStudent = false">Instructors</button>
+      </div>
+    </div>
+    <div class="right">
+      <img src="../../../../assets/home-pages/350.svg" alt="" />
+    </div>
+  </div>
+  <div class="skills-container" *ngIf="isStudent">
+      <div class="skills-header">
+          <h5>Develop New Skills and Knowledge</h5>
+          <p>Enhance your skill set and Knowledge to advance your career</p>
+      </div>
+      <div class="skills">
+        <div class="skill">
+            <img src="" alt="">
+            <h6>Learn</h6>
+        </div>
+        <div class="skill">
+            <img src="" alt="">
+            <h6>Grow</h6>
+        </div>
+        <div class="skill">
+            <img src="" alt="">
+            <h6>Give</h6>
+        </div>
+      </div>
+  </div>
+  <div class="skills-container" *ngIf="!isStudent"></div>
+</div>

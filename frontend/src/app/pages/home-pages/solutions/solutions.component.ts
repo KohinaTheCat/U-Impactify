@@ -12,4 +12,6 @@ export class SolutionsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  isStudent: boolean = false;
+
 }
