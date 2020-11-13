@@ -139,11 +139,26 @@
       <clr-dg-cell> {{ assess.name }} </clr-dg-cell>
 
       <!-- Ask about this as well, unsure need helppppp -->
-      <clr-dg-cell *ngFor="let file of files">
-        <div class="row">{{ file.relativePath }}</div>
+      <clr-dg-cell>
+        <div class="row" *ngFor="let file of files" id="fileStore">
+          {{ file.relativePath }}
+        </div>
       </clr-dg-cell>
 
-      <clr-dg-cell>{{ assess.visibility }}</clr-dg-cell>
+      <!-- <clr-dg-cell>{{ assess.visibility }}</clr-dg-cell> -->
+
+      <clr-dg-cell *ngIf="assess.visibility == 'true'"
+        ><clr-icon shape="check" class="checkmark">{{
+          assess.visibility
+        }}</clr-icon></clr-dg-cell
+      >
+
+      <clr-dg-cell *ngIf="assess.visibility == 'false'"
+        ><clr-icon shape="times" class="wrong">
+          {{ assess.visibility }}</clr-icon
+        ></clr-dg-cell
+      >
+
       <clr-dg-cell>View Submissions</clr-dg-cell>
     </clr-dg-row>
   </clr-datagrid>

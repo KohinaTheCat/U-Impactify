@@ -169,3 +169,18 @@ clr-control-error {
 .row {
   display: list-item;
 }
+
+.fileStore {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.checkmark {
+  color: green;
+  flex-direction: row;
+}
+
+.wrong {
+  color: red;
+  flex-direction: row;
+}
