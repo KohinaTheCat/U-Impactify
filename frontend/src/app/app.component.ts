@@ -25,6 +25,10 @@ export class AppComponent {
   }
 
   shouldNavShow = (): Boolean => {
+    if(
+      this.router.url === '/about' ||
+      this.router.url === '/solutions' ||
+      this.router.url === '/pricing') return false;
     return (
       !!this.user &&
       this.router.url !== '/signup' &&
@@ -42,6 +46,11 @@ export class AppComponent {
   }
 
   shouldFooterShow(): Boolean {
-    return !this.user && this.router.url.includes('user');
+    return (
+      this.router.url === '/about' ||
+      this.router.url === '/solutions' ||
+      this.router.url === '/pricing' ||
+      (!this.user && this.router.url.includes('user'))
+    );
   }
 }
