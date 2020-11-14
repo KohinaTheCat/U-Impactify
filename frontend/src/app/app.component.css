@@ -47,6 +47,10 @@ clr-vertical-nav {
   width: 15rem;
 }
 
+.home-page-footer {
+  position: initial;
+}
+
 app-footer {
   position: absolute;
   width: 100%;
