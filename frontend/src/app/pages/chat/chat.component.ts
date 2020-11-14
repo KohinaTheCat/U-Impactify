@@ -1,7 +1,7 @@
-import { ChatService } from 'src/app/services/chat.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Chat } from 'src/app/models/chat.model';
 import { User } from 'src/app/models/user.model';
+import { ChatService } from 'src/app/services/chat.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -26,6 +26,7 @@ export class ChatComponent implements OnInit {
   selectedChat: any;
   error: string;
   socket: any;
+  isFirstSelection: boolean = true;
 
   @ViewChild('messages') messagesContainer;
   @ViewChild('messageInput') messageInput;
@@ -35,6 +36,13 @@ export class ChatComponent implements OnInit {
     this.socket.on('message', (chatId: string, message: any) => {
       this.onMessageReceived(chatId, message);
     });
+  }
+
+  initScrollObserver(): void {
+    const observer = new MutationObserver(
+      (mutations) => this.scrollIntoView() 
+    );
+    observer.observe(this.messagesContainer.nativeElement, { childList: true });
   }
 
   initChats(): void {
@@ -56,12 +64,14 @@ export class ChatComponent implements OnInit {
   }
 
   onSelectChat($event) {
-    if (this.selectedChat === $event) {
-      this.scrollIntoView();
-      return;
+    if (this.selectedChat !== $event) 
+      this.selectedChat = $event;
+    if (this.isFirstSelection) {
+     setTimeout(() => {
+        this.initScrollObserver();
+        this.isFirstSelection = false;
+     }, 100);
     }
-    this.selectedChat = $event;
-    this.scrollIntoView();
   }
 
   scrollIntoView() {
@@ -120,7 +130,7 @@ export class ChatComponent implements OnInit {
     return messages;
   }
 
-  onSendMessage(selectedChat: Chat, body: string) {    
+  onSendMessage(selectedChat: Chat, body: string) {
     if (!body.trim().length) return;
     const message = {
       from: this.user._id,
@@ -130,7 +140,6 @@ export class ChatComponent implements OnInit {
     selectedChat.messages.push(message);
     this.chatService.sendMessage(message, selectedChat._id);
     this.messageInput.nativeElement.value = '';
-    this.scrollIntoView();
   }
 
   onComposeNewChat(userId: string): void {
@@ -182,9 +191,10 @@ export class ChatComponent implements OnInit {
   }
 
   onMessageReceived(chatId: string, message: any): void {
-    if(this.user.chats.includes(chatId)) {
-      this.chats.filter(chat => chat._id === chatId)[0].messages.push(message);
-      this.scrollIntoView();
+    if (this.user.chats.includes(chatId)) {
+      this.chats
+        .filter((chat) => chat._id === chatId)[0]
+        .messages.push(message);
     } else {
       this.userService.getAnotherUser(this.user._id).subscribe((user) => {
         this.userService.setUser(user);
