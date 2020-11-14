@@ -16,6 +16,7 @@ import { SearchResultsComponent } from './pages/search-results/search-results.co
 import { GivingGardenComponent } from './pages/giving-garden/giving-garden.component';
 import { AboutComponent } from './pages/home-pages/about/about.component';
 import { SolutionsComponent } from './pages/home-pages/solutions/solutions.component';
+import { PricingComponent } from './pages/home-pages/pricing/pricing.component';
 
 const routes: Routes = [
   { path: 'signup', component: LoginSignupComponent },
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: '', component: AboutComponent },
   { path: 'about', component: AboutComponent },
   { path: 'solutions', component: SolutionsComponent },
+  { path: 'pricing', component: PricingComponent },
   { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
   {
     path: 'questionaire',

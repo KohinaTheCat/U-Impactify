@@ -30,6 +30,7 @@ import { SearchResultsComponent } from './pages/search-results/search-results.co
 import { GivingGardenComponent } from './pages/giving-garden/giving-garden.component';
 import { AboutComponent } from './pages/home-pages/about/about.component';
 import { SolutionsComponent } from './pages/home-pages/solutions/solutions.component';
+import { PricingComponent } from './pages/home-pages/pricing/pricing.component';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,7 @@ import { SolutionsComponent } from './pages/home-pages/solutions/solutions.compo
     GivingGardenComponent,
     AboutComponent,
     SolutionsComponent,
+    PricingComponent,
   ],
   imports: [
     BrowserModule,
