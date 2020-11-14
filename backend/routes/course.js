@@ -1,55 +1,12 @@
 const router = require("express").Router();
 let Course = require("../models/course.model");
 
-//connecting to db, init. gridstorage and creating a storage
 const multer = require("multer");
-const crypto = require("crypto");
 const mongoose = require("mongoose");
-const GridFsStorage = require("multer-gridfs-storage");
-
-var Grid = require("gridfs-stream");
-Grid.mongo = mongoose.mongo;
-
-// .env
-require("dotenv").config();
-const uri = process.env.ATLAS_URI;
 
 // connection
-const conn = mongoose.createConnection(uri, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useFindAndModify: false,
-});
-
-// init gfs
-let gfs;
-conn.once("open", () => {
-  // init stream
-  gfs = new mongoose.mongo.GridFSBucket(conn.db, {
-    bucketName: "uploads",
-  });
-});
-
-// init storage
-const storage = new GridFsStorage({
-  url: uri,
-  file: (req, file) => {
-    return new Promise((resolve, reject) => {
-      crypto.randomBytes(16, (err, buf) => {
-        if (err) {
-          return reject(err);
-        }
-        const filename = file.originalname;
-        const fileInfo = {
-          filename: filename,
-          bucketName: "uploads",
-        };
-        resolve(fileInfo);
-      });
-    });
-  },
-});
-
+var gfs = require("../server").gfs;
+var storage = require("../server").storage;
 const upload = multer({ storage: storage });
 
 /**
@@ -159,7 +116,7 @@ router.route("/search/:query").get((req, res) => {
       { name: { $regex: query, $options: "i" } },
       { teachers: { $regex: query, $options: "i" } },
       { level: { $regex: query, $options: "i" } },
-      { tags : { $regex: query, $options: "i"} },
+      { tags: { $regex: query, $options: "i" } },
     ],
   })
     .then((courses) => {
@@ -203,15 +160,14 @@ router.post("/:id/upload", upload.array("documents", 10), (req, res) => {
  * @param id course id
  */
 router.post(
-  "/:id/uploadCourseImage",
-  upload.array("document", 1),
-  (req, res) => {
+  "/:id/uploadCourseImage", upload.array("document", 1), (req, res) => {
     Course.findById(req.params.id)
       .then((course) => {
         course.img = req.files[0].id;
+        console.log(req.files)
         course
           .save()
-          .then(() => res.json(course))
+          .then((course) => res.json(req))
           .catch((err) => res.json(err));
       })
       .catch((err) => res.status(400).json(`Error finding Course: ${err}`));

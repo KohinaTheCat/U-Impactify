@@ -10,7 +10,7 @@ export interface User {
   classesEnrolled: object[];
   classesTeaching: object[];
   questionaire: string[][];
-  profileImg: string;
+  img: string;
   socialInitiative: {
     registeredNumber: string;
     businessNumber: string;

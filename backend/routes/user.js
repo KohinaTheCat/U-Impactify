@@ -2,6 +2,14 @@ const router = require("express").Router();
 let userSchema = require("../models/user.model");
 let courseSchema = require("../models/course.model");
 
+const multer = require("multer");
+const mongoose = require("mongoose");
+
+// connection
+var gfs = require("../server").gfs;
+var storage = require("../server").storage;
+const upload = multer({ storage: storage });
+
 // POST login user
 router.route("/:email").post((req, res) => {
   const { password } = req.body;
@@ -41,7 +49,7 @@ router.route("/").post((req, res) => {
       phone: "",
       email: "",
     },
-    profileImg: "",
+    img: "",
     credit,
     chats: [] 
   });
@@ -50,6 +58,26 @@ router.route("/").post((req, res) => {
     .then(() => res.json(newUser))
     .catch((err) => res.status(400).json(err));
 });
+
+/**
+ * POST uploading profile imgage for a user
+ * @param id user id
+ */
+router.post(
+  "/:id/uploadUserImage",
+  upload.array("document", 1),
+  (req, res) => {
+    User.findById(req.params.id)
+      .then((user) => {
+        user.img = req.files[0].id;
+        user
+          .save()
+          .then((user) => res.json(user))
+          .catch((err) => res.json(err));
+      })
+      .catch((err) => res.status(400).json(`Error finding Course: ${err}`));
+  }
+);
 
 /**
  * PUT questionnaire response

@@ -58,7 +58,7 @@ const userSchema = new Schema({
   questionaire: {
     type: [[String]],
   },
-  profileImg: {
+  img: {
     type: String,
   },
   socialInitiative: {
