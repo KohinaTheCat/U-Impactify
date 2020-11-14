@@ -14,6 +14,9 @@ import { SignupQuestionaire2Component } from './pages/signup-questionaire2/signu
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { SearchResultsComponent } from './pages/search-results/search-results.component';
 import { GivingGardenComponent } from './pages/giving-garden/giving-garden.component';
+import { AboutComponent } from './pages/home-pages/about/about.component';
+import { SolutionsComponent } from './pages/home-pages/solutions/solutions.component';
+import { PricingComponent } from './pages/home-pages/pricing/pricing.component';
 
 const routes: Routes = [
   { path: 'signup', component: LoginSignupComponent },
@@ -22,7 +25,10 @@ const routes: Routes = [
     component: DashboardComponent,
     canActivate: [AuthGuard],
   },
-  { path: '', component: DashboardComponent, canActivate: [AuthGuard] },
+  { path: '', redirectTo: 'about', pathMatch: 'full' },
+  { path: 'about', component: AboutComponent },
+  { path: 'solutions', component: SolutionsComponent },
+  { path: 'pricing', component: PricingComponent },
   { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
   {
     path: 'questionaire',

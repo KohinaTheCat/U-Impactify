@@ -1,1 +1,93 @@
-<div class="container">MESSAGING PAGE</div>
+<div class="container">
+  <div class="inner box-shadow-2">
+    <div class="chat-wrapper">
+      <div class="chat-header">
+        <span>Instant Messaging</span
+        ><button class="btn btn-link" (click)="showCompose = true">
+          <clr-icon shape="note"></clr-icon>
+        </button>
+      </div>
+      <div class="chats-container">
+        <div
+          *ngFor="let chat of chats"
+          class="chat"
+          [ngClass]="{ selected: chat === selectedChat }"
+          (click)="onSelectChat(chat)"
+        >
+          <div class="profile-icon"><clr-icon shape="user"></clr-icon></div>
+          <h5>{{ chat.members[0] }}</h5>
+        </div>
+      </div>
+    </div>
+    <div class="chat-area-container">
+      <div class="chat-area" *ngIf="selectedChat; else noChatSelected">
+        <div class="messages" #messages>
+          <div *ngIf="!selectedChat.messages.length" class="no-messages-found">
+            <h5>No Messages Found</h5>
+            <p>Start a conversation with <strong>{{selectedChat.members[0]}}</strong></p>
+          </div>
+          <div
+            class="message-blip-container"
+            *ngFor="let message of selectedChat.messages"
+            [ngClass]="{
+                'left-align': message.from !== user._id,
+                'right-align': message.from === user._id
+              }"
+          >
+            <div
+              class="message-blip"
+              [ngClass]="{
+                left: message.from !== user._id,
+                right: message.from === user._id
+              }"
+              [title]="message.time"
+            >
+              {{ message.body }}
+            </div>
+          </div>
+        </div>
+        <div class="message-input">
+            <input #messageInput type="text" autocomplete="off" placeholder="Type a message..." (keyup.enter)="onSendMessage(selectedChat, messageInput.value)">
+        </div>
+      </div>
+      <ng-template #noChatSelected>
+        <div class="placeholder">
+          <div class="chat-icon-circle">
+            <clr-icon shape="chat-bubble" class="has-badge is-solid"></clr-icon>
+          </div>
+          <h5>Your Messages</h5>
+          <p>Select an existing chat, or compose a new one.</p>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</div>
+
+<clr-modal [(clrModalOpen)]="showCompose">
+  <h3 class="modal-title">Compose Message</h3>
+  <div class="modal-body">
+    <form clrForm>
+      <clr-input-container>
+        <label>To:</label>
+        <input
+          clrInput
+          placeholder="username"
+          name="input"
+          (keyup.enter)="onComposeNewChat(userSearchQuery)"
+          [(ngModel)]="userSearchQuery"
+        />
+      </clr-input-container>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <div class="error" *ngIf="error else spacer">
+      {{error}}
+    </div>
+    <ng-template #spacer>
+      <div style="flex: 1 1 auto;"></div>
+    </ng-template>
+    <button type="button" class="btn btn-primary" (click)="onComposeNewChat(userSearchQuery)">
+      Send
+    </button>
+  </div>
+</clr-modal>

@@ -55,7 +55,7 @@
       <app-front-page-header *ngIf="shouldHeaderShow()"></app-front-page-header>
       <app-global-search *ngIf="shouldNavShow()"></app-global-search>
       <router-outlet></router-outlet>
-      <app-footer *ngIf="shouldFooterShow()"></app-footer>
+      <app-footer [ngClass]="{'home-page-footer': isHomePages()}" *ngIf="shouldFooterShow()"></app-footer>
     </div>
   </div>
 </div>
