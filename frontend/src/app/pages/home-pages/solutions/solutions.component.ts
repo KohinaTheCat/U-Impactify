@@ -11,7 +11,7 @@ export class SolutionsComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  isStudent: boolean = true;
+  isStudent: boolean = false;
 
   onPress(): void {
     this.router.navigateByUrl('/signup');
