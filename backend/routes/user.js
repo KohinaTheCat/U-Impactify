@@ -41,6 +41,7 @@ router.route("/").post((req, res) => {
       phone: "",
       email: "",
     },
+    profileImg: "",
     credit,
     chats: [] 
   });
