@@ -70,12 +70,9 @@ export class UserService {
    * @param {string} password password of user
    */
   loginUser(email: string, password: string): Observable<User | boolean> {
-    return this.http.post<User | boolean>(
-      `/api/user/${email}`,
-      {
-        password,
-      }
-    );
+    return this.http.post<User | boolean>(`/api/user/${email}`, {
+      password,
+    });
   }
 
   /**
@@ -141,9 +138,7 @@ export class UserService {
    * @param {string} courseId  id of course
    */
   dropACourse(userId: string, courseId: string): Observable<any> {
-    return this.http.delete(
-      `/api/user/dropCourse/${courseId}/${userId}`
-    );
+    return this.http.delete(`/api/user/dropCourse/${courseId}/${userId}`);
   }
 
   /**
@@ -174,21 +169,25 @@ export class UserService {
     email: string,
     _id: string
   ): Observable<User> {
-    return this.http.put<User>(
-      `/api/user/addSocialInitiativeProfile`,
-      {
-        registeredNumber,
-        businessNumber,
-        location,
-        hours,
-        phone,
-        email,
-        _id,
-      }
-    );
+    return this.http.put<User>(`/api/user/addSocialInitiativeProfile`, {
+      registeredNumber,
+      businessNumber,
+      location,
+      hours,
+      phone,
+      email,
+      _id,
+    });
   }
 
   getAllSI(): Observable<any> {
     return this.http.get(`/api/user/getAllSI`);
+  }
+
+  addChat(userId: string, chatId: string): Observable<User> {
+    return this.http.put<User>(`/api/user/addChat`, {
+      userId,
+      chatId,
+    });
   }
 }

@@ -2,25 +2,16 @@ const router = require("express").Router();
 const Chat = require("../models/chat.model");
 
 /**
- * TODO: Update as frontend is developed
  * Handler for when a message is sent from client to server
  * @param {Socket} socket the socket from socket.io
  * @param {Object} chat contains sender, reciever, and message body
  */
-const onMessagedRecieved = (socket, chat) => {
-  const { to, from, body } = chat;
-  Chat.findOne({ members: [from, to] }).then((chat) => {
-    if(chat) {
-      chat.messages = chat.messages.concat({
-        from,
-        body,
-        time: new Date(),
-      });
-    } else {
-      chat = new Chat({members: [from, to], messages: [{from, body, time: new Date()}]});
-    }
-    chat.save().then(() => socket.to(to).emit("message", chat));
-  });
+const onMessagedRecieved = (socket, chatId, message) => {
+  Chat.findById(chatId).then(chat => {
+    chat.messages = chat.messages.concat(message);
+    const to = chat.members.filter(member => member !== message.from)[0];
+    chat.save().then(() => socket.to(to).emit("message", chatId, message)).catch(err => console.error(err));
+  }).catch(err => console.error(err));
 };
 
 /**
@@ -33,14 +24,26 @@ router.route("/:id").get((req, res) => {
     .catch((err) => res.status(404).json(err));
 });
 
+/**
+ * POST new chat
+ * @param {String} from message sender
+ * @param {String} to   message reciever
+ */
+router.route("/").post((req, res) => {
+  const { from, to } = req.body;
+  const chat = new Chat({ members: [from, to], messages: [] });
+  chat.save().then(chat => res.json(chat)).catch(err => res.status(500).json(err));
+});
+
 module.exports = router;
 
 module.exports.listen = (server) => {
   const io = require("socket.io")(server);
   io.on("connection", (socket) => {
+    // When a user is connected, they join a room with name=user._id
     socket.on("serverconn", (id) => {
       socket.join(id);
     });
-    socket.on("message", (chat) => onMessagedRecieved(socket, chat));
+    socket.on("message", (chatId, message) => onMessagedRecieved(socket, chatId, message));
   });
 };

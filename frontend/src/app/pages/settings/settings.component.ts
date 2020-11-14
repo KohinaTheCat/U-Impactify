@@ -19,7 +19,6 @@ export class SettingsComponent implements OnInit {
     this.user = this.userService.getCurrentUser();
   }
 
-  // TODO: add implementation
   onPressDelete(): void {
     this.opened = false;
     this.userService.deleteUser(this.user._id).subscribe(

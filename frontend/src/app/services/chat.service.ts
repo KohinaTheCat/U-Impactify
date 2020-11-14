@@ -24,9 +24,6 @@ export class ChatService {
   init(id: string): void {
     this.socket.open();
     this.socket.emit('serverconn', id);
-    this.socket.on('message', (from: string, message: string) => {
-      this.onMessageReceived(from, message);
-    });
   }
 
   /**
@@ -44,23 +41,16 @@ export class ChatService {
   }
 
   /**
-   * TODO: Update as frontend is developed
-   * Handler for when a message is recieved from server to client
-   * @param from  sender id 
-   * @param body  message body
+   * Send Message Function
+   * @param message from, time, date
+   * @param chatId  id of the chat
    */
-  onMessageReceived(from: string, body: string): void {
-    console.log(from, body);
+  sendMessage(message: any, chatId: string): void {
+    this.socket.emit('message', chatId, message);
   }
 
-  /**
-   * Send message function
-   * @param from sender id 
-   * @param to   reciever id 
-   * @param body message body
-   */
-  sendMessage(from: string, to: string, body: string): void {
-    this.socket.emit('message', { from, to, body });
+  postNewChat(from: string, to: string): Observable<Chat> {
+    return this.http.post<Chat>(`/api/chat`, {from, to});
   }
 
   /**
@@ -68,7 +58,7 @@ export class ChatService {
    * @param chatId id of Chat
    * @return Observable chat instance
    */
-  getMessage(chatId: string): Observable<Chat> {
+  getChat(chatId: string): Observable<Chat> {
     return this.http.get<Chat>(`/api/chat/${chatId}`);
   }
 }

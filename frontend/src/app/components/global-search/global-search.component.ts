@@ -40,11 +40,16 @@ export class GlobalSearchComponent implements OnInit, AfterViewInit {
   searchQuery: String = '';
   isFocused: boolean;
   newMessage: boolean = false;
+  socket: any;
 
   ngOnInit(): void {
     this.chatService.init(this.userService.getCurrentUser()._id);
-    // do new message call here
-    this.newMessage = true;
+    this.socket = this.chatService.getSocket();
+    this.socket.on('message', (chatId, message) => {
+      if(this.router.url !== '/chat') {
+        this.newMessage = true;
+      }
+    });
     this.title =
       location.pathname === '/'
         ? 'Dashboard'
