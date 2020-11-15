@@ -551,10 +551,22 @@ li {
 
 .surveybutton {
   margin-top: 1.5rem;
-  display: flex;
+  display:block;
+  
 }
 
 .surveybutton button{
   font-size: 0.875rem;
   border-radius: 5px;
+  display:block;
+
+}
+
+.surveyQuestion {
+  font-size: 0.75rem;
+}
+
+.answerLabel{
+  font-size: 0.65rem;
+  color: var(--gray60);
 }

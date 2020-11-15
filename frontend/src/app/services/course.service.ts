@@ -162,4 +162,13 @@ export class CourseService {
       anon,
     });
   }
+
+  addSurvey(_id: string, courseId: string, surveyAnswers : string[]): Observable<Course>{
+    // change this name to what backend is
+    return this.http.put<Course>(`api/course/addSurvey`, {
+      _id,
+      courseId,
+      surveyAnswers
+    });
+  }
 }

@@ -49,11 +49,11 @@
         <div (click)="studentAnalysisHandler()">
           <a>Student Performance Analysis</a>
         </div>
-        <div *ngIf = "!surveyRequest">
+        <div *ngIf="!surveyRequest">
           <div (click)="openedSurveyRequest = true">
             <a>Request Survey</a>
           </div>
-        </div> 
+        </div>
       </div>
     </div>
   </div>
@@ -168,46 +168,114 @@
         </div>
       </div>
 
-      <div class= "survey">
-        <h4 *ngIf  = "surveyRequest && alreadyEnrolled">
+      <div class="survey">
+        <!-- <h4 *ngIf="!!user && course.teachers.includes(user._id)">
+          <h4>Survey</h4>
+          <div class = surveybutton>
+             fix button placement 
+            <button class = "btn btn-success-outline" (click)="showSurveys = true">Show all survey responses</button>
+          </div>
+        </h4> -->
+        <h4 *ngIf="surveyRequest && alreadyEnrolled">
           <h4>Survey</h4>
           <!-- fix button placement -->
-          <div class = surveybutton>
-            <button class = "btn btn-success-outline" (click)="openedSurvey = true" (click)="xlOpen = true">Complete the Survey</button>
+          <div class="surveybutton">
+            <button
+              class="btn btn-success-outline"
+              (click)="openedSurvey = true"
+              (click)="xlOpen = true"
+            >
+              Complete the Survey
+            </button>
             <clr-wizard #wizardxl [(clrWizardOpen)]="xlOpen">
               <clr-wizard-title>Course Evaluation</clr-wizard-title>
-              
               <clr-wizard-button [type]="'cancel'">Cancel</clr-wizard-button>
               <clr-wizard-button [type]="'previous'">Back</clr-wizard-button>
               <clr-wizard-button [type]="'next'">Next</clr-wizard-button>
-              <clr-wizard-button [type]="'finish'">Finish</clr-wizard-button>
+              <clr-wizard-button [type]="'finish'" (click)="submitSurvey()"
+                >Finish</clr-wizard-button
+              >
               <clr-wizard-page>
-              <!-- <clr-wizard-page [clrWizardPageNextDisabled]="number.pristine || !formPageTwo.valid"> -->
-                <ng-template clrPageTitle>Please rate from 1-5 how much you agree with the following statements (5-Strongly Agree, 1-Strongly Disagree)</ng-template>
                 <ng-template clrPageNavTitle>Question 1</ng-template>
-                <form #formPageOne="ngForm">
-                  <clr-input-container *ngFor="let question of surveyQuestions; let i = index">
-                    <label>{{ question }}</label>
-                    <input clrInput required type="number" [(ngModel)]="surveyAnswer[i]" name="number" #number="ngModel" />
-                    <clr-control-error>This field is required!</clr-control-error>
-                  </clr-input-container>
+                <ng-template clrPageTitle
+                  >Please rate from 1-5 how much you agree with the following
+                  statements (5-Strongly Agree, 1-Strongly
+                  Disagree)</ng-template
+                >
+                <clr-input-container
+                  *ngFor="let question of surveyQuestions; let i = index"
+                >
+                  <label class="surveyQuestion">{{ question }}</label>
+                  <!-- used select here instead and change font/size of label-->
+                  <input
+                    clrInput
+                    required
+                    type="number"
+                    [(ngModel)]="surveyAnswer[i]"
+                    name="number"
+                    #number="ngModel"
+                  />
+                  <clr-control-error>This field is required!</clr-control-error>
+                </clr-input-container>
+              </clr-wizard-page>
+              <clr-wizard-page>
+                <ng-template clrPageTitle
+                  >For this course, describe the typical course workload in a
+                  week span</ng-template
+                >
+                <ng-template clrPageNavTitle>Question 2</ng-template>
+                <form clrForm>
+                  <clr-textarea-container>
+                    <label class="answerLabel"
+                      >Please write your response below</label
+                    >
+                    <textarea
+                      clrTextarea
+                      [(ngModel)]="surveyAnswer[5]"
+                      name="answer"
+                    ></textarea>
+                  </clr-textarea-container>
                 </form>
               </clr-wizard-page>
               <clr-wizard-page>
-                  <ng-template clrPageTitle>Page 1</ng-template>
-                  ...
+                <ng-template clrPageNavTitle>Question 3</ng-template>
+                <ng-template clrPageTitle
+                  >Would you recommend this course to others? Explain why or why
+                  not</ng-template
+                >
+                <form clrForm>
+                  <clr-textarea-container>
+                    <label class="answerLabel"
+                      >Please write your response below</label
+                    >
+                    <textarea
+                      clrTextarea
+                      [(ngModel)]="surveyAnswer[6]"
+                      name="answer"
+                    ></textarea>
+                  </clr-textarea-container>
+                </form>
               </clr-wizard-page>
-          
               <clr-wizard-page>
-                  <ng-template clrPageTitle>Page 2</ng-template>
-                  ...
+                <ng-template clrPageNavTitle>Question 4</ng-template>
+                <ng-template clrPageTitle
+                  >Are you more interested in this subject after taking this
+                  course?</ng-template
+                >
+                <form clrForm>
+                  <clr-textarea-container>
+                    <label class="answerLabel"
+                      >Please write your response below</label
+                    >
+                    <textarea
+                      clrTextarea
+                      [(ngModel)]="surveyAnswer[7]"
+                      name="answer"
+                    ></textarea>
+                  </clr-textarea-container>
+                </form>
               </clr-wizard-page>
-          
-              <clr-wizard-page>
-                  <ng-template clrPageTitle>Page 3</ng-template>
-                  ...
-              </clr-wizard-page>
-          </clr-wizard>
+            </clr-wizard>
           </div>
         </h4>
       </div>
@@ -248,9 +316,21 @@
 <clr-modal [(clrModalOpen)]="openedSurveyRequest" [clrModalClosable]="false">
   <h3 class="modal-title">Confirming Survey to Students</h3>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline" (click)="openedSurveyRequest = false">Cancel</button>
-    <button type="button" class="btn btn-primary" (click)="registerSurveyRequest()">Ok</button>
-</div>
+    <button
+      type="button"
+      class="btn btn-outline"
+      (click)="openedSurveyRequest = false"
+    >
+      Cancel
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="registerSurveyRequest()"
+    >
+      Ok
+    </button>
+  </div>
 </clr-modal>
 
 <clr-modal
@@ -305,6 +385,15 @@
     </div>
   </div>
 </clr-modal>
+
+<!-- modal for instructor to see the survey responses -->
+<!-- <clr-modal [(clrModalOpen)]="showSurveys" [clrModalSize]="'xl'" [clrModalClosable]="false" *ngIf="course">
+  <h3 class="modal-title">All surveys completed for {{ course.name }}</h3>
+  show all the results here loop over array
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="showSurveys = false">Done</button>
+  </div>
+</clr-modal> -->
 
 <clr-modal
   [(clrModalOpen)]="openedAllReviews"

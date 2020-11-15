@@ -11,7 +11,7 @@ import {
   FileSystemFileEntry,
   FileSystemDirectoryEntry,
 } from 'ngx-file-drop';
-import {ClrWizard} from "@clr/angular";
+import { ClrWizard } from '@clr/angular';
 
 @Component({
   selector: 'app-course-preview',
@@ -35,9 +35,13 @@ export class CoursePreviewComponent implements OnInit {
   loading: boolean = true;
   tags: string[] = [];
   errorMessage: string = '';
+
   surveyRequest: boolean;
   openedSurveyRequest: boolean = false;
   openedSurvey: boolean = false;
+  // check if the student already did the survey
+  surveyDone: boolean = false;
+  instructorReview: Course['instructorReview'];
 
   courseReview: string = '';
   score: number = 0;
@@ -46,18 +50,24 @@ export class CoursePreviewComponent implements OnInit {
   courseStars: number[] = [1, 2, 3, 4, 5];
 
   averageScore: number = 0;
+  showSurveys: boolean = false;
 
   @ViewChild('reviewStars') stars;
-  @ViewChild("wizardxl") wizardExtraLarge: ClrWizard;
+  @ViewChild('wizardxl') wizardExtraLarge: ClrWizard;
   xlOpen: boolean = false;
-  surveyAnswer : string[] = [];
+  surveyAnswer: string[] = new Array('');
   surveyQuestions: string[] = [
     'I found the course very fun and exciting',
     'This course gave me a good understanding of this subject',
-    'The impact consultant designed the course such that it was easy to access resources',
-    'Course assessments allowed me to better improve myself with the course material',
-    'The overall course quality was good',
+    'The impact consultant designed the course so it was easy to access resources',
+    'Course assessments allowed me to better improve my understanding with the course material',
+    'The overall course quality was great',
   ];
+
+  // try using select options for question 1 remove after
+  // remove after just for testing
+  selectedDay: string = '';
+  options: string[] = ['one', 'two'];
 
   constructor(
     private userService: UserService,
@@ -78,6 +88,7 @@ export class CoursePreviewComponent implements OnInit {
         this.level = this.course.level;
         this.tags = this.course.tags.split(' ');
         this.surveyRequest = this.course.surveyRequest;
+        this.instructorReview = this.course.instructorReview;
         this.course.img =
           !this.course.img || this.course.img === ''
             ? (this.course.img = '../../../../assets/courseimage.png')
@@ -259,5 +270,21 @@ export class CoursePreviewComponent implements OnInit {
         this.openedRateCourse = false;
         this.ngOnInit();
       });
+  }
+
+  submitSurvey() {
+    this.courseService.addSurvey(
+      this.userService.getCurrentUser()._id,
+      this.course._id,
+      this.surveyAnswer
+    )
+    .subscribe(() => {
+      this.ngOnInit();
+    });
+    // remove after
+    console.log('submitted survey');
+    for (let i = 0; i < this.surveyAnswer.length; i++) {
+      console.log(this.surveyAnswer[i]);
+    }
   }
 }
