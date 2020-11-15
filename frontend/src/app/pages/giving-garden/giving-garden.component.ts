@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 export class GivingGardenComponent implements OnInit {
   opened: Boolean = false;
   si: [any] = [''];
+  error: string = '';
+  amount: number;
 
   constructor(private userService: UserService, private router: Router) {}
 
@@ -26,5 +28,20 @@ export class GivingGardenComponent implements OnInit {
 
   learnMore(id): void {
     this.router.navigate([`user/${id}`]);
+  }
+
+  onOkay(){
+    const user = this.userService.getCurrentUser();
+    console.log(this.amount);
+    this.amount = (-1)*this.amount;
+    this.userService.updateCredit(user._id, this.amount).subscribe(
+      (res) => {
+        this.userService.setUser(res);
+      },
+      (err) => {
+        this.error = err.message;
+        console.log(err);
+      }
+    );
   }
 }

@@ -25,8 +25,12 @@ import { SettingsComponent } from './pages/settings/settings.component';
 import { SignupQuestionaireComponent } from './pages/signup-questionaire/signup-questionaire.component';
 import { SignupQuestionaire2Component } from './pages/signup-questionaire2/signup-questionaire2.component';
 import { UserProfileComponent } from './pages/user-profile/user-profile.component';
+import { ChatComponent } from './pages/chat/chat.component';
 import { SearchResultsComponent } from './pages/search-results/search-results.component';
 import { GivingGardenComponent } from './pages/giving-garden/giving-garden.component';
+import { AboutComponent } from './pages/home-pages/about/about.component';
+import { SolutionsComponent } from './pages/home-pages/solutions/solutions.component';
+import { PricingComponent } from './pages/home-pages/pricing/pricing.component';
 import { AssessmentsComponent } from './pages/assessments/assessments.component';
 
 @NgModule({
@@ -49,9 +53,13 @@ import { AssessmentsComponent } from './pages/assessments/assessments.component'
     IcIlProfileComponent,
     SettingsComponent,
     UserProfileComponent,
+    ChatComponent,
     SearchResultsComponent,
     GivingGardenComponent,
     AssessmentsComponent,
+    AboutComponent,
+    SolutionsComponent,
+    PricingComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,136 @@
+<div class="solutions-container">
+  <div class="top-container">
+    <div class="left">
+      <h4>Solutions</h4>
+      <p>Make an impact as you learn, give and grow with U-Impactify.</p>
+      <div class="button-container">
+        <button
+          id="student-button"
+          [ngClass]="{ 'selected-button': isStudent }"
+          (click)="isStudent = true"
+        >
+          Students</button
+        ><button
+          id="teacher-button"
+          [ngClass]="{ 'selected-button': !isStudent }"
+          (click)="isStudent = false"
+        >
+          Instructors
+        </button>
+      </div>
+    </div>
+    <div class="right">
+      <img src="../../../../assets/home-pages/350.svg" alt="" />
+    </div>
+  </div>
+  <div class="skills-container" *ngIf="isStudent">
+    <div class="skills-header">
+      <h5>Develop New Skills and Knowledge</h5>
+      <p>Enhance your skill set and Knowledge to advance your career</p>
+    </div>
+    <div class="skills">
+      <div class="skill">
+        <img src="../../../../assets/home-pages/Workspace.svg" alt="" />
+        <h6>Learn</h6>
+      </div>
+      <div class="skill">
+        <img src="../../../../assets/home-pages/Licence.svg" alt="" />
+        <h6>Grow</h6>
+      </div>
+      <div class="skill">
+        <img src="../../../../assets/home-pages/Donate.svg" alt="" />
+        <h6>Give</h6>
+      </div>
+    </div>
+  </div>
+  <div class="special-container" *ngIf="isStudent">
+    <h5>What makes U-Impactify special?</h5>
+    <div class="special-card">
+      <img src="../../../../assets/home-pages/121.svg" alt="" />
+      <div class="special-card-body">
+        <h4>The Giving Garden</h4>
+        <p>Volunteer or work with our Social Initiative partners.</p>
+      </div>
+    </div>
+    <div class="special-card">
+      <div class="special-card-body">
+        <h4>Collaborative Learning</h4>
+        <p>
+          Learn as a group by participating in the chat room, whiteboard, and
+          discussion thread.
+        </p>
+      </div>
+      <img src="../../../../assets/home-pages/348.svg" alt="" />
+    </div>
+    <div class="special-card">
+      <img src="../../../../assets/home-pages/Beyondtheclassroom.svg" alt="" />
+      <div class="special-card-body">
+        <h4>Beyond the classroom</h4>
+        <p>There are a variety of online & offline meetup events available.</p>
+      </div>
+    </div>
+    <div class="special-card">
+      <div class="special-card-body">
+        <h4>Communication & Community</h4>
+        <p>Open space to connect with classmates and past students</p>
+      </div>
+      <img src="../../../../assets/home-pages/Supports.svg" alt="" />
+    </div>
+  </div>
+  <div class="skills-container" *ngIf="!isStudent">
+    <div class="skills-header">
+      <h5>Teach or Coach for Students' Success</h5>
+      <p>Host sessions with students and clients, anywhere, anytime with U-Impactify</p>
+    </div>
+    <div class="skills">
+      <div class="skill">
+        <img src="../../../../assets/home-pages/Create.svg" alt="" />
+        <h6>Plan</h6>
+      </div>
+      <div class="skill">
+        <img src="../../../../assets/home-pages/editor.svg" alt="" />
+        <h6>Create</h6>
+      </div>
+      <div class="skill">
+        <img src="../../../../assets/home-pages/Hiring.svg" alt="" />
+        <h6>Teach</h6>
+      </div>
+    </div>
+  </div>
+  <div class="special-container" *ngIf="!isStudent">
+    <h5>What makes U-Impactify special?</h5>
+    <div class="special-card">
+      <img src="../../../../assets/home-pages/52.svg" alt="" />
+      <div class="special-card-body">
+        <h4>Double down on the virtual classroom</h4>
+        <p>Create customized lessons to maximize engagement.</p>
+      </div>
+    </div>
+    <div class="special-card">
+      <div class="special-card-body">
+        <h4>Marketing Strategy</h4>
+        <p>
+          We provide you guides to strategize your class.
+        </p>
+      </div>
+      <img src="../../../../assets/home-pages/349.svg" alt="" />
+    </div>
+    <div class="special-card">
+      <img src="../../../../assets/home-pages/51.svg" alt="" />
+      <div class="special-card-body">
+        <h4>Hassle-Free Business</h4>
+        <p>Automate financial transactions and track customer analytics with ease.</p>
+      </div>
+    </div>
+    <div class="special-card">
+      <div class="special-card-body">
+        <h4>Monitor learning progress</h4>
+        <p>Collect data about the average and individual performance of your classes. Helping find what works, and what doesn't.</p>
+      </div>
+      <img src="../../../../assets/home-pages/50.svg" alt="" />
+    </div>
+  </div>
+  <div class="bottom-button-container">
+    <button class="btn btn-primary" (click)="onPress()">Get Started</button>
+  </div>
+</div>

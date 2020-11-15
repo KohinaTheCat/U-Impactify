@@ -24,7 +24,7 @@ router.route("/:email").post((req, res) => {
  * @return user
  */
 router.route("/").post((req, res) => {
-  const { _id, password, email, type, questionaire } = req.body;
+  const { _id, password, email, type, questionaire, credit} = req.body;
   const newUser = new userSchema({
     _id,
     password,
@@ -41,6 +41,8 @@ router.route("/").post((req, res) => {
       phone: "",
       email: "",
     },
+    credit,
+    chats: [] 
   });
   newUser
     .save()
@@ -130,6 +132,26 @@ router.route("/updateClassesTeaching").put((req, res) => {
 });
 
 /**
+ * PUT update credit (user)
+ * @param req {_id, credit}
+ * @param _id user id
+ * @return user 
+ */
+router.route("/updateCredit").put((req, res) => { 
+  const { _id, credit } = req.body; 
+  userSchema
+    .findById(_id)
+    .then((user) => { 
+      user.credit = user.credit + Number(credit); 
+      user
+      .save() 
+      .then(() => res.json(user))
+      .catch((err) => res.json(err));
+    })
+    .catch((err) => res.status(400).json(err));
+});
+
+/**
  * DELETE drop a course (Impact Learner only)
  * @param req { userId, courseId }
  * @param userId user id
@@ -211,8 +233,6 @@ router.route("/:id").get((req, res) => {
  * GET users by search query
  * @param query the search query
  * @return array of users that satisfy the query
- *
- * TODO: Replace with filtering in db instead of backend
  */
 router.route("/search/:query").get((req, res) => {
   const { query } = req.params;
@@ -228,6 +248,20 @@ router.route("/search/:query").get((req, res) => {
       res.json(users);
     })
     .catch((err) => res.status(404).json("None Found"));
+});
+
+/**
+ * PUT add new chat id to user
+ * @param userId id of user
+ * @param chatId id of chat
+ * @return user
+ */
+router.put("/addChat", (req, res) => {
+  const { userId, chatId } = req.body;
+  userSchema.findById(userId).then(user => {
+    user.chats = user.chats.concat(chatId);
+    user.save().then(user => res.json(user)).catch(err => res.status(400).json(err));
+  }).catch(err => res.status(404).json(err));
 });
 
 /**

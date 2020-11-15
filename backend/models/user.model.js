@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const { Schema, model } = mongoose;
 const bcrypt = require("bcrypt");
+const { Double } = require("mongodb");
 
 const saltFactor = 10;
 
@@ -14,7 +15,8 @@ const saltFactor = 10;
  * @property {[Object]}   classesTeaching   array to store course _id, name, img
  * @property {[[String]]} questionaire      for the user questionnaire
  * @property {Object}     socialInitiative  for SI Profile
- *
+ * @property {Number}     credit            mock money
+ * @property {[String]}   chats             ids of chats that the user is in
  */
 const userSchema = new Schema({
   _id: {
@@ -77,6 +79,11 @@ const userSchema = new Schema({
       type: String,
     },
   },
+
+  credit: {
+    type: Number,
+  },
+  chats: [String],
 });
 
 /**

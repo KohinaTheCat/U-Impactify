@@ -16,7 +16,7 @@
       <div class="circle" (click)="goToProfile()">
         <clr-icon shape="user"></clr-icon>
       </div>
-      <div class="circle"><clr-icon shape="chat-bubble"></clr-icon></div>
+      <div class="circle" (click)="onPressChat()"><clr-icon shape="chat-bubble" [ngClass]="{'is-solid has-badge': newMessage}"></clr-icon></div>
       <div class="circle"><clr-icon shape="bell"></clr-icon></div>
       <div class="circle" (click)="logOut()">
         <clr-icon shape="power"></clr-icon>

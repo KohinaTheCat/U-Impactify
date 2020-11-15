@@ -39,6 +39,7 @@ export class LoginSignupComponent implements OnInit {
   password: string = '';
   type: string = '';
   error: string = '';
+  credit: number = 1000;
 
   onToggle() {
     this.logged = !this.logged;
@@ -96,6 +97,9 @@ export class LoginSignupComponent implements OnInit {
       email: this.email,
       password: this.password,
       type: this.type,
+      //made it so user starts with $1000, can change depending on implementation
+      //of giving garden
+      credit: this.credit,
     };
     if (!this.logged) {
       this.registerHandler(user);
