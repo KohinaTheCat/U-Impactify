@@ -1,36 +1,28 @@
-const router = require("express").Router();
 let Course = require("../models/course.model");
 
-//connecting to db, init. gridstorage and creating a storage
+const router = require("express").Router();
 const multer = require("multer");
 const crypto = require("crypto");
 const mongoose = require("mongoose");
 const GridFsStorage = require("multer-gridfs-storage");
 
-var Grid = require("gridfs-stream");
-Grid.mongo = mongoose.mongo;
-
-// .env
 require("dotenv").config();
 const uri = process.env.ATLAS_URI;
 
-// connection
 const conn = mongoose.createConnection(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
 });
 
-// init gfs
 let gfs;
 conn.once("open", () => {
   // init stream
   gfs = new mongoose.mongo.GridFSBucket(conn.db, {
-    bucketName: "uploads",
+    bucketName: "course_uploads",
   });
 });
 
-// init storage
 const storage = new GridFsStorage({
   url: uri,
   file: (req, file) => {
@@ -42,7 +34,7 @@ const storage = new GridFsStorage({
         const filename = file.originalname;
         const fileInfo = {
           filename: filename,
-          bucketName: "uploads",
+          bucketName: "course_uploads",
         };
         resolve(fileInfo);
       });
@@ -159,7 +151,7 @@ router.route("/search/:query").get((req, res) => {
       { name: { $regex: query, $options: "i" } },
       { teachers: { $regex: query, $options: "i" } },
       { level: { $regex: query, $options: "i" } },
-      { tags : { $regex: query, $options: "i"} },
+      { tags: { $regex: query, $options: "i" } },
     ],
   })
     .then((courses) => {
@@ -232,7 +224,7 @@ router.get("/:id/getCourseImage", (req, res) => {
 });
 
 /**
- * GET document by filename
+ * GET document by id
  * @param id document id
  * @return document
  */

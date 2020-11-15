@@ -58,7 +58,9 @@ const userSchema = new Schema({
   questionaire: {
     type: [[String]],
   },
-
+  img: {
+    type: String,
+  },
   socialInitiative: {
     registeredNumber: {
       type: String,
@@ -79,7 +81,6 @@ const userSchema = new Schema({
       type: String,
     },
   },
-
   credit: {
     type: Number,
   },

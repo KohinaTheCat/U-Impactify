@@ -58,7 +58,8 @@ export class EnrollCourseComponent implements OnInit {
           course.img =
             res === '' || res === null
               ? ''
-              : `http://localhost:5000/course/documents/${res}`;
+              // TODO: REMOVE LOCALHOST FROM PROD BUILD AFTER
+              : `http://localhost:5000/api/course/documents/${res}`;
         });
       });
       this.loading = false;

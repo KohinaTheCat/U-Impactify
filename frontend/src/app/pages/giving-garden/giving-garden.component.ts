@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class GivingGardenComponent implements OnInit {
   opened: Boolean = false;
   si: [any] = [''];
+  si_imgs: [any] = [''];
   error: string = '';
   amount: number;
 
@@ -18,7 +19,8 @@ export class GivingGardenComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getAllSI().subscribe((res) => {
       this.si = res;
-      console.log(this.si);
+      this.si_imgs = res.map((s) => s.img === '' || s.img === undefined ? '' : `http://localhost:5000/api/user/documents/${s.img}`);
+      console.log(this.si_imgs);
     });
   }
 

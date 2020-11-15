@@ -1,153 +1,175 @@
-<div id="si">
-  <div class="spacer"></div>
-
+<div class="card">
   <div class="profile-container">
-    <h2>Profile</h2>
     <div class="inner">
-      <div id="image">
-        <img src="../../../../assets/THS.png" width="400" alt="" />
+      <div
+        class="profile-pic"
+        [ngClass]="{ 'no-image': !profileImage }"
+        [style.background-image]="'url(' + profileImage + ')'"
+      >
+        <clr-icon *ngIf="!profileImage" shape="image"></clr-icon>
       </div>
-
       <div class="info">
         <div>
           Registered Name: <span class="value">{{ user._id }}</span>
         </div>
         <div>
-          Registered Number: <span class="value">{{ registeredNumber }}</span>
+          Registered Number:
+          <span class="value">{{ user.socialInitiative.registeredNumber }}</span>
         </div>
         <div>
-          Business Number: <span class="value">{{ businessNumber }}</span>
+          Business Number: <span class="value">{{ user.socialInitiative.businessNumber }}</span>
         </div>
         <div>
           Location:
-          <span class="value">{{ location }}</span>
+          <span class="value">{{ user.socialInitiative.location }}</span>
         </div>
         <div>
-          Hours: <span class="value">{{ hours }}</span>
+          Hours: <span class="value">{{ user.socialInitiative.hours }}</span>
         </div>
         <div>
-          Phone: <span class="value">{{ phone }}</span>
+          Phone: <span class="value">{{ user.socialInitiative.phone }}</span>
         </div>
         <div>
-          Email: <span class="value">{{ email }}</span>
+          Email: <span class="value">{{ user.socialInitiative.email }}</span>
         </div>
       </div>
-
       <div class="btn-container">
-        <button class="btn" (click)="onDonate()" id="donateButton">Donate Now</button>
-        <button class="btn">Visit Our Website</button>
-        <button class="btn">Email Us</button>
-        <button *ngIf="sameUser" (click)="basic = true" class="btn edit">
-          {{ current }}
+        <button
+          class="btn btn-purple"
+          *ngIf="isLoggedIn && !sameUser"
+          (click)="onDonate()"
+          id="donateButton"
+        >
+          Donate Now
+        </button>
+        <button class="btn btn-purple">Visit Our Website</button>
+        <button class="btn btn-purple">Email Us</button>
+        <button
+          *ngIf="sameUser"
+          (click)="basic = true"
+          class="btn edit btn-purple"
+        >
+        Edit
         </button>
       </div>
-
-      <clr-modal *ngIf="sameUser" [(clrModalOpen)]="basic" [clrModalSize]="'l'">
-        <div class="modal-body">
-          <h3>Edit your Profile!</h3>
-          <form clrForm>
-            <clr-input-container class="side">
-              <label class="add">Registered Number</label>
-              <input
-                clrInput
-                placeholder="{{ registeredNumber }}"
-                class="addLeft"
-                name="name"
-                [(ngModel)]="registeredNumber"
-              />
-            </clr-input-container>
-          </form>
-          <form clrForm>
-            <clr-input-container class="side">
-              <label class="add">Business Number</label>
-              <input
-                clrInput
-                placeholder="{{ businessNumber }}"
-                class="addLeft"
-                name="name"
-                [(ngModel)]="businessNumber"
-              />
-            </clr-input-container>
-          </form>
-          <form clrForm>
-            <clr-input-container class="side">
-              <label class="add">Location</label>
-              <input
-                clrInput
-                placeholder="{{ location }}"
-                class="addLeft"
-                name="name"
-                [(ngModel)]="location"
-              />
-            </clr-input-container>
-          </form>
-          <form clrForm>
-            <clr-input-container class="side">
-              <label class="add">Hours</label>
-              <input
-                clrInput
-                placeholder="{{ hours }}"
-                class="addLeft"
-                name="name"
-                [(ngModel)]="hours"
-              />
-            </clr-input-container>
-          </form>
-          <form clrForm>
-            <clr-input-container class="side">
-              <label class="add">Phone Number</label>
-              <input
-                clrInput
-                placeholder="{{ phone }}"
-                class="addLeft"
-                name="name"
-                [(ngModel)]="phone"
-              />
-            </clr-input-container>
-          </form>
-          <form clrForm>
-            <clr-input-container class="side">
-              <label class="add">Email Address</label>
-              <input
-                clrInput
-                placeholder="{{ email }}"
-                class="addLeft"
-                name="name"
-                [(ngModel)]="email"
-              />
-            </clr-input-container>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button
-            type="button"
-            class="btn btn-outline"
-            (click)="basic = false"
-            (click)="doNotChange()"
-          >
-            Cancel
-          </button>
-          <button
-            type="button"
-            class="btn btn-primary"
-            (click)="basic = false"
-            (click)="add()"
-          >
-            Ok
-          </button>
-        </div>
-      </clr-modal>
     </div>
     <!-- Here should go the Tabs Container as shown in the mockup -->
   </div>
-
-  <div class="spacer"></div>
 </div>
 
+<clr-modal *ngIf="sameUser" [(clrModalOpen)]="basic" [clrModalSize]="'xl'">
+  <div class="modal-body edit-profile">
+    <h3>Edit Profile</h3>
+    <div class="image-upload">
+      <ngx-file-drop
+        dropZoneLabel="Drop files here"
+        (onFileDrop)="droppedProfileImage($event)"
+        accept=".jpg, .png, .jpeg"
+      >
+        <ng-template
+          ngx-file-drop-content-tmp
+          let-openFileSelector="openFileSelector"
+        >
+          <label>Upload Course Image (.jpg and .png)</label>
+          <button
+            class="btn btn-primary right"
+            style="height: auto"
+            (click)="openFileSelector()"
+          >
+            Browse Files
+          </button>
+        </ng-template>
+      </ngx-file-drop>
+      <div class="uploadedImage imageError">
+        {{ imageError }}
+      </div>
+      <div class="uploadedImage" *ngIf="img[0]">
+        Uploaded "{{ img[0].fileEntry.name }}"
+      </div>
+    </div>
+    <form clrForm class="profile-form">
+      <clr-input-container class="side">
+        <label>Registered Number</label>
+        <input
+          clrInput
+          placeholder="{{ registeredNumber }}"
+          [(ngModel)]="registeredNumber"
+          name="registered number"
+        />
+      </clr-input-container>
+      <clr-input-container class="side">
+        <label>Business Number</label>
+        <input
+          clrInput
+          placeholder="{{ businessNumber }}"
+          [(ngModel)]="businessNumber"
+          name="business number"
+
+        />
+      </clr-input-container>
+      <clr-input-container class="side">
+        <label>Location</label>
+        <input
+          clrInput
+          placeholder="{{ location }}"
+          [(ngModel)]="location"
+          name="location"
+        />
+      </clr-input-container>
+      <clr-input-container class="side">
+        <label>Hours</label>
+        <input
+          clrInput
+          placeholder="{{ hours }}"
+          [(ngModel)]="hours"
+          name="hours"
+        />
+      </clr-input-container>
+      <clr-input-container class="side">
+        <label>Phone Number</label>
+        <input
+          clrInput
+          placeholder="{{ phone }}"
+          [(ngModel)]="phone"
+          name="phone"
+        />
+      </clr-input-container>
+      <clr-input-container class="side">
+        <label>Email Address</label>
+        <input
+          clrInput
+          placeholder="{{ email }}"
+          [(ngModel)]="email"
+          name="email"
+        />
+      </clr-input-container>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-ok btn-outline btn-cancel"
+      (click)="basic = false"
+      (click)="doNotChange()"
+    >
+      Cancel
+    </button>
+    <button
+      type="button"
+      class="btn btn-ok btn-outline"
+      (click)="basic = false"
+      (click)="add()"
+    >
+      Ok
+    </button>
+  </div>
+</clr-modal>
+
+<!-- DONATE MODAL -->
 
 <clr-modal class="popup" [(clrModalOpen)]="opened" [clrModalSize]="'lg'">
   <div class="modal-body">
-    <h3 class="modal-title">I want to contribute to {{socialId}}</h3>
+    <h3 class="modal-title">I want to contribute to {{ user._id }}</h3>
     <div class="row inner_modal">
       <div class="col">
         <div>
@@ -158,7 +180,7 @@
             $
             <input
               [(ngModel)]="amount"
-              [ngModelOptions]="{standalone: true}"
+              [ngModelOptions]="{ standalone: true }"
               type="text"
               id="basic"
               placeholder="100.00"
@@ -168,15 +190,27 @@
         </div>
       </div>
       <div>
-        <img class="modal_img" src="../../../assets/giving_garden/donate_si.svg" />
+        <img
+          class="modal_img"
+          src="../../../assets/giving_garden/donate_si.svg"
+        />
       </div>
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline" (click)="opened = false">
+    <button
+      type="button"
+      class="btn btn-ok btn-outline"
+      (click)="opened = false"
+    >
       Cancel
     </button>
-    <button type="button" class="btn btn-primary" (click)="onOkay()" (click)="opened = false">
+    <button
+      type="button"
+      class="btn btn-ok btn-outline btn-cancel"
+      (click)="onOkay()"
+      (click)="opened = false"
+    >
       Ok
     </button>
   </div>
