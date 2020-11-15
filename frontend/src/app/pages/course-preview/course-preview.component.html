@@ -181,21 +181,18 @@
             >Please rate from 1-5 how much you agree with the following
             statements (5-Strongly Agree, 1-Strongly Disagree)</ng-template
           >
-          <clr-input-container
+          <clr-select-container
             *ngFor="let question of surveyQuestions; let i = index"
           >
-            <label class="surveyQuestion">{{ question }}</label>
-            <!-- used select here instead and change font/size of label-->
-            <input
-              clrInput
-              required
-              type="number"
-              [(ngModel)]="surveyAnswer[i]"
-              name="number"
-              #number="ngModel"
-            />
-            <clr-control-error>This field is required!</clr-control-error>
-          </clr-input-container>
+            <label class="surveyQuestion"> {{ question }} </label>
+            <select clrSelect name="answer" [(ngModel)]="surveyAnswer[i]">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+          </clr-select-container>
         </clr-wizard-page>
         <clr-wizard-page>
           <ng-template clrPageTitle

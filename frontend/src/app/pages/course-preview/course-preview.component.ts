@@ -35,12 +35,9 @@ export class CoursePreviewComponent implements OnInit {
   loading: boolean = true;
   tags: string[] = [];
   errorMessage: string = '';
-
   surveyRequest: boolean;
   openedSurveyRequest: boolean = false;
   openedSurvey: boolean = false;
-  // check if the student already did the survey
-  surveyDone: boolean = false;
   instructorReview: Course['instructorReview'];
 
   courseReview: string = '';
@@ -63,11 +60,6 @@ export class CoursePreviewComponent implements OnInit {
     'Course assessments allowed me to better improve my understanding with the course material',
     'The overall course quality was great',
   ];
-
-  // try using select options for question 1 remove after
-  // remove after just for testing
-  selectedDay: string = '';
-  options: string[] = ['one', 'two'];
 
   constructor(
     private userService: UserService,
