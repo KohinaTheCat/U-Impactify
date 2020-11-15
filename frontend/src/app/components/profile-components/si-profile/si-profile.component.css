@@ -9,6 +9,7 @@
   padding: 1rem;
   padding-bottom: 2rem;
   margin-bottom: 2rem;
+  margin-right: 2rem;
   display: flex;
   flex-direction: column;
 }
@@ -16,7 +17,6 @@
 clr-control-error {
   color: #c21d00;
 }
-
 
 h2 {
   line-height: initial;
