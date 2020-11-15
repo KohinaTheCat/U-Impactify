@@ -56,4 +56,4 @@ const server = app.listen(PORT, () => {
 
 /* Socket.io Connection */
 
-const io = require("./routes/chat").listen(server);
+require("./routes/chat").listen(server);

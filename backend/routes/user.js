@@ -1,6 +1,49 @@
-const router = require("express").Router();
 let userSchema = require("../models/user.model");
 let courseSchema = require("../models/course.model");
+
+const router = require("express").Router();
+const multer = require("multer");
+const crypto = require("crypto");
+const mongoose = require("mongoose");
+const GridFsStorage = require("multer-gridfs-storage");
+
+require("dotenv").config();
+const uri = process.env.ATLAS_URI;
+
+const conn = mongoose.createConnection(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: false,
+});
+
+let gfs;
+conn.once("open", () => {
+  // init stream
+  gfs = new mongoose.mongo.GridFSBucket(conn.db, {
+    bucketName: "user_uploads",
+  });
+});
+
+const storage = new GridFsStorage({
+  url: uri,
+  file: (req, file) => {
+    return new Promise((resolve, reject) => {
+      crypto.randomBytes(16, (err, buf) => {
+        if (err) {
+          return reject(err);
+        }
+        const filename = file.originalname;
+        const fileInfo = {
+          filename: filename,
+          bucketName: "user_uploads",
+        };
+        resolve(fileInfo);
+      });
+    });
+  },
+});
+
+const upload = multer({ storage: storage });
 
 // POST login user
 router.route("/:email").post((req, res) => {
@@ -24,7 +67,7 @@ router.route("/:email").post((req, res) => {
  * @return user
  */
 router.route("/").post((req, res) => {
-  const { _id, password, email, type, questionaire, credit} = req.body;
+  const { _id, password, email, type, questionaire, credit } = req.body;
   const newUser = new userSchema({
     _id,
     password,
@@ -41,14 +84,63 @@ router.route("/").post((req, res) => {
       phone: "",
       email: "",
     },
-    profileImg: "",
+    img: "",
     credit,
-    chats: [] 
+    chats: [],
   });
   newUser
     .save()
     .then(() => res.json(newUser))
     .catch((err) => res.status(400).json(err));
+});
+
+/**
+ * POST uploading profile image for a user
+ * @param id user id
+ */
+router.post("/:id/uploadUserImage", upload.array("document", 1), (req, res) => {
+   userSchema.findById(req.params.id)
+    .then((user) => {
+      user.img = req.files[0].id;
+      user
+        .save()
+        .then((user) => res.json(user))
+        .catch((err) => res.json(err));
+    })
+    .catch((err) => res.status(400).json(`Error finding Course: ${err}`));
+});
+
+/**
+ * GET user profile image for a user
+ * @param id user id
+ * @return user image
+ */
+router.get("/:id/getUserImage", (req, res) => {
+  userSchema.findById(req.params.id)
+    .then((user) => {
+      res.json(user.img);
+    })
+    .catch((err) => res.status(404).json(err));
+});
+
+/**
+ * GET file by id
+ * @param id file id
+ * @return file
+ */
+router.get("/documents/:id", (req, res) => {
+  gfs
+    .find({
+      _id: mongoose.Types.ObjectId(req.params.id),
+    })
+    .toArray((err, files) => {
+      if (!files || files.length === 0) {
+        return res.status(404).json({
+          err: "no files exist",
+        });
+      }
+      gfs.openDownloadStream(mongoose.Types.ObjectId(req.params.id)).pipe(res);
+    });
 });
 
 /**
@@ -136,18 +228,18 @@ router.route("/updateClassesTeaching").put((req, res) => {
  * PUT update credit (user)
  * @param req {_id, credit}
  * @param _id user id
- * @return user 
+ * @return user
  */
-router.route("/updateCredit").put((req, res) => { 
-  const { _id, credit } = req.body; 
+router.route("/updateCredit").put((req, res) => {
+  const { _id, credit } = req.body;
   userSchema
     .findById(_id)
-    .then((user) => { 
-      user.credit = user.credit + Number(credit); 
+    .then((user) => {
+      user.credit = user.credit + Number(credit);
       user
-      .save() 
-      .then(() => res.json(user))
-      .catch((err) => res.json(err));
+        .save()
+        .then(() => res.json(user))
+        .catch((err) => res.json(err));
     })
     .catch((err) => res.status(400).json(err));
 });
@@ -203,7 +295,6 @@ router.route("/addSocialInitiativeProfile").put((req, res) => {
   });
 });
 
-
 /**
  * GET all Social Initiatives
  * @return all Social Initiatives
@@ -234,8 +325,6 @@ router.route("/:id").get((req, res) => {
  * GET users by search query
  * @param query the search query
  * @return array of users that satisfy the query
- *
- * TODO: Replace with filtering in db instead of backend
  */
 router.route("/search/:query").get((req, res) => {
   const { query } = req.params;
@@ -251,6 +340,26 @@ router.route("/search/:query").get((req, res) => {
       res.json(users);
     })
     .catch((err) => res.status(404).json("None Found"));
+});
+
+/**
+ * PUT add new chat id to user
+ * @param userId id of user
+ * @param chatId id of chat
+ * @return user
+ */
+router.put("/addChat", (req, res) => {
+  const { userId, chatId } = req.body;
+  userSchema
+    .findById(userId)
+    .then((user) => {
+      user.chats = user.chats.concat(chatId);
+      user
+        .save()
+        .then((user) => res.json(user))
+        .catch((err) => res.status(400).json(err));
+    })
+    .catch((err) => res.status(404).json(err));
 });
 
 /**

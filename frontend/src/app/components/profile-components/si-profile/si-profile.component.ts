@@ -24,6 +24,8 @@ export class SiProfileComponent implements OnInit {
   img: NgxFileDropEntry[] = [];
   imageError: string = 'No Image Has Been Selected';
 
+  profileImage: string;
+
   user: User;
   disabled = true;
   basic = false;
@@ -35,7 +37,6 @@ export class SiProfileComponent implements OnInit {
   email: string;
   opened: boolean = false;
   amount: number;
-  socialId: string;
   current: string = 'edit';
   error: string = '';
 
@@ -45,15 +46,43 @@ export class SiProfileComponent implements OnInit {
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    if (!!this.searchedUser) {
+    if (this.searchedUser) {
       this.user = this.searchedUser;
-      this.socialId = this.user._id;
     } else {
       this.sameUser = true;
       this.user = this.userService.getCurrentUser();
-      this.socialId = this.user._id;
     }
     this.doNotChange();
+
+    this.userService
+      .getUserImage(this.user._id)
+      .subscribe(
+        (res) =>
+          (this.profileImage =
+            res === '' || res === null
+              ? ''
+              : `http://localhost:5000/api/user/documents/${res}`)
+      );
+  }
+
+  ngOnChanges() {
+    if (this.searchedUser) {
+      this.user = this.searchedUser;
+    } else {
+      this.sameUser = true;
+      this.user = this.userService.getCurrentUser();
+    }
+    this.doNotChange();
+
+    this.userService
+      .getUserImage(this.user._id)
+      .subscribe(
+        (res) =>
+          (this.profileImage =
+            res === '' || res === null
+              ? ''
+              : `http://localhost:5000/api/user/documents/${res}`)
+      );
   }
 
   changePicture() {
@@ -65,11 +94,32 @@ export class SiProfileComponent implements OnInit {
   onChangeImage() {
     if (this.sameUser) {
       this.changeImage = false;
+
+      for (const droppedFile of this.img) {
+        if (droppedFile.fileEntry.isFile) {
+          const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
+          fileEntry.file((file: File) => {
+            const formData = new FormData();
+            formData.append('document', file, droppedFile.relativePath);
+            this.userService.postCourseImage(formData, this.user._id).subscribe(
+              (res) => {
+                this.userService.setUser(res);
+                this.ngOnChanges();
+                console.log(res);
+              },
+              (err) => {
+                console.log(err);
+              }
+            );
+          });
+        }
+      }
     }
   }
 
-  public droppedCourseImage(image: NgxFileDropEntry[]) {
+  public droppedProfileImage(image: NgxFileDropEntry[]) {
     this.img = image;
+    console.log(this.img);
     for (const droppedFile of image) {
       if (droppedFile.fileEntry.isFile) {
         const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
