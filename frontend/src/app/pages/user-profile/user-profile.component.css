@@ -50,3 +50,7 @@
 .spacer {
   flex: 1 1 auto;
 }
+
+app-si-profile {
+  width: 100%;
+}
