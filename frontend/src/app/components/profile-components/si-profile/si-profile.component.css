@@ -17,9 +17,6 @@ clr-control-error {
   color: #c21d00;
 }
 
-label {
-  margin: 2rem;
-}
 
 h2 {
   line-height: initial;
@@ -80,6 +77,39 @@ h2 {
   display: grid;
   grid-template-rows: repeat(auto-fit, 1fr);
   height: 75%;
+}
+
+.image-upload {
+  margin-top: 2rem;
+}
+
+.edit-profile {
+  padding-bottom: 2rem;
+}
+
+.edit-profile *{
+  width: 100%;
+  padding: 0 1rem;
+}
+
+.edit-profile h3 {
+  display: flex;
+  justify-content: center;
+}
+
+.profile-form clr-input-container label{
+  padding: 0;
+  font-size: 0.875rem;
+  display: flex;
+  width: 10rem;
+}
+
+.profile-form clr-input-container input {
+  font-size: 1rem !important;
+}
+
+.profile-form {
+  margin-top: 1rem;
 }
 
 .btn-purple {
@@ -153,6 +183,8 @@ h2 {
 
 .imageError {
   color: #c21d00;
+  display: flex;
+  justify-content: center;
 }
 
 .col {

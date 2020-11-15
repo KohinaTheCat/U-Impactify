@@ -1,7 +1,11 @@
 <div class="card">
   <div class="profile-container">
     <div class="inner">
-      <div  class="profile-pic" [ngClass]="{'no-image': !profileImage}"  [style.background-image]="'url(' + profileImage + ')'">
+      <div
+        class="profile-pic"
+        [ngClass]="{ 'no-image': !profileImage }"
+        [style.background-image]="'url(' + profileImage + ')'"
+      >
         <clr-icon *ngIf="!profileImage" shape="image"></clr-icon>
       </div>
       <div class="info">
@@ -10,28 +14,32 @@
         </div>
         <div>
           Registered Number:
-          <span class="value">{{ registeredNumber }}</span>
+          <span class="value">{{ user.socialInitiative.registeredNumber }}</span>
         </div>
         <div>
-          Business Number: <span class="value">{{ businessNumber }}</span>
+          Business Number: <span class="value">{{ user.socialInitiative.businessNumber }}</span>
         </div>
         <div>
           Location:
-          <span class="value">{{ location }}</span>
+          <span class="value">{{ user.socialInitiative.location }}</span>
         </div>
         <div>
-          Hours: <span class="value">{{ hours }}</span>
+          Hours: <span class="value">{{ user.socialInitiative.hours }}</span>
         </div>
         <div>
-          Phone: <span class="value">{{ phone }}</span>
+          Phone: <span class="value">{{ user.socialInitiative.phone }}</span>
         </div>
         <div>
-          Email: <span class="value">{{ email }}</span>
+          Email: <span class="value">{{ user.socialInitiative.email }}</span>
         </div>
       </div>
-
       <div class="btn-container">
-        <button class="btn btn-purple" (click)="onDonate()" id="donateButton">
+        <button
+          class="btn btn-purple"
+          *ngIf="!sameUser"
+          (click)="onDonate()"
+          id="donateButton"
+        >
           Donate Now
         </button>
         <button class="btn btn-purple">Visit Our Website</button>
@@ -41,7 +49,7 @@
           (click)="basic = true"
           class="btn edit btn-purple"
         >
-          {{ current }}
+        Edit
         </button>
       </div>
     </div>
@@ -49,80 +57,90 @@
   </div>
 </div>
 
-<!-- EDIT MODAL -->
-
-<clr-modal *ngIf="sameUser" [(clrModalOpen)]="basic" [clrModalSize]="'l'">
-  <div class="modal-body">
-    <h3>Edit your Profile!</h3>
-    <form clrForm>
+<clr-modal *ngIf="sameUser" [(clrModalOpen)]="basic" [clrModalSize]="'xl'">
+  <div class="modal-body edit-profile">
+    <h3>Edit Profile</h3>
+    <div class="image-upload">
+      <ngx-file-drop
+        dropZoneLabel="Drop files here"
+        (onFileDrop)="droppedProfileImage($event)"
+        accept=".jpg, .png, .jpeg"
+      >
+        <ng-template
+          ngx-file-drop-content-tmp
+          let-openFileSelector="openFileSelector"
+        >
+          <label>Upload Course Image (.jpg and .png)</label>
+          <button
+            class="btn btn-primary right"
+            style="height: auto"
+            (click)="openFileSelector()"
+          >
+            Browse Files
+          </button>
+        </ng-template>
+      </ngx-file-drop>
+      <div class="uploadedImage imageError">
+        {{ imageError }}
+      </div>
+      <div class="uploadedImage" *ngIf="img[0]">
+        Uploaded "{{ img[0].fileEntry.name }}"
+      </div>
+    </div>
+    <form clrForm class="profile-form">
       <clr-input-container class="side">
-        <label class="add">Registered Number</label>
+        <label>Registered Number</label>
         <input
           clrInput
           placeholder="{{ registeredNumber }}"
-          class="addLeft"
-          name="name"
           [(ngModel)]="registeredNumber"
+          name="registered number"
         />
       </clr-input-container>
-    </form>
-    <form clrForm>
       <clr-input-container class="side">
-        <label class="add">Business Number</label>
+        <label>Business Number</label>
         <input
           clrInput
           placeholder="{{ businessNumber }}"
-          class="addLeft"
-          name="name"
           [(ngModel)]="businessNumber"
+          name="business number"
+
         />
       </clr-input-container>
-    </form>
-    <form clrForm>
       <clr-input-container class="side">
-        <label class="add">Location</label>
+        <label>Location</label>
         <input
           clrInput
           placeholder="{{ location }}"
-          class="addLeft"
-          name="name"
           [(ngModel)]="location"
+          name="location"
         />
       </clr-input-container>
-    </form>
-    <form clrForm>
       <clr-input-container class="side">
-        <label class="add">Hours</label>
+        <label>Hours</label>
         <input
           clrInput
           placeholder="{{ hours }}"
-          class="addLeft"
-          name="name"
           [(ngModel)]="hours"
+          name="hours"
         />
       </clr-input-container>
-    </form>
-    <form clrForm>
       <clr-input-container class="side">
-        <label class="add">Phone Number</label>
+        <label>Phone Number</label>
         <input
           clrInput
           placeholder="{{ phone }}"
-          class="addLeft"
-          name="name"
           [(ngModel)]="phone"
+          name="phone"
         />
       </clr-input-container>
-    </form>
-    <form clrForm>
       <clr-input-container class="side">
-        <label class="add">Email Address</label>
+        <label>Email Address</label>
         <input
           clrInput
           placeholder="{{ email }}"
-          class="addLeft"
-          name="name"
           [(ngModel)]="email"
+          name="email"
         />
       </clr-input-container>
     </form>
@@ -193,46 +211,6 @@
       (click)="onOkay()"
       (click)="opened = false"
     >
-      Ok
-    </button>
-  </div>
-</clr-modal>
-
-<!-- CHANGE IMAGE MODAL -->
-
-<clr-modal [(clrModalOpen)]="changeImage" [clrModalSize]="'lg'">
-  <div class="modal-body">
-    <ngx-file-drop
-      dropZoneLabel="Drop files here"
-      (onFileDrop)="droppedProfileImage($event)"
-      accept=".jpg, .png, .jpeg"
-    >
-      <ng-template
-        ngx-file-drop-content-tmp
-        let-openFileSelector="openFileSelector"
-      >
-        <label>Upload Course Image (.jpg and .png)</label>
-        <button
-          class="btn btn-primary right"
-          style="height: auto"
-          (click)="openFileSelector()"
-        >
-          Browse Files
-        </button>
-      </ng-template>
-    </ngx-file-drop>
-    <div class="uploadedImage imageError">
-      {{ imageError }}
-    </div>
-    <div class="uploadedImage" *ngIf="img[0]">
-      Uploaded "{{ img[0].fileEntry.name }}"
-    </div>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-outline" (click)="changeImage = false">
-      Cancel
-    </button>
-    <button type="button" class="btn btn-primary" (click)="onChangeImage()">
       Ok
     </button>
   </div>

@@ -1,12 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { iif } from 'rxjs';
+import {
+  FileSystemDirectoryEntry, FileSystemFileEntry, NgxFileDropEntry
+} from 'ngx-file-drop';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
-import {
-  NgxFileDropEntry,
-  FileSystemFileEntry,
-  FileSystemDirectoryEntry,
-} from 'ngx-file-drop';
 
 @Component({
   selector: 'app-si-profile',
@@ -20,14 +17,12 @@ export class SiProfileComponent implements OnInit {
   @Input()
   sameUser?: boolean = false;
 
-  changeImage: boolean = false;
   img: NgxFileDropEntry[] = [];
   imageError: string = 'No Image Has Been Selected';
 
   profileImage: string;
 
   user: User;
-  disabled = true;
   basic = false;
   registeredNumber: string;
   businessNumber: string;
@@ -85,16 +80,8 @@ export class SiProfileComponent implements OnInit {
       );
   }
 
-  changePicture() {
-    if (this.sameUser) {
-      this.changeImage = !this.changeImage;
-    }
-  }
-
   onChangeImage() {
     if (this.sameUser) {
-      this.changeImage = false;
-
       for (const droppedFile of this.img) {
         if (droppedFile.fileEntry.isFile) {
           const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
@@ -105,7 +92,6 @@ export class SiProfileComponent implements OnInit {
               (res) => {
                 this.userService.setUser(res);
                 this.ngOnChanges();
-                console.log(res);
               },
               (err) => {
                 console.log(err);
@@ -119,7 +105,6 @@ export class SiProfileComponent implements OnInit {
 
   public droppedProfileImage(image: NgxFileDropEntry[]) {
     this.img = image;
-    console.log(this.img);
     for (const droppedFile of image) {
       if (droppedFile.fileEntry.isFile) {
         const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
@@ -146,16 +131,6 @@ export class SiProfileComponent implements OnInit {
     }
   }
 
-  newFunction(): void {
-    if (this.disabled === false) {
-      this.disabled = true;
-      this.current = 'edit';
-    } else {
-      this.disabled = false;
-      this.current = 'save';
-    }
-  }
-
   add(): void {
     this.userService
       .addSocialInitiativeProfile(
@@ -169,8 +144,12 @@ export class SiProfileComponent implements OnInit {
       )
       .subscribe(
         (res) => {
-          this.userService.setUser(res);
-          this.user = res;
+          if(this.img[0])
+            this.onChangeImage();
+          else {
+            this.userService.setUser(res);
+            this.user = res;
+          }
         },
         (err) => {
           console.log(err);
@@ -209,7 +188,6 @@ export class SiProfileComponent implements OnInit {
         },
         (err) => {
           this.error = err.message;
-          console.log(err);
         }
       );
       this.userService
