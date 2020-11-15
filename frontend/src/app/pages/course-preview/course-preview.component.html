@@ -263,7 +263,10 @@
         </h4> -->
         <h4 *ngIf="surveyRequest && alreadyEnrolled">
           <div class="course-desc">
-            <h4>Survey</h4>
+            <span class="review">
+              <h4 [ngStyle]="{ color: 'rgb(169, 51, 51)' }">To Do:</h4>
+              <h4 style="padding-left: 5px">Survey</h4>
+            </span>
             <div class="rate-button-2">
               <button
                 class="btn btn-success-outline"
