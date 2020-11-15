@@ -1,66 +1,51 @@
-<div class="dashboard">
-  <div class="card">
-    <div class="profile-container">
-      <div class="inner">
-        <div (click)="changePicture()" class="profile-pic">
-          <img
-            *ngIf="profileImage; else icon"
-            [src]="profileImage"
-            class="no_img"
-          />
-
-          <ng-template #icon>
-            <clr-icon class="no_img" shape="image"></clr-icon>
-          </ng-template>
-
-          <div *ngIf="sameUser" class="edit_img">
-            <clr-icon class="is-solid" shape="pencil"></clr-icon>
-          </div>
+<div class="card">
+  <div class="profile-container">
+    <div class="inner">
+      <div  class="profile-pic" [ngClass]="{'no-image': !profileImage}"  [style.background-image]="'url(' + profileImage + ')'">
+        <clr-icon *ngIf="!profileImage" shape="image"></clr-icon>
+      </div>
+      <div class="info">
+        <div>
+          Registered Name: <span class="value">{{ user._id }}</span>
         </div>
-
-        <div class="info">
-          <div>
-            Registered Name: <span class="value">{{ user._id }}</span>
-          </div>
-          <div>
-            Registered Number:
-            <span class="value">{{ registeredNumber }}</span>
-          </div>
-          <div>
-            Business Number: <span class="value">{{ businessNumber }}</span>
-          </div>
-          <div>
-            Location:
-            <span class="value">{{ location }}</span>
-          </div>
-          <div>
-            Hours: <span class="value">{{ hours }}</span>
-          </div>
-          <div>
-            Phone: <span class="value">{{ phone }}</span>
-          </div>
-          <div>
-            Email: <span class="value">{{ email }}</span>
-          </div>
+        <div>
+          Registered Number:
+          <span class="value">{{ registeredNumber }}</span>
         </div>
-
-        <div class="btn-container">
-          <button class="btn btn-purple" (click)="onDonate()" id="donateButton">
-            Donate Now
-          </button>
-          <button class="btn btn-purple">Visit Our Website</button>
-          <button class="btn btn-purple">Email Us</button>
-          <button
-            *ngIf="sameUser"
-            (click)="basic = true"
-            class="btn edit btn-purple"
-          >
-            {{ current }}
-          </button>
+        <div>
+          Business Number: <span class="value">{{ businessNumber }}</span>
+        </div>
+        <div>
+          Location:
+          <span class="value">{{ location }}</span>
+        </div>
+        <div>
+          Hours: <span class="value">{{ hours }}</span>
+        </div>
+        <div>
+          Phone: <span class="value">{{ phone }}</span>
+        </div>
+        <div>
+          Email: <span class="value">{{ email }}</span>
         </div>
       </div>
-      <!-- Here should go the Tabs Container as shown in the mockup -->
+
+      <div class="btn-container">
+        <button class="btn btn-purple" (click)="onDonate()" id="donateButton">
+          Donate Now
+        </button>
+        <button class="btn btn-purple">Visit Our Website</button>
+        <button class="btn btn-purple">Email Us</button>
+        <button
+          *ngIf="sameUser"
+          (click)="basic = true"
+          class="btn edit btn-purple"
+        >
+          {{ current }}
+        </button>
+      </div>
     </div>
+    <!-- Here should go the Tabs Container as shown in the mockup -->
   </div>
 </div>
 
