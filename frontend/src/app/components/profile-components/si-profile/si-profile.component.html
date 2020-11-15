@@ -36,7 +36,7 @@
       <div class="btn-container">
         <button
           class="btn btn-purple"
-          *ngIf="!sameUser"
+          *ngIf="isLoggedIn && !sameUser"
           (click)="onDonate()"
           id="donateButton"
         >

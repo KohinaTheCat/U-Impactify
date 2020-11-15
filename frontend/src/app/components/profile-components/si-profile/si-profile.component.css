@@ -77,6 +77,7 @@ h2 {
   display: grid;
   grid-template-rows: repeat(auto-fit, 1fr);
   height: 75%;
+  align-items: center;
 }
 
 .image-upload {
@@ -141,28 +142,22 @@ h2 {
 }
 
 @media (max-width: 1100px) {
-  .edit_img {
-    padding-top: 0.5rem;
-    padding-right: 2rem;
-  }
-
-  .card {
-    align-items: center;
-    text-align: center;
-  }
-
   .inner {
     grid-template-columns: auto;
-    justify-content: center;
     display: flex;
-    align-items: center;
     flex-direction: column;
     height: 100%;
   }
 
   .info {
     margin: 1rem;
-    text-align: justify;
+    width: 100%;
+    padding-left: 5vw;
+  }
+
+  .btn-container {
+    width: 100%;
+    padding-left: 25%;
   }
 }
 

@@ -22,6 +22,8 @@ export class SiProfileComponent implements OnInit {
 
   profileImage: string;
 
+  isLoggedIn: boolean;
+
   user: User;
   basic = false;
   registeredNumber: string;
@@ -41,6 +43,8 @@ export class SiProfileComponent implements OnInit {
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
+    this.isLoggedIn = !!this.userService.getCurrentUser();
+
     if (this.searchedUser) {
       this.user = this.searchedUser;
     } else {
@@ -61,6 +65,8 @@ export class SiProfileComponent implements OnInit {
   }
 
   ngOnChanges() {
+    this.isLoggedIn = !!this.userService.getCurrentUser();
+
     if (this.searchedUser) {
       this.user = this.searchedUser;
     } else {
