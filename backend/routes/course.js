@@ -300,6 +300,7 @@ router.put("/addReview/", (req, res) => {
   });
 });
 
+
 /**
  * PUT Instructor review on a course
  *  @param _id the student id
@@ -320,5 +321,18 @@ router.put("/addSurvey/", (req, res) => {
       .catch((err) => res.status(400).json(err));
   });
 });
+
+router.put("/surveyRequest/:id", (req, res) => {
+  Course.findById(req.params.id)
+    .then((course) => {
+      course.surveyRequest = true;
+      course
+        .save()
+        .then(() => res.json(course))
+        .catch((err) => res.status(400).json("Error: " + err));
+    })
+    .catch((err) => res.status(404).json(err));
+})
+
 
 module.exports = router;

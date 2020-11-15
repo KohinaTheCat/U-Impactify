@@ -15,4 +15,6 @@ export interface Course {
   img: string;
   files: string[];
   reviews: object[];
+  surveyRequest: boolean;
+  instructorReview: object[];
 }

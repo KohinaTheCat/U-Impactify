@@ -51,7 +51,7 @@ const courseSchema = new Schema({
       },
     ],
   },
-
+  
   instructorReview: {
     type: [
       {
@@ -60,6 +60,11 @@ const courseSchema = new Schema({
       },
     ],
   },
+
+  surveyRequest: {
+    type : Boolean,
+  },
+  
 });
 
 const Course = mongoose.model("Course", courseSchema);
