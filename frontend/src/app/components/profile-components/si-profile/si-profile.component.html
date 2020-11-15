@@ -2,29 +2,20 @@
   <div class="card">
     <div class="profile-container">
       <div class="inner">
-        <div *ngIf="sameUser" (click)="changePicture()" class="profile-pic">
+        <div (click)="changePicture()" class="profile-pic">
           <img
-            *ngIf="profileImage && profileImage.length; else icon"
+            *ngIf="profileImage; else icon"
             [src]="profileImage"
-            width="400"
+            class="no_img"
           />
 
           <ng-template #icon>
             <clr-icon class="no_img" shape="image"></clr-icon>
           </ng-template>
 
-          <div class="edit_img">
-            <clr-icon shape="pencil"></clr-icon>
+          <div *ngIf="sameUser" class="edit_img">
+            <clr-icon class="is-solid" shape="pencil"></clr-icon>
           </div>
-        </div>
-
-        <div *ngIf="!sameUser">
-          <img
-            *ngIf="profileImage === ''"
-            src="{{ profileImage }}"
-            width="400"
-            alt=""
-          />
         </div>
 
         <div class="info">
@@ -175,7 +166,7 @@
 
 <clr-modal class="popup" [(clrModalOpen)]="opened" [clrModalSize]="'lg'">
   <div class="modal-body">
-    <h3 class="modal-title">I want to contribute to {{ socialId }}</h3>
+    <h3 class="modal-title">I want to contribute to {{ user._id }}</h3>
     <div class="row inner_modal">
       <div class="col">
         <div>

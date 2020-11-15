@@ -37,7 +37,6 @@ export class SiProfileComponent implements OnInit {
   email: string;
   opened: boolean = false;
   amount: number;
-  socialId: string;
   current: string = 'edit';
   error: string = '';
 
@@ -47,13 +46,11 @@ export class SiProfileComponent implements OnInit {
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    if (!!this.searchedUser) {
+    if (this.searchedUser) {
       this.user = this.searchedUser;
-      this.socialId = this.user._id;
     } else {
       this.sameUser = true;
       this.user = this.userService.getCurrentUser();
-      this.socialId = this.user._id;
     }
     this.doNotChange();
 
@@ -69,7 +66,14 @@ export class SiProfileComponent implements OnInit {
   }
 
   ngOnChanges() {
-    this.user = this.userService.getCurrentUser();
+    if (this.searchedUser) {
+      this.user = this.searchedUser;
+    } else {
+      this.sameUser = true;
+      this.user = this.userService.getCurrentUser();
+    }
+    this.doNotChange();
+
     this.userService
       .getUserImage(this.user._id)
       .subscribe(
