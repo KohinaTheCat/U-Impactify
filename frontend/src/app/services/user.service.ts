@@ -190,4 +190,24 @@ export class UserService {
       chatId,
     });
   }
+
+  /**
+   * GET user image
+   * @param {string} userId id of course
+   */
+  getUserImage(userId: string): Observable<any> {
+    return this.http.get(`/api/user/${userId}/getUserImage`);
+  }
+
+  /**
+   * POST add profile image to user
+   * @param {FormData} file the course image
+   * @param {string} courseId id of course
+   */
+  postCourseImage(file: FormData, userId: string): Observable<User> {
+    return this.http.post<User>(
+      `/api/user/${userId}/uploadUserImage`,
+      file
+    );
+  }
 }

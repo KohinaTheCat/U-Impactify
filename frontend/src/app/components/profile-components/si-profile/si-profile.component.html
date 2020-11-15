@@ -1,66 +1,74 @@
 <div class="dashboard">
   <div class="card">
-    <div id="si">
-      <div class="profile-container">
-        <div class="inner">
-          <div *ngIf="sameUser"  (click)="changePicture()" class="profile-pic">
-            <img src="../../../../assets/THS.png" width="400" alt="" />
-            <div class="edit_img">
-              <clr-icon shape="pencil"></clr-icon>
-            </div>
-          </div>
+    <div class="profile-container">
+      <div class="inner">
+        <div *ngIf="sameUser" (click)="changePicture()" class="profile-pic">
+          <img
+            *ngIf="profileImage && profileImage.length; else icon"
+            [src]="profileImage"
+            width="400"
+          />
 
-          <div *ngIf="!sameUser">
-            <img src="../../../../assets/THS.png" width="400" alt="" />
-          </div>
+          <ng-template #icon>
+            <clr-icon class="no_img" shape="image"></clr-icon>
+          </ng-template>
 
-          <div class="info">
-            <div>
-              Registered Name: <span class="value">{{ user._id }}</span>
-            </div>
-            <div>
-              Registered Number:
-              <span class="value">{{ registeredNumber }}</span>
-            </div>
-            <div>
-              Business Number: <span class="value">{{ businessNumber }}</span>
-            </div>
-            <div>
-              Location:
-              <span class="value">{{ location }}</span>
-            </div>
-            <div>
-              Hours: <span class="value">{{ hours }}</span>
-            </div>
-            <div>
-              Phone: <span class="value">{{ phone }}</span>
-            </div>
-            <div>
-              Email: <span class="value">{{ email }}</span>
-            </div>
-          </div>
-
-          <div class="btn-container">
-            <button
-              class="btn btn-purple"
-              (click)="onDonate()"
-              id="donateButton"
-            >
-              Donate Now
-            </button>
-            <button class="btn btn-purple">Visit Our Website</button>
-            <button class="btn btn-purple">Email Us</button>
-            <button
-              *ngIf="sameUser"
-              (click)="basic = true"
-              class="btn edit btn-purple"
-            >
-              {{ current }}
-            </button>
+          <div class="edit_img">
+            <clr-icon shape="pencil"></clr-icon>
           </div>
         </div>
-        <!-- Here should go the Tabs Container as shown in the mockup -->
+
+        <div *ngIf="!sameUser">
+          <img
+            *ngIf="profileImage === ''"
+            src="{{ profileImage }}"
+            width="400"
+            alt=""
+          />
+        </div>
+
+        <div class="info">
+          <div>
+            Registered Name: <span class="value">{{ user._id }}</span>
+          </div>
+          <div>
+            Registered Number:
+            <span class="value">{{ registeredNumber }}</span>
+          </div>
+          <div>
+            Business Number: <span class="value">{{ businessNumber }}</span>
+          </div>
+          <div>
+            Location:
+            <span class="value">{{ location }}</span>
+          </div>
+          <div>
+            Hours: <span class="value">{{ hours }}</span>
+          </div>
+          <div>
+            Phone: <span class="value">{{ phone }}</span>
+          </div>
+          <div>
+            Email: <span class="value">{{ email }}</span>
+          </div>
+        </div>
+
+        <div class="btn-container">
+          <button class="btn btn-purple" (click)="onDonate()" id="donateButton">
+            Donate Now
+          </button>
+          <button class="btn btn-purple">Visit Our Website</button>
+          <button class="btn btn-purple">Email Us</button>
+          <button
+            *ngIf="sameUser"
+            (click)="basic = true"
+            class="btn edit btn-purple"
+          >
+            {{ current }}
+          </button>
+        </div>
       </div>
+      <!-- Here should go the Tabs Container as shown in the mockup -->
     </div>
   </div>
 </div>
@@ -220,7 +228,7 @@
   <div class="modal-body">
     <ngx-file-drop
       dropZoneLabel="Drop files here"
-      (onFileDrop)="droppedCourseImage($event)"
+      (onFileDrop)="droppedProfileImage($event)"
       accept=".jpg, .png, .jpeg"
     >
       <ng-template
@@ -230,7 +238,7 @@
         <label>Upload Course Image (.jpg and .png)</label>
         <button
           class="btn btn-primary right"
-          tyle="height: auto;"
+          style="height: auto"
           (click)="openFileSelector()"
         >
           Browse Files

@@ -24,6 +24,8 @@ export class SiProfileComponent implements OnInit {
   img: NgxFileDropEntry[] = [];
   imageError: string = 'No Image Has Been Selected';
 
+  profileImage: string;
+
   user: User;
   disabled = true;
   basic = false;
@@ -54,6 +56,29 @@ export class SiProfileComponent implements OnInit {
       this.socialId = this.user._id;
     }
     this.doNotChange();
+
+    this.userService
+      .getUserImage(this.user._id)
+      .subscribe(
+        (res) =>
+          (this.profileImage =
+            res === '' || res === null
+              ? ''
+              : `http://localhost:5000/api/user/documents/${res}`)
+      );
+  }
+
+  ngOnChanges() {
+    this.user = this.userService.getCurrentUser();
+    this.userService
+      .getUserImage(this.user._id)
+      .subscribe(
+        (res) =>
+          (this.profileImage =
+            res === '' || res === null
+              ? ''
+              : `http://localhost:5000/api/user/documents/${res}`)
+      );
   }
 
   changePicture() {
@@ -65,11 +90,32 @@ export class SiProfileComponent implements OnInit {
   onChangeImage() {
     if (this.sameUser) {
       this.changeImage = false;
+
+      for (const droppedFile of this.img) {
+        if (droppedFile.fileEntry.isFile) {
+          const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
+          fileEntry.file((file: File) => {
+            const formData = new FormData();
+            formData.append('document', file, droppedFile.relativePath);
+            this.userService.postCourseImage(formData, this.user._id).subscribe(
+              (res) => {
+                this.userService.setUser(res);
+                this.ngOnChanges();
+                console.log(res);
+              },
+              (err) => {
+                console.log(err);
+              }
+            );
+          });
+        }
+      }
     }
   }
 
-  public droppedCourseImage(image: NgxFileDropEntry[]) {
+  public droppedProfileImage(image: NgxFileDropEntry[]) {
     this.img = image;
+    console.log(this.img);
     for (const droppedFile of image) {
       if (droppedFile.fileEntry.isFile) {
         const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
