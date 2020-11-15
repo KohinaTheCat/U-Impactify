@@ -151,7 +151,6 @@ router.route("/").get((req, res) => {
  * @param query the search query
  * @return array of courses that satisfy the query
  *
- * TODO: Replace with filtering in db instead of backend
  */
 router.route("/search/:query").get((req, res) => {
   const { query } = req.params;

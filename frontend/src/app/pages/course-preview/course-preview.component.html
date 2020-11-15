@@ -310,6 +310,7 @@
   [(clrModalOpen)]="openedAllReviews"
   [clrModalSize]="'xl'"
   [clrModalClosable]="false"
+  *ngIf="course"
 >
   <h3 class="modal-title">All user reviews for {{ course.name }}</h3>
   <div class="modal-body">

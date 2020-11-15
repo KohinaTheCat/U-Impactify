@@ -28,6 +28,9 @@ import { UserProfileComponent } from './pages/user-profile/user-profile.componen
 import { ChatComponent } from './pages/chat/chat.component';
 import { SearchResultsComponent } from './pages/search-results/search-results.component';
 import { GivingGardenComponent } from './pages/giving-garden/giving-garden.component';
+import { AboutComponent } from './pages/home-pages/about/about.component';
+import { SolutionsComponent } from './pages/home-pages/solutions/solutions.component';
+import { PricingComponent } from './pages/home-pages/pricing/pricing.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +55,9 @@ import { GivingGardenComponent } from './pages/giving-garden/giving-garden.compo
     ChatComponent,
     SearchResultsComponent,
     GivingGardenComponent,
+    AboutComponent,
+    SolutionsComponent,
+    PricingComponent,
   ],
   imports: [
     BrowserModule,
