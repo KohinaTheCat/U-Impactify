@@ -159,7 +159,7 @@ router.route("/search/:query").get((req, res) => {
       { name: { $regex: query, $options: "i" } },
       { teachers: { $regex: query, $options: "i" } },
       { level: { $regex: query, $options: "i" } },
-      { tags : { $regex: query, $options: "i"} },
+      { tags: { $regex: query, $options: "i" } },
     ],
   })
     .then((courses) => {
@@ -280,7 +280,7 @@ router.get("/getAllFiles/:id", (req, res, next) => {
 
 /**
  * PUT review on a course
- *  @param _id the course id
+ *  @param _id the student id
  *  @return course the course
  */
 router.put("/addReview/", (req, res) => {
@@ -293,6 +293,27 @@ router.put("/addReview/", (req, res) => {
       score,
       anon,
     });
+    course
+      .save()
+      .then(() => res.json(course))
+      .catch((err) => res.status(400).json(err));
+  });
+});
+
+/**
+ * PUT Instructor review on a course
+ *  @param _id the student id
+ *  @return course the course
+ */
+router.put("/addSurvey/", (req, res) => {
+  const { _id, surveyAnswers, courseId } = req.body;
+
+  Course.findById(courseId).then((course) => {
+    course.instructorReview = course.instructorReview.concat({
+      _id,
+      surveyAnswers,
+    });
+
     course
       .save()
       .then(() => res.json(course))

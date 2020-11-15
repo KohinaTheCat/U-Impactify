@@ -51,6 +51,15 @@ const courseSchema = new Schema({
       },
     ],
   },
+
+  instructorReview: {
+    type: [
+      {
+        _id: String,
+        surveyAnswers: [String],
+      },
+    ],
+  },
 });
 
 const Course = mongoose.model("Course", courseSchema);
