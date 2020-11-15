@@ -55,7 +55,6 @@ input {
   height: 2.5rem;
   width: 10rem;
   font-size: initial;
-  margin-left: 6rem;
 }
 
 .createNew:hover {
@@ -170,10 +169,10 @@ clr-control-error {
   display: list-item;
 }
 
-.fileStore {
-  display: flex !important;
-  flex-direction: column !important;
-}
+/* .fileStore {
+  display: flex;
+  flex-direction: column;
+} */
 
 .checkmark {
   color: green;
@@ -191,4 +190,46 @@ clr-control-error {
 .text {
   /* padding-top: 0.3rem; */
   font-size: large;
+
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.widthMain {
+  width: 30.15rem;
+  background: var(--purple-base);
+  min-width: 25rem;
+}
+
+.widthColumn {
+  width: 30.15rem;
+  background: var(--purple-smooth);
+  min-width: 25rem;
+}
+
+.widthSmaller {
+  justify-content: center;
+  /* width: 0.03rem; */
+  background: var(--purple-base);
+  max-width: 3rem;
+}
+
+.widthColumnSmall {
+  justify-content: center;
+  background: var(--purple-smooth);
+  max-width: 3rem;
+  /* width: 0.03rem; */
+}
+
+#header {
+  color: #fff;
+}
+
+#headerLast {
+  color: #fff;
+  padding-left: 3rem;
+  max-width: 3rem;
+}
+
+.files {
+  padding-left: 2rem;
 }

@@ -3,11 +3,9 @@
     <span>{{ course.name }}</span>
   </h1>
 
-  <div class="btn-container">
-    <button class="createNew edit" (click)="openModal = true">
-      Create new assessment!
-    </button>
-  </div>
+  <!-- <div class="courseimage"style="background-image: url('{{ course.img }}')"></div>
+    <h4 id="title">{{ course.name }}</h4>
+  </div> -->
 
   <div *ngIf="openModal == true">
     <clr-modal
@@ -122,46 +120,63 @@
     </clr-modal>
   </div>
 
-  <clr-datagrid id="table">
-    <!div class="header">
-    <clr-dg-column>Name</clr-dg-column>
-    <clr-dg-column>Assessment</clr-dg-column>
-    <clr-dg-column>Visibility</clr-dg-column>
-    <clr-dg-column>Submissions</clr-dg-column>
-    <!/div>
+  <div>
+    <div class="btn-container">
+      <button class="createNew edit" (click)="openModal = true">
+        Create new assessment!
+      </button>
+    </div>
 
-    <clr-dg-row *ngFor="let assess of assessArr" [clrDgItem]="currUser">
-      <clr-dg-action-overflow>
-        <button class="action-item" (click)="onEdit(assess)">Edit</button>
-        <button class="action-item" (click)="onDelete(assess)">Delete</button>
-      </clr-dg-action-overflow>
+    <clr-datagrid id="table">
+      <clr-dg-column class="widthMain"
+        ><div id="header">Name</div></clr-dg-column
+      >
+      <clr-dg-column class="widthMain"
+        ><div id="header">Assessment</div></clr-dg-column
+      >
+      <clr-dg-column class="widthSmaller"
+        ><div id="header">Visibility</div></clr-dg-column
+      >
+      <clr-dg-column class="widthSmaller"
+        ><div id="header">Submissions</div></clr-dg-column
+      >
 
-      <clr-dg-cell class="text"> {{ assess.name }} </clr-dg-cell>
+      <clr-dg-row *ngFor="let assess of assessArr" [clrDgItem]="currUser">
+        <!-- <clr-dg-action-overflow>
+          <button class="action-item" (click)="onEdit(assess)">Edit</button>
+          <button class="action-item" (click)="onDelete(assess)">Delete</button>
+        </clr-dg-action-overflow> -->
 
-      <!-- Ask about this as well, unsure need helppppp -->
-      <clr-dg-cell>
-        <div class="row" *ngFor="let file of files" id="fileStore">
-          {{ file.relativePath }}
-        </div>
-      </clr-dg-cell>
+        <clr-dg-cell class="text widthColumn"> {{ assess.name }} </clr-dg-cell>
 
-      <!-- <clr-dg-cell>{{ assess.visibility }}</clr-dg-cell> -->
+        <clr-dg-cell class="widthColumn files">
+          <!-- id="fileStore" -->
+          <div class="row" *ngFor="let file of files">
+            {{ file.relativePath }}
+          </div>
+        </clr-dg-cell>
 
-      <clr-dg-cell *ngIf="assess.visibility == 'true'" class="display">
-        <clr-icon shape="check" class="checkmark"></clr-icon>
-        <div class="text">
-          {{ assess.visibility }}
-        </div>
-      </clr-dg-cell>
+        <!-- <clr-dg-cell>{{ assess.visibility }}</clr-dg-cell> -->
 
-      <clr-dg-cell *ngIf="assess.visibility == 'false'" class="display"
-        ><clr-icon shape="times" class="wrong"></clr-icon>
-        <div class="text">
-          {{ assess.visibility }}
-        </div>
-      </clr-dg-cell>
+        <clr-dg-cell
+          *ngIf="assess.visibility == 'true'"
+          class="display widthColumnSmall"
+        >
+          <clr-icon shape="check" class="checkmark"></clr-icon>
+          <div class="text"></div>
+        </clr-dg-cell>
 
-      <clr-dg-cell class="text">View Submissions</clr-dg-cell>
-    </clr-dg-row>
-  </clr-datagrid>
+        <clr-dg-cell
+          *ngIf="assess.visibility == 'false'"
+          class="display widthColumnSmall"
+          ><clr-icon shape="times" class="wrong"></clr-icon>
+          <div class="text"></div>
+        </clr-dg-cell>
+
+        <clr-dg-cell class="text widthColumnSmall"
+          ><clr-icon shape="view-list" id="submissionsTab"></clr-icon>
+        </clr-dg-cell>
+      </clr-dg-row>
+    </clr-datagrid>
+  </div>
 </div>
