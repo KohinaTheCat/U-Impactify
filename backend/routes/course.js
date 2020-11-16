@@ -210,7 +210,7 @@ router.post(
       .then((assessment) => {
         // course.files = course.files.concat(req.files.map((k) => k.filename));
         console.log("Something: " + assessment.files);
-        assessment.files = assessment.files.concat(req.files.map((k) => k.id));
+        assessment.files = assessment.files.concat(req.files);
 
         assessment
           .save()

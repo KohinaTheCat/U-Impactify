@@ -7,7 +7,7 @@
 export interface Assessment {
   _id: string;
   name: string;
-  files: string[];
+  files: Object[];
   visibility: boolean;
   studentSubmissions: Object[];
 }

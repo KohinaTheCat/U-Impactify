@@ -1,17 +1,17 @@
 <div class="flexbot">
-  <h1 class="title" *ngIf="course">
+  <!-- <h1 class="title" *ngIf="course">
     <span>{{ course.name }}</span>
-  </h1>
+  </h1> -->
 
-  <!-- <div class="outer">
+  <div class="outer" *ngIf="course">
     <div
       class="courseimage"
       style="background-image: url('{{ course.img }}')"
     ></div>
     <h4 id="title2">{{ course.name }}</h4>
-  </div> -->
+  </div>
 
-  <div *ngIf="createNewAssessmentModal == true">
+  <div *ngIf="createNewAssessmentModal">
     <clr-modal
       [(clrModalOpen)]="basic"
       [clrModalSize]="'lg'"
@@ -158,8 +158,9 @@
           <div class="row" *ngFor="let file of assess.files">
             <a
               *ngIf="file"
-              href="http://localhost:5000/api/course/documents/{{ file }}"
-              >{{ file }}</a
+              download="{{ file.filename }}"
+              href="http://localhost:5000/api/course/documents/{{ file.id }}"
+              >{{ file.filename }}</a
             >
           </div>
         </clr-dg-cell>

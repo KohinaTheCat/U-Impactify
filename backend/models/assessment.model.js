@@ -20,7 +20,7 @@ const assessmentSchema = new Schema({
     required: "Assessment name is required",
   },
   files: {
-    type: [String],
+    type: [Object],
     required: "Files are required",
   },
   visibility: {
