@@ -222,19 +222,14 @@ export class CourseService {
    * @param {string}    courseId          id of course
    * @param {string}    assessmentId      id of assessment
    * @param {string}    studentId         id of student
-   * @param {string[]}  files             files that student is submitting
+   * @param {FormData}  files             files that student is submitting
    */
   postStudentSubmission(
-    courseId: string,
     assessmentId: string,
     studentId: string,
-    files: string[]
+    files: FormData
   ): Observable<any> {
-    return this.http.put<Assessment>(`/api/course/addStudentSubmission`, {
-      courseId,
-      assessmentId,
-      studentId,
-    });
+    return this.http.put<Assessment>(`/api/course/assessment/addStudentSubmission/${assessmentId}/${studentId}`, files);
   }
 
   /**

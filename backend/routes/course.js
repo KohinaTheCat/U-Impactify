@@ -391,48 +391,44 @@ router.delete(
  * PUT student submission to assessment
  * @param req {courseId, assessmentId, studentId, files}
  */
-router.post(
-  "/assessment/addStudentSubmission",
+router.put(
+  "/assessment/addStudentSubmission/:assessmentId/:studentId",
   upload.array("documents", 10),
 
   (req, res) => {
-    const { courseId, assessmentId, studentId } = req.body;
-
-    Course.findById(courseId).then((newCourse) => {
-      const ass = newCourse.assessments.filter((id) => id === assessmentId);
-      Assessment.findById(ass).then((assessment) => {
-        if (!assessment.studentSubmissions) {
-          assessment.studentSubmissions = [
-            {
-              studentId,
-              files: [req.files.map((f) => f.id)],
-            },
-          ];
-        }
-
-        const submissions = assessment.studentSubmissions.filter(
-          (sub) => sub.studentId === studentId
-        );
-        if (submissions.length) {
-          const sub =
-            assessment.studentSubmissions[
-              assessment.studentSubmissions.indexOf(submissions[0])
-            ];
-
-          sub.files = sub.files.concat(req.files.map((f) => f.id));
-        } else {
-          assessment.studentSubmissions = assessment.studentSubmissions.concat({
+    const {assessmentId, studentId } = req.params;
+    Assessment.findById(assessmentId).then((assessment) => {
+      if (!assessment.studentSubmissions) {
+        assessment.studentSubmissions = [
+          {
             studentId,
             files: [req.files.map((f) => f.id)],
-          });
-        }
+          },
+        ];
+      }
 
-        assessment.markModified("studentSubmissions");
-        assessment
-          .save()
-          .then((assessment) => res.json(assessment))
-          .catch((err) => res.status(400).json(err));
-      });
+      const submissions = assessment.studentSubmissions.filter(
+        (sub) => sub.studentId === studentId
+      );
+      if (submissions.length) {
+        const sub =
+          assessment.studentSubmissions[
+            assessment.studentSubmissions.indexOf(submissions[0])
+          ];
+
+        sub.files = sub.files.concat(req.files.map((f) => f.id));
+      } else {
+        assessment.studentSubmissions = assessment.studentSubmissions.concat({
+          studentId,
+          files: [req.files.map((f) => f.id)],
+        });
+      }
+
+      assessment.markModified("studentSubmissions");
+      assessment
+        .save()
+        .then((assessment) => res.json(assessment))
+        .catch((err) => res.status(400).json(err));
     });
   }
 );
