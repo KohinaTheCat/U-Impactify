@@ -39,6 +39,7 @@ export class CoursePreviewComponent implements OnInit {
   openedSurveyRequest: boolean = false;
   openedSurvey: boolean = false;
   instructorReview: Course['instructorReview'];
+  completedSurvey : boolean = false;
 
   courseReview: string = '';
   score: number = 0;
@@ -92,7 +93,14 @@ export class CoursePreviewComponent implements OnInit {
             break;
           }
         }
-
+        if(this.surveyRequest){
+          for(let j = 0; j < this.instructorReview.length; j++){            
+            if(this.instructorReview[j]._id === this.user._id){
+              this.completedSurvey = true;
+              break;
+            }
+          }
+        }
         this.averageScore = 0;
 
         this.course.reviews.forEach((review: any) => {
@@ -273,10 +281,5 @@ export class CoursePreviewComponent implements OnInit {
     .subscribe(() => {
       this.ngOnInit();
     });
-    // remove after
-    console.log('submitted survey');
-    for (let i = 0; i < this.surveyAnswer.length; i++) {
-      console.log(this.surveyAnswer[i]);
-    }
   }
 }

@@ -16,5 +16,5 @@ export interface Course {
   files: string[];
   reviews: object[];
   surveyRequest: boolean;
-  instructorReview: object[];
+  instructorReview: [{_id: string, surveyAnswers: string[]}];
 }

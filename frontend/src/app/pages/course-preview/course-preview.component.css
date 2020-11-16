@@ -571,6 +571,8 @@ li {
 
 .surveyQuestion {
   font-size: 0.75rem;
+  padding-left: 2rem;
+  transform: translateY(30px);
 }
 
 .answerLabel {
