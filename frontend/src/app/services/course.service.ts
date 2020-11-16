@@ -2,6 +2,7 @@ import { Course } from './../models/course.model';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Assessment } from './../models/assessment.model';
 
 @Injectable({
   providedIn: 'root',
@@ -151,5 +152,92 @@ export class CourseService {
       score,
       anon,
     });
+  }
+
+  /**
+   * POST new assessment
+   * @param {any}     assessment  the newly created assessment
+   * @param {string}  _id         id of the course
+   * 
+   */
+  postNewAssessment(assessment: any, _id: string): Observable<Assessment> {
+    const { courseId, name, files, visibility, studentSubmission } = assessment;
+    return this.http.post<Assessment>(`http://localhost:5000/assessment/`, {
+      courseId: _id,
+      name,
+      files,
+      visibility,
+      studentSubmission: [],
+    });
+  }
+
+  /**
+   * PUT update assessment
+   */
+  updateAssessment(courseId: string, assessment: any): Observable<Assessment> {
+    return this.http.put<Assessment>(`http://localhost:5000/assessment/${courseId}`, {
+      assessment,
+    });
+  }
+
+  /**
+   * DELETE assessment
+   * @param {string} courseId id of user
+   * @param {string} courseId id of course
+   */
+  deleteAssessment(courseId: string, assessmentId: string): Observable<any> {
+    return this.http.delete(
+      `http://localhost:5000/deleteAssessment/${courseId}/${assessmentId}`
+    );
+  }
+
+  /**
+   * PUT student submission to assessment
+   * @param {string}    courseId          id of course
+   * @param {string}    assessmentId      id of assessment
+   * @param {string}    studentId         id of student
+   * @param {string[]}  files             files that student is submitting
+   */
+  postStudentSubmission(courseId: string, assessmentId: string, studentId: string, files: string[]): Observable<any> {
+    return this.http.put<Assessment>(`http://localhost:5000/assessment/${courseId}/${assessmentId}`, {
+      studentId,
+      files
+    });
+  }
+
+  /**
+   * GET assessment
+   * @param {string} courseId     id of course
+   * @param {string} assessmentId id of assessment
+   */
+  getAssessment(courseId: string, assessmentId: string): Observable<Assessment> {
+    return this.http.get<Assessment>(`http://localhost:5000/assessment/${courseId}/${assessmentId}`);
+  }
+
+  /**
+   * GET all assessment for a course
+   * @param {string} courseId id of course
+   */
+  getAllAssessments(courseId): Observable<Assessment[]> {
+    return this.http.get<Assessment[]>(`http://localhost:5000/assessment/${courseId}`);
+  }
+
+  /**
+   * GET all submissions for an assessment
+   * @param courseId 
+   * @param assessmentId 
+   */
+  getAllStudentSubmissions(courseId: string, assessmentId: string): Observable<Object[]> {
+    return this.http.get<Object[]>(`http://localhost:5000/assessment/${courseId}/${assessmentId}`);
+  }  
+
+  /**
+   * GET student submission by studentId
+   * @param courseId 
+   * @param assessmentId 
+   * @param studentId 
+   */
+  getStudentSubmission(courseId: string, assessmentId: string, studentId: string): Observable<String[]> {
+    return this.http.get<String[]>(`http://localhost:5000/assessment/${courseId}/${assessmentId}/${studentId}`);
   }
 }

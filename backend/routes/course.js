@@ -8,6 +8,7 @@ const mongoose = require("mongoose");
 const GridFsStorage = require("multer-gridfs-storage");
 
 var Grid = require("gridfs-stream");
+const Assessment = require("../models/assessment.model");
 Grid.mongo = mongoose.mongo;
 
 // .env
@@ -299,6 +300,123 @@ router.put("/addReview/", (req, res) => {
       .then(() => res.json(course))
       .catch((err) => res.status(400).json(err));
   });
+});
+
+/**
+ * POST new assessment
+ * @param req {courseId, studentId, file}
+ */
+router.route("/assessment").post((req, res) => {
+
+  const {
+    name,
+    files,
+    visibility,
+    studentSubmissions,
+  } = req.body;
+
+  const newAssessment = new Assessment({
+    name,
+    files,
+    visibility,
+    studentSubmissions,
+  });
+
+  newAssessment
+    .save()
+    .then((assessment) => res.json(assessment))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
+/**
+ * DELETE remove assessment from course
+ * @param req {courseId, assessmentId}
+ * @param courseId course id
+ * @param assessmentId assessment id
+ * @return assessment
+ */
+router.delete("/assessment/deleteAssessment/:courseId/:assessmentId", (req, res) => {
+  const {courseId, assessmentId} = req.params;
+  assessmentSchema.findByIdAndRemove(assessmentId, function (err) {
+    if (!err) {
+      return res.status(200).json(null);
+    }
+    return res.status(400).send();
+  });
+
+})
+
+// Upload student submission to assessment
+/**
+ * PUT student submission to assessment
+ * @param req {courseId, assessmentId, studentId, file}
+ */
+router.put("/assessment/:courseId/:studentId", upload.array("documents", 10), (req, res) => {
+  Assessment.findbyId(req.params.id)
+    .then((assessment) => {
+      assessment
+        .save()
+        .then(() => res.json("Document Added!"))
+        .catch((err) => res.json(err));
+    })
+    .catch((err) => res.status(400).json(`Error finding Assessment: ${err}`))
+});
+
+/**
+ * GET an assessment by id
+ * @param courseId:     course id
+ * @param assessmentId: assessment id
+ * @return assessment
+ */
+router.get("/assessment/:assessmentId", (req, res) => {
+  const { courseId, assessmentId } = req.body;
+  Assessment.findbyId(assessmentId)
+    .then((assessment) => {
+      if (!assessment) return res.status(404).json("Assessment Not Found");
+      if (assessment.courseId == courseId) return res.json(assessment)
+      else return res.status(404).json("Assessment Not Found");
+    })
+    .catch((err) => res.status(404).json(err));
+});
+
+/**
+ * GET all assessments from a course
+ * @param req {courseId, assessmentId, studentId, file}
+ * @return all assessments in a course
+ */
+router.get("/assessment/:courseId", (req, res) => {
+  Assessment.find()
+    .then((assessments) => res.json(assessments))
+    .catch((err) => res.status(400).json(`Error: ${err}`));
+});
+
+/**
+ * GET student submission by studentId
+ */
+router.get("/assessment/:assessmentId/:studentId", (req, res) => {
+  Assessment.findbyId(req.param.assessmentId)
+    .then((assessment) => {
+      const submission = assessment.studentSubmissions.filter(
+        submission => submission.studentId === req.params.studentId);
+      if (submission.length) {
+        res.json(submission[0])
+      }
+      else {
+        res.status(404).json(`Error: Submission not found`);
+      }
+    })
+    .catch((err) => res.status(400)).json(`Error: ${err}`)
+});
+
+/**
+ * GET all student submissions for an assessment
+ */
+router.get("/assessment/:assessmentId", (req, res) => {
+  Assessment.findbyId(req.param.assessmentId)
+    .then((assessment) => {
+      res.json(assessment.studentSubmissions)
+    })
+    .catch((err) => res.status(400).json(`Error: ${err}`));
 });
 
 module.exports = router;

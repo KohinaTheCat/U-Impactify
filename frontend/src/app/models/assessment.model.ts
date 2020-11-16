@@ -3,9 +3,9 @@
  *  - synchronous with `~/backend/models/assessment.model.js`
  */
 export interface Assessment {
-    courseId: string,
+    _id: string;
     name: string,
-    file: string,
-    studentSubmissions: string[][],
+    files: string[],
+    visibility: boolean,
+    studentSubmissions: object[],
   }
-  

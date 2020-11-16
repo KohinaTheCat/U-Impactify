@@ -27,11 +27,9 @@ connection.once("open", () => {
 
 const courseRouter = require("./routes/course");
 const userRouter = require("./routes/user");
-const assessmentRouter = require("./routes/assessment");
 
 app.use("/course", courseRouter);
 app.use("/user", userRouter);
-app.use("/assessment", assessmentRouter);
 
 const PORT = process.env.PORT || 5000;
 
