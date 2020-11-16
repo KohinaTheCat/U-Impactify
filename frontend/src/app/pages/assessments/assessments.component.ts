@@ -30,6 +30,7 @@ export class AssessmentsComponent implements OnInit {
   visibility: boolean = false;
   error: string = '';
   basic: boolean = true;
+  selectedAss: Assessment;
 
   studentSubmission: Object[] = [];
 
@@ -61,10 +62,6 @@ export class AssessmentsComponent implements OnInit {
     this.courseId = id;
     this.courseService.getCourse(id).subscribe((incomingCourse: Course) => {
       this.course = incomingCourse;
-
-      // console.log('here1: ' + incomingCourse);
-      // console.log('here2: ' + this.course);
-      this.name = this.course.name;
       this.course.img =
         !this.course.img || this.course.img === ''
           ? (this.course.img = '../../../../assets/courseimage.png')
@@ -74,7 +71,6 @@ export class AssessmentsComponent implements OnInit {
       this.courseService.getAllAssessments(incomingCourse._id).subscribe(
         (incomingArray: Assessment[]) => {
           this.assessArr = incomingArray;
-          console.log(this.assessArr);
         },
         (err) => {
           console.log(err);
@@ -83,6 +79,11 @@ export class AssessmentsComponent implements OnInit {
     });
 
     console.log(this.assessArr);
+  }
+
+  showStudentSubmission($event) {
+    this.selectedAss = $event;
+    this.submissionsModal = true;
   }
 
   onEdit(assess: Assessment) {}
@@ -145,7 +146,26 @@ export class AssessmentsComponent implements OnInit {
     );
   }
 
-  cancel() {}
+  submitHandler() {
+    const formData = new FormData();
+    for (const droppedFile of this.files) {
+      if (droppedFile.fileEntry.isFile) {
+        const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
+        fileEntry.file((file: File) => {
+          formData.append('documents', file, droppedFile.relativePath);
+        });
+      } else {
+        // It was a directory (empty directories are added, otherwise only files)
+        const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
+      }
+    }
+    this.courseService
+      .postStudentSubmission(this.selectedAss._id, this.user._id, formData)
+      .subscribe((res) => {
+        this.submissionsModal = false;
+        this.selectedAss = null;
+      });
+  }
 
   dropped(files: NgxFileDropEntry[]) {
     this.files = files;
@@ -164,16 +184,5 @@ export class AssessmentsComponent implements OnInit {
   }
   fileLeave(event) {
     console.log(event);
-  }
-
-  studentSubmissionFunction(assess: Assessment) {
-    if (assess == null) {
-    } else {
-      this.courseService
-        .getAllStudentSubmissions(assess._id)
-        .subscribe((res) => {
-          this.studentSubmission = res;
-        });
-    }
   }
 }

@@ -1,8 +1,4 @@
 <div class="flexbot">
-  <!-- <h1 class="title" *ngIf="course">
-    <span>{{ course.name }}</span>
-  </h1> -->
-
   <div class="outer" *ngIf="course">
     <div
       class="courseimage"
@@ -123,11 +119,10 @@
       </div>
     </clr-modal>
   </div>
-  <!-- && course.teachers.includes(user._id) -->
-  <div *ngIf="!!user">
+  <div *ngIf="!!user && course && course.teachers.includes(user._id)">
     <div class="btn-container">
       <button class="createNew edit" (click)="createNewAssessmentModal = true">
-        Create new assessment!
+        Create new assessment
       </button>
     </div>
 
@@ -181,7 +176,7 @@
           ><clr-icon
             shape="view-list"
             id="submissionsTab"
-            (click)="submissionsModal = true"
+            (click)="showStudentSubmission(assess)"
           ></clr-icon>
         </clr-dg-cell>
       </clr-dg-row>
@@ -237,7 +232,7 @@
           ><clr-icon
             shape="view-list"
             id="submissionsTab"
-            (click)="submissionsModal = true"
+            (click)="submissionsModal = true; selectedAss = assess"
           ></clr-icon>
         </clr-dg-cell>
       </clr-dg-row>
@@ -245,7 +240,7 @@
   </div>
 
   <!-- !!user && course.teachers.includes(user._id) -->
-  <div *ngIf="submissionsModal == true">
+  <div *ngIf="submissionsModal && selectedAss">
     <div class="modal">
       <div class="modal-dialog" role="dialog" aria-hidden="true">
         <div class="modal-content">
@@ -255,11 +250,7 @@
             </button>
             <h3 class="modal-title">Student Submissions</h3>
           </div>
-          <div class="modal-body">
-            <p>But not much to say...</p>
-          </div>
-
-          <div *ngFor="let sub of studentSubmission">
+          <div *ngFor="let sub of selectedAss.studentSubmissions">
             <div>{{ sub.studentId }}</div>
           </div>
 
@@ -267,14 +258,14 @@
             <button
               class="btn btn-outline"
               type="button"
-              (click)="submissionsModal = false"
+              (click)="showStudentSubmission(null); submissionsModal = false;"
             >
               Cancel
             </button>
             <button
               class="btn btn-primary"
               type="button"
-              (click)="submissionsModal = false"
+              (click)="showStudentSubmission(null); submissionsModal = false"
               (click)="studentSubmissionsFunction(assess)"
             >
               Ok
@@ -287,7 +278,7 @@
   </div>
 </div>
 
-<div *ngIf="submissionsModal == true && user.type == 'IL'">
+<div *ngIf="submissionsModal == true && user.type == 'IL' && selectedAss">
   <clr-modal
     [(clrModalOpen)]="basic"
     [clrModalSize]="'lg'"
@@ -346,7 +337,7 @@
       <button
         type="button"
         class="btn btn-primary"
-        (click)="registerHandler()"
+        (click)="submitHandler()"
         (click)="submissionsModal = false"
       >
         Create Assessment
