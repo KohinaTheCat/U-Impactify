@@ -441,19 +441,18 @@ router.get("/assessment/getAllAssessments/:courseId", (req, res) => {
       var assessmentArray = [];
 
       course.assessments.forEach((assessment) => {
-        console.log(assessment);
         Assessment.findById(assessment)
           .then((assess) => {
-            console.log(assess);
-            console.log(assessmentArray);
             assessmentArray = assessmentArray.concat(assess);
-            console.log(assessmentArray);
             if (assessmentArray.length == course.assessments.length) {
               res.json(assessmentArray);
             }
           })
           .catch((err) => res.status(400).json(`Error: ${err}`));
       });
+      
+      res.json(assessmentArray);
+
     })
     .catch((err) => res.status(400).json(`Error: ${err}`));
 });

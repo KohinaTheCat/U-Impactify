@@ -213,6 +213,10 @@ clr-control-error {
   max-width: 3rem;
 }
 
+.widthDefault {
+  background: var(--purple-base);
+}
+
 .widthColumnSmall {
   justify-content: center;
   background: var(--purple-smooth);

@@ -182,6 +182,7 @@ export class AssessmentsComponent implements OnInit {
       }
     }
   }
+  
   fileOver(event) {
     console.log(event);
   }
