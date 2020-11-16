@@ -213,7 +213,7 @@ export class CourseService {
    */
   deleteAssessment(courseId: string, assessmentId: string): Observable<any> {
     return this.http.delete(
-      `/api/course/deleteAssessment/${courseId}/${assessmentId}`
+      `/api/course/assessment/deleteAssessment/${courseId}/${assessmentId}`
     );
   }
 
@@ -228,12 +228,13 @@ export class CourseService {
     courseId: string,
     assessmentId: string,
     studentId: string,
-    files: string[]
+    files: FormData
   ): Observable<any> {
     return this.http.put<Assessment>(`/api/course/addStudentSubmission`, {
       courseId,
       assessmentId,
       studentId,
+      files,
     });
   }
 

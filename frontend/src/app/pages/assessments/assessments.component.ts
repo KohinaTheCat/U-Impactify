@@ -89,28 +89,12 @@ export class AssessmentsComponent implements OnInit {
 
   // Ask about this. Not working :(
   onDelete(assess: Assessment) {
-    var temp = this.assessArr.indexOf({
-      _id: assess._id,
-      name: assess.name,
-      visibility: assess.visibility,
-      files: assess.files,
-      studentSubmissions: assess.studentSubmissions,
-    });
-    console.log(
-      'HEREEEE: ' +
-        temp +
-        assess._id +
-        ' ' +
-        assess.name +
-        ' ' +
-        assess.visibility +
-        ' ' +
-        assess.files +
-        ' ' +
-        assess.studentSubmissions
-    );
-    delete this.assessArr[temp];
-    //this.assessArr.find(({ name }) => name === assess.name);
+    console.log('courseId: ' + this.courseId + 'assess.id ' + assess._id);
+    this.courseService
+      .deleteAssessment(this.courseId, assess._id)
+      .subscribe((res) => {
+        this.ngOnInit();
+      });
   }
 
   registerHandler() {

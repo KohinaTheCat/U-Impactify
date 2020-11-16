@@ -391,7 +391,7 @@ router.delete(
  * PUT student submission to assessment
  * @param req {courseId, assessmentId, studentId, files}
  */
-router.post(
+router.put(
   "/assessment/addStudentSubmission",
   upload.array("documents", 10),
 
