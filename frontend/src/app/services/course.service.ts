@@ -173,7 +173,7 @@ export class CourseService {
    * PUT update assessment
    */
   updateAssessment(courseId: string, assessment: any): Observable<Assessment> {
-    return this.http.put<Assessment>(`api/course/assessment/${courseId}`, {
+    return this.http.put<Assessment>(`/api/course/assessment/${courseId}`, {
       assessment,
     });
   }
@@ -188,7 +188,7 @@ export class CourseService {
     courseId: string,
     assessmentId: string
   ): Observable<Course> {
-    return this.http.put<Course>('api/course/assessment/addAssessment', {
+    return this.http.put<Course>('/api/course/assessment/addAssessment', {
       courseId,
       assessmentId,
     });
@@ -218,7 +218,7 @@ export class CourseService {
     studentId: string,
     files: string[]
   ): Observable<any> {
-    return this.http.put<Assessment>(`api/course/addStudentSubmission`, {
+    return this.http.put<Assessment>(`/api/course/addStudentSubmission`, {
       courseId,
       assessmentId,
       studentId,
@@ -230,15 +230,19 @@ export class CourseService {
    * @param {string} assessmentId id of assessment
    */
   getAssessment(assessmentId: string): Observable<Assessment> {
-    return this.http.get<Assessment>(`api/course/assessment/${assessmentId}`);
+    return this.http.get<Assessment>(
+      `/api/course/assessment/getAssessment/${assessmentId}`
+    );
   }
 
   /**
    * GET all assessment for a course
    * @param {string} courseId id of course
    */
-  getAllAssessments(courseId): Observable<Assessment[]> {
-    return this.http.get<Assessment[]>(`api/course/assessment/${courseId}`);
+  getAllAssessments(courseId: string): Observable<Assessment[]> {
+    return this.http.get<Assessment[]>(
+      `/api/course/assessment/getAllAssessments/${courseId}`
+    );
   }
 
   /**
@@ -246,13 +250,8 @@ export class CourseService {
    * @param courseId
    * @param assessmentId
    */
-  getAllStudentSubmissions(
-    courseId: string,
-    assessmentId: string
-  ): Observable<Object[]> {
-    return this.http.get<Object[]>(
-      `api/course/assessment/${courseId}/${assessmentId}`
-    );
+  getAllStudentSubmissions(assessmentId: string): Observable<Object[]> {
+    return this.http.get<Object[]>(`/api/course/assessment/${assessmentId}`);
   }
 
   /**

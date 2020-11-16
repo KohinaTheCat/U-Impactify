@@ -1,6 +1,6 @@
 <div class="flexbot">
   <h1 class="title">
-    <span>{{ course.name }}</span>
+    <span>{{ name }}</span>
   </h1>
 
   <!-- <div class="outer">
@@ -11,7 +11,7 @@
     <h4 id="title2">{{ course.name }}</h4>
   </div> -->
 
-  <div *ngIf="openModal == true">
+  <div *ngIf="createNewAssessmentModal == true">
     <clr-modal
       [(clrModalOpen)]="basic"
       [clrModalSize]="'lg'"
@@ -107,7 +107,7 @@
         <button
           type="button"
           class="btn btn-outline"
-          (click)="openModal = false"
+          (click)="createNewAssessmentModal = false"
           (click)="cancel()"
         >
           Cancel
@@ -116,7 +116,7 @@
           type="button"
           class="btn btn-primary"
           (click)="registerHandler()"
-          (click)="openModal = false"
+          (click)="createNewAssessmentModal = false"
         >
           Create Assessment
         </button>
@@ -126,7 +126,7 @@
 
   <div>
     <div class="btn-container">
-      <button class="createNew edit" (click)="openModal = true">
+      <button class="createNew edit" (click)="createNewAssessmentModal = true">
         Create new assessment!
       </button>
     </div>
@@ -145,7 +145,7 @@
         ><div id="header">Submissions</div></clr-dg-column
       >
 
-      <clr-dg-row *ngFor="let assess of assessArr" [clrDgItem]="currUser">
+      <clr-dg-row *ngFor="let assess of assessArr">
         <!-- <clr-dg-action-overflow>
           <button class="action-item" (click)="onEdit(assess)">Edit</button>
           <button class="action-item" (click)="onDelete(assess)">Delete</button>
@@ -178,9 +178,54 @@
         </clr-dg-cell>
 
         <clr-dg-cell class="text widthColumnSmall"
-          ><clr-icon shape="view-list" id="submissionsTab"></clr-icon>
+          ><clr-icon
+            shape="view-list"
+            id="submissionsTab"
+            (click)="submissionsModal = true"
+          ></clr-icon>
         </clr-dg-cell>
       </clr-dg-row>
     </clr-datagrid>
+  </div>
+
+  <div *ngIf="submissionsModal == true">
+    <div class="modal">
+      <div class="modal-dialog" role="dialog" aria-hidden="true">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button aria-label="Close" class="close" type="button">
+              <clr-icon aria-hidden="true" shape="close"></clr-icon>
+            </button>
+            <h3 class="modal-title">Student Submissions</h3>
+          </div>
+          <div class="modal-body">
+            <p>But not much to say...</p>
+          </div>
+
+          <div *ngFor="let sub of studentSubmission">
+            <div>{{ sub.studentId }}</div>
+          </div>
+
+          <div class="modal-footer">
+            <button
+              class="btn btn-outline"
+              type="button"
+              (click)="submissionsModal = false"
+            >
+              Cancel
+            </button>
+            <button
+              class="btn btn-primary"
+              type="button"
+              (click)="submissionsModal = false"
+              (click)="studentSubmissionsFunction(assess)"
+            >
+              Ok
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-backdrop" aria-hidden="true"></div>
   </div>
 </div>
