@@ -2,7 +2,7 @@
 
 ### Goal
 
-- To complete the user stories assigned on jira for sprint 3
+- To complete the user stories assigned on Jira for sprint 3
 - To test and bug fix
 
 ### User Stories to be Completed, and Task Break Down
@@ -23,7 +23,6 @@
 - Testing
   - Postman/Insomnia
   - Manual Testing
-  - Robot
 
 > BOUN-4 As a Student, I want to be able to see instructor created assessment, so that I can test my knowledge.
 
@@ -34,7 +33,6 @@
 - Testing
   - Manual Testing
   - Postman/Insomnia
-  - Robot
 
 > BOUN-5: As an instructor, I want to be able to create assessments, so that I can test my student’s knowledge.
 
@@ -49,7 +47,6 @@
 - Testing
   - Manual Testing
   - Postman/Insomnia
-  - Robot
 
 > BOUN-16: As an Instructor, I want to be able to get feedback on my courses, so that I know how to improve my content or delivery.
 
@@ -64,7 +61,6 @@
 - Testing
   - Manual Testing
   - Postman/Insomnia
-  - Robot
 
 > BOUN-18: As a Student, I want to be able to rate my courses and add reviews, so that I can give effective feedback to the instructor.
 
@@ -77,7 +73,6 @@
 - Testing
   - Manual Testing
   - Postman/Insomnia
-  - Robot
 
 > BOUN-9: As a User, I want to be able to donate to the giving garden so that I can support those in need.
 
@@ -94,7 +89,6 @@
 - Testing
   - Manual Testing
   - Postman/Insomnia
-  - Robot
 
 > BOUN-74: As a user, I want to be able to search for other users and courses so I can find what I'm looking for faster.
 
@@ -107,7 +101,6 @@
 - Testing
   - Manual Testing
   - Postman/Insomnia
-  - Robot
 
 > BOUN-101: As a User I want to see an about page, so I know what I would be joining into.
 
@@ -118,7 +111,6 @@
 - Testing
   - Manual Testing
   - Postman/Insomnia
-  - Robot
 
 > Team Capacity
 
@@ -143,6 +135,7 @@
 
 - Everyone's availability is different
   - hard to find time to collectively discuss important parts of our project
+- Midterm studying takes up a lot of time, especially with courses like MATB24 :(
 
 > Other Course Load
 
