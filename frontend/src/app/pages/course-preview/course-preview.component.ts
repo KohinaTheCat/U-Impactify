@@ -102,6 +102,8 @@ export class CoursePreviewComponent implements OnInit {
           }
         }
         this.averageScore = 0;
+        console.log(this.instructorReview)
+        console.log(this.reviews)
 
         this.course.reviews.forEach((review: any) => {
           this.averageScore += review.score;
