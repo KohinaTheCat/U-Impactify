@@ -120,7 +120,7 @@ export class CreateCourseComponent implements OnInit {
             }
           }
           this.courseService.postNewFile(formData, res._id).subscribe(
-           (res) => {
+            (res) => {
               console.log(res);
             },
             (err) => {

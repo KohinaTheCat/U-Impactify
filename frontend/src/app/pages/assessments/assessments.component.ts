@@ -33,23 +33,12 @@ export class AssessmentsComponent implements OnInit {
 
   studentSubmission: Object[] = [];
 
+  assessArr: Assessment[] = [];
+
   courseId: string = '';
-  assessArr: Assessment[] = [
-    {
-      files: [''],
-      studentSubmissions: [],
-      _id: '5fb221a41048d348c9c19e57',
-      name: 'Assessment101',
-      visibility: true,
-    },
-    {
-      files: [''],
-      studentSubmissions: [],
-      _id: '5fb221a81048d348c9c19e58',
-      name: 'Assessment102',
-      visibility: true,
-    },
-  ];
+
+  tempVar: string;
+
   studentSubmissions: Object[] = [];
   img: NgxFileDropEntry[] = [];
   file: String[] = [];
@@ -68,27 +57,32 @@ export class AssessmentsComponent implements OnInit {
     this.name = '';
     this.visibility = false;
 
-    this.courseId = this.activatedRouter.snapshot.params['id'];
-    this.courseService
-      .getCourse(this.courseId)
-      .subscribe((incomingCourse: Course) => {
-        this.course = incomingCourse;
-        this.name = this.course.name;
-        this.course.img =
-          !this.course.img || this.course.img === ''
-            ? (this.course.img = '../../../../assets/courseimage.png')
-            : // TODO: REMOVE LOCALHOST FROM PROD BUILD AFTER
-              `http://localhost:5000/api/course/documents/${this.course.img}`;
-      });
+    const id = this.activatedRouter.snapshot.params['id'];
+    this.courseId = id;
+    this.courseService.getCourse(id).subscribe((incomingCourse: Course) => {
+      this.course = incomingCourse;
 
-    this.courseService.getAllAssessments(this.courseId).subscribe(
-      (res) => {
-        this.assessArr = res;
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+      // console.log('here1: ' + incomingCourse);
+      // console.log('here2: ' + this.course);
+      this.name = this.course.name;
+      this.course.img =
+        !this.course.img || this.course.img === ''
+          ? (this.course.img = '../../../../assets/courseimage.png')
+          : // TODO: REMOVE LOCALHOST FROM PROD BUILD AFTER
+            `http://localhost:5000/api/course/documents/${this.course.img}`;
+
+      this.courseService.getAllAssessments(incomingCourse._id).subscribe(
+        (incomingArray: Assessment[]) => {
+          this.assessArr = incomingArray;
+          console.log(this.assessArr);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+    });
+
+    console.log(this.assessArr);
   }
 
   onEdit(assess: Assessment) {}
@@ -130,16 +124,7 @@ export class AssessmentsComponent implements OnInit {
 
     this.courseService.postNewAssessment(assessment).subscribe(
       (res) => {
-        console.log('courseId: ' + this.courseId + ' assessmentId: ' + res._id);
-        this.courseService
-          .postAssessmentCourse(this.courseId, res._id)
-          .subscribe((res) => {
-            this.ngOnInit();
-          });
-
         const formData = new FormData();
-
-        console.log(assessment.files);
 
         for (const droppedFile of assessment.files) {
           if (droppedFile.fileEntry.isFile) {
@@ -152,6 +137,12 @@ export class AssessmentsComponent implements OnInit {
             const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
           }
         }
+
+        this.courseService
+          .postAssessmentCourse(this.courseId, res._id)
+          .subscribe((res) => {
+            this.ngOnInit();
+          });
 
         this.courseService.postNewFile(formData, this.courseId).subscribe(
           (res) => {
@@ -182,7 +173,7 @@ export class AssessmentsComponent implements OnInit {
       }
     }
   }
-  
+
   fileOver(event) {
     console.log(event);
   }
@@ -191,8 +182,13 @@ export class AssessmentsComponent implements OnInit {
   }
 
   studentSubmissionFunction(assess: Assessment) {
-    this.courseService.getAllStudentSubmissions(assess._id).subscribe((res) => {
-      this.studentSubmission = res;
-    });
+    if (assess == null) {
+    } else {
+      this.courseService
+        .getAllStudentSubmissions(assess._id)
+        .subscribe((res) => {
+          this.studentSubmission = res;
+        });
+    }
   }
 }

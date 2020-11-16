@@ -123,8 +123,8 @@
       </div>
     </clr-modal>
   </div>
-
-  <div *ngIf="!!user && course.teachers.includes(user._id)">
+  <!-- && course.teachers.includes(user._id) -->
+  <div *ngIf="!!user">
     <div class="btn-container">
       <button class="createNew edit" (click)="createNewAssessmentModal = true">
         Create new assessment!
@@ -161,18 +161,13 @@
         </clr-dg-cell>
 
         <!-- <clr-dg-cell>{{ assess.visibility }}</clr-dg-cell> -->
-
-        <clr-dg-cell
-          *ngIf="assess.visibility == 'true'"
-          class="display widthColumnSmall"
-        >
+        <!-- <clr-dg-cell> {{ assess.visibility }} </clr-dg-cell> -->
+        <clr-dg-cell *ngIf="assess.visibility" class="display widthColumnSmall">
           <clr-icon shape="check" class="checkmark"></clr-icon>
           <div class="text"></div>
         </clr-dg-cell>
 
-        <clr-dg-cell
-          *ngIf="assess.visibility == 'false'"
-          class="display widthColumnSmall"
+        <clr-dg-cell *ngIf="!assess.visibility" class="display widthColumnSmall"
           ><clr-icon shape="times" class="wrong"></clr-icon>
           <div class="text"></div>
         </clr-dg-cell>
@@ -189,7 +184,6 @@
   </div>
 
   <div *ngIf="user.type == 'IL'">
-
     <clr-datagrid id="table">
       <clr-dg-column class="widthDefault"
         ><div id="header">Name</div></clr-dg-column
@@ -245,8 +239,8 @@
     </clr-datagrid>
   </div>
 
-
-  <div *ngIf="submissionsModal == true && !!user && course.teachers.includes(user._id)">
+  <!-- !!user && course.teachers.includes(user._id) -->
+  <div *ngIf="submissionsModal == true">
     <div class="modal">
       <div class="modal-dialog" role="dialog" aria-hidden="true">
         <div class="modal-content">
@@ -290,68 +284,68 @@
 
 <div *ngIf="submissionsModal == true && user.type == 'IL'">
   <clr-modal
-  [(clrModalOpen)]="basic"
-  [clrModalSize]="'lg'"
-  [clrModalClosable]="false"
->
-  <h3 class="modal-title">Submit Your Assignment</h3>
-  <div class="modal-body">
-    <form clrForm>
-      <clr-control-error>{{ error }}</clr-control-error>
+    [(clrModalOpen)]="basic"
+    [clrModalSize]="'lg'"
+    [clrModalClosable]="false"
+  >
+    <h3 class="modal-title">Submit Your Assignment</h3>
+    <div class="modal-body">
+      <form clrForm>
+        <clr-control-error>{{ error }}</clr-control-error>
 
-      <ngx-file-drop
-        dropZoneLabel="Drop files here"
-        (onFileDrop)="dropped($event)"
-        (onFileOver)="fileOver($event)"
-        (onFileLeave)="fileLeave($event)"
-      >
-        <ng-template
-          ngx-file-drop-content-tmp
-          let-openFileSelector="openFileSelector"
+        <ngx-file-drop
+          dropZoneLabel="Drop files here"
+          (onFileDrop)="dropped($event)"
+          (onFileOver)="fileOver($event)"
+          (onFileLeave)="fileLeave($event)"
         >
-          <label>Upload Assignment Files</label>
-          <button class="btn btn-primary" (click)="openFileSelector()">
-            Browse Files
-          </button>
+          <ng-template
+            ngx-file-drop-content-tmp
+            let-openFileSelector="openFileSelector"
+          >
+            <label>Upload Assignment Files</label>
+            <button class="btn btn-primary" (click)="openFileSelector()">
+              Browse Files
+            </button>
 
-          <!-- <button type="button" (click)="openFileSelector()">Browse Files</button> -->
-        </ng-template>
-      </ngx-file-drop>
-      <div class="upload-table">
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Name of file(s) uploaded:</th>
-            </tr>
-          </thead>
-          <tbody class="upload-name-style">
-            <tr *ngFor="let item of files; let i = index">
-              <td>
-                <strong>{{ item.relativePath }}</strong>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </form>
-  </div>
-  <div class="modal-footer">
-    <button
-      type="button"
-      class="btn btn-outline"
-      (click)="submissionsModal = false"
-      (click)="cancel()"
-    >
-      Cancel
-    </button>
-    <button
-      type="button"
-      class="btn btn-primary"
-      (click)="registerHandler()"
-      (click)="submissionsModal = false"
-    >
-      Create Assessment
-    </button>
-  </div>
-</clr-modal>
+            <!-- <button type="button" (click)="openFileSelector()">Browse Files</button> -->
+          </ng-template>
+        </ngx-file-drop>
+        <div class="upload-table">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Name of file(s) uploaded:</th>
+              </tr>
+            </thead>
+            <tbody class="upload-name-style">
+              <tr *ngFor="let item of files; let i = index">
+                <td>
+                  <strong>{{ item.relativePath }}</strong>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-outline"
+        (click)="submissionsModal = false"
+        (click)="cancel()"
+      >
+        Cancel
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="registerHandler()"
+        (click)="submissionsModal = false"
+      >
+        Create Assessment
+      </button>
+    </div>
+  </clr-modal>
 </div>
