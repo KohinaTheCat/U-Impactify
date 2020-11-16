@@ -1,4 +1,5 @@
 let Course = require("../models/course.model");
+let assessmentSchema = require("../models/assessment.model");
 
 const router = require("express").Router();
 const multer = require("multer");
@@ -75,6 +76,7 @@ router.route("/").post((req, res) => {
     files,
     tags,
     level,
+    assessments: [],
     img: "",
   });
 
@@ -310,11 +312,22 @@ router.route("/assessment").post((req, res) => {
     visibility,
     studentSubmissions,
   });
-
   newAssessment
     .save()
     .then((assessment) => res.json(assessment))
     .catch((err) => res.status(400).json("Error: " + err));
+});
+
+//
+router.route("/assessment/addAssessment").put((req, res) => {
+  const { courseId, assessmentId } = req.body;
+  Course.findById(courseId).then((newCourse) => {
+    newCourse.assessments = newCourse.assessments.concat(assessmentId);
+    newCourse
+      .save()
+      .then(() => res.json(newCourse))
+      .catch((err) => res.json(err));
+  });
 });
 
 /**
@@ -328,6 +341,18 @@ router.delete(
   "/assessment/deleteAssessment/:courseId/:assessmentId",
   (req, res) => {
     const { courseId, assessmentId } = req.params;
+
+    Course.findById(courseId).then((newCourse) => {
+      newCourse.assessments = newCourse.assessments.filter(
+        (id) => id !== assessmentId
+      );
+
+      newCourse
+        .save()
+        .then(() => res.json(newCourse))
+        .catch((err) => res.status(400).json(err));
+    });
+
     assessmentSchema.findByIdAndRemove(assessmentId, function (err) {
       if (!err) {
         return res.status(200).json(null);
@@ -338,22 +363,53 @@ router.delete(
 );
 
 // Upload student submission to assessment
-/**
+/**   [ [studentId, fileId[]] ]
  * PUT student submission to assessment
  * @param req {courseId, assessmentId, studentId, file}
  */
-router.put(
-  "/assessment/:courseId/:studentId",
+router.post(
+  "/assessment/addStudentSubmission",
   upload.array("documents", 10),
+
   (req, res) => {
-    Assessment.findbyId(req.params.id)
-      .then((assessment) => {
+    const { courseId, assessmentId, studentId } = req.body;
+
+    Course.findById(courseId).then((newCourse) => {
+      const ass = newCourse.assessments.filter((id) => id === assessmentId);
+      Assessment.findById(ass).then((assessment) => {
+        if (!assessment.studentSubmissions) {
+          assessment.studentSubmissions = [
+            {
+              studentId,
+              files: [req.files[0].id],
+            },
+          ];
+        }
+
+        const submissions = assessment.studentSubmissions.filter(
+          (sub) => sub.studentId === studentId
+        );
+        if (submissions.length) {
+          const sub =
+            assessment.studentSubmissions[
+              assessment.studentSubmissions.indexOf(submissions[0])
+            ];
+
+          sub.files = sub.files.concat(req.files[0].id);
+        } else {
+          assessment.studentSubmissions = assessment.studentSubmissions.concat({
+            studentId,
+            files: [req.files[0].id],
+          });
+        }
+
+        assessment.markModified("studentSubmissions");
         assessment
           .save()
-          .then(() => res.json("Document Added!"))
-          .catch((err) => res.json(err));
-      })
-      .catch((err) => res.status(400).json(`Error finding Assessment: ${err}`));
+          .then((assessment) => res.json(assessment))
+          .catch((err) => res.status(400).json(err));
+      });
+    });
   }
 );
 
@@ -363,13 +419,15 @@ router.put(
  * @param assessmentId: assessment id
  * @return assessment
  */
+
+// ERROR IN THIS ONE
 router.get("/assessment/:assessmentId", (req, res) => {
-  const { courseId, assessmentId } = req.body;
+  const { assessmentId } = req.body;
+
   Assessment.findbyId(assessmentId)
     .then((assessment) => {
       if (!assessment) return res.status(404).json("Assessment Not Found");
-      if (assessment.courseId == courseId) return res.json(assessment);
-      else return res.status(404).json("Assessment Not Found");
+      return res.json(assessment);
     })
     .catch((err) => res.status(404).json(err));
 });

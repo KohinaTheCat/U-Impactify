@@ -4,7 +4,7 @@ import { Course } from 'src/app/models/course.model';
 import { CourseService } from 'src/app/services/course.service';
 import { UserService } from 'src/app/services/user.service';
 import { User } from 'src/app/models/user.model';
-import { Assessments } from 'src/app/models/assessments.model';
+import { Assessment } from 'src/app/models/assessment.model';
 import {
   FileSystemDirectoryEntry,
   FileSystemFileEntry,
@@ -32,9 +32,9 @@ export class AssessmentsComponent implements OnInit {
 
   courseId: String = '';
   studentSubm: String[][] = [[]];
-  assessArr: Assessments[] = [];
+  assessArr: Assessment[] = [];
 
-  currUser: Assessments;
+  currUser: Assessment;
 
   file: String[] = [];
 
@@ -62,12 +62,12 @@ export class AssessmentsComponent implements OnInit {
     });
   }
 
-  onEdit(assess: Assessments) {}
+  onEdit(assess: Assessment) {}
 
   // Ask about this. Not working :(
-  onDelete(assess: Assessments) {
+  onDelete(assess: Assessment) {
     var temp = this.assessArr.indexOf({
-      courseId: assess.courseId,
+      _id: assess._id,
       name: assess.name,
       visibility: assess.visibility,
       files: assess.files,
@@ -76,7 +76,7 @@ export class AssessmentsComponent implements OnInit {
     console.log(
       'HEREEEE: ' +
         temp +
-        assess.courseId +
+        assess._id +
         ' ' +
         assess.name +
         ' ' +
@@ -91,14 +91,14 @@ export class AssessmentsComponent implements OnInit {
   }
 
   registerHandler() {
-    this.assessArr.push({
-      courseId: this.courseId,
-      name: this.name,
-      visibility: this.visibility,
-      files: this.file,
-      studentSubmissions: this.studentSubm,
-    });
-
+    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+    // this.assessArr.push({
+    //   courseId: this.courseId,
+    //   name: this.name,
+    //   visibility: this.visibility,
+    //   files: this.file,
+    //   studentSubmissions: this.studentSubm,
+    // });
     // const { name, visibility, files } = this;
     // const assessments = {
     //   name,

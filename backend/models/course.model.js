@@ -50,6 +50,9 @@ const courseSchema = new Schema({
       },
     ],
   },
+  assessments: {
+    type: [String],
+  },
 });
 
 const Course = mongoose.model("Course", courseSchema);

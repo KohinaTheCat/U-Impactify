@@ -15,31 +15,23 @@ const Schema = mongoose.Schema;
  **/
 
 const assessmentSchema = new Schema({
-    courseId: {
-      type: String,
-    },
-    name: {
-      type: String,
-      required: "Assessment name is required",
-    },
-    files: {
-      type: [String],
-      required: "Files are required",
-    },
-    visibility: {
-      type: Boolean,
-      required: "Visible is required",
-    },
-    studentSubmissions: {
-      type: [
-        {
-          studentId: String,
-          files: [String],
-        },
-      ]
-      },
-  });
+  name: {
+    type: String,
+    required: "Assessment name is required",
+  },
+  files: {
+    type: [String],
+    required: "Files are required",
+  },
+  visibility: {
+    type: Boolean,
+    required: "Visible is required",
+  },
+  studentSubmissions: {
+    type: [Object],
+  },
+});
 
-const Assessment = model("Assessment", assessmentSchema);
+const Assessment = mongoose.model("Assessment", assessmentSchema);
 
 module.exports = Assessment;
