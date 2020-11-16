@@ -301,16 +301,16 @@ router.put("/addReview/", (req, res) => {
 
 /**
  * POST new assessment
- * @param req {courseId, studentId, file}
+ * @param req {courseId, studentId, files}
  */
 router.route("/assessment").post((req, res) => {
-  const { name, files, visibility, studentSubmissions } = req.body;
+  const { name, files, visibility } = req.body;
 
   const newAssessment = new Assessment({
     name,
     files,
     visibility,
-    studentSubmissions,
+    studentSubmissions: [],
   });
   newAssessment
     .save()
@@ -365,7 +365,7 @@ router.delete(
 // Upload student submission to assessment
 /**   [ [studentId, fileId[]] ]
  * PUT student submission to assessment
- * @param req {courseId, assessmentId, studentId, file}
+ * @param req {courseId, assessmentId, studentId, files}
  */
 router.post(
   "/assessment/addStudentSubmission",
@@ -415,17 +415,15 @@ router.post(
 
 /**
  * GET an assessment by id
- * @param courseId:     course id
  * @param assessmentId: assessment id
  * @return assessment
  */
 
-// ERROR IN THIS ONE
-router.get("/assessment/:assessmentId", (req, res) => {
-  const { assessmentId } = req.body;
+router.get("/assessment/getAssessment/:assessmentId", (req, res) => {
 
-  Assessment.findbyId(assessmentId)
+  Assessment.findById(req.body.assessmentId)
     .then((assessment) => {
+      console.log(assessment);
       if (!assessment) return res.status(404).json("Assessment Not Found");
       return res.json(assessment);
     })
@@ -437,17 +435,40 @@ router.get("/assessment/:assessmentId", (req, res) => {
  * @param req {courseId, assessmentId, studentId, file}
  * @return all assessments in a course
  */
-router.get("/assessment/:courseId", (req, res) => {
-  Assessment.find()
-    .then((assessments) => res.json(assessments))
+router.get("/assessment/getAllAssessments/:courseId", (req, res) => {
+  Course.findById(req.body.courseId)
+    .then((course) => {
+      var assessmentArray = [];
+
+
+      course.assessments.forEach(assessment => {
+        console.log(assessment);
+        Assessment.findById(assessment)
+          .then((assess) => {
+            console.log(assess);
+            console.log(assessmentArray);
+            assessmentArray = assessmentArray.concat(assess);
+            console.log(assessmentArray);
+            if (assessmentArray.length == course.assessments.length) {
+              res.json(assessmentArray);
+            }
+          })
+          .catch((err) => res.status(400)
+          .json(`Error: ${err}`));
+      });
+
+      
+
+    })
     .catch((err) => res.status(400).json(`Error: ${err}`));
-});
+  });
+  
 
 /**
  * GET student submission by studentId
  */
-router.get("/assessment/:assessmentId/:studentId", (req, res) => {
-  Assessment.findbyId(req.param.assessmentId)
+router.get("/assessment/getstudentSubmission/:assessmentId/:studentId", (req, res) => {
+  Assessment.findById(req.body.assessmentId)
     .then((assessment) => {
       const submission = assessment.studentSubmissions.filter(
         (submission) => submission.studentId === req.params.studentId
@@ -458,19 +479,26 @@ router.get("/assessment/:assessmentId/:studentId", (req, res) => {
         res.status(404).json(`Error: Submission not found`);
       }
     })
-    .catch((err) => res.status(400))
-    .json(`Error: ${err}`);
+    .catch((err) => res.status(400)
+    .json(`Error: ${err}`));
 });
 
 /**
  * GET all student submissions for an assessment
  */
-router.get("/assessment/:assessmentId", (req, res) => {
-  Assessment.findbyId(req.param.assessmentId)
+router.get("/assessment/getAllStudentSubmissions/:assessmentId", (req, res) => {
+  Assessment.findById(req.body.assessmentId)
     .then((assessment) => {
-      res.json(assessment.studentSubmissions);
+      if (assessment.studentSubmissions.length) {
+        res.json(assessment.studentSubmissions);
+      } else {
+        res.status(404).json(`Error: Assessment Not Found`);
+      }
+
     })
     .catch((err) => res.status(400).json(`Error: ${err}`));
 });
+
+
 
 module.exports = router;
