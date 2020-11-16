@@ -107,27 +107,26 @@ export class CreateCourseComponent implements OnInit {
               (err) => console.log(err)
             );
           }
-
+          const formData = new FormData();
           for (const droppedFile of course.files) {
             if (droppedFile.fileEntry.isFile) {
               const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
               fileEntry.file((file: File) => {
-                const formData = new FormData();
                 formData.append('documents', file, droppedFile.relativePath);
-                this.courseService.postNewFile(formData, res._id).subscribe(
-                  (res) => {
-                    console.log(res);
-                  },
-                  (err) => {
-                    console.log(err);
-                  }
-                );
               });
             } else {
               // It was a directory (empty directories are added, otherwise only files)
               const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
             }
           }
+          this.courseService.postNewFile(formData, res._id).subscribe(
+           (res) => {
+              console.log(res);
+            },
+            (err) => {
+              console.log(err);
+            }
+          );
         },
         (err) => {
           this.error = err.message;

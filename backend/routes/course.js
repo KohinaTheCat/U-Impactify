@@ -182,6 +182,7 @@ router.put("/update", (req, res) => {
 router.post("/:id/upload", upload.array("documents", 10), (req, res) => {
   Course.findById(req.params.id)
     .then((course) => {
+      course.files = course.files.concat(req.files.map(k => k.filename));
       course
         .save()
         .then(() => res.json("Document Added!"))
