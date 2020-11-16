@@ -50,6 +50,14 @@ export class CourseService {
   }
 
   /**
+   * PUT
+   * @param {any} course the course that's requesting survey
+   */
+  requestSurvey(id: string): Observable<Course> {
+    return this.http.put<Course>(`/api/course/surveyRequest/${id}`, {});
+  }
+
+  /**
    * GET all documents for a course
    * @param {string} courseId id of course
    */
@@ -148,17 +156,16 @@ export class CourseService {
   /**
    * POST new assessment
    * @param {any}     assessment  the newly created assessment
-   * @param {string}  _id         id of the course
+
    *
    */
-  postNewAssessment(assessment: any, _id: string): Observable<Assessment> {
-    const { courseId, name, files, visibility, studentSubmission } = assessment;
-    return this.http.post<Assessment>(`/api/assessment/`, {
-      courseId: _id,
+  postNewAssessment(assessment: any): Observable<Assessment> {
+    const { name, visibility, studentSubmission } = assessment;
+    return this.http.post<Assessment>(`/api/course/assessment`, {
       name,
-      files,
+      files: [],
       visibility,
-      studentSubmission: [],
+      studentSubmission,
     });
   }
 
@@ -166,12 +173,25 @@ export class CourseService {
    * PUT update assessment
    */
   updateAssessment(courseId: string, assessment: any): Observable<Assessment> {
-    return this.http.put<Assessment>(
-      `http://localhost:5000/assessment/${courseId}`,
-      {
-        assessment,
-      }
-    );
+    return this.http.put<Assessment>(`api/course/assessment/${courseId}`, {
+      assessment,
+    });
+  }
+
+  /**
+   *
+   * @param courseId
+   * @param assessmentId
+   */
+
+  postAssessmentCourse(
+    courseId: string,
+    assessmentId: string
+  ): Observable<Course> {
+    return this.http.put<Course>('api/course/assessment/addAssessment', {
+      courseId,
+      assessmentId,
+    });
   }
 
   /**
@@ -181,7 +201,7 @@ export class CourseService {
    */
   deleteAssessment(courseId: string, assessmentId: string): Observable<any> {
     return this.http.delete(
-      `http://localhost:5000/deleteAssessment/${courseId}/${assessmentId}`
+      `/api/course/deleteAssessment/${courseId}/${assessmentId}`
     );
   }
 
@@ -198,14 +218,11 @@ export class CourseService {
     studentId: string,
     files: string[]
   ): Observable<any> {
-    return this.http.put<Assessment>(
-      `http://localhost:5000/addStudentSubmission`,
-      {
-        courseId,
-        assessmentId,
-        studentId,
-      }
-    );
+    return this.http.put<Assessment>(`api/course/addStudentSubmission`, {
+      courseId,
+      assessmentId,
+      studentId,
+    });
   }
 
   /**
@@ -213,9 +230,7 @@ export class CourseService {
    * @param {string} assessmentId id of assessment
    */
   getAssessment(assessmentId: string): Observable<Assessment> {
-    return this.http.get<Assessment>(
-      `http://localhost:5000/assessment/${assessmentId}`
-    );
+    return this.http.get<Assessment>(`api/course/assessment/${assessmentId}`);
   }
 
   /**
@@ -223,9 +238,7 @@ export class CourseService {
    * @param {string} courseId id of course
    */
   getAllAssessments(courseId): Observable<Assessment[]> {
-    return this.http.get<Assessment[]>(
-      `http://localhost:5000/assessment/${courseId}`
-    );
+    return this.http.get<Assessment[]>(`api/course/assessment/${courseId}`);
   }
 
   /**
@@ -238,7 +251,7 @@ export class CourseService {
     assessmentId: string
   ): Observable<Object[]> {
     return this.http.get<Object[]>(
-      `http://localhost:5000/assessment/${courseId}/${assessmentId}`
+      `api/course/assessment/${courseId}/${assessmentId}`
     );
   }
 
@@ -254,7 +267,19 @@ export class CourseService {
     studentId: string
   ): Observable<String[]> {
     return this.http.get<String[]>(
-      `http://localhost:5000/assessment/${courseId}/${assessmentId}/${studentId}`
+      `api/course/assessment/${courseId}/${assessmentId}/${studentId}`
     );
+  }
+
+  addSurvey(
+    _id: string,
+    courseId: string,
+    surveyAnswers: string[]
+  ): Observable<Course> {
+    return this.http.put<Course>(`api/course/addSurvey`, {
+      _id,
+      courseId,
+      surveyAnswers,
+    });
   }
 }

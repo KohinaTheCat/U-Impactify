@@ -40,6 +40,9 @@ const courseSchema = new Schema({
   files: {
     type: [String],
   },
+  assessments: {
+    type: [String],
+  },
   reviews: {
     type: [
       {
@@ -50,8 +53,18 @@ const courseSchema = new Schema({
       },
     ],
   },
-  assessments: {
-    type: [String],
+
+  instructorReview: {
+    type: [
+      {
+        _id: String,
+        surveyAnswers: [String],
+      },
+    ],
+  },
+
+  surveyRequest: {
+    type: Boolean,
   },
 });
 

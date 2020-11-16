@@ -529,9 +529,18 @@ clr-control-error {
   margin-top: 1rem;
 }
 
+.rate-button-2 button {
+  font-size: 0.875rem;
+  border-radius: 5px;
+}
+
 .rate-button button {
   font-size: 0.875rem;
   border-radius: 5px;
+}
+
+.no {
+  margin-top: 10rem;
 }
 
 .no-ratings {
@@ -547,4 +556,26 @@ clr-control-error {
 }
 li {
   list-style: none;
+}
+
+.surveybutton {
+  margin-top: 1.5rem;
+  display: block;
+}
+
+.surveybutton button {
+  font-size: 0.875rem;
+  border-radius: 5px;
+  display: block;
+}
+
+.surveyQuestion {
+  font-size: 0.75rem;
+  padding-left: 2rem;
+  transform: translateY(30px);
+}
+
+.answerLabel {
+  font-size: 0.65rem;
+  color: var(--gray60);
 }

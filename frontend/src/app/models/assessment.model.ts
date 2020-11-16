@@ -9,5 +9,5 @@ export interface Assessment {
   name: string;
   files: string[];
   visibility: boolean;
-  studentSubmissions: object[];
+  studentSubmissions: Object[];
 }

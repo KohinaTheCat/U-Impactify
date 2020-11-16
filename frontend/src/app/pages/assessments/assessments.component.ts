@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Course } from 'src/app/models/course.model';
 import { CourseService } from 'src/app/services/course.service';
@@ -30,12 +30,11 @@ export class AssessmentsComponent implements OnInit {
   error: string = '';
   basic: boolean = true;
 
-  courseId: String = '';
-  studentSubm: String[][] = [[]];
+  courseId: string = '';
   assessArr: Assessment[] = [];
-
+  studentSubmissions: Object[] = [];
   currUser: Assessment;
-
+  img: NgxFileDropEntry[] = [];
   file: String[] = [];
 
   constructor(
@@ -51,14 +50,20 @@ export class AssessmentsComponent implements OnInit {
     this.name = '';
     this.visibility = false;
 
-    const id = this.activatedRouter.snapshot.params['id'];
-    this.courseService.getCourse(id).subscribe((incomingCourse: Course) => {
-      this.course = incomingCourse;
-      this.course.img =
-        !this.course.img || this.course.img === ''
-          ? (this.course.img = '../../../../assets/courseimage.png')
-          : // TODO: REMOVE LOCALHOST FROM PROD BUILD AFTER
-            `http://localhost:5000/api/course/documents/${this.course.img}`;
+    this.courseId = this.activatedRouter.snapshot.params['id'];
+    this.courseService
+      .getCourse(this.courseId)
+      .subscribe((incomingCourse: Course) => {
+        this.course = incomingCourse;
+        this.course.img =
+          !this.course.img || this.course.img === ''
+            ? (this.course.img = '../../../../assets/courseimage.png')
+            : // TODO: REMOVE LOCALHOST FROM PROD BUILD AFTER
+              `http://localhost:5000/api/course/documents/${this.course.img}`;
+      });
+
+    this.courseService.getAllAssessments(this.courseId).subscribe((res) => {
+      this.assessArr = res;
     });
   }
 
@@ -91,20 +96,51 @@ export class AssessmentsComponent implements OnInit {
   }
 
   registerHandler() {
-    // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    // this.assessArr.push({
-    //   courseId: this.courseId,
-    //   name: this.name,
-    //   visibility: this.visibility,
-    //   files: this.file,
-    //   studentSubmissions: this.studentSubm,
-    // });
-    // const { name, visibility, files } = this;
-    // const assessments = {
-    //   name,
-    //   visibility,
-    //   files,
-    // };
+    console.log('Added first one');
+    const { name, visibility, studentSubmissions, files } = this;
+    const assessment = {
+      name,
+      visibility,
+      studentSubmissions,
+      files,
+    };
+
+    this.courseService.postNewAssessment(assessment).subscribe(
+      (res) => {
+        console.log('courseId: ' + this.courseId + ' assessmentId: ' + res._id);
+        this.courseService
+          .postAssessmentCourse(this.courseId, res._id)
+          .subscribe((res) => {
+            this.ngOnInit();
+          });
+
+        const formData = new FormData();
+        for (const droppedFile of assessment.files) {
+          if (droppedFile.fileEntry.isFile) {
+            const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
+            fileEntry.file((file: File) => {
+              formData.append('documents', file, droppedFile.relativePath);
+            });
+          } else {
+            // It was a directory (empty directories are added, otherwise only files)
+            const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
+          }
+
+          this.courseService.postNewFile(formData, res._id).subscribe(
+            (res) => {
+              console.log(res);
+            },
+            (err) => {
+              console.log(err);
+            }
+          );
+        }
+      },
+      (err) => {
+        this.error = err.message;
+        this.basic = true;
+      }
+    );
   }
 
   cancel() {}

@@ -11,6 +11,7 @@ import {
   FileSystemFileEntry,
   FileSystemDirectoryEntry,
 } from 'ngx-file-drop';
+import { ClrWizard } from '@clr/angular';
 
 @Component({
   selector: 'app-course-preview',
@@ -34,6 +35,11 @@ export class CoursePreviewComponent implements OnInit {
   loading: boolean = true;
   tags: string[] = [];
   errorMessage: string = '';
+  surveyRequest: boolean;
+  openedSurveyRequest: boolean = false;
+  openedSurvey: boolean = false;
+  instructorReview: Course['instructorReview'];
+  completedSurvey: boolean = false;
 
   courseReview: string = '';
   score: number = 0;
@@ -42,8 +48,19 @@ export class CoursePreviewComponent implements OnInit {
   courseStars: number[] = [1, 2, 3, 4, 5];
 
   averageScore: number = 0;
+  showSurveys: boolean = false;
 
   @ViewChild('reviewStars') stars;
+  @ViewChild('wizardxl') wizardExtraLarge: ClrWizard;
+  xlOpen: boolean = false;
+  surveyAnswer: string[] = new Array('');
+  surveyQuestions: string[] = [
+    'I found the course very fun and exciting',
+    'This course gave me a good understanding of this subject',
+    'The impact consultant designed the course so it was easy to access resources',
+    'Course assessments allowed me to better improve my understanding with the course material',
+    'The overall course quality was great',
+  ];
 
   constructor(
     private userService: UserService,
@@ -63,18 +80,27 @@ export class CoursePreviewComponent implements OnInit {
         this.description = this.course.description;
         this.level = this.course.level;
         this.tags = this.course.tags.split(' ');
+        this.surveyRequest = this.course.surveyRequest;
+        this.instructorReview = this.course.instructorReview;
         this.course.img =
           !this.course.img || this.course.img === ''
             ? (this.course.img = '../../../../assets/courseimage.png')
-            // TODO: REMOVE LOCALHOST FROM PROD BUILD AFTER
-            : `http://localhost:5000/api/course/documents/${this.course.img}`;
+            : // TODO: REMOVE LOCALHOST FROM PROD BUILD AFTER
+              `http://localhost:5000/api/course/documents/${this.course.img}`;
         for (let i = 0; i < this.course.students.length; i++) {
           if (this.course.students[i] == this.user._id) {
             this.alreadyEnrolled = true;
             break;
           }
         }
-
+        if (this.surveyRequest) {
+          for (let j = 0; j < this.instructorReview.length; j++) {
+            if (this.instructorReview[j]._id === this.user._id) {
+              this.completedSurvey = true;
+              break;
+            }
+          }
+        }
         this.averageScore = 0;
 
         this.course.reviews.forEach((review: any) => {
@@ -132,6 +158,16 @@ export class CoursePreviewComponent implements OnInit {
   }
 
   studentAnalysisHandler() {}
+
+  registerSurveyRequest() {
+    this.openedSurveyRequest = false;
+    this.courseService.requestSurvey(this.course._id).subscribe(
+      (res: Course) => {
+        this.ngOnInit();
+      },
+      (err) => console.log(err)
+    );
+  }
 
   cancel() {
     this.openedUpdateCourse = false;
@@ -234,6 +270,18 @@ export class CoursePreviewComponent implements OnInit {
       )
       .subscribe((course) => {
         this.openedRateCourse = false;
+        this.ngOnInit();
+      });
+  }
+
+  submitSurvey() {
+    this.courseService
+      .addSurvey(
+        this.userService.getCurrentUser()._id,
+        this.course._id,
+        this.surveyAnswer
+      )
+      .subscribe(() => {
         this.ngOnInit();
       });
   }
