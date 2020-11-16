@@ -54,6 +54,11 @@ export class AssessmentsComponent implements OnInit {
     const id = this.activatedRouter.snapshot.params['id'];
     this.courseService.getCourse(id).subscribe((incomingCourse: Course) => {
       this.course = incomingCourse;
+      this.course.img =
+        !this.course.img || this.course.img === ''
+          ? (this.course.img = '../../../../assets/courseimage.png')
+          : // TODO: REMOVE LOCALHOST FROM PROD BUILD AFTER
+            `http://localhost:5000/api/course/documents/${this.course.img}`;
     });
   }
 
