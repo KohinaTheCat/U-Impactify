@@ -198,21 +198,28 @@ router.post("/:id/upload", upload.array("documents", 10), (req, res) => {
     .catch((err) => res.status(400).json(`Error finding Course: ${err}`));
 });
 
-// /**
-//  * POST uploading document to a course
-//  * @param id course id
-//  */
-// router.post("/:id/uploadAssessment", upload.array("documents", 10), (req, res) => {
-//   Course.findById(req.params.id)
-//     .then((course) => {
-//       course.files = course.files.concat(req.files.map((k) => k.filename));
-//       course
-//         .save()
-//         .then(() => res.json("Document Added!"))
-//         .catch((err) => res.json(err));
-//     })
-//     .catch((err) => res.status(400).json(`Error finding Course: ${err}`));
-// });
+/**
+ * POST uploading document to a assessment
+ * @param id course id
+ */
+router.post(
+  "/assessment/uploadAssessment/:id",
+  upload.array("documents", 10),
+  (req, res) => {
+    Assessment.findById(req.params.id)
+      .then((assessment) => {
+        // course.files = course.files.concat(req.files.map((k) => k.filename));
+        console.log("Something: " + assessment.files);
+        assessment.files = assessment.files.concat(req.files.map((k) => k.id));
+
+        assessment
+          .save()
+          .then(() => res.json("Assessment Document Added!"))
+          .catch((err) => res.json(err));
+      })
+      .catch((err) => res.status(400).json(`Error finding Course: ${err}`));
+  }
+);
 
 /**
  * POST uploading courseImage to a course

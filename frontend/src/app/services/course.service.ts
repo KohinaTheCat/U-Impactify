@@ -50,6 +50,18 @@ export class CourseService {
   }
 
   /**
+   * POST uploading document to a course
+   * @param {FormData} file     new file
+   * @param {string}   courseId id of course
+   */
+  postNewAssessmentFile(file: FormData, assessmentId: string) {
+    return this.http.post(
+      `/api/course/assessment/uploadAssessment/${assessmentId}`,
+      file
+    );
+  }
+
+  /**
    * PUT
    * @param {any} course the course that's requesting survey
    */

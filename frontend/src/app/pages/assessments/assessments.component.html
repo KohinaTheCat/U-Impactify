@@ -1,6 +1,6 @@
 <div class="flexbot">
-  <h1 class="title">
-    <span>{{ name }}</span>
+  <h1 class="title" *ngIf="course">
+    <span>{{ course.name }}</span>
   </h1>
 
   <!-- <div class="outer">
@@ -155,8 +155,12 @@
 
         <clr-dg-cell class="widthColumn files">
           <!-- id="fileStore" -->
-          <div class="row" *ngFor="let file of files">
-            {{ file.relativePath }}
+          <div class="row" *ngFor="let file of assess.files">
+            <a
+              *ngIf="file"
+              href="http://localhost:5000/api/course/documents/{{ file }}"
+              >{{ file }}</a
+            >
           </div>
         </clr-dg-cell>
 

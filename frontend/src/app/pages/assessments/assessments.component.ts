@@ -123,7 +123,7 @@ export class AssessmentsComponent implements OnInit {
     };
 
     this.courseService.postNewAssessment(assessment).subscribe(
-      (res) => {
+      (ass) => {
         const formData = new FormData();
 
         for (const droppedFile of assessment.files) {
@@ -139,19 +139,20 @@ export class AssessmentsComponent implements OnInit {
         }
 
         this.courseService
-          .postAssessmentCourse(this.courseId, res._id)
+          .postAssessmentCourse(this.courseId, ass._id)
           .subscribe((res) => {
-            this.ngOnInit();
+            this.courseService
+              .postNewAssessmentFile(formData, ass._id)
+              .subscribe(
+                (res) => {
+                  console.log(res);
+                  this.ngOnInit();
+                },
+                (err) => {
+                  console.log(err);
+                }
+              );
           });
-
-        this.courseService.postNewFile(formData, this.courseId).subscribe(
-          (res) => {
-            console.log(res);
-          },
-          (err) => {
-            console.log(err);
-          }
-        );
       },
       (err) => {
         this.error = err.message;
