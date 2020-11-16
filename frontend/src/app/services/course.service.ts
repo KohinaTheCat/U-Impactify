@@ -52,6 +52,15 @@ export class CourseService {
   }
 
   /**
+   * PUT 
+   * @param {any} course the course that's requesting survey
+   */
+  requestSurvey(id: string): Observable<Course> {
+    return this.http.put<Course>(`/api/course/surveyRequest/${id}`, {
+    });
+  }
+
+  /**
    * GET all documents for a course
    * @param {string} courseId id of course
    */
@@ -150,6 +159,14 @@ export class CourseService {
       courseReview,
       score,
       anon,
+    });
+  }
+
+  addSurvey(_id: string, courseId: string, surveyAnswers : string[]): Observable<Course>{
+    return this.http.put<Course>(`api/course/addSurvey`, {
+      _id,
+      courseId,
+      surveyAnswers
     });
   }
 }

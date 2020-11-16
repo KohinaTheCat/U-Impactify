@@ -272,7 +272,7 @@ router.get("/getAllFiles/:id", (req, res, next) => {
 
 /**
  * PUT review on a course
- *  @param _id the course id
+ *  @param _id the student id
  *  @return course the course
  */
 router.put("/addReview/", (req, res) => {
@@ -291,5 +291,40 @@ router.put("/addReview/", (req, res) => {
       .catch((err) => res.status(400).json(err));
   });
 });
+
+
+/**
+ * PUT Instructor review on a course
+ *  @param _id the student id
+ *  @return course the course
+ */
+router.put("/addSurvey/", (req, res) => {
+  const { _id, surveyAnswers, courseId } = req.body;
+
+  Course.findById(courseId).then((course) => {
+    course.instructorReview = course.instructorReview.concat({
+      _id,
+      surveyAnswers,
+    });
+
+    course
+      .save()
+      .then(() => res.json(course))
+      .catch((err) => res.status(400).json(err));
+  });
+});
+
+router.put("/surveyRequest/:id", (req, res) => {
+  Course.findById(req.params.id)
+    .then((course) => {
+      course.surveyRequest = true;
+      course
+        .save()
+        .then(() => res.json(course))
+        .catch((err) => res.status(400).json("Error: " + err));
+    })
+    .catch((err) => res.status(404).json(err));
+})
+
 
 module.exports = router;
