@@ -271,7 +271,7 @@
       </clr-wizard>
 
       <div class="survey">
-        <h4 *ngIf="!!user && course.teachers.includes(user._id)">
+        <h4 *ngIf="surveyRequest && course.teachers.includes(user._id)">
           <div class="course-desc">
             <h4>Survey</h4>
             <div class="rate-button-2">
