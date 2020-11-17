@@ -208,9 +208,14 @@ router.post(
   (req, res) => {
     Assessment.findById(req.params.id)
       .then((assessment) => {
-        // course.files = course.files.concat(req.files.map((k) => k.filename));
-        console.log("Something: " + assessment.files);
-        assessment.files = assessment.files.concat(req.files);
+        assessment.files = assessment.files.concat(
+          req.files.map((file) => {
+            return {
+              name: file.filename,
+              id: file.id,
+            };
+          })
+        );
 
         assessment
           .save()
@@ -402,7 +407,12 @@ router.put(
         assessment.studentSubmissions = [
           {
             studentId,
-            files: [req.files.map((f) => f.id)],
+            files: req.files.map((file) => {
+              return {
+                id: file.id,
+                name: file.filename,
+              };
+            }),
           },
         ];
       }
@@ -416,11 +426,23 @@ router.put(
             assessment.studentSubmissions.indexOf(submissions[0])
           ];
 
-        sub.files = sub.files.concat(req.files.map((f) => f.id));
+        sub.files = sub.files.concat(
+          req.files.map((file) => {
+            return {
+              id: file.id,
+              name: file.filename,
+            };
+          })
+        );
       } else {
         assessment.studentSubmissions = assessment.studentSubmissions.concat({
           studentId,
-          files: [req.files.map((f) => f.id)],
+          files: req.files.map((file) => {
+            return {
+              id: file.id,
+              name: file.filename,
+            };
+          }),
         });
       }
 

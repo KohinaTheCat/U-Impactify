@@ -274,3 +274,16 @@ clr-control-error {
 .options {
   background: var(--purple-smooth);
 }
+
+.student-submission-card {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.student-submission-card ul {
+  padding-left: 0.5rem;
+}
+
+.student-submission-title {
+  font-size: 1.25rem;
+}
