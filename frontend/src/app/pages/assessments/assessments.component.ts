@@ -32,6 +32,10 @@ export class AssessmentsComponent implements OnInit {
   basic: boolean = true;
   selectedAss: Assessment;
 
+  identification: Object[];
+
+  viewSelfSubmissions: Object[][] = [];
+
   studentSubmission: Object[] = [];
 
   assessArr: Assessment[] = [];
@@ -70,15 +74,51 @@ export class AssessmentsComponent implements OnInit {
 
       this.courseService.getAllAssessments(incomingCourse._id).subscribe(
         (incomingArray: Assessment[]) => {
-          this.assessArr = incomingArray;
+          this.assessArr = incomingArray.sort((a, b) => {
+            if (a.name < b.name) {
+              return -1; //nameA comes first
+            }
+            if (a.name > b.name) {
+              return 1; // nameB comes first
+            }
+            return 0; // names must be equal
+          });
+          console.log('Over here2: ' + this.assessArr);
+
+          if (
+            this.user.type === 'IL' ||
+            (this.user.type === 'IC' &&
+              !this.course.teachers.includes(this.user._id))
+          ) {
+            this.assessArr = this.assessArr.filter(
+              (assess) => assess.visibility
+            );
+          }
+          console.log('Over here: ' + this.assessArr);
+          this.assessArr.forEach((assess) => {
+            const studentSub = assess.studentSubmissions.find(
+              (sub: any) => sub.studentId === this.user._id
+            );
+            if (studentSub) {
+              console.log('HERE: ' + studentSub['studentId']);
+
+              this.viewSelfSubmissions = this.viewSelfSubmissions.concat([
+                studentSub['files'],
+              ]);
+            } else {
+              this.viewSelfSubmissions = this.viewSelfSubmissions.concat([
+                [{}],
+              ]);
+            }
+          });
+
+          console.log(this.viewSelfSubmissions);
         },
         (err) => {
           console.log(err);
         }
       );
     });
-
-    console.log(this.assessArr);
   }
 
   showStudentSubmission($event) {
@@ -184,5 +224,29 @@ export class AssessmentsComponent implements OnInit {
   }
   fileLeave(event) {
     console.log(event);
+  }
+
+  registerSubmission(assess: Assessment) {
+    this.identification = assess.studentSubmissions.filter(
+      (temp: any) => temp.studentId === this.user._id
+    );
+
+    if (this.identification.length) {
+      console.log(this.identification[0]['studentId']);
+
+      this.viewSelfSubmissions = this.identification[0]['files'];
+      this.ngOnInit();
+      return true;
+    }
+
+    // if (temp2.length) {
+    //   this.viewSelfSubmissions = temp2[0].files;
+    //   return true;
+    // }
+
+    // if (assess.studentSubmissions.includes(this.user._id)) {
+    // } else {
+    //   return false;
+    // }
   }
 }

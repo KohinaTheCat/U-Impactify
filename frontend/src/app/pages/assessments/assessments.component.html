@@ -141,55 +141,46 @@
       >
 
       <clr-dg-row *ngFor="let assess of assessArr">
-        <div *ngIf="assess.visibility">
-          <clr-dg-action-overflow>
-            <!-- <button class="action-item" (click)="onEdit(assess)">Edit</button> -->
-            <button class="action-item" (click)="onDelete(assess)">
-              Delete
-            </button>
-          </clr-dg-action-overflow>
+        <clr-dg-action-overflow>
+          <!-- <button class="action-item" (click)="onEdit(assess)">Edit</button> -->
+          <button class="action-item" (click)="onDelete(assess)">Delete</button>
+        </clr-dg-action-overflow>
 
-          <clr-dg-cell class="text widthColumn">
-            {{ assess.name }}
-          </clr-dg-cell>
+        <clr-dg-cell class="text widthColumn">
+          {{ assess.name }}
+        </clr-dg-cell>
 
-          <clr-dg-cell class="widthColumn files">
-            <!-- id="fileStore" -->
-            <div class="row" *ngFor="let file of assess.files">
-              <a
-                *ngIf="file"
-                download="{{ file.name }}"
-                href="http://localhost:5000/api/course/documents/{{ file.id }}"
-                >{{ file.name }}</a
-              >
-            </div>
-          </clr-dg-cell>
+        <clr-dg-cell class="widthColumn files">
+          <!-- id="fileStore" -->
+          <div class="row" *ngFor="let file of assess.files">
+            <a
+              *ngIf="file"
+              download="{{ file.name }}"
+              href="http://localhost:5000/api/course/documents/{{ file.id }}"
+              >{{ file.name }}</a
+            >
+          </div>
+        </clr-dg-cell>
 
-          <!-- <clr-dg-cell>{{ assess.visibility }}</clr-dg-cell> -->
-          <!-- <clr-dg-cell> {{ assess.visibility }} </clr-dg-cell> -->
-          <clr-dg-cell
-            *ngIf="assess.visibility"
-            class="display widthColumnSmall"
-          >
-            <clr-icon shape="check" class="checkmark"></clr-icon>
-            <div class="text"></div>
-          </clr-dg-cell>
+        <!-- <clr-dg-cell>{{ assess.visibility }}</clr-dg-cell> -->
+        <!-- <clr-dg-cell> {{ assess.visibility }} </clr-dg-cell> -->
+        <clr-dg-cell *ngIf="assess.visibility" class="display widthColumnSmall">
+          <clr-icon shape="check" class="checkmark"></clr-icon>
+          <div class="text"></div>
+        </clr-dg-cell>
 
-          <clr-dg-cell
-            *ngIf="!assess.visibility"
-            class="display widthColumnSmall"
-            ><clr-icon shape="times" class="wrong"></clr-icon>
-            <div class="text"></div>
-          </clr-dg-cell>
+        <clr-dg-cell *ngIf="!assess.visibility" class="display widthColumnSmall"
+          ><clr-icon shape="times" class="wrong"></clr-icon>
+          <div class="text"></div>
+        </clr-dg-cell>
 
-          <clr-dg-cell class="text widthColumnSmall"
-            ><clr-icon
-              shape="view-list"
-              id="submissionsTab"
-              (click)="showStudentSubmission(assess)"
-            ></clr-icon>
-          </clr-dg-cell>
-        </div>
+        <clr-dg-cell class="text widthColumnSmall"
+          ><clr-icon
+            shape="view-list"
+            id="submissionsTab"
+            (click)="showStudentSubmission(assess)"
+          ></clr-icon>
+        </clr-dg-cell>
       </clr-dg-row>
     </clr-datagrid>
   </div>
@@ -211,7 +202,7 @@
         <div id="header">View Submission</div>
       </clr-dg-column>
 
-      <clr-dg-row *ngFor="let assess of assessArr">
+      <clr-dg-row *ngFor="let assess of assessArr; let i = index">
         <!-- <clr-dg-action-overflow>
           <button class="action-item" (click)="onEdit(assess)">Edit</button>
           <button class="action-item" (click)="onDelete(assess)">Delete</button>
@@ -224,9 +215,9 @@
           <div class="row" *ngFor="let file of assess.files">
             <a
               *ngIf="file"
-              download="{{ file.filename }}"
+              download="{{ file.name }}"
               href="http://localhost:5000/api/course/documents/{{ file.id }}"
-              >{{ file.filename }}</a
+              >{{ file.name }}</a
             >
           </div>
         </clr-dg-cell>
@@ -256,7 +247,13 @@
           ></clr-icon>
         </clr-dg-cell>
 
-        <clr-dg-cell class="widthColumnSmall"> I am a submission! </clr-dg-cell>
+        <clr-dg-cell class="widthColumnSmall">
+          <div *ngFor="let file of viewSelfSubmissions[i]">
+            <div *ngIf="file.name">
+              {{ file.name }}
+            </div>
+          </div>
+        </clr-dg-cell>
       </clr-dg-row>
     </clr-datagrid>
   </div>
