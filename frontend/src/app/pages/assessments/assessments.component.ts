@@ -53,7 +53,10 @@ export class AssessmentsComponent implements OnInit {
     private router: Router,
     private userService: UserService,
     private activatedRouter: ActivatedRoute
-  ) {}
+  ) {
+    const id = this.activatedRouter.snapshot.params['id'];
+    this.courseId = id;
+  }
 
   ngOnInit(): void {
     this.user = this.userService.getCurrentUser();
@@ -61,64 +64,63 @@ export class AssessmentsComponent implements OnInit {
     this.submissionsModal = false;
     this.name = '';
     this.visibility = false;
+    this.viewSelfSubmissions = [];
+    this.assessArr = [];
+    this.courseService
+      .getCourse(this.courseId)
+      .subscribe((incomingCourse: Course) => {
+        this.course = incomingCourse;
+        this.course.img =
+          !this.course.img || this.course.img === ''
+            ? (this.course.img = '../../../../assets/courseimage.png')
+            : // TODO: REMOVE LOCALHOST FROM PROD BUILD AFTER
+              `http://localhost:5000/api/course/documents/${this.course.img}`;
 
-    const id = this.activatedRouter.snapshot.params['id'];
-    this.courseId = id;
-    this.courseService.getCourse(id).subscribe((incomingCourse: Course) => {
-      this.course = incomingCourse;
-      this.course.img =
-        !this.course.img || this.course.img === ''
-          ? (this.course.img = '../../../../assets/courseimage.png')
-          : // TODO: REMOVE LOCALHOST FROM PROD BUILD AFTER
-            `http://localhost:5000/api/course/documents/${this.course.img}`;
+        this.courseService.getAllAssessments(incomingCourse._id).subscribe(
+          (incomingArray: Assessment[]) => {
+            this.assessArr = incomingArray.sort((a, b) => {
+              if (a.name < b.name) {
+                return -1; //nameA comes first
+              }
+              if (a.name > b.name) {
+                return 1; // nameB comes first
+              }
+              return 0; // names must be equal
+            });
 
-      this.courseService.getAllAssessments(incomingCourse._id).subscribe(
-        (incomingArray: Assessment[]) => {
-          this.assessArr = incomingArray.sort((a, b) => {
-            if (a.name < b.name) {
-              return -1; //nameA comes first
+            if (
+              this.user.type === 'IL' ||
+              (this.user.type === 'IC' &&
+                !this.course.teachers.includes(this.user._id))
+            ) {
+              this.assessArr = this.assessArr.filter(
+                (assess) => assess.visibility
+              );
             }
-            if (a.name > b.name) {
-              return 1; // nameB comes first
-            }
-            return 0; // names must be equal
-          });
-          console.log('Over here2: ' + this.assessArr);
+            this.assessArr.forEach((assess) => {
+              const studentSub = assess.studentSubmissions.find(
+                (sub: any) => sub.studentId === this.user._id
+              );
+              if (studentSub) {
+                console.log('HERE: ' + studentSub['studentId']);
 
-          if (
-            this.user.type === 'IL' ||
-            (this.user.type === 'IC' &&
-              !this.course.teachers.includes(this.user._id))
-          ) {
-            this.assessArr = this.assessArr.filter(
-              (assess) => assess.visibility
-            );
+                this.viewSelfSubmissions = this.viewSelfSubmissions.concat([
+                  studentSub['files'],
+                ]);
+              } else {
+                this.viewSelfSubmissions = this.viewSelfSubmissions.concat([
+                  [{}],
+                ]);
+              }
+            });
+
+            console.log(this.viewSelfSubmissions);
+          },
+          (err) => {
+            console.log(err);
           }
-          console.log('Over here: ' + this.assessArr);
-          this.assessArr.forEach((assess) => {
-            const studentSub = assess.studentSubmissions.find(
-              (sub: any) => sub.studentId === this.user._id
-            );
-            if (studentSub) {
-              console.log('HERE: ' + studentSub['studentId']);
-
-              this.viewSelfSubmissions = this.viewSelfSubmissions.concat([
-                studentSub['files'],
-              ]);
-            } else {
-              this.viewSelfSubmissions = this.viewSelfSubmissions.concat([
-                [{}],
-              ]);
-            }
-          });
-
-          console.log(this.viewSelfSubmissions);
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
-    });
+        );
+      });
   }
 
   showStudentSubmission($event) {
@@ -202,8 +204,10 @@ export class AssessmentsComponent implements OnInit {
     this.courseService
       .postStudentSubmission(this.selectedAss._id, this.user._id, formData)
       .subscribe((res) => {
+        console.log('Did I make it');
         this.submissionsModal = false;
         this.selectedAss = null;
+        this.ngOnInit();
       });
   }
 

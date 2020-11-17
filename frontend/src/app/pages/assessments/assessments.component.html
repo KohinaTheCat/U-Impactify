@@ -249,9 +249,13 @@
 
         <clr-dg-cell class="widthColumnSmall">
           <div *ngFor="let file of viewSelfSubmissions[i]">
-            <div *ngIf="file.name">
+            <a
+              *ngIf="file.name"
+              download="{{ file.name }}"
+              href="http://localhost:5000/api/course/documents/{{ file.id }}"
+            >
               {{ file.name }}
-            </div>
+            </a>
           </div>
         </clr-dg-cell>
       </clr-dg-row>
@@ -380,12 +384,7 @@
       >
         Cancel
       </button>
-      <button
-        type="button"
-        class="btn btn-primary"
-        (click)="submitHandler()"
-        (click)="submissionsModal = false"
-      >
+      <button type="button" class="btn btn-primary" (click)="submitHandler()">
         Submit
       </button>
     </div>
