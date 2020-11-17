@@ -153,9 +153,9 @@
           <div class="row" *ngFor="let file of assess.files">
             <a
               *ngIf="file"
-              download="{{ file.filename }}"
+              download="{{ file.name }}"
               href="http://localhost:5000/api/course/documents/{{ file.id }}"
-              >{{ file.filename }}</a
+              >{{ file.name }}</a
             >
           </div>
         </clr-dg-cell>
@@ -240,7 +240,7 @@
   </div>
 
   <!-- !!user && course.teachers.includes(user._id) -->
-  <div *ngIf="submissionsModal && selectedAss">
+  <div *ngIf="submissionsModal && selectedAss && !!user && course.teachers.includes(user._id)">
     <div class="modal">
       <div class="modal-dialog" role="dialog" aria-hidden="true">
         <div class="modal-content">
@@ -248,10 +248,15 @@
             <button aria-label="Close" class="close" type="button">
               <clr-icon aria-hidden="true" shape="close"></clr-icon>
             </button>
-            <h3 class="modal-title">Student Submissions</h3>
+            <h3 class="modal-title student-submission-title">Submissions for {{selectedAss.name}}</h3>
           </div>
-          <div *ngFor="let sub of selectedAss.studentSubmissions">
-            <div>{{ sub.studentId }}</div>
+          <div *ngFor="let sub of selectedAss.studentSubmissions" class="student-submission-card">
+            <div class="student-sub-card-header">
+              Student: {{sub.studentId}}
+            </div>
+            <ul>
+              <li *ngFor="let file of sub.files"><a download="{{file.name}}" href="http://localhost:5000/api/course/documents/{{file.id}}">{{file.name}}</a></li>
+            </ul>
           </div>
 
           <div class="modal-footer">
@@ -284,7 +289,7 @@
     [clrModalSize]="'lg'"
     [clrModalClosable]="false"
   >
-    <h3 class="modal-title">Submit Your Assignment</h3>
+    <h3 class="modal-title student-submission-title">Submission for {{selectedAss.name}}</h3>
     <div class="modal-body">
       <form clrForm>
         <clr-control-error>{{ error }}</clr-control-error>
@@ -340,7 +345,7 @@
         (click)="submitHandler()"
         (click)="submissionsModal = false"
       >
-        Create Assessment
+        Submit
       </button>
     </div>
   </clr-modal>
