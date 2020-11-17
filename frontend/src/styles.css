@@ -305,5 +305,9 @@ p {
 }
 
 .clr-accordion-inner-content {
-    padding: 1.5rem 1.25rem !important;
+  padding: 1.5rem 1.25rem !important;
+}
+
+.datagrid-column-separator {
+  pointer-events: none;
 }

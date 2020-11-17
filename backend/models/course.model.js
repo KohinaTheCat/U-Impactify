@@ -40,6 +40,9 @@ const courseSchema = new Schema({
   files: {
     type: [String],
   },
+  assessments: {
+    type: [String],
+  },
   reviews: {
     type: [
       {
@@ -50,7 +53,7 @@ const courseSchema = new Schema({
       },
     ],
   },
-  
+
   instructorReview: {
     type: [
       {
@@ -61,9 +64,8 @@ const courseSchema = new Schema({
   },
 
   surveyRequest: {
-    type : Boolean,
+    type: Boolean,
   },
-  
 });
 
 const Course = mongoose.model("Course", courseSchema);

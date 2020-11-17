@@ -31,6 +31,7 @@ import { GivingGardenComponent } from './pages/giving-garden/giving-garden.compo
 import { AboutComponent } from './pages/home-pages/about/about.component';
 import { SolutionsComponent } from './pages/home-pages/solutions/solutions.component';
 import { PricingComponent } from './pages/home-pages/pricing/pricing.component';
+import { AssessmentsComponent } from './pages/assessments/assessments.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import { PricingComponent } from './pages/home-pages/pricing/pricing.component';
     ChatComponent,
     SearchResultsComponent,
     GivingGardenComponent,
+    AssessmentsComponent,
     AboutComponent,
     SolutionsComponent,
     PricingComponent,

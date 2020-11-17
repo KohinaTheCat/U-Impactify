@@ -39,7 +39,7 @@ export class CoursePreviewComponent implements OnInit {
   openedSurveyRequest: boolean = false;
   openedSurvey: boolean = false;
   instructorReview: Course['instructorReview'];
-  completedSurvey : boolean = false;
+  completedSurvey: boolean = false;
 
   courseReview: string = '';
   score: number = 0;
@@ -85,17 +85,17 @@ export class CoursePreviewComponent implements OnInit {
         this.course.img =
           !this.course.img || this.course.img === ''
             ? (this.course.img = '../../../../assets/courseimage.png')
-            // TODO: REMOVE LOCALHOST FROM PROD BUILD AFTER
-            : `http://localhost:5000/api/course/documents/${this.course.img}`;
+            : // TODO: REMOVE LOCALHOST FROM PROD BUILD AFTER
+              `http://localhost:5000/api/course/documents/${this.course.img}`;
         for (let i = 0; i < this.course.students.length; i++) {
           if (this.course.students[i] == this.user._id) {
             this.alreadyEnrolled = true;
             break;
           }
         }
-        if(this.surveyRequest){
-          for(let j = 0; j < this.instructorReview.length; j++){            
-            if(this.instructorReview[j]._id === this.user._id){
+        if (this.surveyRequest) {
+          for (let j = 0; j < this.instructorReview.length; j++) {
+            if (this.instructorReview[j]._id === this.user._id) {
               this.completedSurvey = true;
               break;
             }
@@ -153,7 +153,9 @@ export class CoursePreviewComponent implements OnInit {
 
   editDocumentsHandler() {}
 
-  assessmentsHandler() {}
+  assessmentsHandler() {
+    this.router.navigate([`course/${this.course._id}/assessments`]);
+  }
 
   studentAnalysisHandler() {}
 
@@ -273,13 +275,14 @@ export class CoursePreviewComponent implements OnInit {
   }
 
   submitSurvey() {
-    this.courseService.addSurvey(
-      this.userService.getCurrentUser()._id,
-      this.course._id,
-      this.surveyAnswer
-    )
-    .subscribe(() => {
-      this.ngOnInit();
-    });
+    this.courseService
+      .addSurvey(
+        this.userService.getCurrentUser()._id,
+        this.course._id,
+        this.surveyAnswer
+      )
+      .subscribe(() => {
+        this.ngOnInit();
+      });
   }
 }

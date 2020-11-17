@@ -1,4 +1,5 @@
 let Course = require("../models/course.model");
+let assessmentSchema = require("../models/assessment.model");
 
 const router = require("express").Router();
 const multer = require("multer");
@@ -6,6 +7,11 @@ const crypto = require("crypto");
 const mongoose = require("mongoose");
 const GridFsStorage = require("multer-gridfs-storage");
 
+var Grid = require("gridfs-stream");
+const Assessment = require("../models/assessment.model");
+Grid.mongo = mongoose.mongo;
+
+// .env
 require("dotenv").config();
 const uri = process.env.ATLAS_URI;
 
@@ -70,6 +76,7 @@ router.route("/").post((req, res) => {
     files,
     tags,
     level,
+    assessments: [],
     img: "",
   });
 
@@ -182,7 +189,7 @@ router.put("/update", (req, res) => {
 router.post("/:id/upload", upload.array("documents", 10), (req, res) => {
   Course.findById(req.params.id)
     .then((course) => {
-      course.files = course.files.concat(req.files.map(k => k.filename));
+      course.files = course.files.concat(req.files.map((k) => k.filename));
       course
         .save()
         .then(() => res.json("Document Added!"))
@@ -190,6 +197,34 @@ router.post("/:id/upload", upload.array("documents", 10), (req, res) => {
     })
     .catch((err) => res.status(400).json(`Error finding Course: ${err}`));
 });
+
+/**
+ * POST uploading document to a assessment
+ * @param id course id
+ */
+router.post(
+  "/assessment/uploadAssessment/:id",
+  upload.array("documents", 10),
+  (req, res) => {
+    Assessment.findById(req.params.id)
+      .then((assessment) => {
+        assessment.files = assessment.files.concat(
+          req.files.map((file) => {
+            return {
+              name: file.filename,
+              id: file.id,
+            };
+          })
+        );
+
+        assessment
+          .save()
+          .then(() => res.json("Assessment Document Added!"))
+          .catch((err) => res.json(err));
+      })
+      .catch((err) => res.status(400).json(`Error finding Course: ${err}`));
+  }
+);
 
 /**
  * POST uploading courseImage to a course
@@ -293,6 +328,208 @@ router.put("/addReview/", (req, res) => {
   });
 });
 
+/**
+ * POST new assessment
+ * @param req {courseId, studentId, files}
+ */
+router.route("/assessment").post((req, res) => {
+  const { name, files, visibility } = req.body;
+
+  const newAssessment = new Assessment({
+    name,
+    files,
+    visibility,
+    studentSubmissions: [],
+  });
+  newAssessment
+    .save()
+    .then((assessment) => res.json(assessment))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
+//
+router.route("/assessment/addAssessment").put((req, res) => {
+  const { courseId, assessmentId } = req.body;
+  Course.findById(courseId).then((newCourse) => {
+    newCourse.assessments = newCourse.assessments.concat(assessmentId);
+    newCourse
+      .save()
+      .then(() => res.json(newCourse))
+      .catch((err) => res.json(err));
+  });
+});
+
+/**
+ * DELETE remove assessment from course
+ * @param req {courseId, assessmentId}
+ * @param courseId course id
+ * @param assessmentId assessment id
+ * @return assessment
+ */
+router.delete(
+  "/assessment/deleteAssessment/:courseId/:assessmentId",
+  (req, res) => {
+    const { courseId, assessmentId } = req.params;
+
+    Course.findById(courseId).then((newCourse) => {
+      newCourse.assessments = newCourse.assessments.filter(
+        (id) => id !== assessmentId
+      );
+
+      newCourse
+        .save()
+        .then(() => res.json(newCourse))
+        .catch((err) => res.status(400).json(err));
+    });
+
+    assessmentSchema.findByIdAndRemove(assessmentId, function (err) {
+      if (!err) {
+        return res.status(200).json(null);
+      }
+      return res.status(400).send();
+    });
+  }
+);
+
+// Upload student submission to assessment
+/**   [ [studentId, fileId[]] ]
+ * PUT student submission to assessment
+ * @param req {courseId, assessmentId, studentId, files}
+ */
+router.put(
+  "/assessment/addStudentSubmission/:assessmentId/:studentId",
+  upload.array("documents", 10),
+
+  (req, res) => {
+    const { assessmentId, studentId } = req.params;
+    Assessment.findById(assessmentId).then((assessment) => {
+      if (!assessment.studentSubmissions) {
+        assessment.studentSubmissions = [
+          {
+            studentId,
+            files: req.files.map((file) => {
+              return {
+                id: file.id,
+                name: file.filename,
+              };
+            }),
+          },
+        ];
+      }
+
+      const submissions = assessment.studentSubmissions.filter(
+        (sub) => sub.studentId === studentId
+      );
+      if (submissions.length) {
+        const sub =
+          assessment.studentSubmissions[
+            assessment.studentSubmissions.indexOf(submissions[0])
+          ];
+
+        sub.files = sub.files.concat(
+          req.files.map((file) => {
+            return {
+              id: file.id,
+              name: file.filename,
+            };
+          })
+        );
+      } else {
+        assessment.studentSubmissions = assessment.studentSubmissions.concat({
+          studentId,
+          files: req.files.map((file) => {
+            return {
+              id: file.id,
+              name: file.filename,
+            };
+          }),
+        });
+      }
+
+      assessment.markModified("studentSubmissions");
+      assessment
+        .save()
+        .then((assessment) => res.json(assessment))
+        .catch((err) => res.status(400).json(err));
+    });
+  }
+);
+
+/**
+ * GET an assessment by id
+ * @param assessmentId: assessment id
+ * @return assessment
+ */
+
+router.get("/assessment/getAssessment/:assessmentId", (req, res) => {
+  Assessment.findById(req.body.assessmentId)
+    .then((assessment) => {
+      console.log(assessment);
+      if (!assessment) return res.status(404).json("Assessment Not Found");
+      return res.json(assessment);
+    })
+    .catch((err) => res.status(404).json(err));
+});
+
+/**
+ * GET all assessments from a course
+ * @param req {courseId, assessmentId, studentId, file}
+ * @return all assessments in a course
+ */
+router.get("/assessment/getAllAssessments/:courseId", (req, res) => {
+  Course.findById(req.params.courseId)
+    .then((course) => {
+      var assessmentArray = [];
+
+      course.assessments.forEach((assessment) => {
+        Assessment.findById(assessment)
+          .then((assess) => {
+            assessmentArray = assessmentArray.concat(assess);
+            if (assessmentArray.length == course.assessments.length) {
+              res.json(assessmentArray);
+            }
+          })
+          .catch((err) => res.status(400).json(`Error: ${err}`));
+      });
+    })
+    .catch((err) => res.status(400).json(`Error: ${err}`));
+});
+
+/**
+ * GET student submission by studentId
+ */
+router.get(
+  "/assessment/getstudentSubmission/:assessmentId/:studentId",
+  (req, res) => {
+    Assessment.findById(req.body.assessmentId)
+      .then((assessment) => {
+        const submission = assessment.studentSubmissions.filter(
+          (submission) => submission.studentId === req.params.studentId
+        );
+        if (submission.length) {
+          res.json(submission[0]);
+        } else {
+          res.status(404).json(`Error: Submission not found`);
+        }
+      })
+      .catch((err) => res.status(400).json(`Error: ${err}`));
+  }
+);
+
+/**
+ * GET all student submissions for an assessment
+ */
+router.get("/assessment/getAllStudentSubmissions/:assessmentId", (req, res) => {
+  Assessment.findById(req.body.assessmentId)
+    .then((assessment) => {
+      if (assessment.studentSubmissions.length) {
+        res.json(assessment.studentSubmissions);
+      } else {
+        res.status(404).json(`Error: Assessment Not Found`);
+      }
+    })
+    .catch((err) => res.status(400).json(`Error: ${err}`));
+});
 
 /**
  * PUT Instructor review on a course
@@ -325,7 +562,6 @@ router.put("/surveyRequest/:id", (req, res) => {
         .catch((err) => res.status(400).json("Error: " + err));
     })
     .catch((err) => res.status(404).json(err));
-})
-
+});
 
 module.exports = router;
