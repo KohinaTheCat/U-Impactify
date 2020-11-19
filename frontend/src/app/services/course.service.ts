@@ -217,6 +217,12 @@ export class CourseService {
     );
   }
 
+  deleteStudentSubmission(assessmentId: string, studentId: string) {
+    return this.http.delete(
+      `/api/course/assessment/deleteStudentSubmission/${assessmentId}/${studentId}`
+    );
+  }
+
   /**
    * PUT student submission to assessment
    * @param {string}    courseId          id of course

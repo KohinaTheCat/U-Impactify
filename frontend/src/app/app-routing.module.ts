@@ -33,11 +33,6 @@ const routes: Routes = [
   { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
 
   // I added this here
-  {
-    path: 'course/:id/assessments',
-    component: AssessmentsComponent,
-    canActivate: [AuthGuard],
-  },
 
   {
     path: 'questionaire',

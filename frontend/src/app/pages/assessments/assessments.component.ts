@@ -80,7 +80,7 @@ export class AssessmentsComponent implements OnInit {
           (incomingArray: Assessment[]) => {
             this.assessArr = incomingArray.sort((a, b) => {
               if (a.name < b.name) {
-                return -1; //nameA comes first
+                return -1; //nameA comes
               }
               if (a.name > b.name) {
                 return 1; // nameB comes first
@@ -102,7 +102,8 @@ export class AssessmentsComponent implements OnInit {
                 (sub: any) => sub.studentId === this.user._id
               );
               if (studentSub) {
-                console.log('HERE: ' + studentSub['studentId']);
+                if (studentSub['files'].length > 0) {
+                }
 
                 this.viewSelfSubmissions = this.viewSelfSubmissions.concat([
                   studentSub['files'],
@@ -113,8 +114,6 @@ export class AssessmentsComponent implements OnInit {
                 ]);
               }
             });
-
-            console.log(this.viewSelfSubmissions);
           },
           (err) => {
             console.log(err);
@@ -132,7 +131,6 @@ export class AssessmentsComponent implements OnInit {
 
   // Ask about this. Not working :(
   onDelete(assess: Assessment) {
-    console.log('courseId: ' + this.courseId + 'assess.id ' + assess._id);
     this.courseService
       .deleteAssessment(this.courseId, assess._id)
       .subscribe((res) => {
@@ -201,10 +199,14 @@ export class AssessmentsComponent implements OnInit {
         const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
       }
     }
+
+    this.courseService
+      .deleteStudentSubmission(this.selectedAss._id, this.user._id)
+      .subscribe((res) => {});
+
     this.courseService
       .postStudentSubmission(this.selectedAss._id, this.user._id, formData)
       .subscribe((res) => {
-        console.log('Did I make it');
         this.submissionsModal = false;
         this.selectedAss = null;
         this.ngOnInit();
@@ -236,21 +238,9 @@ export class AssessmentsComponent implements OnInit {
     );
 
     if (this.identification.length) {
-      console.log(this.identification[0]['studentId']);
-
       this.viewSelfSubmissions = this.identification[0]['files'];
       this.ngOnInit();
       return true;
     }
-
-    // if (temp2.length) {
-    //   this.viewSelfSubmissions = temp2[0].files;
-    //   return true;
-    // }
-
-    // if (assess.studentSubmissions.includes(this.user._id)) {
-    // } else {
-    //   return false;
-    // }
   }
 }
