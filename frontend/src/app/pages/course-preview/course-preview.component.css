@@ -422,11 +422,8 @@ clr-control-error {
   height: 100%;
   width: 100%;
   color: var(--gray40);
-  display: flex;
-  justify-content: center;
-  align-items: center;
   border-radius: 20px;
-  font-size: 2rem;
+  padding: 1rem;
 }
 
 #left-bottom {
