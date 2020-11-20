@@ -332,12 +332,17 @@
           >
             <clr-stack-label>Lectures</clr-stack-label>
 
-            <clr-stack-block *ngFor="let lec of course.lectures; let j = index"
+            <clr-stack-block
+              *ngFor="let lec of course.lectures; let j = index"
               [clrStackViewLevel]="2"
               [clrStackViewSetsize]="3"
               [clrStackViewPosinset]="j"
             >
-              <clr-stack-label>{{lec.title}}</clr-stack-label>
+              <clr-stack-label
+                ><a (click)="goToLecture(lec._id, lec.title)">{{
+                  lec.title
+                }}</a></clr-stack-label
+              >
             </clr-stack-block>
           </clr-stack-block>
 

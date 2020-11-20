@@ -24,6 +24,10 @@ h3 {
   filter: blur(3px) brightness(0.9);
 }
 
+clr-stack-label{
+  font-size: 1rem;
+}
+
 .loading {
   width: 100%;
   display: flex;
@@ -430,6 +434,7 @@ clr-control-error {
   margin-left: 1rem;
   margin-bottom: 0.5rem;
 }
+
 #left-top-bottom {
   margin-left: 1rem;
   margin-top: 0.5rem;

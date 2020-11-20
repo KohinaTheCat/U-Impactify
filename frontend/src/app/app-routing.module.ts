@@ -55,7 +55,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
   },
   {
-    path: 'course/lectures/:id',
+    path: 'course/lectures/:title/:id',
     component: CourseLecturesComponent,
     canActivate: [AuthGuard],
   },
