@@ -331,26 +331,13 @@
             [clrStackViewPosinset]="2"
           >
             <clr-stack-label>Lectures</clr-stack-label>
-            <clr-stack-block
+
+            <clr-stack-block *ngFor="let lec of course.lectures; let j = index"
               [clrStackViewLevel]="2"
               [clrStackViewSetsize]="3"
-              [clrStackViewPosinset]="1"
+              [clrStackViewPosinset]="j"
             >
-              <clr-stack-label>Welcome to the Course</clr-stack-label>
-            </clr-stack-block>
-            <clr-stack-block
-              [clrStackViewLevel]="2"
-              [clrStackViewSetsize]="3"
-              [clrStackViewPosinset]="2"
-            >
-              <clr-stack-label>Lecture 1: Introduction to Scrum</clr-stack-label>
-            </clr-stack-block>
-            <clr-stack-block
-              [clrStackViewLevel]="2"
-              [clrStackViewSetsize]="3"
-              [clrStackViewPosinset]="3"
-            >
-              <clr-stack-label>Lecture 2: Introduction to Scrum pt. 2</clr-stack-label>
+              <clr-stack-label>{{lec.title}}</clr-stack-label>
             </clr-stack-block>
           </clr-stack-block>
 

@@ -76,6 +76,7 @@ export class CoursePreviewComponent implements OnInit {
       (incomingCourse: Course) => {
         this.valid = true;
         this.course = incomingCourse;
+        console.log(this.course);
         this.reviews = this.course.reviews;
         this.description = this.course.description;
         this.level = this.course.level;

@@ -77,6 +77,7 @@ router.route("/").post((req, res) => {
     tags,
     level,
     assessments: [],
+    lectures: [],
     img: "",
   });
 
@@ -358,6 +359,24 @@ router.route("/assessment/addAssessment").put((req, res) => {
       .catch((err) => res.json(err));
   });
 });
+
+router.post(
+  "/:id/uploadLecture",
+  upload.array("document", 1),
+  (req, res) => {
+    Course.findById(req.params.id)
+      .then((course) => {
+        course.lectures = course.lectures.concat([
+          { _id: req.files[0].id, title: req.body.title },
+        ]);
+        course
+          .save()
+          .then(() => res.json(course))
+          .catch((err) => res.json(err));
+      })
+      .catch((err) => res.status(400).json(`Error finding Course: ${err}`));
+  }
+);
 
 /**
  * DELETE remove assessment from course
