@@ -5,23 +5,77 @@
 .container {
   background: #ffffff;
   border-radius: 20px;
-  padding: 1rem 2rem;
   margin-bottom: 1.5rem;
 }
 
+.container-open {
+  border: 1px solid var(--green-base);
+}
+
 .top-header {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  border-radius: 20px;
+}
+
+.top-header-open {
+    background-color: var(--green-smooth);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.top-header h5 {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 400;
+}
+
+.top-header p {
+  margin: 0;
+  color: var(--gray80);
 }
 
 .caret-button {
-   display: flex;
-   justify-content: center;
-   align-items: center;
-   margin-left: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 1rem;
+  cursor: pointer;
 }
 
 .caret-button clr-icon {
-    width: 2rem;
-    height: 2rem;
+  width: 2rem;
+  height: 2rem;
+}
+.body {
+  padding: 1rem 2rem;
+}
+
+.info-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 20rem);
+  margin: 1rem 0;
+}
+
+.info h6 {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.info p {
+  margin: 0.25rem 0;
+  font-size: 1rem;
+}
+
+.list-container h6 {
+  font-weight: 400;
+  font-size: 1.125rem;
+  margin: 0;
+}
+
+.list-container ul {
+  padding-left: 1rem;
+  margin: 0.5rem 0;
+  color: var(--gray80);
 }

@@ -37,20 +37,26 @@ export class SiOpportunitiesComponent implements OnInit {
     this.volunteers = this.createMockOpportunities(3);
   }
 
+  onNewOpportunity(): void {
+
+  }
+
   /* MOCK FOR BOUN-114 */
   createMockOpportunities(i: number): Opportunity[] {
     return Array.from(Array(i), (v, k) => {
       const opp: Opportunity = {
         _id: `Opp${k++}`,
-        name: `Opportunity ${k++}`,
+        name: `Help Out ${k++}`,
         description:
           'Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero aut placeat repellat amet asperiores vero in a perspiciatis doloribus cum! Commodi molestiae perferendis voluptas id ex provident dolorem nisi laudantium. Tenetur est soluta cum repudiandae ea corrupti voluptatum facilis perspiciatis a magnam ex iste fugit voluptatem eaque, molestiae accusantium hic laboriosam alias. Accusantium iure eaque odio voluptatibus consequatur. Harum, est? Sit et harum ipsa fugit ex? Quos iusto repudiandae porro amet, odit nihil totam. Repellat odio distinctio ex cumque autem, facilis est itaque amet qui ad aut? Harum, ipsam omnis. Ratione totam ipsum dicta ea soluta exercitationem blanditiis qui eum quia deleniti sapiente excepturi provident accusamus, obcaecati accusantium, eos pariatur harum suscipit reiciendis? Cupiditate aliquid aut fugit laboriosam, molestiae distinctio.',
         location: 'Toronto, ON',
-        positionType: !(k % 2) ? positionTypes.PERMANENT : positionTypes.TEMPORARY,
+        positionType: !(k % 2)
+          ? positionTypes.PERMANENT
+          : positionTypes.TEMPORARY,
         datePosted: new Date(),
         dateNeeded: new Date(Date.now() + 10000000000),
         salary: 19.25,
-        numberOfHires:  Math.floor((Math.random() * 10) + 1),
+        numberOfHires: Math.floor(Math.random() * 10 + 1),
         responsibilites: [
           'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
           'Dolores pariatur et, eligendi dicta, quia eos praesentium odit adipisci animi, dolore ad est?',

@@ -1,6 +1,6 @@
 <div class="opportunities">
   <div class="opportunity-container volunteer-container">
-    <h5>Volunteer Opportunities</h5>
+    <div class="top-header"><h5>Volunteer Opportunities</h5> <button class="btn" (click)="onNewOpportunity()">New</button></div>
     <div class="list-container">
       <app-opportunity-accordian-card
         *ngFor="let opportunity of volunteers"
@@ -9,7 +9,7 @@
     </div>
   </div>
   <div class="opportunity-container employment-container">
-    <h5>Employment Opportunities</h5>
+    <div class="top-header"><h5>Employment Opportunities</h5> <button class="btn" (click)="onNewOpportunity()">New</button></div>
     <div class="list-container">
       <app-opportunity-accordian-card
         *ngFor="let opportunity of employments"
