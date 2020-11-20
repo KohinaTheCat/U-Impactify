@@ -1,0 +1,20 @@
+<div class="opportunities">
+  <div class="opportunity-container volunteer-container">
+    <h5>Volunteer Opportunities</h5>
+    <div class="list-container">
+      <app-opportunity-accordian-card
+        *ngFor="let opportunity of volunteers"
+        [opportunity]="opportunity"
+      ></app-opportunity-accordian-card>
+    </div>
+  </div>
+  <div class="opportunity-container employment-container">
+    <h5>Employment Opportunities</h5>
+    <div class="list-container">
+      <app-opportunity-accordian-card
+        *ngFor="let opportunity of employments"
+        [opportunity]="opportunity"
+      ></app-opportunity-accordian-card>
+    </div>
+  </div>
+</div>

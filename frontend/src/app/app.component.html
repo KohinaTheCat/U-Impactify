@@ -9,7 +9,11 @@
       <a clrVerticalNavLink routerLink="./dashboard" routerLinkActive="active"
         ><clr-icon shape="home"></clr-icon> <span>Dashboard</span></a
       >
-      <a *ngIf="user.type === 'SI'" clrVerticalNavLink
+      <a
+        *ngIf="user.type === 'SI'"
+        clrVerticalNavLink
+        routerLink="./opportunities"
+        routerLinkActive="active"
         ><clr-icon shape="user"></clr-icon> <span>Opportunities</span></a
       >
       <a *ngIf="user.type !== 'SI'" clrVerticalNavLink
@@ -55,7 +59,10 @@
       <app-front-page-header *ngIf="shouldHeaderShow()"></app-front-page-header>
       <app-global-search *ngIf="shouldNavShow()"></app-global-search>
       <router-outlet></router-outlet>
-      <app-footer [ngClass]="{'home-page-footer': isHomePages()}" *ngIf="shouldFooterShow()"></app-footer>
+      <app-footer
+        [ngClass]="{ 'home-page-footer': isHomePages() }"
+        *ngIf="shouldFooterShow()"
+      ></app-footer>
     </div>
   </div>
 </div>

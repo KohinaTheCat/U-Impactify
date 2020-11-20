@@ -1,0 +1,49 @@
+<div class="container box-shadow-1" *ngIf="opportunity">
+  <div class="top-header">
+    <div class="wrapper">
+      <h5>{{ opportunity.name }}</h5>
+      <p>{{opportunity.description}}</p>
+    </div>
+    <div class="caret-button" (click)="open = !open"><clr-icon shape="angle" [ngClass]="{'closed' : !open}"></clr-icon></div>
+  </div>
+  <div class="body" *ngIf="open">
+      <div class="info-container">
+          <div class="info">
+              <h6>Date Posted</h6>
+              <p>{{opportunity.datePosted | date:'shortDate'}}</p>
+          </div>
+          <div class="info">
+              <h6>Date Needed</h6>
+              <p>{{opportunity.dateNeeded | date:'shortDate'}}</p>
+          </div>
+          <div class="info">
+              <h6>Location</h6>
+              <p>{{opportunity.location}}</p>
+          </div>
+          <div class="info">
+              <h6>Type of Position</h6>
+              <p>{{opportunity.position}}</p>
+          </div>
+          <div class="info" *ngIf="opportunity.salary">
+              <h6>Salary</h6>
+              <p>{{opportunity.salary}}</p>
+          </div>
+          <div class="info">
+              <h6>Looking for</h6>
+              <p>{{opportunity.numberOfHires}} <span *ngIf="opportunity.numberOfHires === 1">person</span><span *ngIf="opportunity.numberOfHires > 1">people</span></p>
+          </div>
+      </div>
+      <div class="list-container">
+          <h6>Responsibilites</h6>
+          <ul>
+              <li *ngFor="let res of opportunity.responsibilites">{{res}}</li>
+          </ul>
+      </div>
+      <div class="list-container">
+          <h6>Requirements</h6>
+          <ul>
+              <li *ngFor="let req of opportunity.requirements">{{req}}</li>
+          </ul>
+      </div>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+.opportunities {
+    padding: 0 2rem;
+}
+
+.opportunity-container {
+    margin-bottom: 2rem;
+}
+
+.list-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+h5 {
+    margin-bottom: 1rem;
+}
+

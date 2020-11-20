@@ -1,0 +1,27 @@
+.closed {
+  transform: rotate(180deg);
+}
+
+.container {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 1rem 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.top-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.caret-button {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   margin-left: 1rem;
+}
+
+.caret-button clr-icon {
+    width: 2rem;
+    height: 2rem;
+}

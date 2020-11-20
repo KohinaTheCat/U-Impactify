@@ -18,6 +18,7 @@ import { AssessmentsComponent } from './pages/assessments/assessments.component'
 import { AboutComponent } from './pages/home-pages/about/about.component';
 import { SolutionsComponent } from './pages/home-pages/solutions/solutions.component';
 import { PricingComponent } from './pages/home-pages/pricing/pricing.component';
+import { SiOpportunitiesComponent } from './pages/si-opportunities/si-opportunities.component';
 
 const routes: Routes = [
   { path: 'signup', component: LoginSignupComponent },
@@ -72,6 +73,7 @@ const routes: Routes = [
   },
   { path: 'search', redirectTo: 'dashboard', canActivate: [AuthGuard] },
   { path: 'search/:type', redirectTo: 'dashboard', canActivate: [AuthGuard] },
+  { path: 'opportunities', component: SiOpportunitiesComponent }
 ];
 
 @NgModule({
