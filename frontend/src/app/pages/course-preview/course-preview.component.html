@@ -331,12 +331,25 @@
             [clrStackViewPosinset]="2"
           >
             <clr-stack-label>Lectures</clr-stack-label>
-
+            <clr-stack-block
+              [clrStackViewLevel]="2"
+              [clrStackViewSetsize]="3"
+              [clrStackViewPosinset]="1"
+            >
+              <clr-stack-label>
+                <button
+                  (click)="uploadVideo = true"
+                  class="btn btn-info btn-sm"
+                >
+                  <clr-icon shape="plus"></clr-icon>
+                </button>
+              </clr-stack-label>
+            </clr-stack-block>
             <clr-stack-block
               *ngFor="let lec of course.lectures; let j = index"
               [clrStackViewLevel]="2"
               [clrStackViewSetsize]="3"
-              [clrStackViewPosinset]="j"
+              [clrStackViewPosinset]="j + 1"
             >
               <clr-stack-label
                 ><a (click)="goToLecture(lec._id, lec.title)">{{
@@ -637,6 +650,67 @@
     </button>
     <button type="button" class="btn btn-primary" (click)="registerHandler()">
       Update Course
+    </button>
+  </div>
+</clr-modal>
+
+<!-- UPLOAD COURSE LECTURE MODAL -->
+<clr-modal
+  [(clrModalOpen)]="uploadVideo"
+  [clrModalSize]="'lg'"
+  [clrModalClosable]="false"
+>
+  <h3 class="modal-title">Upload a Lecture</h3>
+  <div class="modal-body">
+    <form clrForm>
+      <!-- CHANGE THIS -->
+      <clr-control-error>{{ error }}</clr-control-error>
+      <ngx-file-drop
+        dropZoneLabel="Drop files here"
+        (onFileDrop)="droppedCourseImage($event)"
+      >
+        <ng-template
+          ngx-file-drop-content-tmp
+          let-openFileSelector="openFileSelector"
+        >
+          <label>Upload Video File (.mp4)</label>
+          <!-- CHANGE THIS -->
+          <button class="btn btn-primary" (click)="openFileSelector()">
+            Browse Files
+          </button>
+        </ng-template>
+      </ngx-file-drop>
+      <!-- CHANGE THIS -->
+      <div class="imageError">
+        <clr-control-error>{{ imageError }}</clr-control-error>
+      </div>
+      <!-- CHANGE THIS -->
+      <div class="uploadedImage" *ngIf="img[0]">
+        Uploaded "{{ img[0].fileEntry.name }}"
+      </div>
+      <clr-input-container>
+        <label
+          >Course Title
+          <!-- CHANGE THIS -->
+          <input
+            clrInput
+            type="text"
+            placeholder=""
+            [(ngModel)]="description" 
+            name=""
+            required
+          />
+        </label>
+        <clr-control-error>This field is required!</clr-control-error>
+      </clr-input-container>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="uploadVideo = false">
+      Cancel
+    </button>
+    <button type="button" class="btn btn-primary" (click)="uploadVideo = false">
+      Upload
     </button>
   </div>
 </clr-modal>

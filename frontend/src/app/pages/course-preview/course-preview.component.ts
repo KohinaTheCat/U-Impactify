@@ -50,6 +50,8 @@ export class CoursePreviewComponent implements OnInit {
   averageScore: number = 0;
   showSurveys: boolean = false;
 
+  uploadVideo: boolean = false;
+
   @ViewChild('reviewStars') stars;
   @ViewChild('wizardxl') wizardExtraLarge: ClrWizard;
   xlOpen: boolean = false;
