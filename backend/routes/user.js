@@ -439,8 +439,25 @@ router.delete("/deleteUser/:userId", (req, res) => {
   });
 });
 
+/**
+ * Create a new opportunity
+ * @return opportunity
+ */
 router.route("/opportunity").put((req, res) => {
-  const { recruiter, name, description, type, location, datePosted, dateNeeded, salary, numberOfHires , responsibilites , requirements, applicants} = req.body;
+  const {
+    recruiter,
+    name,
+    description,
+    type,
+    location,
+    datePosted,
+    dateNeeded,
+    salary,
+    numberOfHires,
+    responsibilites,
+    requirements,
+    applicants,
+  } = req.body;
   const newOpportunity = new Opportunity({
     recruiter,
     name,
@@ -461,12 +478,20 @@ router.route("/opportunity").put((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
+/**
+ * PUT new volunteer opportunity with creator 
+ * @param userId user id
+ * @param opportunityId opportunity id
+ * @return opportunity
+ */
 router.put("/addVolunteerOpportunity", (req, res) => {
   const { userId, opportunityId } = req.body;
   userSchema
     .findById(userId)
     .then((user) => {
-      user.socialInitiative.volunteerPosting = user.socialInitiative.volunteerPosting.concat(opportunityId);
+      user.socialInitiative.volunteerPosting = user.socialInitiative.volunteerPosting.concat(
+        opportunityId
+      );
       user
         .save()
         .then((user) => res.json(user))
@@ -475,12 +500,20 @@ router.put("/addVolunteerOpportunity", (req, res) => {
     .catch((err) => res.status(404).json(err));
 });
 
+/**
+ * PUT new employment opportunity with creator 
+ * @param userId user id
+ * @param opportunityId opportunity id
+ * @return opportunity
+ */
 router.put("/addEmploymentOpportunity", (req, res) => {
   const { userId, opportunityId } = req.body;
   userSchema
     .findById(userId)
     .then((user) => {
-      user.socialInitiative.employmentPosting = user.socialInitiative.employmentPosting.concat(opportunityId);
+      user.socialInitiative.employmentPosting = user.socialInitiative.employmentPosting.concat(
+        opportunityId
+      );
       user
         .save()
         .then((user) => res.json(user))
@@ -489,46 +522,49 @@ router.put("/addEmploymentOpportunity", (req, res) => {
     .catch((err) => res.status(404).json(err));
 });
 
+/**
+ * GET all volunteer opportunities
+ * @return opportunity list
+ */
 router.get("/opportunity/getVolunteerOpportunities", (req, res) => {
-  opportunitySchema.find( {type : "volunteer"} )
-  .then((opp) => {
-    res.json(opp);
-  })
-  .catch ((err) => res.status(404).json(err));
-})
-
-router.get("/opportunity/getEmploymentOpportunities", (req, res) => {
-  opportunitySchema.find( {type : "employment"} )
-  .then((opp) => {
-    res.json(opp);
-  })
-  .catch ((err) => res.status(404).json(err));
-})
-
-
-// might have to get rid of this cuz 2 different types of opportunities
-// add a type "volunteer" or "employment when adding a opportunity"
-router.get("/opportunity/getAllOpportunities", (req, res) => {
-  opportunitySchema.find()
+  opportunitySchema
+    .find({ type: "volunteer" })
     .then((opp) => {
       res.json(opp);
     })
     .catch((err) => res.status(404).json(err));
 });
 
+/**
+ * GET all employment opportunities
+ * @return opportunity list
+ */
+router.get("/opportunity/getEmploymentOpportunities", (req, res) => {
+  opportunitySchema
+    .find({ type: "employment" })
+    .then((opp) => {
+      res.json(opp);
+    })
+    .catch((err) => res.status(404).json(err));
+});
+
+/**
+ * PUT applying to an opportunity
+ * @return opportunity
+ */
 router.put("/opportunity/applyOpportunity", (req, res) => {
   const { opportunityId, applicantUserId } = req.body;
   opportunitySchema
     .findById(opportunityId)
     .then((opp) => {
-      console.log(opp)
+      console.log(opp);
       opp.applicants = opp.applicants.concat(applicantUserId);
       opp
         .save()
         .then((opp) => res.json(opp))
-        .catch((err) => res.status(404).json(err))
+        .catch((err) => res.status(404).json(err));
     })
-    .catch((err) => res.status(404).json(err))
-})
+    .catch((err) => res.status(404).json(err));
+});
 
 module.exports = router;

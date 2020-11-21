@@ -221,13 +221,28 @@ export class UserService {
    * @param {string} courseId id of course
    */
   postCourseImage(file: FormData, userId: string): Observable<User> {
-    return this.http.post<User>(
-      `/api/user/${userId}/uploadUserImage`,
-      file
-    );
+    return this.http.post<User>(`/api/user/${userId}/uploadUserImage`, file);
   }
+
+  /**
+   * PUT new opportunity
+   * @param {opportunity} opportunity the opportunity
+   */
   createNewOpportunity(opportunity: any): Observable<any> {
-    const { recruiter, name, description, type, location, datePosted, dateNeeded, salary, numberOfHires, responsibilites, requirements, applicants } = opportunity;
+    const {
+      recruiter,
+      name,
+      description,
+      type,
+      location,
+      datePosted,
+      dateNeeded,
+      salary,
+      numberOfHires,
+      responsibilites,
+      requirements,
+      applicants,
+    } = opportunity;
     return this.http.put(`/api/user/opportunity`, {
       recruiter,
       name,
@@ -244,25 +259,45 @@ export class UserService {
     });
   }
 
-  addNewVolunteerOpportunity(userId: string, opportunityId: string){
+  /**
+   * PUT new volunteer opportunity
+   * @param {userId} userId the userid
+   * @param {opportunityId} opportunityId the opportunity id
+   */
+  addNewVolunteerOpportunity(userId: string, opportunityId: string) {
     return this.http.put(`/api/user/addVolunteerOpportunity`, {
       userId,
       opportunityId,
-    })
+    });
   }
-  addNewEmploymentOpportunity(userId: string, opportunityId: string){
+
+  /**
+   * PUT new employment opportunity
+   * @param {userId} userId the userid
+   * @param {opportunityId} opportunityId the opportunity id
+   */
+  addNewEmploymentOpportunity(userId: string, opportunityId: string) {
     return this.http.put(`/api/user/addEmploymentOpportunity`, {
       userId,
       opportunityId,
-    })
+    });
   }
 
-  
-  //${query}
-  getVolunteerOpportunity() :  Observable<any> {
-    return this.http.get<Opportunity[]>(`/api/user/opportunity/getVolunteerOpportunities`)
+  /**
+   * GET all volunteer opportunity
+   */
+  getVolunteerOpportunity(): Observable<any> {
+    return this.http.get<Opportunity[]>(
+      `/api/user/opportunity/getVolunteerOpportunities`
+    );
   }
-  getEmploymentOpportunity() : Observable<any>{
-    return this.http.get<Opportunity[]>(`/api/user/opportunity/getEmploymentOpportunities/`)
+
+  /**
+   * GET all employment opportunity
+   */
+  getEmploymentOpportunity(): Observable<any> {
+    return this.http.get<Opportunity[]>(
+      `/api/user/opportunity/getEmploymentOpportunities/`
+    );
   }
 }
