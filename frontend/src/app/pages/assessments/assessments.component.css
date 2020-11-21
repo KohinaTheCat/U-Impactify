@@ -66,6 +66,10 @@ input {
   background: var(--purple-base);
 }
 
+.box-shadow-2:hover {
+  background: rgb(250, 243, 252);
+}
+
 .edit {
   /* Edit */
   justify-content: flex-start;
@@ -313,7 +317,7 @@ clr-control-error {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 1rem;
+  margin: 2rem;
   /* background-color: #923af7; */
   width: 30%;
   /* margin-right: 2rem;
@@ -342,4 +346,25 @@ clr-control-error {
 .h6 {
   color: rgb(0, 0, 0);
   font-size: larger;
+}
+
+h5 {
+  color: rgb(60, 58, 58);
+}
+
+.new {
+  color: rgb(167, 163, 163);
+  margin: 2rem;
+}
+
+.course-content {
+  border: 2px var(--gray40) dashed;
+  height: 100%;
+  width: 100%;
+  color: var(--gray40);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+  font-size: 2rem;
 }

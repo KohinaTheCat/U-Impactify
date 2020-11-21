@@ -12,11 +12,6 @@
     class="test"
     *ngIf="!!user && course && course.teachers.includes(user._id)"
   >
-    <div class="btn-container">
-      <button class="createNew edit" (click)="createNewAssessmentModal = true">
-        Create new assessment
-      </button>
-    </div>
     <div class="box-shadow-2" id="add1">
       <h6 class="child">Name</h6>
       <h6 class="child">Assessment</h6>
@@ -26,7 +21,7 @@
 
     <div class="box-shadow-2" id="add2" *ngFor="let assess of assessArr">
       <div class="content">
-        <span class="h6">{{ assess.name }}dadf</span>
+        <span class="h6">{{ assess.name }}</span>
       </div>
       <div class="content">
         <div *ngFor="let file of assess.files">
@@ -40,16 +35,28 @@
       </div>
       <div class="content">
         <div *ngIf="assess.visibility">
-          <img src="../../../assets/uLogo.svg" width="20" height="20" />
+          <img src="../../../assets/stalkhehe.png" width="25" height="15" />
         </div>
         <div *ngIf="!assess.visibility">
-          <img src="../../../assets/uLogo.svg" width="20" height="20" />
+          <img src="../../../assets/nopeak.png" width="25" height="15" />
         </div>
       </div>
       <div class="content">
-        <h3>{{ assess.name }}</h3>
+        <clr-icon
+          shape="view-list"
+          id="submissionsTab"
+          (click)="showStudentSubmission(assess)"
+        ></clr-icon>
       </div>
     </div>
+    <button
+      class="box-shadow-2"
+      id="add2"
+      [ngStyle]="{ border: '2px var(--gray40) dashed' }"
+      (click)="createNewAssessmentModal = true"
+    >
+      <h5 class="new">Create New Assessment</h5>
+    </button>
   </div>
 
   <div *ngIf="!!user && course && course.teachers.includes(user._id)">
