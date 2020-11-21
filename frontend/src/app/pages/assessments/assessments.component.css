@@ -1,7 +1,6 @@
 .flexbot {
   display: flex;
   flex-direction: column;
-  background-color: antiquewhite;
 
   background-size: cover;
   background-repeat: no-repeat;
@@ -310,7 +309,10 @@ clr-control-error {
   width: calc(100% - 4rem);
 }
 
-#check {
-  align-self: center;
-  color: red;
+.child {
+  transform: translateY(-0.5rem);
+}
+
+h3 {
+  color: white;
 }
