@@ -1,11 +1,11 @@
 <div class="flexbot">
-  <!-- <div class="outer" *ngIf="course">
+  <div class="outer" *ngIf="course">
     <div
       class="courseimage"
       style="background-image: url('{{ course.img }}')"
     ></div>
     <h4 id="title2">{{ course.name }}</h4>
-  </div> -->
+  </div>
 
   <!-- TEACHER -->
   <div
@@ -83,6 +83,18 @@
       <h6 class="child">View submission(s)</h6>
     </div>
 
+    <div
+      *ngIf="assessArr.length == 0"
+      class="box-shadow-2"
+      id="addout"
+      [ngStyle]="{
+        border: '2px var(--gray40) dashed',
+        margin: '3rem',
+        width: 'calc(100% - 4rem)'
+      }"
+    >
+      <h5 class="new">Horay no Assessment(s)</h5>
+    </div>
     <div
       class="box-shadow-2"
       id="addout"
