@@ -17,11 +17,38 @@
         Create new assessment
       </button>
     </div>
-    <div class="box-shadow-2">
-      <h3 class="child">Name</h3>
-      <h3 class="child">Assessment</h3>
-      <h3 class="child">Visibility</h3>
-      <h3 class="child">Submission</h3>
+    <div class="box-shadow-2" id="add1">
+      <h6 class="child">Name</h6>
+      <h6 class="child">Assessment</h6>
+      <h6 class="child">Visibility</h6>
+      <h6 class="child">Submission</h6>
+    </div>
+
+    <div class="box-shadow-2" id="add2" *ngFor="let assess of assessArr">
+      <div class="content">
+        <span class="h6">{{ assess.name }}dadf</span>
+      </div>
+      <div class="content">
+        <div *ngFor="let file of assess.files">
+          <a
+            *ngIf="file"
+            download="{{ file.name }}"
+            href="http://localhost:5000/api/course/documents/{{ file.id }}"
+            >{{ file.name }}</a
+          >
+        </div>
+      </div>
+      <div class="content">
+        <div *ngIf="assess.visibility">
+          <img src="../../../assets/uLogo.svg" width="20" height="20" />
+        </div>
+        <div *ngIf="!assess.visibility">
+          <img src="../../../assets/uLogo.svg" width="20" height="20" />
+        </div>
+      </div>
+      <div class="content">
+        <h3>{{ assess.name }}</h3>
+      </div>
     </div>
   </div>
 
