@@ -489,44 +489,20 @@ router.put("/addEmploymentOpportunity", (req, res) => {
     .catch((err) => res.status(404).json(err));
 });
 
-router.get("/opportunity/getVolunteerOpportunities/:userId", (req, res) => {
-  let volunteerPosting = [];
-  userSchema
-    .findById(req.params.userId)
-    .then((user) => {
-      user.socialInitiative.volunteerPosting.forEach(postingId => {
-        opportunitySchema
-          .findById(postingId)
-          .then((posting) => {
-            volunteerPosting = volunteerPosting.concat(posting);
-            if (volunteerPosting.length === user.socialInitiative.volunteerPosting.length) {
-              res.json(volunteerPosting)
-            }
-          })
-          .catch ((err) => res.status(404).json(err));
-      });
-    })
-    .catch ((err) => res.status(404).json(err));
+router.get("/opportunity/getVolunteerOpportunities", (req, res) => {
+  opportunitySchema.find( {type : "volunteer"} )
+  .then((opp) => {
+    res.json(opp);
+  })
+  .catch ((err) => res.status(404).json(err));
 })
 
-router.get("/opportunity/getEmploymentOpportunities/:userId", (req, res) => {
-  let employmentPosting = [];
-  userSchema
-    .findById(req.params.userId)
-    .then((user) => {
-      user.socialInitiative.employmentPosting.forEach(postingId => {
-        opportunitySchema
-          .findById(postingId)
-          .then((posting) => {
-            employmentPosting = employmentPosting.concat(posting);
-            if (employmentPosting.length === user.socialInitiative.volunteerPosting.length) {
-              res.json(employmentPosting)
-            }
-          })
-          .catch ((err) => res.status(404).json(err));
-      });
-    })
-    .catch ((err) => res.status(404).json(err));
+router.get("/opportunity/getEmploymentOpportunities", (req, res) => {
+  opportunitySchema.find( {type : "employment"} )
+  .then((opp) => {
+    res.json(opp);
+  })
+  .catch ((err) => res.status(404).json(err));
 })
 
 

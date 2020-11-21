@@ -4,6 +4,22 @@ import { Observable } from 'rxjs';
 
 import { User } from '../models/user.model';
 
+export interface Opportunity {
+  recruiter: string;
+  // _id?: string;
+  name: string;
+  description: string;
+  type: string;
+  location: string;
+  datePosted: Date;
+  dateNeeded: Date;
+  salary?: number;
+  numberOfHires: number;
+  responsibilites: string[];
+  requirements: string[];
+  applicants: string[];
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -209,5 +225,44 @@ export class UserService {
       `/api/user/${userId}/uploadUserImage`,
       file
     );
+  }
+  createNewOpportunity(opportunity: any): Observable<any> {
+    const { recruiter, name, description, type, location, datePosted, dateNeeded, salary, numberOfHires, responsibilites, requirements, applicants } = opportunity;
+    return this.http.put(`/api/user/opportunity`, {
+      recruiter,
+      name,
+      description,
+      type,
+      location,
+      datePosted,
+      dateNeeded,
+      salary,
+      numberOfHires,
+      responsibilites,
+      requirements,
+      applicants,
+    });
+  }
+
+  addNewVolunteerOpportunity(userId: string, opportunityId: string){
+    return this.http.put(`/api/user/addVolunteerOpportunity`, {
+      userId,
+      opportunityId,
+    })
+  }
+  addNewEmploymentOpportunity(userId: string, opportunityId: string){
+    return this.http.put(`/api/user/addEmploymentOpportunity`, {
+      userId,
+      opportunityId,
+    })
+  }
+
+  
+  //${query}
+  getVolunteerOpportunity() :  Observable<any> {
+    return this.http.get<Opportunity[]>(`/api/user/opportunity/getVolunteerOpportunities`)
+  }
+  getEmploymentOpportunity() : Observable<any>{
+    return this.http.get<Opportunity[]>(`/api/user/opportunity/getEmploymentOpportunities/`)
   }
 }
