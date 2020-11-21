@@ -1,11 +1,13 @@
 let userSchema = require("../models/user.model");
 let courseSchema = require("../models/course.model");
+let opportunitySchema = require("../models/opportunity.model");
 
 const router = require("express").Router();
 const multer = require("multer");
 const crypto = require("crypto");
 const mongoose = require("mongoose");
 const GridFsStorage = require("multer-gridfs-storage");
+const Opportunity = require("../models/opportunity.model");
 
 require("dotenv").config();
 const uri = process.env.ATLAS_URI;
@@ -87,6 +89,8 @@ router.route("/").post((req, res) => {
     img: "",
     credit,
     chats: [],
+    volunteerPosting: [],
+    employmentPosting: [],
   });
   newUser
     .save()
@@ -433,6 +437,133 @@ router.delete("/deleteUser/:userId", (req, res) => {
     }
     return res.status(400).send();
   });
+});
+
+/**
+ * Create a new opportunity
+ * @return opportunity
+ */
+router.route("/opportunity").put((req, res) => {
+  const {
+    recruiter,
+    name,
+    description,
+    type,
+    location,
+    datePosted,
+    dateNeeded,
+    salary,
+    numberOfHires,
+    responsibilites,
+    requirements,
+    applicants,
+  } = req.body;
+  const newOpportunity = new Opportunity({
+    recruiter,
+    name,
+    description,
+    type,
+    location,
+    datePosted,
+    dateNeeded,
+    salary,
+    numberOfHires,
+    responsibilites,
+    requirements,
+    applicants,
+  });
+  newOpportunity
+    .save()
+    .then((opportunity) => res.json(opportunity))
+    .catch((err) => res.status(400).json("Error: " + err));
+});
+
+/**
+ * PUT new volunteer opportunity with creator 
+ * @param userId user id
+ * @param opportunityId opportunity id
+ * @return opportunity
+ */
+router.put("/addVolunteerOpportunity", (req, res) => {
+  const { userId, opportunityId } = req.body;
+  userSchema
+    .findById(userId)
+    .then((user) => {
+      user.socialInitiative.volunteerPosting = user.socialInitiative.volunteerPosting.concat(
+        opportunityId
+      );
+      user
+        .save()
+        .then((user) => res.json(user))
+        .catch((err) => res.status(400).json(err));
+    })
+    .catch((err) => res.status(404).json(err));
+});
+
+/**
+ * PUT new employment opportunity with creator 
+ * @param userId user id
+ * @param opportunityId opportunity id
+ * @return opportunity
+ */
+router.put("/addEmploymentOpportunity", (req, res) => {
+  const { userId, opportunityId } = req.body;
+  userSchema
+    .findById(userId)
+    .then((user) => {
+      user.socialInitiative.employmentPosting = user.socialInitiative.employmentPosting.concat(
+        opportunityId
+      );
+      user
+        .save()
+        .then((user) => res.json(user))
+        .catch((err) => res.status(400).json(err));
+    })
+    .catch((err) => res.status(404).json(err));
+});
+
+/**
+ * GET all volunteer opportunities
+ * @return opportunity list
+ */
+router.get("/opportunity/getVolunteerOpportunities", (req, res) => {
+  opportunitySchema
+    .find({ type: "volunteer" })
+    .then((opp) => {
+      res.json(opp);
+    })
+    .catch((err) => res.status(404).json(err));
+});
+
+/**
+ * GET all employment opportunities
+ * @return opportunity list
+ */
+router.get("/opportunity/getEmploymentOpportunities", (req, res) => {
+  opportunitySchema
+    .find({ type: "employment" })
+    .then((opp) => {
+      res.json(opp);
+    })
+    .catch((err) => res.status(404).json(err));
+});
+
+/**
+ * PUT applying to an opportunity
+ * @return opportunity
+ */
+router.put("/opportunity/applyOpportunity", (req, res) => {
+  const { opportunityId, applicantUserId } = req.body;
+  opportunitySchema
+    .findById(opportunityId)
+    .then((opp) => {
+      opp.applicants = opp.applicants.concat(applicantUserId);
+      opp
+        .save()
+        .then((opp) => res.json(opp))
+        .catch((err) => res.status(404).json(err));
+    })
+    .catch((err) => res.status(404).json(err));
 });
 
 module.exports = router;

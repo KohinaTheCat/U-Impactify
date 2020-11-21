@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { User } from '../models/user.model';
+import { Opportunity } from './../models/opportunity.model';
 
 @Injectable({
   providedIn: 'root',
@@ -205,9 +206,83 @@ export class UserService {
    * @param {string} courseId id of course
    */
   postCourseImage(file: FormData, userId: string): Observable<User> {
-    return this.http.post<User>(
-      `/api/user/${userId}/uploadUserImage`,
-      file
+    return this.http.post<User>(`/api/user/${userId}/uploadUserImage`, file);
+  }
+
+  /**
+   * PUT new opportunity
+   * @param {opportunity} opportunity the opportunity
+   */
+  createNewOpportunity(opportunity: Opportunity): Observable<any> {
+    const {
+      recruiter,
+      name,
+      description,
+      type,
+      location,
+      datePosted,
+      dateNeeded,
+      salary,
+      numberOfHires,
+      responsibilites,
+      requirements,
+      applicants,
+    } = opportunity;
+    return this.http.put(`/api/user/opportunity`, {
+      recruiter,
+      name,
+      description,
+      type,
+      location,
+      datePosted,
+      dateNeeded,
+      salary,
+      numberOfHires,
+      responsibilites,
+      requirements,
+      applicants,
+    });
+  }
+
+  /**
+   * PUT new volunteer opportunity
+   * @param {userId} userId the userid
+   * @param {opportunityId} opportunityId the opportunity id
+   */
+  addNewVolunteerOpportunity(userId: string, opportunityId: string) {
+    return this.http.put(`/api/user/addVolunteerOpportunity`, {
+      userId,
+      opportunityId,
+    });
+  }
+
+  /**
+   * PUT new employment opportunity
+   * @param {userId} userId the userid
+   * @param {opportunityId} opportunityId the opportunity id
+   */
+  addNewEmploymentOpportunity(userId: string, opportunityId: string) {
+    return this.http.put(`/api/user/addEmploymentOpportunity`, {
+      userId,
+      opportunityId,
+    });
+  }
+
+  /**
+   * GET all volunteer opportunity
+   */
+  getVolunteerOpportunity(): Observable<any> {
+    return this.http.get<Opportunity[]>(
+      `/api/user/opportunity/getVolunteerOpportunities`
+    );
+  }
+
+  /**
+   * GET all employment opportunity
+   */
+  getEmploymentOpportunity(): Observable<any> {
+    return this.http.get<Opportunity[]>(
+      `/api/user/opportunity/getEmploymentOpportunities/`
     );
   }
 }

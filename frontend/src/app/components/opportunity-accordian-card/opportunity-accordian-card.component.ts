@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Opportunity } from 'src/app/pages/si-opportunities/si-opportunities.component';
+import { Opportunity } from './../../models/opportunity.model';
 
 @Component({
   selector: 'app-opportunity-accordian-card',
