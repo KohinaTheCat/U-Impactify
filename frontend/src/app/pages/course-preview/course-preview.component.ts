@@ -20,33 +20,35 @@ import { ClrWizard } from '@clr/angular';
 })
 export class CoursePreviewComponent implements OnInit {
   course: Course;
-  reviews: Course['reviews'];
+  user: User;
+
   valid: boolean;
   alreadyEnrolled: boolean = false;
+
   error: string;
-  user: User;
+  errorMessage: string = '';
+  imageError: string = '';
   openedUpdateCourse: boolean;
-  openedRateCourse: boolean;
-  openedAllReviews: false;
+
   description: string = '';
   level: string = '';
   img: NgxFileDropEntry[] = [];
-  imageError: string = '';
   loading: boolean = true;
   tags: string[] = [];
-  errorMessage: string = '';
+
+  openedRateCourse: boolean;
+  openedAllReviews: false;
   surveyRequest: boolean;
   openedSurveyRequest: boolean = false;
   openedSurvey: boolean = false;
   instructorReview: Course['instructorReview'];
   completedSurvey: boolean = false;
 
+  reviews: Course['reviews'];
   courseReview: string = '';
   score: number = 0;
   anon: boolean = false;
-
   courseStars: number[] = [1, 2, 3, 4, 5];
-
   averageScore: number = 0;
   showSurveys: boolean = false;
 
@@ -61,6 +63,11 @@ export class CoursePreviewComponent implements OnInit {
     'Course assessments allowed me to better improve my understanding with the course material',
     'The overall course quality was great',
   ];
+
+  uploadVideo: boolean = false;
+  video: NgxFileDropEntry[] = [];
+  videoUploadError: string = '';
+  videoTitle: string = '';
 
   constructor(
     private userService: UserService,
@@ -115,7 +122,6 @@ export class CoursePreviewComponent implements OnInit {
         this.loading = false;
         this.valid = false;
         this.error = err.message;
-        console.log('error message' + this.error);
       }
     );
   }
@@ -172,6 +178,7 @@ export class CoursePreviewComponent implements OnInit {
   cancel() {
     this.openedUpdateCourse = false;
   }
+
   registerHandler() {
     const { description, level } = this;
 
@@ -193,10 +200,6 @@ export class CoursePreviewComponent implements OnInit {
               }
             );
         });
-      } else {
-        // It was a directory (empty directories are added, otherwise only files)
-        const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
-        console.log(droppedFile.relativePath, fileEntry);
       }
     }
 
@@ -233,22 +236,8 @@ export class CoursePreviewComponent implements OnInit {
             this.imageError = '';
           }
         });
-      } else {
-        // It was a directory (empty directories are added, otherwise only files)
-        const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
-        console.log(droppedFile.relativePath, fileEntry);
       }
     }
-  }
-
-  // usage code from - https://www.npmjs.com/package/ngx-file-drop
-  public fileOver(event) {
-    console.log(event);
-  }
-
-  // usage code from - https://www.npmjs.com/package/ngx-file-drop
-  public fileLeave(event) {
-    console.log(event);
   }
 
   setScore(score: number): void {
@@ -284,5 +273,57 @@ export class CoursePreviewComponent implements OnInit {
       .subscribe(() => {
         this.ngOnInit();
       });
+  }
+
+  goToLecture(id, title, date) {
+    this.router.navigate([`course/lectures/${title}/${id}/${date}`]);
+  }
+
+  uploadLecture() {
+    if (this.videoTitle === '') {
+      this.videoUploadError = 'No Title Entered!';
+      return;
+    }
+
+    var video = this.video;
+    this.uploadVideo = false;
+    if (video[0].fileEntry.isFile) {
+      const fileEntry = video[0].fileEntry as FileSystemFileEntry;
+      fileEntry.file((file: File) => {
+        const formData = new FormData();
+        formData.append('document', file, video[0].relativePath);
+        formData.append('title', this.videoTitle);
+        this.courseService
+          .postUploadLecture(formData, this.course._id)
+          .subscribe(
+            (res: Course) => {
+              this.ngOnInit();
+            },
+            (err) => {
+              console.log(err);
+            }
+          );
+      });
+    }
+  }
+
+  public droppedLecture(video: NgxFileDropEntry[]) {
+    this.video = video;
+    if (video[0].fileEntry.isFile) {
+      const fileEntry = video[0].fileEntry as FileSystemFileEntry;
+      fileEntry.file((file: File) => {
+        if (!file.name.endsWith('.mp4')) {
+          this.video = [];
+          this.videoUploadError = 'Bad Lecture Type!';
+        } else {
+          this.videoUploadError = 'Uploaded ' + file.name;
+        }
+      });
+    }
+  }
+
+  public dateToString(date) {
+    var d = new Date(date);
+    return d.toDateString();
   }
 }

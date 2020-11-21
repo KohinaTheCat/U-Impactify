@@ -17,5 +17,6 @@ export interface Course {
   reviews: object[];
   surveyRequest: boolean;
   assessments: string[];
+  lectures: [{ id: string; title: string, date: Date }];
   instructorReview: [{ _id: string; surveyAnswers: string[] }];
 }
