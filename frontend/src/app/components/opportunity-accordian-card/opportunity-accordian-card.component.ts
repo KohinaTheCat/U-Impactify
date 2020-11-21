@@ -11,6 +11,9 @@ export class OpportunityAccordianCardComponent implements OnInit {
   @Input()
   opportunity: Opportunity;
 
+  @Input()
+  type: string;
+
   open: boolean = false;
 
   constructor() { }

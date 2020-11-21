@@ -1,20 +1,154 @@
-<div class="opportunities">
-  <div class="opportunity-container volunteer-container">
-    <div class="top-header"><h5>Volunteer Opportunities</h5> <button class="btn" (click)="onNewOpportunity()">New</button></div>
-    <div class="list-container">
-      <app-opportunity-accordian-card
-        *ngFor="let opportunity of volunteers"
-        [opportunity]="opportunity"
-      ></app-opportunity-accordian-card>
-    </div>
-  </div>
-  <div class="opportunity-container employment-container">
-    <div class="top-header"><h5>Employment Opportunities</h5> <button class="btn" (click)="onNewOpportunity()">New</button></div>
-    <div class="list-container">
-      <app-opportunity-accordian-card
-        *ngFor="let opportunity of employments"
-        [opportunity]="opportunity"
-      ></app-opportunity-accordian-card>
-    </div>
-  </div>
+<div class="loading" *ngIf="loading; else done">
+  <span class="spinner"></span>
 </div>
+<ng-template #done>
+  <div class="main" *ngIf="!showNewOpportunity; else newOpportunity">
+    <div class="opportunity-container volunteer-container">
+      <div class="top-header">
+        <h5>Volunteer Opportunities</h5>
+        <button
+          id="volunteer-button"
+          class="btn button"
+          (click)="onNewOpportunity('volunteer')"
+        >
+          New
+        </button>
+      </div>
+      <div class="list-container">
+        <app-opportunity-accordian-card
+          *ngFor="let opportunity of volunteers"
+          [opportunity]="opportunity"
+          [type]="'volunteer'"
+        ></app-opportunity-accordian-card>
+      </div>
+    </div>
+    <div class="opportunity-container employment-container">
+      <div class="top-header">
+        <h5>Employment Opportunities</h5>
+        <button
+          id="employment-button"
+          class="btn button"
+          (click)="onNewOpportunity('employment')"
+        >
+          New
+        </button>
+      </div>
+      <div class="list-container">
+        <app-opportunity-accordian-card
+          *ngFor="let opportunity of employments"
+          [opportunity]="opportunity"
+          [type]="'employment'"
+        ></app-opportunity-accordian-card>
+      </div>
+    </div>
+  </div>
+  <ng-template #newOpportunity>
+    <div class="main" *ngIf="opportunityType">
+      <div class="top">
+        <button (click)="onReturn()" type="button" id="back-button" class="btn button">
+          Back
+        </button>
+        <button *ngIf="shouldShowSubmitButton" (click)="onSubmit()" type="button" id="submit-button" class="btn button">
+          Submit
+        </button>
+      </div>
+      <h5>New {{ opportunityType | titlecase }} Opportunity</h5>
+      <div class="add-overlay">
+        <div class="position-top">
+          <input
+            type="text"
+            placeholder="Name"
+            name="name"
+            id="name"
+            [(ngModel)]="name"
+          />
+          <textarea
+            name="description"
+            class="text-area"
+            placeholder="Description"
+            [(ngModel)]="description"
+          ></textarea>
+        </div>
+        <div class="info-container">
+          <div class="info">
+            <h6>Date Posted</h6>
+            <form clrForm clrLayout="vertical">
+              <input
+                clrInput
+                value="{{ datePosted | date: 'yyyy-MM-dd' }}"
+                disabled
+              />
+            </form>
+          </div>
+          <div class="info">
+            <h6>Date Needed</h6>
+            <form clrForm clrLayout="vertical">
+              <clr-date-container>
+                <input
+                  type="date"
+                  clrDate
+                  name="dateNeeded"
+                  [(clrDate)]="dateNeeded"
+                  min="{{ datePosted | date: 'yyyy-MM-dd' }}"
+                />
+              </clr-date-container>
+            </form>
+          </div>
+          <div class="info">
+            <h6>Location</h6>
+            <form clrForm clrLayout="vertical">
+              <input
+                clrInput
+                name="location"
+                placeholder="Location"
+                [(ngModel)]="location"
+              />
+            </form>
+          </div>
+          <div class="info" *ngIf="opportunityType === 'employment'">
+            <h6>Salary (CAD/hr)</h6>
+            <form clrForm clrLayout="vertical">
+              <input
+                clrInput
+                type="number"
+                name="salary"
+                [(ngModel)]="salary"
+              />
+            </form>
+          </div>
+          <div class="info">
+            <h6>Number of Hires</h6>
+            <form clrForm clrLayout="vertical">
+              <input
+                clrInput
+                type="number"
+                name="numHires"
+                [(ngModel)]="numberOfHires"
+              />
+            </form>
+          </div>
+        </div>
+        <div class="bottom-container">
+          <div class="text-container">
+            <h5>Responsibilities</h5>
+            <textarea
+              class="text-area"
+              name="responsibilities"
+              placeholder="Newline seperated (every new line is a new responsibility)"
+              [(ngModel)]="responsibilites"
+            ></textarea>
+          </div>
+          <div class="text-container">
+            <h5>Requirements</h5>
+            <textarea
+              class="text-area"
+              name="requirements"
+              placeholder="Newline seperated (every new line is a new requirement)"
+              [(ngModel)]="requirements"
+            ></textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</ng-template>

@@ -1,5 +1,5 @@
-<div class="container box-shadow-1" [ngClass]="{'container-open': open}" *ngIf="opportunity">
-  <div class="top-header" [ngClass]="{'top-header-open': open}">
+<div class="container box-shadow-1" [ngClass]="{'container-open-employment': open && type === 'employment', 'container-open-volunteer': open && type === 'volunteer'}" *ngIf="opportunity">
+  <div class="top-header" [ngClass]="{'top-header-open-employment': open && type === 'employment', 'top-header-open-volunteer': open && type === 'volunteer'}">
     <div class="wrapper">
       <h5>{{ opportunity.name }}</h5>
       <p>{{opportunity.description}}</p>
@@ -19,10 +19,6 @@
           <div class="info">
               <h6>Location</h6>
               <p>{{opportunity.location}}</p>
-          </div>
-          <div class="info">
-              <h6>Type of Position</h6>
-              <p>{{opportunity.positionType | titlecase}}</p>
           </div>
           <div class="info" *ngIf="opportunity.salary">
               <h6>Salary</h6>
