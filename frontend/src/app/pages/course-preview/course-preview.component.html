@@ -58,21 +58,18 @@
     </div>
   </div>
 
-  <div
-  id="settings-dropdown"
-  *ngIf="user.type == 'IL' && alreadyEnrolled"
->
-  <div class="dropdown" style="float: left">
-    <div class="settings-circle">
-      <clr-icon shape="cog" size="36"></clr-icon>
-    </div>
-    <div class="dropdown-content">
-      <div (click)="assessmentsHandler()">
-        <a>Assessments</a>
+  <div id="settings-dropdown" *ngIf="user.type == 'IL' && alreadyEnrolled">
+    <div class="dropdown" style="float: left">
+      <div class="settings-circle">
+        <clr-icon shape="cog" size="36"></clr-icon>
+      </div>
+      <div class="dropdown-content">
+        <div (click)="assessmentsHandler()">
+          <a>Assessments</a>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
   <div
     class="body"
@@ -208,7 +205,7 @@
               <option value="4">4</option>
               <option value="5">5</option>
             </select>
-            <label class ="surveyQuestion">{{ question }}</label>
+            <label class="surveyQuestion">{{ question }}</label>
           </clr-select-container>
         </clr-wizard-page>
         <clr-wizard-page>
@@ -279,7 +276,7 @@
                 class="btn btn-success-outline"
                 (click)="showSurveys = true"
               >
-              Show all survey responses
+                Show all survey responses
               </button>
             </div>
           </div>
@@ -322,12 +319,69 @@
         </div>
       </div>
     </div>
+
+    <!-- COURSE CONTENT HERE -->
     <div class="right">
       <h4>Course Outline</h4>
-      <div class="course-content">Course Content Here.</div>
+      <div class="course-content">
+        <clr-stack-view>
+          <clr-stack-block
+            [clrStackViewLevel]="1"
+            [clrStackViewSetsize]="3"
+            [clrStackViewPosinset]="2"
+          >
+            <clr-stack-label>Lectures</clr-stack-label>
+            <clr-stack-block
+              *ngIf="user.type == 'IC'"
+              [clrStackViewLevel]="2"
+              [clrStackViewSetsize]="3"
+              [clrStackViewPosinset]="1"
+            >
+              <clr-stack-label>
+                <button
+                  (click)="uploadVideo = true"
+                  class="btn btn-info btn-sm"
+                >
+                  <clr-icon shape="plus"></clr-icon>
+                </button>
+              </clr-stack-label>
+            </clr-stack-block>
+            <clr-stack-block
+              *ngFor="let lec of course.lectures; let j = index"
+              [clrStackViewLevel]="2"
+              [clrStackViewSetsize]="3"
+              [clrStackViewPosinset]="j + 1"
+            >
+              <div class="stack-block-content">
+                {{ dateToString(lec.date) }}
+              </div>
+              <clr-stack-label
+                ><a (click)="goToLecture(lec._id, lec.title, lec.date)">{{
+                  lec.title
+                }}</a></clr-stack-label
+              >
+            </clr-stack-block>
+          </clr-stack-block>
+
+          <clr-stack-block
+            [clrStackViewLevel]="1"
+            [clrStackViewSetsize]="3"
+            [clrStackViewPosinset]="3"
+          >
+            <clr-stack-label>Extra Reading</clr-stack-label>
+            <clr-stack-block>
+              <clr-stack-label>Outline 1</clr-stack-label>
+            </clr-stack-block>
+            <clr-stack-block>
+              <clr-stack-label>Outline 2</clr-stack-label>
+            </clr-stack-block>
+          </clr-stack-block>
+        </clr-stack-view>
+      </div>
     </div>
   </div>
 </div>
+<!-- END OF COURSE CONTENT -->
 
 <div class="err" *ngIf="!loading && !valid">
   <div class="inner">
@@ -386,7 +440,7 @@
       </div>
     </form>
     <div class="anon-review">
-      <input type="checkbox" clrToggle [(ngModel)]="anon" />
+      <input type="checkbox" clrToggle [(ngModel)]="anon" name="anon" />
       Anonymous Review
     </div>
   </div>
@@ -409,30 +463,41 @@
   </div>
 </clr-modal>
 
-<clr-modal [(clrModalOpen)]="showSurveys" [clrModalSize]="'xl'" [clrModalClosable]="false" *ngIf="course">
+<clr-modal
+  [(clrModalOpen)]="showSurveys"
+  [clrModalSize]="'xl'"
+  [clrModalClosable]="false"
+  *ngIf="course"
+>
   <h3 class="modal-title">All surveys completed for {{ course.name }}</h3>
   <div class="modal-body">
     <table class="table table-noborder">
       <thead>
-          <tr>
-              <th class="left">Student Name</th>
-              <th class="left">Describe the typical course workload in a week span</th>
-              <th class="left">Would you recommend this course to others?</th>
-              <th class="left">Are you more interested in this subject after taking this course?</th>
-          </tr>
+        <tr>
+          <th class="left">Student Name</th>
+          <th class="left">
+            Describe the typical course workload in a week span
+          </th>
+          <th class="left">Would you recommend this course to others?</th>
+          <th class="left">
+            Are you more interested in this subject after taking this course?
+          </th>
+        </tr>
       </thead>
       <tbody>
-          <tr *ngFor="let survey of instructorReview">
-            <td class="left">{{survey._id}}</td>
-            <td class="left">{{survey.surveyAnswers[5]}}</td>
-            <td class="left">{{survey.surveyAnswers[6]}}</td>
-            <td class="left">{{survey.surveyAnswers[7]}}</td>
+        <tr *ngFor="let survey of instructorReview">
+          <td class="left">{{ survey._id }}</td>
+          <td class="left">{{ survey.surveyAnswers[5] }}</td>
+          <td class="left">{{ survey.surveyAnswers[6] }}</td>
+          <td class="left">{{ survey.surveyAnswers[7] }}</td>
         </tr>
       </tbody>
     </table>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-primary" (click)="showSurveys = false">Done</button>
+    <button type="button" class="btn btn-primary" (click)="showSurveys = false">
+      Done
+    </button>
   </div>
 </clr-modal>
 
@@ -510,9 +575,7 @@
       <clr-control-error>{{ error }}</clr-control-error>
       <ngx-file-drop
         dropZoneLabel="Drop files here"
-        (onFileDrop)="droppedCourseImage($event)"
-        (onFileOver)="fileOver($event)"
-        (onFileLeave)="fileLeave($event)"
+        (onFileDrop)="droppedLecture($event)"
       >
         <ng-template
           ngx-file-drop-content-tmp
@@ -589,6 +652,60 @@
     </button>
     <button type="button" class="btn btn-primary" (click)="registerHandler()">
       Update Course
+    </button>
+  </div>
+</clr-modal>
+
+<!-- UPLOAD COURSE LECTURE MODAL -->
+<clr-modal
+  [(clrModalOpen)]="uploadVideo"
+  [clrModalSize]="'lg'"
+  [clrModalClosable]="false"
+>
+  <h3 class="modal-title">Upload a Lecture</h3>
+  <div class="modal-body">
+    <form clrForm>
+      <ngx-file-drop
+        dropZoneLabel="Drop files here"
+        (onFileDrop)="droppedLecture($event)"
+      >
+        <ng-template
+          ngx-file-drop-content-tmp
+          let-openFileSelector="openFileSelector"
+        >
+          <label>Upload Video File (.mp4)</label>
+          <button class="btn btn-primary" (click)="openFileSelector()">
+            Browse Files
+          </button>
+        </ng-template>
+      </ngx-file-drop>
+      <div class="imageError">
+        <clr-control-error>{{ videoUploadError }}</clr-control-error>
+      </div>
+      <div class="uploadedImage" *ngIf="img[0]">
+        Uploaded "{{ video[0].fileEntry.name }}"
+      </div>
+      <clr-input-container>
+        <label
+          >Course Title
+          <input
+            clrInput
+            type="text"
+            placeholder=""
+            [(ngModel)]="videoTitle"
+            name="title"
+          />
+        </label>
+        <clr-control-error>This field is required!</clr-control-error>
+      </clr-input-container>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="uploadVideo = false">
+      Cancel
+    </button>
+    <button type="button" class="btn btn-primary" (click)="uploadLecture()">
+      Upload
     </button>
   </div>
 </clr-modal>

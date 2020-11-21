@@ -2,7 +2,6 @@ import { ChatComponent } from './pages/chat/chat.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
-import { CourseComponent } from './pages/course/course.component';
 import { CreateCourseComponent } from './pages/create-course/create-course.component';
 import { CoursePreviewComponent } from './pages/course-preview/course-preview.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
@@ -18,6 +17,7 @@ import { AssessmentsComponent } from './pages/assessments/assessments.component'
 import { AboutComponent } from './pages/home-pages/about/about.component';
 import { SolutionsComponent } from './pages/home-pages/solutions/solutions.component';
 import { PricingComponent } from './pages/home-pages/pricing/pricing.component';
+import { CourseLecturesComponent } from './pages/course-lectures/course-lectures.component';
 
 const routes: Routes = [
   { path: 'signup', component: LoginSignupComponent },
@@ -31,8 +31,6 @@ const routes: Routes = [
   { path: 'solutions', component: SolutionsComponent },
   { path: 'pricing', component: PricingComponent },
   { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
-
-  // I added this here
   {
     path: 'course/:id/assessments',
     component: AssessmentsComponent,
@@ -49,12 +47,16 @@ const routes: Routes = [
     component: SignupQuestionaire2Component,
     canDeactivate: [AuthGuard],
   },
-  { path: 'course', component: CourseComponent },
   { path: 'course/:id', component: CoursePreviewComponent },
   { path: 'socialinitiatives', component: GivingGardenComponent },
   {
     path: 'createcourse',
     component: CreateCourseComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'course/lectures/:title/:id/:date',
+    component: CourseLecturesComponent,
     canActivate: [AuthGuard],
   },
   { path: 'chat', component: ChatComponent, canActivate: [AuthGuard] },
