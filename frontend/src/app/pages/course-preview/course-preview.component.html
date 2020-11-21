@@ -332,6 +332,7 @@
           >
             <clr-stack-label>Lectures</clr-stack-label>
             <clr-stack-block
+              *ngIf="user.type == 'IC'"
               [clrStackViewLevel]="2"
               [clrStackViewSetsize]="3"
               [clrStackViewPosinset]="1"
@@ -436,7 +437,7 @@
       </div>
     </form>
     <div class="anon-review">
-      <input type="checkbox" clrToggle [(ngModel)]="anon" />
+      <input type="checkbox" clrToggle [(ngModel)]="anon" name="anon" />
       Anonymous Review
     </div>
   </div>
@@ -571,9 +572,7 @@
       <clr-control-error>{{ error }}</clr-control-error>
       <ngx-file-drop
         dropZoneLabel="Drop files here"
-        (onFileDrop)="droppedCourseImage($event)"
-        (onFileOver)="fileOver($event)"
-        (onFileLeave)="fileLeave($event)"
+        (onFileDrop)="droppedLecture($event)"
       >
         <ng-template
           ngx-file-drop-content-tmp
@@ -663,42 +662,35 @@
   <h3 class="modal-title">Upload a Lecture</h3>
   <div class="modal-body">
     <form clrForm>
-      <!-- CHANGE THIS -->
-      <clr-control-error>{{ error }}</clr-control-error>
       <ngx-file-drop
         dropZoneLabel="Drop files here"
-        (onFileDrop)="droppedCourseImage($event)"
+        (onFileDrop)="droppedLecture($event)"
       >
         <ng-template
           ngx-file-drop-content-tmp
           let-openFileSelector="openFileSelector"
         >
           <label>Upload Video File (.mp4)</label>
-          <!-- CHANGE THIS -->
           <button class="btn btn-primary" (click)="openFileSelector()">
             Browse Files
           </button>
         </ng-template>
       </ngx-file-drop>
-      <!-- CHANGE THIS -->
       <div class="imageError">
-        <clr-control-error>{{ imageError }}</clr-control-error>
+        <clr-control-error>{{ videoUploadError }}</clr-control-error>
       </div>
-      <!-- CHANGE THIS -->
       <div class="uploadedImage" *ngIf="img[0]">
-        Uploaded "{{ img[0].fileEntry.name }}"
+        Uploaded "{{ video[0].fileEntry.name }}"
       </div>
       <clr-input-container>
         <label
           >Course Title
-          <!-- CHANGE THIS -->
           <input
             clrInput
             type="text"
             placeholder=""
-            [(ngModel)]="description" 
-            name=""
-            required
+            [(ngModel)]="videoTitle"
+            name="title"
           />
         </label>
         <clr-control-error>This field is required!</clr-control-error>
@@ -709,7 +701,7 @@
     <button type="button" class="btn btn-outline" (click)="uploadVideo = false">
       Cancel
     </button>
-    <button type="button" class="btn btn-primary" (click)="uploadVideo = false">
+    <button type="button" class="btn btn-primary" (click)="uploadLecture()">
       Upload
     </button>
   </div>
