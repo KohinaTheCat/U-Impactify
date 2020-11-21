@@ -1,0 +1,155 @@
+*:focus {
+  outline: none;
+}
+
+.main {
+  padding: 0 2rem;
+}
+
+.opportunity-container {
+  margin-bottom: 2rem;
+}
+
+.list-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin: 0 0 1rem 0;
+}
+
+h5 {
+  color: var(--gray80);
+  font-size: 1.5rem;
+  line-height: normal;
+}
+
+.button {
+  /* Shadow Dark · 16dp */
+  box-shadow: 0px 4px 12px rgba(120, 98, 188, 0.16);
+
+  border-radius: 7px;
+  border: 0;
+  font-size: 1rem;
+    width: 5rem;
+    height: 2.5rem;
+  /* White Base */
+  color: #ffffff;
+}
+
+#back-button {
+  width: 5rem;
+  background-color: var(--purple-base);
+}
+
+#submit-button {
+  width: 7rem;
+  background-color: var(--red-base);
+}
+
+#volunteer-button {
+  background: var(--green-base);
+}
+
+#employment-button {
+  background: var(--red-base);
+}
+
+.top {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.add-overlay {
+  /* White Base */
+  background: #ffffff;
+  /* Gray · 20% */
+  border: 5px solid #f5f7fa;
+  box-sizing: border-box;
+  /* Shadow Black Dark */
+  box-shadow: 0px 8px 24px #eff3f9;
+  border-radius: 40px;
+
+  padding: 2rem;
+  margin-top: 1rem;
+}
+
+#name {
+  /* Rectangle 1638 */
+  width: 100%;
+  height: 55px;
+
+  /* Gray · 10% */
+  background: #fafafa;
+  /* Gray · 20% */
+  border: 3px solid #f5f7fa;
+  border-radius: 11px;
+
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 1.25rem;
+  padding: 0 1rem;
+
+  /* Gray · 60% */
+  color: var(--gray80);
+  margin-bottom: 1rem;
+}
+
+.text-area {
+  /* Rectangle 1637 */
+  width: 100%;
+  height: 81px;
+
+  /* Gray · 10% */
+  background: #fafafa;
+  /* Gray · 20% */
+  border: 3px solid #f5f7fa;
+  border-radius: 11px;
+
+  font-size: 1rem;
+  font-weight: 300;
+
+  padding: 1rem;
+
+  /* Gray · 60% */
+  color: var(--gray80);
+}
+
+.info-container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 1rem 0;
+}
+
+.info {
+  width: 20rem;
+  margin-bottom: 0.5rem;
+}
+
+.info h6 {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.info p {
+  margin: 0.25rem 0;
+  text-align: center;
+  font-size: 1rem;
+}
+
+.text-container textarea {
+  margin-top: 1rem;
+  height: 15rem;
+}
+
+.info form input {
+  font-size: 0.75rem;
+}
