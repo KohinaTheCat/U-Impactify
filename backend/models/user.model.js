@@ -80,6 +80,9 @@ const userSchema = new Schema({
     email: {
       type: String,
     },
+    opportunityPosting: {
+      type: [String],
+    }
   },
   credit: {
     type: Number,
