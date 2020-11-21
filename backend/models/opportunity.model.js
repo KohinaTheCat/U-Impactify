@@ -12,27 +12,33 @@ const opportunitySchema = new Schema({
   description: {
     type: String,
   },
+  type: {
+    type: String,
+  },
   location: {
     type: String,
   },
   datePosted: {
-      type: Date,
+    type: Date,
   },
   dateNeeded: {
-      type: Date,
+    type: Date,
   },
   salary: {
-      type: Number,
+    type: Number,
   },
   numberOfHires: {
-      type: Number,
+    type: Number,
   },
   responsibilites: {
-      type: [String],
+    type: [String],
   },
   requirements: {
-       type: [String],
-  }
+    type: [String],
+  },
+  applicants: {
+    type: [String],
+  },
 });
 
 const Opportunity = mongoose.model("Opportunity", opportunitySchema);

@@ -89,7 +89,8 @@ router.route("/").post((req, res) => {
     img: "",
     credit,
     chats: [],
-    opportunityPosting: [],
+    volunteerPosting: [],
+    employmentPosting: [],
   });
   newUser
     .save()
@@ -438,20 +439,21 @@ router.delete("/deleteUser/:userId", (req, res) => {
   });
 });
 
-
 router.route("/opportunity").put((req, res) => {
-  const { recruiter, name, description, location, datePosted, dateNeeded, salary, numberOfHires , responsibilites , requirements} = req.body;
+  const { recruiter, name, description, type, location, datePosted, dateNeeded, salary, numberOfHires , responsibilites , requirements, applicants} = req.body;
   const newOpportunity = new Opportunity({
     recruiter,
     name,
     description,
+    type,
     location,
     datePosted,
     dateNeeded,
     salary,
     numberOfHires,
     responsibilites,
-    requirements
+    requirements,
+    applicants,
   });
   newOpportunity
     .save()
@@ -459,13 +461,12 @@ router.route("/opportunity").put((req, res) => {
     .catch((err) => res.status(400).json("Error: " + err));
 });
 
-
-router.put("/addOpportunity", (req, res) => {
+router.put("/addVolunteerOpportunity", (req, res) => {
   const { userId, opportunityId } = req.body;
   userSchema
     .findById(userId)
     .then((user) => {
-      user.socialInitiative.opportunityPosting = user.socialInitiative.opportunityPosting.concat(opportunityId);
+      user.socialInitiative.volunteerPosting = user.socialInitiative.volunteerPosting.concat(opportunityId);
       user
         .save()
         .then((user) => res.json(user))
@@ -474,7 +475,63 @@ router.put("/addOpportunity", (req, res) => {
     .catch((err) => res.status(404).json(err));
 });
 
+router.put("/addEmploymentOpportunity", (req, res) => {
+  const { userId, opportunityId } = req.body;
+  userSchema
+    .findById(userId)
+    .then((user) => {
+      user.socialInitiative.employmentPosting = user.socialInitiative.employmentPosting.concat(opportunityId);
+      user
+        .save()
+        .then((user) => res.json(user))
+        .catch((err) => res.status(400).json(err));
+    })
+    .catch((err) => res.status(404).json(err));
+});
 
+router.get("/opportunity/getVolunteerOpportunities/:userId", (req, res) => {
+  let volunteerPosting = [];
+  userSchema
+    .findById(req.params.userId)
+    .then((user) => {
+      user.socialInitiative.volunteerPosting.forEach(postingId => {
+        opportunitySchema
+          .findById(postingId)
+          .then((posting) => {
+            volunteerPosting = volunteerPosting.concat(posting);
+            if (volunteerPosting.length === user.socialInitiative.volunteerPosting.length) {
+              res.json(volunteerPosting)
+            }
+          })
+          .catch ((err) => res.status(404).json(err));
+      });
+    })
+    .catch ((err) => res.status(404).json(err));
+})
+
+router.get("/opportunity/getEmploymentOpportunities/:userId", (req, res) => {
+  let employmentPosting = [];
+  userSchema
+    .findById(req.params.userId)
+    .then((user) => {
+      user.socialInitiative.employmentPosting.forEach(postingId => {
+        opportunitySchema
+          .findById(postingId)
+          .then((posting) => {
+            employmentPosting = employmentPosting.concat(posting);
+            if (employmentPosting.length === user.socialInitiative.volunteerPosting.length) {
+              res.json(employmentPosting)
+            }
+          })
+          .catch ((err) => res.status(404).json(err));
+      });
+    })
+    .catch ((err) => res.status(404).json(err));
+})
+
+
+// might have to get rid of this cuz 2 different types of opportunities
+// add a type "volunteer" or "employment when adding a opportunity"
 router.get("/opportunity/getAllOpportunities", (req, res) => {
   opportunitySchema.find()
     .then((opp) => {
@@ -483,5 +540,19 @@ router.get("/opportunity/getAllOpportunities", (req, res) => {
     .catch((err) => res.status(404).json(err));
 });
 
+router.put("/opportunity/applyOpportunity", (req, res) => {
+  const { opportunityId, applicantUserId } = req.body;
+  opportunitySchema
+    .findById(opportunityId)
+    .then((opp) => {
+      console.log(opp)
+      opp.applicants = opp.applicants.concat(applicantUserId);
+      opp
+        .save()
+        .then((opp) => res.json(opp))
+        .catch((err) => res.status(404).json(err))
+    })
+    .catch((err) => res.status(404).json(err))
+})
 
 module.exports = router;
