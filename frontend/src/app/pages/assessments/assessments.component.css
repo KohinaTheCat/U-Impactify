@@ -1,16 +1,23 @@
 .flexbot {
   display: flex;
-  align-items: center;
-  justify-content: space-evenly;
   flex-direction: column;
+  background-color: antiquewhite;
 
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  width: 100%;
+  height: 100%;
 }
-
+.test {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: aqua;
+}
 #table {
-  width: 70rem;
+  width: 100%;
   margin-top: 0.5rem;
 }
 
@@ -254,6 +261,7 @@ clr-control-error {
 }
 
 .outer {
+  align-self: center;
   height: 20rem;
   border-radius: 20px;
   overflow: hidden;
@@ -286,4 +294,23 @@ clr-control-error {
 
 .student-submission-title {
   font-size: 1.25rem;
+}
+
+/* Aryan Here */
+
+.box-shadow-2 {
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  align-items: center;
+  justify-content: space-evenly;
+
+  background-color: #a78ec3;
+
+  width: calc(100% - 4rem);
+}
+
+#check {
+  align-self: center;
+  color: red;
 }

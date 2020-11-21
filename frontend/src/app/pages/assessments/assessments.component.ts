@@ -13,6 +13,7 @@ import {
 
 import { ROOT_DROPDOWN_PROVIDER } from '@clr/angular/popover/dropdown/providers/dropdown.service';
 import { FiltersProvider } from '@clr/angular/data/datagrid/providers/filters';
+import { FindValueSubscriber } from 'rxjs/internal/operators/find';
 
 @Component({
   selector: 'app-assessments',
@@ -22,7 +23,7 @@ import { FiltersProvider } from '@clr/angular/data/datagrid/providers/filters';
 export class AssessmentsComponent implements OnInit {
   course: Course;
   user: User;
-  createNewAssessmentModal: boolean;
+  createNewAssessmentModal: false;
   submissionsModal: boolean;
   name: String = '';
   files: NgxFileDropEntry[] = [];

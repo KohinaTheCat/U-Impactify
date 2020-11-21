@@ -7,125 +7,25 @@
     <h4 id="title2">{{ course.name }}</h4>
   </div>
 
-  <div *ngIf="createNewAssessmentModal">
-    <clr-modal
-      [(clrModalOpen)]="basic"
-      [clrModalSize]="'lg'"
-      [clrModalClosable]="false"
-    >
-      <h3 class="modal-title">Create an assignment</h3>
-      <div class="modal-body">
-        <form clrForm>
-          <clr-control-error>{{ error }}</clr-control-error>
-
-          <clr-input-container>
-            <label
-              >Assessment name
-              <input
-                clrInput
-                type="text"
-                [(ngModel)]="name"
-                name="name"
-                required
-              />
-            </label>
-            <clr-control-error>This field is required!</clr-control-error>
-          </clr-input-container>
-
-          <clr-radio-container>
-            <label>Visibliity</label>
-            <clr-radio-wrapper>
-              <input
-                type="radio"
-                clrRadio
-                name="true"
-                required
-                value="true"
-                [(ngModel)]="visibility"
-              />
-              <label class="rlabel">True</label>
-            </clr-radio-wrapper>
-            <clr-radio-wrapper>
-              <input
-                type="radio"
-                clrRadio
-                name="false"
-                required
-                value="false"
-                [(ngModel)]="visibility"
-              />
-              <label class="rlabel">False</label>
-            </clr-radio-wrapper>
-
-            <clr-control-error
-              >Please choose whether or not you want it to be
-              seen!</clr-control-error
-            >
-          </clr-radio-container>
-
-          <ngx-file-drop
-            dropZoneLabel="Drop files here"
-            (onFileDrop)="dropped($event)"
-            (onFileOver)="fileOver($event)"
-            (onFileLeave)="fileLeave($event)"
-          >
-            <ng-template
-              ngx-file-drop-content-tmp
-              let-openFileSelector="openFileSelector"
-            >
-              <label>Upload Assignment Files</label>
-              <button class="btn btn-primary" (click)="openFileSelector()">
-                Browse Files
-              </button>
-
-              <!-- <button type="button" (click)="openFileSelector()">Browse Files</button> -->
-            </ng-template>
-          </ngx-file-drop>
-          <div class="upload-table">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th>Name of file(s) uploaded:</th>
-                </tr>
-              </thead>
-              <tbody class="upload-name-style">
-                <tr *ngFor="let item of files; let i = index">
-                  <td>
-                    <strong>{{ item.relativePath }}</strong>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button
-          type="button"
-          class="btn btn-outline"
-          (click)="createNewAssessmentModal = false"
-          (click)="cancel()"
-        >
-          Cancel
-        </button>
-        <button
-          type="button"
-          class="btn btn-primary"
-          (click)="registerHandler()"
-          (click)="createNewAssessmentModal = false"
-        >
-          Create Assessment
-        </button>
-      </div>
-    </clr-modal>
-  </div>
-  <div *ngIf="!!user && course && course.teachers.includes(user._id)">
+  <!-- TEACHER -->
+  <div
+    class="test"
+    *ngIf="!!user && course && course.teachers.includes(user._id)"
+  >
     <div class="btn-container">
       <button class="createNew edit" (click)="createNewAssessmentModal = true">
         Create new assessment
       </button>
     </div>
+    <div class="box-shadow-2">
+      <h3>Name</h3>
+      <h3>Assessment</h3>
+      <h3>Visibility</h3>
+      <h3>Submission</h3>
+    </div>
+  </div>
 
+  <div *ngIf="!!user && course && course.teachers.includes(user._id)">
     <clr-datagrid id="table">
       <clr-dg-column class="widthMain"
         ><div id="header">Name</div></clr-dg-column
@@ -185,6 +85,7 @@
     </clr-datagrid>
   </div>
 
+  <!-- IMPACT LEARNER -->
   <div *ngIf="user.type == 'IL'">
     <clr-datagrid id="table">
       <clr-dg-column class="widthDefault"
@@ -386,6 +287,119 @@
       </button>
       <button type="button" class="btn btn-primary" (click)="submitHandler()">
         Submit
+      </button>
+    </div>
+  </clr-modal>
+</div>
+
+<div *ngIf="createNewAssessmentModal">
+  <clr-modal
+    [(clrModalOpen)]="basic"
+    [clrModalSize]="'lg'"
+    [clrModalClosable]="false"
+  >
+    <h3 class="modal-title">Create an assignment</h3>
+    <div class="modal-body">
+      <form clrForm>
+        <clr-control-error>{{ error }}</clr-control-error>
+
+        <clr-input-container>
+          <label
+            >Assessment name
+            <input
+              clrInput
+              type="text"
+              [(ngModel)]="name"
+              name="name"
+              required
+            />
+          </label>
+          <clr-control-error>This field is required!</clr-control-error>
+        </clr-input-container>
+
+        <clr-radio-container>
+          <label>Visibliity</label>
+          <clr-radio-wrapper>
+            <input
+              type="radio"
+              clrRadio
+              name="true"
+              required
+              value="true"
+              [(ngModel)]="visibility"
+            />
+            <label class="rlabel">True</label>
+          </clr-radio-wrapper>
+          <clr-radio-wrapper>
+            <input
+              type="radio"
+              clrRadio
+              name="false"
+              required
+              value="false"
+              [(ngModel)]="visibility"
+            />
+            <label class="rlabel">False</label>
+          </clr-radio-wrapper>
+
+          <clr-control-error
+            >Please choose whether or not you want it to be
+            seen!</clr-control-error
+          >
+        </clr-radio-container>
+
+        <ngx-file-drop
+          dropZoneLabel="Drop files here"
+          (onFileDrop)="dropped($event)"
+          (onFileOver)="fileOver($event)"
+          (onFileLeave)="fileLeave($event)"
+        >
+          <ng-template
+            ngx-file-drop-content-tmp
+            let-openFileSelector="openFileSelector"
+          >
+            <label>Upload Assignment Files</label>
+            <button class="btn btn-primary" (click)="openFileSelector()">
+              Browse Files
+            </button>
+
+            <!-- <button type="button" (click)="openFileSelector()">Browse Files</button> -->
+          </ng-template>
+        </ngx-file-drop>
+        <div class="upload-table">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Name of file(s) uploaded:</th>
+              </tr>
+            </thead>
+            <tbody class="upload-name-style">
+              <tr *ngFor="let item of files; let i = index">
+                <td>
+                  <strong>{{ item.relativePath }}</strong>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button
+        type="button"
+        class="btn btn-outline"
+        (click)="createNewAssessmentModal = false"
+        (click)="cancel()"
+      >
+        Cancel
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="registerHandler()"
+        (click)="createNewAssessmentModal = false"
+      >
+        Create Assessment
       </button>
     </div>
   </clr-modal>
