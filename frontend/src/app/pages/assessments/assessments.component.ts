@@ -22,6 +22,7 @@ import { FiltersProvider } from '@clr/angular/data/datagrid/providers/filters';
 export class AssessmentsComponent implements OnInit {
   course: Course;
   user: User;
+  title: string = 'Create an assignment';
   createNewAssessmentModal: boolean;
   submissionsModal: boolean;
   name: String = '';
@@ -31,6 +32,7 @@ export class AssessmentsComponent implements OnInit {
   error: string = '';
   basic: boolean = true;
   selectedAss: Assessment;
+  assessmentTracker: Assessment;
 
   identification: Object[];
 
@@ -127,9 +129,53 @@ export class AssessmentsComponent implements OnInit {
     this.submissionsModal = true;
   }
 
-  onEdit(assess: Assessment) {}
+  // onEdit(assess: Assessment) {
 
-  // Ask about this. Not working :(
+  //   this.createNewAssessmentModal = true;
+  //   this.assessmentTracker = assess;
+
+  //   this.title = 'Edit assignment';
+  //   const { name, visibility, studentSubmission, files } = this;
+  //   this.name = assess.name;
+  //   this.visibility = assess.visibility;
+  //   const assessment = {
+  //     name,
+  //     visibility,
+  //     studentSubmission,
+  //     files,
+  //   };
+
+  //   const formData = new FormData();
+
+  //   for (const droppedFile of assessment.files) {
+  //     if (droppedFile.fileEntry.isFile) {
+  //       const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
+  //       fileEntry.file((file: File) => {
+  //         formData.append('documents', file, droppedFile.relativePath);
+  //       });
+  //     } else {
+  //       // It was a directory (empty directories are added, otherwise only files)
+  //       const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
+  //     }
+  //   }
+
+  //   if (assess.files) {
+  //     this.courseService.deleteFiles(assess._id).subscribe((res) => {
+  //       this.courseService
+  //         .updateAssessment(formData, assessment, res._id)
+  //         .subscribe((res) => {
+  //           this.ngOnInit();
+  //         });
+  //     });
+  //   } else {
+  //     this.courseService
+  //       .updateAssessment(formData, assessment, assess._id)
+  //       .subscribe((res) => {
+  //         this.ngOnInit();
+  //       });
+  //   }
+  // }
+
   onDelete(assess: Assessment) {
     this.courseService
       .deleteAssessment(this.courseId, assess._id)

@@ -360,40 +360,6 @@ router.route("/assessment/addAssessment").put((req, res) => {
   });
 });
 
-// router.delete("/assessment/removeAssessment/:assessmentId", (req, res) => {
-//   const { assessmentId } = req.params;
-//   Assessment.findById(assessmentId).then((newAssessment) => {
-//     // Check if newAssessment is empty
-//     if (newAssessment.studentSubmissions) {
-//       // Go through each student
-//       for (i = 0; i < newAssessment.studentSubmissions.length; i++) {
-//         // If that student has files submitted
-//         if (newAssessment.studentSubmissions[i].files) {
-//           // Go through each of the files in there and delete them from course_uploads.files
-//           newAssessment.studentSubmissions[i].files.forEach((file) => {
-//             gfs.delete(new mongoose.Types.ObjectId(file.id));
-//           });
-//         }
-//       }
-//     }
-
-//     // Deleting all of the assessment files
-//     if (newAssessment.files) {
-//       newAssessment.files.forEach((file) => {
-//         gfs.delete(new mongoose.Types.ObjectId(file.id));
-//       });
-//     }
-
-//     gfs.delete(new mongoose.Types.ObjectId(assessmentId));
-//     res.json("Deleted assessment!");
-//     // newAssessment.markModified("studentSubmissions");
-//     // newAssessment
-//     //   .save()
-//     //   .then(() => res.json(newAssessment))
-//     //   .catch((err) => res.status(400).json(err));
-//   });
-// });
-
 /**
  * DELETE remove assessment from course
  * @param req {courseId, assessmentId}
@@ -445,6 +411,52 @@ router.delete(
     });
   }
 );
+
+// router.put(
+//   "/assessment/updateAssessment",
+//   upload.array("documents", 10),
+//   (req, res) => {
+//     const {
+//       files,
+//       studentSubmissions,
+//       name,
+//       visibility,
+//       assessmentId,
+//     } = req.body;
+
+//     Assessment.findById(assessmentId)
+//       .then((assessment) => {
+//         assessment = {
+//           ...assessment,
+//           name,
+//           visibility,
+//           files,
+//           studentSubmissions,
+//         };
+//         assessment
+//           .save()
+//           .then(() => res.json(assessment))
+//           .catch((err) => res.status(400).json("Error: " + err));
+//       })
+//       .catch((err) => res.status(404).json(err));
+//   }
+// );
+
+// router.put("/assessment/deleteFiles", (req, res) => {
+//   const { assessmentId } = req.body;
+//   Assessment.findById(assessmentId).then((assessment) => {
+//     if (assessment.files) {
+//       for (i = 0; i < assessment.files; i++) {
+//         gfs.delete(new mongoose.Types.ObjectId(file.id));
+//       }
+//     }
+//     assessment.files = [];
+//     assessment
+//       .save()
+//       .then(() => res.json(assessment))
+//       .catch((err) => res.json(err));
+//   });
+// });
 
 // Upload student submission to assessment
 /**   [ [studentId, fileId[]] ]
