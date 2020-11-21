@@ -12,6 +12,7 @@ export interface Opportunity {
   numberOfHires: number;
   responsibilites: string[];
   requirements: string[];
+  applicants?: string[];
 }
 
 @Component({
@@ -128,6 +129,7 @@ export class SiOpportunitiesComponent implements OnInit {
           'Exercitationem natus repudiandae debitis consequatur soluta cum mollitia at? Dolorum dolorem laboriosam illo maxime animi illum quidem fugiat dolor harum?',
           'Dolorem, cum.',
         ],
+        applicants: ['user1', 'user2', 'user2', 'user3', 'user4', 'user5'],
       };
       if (salary) opp.salary = 19.25;
       return opp;

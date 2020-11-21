@@ -65,7 +65,7 @@
 
 .info-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, 20rem);
+  grid-template-columns: repeat(auto-fit, minmax(20%, 10rem));
   margin: 0 0 1rem 0;
 }
 
@@ -89,4 +89,53 @@
   padding-left: 1rem;
   margin: 0.5rem 0;
   color: var(--gray80);
+}
+
+.applicants-container {
+  margin-top: 0.5rem;
+}
+
+.applicants {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  column-gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.applicants-container h6 {
+   font-weight: 400;
+  font-size: 1.125rem;
+  margin: 0;
+}
+
+.applicant {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 5rem;
+}
+
+.user-profile-icon {
+  background-color: var(--gray20);
+  color: var(--purple-base);
+  height: 2rem;
+  width: 2rem;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.25rem;
+}
+
+.user-profile-icon clr-icon {
+  height: 1.25rem;
+  width: 1.25rem;
+  color: var(--purple-base);
+}
+
+.applicant p {
+  margin: 0;
+  font-size: 0.75rem;
 }
