@@ -125,9 +125,11 @@ export class AssessmentsComponent implements OnInit {
       });
   }
 
-  showStudentSubmission($event) {
-    this.selectedAss = $event;
-    this.submissionsModal = true;
+  showStudentSubmission(assessment: any) {
+    this.router.navigate([
+      `course/${this.course._id}/assessments/studentSubmissions/${assessment._id}`,
+    ]);
+    console.log('asdfasd');
   }
 
   // onEdit(assess: Assessment) {

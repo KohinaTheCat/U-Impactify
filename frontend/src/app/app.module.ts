@@ -32,6 +32,7 @@ import { AboutComponent } from './pages/home-pages/about/about.component';
 import { SolutionsComponent } from './pages/home-pages/solutions/solutions.component';
 import { PricingComponent } from './pages/home-pages/pricing/pricing.component';
 import { AssessmentsComponent } from './pages/assessments/assessments.component';
+import { StudentSubmissionComponent } from './pages/studentSubmissionFolder/student-submission/student-submission.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { AssessmentsComponent } from './pages/assessments/assessments.component'
     AboutComponent,
     SolutionsComponent,
     PricingComponent,
+    StudentSubmissionComponent,
   ],
   imports: [
     BrowserModule,
