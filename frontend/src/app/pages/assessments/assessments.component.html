@@ -83,7 +83,11 @@
       <h6 class="child">View submission(s)</h6>
     </div>
 
-    <div class="box-shadow-2" id="addout" *ngFor="let assess of assessArr">
+    <div
+      class="box-shadow-2"
+      id="addout"
+      *ngFor="let assess of assessArr; let i = index"
+    >
       <div class="trash-2"></div>
       <div id="add2">
         <div class="content">
@@ -121,6 +125,7 @@
         </div>
       </div>
     </div>
+
     <!-- IMPACT LEARNER -->
     <div *ngIf="user.type == 'IL'">
       <clr-datagrid id="table">
