@@ -322,8 +322,8 @@ export class CoursePreviewComponent implements OnInit {
     }
   }
 
-  public dateToString(date){
-    var d = new Date(date)
-    return d.toDateString()
+  public dateToString(date) {
+    var d = new Date(date);
+    return d.toDateString();
   }
 }

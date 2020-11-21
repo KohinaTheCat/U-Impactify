@@ -352,7 +352,9 @@
               [clrStackViewSetsize]="3"
               [clrStackViewPosinset]="j + 1"
             >
-              <div class="stack-block-content">{{dateToString(lec.date)}}</div>
+              <div class="stack-block-content">
+                {{ dateToString(lec.date) }}
+              </div>
               <clr-stack-label
                 ><a (click)="goToLecture(lec._id, lec.title, lec.date)">{{
                   lec.title
