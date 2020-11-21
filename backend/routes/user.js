@@ -557,7 +557,6 @@ router.put("/opportunity/applyOpportunity", (req, res) => {
   opportunitySchema
     .findById(opportunityId)
     .then((opp) => {
-      console.log(opp);
       opp.applicants = opp.applicants.concat(applicantUserId);
       opp
         .save()
