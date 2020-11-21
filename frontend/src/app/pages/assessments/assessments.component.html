@@ -19,40 +19,51 @@
       <h6 class="child">Submission</h6>
     </div>
 
-    <div class="box-shadow-2" id="add2" *ngFor="let assess of assessArr">
-      <div class="content">
-        <span class="h6">{{ assess.name }}</span>
+    <div class="box-shadow-2" id="addout" *ngFor="let assess of assessArr">
+      <div class="trash">
+        <clr-icon class="editt" shape="note"></clr-icon>
+        <clr-icon class="nono" shape="trash"></clr-icon>
       </div>
-      <div class="content">
-        <div *ngFor="let file of assess.files">
-          <a
-            *ngIf="file"
-            download="{{ file.name }}"
-            href="http://localhost:5000/api/course/documents/{{ file.id }}"
-            >{{ file.name }}</a
-          >
+      <div id="add2">
+        <div class="content">
+          <span class="h6">{{ assess.name }}</span>
         </div>
-      </div>
-      <div class="content">
-        <div *ngIf="assess.visibility">
-          <img src="../../../assets/stalkhehe.png" width="25" height="15" />
+        <div class="content">
+          <div *ngFor="let file of assess.files">
+            <a
+              *ngIf="file"
+              download="{{ file.name }}"
+              href="http://localhost:5000/api/course/documents/{{ file.id }}"
+              >{{ file.name }}</a
+            >
+          </div>
         </div>
-        <div *ngIf="!assess.visibility">
-          <img src="../../../assets/nopeak.png" width="25" height="15" />
+        <div class="content">
+          <div *ngIf="assess.visibility">
+            <img src="../../../assets/stalkhehe.png" width="25" height="15" />
+          </div>
+          <div *ngIf="!assess.visibility">
+            <img src="../../../assets/nopeak.png" width="25" height="15" />
+          </div>
         </div>
-      </div>
-      <div class="content">
-        <clr-icon
-          shape="view-list"
-          id="submissionsTab"
-          (click)="showStudentSubmission(assess)"
-        ></clr-icon>
+        <div class="content">
+          <clr-icon
+            shape="view-list"
+            id="submissionsTab"
+            (click)="showStudentSubmission(assess)"
+          ></clr-icon>
+        </div>
       </div>
     </div>
+
     <button
       class="box-shadow-2"
       id="add2"
-      [ngStyle]="{ border: '2px var(--gray40) dashed' }"
+      [ngStyle]="{
+        border: '2px var(--gray40) dashed',
+        margin: '3rem',
+        width: 'calc(100% - 4rem)'
+      }"
       (click)="createNewAssessmentModal = true"
     >
       <h5 class="new">Create New Assessment</h5>

@@ -317,7 +317,7 @@ clr-control-error {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 2rem;
+  margin-bottom: 2.5rem;
   /* background-color: #923af7; */
   width: 30%;
   /* margin-right: 2rem;
@@ -330,8 +330,20 @@ clr-control-error {
   align-self: center;
   align-items: center;
   justify-content: space-evenly;
+  width: 100%;
+
+  /* background-color: #c21d00; */
+}
+
+#addout {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  align-items: center;
+  justify-content: space-evenly;
   margin-top: 3rem;
   width: calc(100% - 4rem);
+
   /* background-color: #c21d00; */
 }
 
@@ -367,4 +379,22 @@ h5 {
   align-items: center;
   border-radius: 20px;
   font-size: 2rem;
+}
+
+.trash {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: flex-end;
+  margin-top: 1.5rem;
+  margin-right: 1.5rem;
+  width: 100%;
+}
+
+.editt:hover {
+  color: red;
+}
+
+.nono:hover {
+  color: red;
 }
