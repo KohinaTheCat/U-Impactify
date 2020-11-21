@@ -1,21 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Opportunity } from 'src/app/models/opportunity.model';
 import { UserService } from './../../services/user.service';
 import { User } from 'src/app/models/user.model';
-
-export interface Opportunity {
-  recruiter: string;
-  name: string;
-  description: string;
-  type: string;
-  location: string;
-  datePosted: Date;
-  dateNeeded: Date;
-  salary: number;
-  numberOfHires: number;
-  responsibilites: string[];
-  requirements: string[];
-  applicants: string[];
-}
 
 @Component({
   selector: 'app-si-opportunities',

@@ -3,22 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { User } from '../models/user.model';
-
-export interface Opportunity {
-  recruiter: string;
-  // _id?: string;
-  name: string;
-  description: string;
-  type: string;
-  location: string;
-  datePosted: Date;
-  dateNeeded: Date;
-  salary?: number;
-  numberOfHires: number;
-  responsibilites: string[];
-  requirements: string[];
-  applicants: string[];
-}
+import { Opportunity } from './../models/opportunity.model';
 
 @Injectable({
   providedIn: 'root',
@@ -228,7 +213,7 @@ export class UserService {
    * PUT new opportunity
    * @param {opportunity} opportunity the opportunity
    */
-  createNewOpportunity(opportunity: any): Observable<any> {
+  createNewOpportunity(opportunity: Opportunity): Observable<any> {
     const {
       recruiter,
       name,
