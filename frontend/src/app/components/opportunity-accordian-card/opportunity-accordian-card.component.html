@@ -60,7 +60,7 @@
         <li *ngFor="let req of opportunity.requirements">{{ req }}</li>
       </ul>
     </div>
-    <div class="applicants-container" *ngIf="opportunity.applicants">
+    <div class="applicants-container" *ngIf="opportunity.applicants.length">
       <h6>Applicants</h6>
       <div class="applicants">
         <div class="applicant" *ngFor="let applicant of opportunity.applicants">

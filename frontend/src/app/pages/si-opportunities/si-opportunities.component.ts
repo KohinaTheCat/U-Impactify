@@ -34,16 +34,18 @@ export class SiOpportunitiesComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.userService.getCurrentUser();
-    this.showNewOpportunity = false; // change
-    this.opportunityType = ''; // change
+    this.showNewOpportunity = false;
+    this.opportunityType = '';
     this.clearInput();
     this.userService.getEmploymentOpportunity().subscribe((opp) => {
       this.employments = opp;
+      this.userService.getVolunteerOpportunity().subscribe((opp) => {
+        this.volunteers = opp;
+        this.employments.forEach((i) => console.log(i));
+        this.volunteers.forEach((i) => console.log(i));
+        this.loading = false;
+      });
     });
-    this.userService.getVolunteerOpportunity().subscribe((opp) => {
-      this.volunteers = opp;
-    });
-    this.loading = false;
   }
 
   ngDoCheck() {
@@ -67,10 +69,14 @@ export class SiOpportunitiesComponent implements OnInit {
         // 8th value is salary, sketchy fix
         this.shouldShowSubmitButton =
           Object.values(this.newOpportunity).every((o, i) => !!o || i === 7) &&
+          !!this.responsibilites.trim().length &&
+          !!this.requirements.trim().length &&
           this.numberOfHires > 0;
       } else if (this.opportunityType === 'employment') {
         this.shouldShowSubmitButton =
           Object.values(this.newOpportunity).every((o) => !!o) &&
+          !!this.responsibilites.trim().length &&
+          !!this.requirements.trim().length &&
           this.salary > 0 &&
           this.numberOfHires > 0;
       }

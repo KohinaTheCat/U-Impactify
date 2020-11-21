@@ -153,3 +153,11 @@ h5 {
 .info form input {
   font-size: 0.75rem;
 }
+
+
+.loading {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
