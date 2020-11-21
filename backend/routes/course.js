@@ -9,6 +9,7 @@ const GridFsStorage = require("multer-gridfs-storage");
 
 var Grid = require("gridfs-stream");
 const Assessment = require("../models/assessment.model");
+const { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } = require("constants");
 Grid.mongo = mongoose.mongo;
 
 // .env
@@ -376,20 +377,86 @@ router.delete(
         (id) => id !== assessmentId
       );
 
-      newCourse
-        .save()
-        .then(() => res.json(newCourse))
-        .catch((err) => res.status(400).json(err));
-    });
+      Assessment.findById(assessmentId).then((newAssessment) => {
+        if (newAssessment) {
+          if (newAssessment.studentSubmissions) {
+            for (i = 0; i < newAssessment.studentSubmissions.length; i++) {
+              // If that student has files submitted
+              if (newAssessment.studentSubmissions[i].files) {
+                // Go through each of the files in there and delete them from course_uploads.files
+                newAssessment.studentSubmissions[i].files.forEach((file) => {
+                  gfs.delete(new mongoose.Types.ObjectId(file.id));
+                });
+              }
+            }
+          }
+          if (newAssessment.files) {
+            for (i = 0; i < newAssessment.files.length; i++) {
+              gfs.delete(
+                new mongoose.Types.ObjectId(newAssessment.files[i].id)
+              );
+            }
+          }
+        }
+      });
 
-    assessmentSchema.findByIdAndRemove(assessmentId, function (err) {
-      if (!err) {
-        return res.status(200).json(null);
-      }
-      return res.status(400).send();
+      assessmentSchema.findByIdAndRemove(assessmentId, function (err) {
+        if (!err) {
+          newCourse
+            .save()
+            .then(() => res.json(newCourse))
+            .catch((err) => res.status(400).json(err));
+        }
+      });
     });
   }
 );
+
+// router.put(
+//   "/assessment/updateAssessment",
+//   upload.array("documents", 10),
+//   (req, res) => {
+//     const {
+//       files,
+//       studentSubmissions,
+//       name,
+//       visibility,
+//       assessmentId,
+//     } = req.body;
+
+//     Assessment.findById(assessmentId)
+//       .then((assessment) => {
+//         assessment = {
+//           ...assessment,
+//           name,
+//           visibility,
+//           files,
+//           studentSubmissions,
+//         };
+//         assessment
+//           .save()
+//           .then(() => res.json(assessment))
+//           .catch((err) => res.status(400).json("Error: " + err));
+//       })
+//       .catch((err) => res.status(404).json(err));
+//   }
+// );
+
+// router.put("/assessment/deleteFiles", (req, res) => {
+//   const { assessmentId } = req.body;
+//   Assessment.findById(assessmentId).then((assessment) => {
+//     if (assessment.files) {
+//       for (i = 0; i < assessment.files; i++) {
+//         gfs.delete(new mongoose.Types.ObjectId(file.id));
+//       }
+//     }
+//     assessment.files = [];
+//     assessment
+//       .save()
+//       .then(() => res.json(assessment))
+//       .catch((err) => res.json(err));
+//   });
+// });
 
 // Upload student submission to assessment
 /**   [ [studentId, fileId[]] ]
@@ -530,6 +597,42 @@ router.get("/assessment/getAllStudentSubmissions/:assessmentId", (req, res) => {
     })
     .catch((err) => res.status(400).json(`Error: ${err}`));
 });
+
+/**
+//  * DELETE student submisison
+//  */
+router.delete(
+  "/assessment/deleteStudentSubmission/:assessmentId/:studentId",
+  (req, res) => {
+    console.log("OVER HERE");
+    const { assessmentId, studentId } = req.params;
+    Assessment.findById(assessmentId).then((newAssessment) => {
+      console.log("Assessment: " + newAssessment);
+      for (i = 0; i < newAssessment.studentSubmissions.length; i++) {
+        if (newAssessment.studentSubmissions[i].studentId === studentId) {
+          if (newAssessment.studentSubmissions[i].files) {
+            newAssessment.studentSubmissions[i].files.forEach((file) => {
+              gfs.delete(new mongoose.Types.ObjectId(file.id));
+            });
+          }
+
+          newAssessment.studentSubmissions[i].files = [];
+        }
+      }
+      // .forEach((node) => {
+      //   if (node.studentId === studentId) {
+      //     node.files = [];
+      //   }
+      // ((eachStudent) => eachStudent.studentId !== studentId);
+
+      newAssessment.markModified("studentSubmissions");
+      newAssessment
+        .save()
+        .then(() => res.json(newAssessment))
+        .catch((err) => res.status(400).json(err));
+    });
+  }
+);
 
 /**
  * PUT Instructor review on a course

@@ -1,11 +1,11 @@
 <div class="flexbot">
-  <div class="outer" *ngIf="course">
+  <!-- <div class="outer" *ngIf="course">
     <div
       class="courseimage"
       style="background-image: url('{{ course.img }}')"
     ></div>
     <h4 id="title2">{{ course.name }}</h4>
-  </div>
+  </div> -->
 
   <!-- TEACHER -->
   <div
@@ -341,7 +341,7 @@
       [clrModalSize]="'lg'"
       [clrModalClosable]="false"
     >
-      <h3 class="modal-title">Create an assignment</h3>
+      <h3 class="modal-title">{{ title }}</h3>
       <div class="modal-body">
         <form clrForm>
           <clr-control-error>{{ error }}</clr-control-error>

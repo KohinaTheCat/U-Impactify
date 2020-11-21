@@ -23,7 +23,8 @@ import { FindValueSubscriber } from 'rxjs/internal/operators/find';
 export class AssessmentsComponent implements OnInit {
   course: Course;
   user: User;
-  createNewAssessmentModal: false;
+  title: string = 'Create an assignment';
+  createNewAssessmentModal: boolean;
   submissionsModal: boolean;
   name: String = '';
   files: NgxFileDropEntry[] = [];
@@ -32,6 +33,7 @@ export class AssessmentsComponent implements OnInit {
   error: string = '';
   basic: boolean = true;
   selectedAss: Assessment;
+  assessmentTracker: Assessment;
 
   identification: Object[];
 
@@ -81,7 +83,7 @@ export class AssessmentsComponent implements OnInit {
           (incomingArray: Assessment[]) => {
             this.assessArr = incomingArray.sort((a, b) => {
               if (a.name < b.name) {
-                return -1; //nameA comes first
+                return -1; //nameA comes
               }
               if (a.name > b.name) {
                 return 1; // nameB comes first
@@ -103,7 +105,8 @@ export class AssessmentsComponent implements OnInit {
                 (sub: any) => sub.studentId === this.user._id
               );
               if (studentSub) {
-                console.log('HERE: ' + studentSub['studentId']);
+                if (studentSub['files'].length > 0) {
+                }
 
                 this.viewSelfSubmissions = this.viewSelfSubmissions.concat([
                   studentSub['files'],
@@ -114,8 +117,6 @@ export class AssessmentsComponent implements OnInit {
                 ]);
               }
             });
-
-            console.log(this.viewSelfSubmissions);
           },
           (err) => {
             console.log(err);
@@ -129,11 +130,54 @@ export class AssessmentsComponent implements OnInit {
     this.submissionsModal = true;
   }
 
-  onEdit(assess: Assessment) {}
+  // onEdit(assess: Assessment) {
 
-  // Ask about this. Not working :(
+  //   this.createNewAssessmentModal = true;
+  //   this.assessmentTracker = assess;
+
+  //   this.title = 'Edit assignment';
+  //   const { name, visibility, studentSubmission, files } = this;
+  //   this.name = assess.name;
+  //   this.visibility = assess.visibility;
+  //   const assessment = {
+  //     name,
+  //     visibility,
+  //     studentSubmission,
+  //     files,
+  //   };
+
+  //   const formData = new FormData();
+
+  //   for (const droppedFile of assessment.files) {
+  //     if (droppedFile.fileEntry.isFile) {
+  //       const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
+  //       fileEntry.file((file: File) => {
+  //         formData.append('documents', file, droppedFile.relativePath);
+  //       });
+  //     } else {
+  //       // It was a directory (empty directories are added, otherwise only files)
+  //       const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
+  //     }
+  //   }
+
+  //   if (assess.files) {
+  //     this.courseService.deleteFiles(assess._id).subscribe((res) => {
+  //       this.courseService
+  //         .updateAssessment(formData, assessment, res._id)
+  //         .subscribe((res) => {
+  //           this.ngOnInit();
+  //         });
+  //     });
+  //   } else {
+  //     this.courseService
+  //       .updateAssessment(formData, assessment, assess._id)
+  //       .subscribe((res) => {
+  //         this.ngOnInit();
+  //       });
+  //   }
+  // }
+
   onDelete(assess: Assessment) {
-    console.log('courseId: ' + this.courseId + 'assess.id ' + assess._id);
     this.courseService
       .deleteAssessment(this.courseId, assess._id)
       .subscribe((res) => {
@@ -202,10 +246,14 @@ export class AssessmentsComponent implements OnInit {
         const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
       }
     }
+
+    this.courseService
+      .deleteStudentSubmission(this.selectedAss._id, this.user._id)
+      .subscribe((res) => {});
+
     this.courseService
       .postStudentSubmission(this.selectedAss._id, this.user._id, formData)
       .subscribe((res) => {
-        console.log('Did I make it');
         this.submissionsModal = false;
         this.selectedAss = null;
         this.ngOnInit();
@@ -237,21 +285,9 @@ export class AssessmentsComponent implements OnInit {
     );
 
     if (this.identification.length) {
-      console.log(this.identification[0]['studentId']);
-
       this.viewSelfSubmissions = this.identification[0]['files'];
       this.ngOnInit();
       return true;
     }
-
-    // if (temp2.length) {
-    //   this.viewSelfSubmissions = temp2[0].files;
-    //   return true;
-    // }
-
-    // if (assess.studentSubmissions.includes(this.user._id)) {
-    // } else {
-    //   return false;
-    // }
   }
 }

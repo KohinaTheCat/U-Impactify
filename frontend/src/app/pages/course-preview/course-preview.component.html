@@ -58,21 +58,18 @@
     </div>
   </div>
 
-  <div
-  id="settings-dropdown"
-  *ngIf="user.type == 'IL' && alreadyEnrolled"
->
-  <div class="dropdown" style="float: left">
-    <div class="settings-circle">
-      <clr-icon shape="cog" size="36"></clr-icon>
-    </div>
-    <div class="dropdown-content">
-      <div (click)="assessmentsHandler()">
-        <a>Assessments</a>
+  <div id="settings-dropdown" *ngIf="user.type == 'IL' && alreadyEnrolled">
+    <div class="dropdown" style="float: left">
+      <div class="settings-circle">
+        <clr-icon shape="cog" size="36"></clr-icon>
+      </div>
+      <div class="dropdown-content">
+        <div (click)="assessmentsHandler()">
+          <a>Assessments</a>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
   <div
     class="body"
@@ -208,7 +205,7 @@
               <option value="4">4</option>
               <option value="5">5</option>
             </select>
-            <label class ="surveyQuestion">{{ question }}</label>
+            <label class="surveyQuestion">{{ question }}</label>
           </clr-select-container>
         </clr-wizard-page>
         <clr-wizard-page>
@@ -279,7 +276,7 @@
                 class="btn btn-success-outline"
                 (click)="showSurveys = true"
               >
-              Show all survey responses
+                Show all survey responses
               </button>
             </div>
           </div>
@@ -324,7 +321,7 @@
     </div>
     <div class="right">
       <h4>Course Outline</h4>
-      <div class="course-content">Course Content Here.</div>
+      <div class="course-content"></div>
     </div>
   </div>
 </div>
@@ -409,30 +406,41 @@
   </div>
 </clr-modal>
 
-<clr-modal [(clrModalOpen)]="showSurveys" [clrModalSize]="'xl'" [clrModalClosable]="false" *ngIf="course">
+<clr-modal
+  [(clrModalOpen)]="showSurveys"
+  [clrModalSize]="'xl'"
+  [clrModalClosable]="false"
+  *ngIf="course"
+>
   <h3 class="modal-title">All surveys completed for {{ course.name }}</h3>
   <div class="modal-body">
     <table class="table table-noborder">
       <thead>
-          <tr>
-              <th class="left">Student Name</th>
-              <th class="left">Describe the typical course workload in a week span</th>
-              <th class="left">Would you recommend this course to others?</th>
-              <th class="left">Are you more interested in this subject after taking this course?</th>
-          </tr>
+        <tr>
+          <th class="left">Student Name</th>
+          <th class="left">
+            Describe the typical course workload in a week span
+          </th>
+          <th class="left">Would you recommend this course to others?</th>
+          <th class="left">
+            Are you more interested in this subject after taking this course?
+          </th>
+        </tr>
       </thead>
       <tbody>
-          <tr *ngFor="let survey of instructorReview">
-            <td class="left">{{survey._id}}</td>
-            <td class="left">{{survey.surveyAnswers[5]}}</td>
-            <td class="left">{{survey.surveyAnswers[6]}}</td>
-            <td class="left">{{survey.surveyAnswers[7]}}</td>
+        <tr *ngFor="let survey of instructorReview">
+          <td class="left">{{ survey._id }}</td>
+          <td class="left">{{ survey.surveyAnswers[5] }}</td>
+          <td class="left">{{ survey.surveyAnswers[6] }}</td>
+          <td class="left">{{ survey.surveyAnswers[7] }}</td>
         </tr>
       </tbody>
     </table>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-primary" (click)="showSurveys = false">Done</button>
+    <button type="button" class="btn btn-primary" (click)="showSurveys = false">
+      Done
+    </button>
   </div>
 </clr-modal>
 
