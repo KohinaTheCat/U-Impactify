@@ -22,7 +22,11 @@
     <div class="box-shadow-2" id="addout" *ngFor="let assess of assessArr">
       <div class="trash">
         <clr-icon class="editt" shape="note"></clr-icon>
-        <clr-icon class="nono" shape="trash"></clr-icon>
+        <clr-icon
+          class="nono"
+          shape="trash"
+          (click)="onDelete(assess)"
+        ></clr-icon>
       </div>
       <div id="add2">
         <div class="content">
@@ -68,66 +72,6 @@
     >
       <h5 class="new">Create New Assessment</h5>
     </button>
-  </div>
-
-  <div *ngIf="!!user && course && course.teachers.includes(user._id)">
-    <clr-datagrid id="table">
-      <clr-dg-column class="widthMain"
-        ><div id="header">Name</div></clr-dg-column
-      >
-      <clr-dg-column class="widthMain"
-        ><div id="header">Assessment</div></clr-dg-column
-      >
-      <clr-dg-column class="widthSmaller"
-        ><div id="header">Visibility</div></clr-dg-column
-      >
-      <clr-dg-column class="widthSmaller"
-        ><div id="header">Submissions</div></clr-dg-column
-      >
-
-      <clr-dg-row *ngFor="let assess of assessArr">
-        <clr-dg-action-overflow>
-          <!-- <button class="action-item" (click)="onEdit(assess)">Edit</button> -->
-          <button class="action-item" (click)="onDelete(assess)">Delete</button>
-        </clr-dg-action-overflow>
-
-        <clr-dg-cell class="text widthColumn">
-          {{ assess.name }}
-        </clr-dg-cell>
-
-        <clr-dg-cell class="widthColumn files">
-          <!-- id="fileStore" -->
-          <div class="row" *ngFor="let file of assess.files">
-            <a
-              *ngIf="file"
-              download="{{ file.name }}"
-              href="http://localhost:5000/api/course/documents/{{ file.id }}"
-              >{{ file.name }}</a
-            >
-          </div>
-        </clr-dg-cell>
-
-        <!-- <clr-dg-cell>{{ assess.visibility }}</clr-dg-cell> -->
-        <!-- <clr-dg-cell> {{ assess.visibility }} </clr-dg-cell> -->
-        <clr-dg-cell *ngIf="assess.visibility" class="display widthColumnSmall">
-          <clr-icon shape="check" class="checkmark"></clr-icon>
-          <div class="text"></div>
-        </clr-dg-cell>
-
-        <clr-dg-cell *ngIf="!assess.visibility" class="display widthColumnSmall"
-          ><clr-icon shape="times" class="wrong"></clr-icon>
-          <div class="text"></div>
-        </clr-dg-cell>
-
-        <clr-dg-cell class="text widthColumnSmall"
-          ><clr-icon
-            shape="view-list"
-            id="submissionsTab"
-            (click)="showStudentSubmission(assess)"
-          ></clr-icon>
-        </clr-dg-cell>
-      </clr-dg-row>
-    </clr-datagrid>
   </div>
 
   <!-- IMPACT LEARNER -->
