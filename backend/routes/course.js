@@ -9,6 +9,7 @@ const GridFsStorage = require("multer-gridfs-storage");
 
 var Grid = require("gridfs-stream");
 const Assessment = require("../models/assessment.model");
+const { SSL_OP_SSLEAY_080_CLIENT_DH_BUG } = require("constants");
 Grid.mongo = mongoose.mongo;
 
 // .env
@@ -410,18 +411,37 @@ router.delete(
         (id) => id !== assessmentId
       );
 
-      newCourse
-        .save()
-        .then(() => res.json(newCourse))
-        .catch((err) => res.status(400).json(err));
-    });
+      Assessment.findById(assessmentId).then((newAssessment) => {
+        if (newAssessment) {
+          if (newAssessment.studentSubmissions) {
+            for (i = 0; i < newAssessment.studentSubmissions.length; i++) {
+              // If that student has files submitted
+              if (newAssessment.studentSubmissions[i].files) {
+                // Go through each of the files in there and delete them from course_uploads.files
+                newAssessment.studentSubmissions[i].files.forEach((file) => {
+                  gfs.delete(new mongoose.Types.ObjectId(file.id));
+                });
+              }
+            }
+          }
+          if (newAssessment.files) {
+            for (i = 0; i < newAssessment.files.length; i++) {
+              gfs.delete(
+                new mongoose.Types.ObjectId(newAssessment.files[i].id)
+              );
+            }
+          }
+        }
+      });
 
-    // Ask Navinn about this... Because of student submission pictures and assessment files
-    assessmentSchema.findByIdAndRemove(assessmentId, function (err) {
-      if (!err) {
-        return res.status(200).json(null);
-      }
-      return res.status(400).send();
+      assessmentSchema.findByIdAndRemove(assessmentId, function (err) {
+        if (!err) {
+          newCourse
+            .save()
+            .then(() => res.json(newCourse))
+            .catch((err) => res.status(400).json(err));
+        }
+      });
     });
   }
 );
