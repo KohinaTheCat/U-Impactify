@@ -10,7 +10,7 @@ export interface Opportunity {
   location: string;
   datePosted: Date;
   dateNeeded: Date;
-  salary?: number;
+  salary: number;
   numberOfHires: number;
   responsibilites: string[];
   requirements: string[];
@@ -78,11 +78,9 @@ export class SiOpportunitiesComponent implements OnInit {
       };
 
       if (this.opportunityType === 'volunteer') {
-        // 6th value is salary, sketchy fix
-        // BUTTON NOT SHOWING, TRY TO FIX THIS
-        // this.newOpportunity.salary = 0;
+        // 8th value is salary, sketchy fix
         this.shouldShowSubmitButton =
-          Object.values(this.newOpportunity).every((o, i) => !!o || i === 5) &&
+          Object.values(this.newOpportunity).every((o, i) => !!o || i === 7) &&
           this.numberOfHires > 0;
       } else if (this.opportunityType === 'employment') {
         this.shouldShowSubmitButton =
