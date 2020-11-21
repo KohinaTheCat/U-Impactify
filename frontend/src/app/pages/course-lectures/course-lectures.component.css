@@ -3,15 +3,21 @@
   padding-right: 2rem;
 }
 
-video{
+video {
   border-radius: 1rem;
   user-select: none;
   border-width: 0px;
   height: 70vh;
 }
 
-.video-container{
+.video-container {
   display: flex;
   justify-content: center;
   flex-direction: column;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }

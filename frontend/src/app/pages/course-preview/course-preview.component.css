@@ -24,7 +24,7 @@ h3 {
   filter: blur(3px) brightness(0.9);
 }
 
-clr-stack-label{
+clr-stack-label {
   font-size: 1rem;
 }
 
@@ -421,12 +421,14 @@ clr-control-error {
 }
 
 .course-content {
-  border: 2px var(--gray40) dashed;
   height: 100%;
   width: 100%;
-  color: var(--gray40);
-  border-radius: 20px;
-  padding: 1rem;
+}
+
+.stack-block-label{
+  background: #9ed9d9;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 15px 15px 0px 0px;
 }
 
 #left-bottom {

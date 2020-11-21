@@ -367,7 +367,7 @@ router.post(
     Course.findById(req.params.id)
       .then((course) => {
         course.lectures = course.lectures.concat([
-          { _id: req.files[0].id, title: req.body.title },
+          { _id: req.files[0].id, title: req.body.title, date: new Date() },
         ]);
         course
           .save()
@@ -429,7 +429,7 @@ router.put(
             files: req.files.map((file) => {
               return {
                 id: file.id,
-                name: file.filename,
+                name: file.filename
               };
             }),
           },

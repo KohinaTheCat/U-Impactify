@@ -80,8 +80,8 @@ body {
   --clr-vertical-nav-active-bg-color: #a78ec3;
   --clr-vertical-nav-item-active-color: white;
   --clr-vertical-nav-hover-bg-color: #a78ec3;
-
   --clr-accordion-active-background-color: #e2f4f4;
+  --clr-stack-view-border-radius: 20px;
 }
 
 h1 {

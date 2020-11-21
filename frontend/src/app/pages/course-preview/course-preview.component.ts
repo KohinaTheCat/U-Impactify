@@ -275,8 +275,8 @@ export class CoursePreviewComponent implements OnInit {
       });
   }
 
-  goToLecture(id, title) {
-    this.router.navigate([`course/lectures/${title}/${id}`]);
+  goToLecture(id, title, date) {
+    this.router.navigate([`course/lectures/${title}/${id}/${date}`]);
   }
 
   uploadLecture() {
@@ -320,5 +320,10 @@ export class CoursePreviewComponent implements OnInit {
         }
       });
     }
+  }
+
+  public dateToString(date){
+    var d = new Date(date)
+    return d.toDateString()
   }
 }

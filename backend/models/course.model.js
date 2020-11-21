@@ -54,7 +54,7 @@ const courseSchema = new Schema({
     ],
   },
   lectures: {
-    type: [{_id: String, title: String}],
+    type: [{_id: String, title: String, date: Date}],
   },
   instructorReview: {
     type: [

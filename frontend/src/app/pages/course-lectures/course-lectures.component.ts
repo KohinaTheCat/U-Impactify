@@ -9,11 +9,17 @@ import { ActivatedRoute } from '@angular/router';
 export class CourseLecturesComponent implements OnInit {
   videoId: string;
   title: string;
-  
+  date: string;
+
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.videoId = "http://localhost:5000/api/course/documents/" + this.route.snapshot.paramMap.get('id')
-    this.title = this.route.snapshot.paramMap.get("title")
+    this.videoId =
+      'http://localhost:5000/api/course/documents/' +
+      this.route.snapshot.paramMap.get('id');
+    this.title = this.route.snapshot.paramMap.get('title');
+
+    var d = new Date(this.route.snapshot.paramMap.get('date'));
+    this.date = d.toDateString();
   }
 }
