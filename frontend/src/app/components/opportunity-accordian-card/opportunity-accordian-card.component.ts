@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
 import { Opportunity } from './../../models/opportunity.model';
@@ -16,6 +16,9 @@ export class OpportunityAccordianCardComponent implements OnInit {
   @Input()
   type: string;
 
+  @Output()
+  onApply: EventEmitter<string> = new EventEmitter<string>();
+
   user: User;
 
   open: boolean = false;
@@ -24,6 +27,10 @@ export class OpportunityAccordianCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.userService.getCurrentUser();
+  }
+
+  onClickApply(): void {
+    this.onApply.emit(this.opportunity._id);
   }
 
 }

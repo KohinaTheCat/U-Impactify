@@ -120,4 +120,11 @@ export class SiOpportunitiesComponent implements OnInit {
     this.responsibilites = '';
     this.requirements = '';
   }
+
+  onApply(opportunityId: string) {
+    this.userService
+      .applyOpportunity(opportunityId, this.user._id)
+      .subscribe((res) => this.ngOnInit());
+
+  }
 }

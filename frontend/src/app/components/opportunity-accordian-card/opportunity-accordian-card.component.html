@@ -71,7 +71,7 @@
       </ul>
     </div>
     <div class="applicants-container" *ngIf="user.type === 'SI' && user._id === opportunity.recruiter &&opportunity.applicants.length">
-      <h6>Applicants</h6>
+      <h6>Applicants - Click to Hire</h6>
       <div class="applicants">
         <div class="applicant" *ngFor="let applicant of opportunity.applicants">
           <div class="user-profile-icon">
@@ -82,5 +82,6 @@
       </div>
     </div>
     <div class="applied-container" *ngIf="user.type === 'IC' && opportunity.applicants.includes(user._id)"><p>You have already applied for this position</p></div>
+    <div class="applied-container" *ngIf="user.type === 'IC' && !opportunity.applicants.includes(user._id)"><button class="btn" (click)="onClickApply()" [ngClass]="{'btn-outline-success': opportunity.type === 'volunteer', 'btn-outline-danger': opportunity.type === 'employment'}">Apply For Hire</button></div>
   </div>
 </div>

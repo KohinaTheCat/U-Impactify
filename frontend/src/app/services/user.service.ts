@@ -285,4 +285,11 @@ export class UserService {
       `/api/user/opportunity/getEmploymentOpportunities/`
     );
   }
+
+  applyOpportunity(opportunityId: string, applicantUserId: string): Observable<any> {
+    return this.http.put(`/api/user/opportunity/applyOpportunity`, {
+      opportunityId,
+      applicantUserId,
+    });
+  }
 }

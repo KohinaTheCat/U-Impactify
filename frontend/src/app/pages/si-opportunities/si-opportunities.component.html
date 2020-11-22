@@ -17,6 +17,7 @@
       </div>
       <div class="list-container">
         <app-opportunity-accordian-card
+        (onApply)="onApply($event)"
           *ngFor="let opportunity of volunteers"
           [opportunity]="opportunity"
           [type]="'volunteer'"
@@ -37,6 +38,7 @@
       </div>
       <div class="list-container">
         <app-opportunity-accordian-card
+        (onApply)="onApply($event)"
           *ngFor="let opportunity of employments"
           [opportunity]="opportunity"
           [type]="'employment'"
