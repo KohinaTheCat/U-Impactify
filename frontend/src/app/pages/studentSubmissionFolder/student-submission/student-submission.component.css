@@ -1,0 +1,28 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+#back-button {
+  width: 5rem;
+  background-color: var(--purple-base);
+  color: white;
+  margin-left: 2rem;
+  margin-bottom: 1rem;
+}
+
+#header {
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: #a78ec3;
+  width: calc(100% - 4rem);
+}
+
+.translate {
+  color: white;
+  transform: translateY(-0.5rem);
+}
