@@ -17,6 +17,9 @@
       </div>
       <div class="list-container">
         <app-opportunity-accordian-card
+        (onEdit)="onEdit($event)"
+        (onApproveHire)="onApproveHire($event)"
+        (onDelete)="onDelete($event)"
         (onApply)="onApply($event)"
           *ngFor="let opportunity of volunteers"
           [opportunity]="opportunity"
@@ -38,6 +41,9 @@
       </div>
       <div class="list-container">
         <app-opportunity-accordian-card
+        (onEdit)="onEdit($event)"
+        (onApproveHire)="onApproveHire($event)"
+        (onDelete)="onDelete($event)"
         (onApply)="onApply($event)"
           *ngFor="let opportunity of employments"
           [opportunity]="opportunity"

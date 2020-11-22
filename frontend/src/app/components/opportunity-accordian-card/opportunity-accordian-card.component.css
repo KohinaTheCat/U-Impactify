@@ -34,9 +34,30 @@
 
 .top-header {
   display: flex;
-  justify-content: space-between;
+  align-items: center;
   padding: 1rem 2rem;
   border-radius: 20px;
+}
+
+.settings-button, .settings-button clr-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.settings-button {
+  margin-right: 1rem;
+}
+
+.settings-button clr-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--gray80);
+}
+
+clr-dropdown, clr-dropdown * {
+  outline: none;
+  user-select: none;
 }
 
 .top-header-open-employment {
@@ -160,11 +181,28 @@
   margin: 0.5rem 0;
 }
 
-.btn-outline-success, .btn-outline-danger {
+.btn-outline-success, .btn-outline-danger, #deleteButton {
   border-radius: 10px;
   height: 3rem;
-  width: 10rem;
+  width: max-content;
   font-size: 0.875rem;
   font-family: "Open Sans", sans-serif;
   font-weight: 400;
+}
+
+
+.hire {
+  cursor: pointer;
+}
+
+.modal-body h6 {
+  font-size: 0.75rem;
+}
+
+.modal-body ul {
+  margin: 0.5rem 0 0.5rem 1rem;
+}
+
+.modal-body p {
+  margin: 0;
 }

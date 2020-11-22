@@ -566,4 +566,31 @@ router.put("/opportunity/applyOpportunity", (req, res) => {
     .catch((err) => res.status(404).json(err));
 });
 
+
+/**
+ * DELETE opportunity
+ * @param id to be deleted opportunity
+ */
+router.delete("/opportunity/deleteOpportunity/:id", (req, res) => {
+  opportunitySchema.findByIdAndDelete(req.params.id).then(val => res.json(val)).catch(err => res.status(400).json(err));
+});
+
+/**
+ * DELETE remove opportunity from user
+ * @param userId userId (type ==== "SI")
+ * @param opportunityId id of opportunity
+ */
+router.delete("/opportunity/removeOpportunity/:userId/:opportunityId", (req, res) => {
+  userSchema.findById(req.params.userId).then(user => {
+    user.volunteerPosting = user.socialInitiative.volunteerPosting.filter(opp => opp !== req.params.opportunityId);
+    user.employmentPosting = user.socialInitiative.employmentPosting.filter(opp => opp !== req.params.opportunityId);
+    user.save().then(user => res.json(user)).catch(err => res.status(400).json(err));
+  });
+});
+
+router.put("/opportunity/updateOpportunity", (req, res) => {
+  const {opportunity} = req.body;
+  opportunitySchema.findByIdAndUpdate(opportunity._id, opportunity).then(opp => res.json(opp)).catch(err => res.status(400).json(err));
+});
+
 module.exports = router;
