@@ -604,7 +604,6 @@ router.get("/assessment/getAllStudentSubmissions/:assessmentId", (req, res) => {
 router.delete(
   "/assessment/deleteStudentSubmission/:assessmentId/:studentId",
   (req, res) => {
-    console.log("OVER HERE");
     const { assessmentId, studentId } = req.params;
     Assessment.findById(assessmentId).then((newAssessment) => {
       console.log("Assessment: " + newAssessment);
