@@ -41,8 +41,6 @@ export class SiOpportunitiesComponent implements OnInit {
       this.employments = opp;
       this.userService.getVolunteerOpportunity().subscribe((opp) => {
         this.volunteers = opp;
-        this.employments.forEach((i) => console.log(i));
-        this.volunteers.forEach((i) => console.log(i));
         this.loading = false;
       });
     });

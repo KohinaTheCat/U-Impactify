@@ -1,8 +1,11 @@
 /**
  * Opportunity Frontend model
  *  - synchronous with `~/backend/models/opportunity.model.js`
+ * 
+ * @param {string} _id mongodb ObjectId  
  */
 export interface Opportunity {
+    _id?: string;
     recruiter: string;
     name: string;
     description: string;

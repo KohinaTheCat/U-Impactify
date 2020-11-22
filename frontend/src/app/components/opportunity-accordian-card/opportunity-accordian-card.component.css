@@ -3,7 +3,7 @@
 }
 
 .container {
-  background: #ffffff;
+  background: #FFF;
   border-radius: 20px;
   margin-bottom: 1.5rem;
 }
@@ -14,7 +14,22 @@
 
 .container-open-volunteer {
   border: 2px solid var(--green-base);
+}
 
+.applied {
+  background-color: var(--gray30);
+}
+
+.applied-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.applied-container p {
+  font-size: 1rem;
+  color: var(--gray60);
 }
 
 .top-header {
@@ -138,4 +153,9 @@
 .applicant p {
   margin: 0;
   font-size: 0.75rem;
+}
+
+
+#employer .applicant {
+  margin: 0.5rem 0;
 }

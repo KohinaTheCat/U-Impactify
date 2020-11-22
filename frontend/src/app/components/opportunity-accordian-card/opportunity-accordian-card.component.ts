@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { User } from 'src/app/models/user.model';
+import { UserService } from 'src/app/services/user.service';
 import { Opportunity } from './../../models/opportunity.model';
 
 @Component({
@@ -14,11 +16,14 @@ export class OpportunityAccordianCardComponent implements OnInit {
   @Input()
   type: string;
 
+  user: User;
+
   open: boolean = false;
 
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+    this.user = this.userService.getCurrentUser();
   }
 
 }

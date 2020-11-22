@@ -2,7 +2,8 @@
   class="container box-shadow-1"
   [ngClass]="{
     'container-open-employment': open && type === 'employment',
-    'container-open-volunteer': open && type === 'volunteer'
+    'container-open-volunteer': open && type === 'volunteer',
+    'applied': user.type === 'IC' && opportunity.applicants.includes(user._id)
   }"
   *ngIf="opportunity"
 >
@@ -48,6 +49,15 @@
         </p>
       </div>
     </div>
+    <div class="list-container" id="employer">
+      <h6>Employer</h6>
+      <div class="applicant">
+        <div class="user-profile-icon">
+          <clr-icon shape="user"></clr-icon>
+        </div>
+        <p>{{ opportunity.recruiter }}</p>
+      </div>
+    </div>
     <div class="list-container">
       <h6>Responsibilites</h6>
       <ul>
@@ -60,7 +70,7 @@
         <li *ngFor="let req of opportunity.requirements">{{ req }}</li>
       </ul>
     </div>
-    <div class="applicants-container" *ngIf="opportunity.applicants.length">
+    <div class="applicants-container" *ngIf="user.type === 'SI' && user._id === opportunity.recruiter &&opportunity.applicants.length">
       <h6>Applicants</h6>
       <div class="applicants">
         <div class="applicant" *ngFor="let applicant of opportunity.applicants">
@@ -71,5 +81,6 @@
         </div>
       </div>
     </div>
+    <div class="applied-container" *ngIf="user.type === 'IC' && opportunity.applicants.includes(user._id)"><p>You have already applied for this position</p></div>
   </div>
 </div>
