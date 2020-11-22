@@ -101,7 +101,7 @@ button {
   background-color: var(--teal-smooth);
   border-radius: 40px;
   padding: 2.5rem 5rem;
-  height: 30rem;
+  height: 100%;
 }
 
 .what-card h5 {
