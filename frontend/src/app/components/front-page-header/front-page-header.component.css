@@ -32,9 +32,9 @@ button {
   font-size: 1.3rem;
   text-transform: none;
 }
+
 .btn-outline,
 .btn-primary {
-  margin-right: 6rem;
   font-size: 1rem;
   box-sizing: border-box;
   border-radius: 0.5rem;
@@ -59,13 +59,9 @@ button {
     margin-top: 1rem;
     width: 100%;
   }
+
   .flexbox-container22 {
     justify-content: space-evenly;
-  }
-
-  .btn-outline,
-  .btn-primary {
-    margin: 1rem;
   }
 
   .btn-outline,
