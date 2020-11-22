@@ -103,9 +103,16 @@ router.route("/").post((req, res) => {
  * @param id user id
  */
 router.post("/:id/uploadUserImage", upload.array("document", 1), (req, res) => {
-   userSchema.findById(req.params.id)
+  userSchema
+    .findById(req.params.id)
     .then((user) => {
-      user.img = req.files[0].id;
+      if (user.img === "") user.img = req.files[0].id;
+      else {
+        gfs.delete(new mongoose.Types.ObjectId(user.img), (err, data) => {
+          if (err) return res.status(404).json({ err: err.message });
+        });
+        user.img = req.files[0].id;
+      }
       user
         .save()
         .then((user) => res.json(user))
@@ -120,7 +127,8 @@ router.post("/:id/uploadUserImage", upload.array("document", 1), (req, res) => {
  * @return user image
  */
 router.get("/:id/getUserImage", (req, res) => {
-  userSchema.findById(req.params.id)
+  userSchema
+    .findById(req.params.id)
     .then((user) => {
       res.json(user.img);
     })
@@ -479,7 +487,7 @@ router.route("/opportunity").put((req, res) => {
 });
 
 /**
- * PUT new volunteer opportunity with creator 
+ * PUT new volunteer opportunity with creator
  * @param userId user id
  * @param opportunityId opportunity id
  * @return opportunity
@@ -501,7 +509,7 @@ router.put("/addVolunteerOpportunity", (req, res) => {
 });
 
 /**
- * PUT new employment opportunity with creator 
+ * PUT new employment opportunity with creator
  * @param userId user id
  * @param opportunityId opportunity id
  * @return opportunity

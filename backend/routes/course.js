@@ -237,7 +237,13 @@ router.post(
   (req, res) => {
     Course.findById(req.params.id)
       .then((course) => {
-        course.img = req.files[0].id;
+        if (course.img === "") course.img = req.files[0].id;
+        else {
+          gfs.delete(new mongoose.Types.ObjectId(course.img), (err, data) => {
+            if (err) return res.status(404).json({ err: err.message });
+          });
+          course.img = req.files[0].id;
+        }
         course
           .save()
           .then(() => res.json(course))
@@ -360,23 +366,19 @@ router.route("/assessment/addAssessment").put((req, res) => {
   });
 });
 
-router.post(
-  "/:id/uploadLecture",
-  upload.array("document", 1),
-  (req, res) => {
-    Course.findById(req.params.id)
-      .then((course) => {
-        course.lectures = course.lectures.concat([
-          { _id: req.files[0].id, title: req.body.title, date: new Date() },
-        ]);
-        course
-          .save()
-          .then(() => res.json(course))
-          .catch((err) => res.json(err));
-      })
-      .catch((err) => res.status(400).json(`Error finding Course: ${err}`));
-  }
-);
+router.post("/:id/uploadLecture", upload.array("document", 1), (req, res) => {
+  Course.findById(req.params.id)
+    .then((course) => {
+      course.lectures = course.lectures.concat([
+        { _id: req.files[0].id, title: req.body.title, date: new Date() },
+      ]);
+      course
+        .save()
+        .then(() => res.json(course))
+        .catch((err) => res.json(err));
+    })
+    .catch((err) => res.status(400).json(`Error finding Course: ${err}`));
+});
 
 /**
  * DELETE remove assessment from course
@@ -429,7 +431,7 @@ router.put(
             files: req.files.map((file) => {
               return {
                 id: file.id,
-                name: file.filename
+                name: file.filename,
               };
             }),
           },
