@@ -7,6 +7,7 @@
       <div class="top-header">
         <h5>Volunteer Opportunities</h5>
         <button
+        *ngIf="user.type === 'SI'"
           id="volunteer-button"
           class="btn button"
           (click)="onNewOpportunity('volunteer')"
@@ -16,6 +17,10 @@
       </div>
       <div class="list-container">
         <app-opportunity-accordian-card
+        (onEdit)="onEdit($event)"
+        (onApproveHire)="onApproveHire($event)"
+        (onDelete)="onDelete($event)"
+        (onApply)="onApply($event)"
           *ngFor="let opportunity of volunteers"
           [opportunity]="opportunity"
           [type]="'volunteer'"
@@ -26,6 +31,7 @@
       <div class="top-header">
         <h5>Employment Opportunities</h5>
         <button
+        *ngIf="user.type === 'SI'"
           id="employment-button"
           class="btn button"
           (click)="onNewOpportunity('employment')"
@@ -35,6 +41,10 @@
       </div>
       <div class="list-container">
         <app-opportunity-accordian-card
+        (onEdit)="onEdit($event)"
+        (onApproveHire)="onApproveHire($event)"
+        (onDelete)="onDelete($event)"
+        (onApply)="onApply($event)"
           *ngFor="let opportunity of employments"
           [opportunity]="opportunity"
           [type]="'employment'"

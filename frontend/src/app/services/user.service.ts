@@ -285,4 +285,48 @@ export class UserService {
       `/api/user/opportunity/getEmploymentOpportunities/`
     );
   }
+
+  /**
+   * PUT apply for opportunity
+   * @param opportunityId id of opportunity
+   * @param applicantUserId id of the applicant user
+   */
+  applyOpportunity(
+    opportunityId: string,
+    applicantUserId: string
+  ): Observable<any> {
+    return this.http.put(`/api/user/opportunity/applyOpportunity`, {
+      opportunityId,
+      applicantUserId,
+    });
+  }
+
+  /**
+   * DELETE opportunity
+   * @param opportunityId id of the to be deleted opportunity
+   */
+  deleteOpportunity(opportunityId: any): Observable<any> {
+    return this.http.delete(
+      `/api/user/opportunity/deleteOpportunity/${opportunityId}`
+    );
+  }
+
+  /**
+   * DELETE remove opportunity from user
+   * @param _id userId (type ==== "SI")
+   * @param opportunityId id of opportunity
+   */
+  removeOpportunity(_id: string, opportunityId: any): Observable<User> {
+    return this.http.delete<User>(
+      `/api/user/opportunity/removeOpportunity/${_id}/${opportunityId}`
+    );
+  }
+
+  /**
+   * PUT update opportunity
+   * @param opportunity updated opportunity
+   */
+  updateOpportunity(opportunity: Opportunity): Observable<Opportunity> {
+    return this.http.put<Opportunity>(`/api/user/opportunity/updateOpportunity`, {opportunity});
+  }
 }
