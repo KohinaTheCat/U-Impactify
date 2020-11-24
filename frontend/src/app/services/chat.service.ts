@@ -50,7 +50,7 @@ export class ChatService {
   }
 
   postNewChat(from: string, to: string): Observable<Chat> {
-    return this.http.post<Chat>(`/api/chat`, {from, to});
+    return this.http.post<Chat>(`/api/chat`, { from, to });
   }
 
   /**
@@ -60,5 +60,15 @@ export class ChatService {
    */
   getChat(chatId: string): Observable<Chat> {
     return this.http.get<Chat>(`/api/chat/${chatId}`);
+  }
+
+  /**
+   * GET find by members
+   * @param from mesasge sender
+   * @param to message reciever
+   * @return Observable chat instance
+   */
+  findChat(from: string, to: string): Observable<Chat> {
+    return this.http.get<Chat>(`/api/chat/find/${from}/${to}`);
   }
 }

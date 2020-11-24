@@ -101,11 +101,14 @@ export class SiOpportunitiesComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if(this.editOpportunityId) {
+    if (this.editOpportunityId) {
       this.newOpportunity._id = this.editOpportunityId;
-      this.userService.updateOpportunity(this.newOpportunity).subscribe(res => {
-        this.ngOnInit();
-      }, err => console.log(err));
+      this.userService.updateOpportunity(this.newOpportunity).subscribe(
+        (res) => {
+          this.ngOnInit();
+        },
+        (err) => console.log(err)
+      );
     } else {
       this.userService.createNewOpportunity(this.newOpportunity).subscribe(
         (res) => {
@@ -122,7 +125,8 @@ export class SiOpportunitiesComponent implements OnInit {
         },
         (err) => console.log(err)
       );
-    } this.ngOnInit();
+    }
+    this.ngOnInit();
   }
 
   clearInput(): void {
@@ -181,14 +185,28 @@ export class SiOpportunitiesComponent implements OnInit {
       body: `Congrats! You have been selected for '${opportunityName}' with ${this.user._id}! To further discuss your position, when you will be starting, and how to get started, feel free to email us, or just reply to this message, and we will be happy to help. Thank you very much.`,
     };
     toBeHired.forEach((id: string) => {
-      this.chatService.postNewChat(this.user._id, id).subscribe((chat) => {
-        this.userService.addChat(this.user._id, chat._id).subscribe((res) => {
-          this.userService.setUser(res);
-          this.userService.addChat(id, chat._id).subscribe((res) => {
-            this.chatService.sendMessage(approveMessage, chat._id);
-          });
-        });
-      });
+      this.chatService.findChat(this.user._id, id).subscribe(
+        (chat) => {
+          this.chatService.sendMessage(approveMessage, chat._id);
+        },
+        (err) => {
+          // CASE chat is not found
+          if (err) {
+            this.chatService
+              .postNewChat(this.user._id, id)
+              .subscribe((chat) => {
+                this.userService
+                  .addChat(this.user._id, chat._id)
+                  .subscribe((res) => {
+                    this.userService.setUser(res);
+                    this.userService.addChat(id, chat._id).subscribe((res) => {
+                      this.chatService.sendMessage(approveMessage, chat._id);
+                    });
+                  });
+              });
+          }
+        }
+      );
     });
     this.onDelete(opportunityId);
   }
@@ -205,7 +223,7 @@ export class SiOpportunitiesComponent implements OnInit {
   }
 
   onEdit(opportunity: Opportunity) {
-    this.newOpportunity = opportunity;    
+    this.newOpportunity = opportunity;
     this.setInput(opportunity);
     this.onNewOpportunity(opportunity.type);
   }
