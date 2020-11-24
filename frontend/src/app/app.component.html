@@ -5,7 +5,7 @@
       class="nav-trigger--bottom"
       *ngIf="shouldNavShow()"
     >
-      <img src="../assets/uLogo.svg" id="logo" />
+      <img src="../assets/uLogo.svg" id="logo"  routerLink="./about" routerLinkActive="active"/>
       <a clrVerticalNavLink routerLink="./dashboard" routerLinkActive="active"
         ><clr-icon shape="home"></clr-icon> <span>Dashboard</span></a
       >
