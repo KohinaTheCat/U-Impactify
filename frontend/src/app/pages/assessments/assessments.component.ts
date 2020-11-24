@@ -24,7 +24,7 @@ export class AssessmentsComponent implements OnInit {
   course: Course;
   user: User;
   title: string = 'Create an assignment';
-  createNewAssessmentModal: boolean;
+  createNewAssessmentModal: boolean = false;
   submissionsModal: boolean;
   name: String = '';
   files: NgxFileDropEntry[] = [];
@@ -130,6 +130,10 @@ export class AssessmentsComponent implements OnInit {
       `course/${this.course._id}/assessments/studentSubmissions/${assessment._id}`,
     ]);
     console.log('asdfasd');
+  }
+
+  cancel() {
+    this.createNewAssessmentModal = false;
   }
 
   // onEdit(assess: Assessment) {
