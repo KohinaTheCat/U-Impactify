@@ -19,6 +19,8 @@ import { SolutionsComponent } from './pages/home-pages/solutions/solutions.compo
 import { PricingComponent } from './pages/home-pages/pricing/pricing.component';
 import { SiOpportunitiesComponent } from './pages/si-opportunities/si-opportunities.component';
 import { CourseLecturesComponent } from './pages/course-lectures/course-lectures.component';
+import { TypeGuard } from './guards/type.guard';
+import { CoursesComponent } from './components/dashboard-components/courses/courses.component';
 
 const routes: Routes = [
   { path: 'signup', component: LoginSignupComponent },
@@ -35,7 +37,7 @@ const routes: Routes = [
   {
     path: 'course/:id/assessments',
     component: AssessmentsComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, TypeGuard],
   },
 
   {
@@ -48,23 +50,40 @@ const routes: Routes = [
     component: SignupQuestionaire2Component,
     canDeactivate: [AuthGuard],
   },
-  { path: 'course/:id', component: CoursePreviewComponent },
-  { path: 'socialinitiatives', component: GivingGardenComponent },
+  {
+    path: 'course/:id',
+    component: CoursePreviewComponent,
+    canActivate: [AuthGuard, TypeGuard],
+  },
+  {
+    path: 'course',
+    component: CoursesComponent,
+    canActivate: [AuthGuard, TypeGuard],
+  },
+  {
+    path: 'socialinitiatives',
+    component: GivingGardenComponent,
+    canActivate: [AuthGuard, TypeGuard],
+  },
   {
     path: 'createcourse',
     component: CreateCourseComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, TypeGuard],
   },
   {
     path: 'course/lectures/:title/:id/:date',
     component: CourseLecturesComponent,
+    canActivate: [AuthGuard, TypeGuard],
+  },
+  {
+    path: 'chat',
+    component: ChatComponent,
     canActivate: [AuthGuard],
   },
-  { path: 'chat', component: ChatComponent, canActivate: [AuthGuard] },
   {
     path: 'enrollcourse',
     component: EnrollCourseComponent,
-    canActivate: [AuthGuard],
+    canActivate: [AuthGuard, TypeGuard],
   },
   { path: 'user/:username', component: UserProfileComponent },
   { path: 'user', redirectTo: 'dashboard', canActivate: [AuthGuard] },
@@ -75,7 +94,11 @@ const routes: Routes = [
   },
   { path: 'search', redirectTo: 'dashboard', canActivate: [AuthGuard] },
   { path: 'search/:type', redirectTo: 'dashboard', canActivate: [AuthGuard] },
-  { path: 'opportunities', component: SiOpportunitiesComponent }
+  {
+    path: 'opportunities',
+    component: SiOpportunitiesComponent,
+    canActivate: [AuthGuard, TypeGuard],
+  },
 ];
 
 @NgModule({
