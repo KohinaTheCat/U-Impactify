@@ -1,8 +1,4 @@
-<clr-modal
-  [(clrModalOpen)]="basic"
-  [clrModalSize]="'lg'"
-  [clrModalClosable]="false"
->
+<div>
   <h3 class="modal-title">Create a course</h3>
   <div class="modal-body">
     <form clrForm>
@@ -136,7 +132,6 @@
     <button
       type="button"
       class="btn btn-outline"
-      (click)="basic = false"
       (click)="cancel()"
     >
       Cancel
@@ -145,9 +140,8 @@
       type="button"
       class="btn btn-primary"
       (click)="registerHandler()"
-      (click)="basic = false"
     >
       Create Course
     </button>
   </div>
-</clr-modal>
+</div>

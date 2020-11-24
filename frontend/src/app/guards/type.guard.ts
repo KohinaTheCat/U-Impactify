@@ -28,14 +28,14 @@ export class TypeGuard implements CanActivate {
       IL: [
         '/assessments',
         '/lectures/',
-        '/enrollcourse',
+        '/enroll',
         '/socialinitiatives',
         '/course/',
       ],
       IC: [
         '/assessments',
         '/lectures/',
-        '/createcourse',
+        '/create',
         '/opportunities',
         '/course/',
         '/socialinitiatives',

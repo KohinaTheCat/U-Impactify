@@ -45,9 +45,9 @@ export class CoursesComponent implements OnInit {
 
   addNewCourse(): void {
     if (this.user.type === 'IL') {
-      this.router.navigate(['enrollcourse']);
+      this.router.navigate(['course/enroll']);
     } else if (this.user.type === 'IC') {
-      this.router.navigate(['createcourse']);
+      this.router.navigate(['course/create']);
     }
   }
 

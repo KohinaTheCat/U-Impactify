@@ -26,7 +26,6 @@ export class CreateCourseComponent implements OnInit {
   tags: string = '';
   files: NgxFileDropEntry[] = [];
   img: NgxFileDropEntry[] = [];
-  basic: boolean = true;
   error: string = '';
   imageError: string = '';
 
@@ -130,7 +129,6 @@ export class CreateCourseComponent implements OnInit {
         },
         (err) => {
           this.error = err.message;
-          this.basic = true;
         }
       );
   }

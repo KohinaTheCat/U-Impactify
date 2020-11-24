@@ -51,6 +51,16 @@ const routes: Routes = [
     canDeactivate: [AuthGuard],
   },
   {
+    path: 'course/create',
+    component: CreateCourseComponent,
+    canActivate: [AuthGuard, TypeGuard],
+  },
+  {
+    path: 'course/enroll',
+    component: EnrollCourseComponent,
+    canActivate: [AuthGuard, TypeGuard],
+  },
+  {
     path: 'course/:id',
     component: CoursePreviewComponent,
     canActivate: [AuthGuard, TypeGuard],
@@ -66,11 +76,6 @@ const routes: Routes = [
     canActivate: [AuthGuard, TypeGuard],
   },
   {
-    path: 'createcourse',
-    component: CreateCourseComponent,
-    canActivate: [AuthGuard, TypeGuard],
-  },
-  {
     path: 'course/lectures/:title/:id/:date',
     component: CourseLecturesComponent,
     canActivate: [AuthGuard, TypeGuard],
@@ -79,11 +84,6 @@ const routes: Routes = [
     path: 'chat',
     component: ChatComponent,
     canActivate: [AuthGuard],
-  },
-  {
-    path: 'enrollcourse',
-    component: EnrollCourseComponent,
-    canActivate: [AuthGuard, TypeGuard],
   },
   { path: 'user/:username', component: UserProfileComponent },
   { path: 'user', redirectTo: 'dashboard', canActivate: [AuthGuard] },
