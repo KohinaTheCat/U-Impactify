@@ -174,6 +174,7 @@
             Rate this course
           </button>
           <button
+          *ngIf="this.averageScore"
             class="btn btn-success-outline"
             id="change"
             (click)="openedAllReviews = true"

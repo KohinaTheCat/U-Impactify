@@ -33,7 +33,7 @@
         ><clr-icon shape="envelope"></clr-icon> <span>Mailbox</span></a
       >
       <a
-        *ngIf="user.type === 'IL'"
+        *ngIf="user.type !== 'SI'"
         clrVerticalNavLink
         routerLink="./socialinitiatives"
         routerLinkActive="active"
@@ -43,10 +43,6 @@
       <a *ngIf="user.type === 'IC'" clrVerticalNavLink
         ><clr-icon shape="thumbs-up"></clr-icon>
         <span>Reviews & Feedback</span></a
-      >
-      <a *ngIf="user.type === 'IC'" clrVerticalNavLink
-        ><clr-icon shape="dollar-bill"></clr-icon>
-        <span>Billing & Marketing</span></a
       >
       <a clrVerticalNavLink routerLink="./settings" routerLinkActive="active"
         ><clr-icon shape="cog"></clr-icon> <span>Settings</span></a
