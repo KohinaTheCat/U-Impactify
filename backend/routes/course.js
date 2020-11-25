@@ -428,6 +428,7 @@ router.put(
         assessment.studentSubmissions = [
           {
             studentId,
+            mark: -1,
             files: req.files.map((file) => {
               return {
                 id: file.id,
@@ -458,6 +459,8 @@ router.put(
       } else {
         assessment.studentSubmissions = assessment.studentSubmissions.concat({
           studentId,
+          //not sure if mark has to be neg 1 here
+          mark: -1, 
           files: req.files.map((file) => {
             return {
               id: file.id,
