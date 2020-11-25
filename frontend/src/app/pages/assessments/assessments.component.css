@@ -366,6 +366,10 @@ h5 {
   color: rgb(60, 58, 58);
 }
 
+h3 {
+  color: rgb(112, 112, 112);
+}
+
 .new {
   color: rgb(167, 163, 163);
   margin: 2rem;
@@ -403,4 +407,84 @@ h5 {
 
 .nono:hover {
   color: red;
+}
+
+/* TESTING  */
+.add-overlay {
+  /* White Base */
+  background: #ffffff;
+  /* Gray · 20% */
+  border: 5px solid #f5f7fa;
+  box-sizing: border-box;
+  /* Shadow Black Dark */
+  box-shadow: 0px 8px 24px #eff3f9;
+  border-radius: 40px;
+
+  padding: 2rem;
+  margin-top: 1rem;
+}
+
+.text-area {
+  /* Rectangle 1637 */
+  width: 100%;
+  height: 50px;
+
+  /* Gray · 10% */
+  background: #fafafa;
+  /* Gray · 20% */
+  border: 3px solid #f5f7fa;
+  border-radius: 11px;
+
+  font-size: 1rem;
+  font-weight: 300;
+
+  padding: 1rem;
+
+  /* Gray · 60% */
+  color: var(--gray80);
+}
+.level {
+  border: 2px solid;
+  padding: 0.4rem;
+  font-size: 0.875rem;
+  border-radius: 10px;
+  width: 5.7rem;
+  cursor: pointer;
+  filter: opacity(37.5%);
+}
+.level-2 {
+  border: 2px solid;
+  padding: 0.4rem;
+  font-size: 0.875rem;
+  border-radius: 10px;
+  width: 3.9rem;
+  cursor: pointer;
+  filter: opacity(37.5%);
+}
+
+.level:hover,
+.selected {
+  filter: initial;
+}
+
+.level-2:hover,
+.selected {
+  filter: initial;
+}
+
+.difficulty {
+  margin: 1.5rem 0 1rem 0;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#easy {
+  background-color: var(--green-smooth);
+  border-color: var(--green-base);
+  color: #808010;
+}
+#difficult {
+  background-color: var(--blue2-smooth);
+  border-color: var(--blue2-base);
+  color: #00f;
 }

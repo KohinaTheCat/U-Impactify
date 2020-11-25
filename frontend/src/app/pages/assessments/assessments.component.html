@@ -1,4 +1,5 @@
 <div class="flexbot">
+  <!-- Header -->
   <div class="outer" *ngIf="course">
     <div
       class="courseimage"
@@ -219,6 +220,29 @@
     <form clrForm>
       <clr-control-error>{{ error }}</clr-control-error>
 
+      <div class="add-overlay">
+        <div class="position-top">
+          <input
+            type="text"
+            placeholder="Assessment Name"
+            name="name"
+            id="name"
+            [(ngModel)]="name"
+            class="text-area"
+          />
+        </div>
+        <div class="diff-container">
+          <h3>Student Visibility</h3>
+          <div class="difficulty">
+            <div class="level-2" id="easy" (click)="visibility = true">
+              <strong>Visible </strong>
+            </div>
+            <div class="level" id="difficult" (click)="visibility = false">
+              <strong>Not-Visible</strong>
+            </div>
+          </div>
+        </div>
+      </div>
       <clr-input-container>
         <label
           >Assessment name
