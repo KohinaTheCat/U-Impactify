@@ -341,7 +341,7 @@ clr-control-error {
   align-self: center;
   align-items: center;
   justify-content: space-evenly;
-  margin-top: 3rem;
+  margin-top: 1rem;
   width: calc(100% - 4rem);
 
   /* background-color: #c21d00; */

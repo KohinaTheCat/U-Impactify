@@ -15,10 +15,10 @@
     Back
   </button>
 
-  <div class="box-shadow-2" id="header">
-    <h6 class="translate">Name</h6>
-    <h6 class="translate">Submission</h6>
-    <h6 class="translate">Evaluation</h6>
+  <div class="box-shadow-2" id="add1">
+    <h6 class="child">Name</h6>
+    <h6 class="child">Submission</h6>
+    <h6 class="child">Evaluation</h6>
   </div>
   <!-- *ngFor="let assess of assessArr" -->
   <div
@@ -45,32 +45,6 @@
       <div class="content">
         <span class="h6">Enter grade over here!</span>
       </div>
-
-      <!-- <div class="content">
-        <div *ngFor="let file of assess.files">
-          <a
-            *ngIf="file"
-            download="{{ file.name }}"
-            href="http://localhost:5000/api/course/documents/{{ file.id }}"
-            >{{ file.name }}</a
-          >
-        </div>
-      </div>
-      <div class="content">
-        <div *ngIf="assess.visibility">
-          <img src="../../../assets/stalkhehe.png" width="25" height="15" />
-        </div>
-        <div *ngIf="!assess.visibility">
-          <img src="../../../assets/nopeak.png" width="25" height="15" />
-        </div>
-      </div>
-      <div class="content">
-        <clr-icon
-          shape="view-list"
-          id="submissionsTab"
-          (click)="showStudentSubmission(assess)"
-        ></clr-icon>
-      </div> -->
     </div>
   </div>
 </div>
