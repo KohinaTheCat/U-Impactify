@@ -486,14 +486,17 @@ router.put(
 router.put(
   "/assessment/updateMark/:assessmentId/:studentId",
   (req, res) => {
-    Assessment.findById(req.body.assessmentId)
+    const { assessmentId, studentId, mark} = req.body;
+    Assessment.findById(assessmentId)
       .then((assessment) => {
-        const submission = assessment.studentSubmissions.filter(
-          (submission) => submission.studentId === req.body.studentId
+        const submissiontemp = assessment.studentSubmissions.filter(
+          (submission) => submission.studentId === studentId
         );
-        if (submission.length) {
-          submission.mark = req.body.mark;
-          res.json(submission[0]);
+        if (submissiontemp.length) {
+          assessment.studentSubmissions[assessment.studentSubmissions.indexOf(submissiontemp[0])].mark = mark; 
+          assessment.save()
+          .then(() => res.json(assessment))
+          .catch((err) => res.json(err));
         } else {
           res.status(404).json(`Error: Submission not found`);
         }
