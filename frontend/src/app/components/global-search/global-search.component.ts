@@ -25,6 +25,9 @@ export class GlobalSearchComponent implements OnInit, AfterViewInit {
           case '/socialinitiatives':
             this.title = 'Social Initiatives';
             break;
+          case '/course/create':
+            this.title = 'Create A Course';
+            break;
           default:
             this.title = event.url.substring(1).split('/')[0];
             break;

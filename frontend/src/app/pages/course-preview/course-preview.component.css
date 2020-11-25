@@ -175,6 +175,7 @@ h3-special {
   font-size: 0.875rem;
   border-radius: 10px;
   width: min-content;
+  user-select: none;
 }
 
 #easy {

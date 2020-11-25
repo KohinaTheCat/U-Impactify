@@ -58,7 +58,7 @@
         <button (click)="onReturn()" type="button" id="back-button" class="btn button">
           Back
         </button>
-        <button *ngIf="shouldShowSubmitButton" (click)="onSubmit()" type="button" id="submit-button" class="btn button">
+        <button (click)="onSubmit()" type="button" id="submit-button" class="btn button" [disabled]="shouldShowSubmitButton">
           Submit
         </button>
       </div>

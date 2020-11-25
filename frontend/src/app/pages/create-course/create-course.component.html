@@ -1,9 +1,156 @@
-<div>
-  <h3 class="modal-title">Create a course</h3>
-  <div class="modal-body">
+<div class="main">
+  <div class="top">
+    <button
+      (click)="cancel()"
+      type="button"
+      id="back-button"
+      class="btn button"
+    >
+      Back
+    </button>
+    <button
+      (click)="registerHandler()"
+      type="button"
+      id="submit-button"
+      class="btn button"
+      [clrLoading]="submitBtnState"
+      [disabled]="!shouldShowSubmit"
+    >
+      Submit
+    </button>
+  </div>
+  <div class="add-overlay">
+    <ngx-file-drop
+      dropZoneLabel="Drop files here"
+      contentClassName="fileUploadContent"
+      dropZoneClassName="dropZone"
+      (onFileDrop)="droppedCourseImage($event)"
+      (onFileOver)="fileOver($event)"
+      (onFileLeave)="fileLeave($event)"
+      accept=".jpg, .png, .jpeg"
+    >
+      <ng-template
+        ngx-file-drop-content-tmp
+        let-openFileSelector="openFileSelector"
+      >
+        <div class="fileUpload" (click)="openFileSelector()">
+          <clr-icon shape="picture"></clr-icon>
+          <h6>Upload Course Image</h6>
+          <p>.jpg, .png, .jpeg</p>
+          <p>Drag and drop, or click to browse</p>
+          <div class="uploadedImage" >
+            <span *ngIf="img[0] && !imageError">
+              Uploaded "{{ img[0].fileEntry.name }}"
+            </span>
+            <span id="imageError">
+              {{ imageError }}
+            </span>
+          </div>
+        </div>
+      </ng-template>
+    </ngx-file-drop>
+  </div>
+  <div class="add-overlay">
+    <div class="position-top">
+      <input
+        type="text"
+        placeholder="Name"
+        name="name"
+        id="name"
+        [(ngModel)]="name"
+      />
+      <textarea
+        name="description"
+        class="text-area"
+        placeholder="Description"
+        [(ngModel)]="description"
+      ></textarea>
+    </div>
+  </div>
+  <div class="items-container">
+    <div class="add-overlay">
+      <div class="diff-container">
+        <h6>Course Difficulty</h6>
+        <div class="difficulty">
+          <div
+            class="level"
+            id="easy"
+            (click)="level = 'easy';"
+            [ngClass]="{ selected: level === 'easy' }"
+          >
+            <strong>EASY</strong>
+          </div>
+          <div
+            class="level"
+            id="difficult"
+            (click)="level = 'difficult'"
+            [ngClass]="{ selected: level === 'difficult' }"
+          >
+            <strong>DIFFICULT</strong>
+          </div>
+          <div
+            class="level"
+            id="advanced"
+            (click)="level = 'advanced'"
+            [ngClass]="{ selected: level === 'advanced' }"
+          >
+            <strong>ADVANCED</strong>
+          </div>
+        </div>
+      </div>
+      <div class="tags-container">
+        <h6>Tags</h6>
+        <textarea
+          name="tags"
+          placeholder="Space seperated (each word is a new tag)"
+          class="text-area"
+          [(ngModel)]="tags"
+        ></textarea>
+      </div>
+    </div>
+    <div class="add-overlay">
+      <ngx-file-drop
+        dropZoneLabel="Drop files here"
+        contentClassName="fileUploadContent"
+        dropZoneClassName="dropZone"
+        (onFileDrop)="dropped($event)"
+        (onFileOver)="fileOver($event)"
+        (onFileLeave)="fileLeave($event)"
+      >
+        <ng-template
+          ngx-file-drop-content-tmp
+          let-openFileSelector="openFileSelector"
+        >
+          <div class="fileUpload" (click)="openFileSelector()">
+            <clr-icon shape="upload-cloud"></clr-icon>
+            <h6>Upload Documents</h6>
+            <p>Drag and drop, or click to browse</p>
+          </div>
+        </ng-template>
+      </ngx-file-drop>
+      <div class="upload-table" *ngIf="files.length">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Name of file(s) uploaded:</th>
+            </tr>
+          </thead>
+          <tbody class="upload-name-style">
+            <tr *ngFor="let item of files; let i = index">
+              <td>
+                <strong>{{ item.relativePath }}</strong>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <div>
+  <div>
     <form clrForm>
       <clr-control-error>{{ error }}</clr-control-error>
-
       <ngx-file-drop
         dropZoneLabel="Drop files here"
         (onFileDrop)="droppedCourseImage($event)"
@@ -107,7 +254,6 @@
             Browse Files
           </button>
 
-          <!-- <button type="button" (click)="openFileSelector()">Browse Files</button> -->
         </ng-template>
       </ngx-file-drop>
       <div class="upload-table">
@@ -144,4 +290,4 @@
       Create Course
     </button>
   </div>
-</div>
+</div> -->

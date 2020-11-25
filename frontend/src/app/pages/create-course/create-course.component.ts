@@ -7,6 +7,7 @@ import {
   FileSystemDirectoryEntry,
 } from 'ngx-file-drop';
 import { Router } from '@angular/router';
+import { ClrLoadingState } from '@clr/angular';
 
 @Component({
   selector: 'app-create-course',
@@ -29,25 +30,33 @@ export class CreateCourseComponent implements OnInit {
   error: string = '';
   imageError: string = '';
 
-  done: boolean = false;
+  submitBtnState: ClrLoadingState = ClrLoadingState.DEFAULT;
+
+
+  shouldShowSubmit: boolean = true;
 
   ngOnInit(): void {}
+
+  ngDoCheck(): void {
+    this.shouldShowSubmit =
+      !!this.name.trim() && !!this.description.trim() && !!this.level;
+  }
 
   cancel() {
     this.router.navigate(['dashboard']);
   }
 
   registerHandler() {
+    this.submitBtnState = ClrLoadingState.LOADING;
     const { name, description, level, tags, files } = this;
     const course = {
       teachers: [this.userService.getCurrentUser()._id],
-      name,
-      description,
+      name: name.trim(),
+      description: description.trim(),
       level,
-      tags,
+      tags: tags.trim(),
       files,
     };
-
     this.courseService
       .postNewCourse(course, this.userService.getCurrentUser()._id)
       .subscribe(
@@ -73,7 +82,7 @@ export class CreateCourseComponent implements OnInit {
                       .subscribe(
                         (res) => {
                           this.userService.setUser(res);
-                          this.done = true;
+                          this.submitBtnState = ClrLoadingState.SUCCESS;
                           this.router.navigate(['dashboard']);
                         },
                         (err) => console.log(err)
@@ -101,6 +110,7 @@ export class CreateCourseComponent implements OnInit {
               .subscribe(
                 (res) => {
                   this.userService.setUser(res);
+                  this.submitBtnState = ClrLoadingState.SUCCESS;
                   this.router.navigate(['dashboard']);
                 },
                 (err) => console.log(err)
