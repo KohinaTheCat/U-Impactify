@@ -480,6 +480,29 @@ router.put(
 );
 
 /**
+ * PUT update mark by student id and assessment
+ * @param req{assesmentId, studentId}
+ */
+router.put(
+  "/assessment/updateMark/:assessmentId/:studentId",
+  (req, res) => {
+    Assessment.findById(req.body.assessmentId)
+      .then((assessment) => {
+        const submission = assessment.studentSubmissions.filter(
+          (submission) => submission.studentId === req.body.studentId
+        );
+        if (submission.length) {
+          submission.mark = req.body.mark;
+          res.json(submission[0]);
+        } else {
+          res.status(404).json(`Error: Submission not found`);
+        }
+      })
+      .catch((err) => res.status(400).json(`Error: ${err}`));
+  }
+)
+
+/**
  * GET an assessment by id
  * @param assessmentId: assessment id
  * @return assessment
