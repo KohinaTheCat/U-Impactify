@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { Assessment } from 'src/app/models/assessment.model';
 import { Course } from 'src/app/models/course.model';
-// import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
 
 @Component({
   selector: 'app-student-submission',
@@ -16,6 +16,7 @@ export class StudentSubmissionComponent implements OnInit {
   courseId: string;
   assessmentId: string;
   assessment: Assessment;
+  loading: boolean = true;
 
   constructor(
     private courseService: CourseService,
@@ -47,6 +48,7 @@ export class StudentSubmissionComponent implements OnInit {
             for (const eachAssessment of incomingArraySet) {
               if (eachAssessment._id === this.assessmentId) {
                 this.assessment = eachAssessment;
+                this.loading = false;
               }
             }
           });

@@ -1,4 +1,8 @@
-<div class="page">
+<div class="loading" *ngIf="loading">
+  <span class="spinner"></span>
+</div>
+
+<div class="page" *ngIf="!loading">
   <div class="outer" *ngIf="course && assessment">
     <div
       class="courseimage"
@@ -24,16 +28,22 @@
   >
     <div id="add2">
       <div class="content">
-        <div>{{ assessment.studentSubmissions }}</div>
-        <span class="h6">{{ submission.name }}</span>
+        <span class="h6">{{ submission.studentId }}</span>
       </div>
 
       <div class="content">
-        <span class="h6">Some name</span>
+        <div *ngFor="let file of submission.files">
+          <a
+            *ngIf="file"
+            download="{{ file.name }}"
+            href="http://localhost:5000/api/course/documents/{{ file.id }}"
+            >{{ file.name }}</a
+          >
+        </div>
       </div>
 
       <div class="content">
-        <span class="h6">Some name</span>
+        <span class="h6">Enter grade over here!</span>
       </div>
 
       <!-- <div class="content">
