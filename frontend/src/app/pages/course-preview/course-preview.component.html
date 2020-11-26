@@ -28,6 +28,7 @@
       </button>
     </div>
   </div>
+
   <div
     id="settings-dropdown"
     *ngIf="!!user && course.teachers.includes(user._id)"
@@ -69,6 +70,35 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <div
+    class="courseHeader"
+    *ngIf="!!user && course.teachers.includes(user._id)"
+  >
+    <button class="box-shadow-3" [ngStyle]="{ width: '13rem' }">
+      <middle>
+        <img src="../../../assets/icons/136.png" width="27.52" height="33.19" />
+        <strong>Assessments</strong>
+      </middle>
+    </button>
+
+    <button class="box-shadow-3" [ngStyle]="{ width: '20rem' }">
+      <middle>
+        <img src="../../../assets/icons/136.png" width="27.52" height="33.19" />
+        <strong>Upload/Edit Documents</strong>
+      </middle>
+    </button>
+
+    <button class="box-shadow-3" [ngStyle]="{ width: '20rem' }">
+      <middle>
+        <img src="../../../assets/icons/136.png" width="27.52" height="33.19" />
+        <strong>Upload/Edit Documents</strong>
+      </middle>
+    </button>
+
+    <h3>where is this</h3>
+    <h3>where is this</h3>
   </div>
 
   <div
@@ -174,7 +204,7 @@
             Rate this course
           </button>
           <button
-          *ngIf="this.averageScore"
+            *ngIf="this.averageScore"
             class="btn btn-success-outline"
             id="change"
             (click)="openedAllReviews = true"
