@@ -50,7 +50,7 @@ export class CoursePreviewComponent implements OnInit {
   anon: boolean = false;
   courseStars: number[] = [1, 2, 3, 4, 5];
   averageScore: number = 0;
-  showSurveys: boolean = false;
+  // showSurveys: boolean = false;
 
   @ViewChild('reviewStars') stars;
   @ViewChild('wizardxl') wizardExtraLarge: ClrWizard;
@@ -273,6 +273,11 @@ export class CoursePreviewComponent implements OnInit {
       .subscribe(() => {
         this.ngOnInit();
       });
+  }
+
+  goToSurveyResponses(){
+    console.log("navigating timee")
+    this.router.navigate([`surveyresponses`])
   }
 
   goToLecture(id, title, date) {

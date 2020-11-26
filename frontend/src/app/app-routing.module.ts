@@ -21,6 +21,7 @@ import { SiOpportunitiesComponent } from './pages/si-opportunities/si-opportunit
 import { CourseLecturesComponent } from './pages/course-lectures/course-lectures.component';
 import { TypeGuard } from './guards/type.guard';
 import { CoursesComponent } from './components/dashboard-components/courses/courses.component';
+import { SurveyResponsesComponent } from './pages/survey-responses/survey-responses.component';
 
 const routes: Routes = [
   { path: 'signup', component: LoginSignupComponent },
@@ -99,6 +100,11 @@ const routes: Routes = [
     component: SiOpportunitiesComponent,
     canActivate: [AuthGuard, TypeGuard],
   },
+  {
+    path : 'surveyresponses/:courseId',
+    component: SurveyResponsesComponent,
+    canActivate: [AuthGuard, TypeGuard],
+  }
 ];
 
 @NgModule({

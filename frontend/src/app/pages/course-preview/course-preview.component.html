@@ -274,10 +274,11 @@
           <div class="course-desc">
             <h4>Survey</h4>
             <div class="rate-button-2">
-              <button
+              <!-- <button
                 class="btn btn-success-outline"
                 (click)="showSurveys = true"
-              >
+              > -->
+              <button class = "btn btn-success-outline" (click)="goToSurveyResponses()">
                 Show all survey responses
               </button>
             </div>
@@ -465,7 +466,7 @@
   </div>
 </clr-modal>
 
-<clr-modal
+<!-- <clr-modal
   [(clrModalOpen)]="showSurveys"
   [clrModalSize]="'xl'"
   [clrModalClosable]="false"
@@ -501,7 +502,7 @@
       Done
     </button>
   </div>
-</clr-modal>
+</clr-modal> -->
 
 <clr-modal
   [(clrModalOpen)]="openedAllReviews"
