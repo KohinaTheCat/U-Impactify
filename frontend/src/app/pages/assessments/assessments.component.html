@@ -152,46 +152,42 @@
           <form clrForm>
             <clr-control-error>{{ error }}</clr-control-error>
 
-            <ngx-file-drop
-              dropZoneLabel="Drop files here"
-              (onFileDrop)="dropped($event)"
-              (onFileOver)="fileOver($event)"
-              (onFileLeave)="fileLeave($event)"
-            >
-              <ng-template
-                ngx-file-drop-content-tmp
-                let-openFileSelector="openFileSelector"
+            <div class="add-overlay">
+              <ngx-file-drop
+                dropZoneLabel="Drop files here"
+                (onFileDrop)="dropped($event)"
+                (onFileOver)="fileOver($event)"
+                (onFileLeave)="fileLeave($event)"
+                contentClassName="fileUploadContent"
+                dropZoneClassName="dropZone"
               >
-                <label>Upload Assignment Files</label>
-                <button class="btn btn-primary" (click)="openFileSelector()">
-                  Browse Files
-                </button>
-
-                <!-- <button type="button" (click)="openFileSelector()">Browse Files</button> -->
-              </ng-template>
-            </ngx-file-drop>
-            <div class="upload-table">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th>Name of file(s) uploaded:</th>
-                  </tr>
-                </thead>
-                <tbody class="upload-name-style">
-                  <tr *ngFor="let item of files; let i = index">
-                    <td>
-                      <strong>{{ item.relativePath }}</strong>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                <ng-template
+                  ngx-file-drop-content-tmp
+                  let-openFileSelector="openFileSelector"
+                >
+                  <div class="fileUpload" (click)="openFileSelector()">
+                    <clr-icon shape="picture"></clr-icon>
+                    <h3>Upload Documents</h3>
+                    <p>.png, .docx, .pdf</p>
+                    <p>Drag and drop, or click to browse</p>
+                    <div class="uploadedImage">
+                      <div *ngFor="let item of files; let i = index">
+                        <strong> Uploaded: "{{ item.relativePath }}"</strong>
+                      </div>
+                      <span id="imageError">
+                        {{ imageError }}
+                      </span>
+                    </div>
+                  </div>
+                </ng-template>
+              </ngx-file-drop>
             </div>
           </form>
         </div>
         <div class="modal-footer">
           <button
             type="button"
-            class="btn btn-outline"
+            class="btn btn-ok btn-outline btn-cancel"
             (click)="submissionsModal = false"
             (click)="cancel()"
           >
@@ -199,7 +195,7 @@
           </button>
           <button
             type="button"
-            class="btn btn-primary"
+            class="btn btn-ok btn-outline"
             (click)="submitHandler()"
           >
             Submit
@@ -247,14 +243,6 @@
               </div>
             </div>
           </div>
-          <!-- <div class="difficulty">
-            <div class="level-2" id="easy" (click)="visibility = true">
-              <strong>Visible </strong>
-            </div>
-            <div class="level" id="difficult" (click)="visibility = false">
-              <strong>Not-Visible</strong>
-            </div>
-          </div> -->
         </div>
       </div>
 
