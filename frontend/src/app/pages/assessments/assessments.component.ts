@@ -84,7 +84,6 @@ export class AssessmentsComponent implements OnInit {
             ? (this.course.img = '../../../../assets/courseimage.png')
             : // TODO: REMOVE LOCALHOST FROM PROD BUILD AFTER
               `http://localhost:5000/api/course/documents/${this.course.img}`;
-
         this.courseService.getAllAssessments(incomingCourse._id).subscribe(
           (incomingArray: Assessment[]) => {
             this.assessArr = incomingArray.sort((a, b) => {
@@ -144,7 +143,6 @@ export class AssessmentsComponent implements OnInit {
     this.router.navigate([
       `course/${this.course._id}/assessments/studentSubmissions/${assessment._id}`,
     ]);
-    console.log('asdfasd');
   }
 
   onEdit(assess: Assessment) {
@@ -166,6 +164,7 @@ export class AssessmentsComponent implements OnInit {
   }
 
   registerHandler() {
+    console.log(this.assessArr);
     const { name, visibility, studentSubmissions, files } = this;
     const assessment = {
       name,

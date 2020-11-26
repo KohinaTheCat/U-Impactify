@@ -357,6 +357,7 @@ router.route("/assessment").post((req, res) => {
 
 //
 router.route("/assessment/addAssessment").put((req, res) => {
+  console.log("Am I in the right one?");
   const { courseId, assessmentId } = req.body;
   Course.findById(courseId).then((newCourse) => {
     newCourse.assessments = newCourse.assessments.concat(assessmentId);
@@ -570,7 +571,7 @@ router.put(
         assessment.studentSubmissions = assessment.studentSubmissions.concat({
           studentId,
           //not sure if mark has to be neg 1 here
-          mark: -1, 
+          mark: -1,
           files: req.files.map((file) => {
             return {
               id: file.id,
@@ -593,27 +594,27 @@ router.put(
  * PUT update mark by student id and assessment
  * @param req{assesmentId, studentId}
  */
-router.put(
-  "/assessment/updateMark/:assessmentId/:studentId",
-  (req, res) => {
-    const { assessmentId, studentId, mark} = req.body;
-    Assessment.findById(assessmentId)
-      .then((assessment) => {
-        const submissiontemp = assessment.studentSubmissions.filter(
-          (submission) => submission.studentId === studentId
-        );
-        if (submissiontemp.length) {
-          assessment.studentSubmissions[assessment.studentSubmissions.indexOf(submissiontemp[0])].mark = mark; 
-          assessment.save()
+router.put("/assessment/updateMark/:assessmentId/:studentId", (req, res) => {
+  const { assessmentId, studentId, mark } = req.body;
+  Assessment.findById(assessmentId)
+    .then((assessment) => {
+      const submissiontemp = assessment.studentSubmissions.filter(
+        (submission) => submission.studentId === studentId
+      );
+      if (submissiontemp.length) {
+        assessment.studentSubmissions[
+          assessment.studentSubmissions.indexOf(submissiontemp[0])
+        ].mark = mark;
+        assessment
+          .save()
           .then(() => res.json(assessment))
           .catch((err) => res.json(err));
-        } else {
-          res.status(404).json(`Error: Submission not found`);
-        }
-      })
-      .catch((err) => res.status(400).json(`Error: ${err}`));
-  }
-)
+      } else {
+        res.status(404).json(`Error: Submission not found`);
+      }
+    })
+    .catch((err) => res.status(400).json(`Error: ${err}`));
+});
 
 /**
  * GET an assessment by id
