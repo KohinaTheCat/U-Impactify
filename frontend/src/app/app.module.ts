@@ -16,7 +16,6 @@ import { FrontPageHeaderComponent } from './components/front-page-header/front-p
 import { GlobalSearchComponent } from './components/global-search/global-search.component';
 import { IcIlProfileComponent } from './components/profile-components/ic-il-profile/ic-il-profile.component';
 import { SiProfileComponent } from './components/profile-components/si-profile/si-profile.component';
-import { CourseComponent } from './pages/course/course.component';
 import { CreateCourseComponent } from './pages/create-course/create-course.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { EnrollCourseComponent } from './pages/enroll-course/enroll-course.component';
@@ -31,8 +30,11 @@ import { GivingGardenComponent } from './pages/giving-garden/giving-garden.compo
 import { AboutComponent } from './pages/home-pages/about/about.component';
 import { SolutionsComponent } from './pages/home-pages/solutions/solutions.component';
 import { PricingComponent } from './pages/home-pages/pricing/pricing.component';
-import { AssessmentsComponent } from './pages/assessments/assessments.component';
 import { StudentSubmissionComponent } from './pages/studentSubmissionFolder/student-submission/student-submission.component';
+import { AssessmentsComponent } from './pages/assessments/assessments.component';
+import { SiOpportunitiesComponent } from './pages/si-opportunities/si-opportunities.component';
+import { OpportunityAccordianCardComponent } from './components/opportunity-accordian-card/opportunity-accordian-card.component';
+import { CourseLecturesComponent } from './pages/course-lectures/course-lectures.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +46,6 @@ import { StudentSubmissionComponent } from './pages/studentSubmissionFolder/stud
     FooterComponent,
     CreateCourseComponent,
     DashboardComponent,
-    CourseComponent,
     GlobalSearchComponent,
     CoursesComponent,
     IcUpcomingEventsComponent,
@@ -62,6 +63,9 @@ import { StudentSubmissionComponent } from './pages/studentSubmissionFolder/stud
     SolutionsComponent,
     PricingComponent,
     StudentSubmissionComponent,
+    SiOpportunitiesComponent,
+    OpportunityAccordianCardComponent,
+    CourseLecturesComponent,
   ],
   imports: [
     BrowserModule,

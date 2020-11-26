@@ -39,24 +39,29 @@ export class ChatComponent implements OnInit {
   }
 
   initScrollObserver(): void {
-    const observer = new MutationObserver(
-      (mutations) => this.scrollIntoView() 
-    );
+    const observer = new MutationObserver((mutations) => this.scrollIntoView());
     observer.observe(this.messagesContainer.nativeElement, { childList: true });
   }
 
   initChats(): void {
     this.chats = [];
-    this.user = this.userService.getCurrentUser();
     this.socket = this.chatService.getSocket();
-    this.user.chats.forEach((chatId) =>
-      this.chatService.getChat(chatId).subscribe((chat) => {
-        chat.members = chat.members.filter(
-          (member) => member !== this.user._id
+
+    this.userService
+      .getAnotherUser(this.userService.getCurrentUser()._id)
+      .subscribe((user) => {
+        this.userService.setUser(user);
+        this.user = user;
+        this.user.chats.forEach((chatId) =>
+          this.chatService.getChat(chatId).subscribe((chat) => {
+            chat.members = chat.members.filter(
+              (member) => member !== this.user._id
+            );
+            this.chats.push(chat);
+          })
         );
-        this.chats.push(chat);
-      })
-    );
+      });
+
     // this.chats = this.createMockChats();
     // this.chats.forEach(
     //   (chat) => (chat.messages = this.createMockMessages(chat.members))
@@ -64,19 +69,19 @@ export class ChatComponent implements OnInit {
   }
 
   onSelectChat($event) {
-    if (this.selectedChat !== $event) 
-      this.selectedChat = $event;
+    if (this.selectedChat !== $event) this.selectedChat = $event;
     if (this.isFirstSelection) {
-     setTimeout(() => {
+      setTimeout(() => {
         this.initScrollObserver();
         this.isFirstSelection = false;
-     }, 100);
+      }, 100);
     }
   }
 
   scrollIntoView() {
     if (this.messagesContainer) {
-      const recentMessage = this.messagesContainer.nativeElement.lastElementChild;
+      const recentMessage = this.messagesContainer.nativeElement
+        .lastElementChild;
       recentMessage.scrollIntoView({
         behavior: 'smooth',
         block: 'end',

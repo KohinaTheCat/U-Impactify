@@ -41,7 +41,7 @@ const courseSchema = new Schema({
     type: [String],
   },
   assessments: {
-    type: [String],
+    type: [{id: String, title: String}],
   },
   reviews: {
     type: [
@@ -53,7 +53,9 @@ const courseSchema = new Schema({
       },
     ],
   },
-
+  lectures: {
+    type: [{_id: String, title: String, date: Date}],
+  },
   instructorReview: {
     type: [
       {
@@ -62,7 +64,6 @@ const courseSchema = new Schema({
       },
     ],
   },
-
   surveyRequest: {
     type: Boolean,
   },

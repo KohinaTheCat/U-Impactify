@@ -24,6 +24,10 @@ h3 {
   filter: blur(3px) brightness(0.9);
 }
 
+clr-stack-label {
+  font-size: 1rem;
+}
+
 .loading {
   width: 100%;
   display: flex;
@@ -107,7 +111,6 @@ h3-special {
 }
 
 .btn.btn-primary {
-  font-size: 0.5rem;
   display: flex;
   justify-content: center;
 }
@@ -172,6 +175,7 @@ h3-special {
   font-size: 0.875rem;
   border-radius: 10px;
   width: min-content;
+  user-select: none;
 }
 
 #easy {
@@ -418,21 +422,21 @@ clr-control-error {
 }
 
 .course-content {
-  border: 2px var(--gray40) dashed;
   height: 100%;
   width: 100%;
-  color: var(--gray40);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 20px;
-  font-size: 2rem;
+}
+
+.stack-block-label{
+  background: #9ed9d9;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 15px 15px 0px 0px;
 }
 
 #left-bottom {
   margin-left: 1rem;
   margin-bottom: 0.5rem;
 }
+
 #left-top-bottom {
   margin-left: 1rem;
   margin-top: 0.5rem;

@@ -3,6 +3,10 @@ h2 {
   font-size: 2rem;
 }
 
+.shift {
+  padding: 0 2rem;
+}
+
 .courses {
   display: flex;
   flex-wrap: wrap;

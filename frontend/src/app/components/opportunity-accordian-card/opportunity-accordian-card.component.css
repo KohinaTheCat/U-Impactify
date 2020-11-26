@@ -1,0 +1,208 @@
+.closed {
+  transform: rotate(180deg);
+}
+
+.container {
+  background: #FFF;
+  border-radius: 20px;
+  margin-bottom: 1.5rem;
+}
+
+.container-open-employment {
+  border: 2px solid var(--red-base);
+}
+
+.container-open-volunteer {
+  border: 2px solid var(--green-base);
+}
+
+.applied {
+  background-color: var(--gray30);
+}
+
+.applied-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.applied-container p {
+  font-size: 1rem;
+  color: var(--gray60);
+}
+
+.top-header {
+  display: flex;
+  align-items: center;
+  padding: 1rem 2rem;
+  border-radius: 20px;
+}
+
+.settings-button, .settings-button clr-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.settings-button {
+  margin-right: 1rem;
+}
+
+.settings-button clr-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--gray80);
+}
+
+clr-dropdown, clr-dropdown * {
+  outline: none;
+  user-select: none;
+}
+
+.top-header-open-employment {
+    background-color: var(--red-smooth);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.top-header-open-volunteer {
+    background-color: var(--green-smooth);
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.top-header h5 {
+  margin: 0;
+  font-size: 1.75rem;
+  font-weight: 400;
+}
+
+.top-header p {
+  margin: 0;
+  color: var(--gray80);
+}
+
+.caret-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 1rem;
+  cursor: pointer;
+}
+
+.caret-button clr-icon {
+  width: 2rem;
+  height: 2rem;
+}
+.body {
+  padding: 1rem 2rem;
+}
+
+.info-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20%, 10rem));
+  margin: 0 0 1rem 0;
+}
+
+.info h6 {
+  font-size: 1rem;
+  margin: 0;
+}
+
+.info p {
+  margin: 0.25rem 0;
+  font-size: 1rem;
+}
+
+.list-container h6 {
+  font-weight: 400;
+  font-size: 1.125rem;
+  margin: 0;
+}
+
+.list-container ul {
+  padding-left: 1rem;
+  margin: 0.5rem 0;
+  color: var(--gray80);
+}
+
+.applicants-container {
+  margin-top: 0.5rem;
+}
+
+.applicants {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  column-gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.applicants-container h6 {
+   font-weight: 400;
+  font-size: 1.125rem;
+  margin: 0;
+}
+
+.applicant {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 5rem;
+}
+
+.user-profile-icon {
+  background-color: var(--gray20);
+  color: var(--purple-base);
+  height: 2rem;
+  width: 2rem;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.25rem;
+}
+
+.user-profile-icon clr-icon {
+  height: 1.25rem;
+  width: 1.25rem;
+  color: var(--purple-base);
+}
+
+.applicant p {
+  margin: 0;
+  font-size: 0.75rem;
+}
+
+
+#employer .applicant {
+  margin: 0.5rem 0;
+}
+
+.btn-outline-success, .btn-outline-danger, #deleteButton {
+  border-radius: 10px;
+  height: 3rem;
+  width: max-content;
+  font-size: 0.875rem;
+  font-family: "Open Sans", sans-serif;
+  font-weight: 400;
+}
+
+
+.hire {
+  cursor: pointer;
+}
+
+.modal-body h6 {
+  font-size: 0.75rem;
+}
+
+.modal-body ul {
+  margin: 0.5rem 0 0.5rem 1rem;
+}
+
+.modal-body p {
+  margin: 0;
+}

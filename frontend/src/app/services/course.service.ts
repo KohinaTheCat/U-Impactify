@@ -168,7 +168,6 @@ export class CourseService {
   /**
    * POST new assessment
    * @param {any}     assessment  the newly created assessment
-
    *
    */
   postNewAssessment(assessment: any): Observable<Assessment> {
@@ -186,7 +185,6 @@ export class CourseService {
    * @param courseId
    * @param assessmentId
    */
-
   postAssessmentCourse(
     courseId: string,
     assessmentId: string
@@ -340,5 +338,14 @@ export class CourseService {
       courseId,
       surveyAnswers,
     });
+  }
+
+  /**
+   * POST uploading document to a course
+   * @param {FormData} file     new file
+   * @param {string}   courseId id of course
+   */
+  postUploadLecture(video: FormData, courseId: string) {
+    return this.http.post(`/api/course/${courseId}/uploadLecture`, video);
   }
 }

@@ -78,6 +78,7 @@ router.route("/").post((req, res) => {
     tags,
     level,
     assessments: [],
+    lectures: [],
     img: "",
   });
 
@@ -237,7 +238,13 @@ router.post(
   (req, res) => {
     Course.findById(req.params.id)
       .then((course) => {
-        course.img = req.files[0].id;
+        if (course.img === "") course.img = req.files[0].id;
+        else {
+          gfs.delete(new mongoose.Types.ObjectId(course.img), (err, data) => {
+            if (err) return res.status(404).json({ err: err.message });
+          });
+          course.img = req.files[0].id;
+        }
         course
           .save()
           .then(() => res.json(course))
@@ -358,6 +365,20 @@ router.route("/assessment/addAssessment").put((req, res) => {
       .then(() => res.json(newCourse))
       .catch((err) => res.json(err));
   });
+});
+
+router.post("/:id/uploadLecture", upload.array("document", 1), (req, res) => {
+  Course.findById(req.params.id)
+    .then((course) => {
+      course.lectures = course.lectures.concat([
+        { _id: req.files[0].id, title: req.body.title, date: new Date() },
+      ]);
+      course
+        .save()
+        .then(() => res.json(course))
+        .catch((err) => res.json(err));
+    })
+    .catch((err) => res.status(400).json(`Error finding Course: ${err}`));
 });
 
 /**
@@ -517,6 +538,7 @@ router.put(
         assessment.studentSubmissions = [
           {
             studentId,
+            mark: -1,
             files: req.files.map((file) => {
               return {
                 id: file.id,
@@ -547,6 +569,8 @@ router.put(
       } else {
         assessment.studentSubmissions = assessment.studentSubmissions.concat({
           studentId,
+          //not sure if mark has to be neg 1 here
+          mark: -1, 
           files: req.files.map((file) => {
             return {
               id: file.id,
@@ -564,6 +588,32 @@ router.put(
     });
   }
 );
+
+/**
+ * PUT update mark by student id and assessment
+ * @param req{assesmentId, studentId}
+ */
+router.put(
+  "/assessment/updateMark/:assessmentId/:studentId",
+  (req, res) => {
+    const { assessmentId, studentId, mark} = req.body;
+    Assessment.findById(assessmentId)
+      .then((assessment) => {
+        const submissiontemp = assessment.studentSubmissions.filter(
+          (submission) => submission.studentId === studentId
+        );
+        if (submissiontemp.length) {
+          assessment.studentSubmissions[assessment.studentSubmissions.indexOf(submissiontemp[0])].mark = mark; 
+          assessment.save()
+          .then(() => res.json(assessment))
+          .catch((err) => res.json(err));
+        } else {
+          res.status(404).json(`Error: Submission not found`);
+        }
+      })
+      .catch((err) => res.status(400).json(`Error: ${err}`));
+  }
+)
 
 /**
  * GET an assessment by id

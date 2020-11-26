@@ -80,8 +80,8 @@ body {
   --clr-vertical-nav-active-bg-color: #a78ec3;
   --clr-vertical-nav-item-active-color: white;
   --clr-vertical-nav-hover-bg-color: #a78ec3;
-
   --clr-accordion-active-background-color: #e2f4f4;
+  --clr-stack-view-border-radius: 20px;
 }
 
 h1 {
@@ -310,4 +310,22 @@ p {
 
 .datagrid-column-separator {
   pointer-events: none;
+}
+
+.fileUploadContent {
+  height: 100%;
+
+  /* White Base */
+  background: #ffffff;
+  /* Gray · 30% */
+  border: 4px dashed #e3e5e6;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.dropZone {
+  border: 0;
 }

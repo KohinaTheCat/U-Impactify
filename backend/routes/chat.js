@@ -15,6 +15,21 @@ const onMessagedRecieved = (socket, chatId, message) => {
 };
 
 /**
+   * GET find by members
+   * @param from mesasge sender
+   * @param to message reciever
+   */
+router.route("/find/:from/:to").get((req, res) => {
+  Chat.find().then(chats => {
+    const shared = chats.filter(chat => chat.members.includes(req.params.from) && chat.members.includes(req.params.to));
+    if(shared.length)
+      res.json(shared[0]);
+    else
+      res.status(404).json(`Not Found`); 
+  }).catch(err => res.status(400).json(err));
+});
+
+/**
  * GET chat by id
  * @param {String} id chatId
  */

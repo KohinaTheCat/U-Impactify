@@ -1,0 +1,222 @@
+<div
+  class="container box-shadow-1"
+  [ngClass]="{
+    'container-open-employment': open && type === 'employment',
+    'container-open-volunteer': open && type === 'volunteer',
+    applied: user.type === 'IC' && opportunity.applicants.includes(user._id)
+  }"
+  *ngIf="opportunity"
+>
+  <div
+    class="top-header"
+    [ngClass]="{
+      'top-header-open-employment': open && type === 'employment',
+      'top-header-open-volunteer': open && type === 'volunteer'
+    }"
+  >
+  <clr-dropdown *ngIf="user.type === 'SI' && opportunity.recruiter === user._id" [clrCloseMenuOnItemClick]="true">
+        <button clrDropdownTrigger aria-label="Dropdown demo button" class="settings-button">
+            <clr-icon shape="cog"></clr-icon>
+        </button>
+        <clr-dropdown-menu *clrIfOpen>
+            <label class="dropdown-header" aria-hidden="true">Opportunity Settings</label>
+            <div class="dropdown-divider" role="separator" aria-hidden="true"></div>
+            <div aria-label="Dropdown header Action 1" (click)="onClickEdit()" clrDropdownItem>Edit</div>
+            <div aria-label="Dropdown header Action 2" (click)="shouldShowDelete = true" clrDropdownItem >Delete</div>
+        </clr-dropdown-menu>
+    </clr-dropdown>
+    <div class="wrapper">
+      <h5>{{ opportunity.name }}</h5>
+      <p>{{ opportunity.description }}</p>
+    </div>
+    <div class="spacer" style="flex: 1 1 auto"></div>
+    <div class="caret-button" (click)="open = !open">
+      <clr-icon shape="angle" [ngClass]="{ closed: !open }"></clr-icon>
+    </div>
+  </div>
+  <div class="body" *ngIf="open">
+    <div class="info-container">
+      <div class="info">
+        <h6>Date Posted</h6>
+        <p>{{ opportunity.datePosted | date: "shortDate" }}</p>
+      </div>
+      <div class="info">
+        <h6>Date Needed</h6>
+        <p>{{ opportunity.dateNeeded | date: "shortDate" }}</p>
+      </div>
+      <div class="info">
+        <h6>Location</h6>
+        <p>{{ opportunity.location }}</p>
+      </div>
+      <div class="info" *ngIf="opportunity.salary">
+        <h6>Salary</h6>
+        <p>{{ opportunity.salary | currency }}/hr</p>
+      </div>
+      <div class="info">
+        <h6>Looking for</h6>
+        <p>
+          {{ opportunity.numberOfHires }}
+          <span *ngIf="opportunity.numberOfHires === 1">person</span
+          ><span *ngIf="opportunity.numberOfHires > 1">people</span>
+        </p>
+      </div>
+    </div>
+    <div class="list-container" id="employer">
+      <h6>Employer</h6>
+      <div class="applicant">
+        <div class="user-profile-icon">
+          <clr-icon shape="user"></clr-icon>
+        </div>
+        <p>{{ opportunity.recruiter }}</p>
+      </div>
+    </div>
+    <div class="list-container">
+      <h6>Responsibilites</h6>
+      <ul>
+        <li *ngFor="let res of opportunity.responsibilites">{{ res }}</li>
+      </ul>
+    </div>
+    <div class="list-container">
+      <h6>Requirements</h6>
+      <ul>
+        <li *ngFor="let req of opportunity.requirements">{{ req }}</li>
+      </ul>
+    </div>
+    <div
+      class="applicants-container"
+      *ngIf="
+        user.type === 'SI' &&
+        user._id === opportunity.recruiter &&
+        opportunity.applicants.length
+      "
+    >
+      <h6>Applicants - Click to Select</h6>
+      <div class="applicants">
+        <div
+          class="applicant hire"
+          (click)="onSelectHire(applicant)"
+          *ngFor="let applicant of opportunity.applicants"
+        >
+          <div class="user-profile-icon">
+            <clr-icon
+              shape="user"
+              [ngClass]="{
+                'has-badge is-solid': toBeHired.includes(applicant)
+              }"
+            ></clr-icon>
+          </div>
+          <p>{{ applicant }}</p>
+        </div>
+      </div>
+    </div>
+    <div
+      class="applied-container"
+      *ngIf="user.type === 'IC' && opportunity.applicants.includes(user._id)"
+    >
+      <p>You have already applied for this position</p>
+    </div>
+    <div
+      class="applied-container"
+      *ngIf="user.type === 'IC' && !opportunity.applicants.includes(user._id)"
+    >
+      <button
+        class="btn"
+        (click)="onClickApply()"
+        [ngClass]="{
+          'btn-outline-success': opportunity.type === 'volunteer',
+          'btn-outline-danger': opportunity.type === 'employment'
+        }"
+      >
+        Apply For Hire
+      </button>
+    </div>
+    <div
+      class="applied-container"
+      *ngIf="toBeHired.length === opportunity.numberOfHires"
+    >
+      <button
+        class="btn"
+        (click)="shouldOpenApproveHire = true"
+        [ngClass]="{
+          'btn-outline-success': opportunity.type === 'volunteer',
+          'btn-outline-danger': opportunity.type === 'employment'
+        }"
+      >
+        Select Applicants for Hire
+      </button>
+    </div>
+  </div>
+</div>
+
+<clr-modal
+  [(clrModalOpen)]="shouldOpenApproveHire"
+  [clrModalSize]="'lg'"
+  *ngIf="toBeHired.length === opportunity.numberOfHires"
+>
+  <div class="modal-title">
+    <img src="../../../assets/word-logo.png" alt="" style="width: 200px" />
+  </div>
+  <div class="modal-body">
+    <h6>
+      You are about to select the following applicants for hire for '{{
+        opportunity.name
+      }}'
+    </h6>
+    <ul>
+      <li *ngFor="let hire of toBeHired">{{ hire }}</li>
+    </ul>
+    <p>
+      After pressing <strong>PROCEED</strong> this opportunity will be
+      <em><strong>Permanently Deleted</strong></em> and we will send an
+      acceptance message to each of those applicants via your chats. After
+      sending those messages, the applicants will either reply to the message in
+      the same chat, or email you for more information. We expect the hiring and
+      onboarding to occur outside of the program at your own disgression.
+      <br /><br />
+      The UImpactify team thanks you for your opportunity and wishes you future
+      success with your new hire<span *ngIf="opportunity.numberOfHires > 1"
+        >s</span
+      >.
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-success-outline"
+      (click)="shouldOpenApproveHire = false; toBeHired = []"
+    >
+      Dismiss
+    </button>
+    <button type="button" class="btn btn-danger" (click)="onClickApproveHire()">
+      PROCEED
+    </button>
+  </div>
+</clr-modal>
+
+<clr-modal [(clrModalOpen)]="shouldShowDelete" [clrModalSize]="'lg'">
+  <div class="modal-title">
+    <img src="../../../assets/word-logo.png" alt="" style="width: 200px" />
+  </div>
+  <div class="modal-body">
+    <h6>You are about to delete '{{ opportunity.name }}'</h6>
+    <p>
+      After pressing <strong>PROCEED</strong> this opportunity will be
+      <em><strong>Permanently Deleted.</strong></em> <br />
+      We expect you to contact applicants at your own disgression. <br /><br />
+      The UImpactify team thanks you for your opportunity and wishes you success
+      for your future opportunities.
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-success-outline"
+      (click)="shouldShowDelete = false"
+    >
+      Dismiss
+    </button>
+    <button type="button" class="btn btn-danger" (click)="onClickDelete()">
+      PROCEED
+    </button>
+  </div>
+</clr-modal>

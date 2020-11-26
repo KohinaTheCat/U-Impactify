@@ -28,7 +28,7 @@ export class AuthGuard implements CanActivate , CanDeactivate<CanComponentDeacti
   ): boolean {
     const user: User = this.userService.getCurrentUser();
     if (!user || !user._id) {
-      this.router.navigateByUrl('/signup');
+      this.router.navigateByUrl('/about');
       return false;
     }
     return true;

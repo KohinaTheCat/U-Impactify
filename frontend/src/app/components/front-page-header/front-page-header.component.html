@@ -1,6 +1,6 @@
 <div class="flexbox-container">
   <div class="flexbox-container2">
-    <img src="../../../assets/uLogo.svg" width="77" height="79" />
+    <img src="../../../assets/uLogo.svg" width="77" height="79"  routerLink="./about" routerLinkActive="active" />
     <button class="btn btn-link" routerLink="./about" routerLinkActive="active">About</button>
     <button class="btn btn-link" routerLink="./solutions" routerLinkActive="active">Solutions</button>
     <button class="btn btn-link" routerLink="./pricing"
@@ -8,7 +8,10 @@
   </div>
 
   <div class="flexbox-container22" *ngIf="shouldShow()">
-    <button class="btn btn-outline" (click)="navigate()">SIGNUP</button>
-    <button class="btn btn-primary" (click)="navigate()">LOGIN</button>
+    <button class="btn btn-outline" *ngIf="user else loginButtons" (click)="navigate()"><span id="profileImage"><clr-icon shape="user"></clr-icon></span> <span id="userIdText">{{user._id}}</span></button>
+    <ng-template #loginButtons>
+      <button class="btn btn-outline" (click)="navigate()">SIGNUP</button>
+      <button class="btn btn-primary" (click)="navigate()">LOGIN</button>
+    </ng-template>
   </div>
 </div>

@@ -32,9 +32,9 @@ button {
   font-size: 1.3rem;
   text-transform: none;
 }
+
 .btn-outline,
 .btn-primary {
-  margin-right: 6rem;
   font-size: 1rem;
   box-sizing: border-box;
   border-radius: 0.5rem;
@@ -42,6 +42,19 @@ button {
   padding-right: 2rem;
   padding-top: 0.5rem;
   padding-bottom: 2.2rem;
+}
+
+#userIdText {
+  letter-spacing: normal;
+  margin-left: 1rem;
+}
+
+#profileImage {
+  width: 2rem;
+  height: 2rem;
+  display: inline-block;
+  justify-content: center;
+  align-items: center;
 }
 
 @media only screen and (max-width: 1250px) {
@@ -59,17 +72,17 @@ button {
     margin-top: 1rem;
     width: 100%;
   }
+
   .flexbox-container22 {
     justify-content: space-evenly;
   }
 
   .btn-outline,
   .btn-primary {
-    margin: 1rem;
-  }
-
-  .btn-outline,
-  .btn-primary {
     margin: 0;
   }
+}
+
+img {
+  cursor: pointer;
 }

@@ -15,6 +15,7 @@ export class CoursesComponent implements OnInit {
   selectedCourse: any;
 
   opened: boolean = false;
+  isCoursesPage: boolean = false;
 
   constructor(
     private userService: UserService,
@@ -28,6 +29,7 @@ export class CoursesComponent implements OnInit {
 
   ngOnChanges(): void {
     this.user = this.userService.getCurrentUser();
+    this.isCoursesPage = this.router.url === '/course';
     this.courses =
       this.user.type === 'IL'
         ? this.user.classesEnrolled
@@ -43,9 +45,9 @@ export class CoursesComponent implements OnInit {
 
   addNewCourse(): void {
     if (this.user.type === 'IL') {
-      this.router.navigate(['enrollcourse']);
+      this.router.navigate(['course/enroll']);
     } else if (this.user.type === 'IC') {
-      this.router.navigate(['createcourse']);
+      this.router.navigate(['course/create']);
     }
   }
 
