@@ -69,7 +69,7 @@ router.route("/:email").post((req, res) => {
  * @return user
  */
 router.route("/").post((req, res) => {
-  const { _id, password, email, type, questionaire, credit } = req.body;
+  const { _id, password, email, type, questionaire } = req.body;
   const newUser = new userSchema({
     _id,
     password,
@@ -94,7 +94,7 @@ router.route("/").post((req, res) => {
       email: "",
     },
     img: "",
-    credit,
+    credit: 0,
     chats: [],
     volunteerPosting: [],
     employmentPosting: [],

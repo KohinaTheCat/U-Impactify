@@ -26,14 +26,13 @@ export class UserService {
    * @param {User} newUser the about-to-be user
    */
   postNewUser(newUser: User): Observable<User> {
-    const { _id, password, email, type, questionaire, credit } = newUser;
+    const { _id, password, email, type, questionaire } = newUser;
     return this.http.post<User>('/api/user/', {
       _id,
       password,
       email,
       type,
       questionaire,
-      credit,
     });
   }
 

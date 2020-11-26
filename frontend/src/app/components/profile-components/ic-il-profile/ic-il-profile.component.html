@@ -96,6 +96,19 @@
       </div>
     </div>
   </div>
+
+  <div *ngIf="sameUser" class="profile-card">
+    <h6>Billing and Payment</h6>
+    <div class="profile-card-body">
+      <div class="displayCredit">
+        <h3>Amount in your Account:</h3>
+        ${{ user.credit }}
+      </div>
+      <div class="edit-button">
+        <button class="btn btn-primary">Add Credit</button>
+      </div>
+    </div>
+  </div>
 </div>
 
 <clr-modal

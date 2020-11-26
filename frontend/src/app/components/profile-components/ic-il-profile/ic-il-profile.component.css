@@ -57,11 +57,48 @@ h6 {
   min-height: 150px;
 }
 
-.imageError{
+.imageError {
   width: 100%;
   text-align: center;
   margin-top: 1rem;
   margin-bottom: 2rem;
+}
+
+.displayCredit {
+  background: #ffffff;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 2rem;
+  line-height: 73px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 1rem;
+  color: #9ed9d9;
+  width: 50%;
+  margin-top: 1rem;
+}
+
+.displayCredit h3 {
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 16px;
+  line-height: 22px;
+  text-align: center;
+  letter-spacing: 0.1px;
+  color: #7a7a7a;
+}
+
+.profile-card-body{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
 }
 
 .alert {
@@ -90,6 +127,7 @@ h6 {
 }
 
 .row {
+  margin-bottom: 2rem;
   display: flex;
   justify-content: space-evenly;
   flex-direction: row;
@@ -100,7 +138,7 @@ label {
   margin-right: 1rem;
 }
 
-.modal-body h3{
+.modal-body h3 {
   margin-bottom: 1rem;
 }
 
@@ -186,19 +224,14 @@ label {
 .edit-button {
   display: flex;
   flex-direction: row-reverse;
-  margin-bottom: -3.25rem;
 }
 
 .edit-button button {
-  height: 3rem;
+  height: 2rem;
   box-shadow: 0px 4px 12px rgba(120, 98, 188, 0.16);
-
   border-radius: 7px;
   border: 0;
   font-size: 1rem;
-  /* White Base */
   color: #ffffff;
-
-  width: 5rem;
   background-color: var(--purple-base);
 }
