@@ -24,6 +24,7 @@ export class AssessmentsComponent implements OnInit {
   course: Course;
   user: User;
   title: string = 'Create an assignment';
+  createText: string = 'CREATE ASSESSMENT';
   createNewAssessmentModal: boolean = false;
   submissionsModal: boolean;
   name: string = '';
@@ -147,66 +148,14 @@ export class AssessmentsComponent implements OnInit {
   }
 
   onEdit(assess: Assessment) {
+    this.title = 'Edit: ' + assess.name;
+    this.createText = 'MODIFY';
     this.name = assess.name;
     this.visibility = assess.visibility;
     this.createNewAssessmentModal = true;
     this.editOption = true;
     this.selectedAssessment = assess;
-    // if (assess.files.length) {
-    //   this.courseService.deleteFiles(assess._id).subscribe((returnAssess: Assessment) => {
-
-    //     // this.courseService.updateAssessment(returnAssess._id, );
-
-    //   });
-    // }
   }
-
-  // onEdit(assess: Assessment) {
-
-  //   this.createNewAssessmentModal = true;
-  //   this.assessmentTracker = assess;
-
-  //   this.title = 'Edit assignment';
-  //   const { name, visibility, studentSubmission, files } = this;
-  //   this.name = assess.name;
-  //   this.visibility = assess.visibility;
-  //   const assessment = {
-  //     name,
-  //     visibility,
-  //     studentSubmission,
-  //     files,
-  //   };
-
-  //   const formData = new FormData();
-
-  //   for (const droppedFile of assessment.files) {
-  //     if (droppedFile.fileEntry.isFile) {
-  //       const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
-  //       fileEntry.file((file: File) => {
-  //         formData.append('documents', file, droppedFile.relativePath);
-  //       });
-  //     } else {
-  //       // It was a directory (empty directories are added, otherwise only files)
-  //       const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
-  //     }
-  //   }
-
-  //   if (assess.files) {
-  //     this.courseService.deleteFiles(assess._id).subscribe((res) => {
-  //       this.courseService
-  //         .updateAssessment(formData, assessment, res._id)
-  //         .subscribe((res) => {
-  //           this.ngOnInit();
-  //         });
-  //     });
-  //   } else {
-  //     this.courseService
-  //       .updateAssessment(formData, assessment, assess._id)
-  //       .subscribe((res) => {
-  //         this.ngOnInit();
-  //       });
-  //   }
-  // }
 
   onDelete(assess: Assessment) {
     this.courseService

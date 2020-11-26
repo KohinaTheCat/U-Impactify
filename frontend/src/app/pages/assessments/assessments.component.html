@@ -76,7 +76,11 @@
         border: '2px var(--gray40) dashed',
         width: 'calc(100% - 4rem)'
       }"
-      (click)="createNewAssessmentModal = true"
+      (click)="
+        createNewAssessmentModal = true;
+        title = 'Create an assignment';
+        createText = 'CREATE ASSESSMENT'
+      "
     >
       <h5 class="new">Create New Assessment</h5>
     </button>
@@ -303,7 +307,7 @@
       class="btn btn-ok btn-outline"
       (click)="registerHandler()"
     >
-      Create Assessment
+      {{ createText }}
     </button>
   </div>
 </clr-modal>
