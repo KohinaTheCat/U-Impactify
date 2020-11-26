@@ -276,8 +276,7 @@ export class CoursePreviewComponent implements OnInit {
   }
 
   goToSurveyResponses(){
-    console.log("navigating timee")
-    this.router.navigate([`surveyresponses`])
+    this.router.navigate([`surveyresponses/${this.course._id}`])
   }
 
   goToLecture(id, title, date) {

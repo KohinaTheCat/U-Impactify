@@ -1,1 +1,23 @@
-<p>survey-responses works!</p>
+<!-- add styling and make it look nice, add back button -->
+
+<h3>All surveys completed for {{ courseName }}</h3>
+<table class="table table-noborder">
+  <thead>
+    <tr>
+      <th class="left">Student Name</th>
+      <th class="left">Describe the typical course workload in a week span</th>
+      <th class="left">Would you recommend this course to others?</th>
+      <th class="left">
+        Are you more interested in this subject after taking this course?
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let survey of instructorReview">
+      <td class="left">{{ survey._id }}</td>
+      <td class="left">{{ survey.surveyAnswers[5] }}</td>
+      <td class="left">{{ survey.surveyAnswers[6] }}</td>
+      <td class="left">{{ survey.surveyAnswers[7] }}</td>
+    </tr>
+  </tbody>
+</table>

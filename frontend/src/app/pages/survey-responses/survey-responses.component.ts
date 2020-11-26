@@ -13,10 +13,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class SurveyResponsesComponent implements OnInit {
 
-  user : User;
-  course : Course; 
+  user: User;
+  course: Course; 
   courseId: string;
   valid: boolean;
+  showSurveys: true;
+  instructorReview: Course['instructorReview'];
+  courseName: string;
+
 
   constructor(private userService: UserService, private courseService: CourseService, private activateRouter: ActivatedRoute) {
     const courseId = this.activateRouter.snapshot.params['courseId'];
@@ -31,8 +35,9 @@ export class SurveyResponsesComponent implements OnInit {
           this.valid = true;
         }
         this.course = course;
+        this.courseName = course.name;
+        this.instructorReview = this.course.instructorReview;
       }
     );
   }
-
 }
