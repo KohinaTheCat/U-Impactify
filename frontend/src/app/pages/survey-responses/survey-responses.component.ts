@@ -9,35 +9,38 @@ import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-survey-responses',
   templateUrl: './survey-responses.component.html',
-  styleUrls: ['./survey-responses.component.css']
+  styleUrls: ['./survey-responses.component.css'],
 })
 export class SurveyResponsesComponent implements OnInit {
-
   user: User;
-  course: Course; 
+  course: Course;
   courseId: string;
   valid: boolean;
   showSurveys: true;
-  instructorReview: Course['instructorReview'];
-  courseName: string;
+  loading: boolean = true;
 
-
-  constructor(private userService: UserService, private courseService: CourseService, private activateRouter: ActivatedRoute) {
+  constructor(
+    private userService: UserService,
+    private courseService: CourseService,
+    private activateRouter: ActivatedRoute
+  ) {
     const courseId = this.activateRouter.snapshot.params['courseId'];
     this.courseId = courseId;
   }
 
   ngOnInit(): void {
-    this.courseService.getCourse(this.courseId).subscribe(
-      (course: Course) => {
-        this.user = this.userService.getCurrentUser();
-        if (course.teachers.includes(this.user._id)){
-          this.valid = true;
-        }
-        this.course = course;
-        this.courseName = course.name;
-        this.instructorReview = this.course.instructorReview;
+    this.courseService.getCourse(this.courseId).subscribe((course: Course) => {
+      this.user = this.userService.getCurrentUser();
+      if (course.teachers.includes(this.user._id)) {
+        this.valid = true;
       }
-    );
+      this.course = course;
+      this.course.img =
+        !this.course.img || this.course.img === ''
+          ? (this.course.img = '../../../../assets/courseimage.png')
+          : // TODO: REMOVE LOCALHOST FROM PROD BUILD AFTER
+            `http://localhost:5000/api/course/documents/${this.course.img}`;
+      this.loading = false;
+    });
   }
 }
