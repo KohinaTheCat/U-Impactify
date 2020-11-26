@@ -30,49 +30,6 @@
   </div>
 
   <div
-    id="settings-dropdown"
-    *ngIf="!!user && course.teachers.includes(user._id)"
-  >
-    <div class="dropdown" style="float: left">
-      <div class="settings-circle">
-        <clr-icon shape="cog" size="36"></clr-icon>
-      </div>
-      <div class="dropdown-content">
-        <div (click)="assessmentsHandler()">
-          <a>Assessments</a>
-        </div>
-        <div (click)="editDocumentsHandler()">
-          <a>Upload/Edit Documents</a>
-        </div>
-        <div (click)="updateCourseContentHandler()">
-          <a>Update Course Content</a>
-        </div>
-        <div (click)="studentAnalysisHandler()">
-          <a>Student Performance Analysis</a>
-        </div>
-        <div *ngIf="!surveyRequest">
-          <div (click)="openedSurveyRequest = true">
-            <a>Request Survey</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div id="settings-dropdown" *ngIf="user.type == 'IL' && alreadyEnrolled">
-    <div class="dropdown" style="float: left">
-      <div class="settings-circle">
-        <clr-icon shape="cog" size="36"></clr-icon>
-      </div>
-      <div class="dropdown-content">
-        <div (click)="assessmentsHandler()">
-          <a>Assessments</a>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div
     class="courseHeader"
     *ngIf="!!user && course.teachers.includes(user._id)"
   >
@@ -136,6 +93,23 @@
         </middle>
       </button>
     </div>
+  </div>
+
+  <div
+    class="courseHeader"
+    id="bug"
+    *ngIf="user.type == 'IL' && alreadyEnrolled"
+  >
+    <button
+      class="box-shadow-3"
+      [ngStyle]="{ width: '14rem' }"
+      (click)="assessmentsHandler()"
+    >
+      <middle>
+        <img src="../../../assets/icons/136.png" width="25.52" height="31.19" />
+        <strong>Assessments</strong>
+      </middle>
+    </button>
   </div>
 
   <div

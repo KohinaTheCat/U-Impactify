@@ -589,8 +589,12 @@ li {
   flex-direction: row;
   justify-content: space-between;
   width: 100%;
+  padding-top: 2rem;
+  margin-bottom: 3rem;
+}
+
+#bug {
   margin-bottom: 1rem;
-  transform: translateY(-2rem);
 }
 
 .box-shadow-3 {
