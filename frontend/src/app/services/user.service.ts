@@ -188,7 +188,7 @@ export class UserService {
    * @return user
    */
   updateProfile(_id: string, profile: any): Observable<User> {
-    return this.http.put<User>(`/api/user/updateProfile`, {
+    return this.http.put<User>(`/api/user/addProfile`, {
       _id,
       profile,
     });
@@ -218,7 +218,7 @@ export class UserService {
    * @param {FormData} file the course image
    * @param {string} courseId id of course
    */
-  postCourseImage(file: FormData, userId: string): Observable<User> {
+  postUserImage(file: FormData, userId: string): Observable<User> {
     return this.http.post<User>(`/api/user/${userId}/uploadUserImage`, file);
   }
 

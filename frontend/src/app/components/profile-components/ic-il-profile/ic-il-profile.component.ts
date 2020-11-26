@@ -30,21 +30,38 @@ export class IcIlProfileComponent implements OnInit {
   img: NgxFileDropEntry[] = [];
   imageError: string = 'No Image Has Been Selected';
 
+  profileImage: string = '';
+
   linkedIn: string = '';
   facebook: string = '';
   twitter: string = '';
   fullName: string = '';
   phone: string = '';
-  
 
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    this.initProfile();
+    this.ngOnChanges();
+
+    if (this.sameUser) {
+      this.user = this.userService.getCurrentUser();
+      this.linkedIn = this.user.profile.linkedIn;
+      this.facebook = this.user.profile.facebook;
+      this.twitter = this.user.profile.twitter;
+    }
   }
 
   ngOnChanges(): void {
     this.initProfile();
+    this.userService
+      .getUserImage(this.user._id)
+      .subscribe(
+        (res) =>
+          (this.profileImage =
+            res === '' || res === null
+              ? ''
+              : `http://localhost:5000/api/user/documents/${res}`)
+      );
   }
 
   /**
@@ -81,33 +98,47 @@ export class IcIlProfileComponent implements OnInit {
             this.imageError = '';
           }
         });
-      } else {
-        // It was a directory (empty directories are added, otherwise only files)
-        const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
       }
     }
   }
 
+  // UPDATING PROFILE DATA DOES NOT WROK
   onChangeImage() {
     if (this.sameUser) {
-      for (const droppedFile of this.img) {
-        if (droppedFile.fileEntry.isFile) {
-          const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
-          fileEntry.file((file: File) => {
-            const formData = new FormData();
-            formData.append('document', file, droppedFile.relativePath);
-            this.userService.postCourseImage(formData, this.user._id).subscribe(
-              (res) => {
-                this.userService.setUser(res);
-                this.ngOnChanges();
-              },
-              (err) => {
-                console.log(err);
-              }
-            );
-          });
-        }
-      }
+      var profile = {
+        fullName: '',
+        phoneNumber: '',
+        linkedIn: this.linkedIn,
+        facebook: this.facebook,
+        twitter: this.twitter,
+      };
+      this.userService.updateProfile(this.user._id, profile).subscribe(
+        (res) => {
+          if (this.img[0] && this.img[0].fileEntry.isFile) {
+            const fileEntry = this.img[0].fileEntry as FileSystemFileEntry;
+            fileEntry.file((file: File) => {
+              const formData = new FormData();
+              formData.append('document', file, this.img[0].relativePath);
+              this.userService.postUserImage(formData, this.user._id).subscribe(
+                (res) => {
+                  this.userService.setUser(res);
+                  this.ngOnChanges();
+                },
+                (err) => {
+                  console.log(err);
+                }
+              );
+            });
+          } else {
+            this.userService.setUser(res);
+            this.ngOnChanges();
+          }
+        },
+        (err) => console.log(err)
+      );
+
+      this.ngOnChanges();
     }
+    this.shouldEditShow = false;
   }
 }

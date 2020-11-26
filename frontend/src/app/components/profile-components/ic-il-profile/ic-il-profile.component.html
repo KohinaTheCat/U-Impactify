@@ -40,7 +40,13 @@
     </div>
     <div class="name-container">
       <div class="profile-picture">
-        <clr-icon *ngIf="!user.img" shape="user"></clr-icon>
+        <div
+          class="profile-picture"
+          [ngClass]="{ 'no-image': !profileImage }"
+          [style.background-image]="'url(' + profileImage + ')'"
+        >
+          <clr-icon *ngIf="!user.img" shape="user"></clr-icon>
+        </div>
       </div>
       <div class="names">
         <h3>{{ user.profile.fullName || user._id }}</h3>
@@ -122,7 +128,7 @@
       <div class="imageError">
         {{ imageError }}
       </div>
-      <div class="uploadedImage" *ngIf="img[0]">
+      <div class="imageError" *ngIf="img[0]">
         Uploaded "{{ img[0].fileEntry.name }}"
       </div>
     </div>
@@ -167,7 +173,7 @@
     <button
       type="button"
       class="btn btn-ok btn-outline"
-      (click)="shouldEditShow = false"
+      (click)="onChangeImage()"
     >
       Ok
     </button>

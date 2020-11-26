@@ -49,6 +49,7 @@ h6 {
 .dashboard {
   padding-left: 2rem;
   padding-right: 2rem;
+  margin-bottom: 2rem;
 }
 
 .image {
@@ -130,8 +131,9 @@ label {
   justify-content: center;
   width: 12rem;
   height: 12rem;
-  background-color: var(--gray20);
-  margin-right: 1rem;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 
 .profile-picture clr-icon {
@@ -148,6 +150,7 @@ label {
 
 .names h3 {
   margin: 0;
+  margin-left: 1rem;
   font-size: 2rem;
   height: max-content;
   font-weight: 300;
