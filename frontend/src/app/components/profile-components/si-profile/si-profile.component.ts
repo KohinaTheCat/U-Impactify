@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import {
-  FileSystemDirectoryEntry, FileSystemFileEntry, NgxFileDropEntry
+  FileSystemDirectoryEntry,
+  FileSystemFileEntry,
+  NgxFileDropEntry,
 } from 'ngx-file-drop';
 import { User } from 'src/app/models/user.model';
 import { UserService } from 'src/app/services/user.service';
@@ -94,7 +96,7 @@ export class SiProfileComponent implements OnInit {
           fileEntry.file((file: File) => {
             const formData = new FormData();
             formData.append('document', file, droppedFile.relativePath);
-            this.userService.postCourseImage(formData, this.user._id).subscribe(
+            this.userService.postUserImage(formData, this.user._id).subscribe(
               (res) => {
                 this.userService.setUser(res);
                 this.ngOnChanges();
@@ -150,8 +152,7 @@ export class SiProfileComponent implements OnInit {
       )
       .subscribe(
         (res) => {
-          if(this.img[0])
-            this.onChangeImage();
+          if (this.img[0]) this.onChangeImage();
           else {
             this.userService.setUser(res);
             this.user = res;

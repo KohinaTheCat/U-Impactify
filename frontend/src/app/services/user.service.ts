@@ -26,14 +26,13 @@ export class UserService {
    * @param {User} newUser the about-to-be user
    */
   postNewUser(newUser: User): Observable<User> {
-    const { _id, password, email, type, questionaire, credit } = newUser;
+    const { _id, password, email, type, questionaire } = newUser;
     return this.http.post<User>('/api/user/', {
       _id,
       password,
       email,
       type,
       questionaire,
-      credit,
     });
   }
 
@@ -129,7 +128,7 @@ export class UserService {
   updateCredit(_id: string, credit: number): Observable<any> {
     return this.http.put('api/user/updateCredit', {
       _id,
-      credit,
+      credit, 
     });
   }
 
@@ -181,6 +180,19 @@ export class UserService {
     });
   }
 
+  /**
+   * PUT user profile
+   * @param _id id of the user
+   * @param profile {fullName, phone, linkedIn, facebook, twitter}
+   * @return user
+   */
+  updateProfile(_id: string, profile: any): Observable<User> {
+    return this.http.put<User>(`/api/user/addProfile`, {
+      _id,
+      profile,
+    });
+  }
+
   getAllSI(): Observable<any> {
     return this.http.get(`/api/user/getAllSI`);
   }
@@ -205,7 +217,7 @@ export class UserService {
    * @param {FormData} file the course image
    * @param {string} courseId id of course
    */
-  postCourseImage(file: FormData, userId: string): Observable<User> {
+  postUserImage(file: FormData, userId: string): Observable<User> {
     return this.http.post<User>(`/api/user/${userId}/uploadUserImage`, file);
   }
 
@@ -327,6 +339,9 @@ export class UserService {
    * @param opportunity updated opportunity
    */
   updateOpportunity(opportunity: Opportunity): Observable<Opportunity> {
-    return this.http.put<Opportunity>(`/api/user/opportunity/updateOpportunity`, {opportunity});
+    return this.http.put<Opportunity>(
+      `/api/user/opportunity/updateOpportunity`,
+      { opportunity }
+    );
   }
 }

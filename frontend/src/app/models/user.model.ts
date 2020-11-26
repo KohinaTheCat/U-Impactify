@@ -11,6 +11,13 @@ export interface User {
   classesTeaching: object[];
   questionaire: string[][];
   img: string;
+  profile: {
+    fullName: string;
+    phone: string;
+    linkedIn: string;
+    facebook: string;
+    twitter: string;
+  };
   socialInitiative: {
     registeredNumber: string;
     businessNumber: string;

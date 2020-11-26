@@ -32,10 +32,10 @@
 
   <h3>Showing all Social Initiatives</h3>
   <div class="card_wrapper">
-    <div *ngFor="let s of si; let i = index;" class="si_card">
-      <img *ngIf="s.img else icon;" class="si_img" [src]="si_imgs[i]">
+    <div *ngFor="let s of si; let i = index" class="si_card">
+      <img *ngIf="s.img; else icon" class="si_img" [src]="si_imgs[i]" />
       <ng-template #icon>
-      <clr-icon class="si_img" shape="image"></clr-icon>
+        <clr-icon class="si_img" shape="image"></clr-icon>
       </ng-template>
       <p>{{ s._id }}</p>
       <button (click)="learnMore(s._id)" class="btn btn-success-outline">
@@ -45,10 +45,12 @@
   </div>
 </div>
 
+<!-- DONATE MODAL -->
+
 <clr-modal [(clrModalOpen)]="opened" [clrModalSize]="'lg'">
   <h3 class="modal-title">We Appreciate your Impact on the Community!</h3>
   <div class="modal-body">
-    <div class="row inner_modal">
+    <div class="donate-modal-body inner_modal">
       <div class="col">
         <div>
           <p>How much will you give today?</p>
@@ -58,7 +60,7 @@
             $
             <input
               [(ngModel)]="amount"
-              [ngModelOptions]="{standalone: true}"
+              [ngModelOptions]="{ standalone: true }"
               type="text"
               id="basic"
               placeholder="100.00"
@@ -76,7 +78,12 @@
     <button type="button" class="btn btn-outline" (click)="opened = false">
       Cancel
     </button>
-    <button type="button" class="btn btn-primary" (click)="onOkay()" (click)="opened = false">
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="onOkay()"
+      (click)="opened = false"
+    >
       Ok
     </button>
   </div>

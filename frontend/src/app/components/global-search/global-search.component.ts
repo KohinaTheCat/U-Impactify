@@ -34,7 +34,10 @@ export class GlobalSearchComponent implements OnInit, AfterViewInit {
           default:
             this.title = event.url.substring(1).split('/')[0];
             break;
-        }
+        } this.isUserProfile =
+          this.userService.getCurrentUser() &&
+          event.url === `/user/${this.userService.getCurrentUser()._id}`;
+          this.isChat = event.url === '/chat';
       });
   }
 
@@ -47,6 +50,8 @@ export class GlobalSearchComponent implements OnInit, AfterViewInit {
   isFocused: boolean;
   newMessage: boolean = false;
   socket: any;
+  isUserProfile: boolean = false;
+  isChat: boolean = false;
 
   ngOnInit(): void {
     this.chatService.init(this.userService.getCurrentUser()._id);
