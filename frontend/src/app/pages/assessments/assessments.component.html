@@ -240,11 +240,10 @@
                   id="toggle1"
                   name="toggle-basic"
                   value="option1"
+                  [(ngModel)]="visibility"
                   class="clr-toggle"
-                  (click)="visibility = !visibility"
                 />
                 <label for="toggle1">Student Visibility</label>
-                <span>{{ visibility }}</span>
               </div>
             </div>
           </div>

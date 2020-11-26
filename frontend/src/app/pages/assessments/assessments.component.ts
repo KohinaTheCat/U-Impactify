@@ -126,12 +126,10 @@ export class AssessmentsComponent implements OnInit {
   }
 
   cancel() {
-    console.log(this.visibility);
     this.files = [];
     this.name = '';
     this.visibility = false;
     this.createNewAssessmentModal = false;
-    console.log(this.visibility);
   }
 
   showStudentSubmission(assessment: any) {
