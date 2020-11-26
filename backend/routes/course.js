@@ -412,6 +412,49 @@ router.delete(
   }
 );
 
+router.delete("/assessment/deleteFiles/:assessmentId", (req, res) => {
+  const { assessmentId } = req.params;
+
+  Assessment.findById(assessmentId).then((newAssess) => {
+    for (i = 0; i < newAssess.files.length; i++) {
+      gfs.delete(new mongoose.Types.ObjectId(newAssess.files[i].id));
+    }
+    newAssess.files = [];
+
+    newAssess
+      .save()
+      .then(() => res.json(newAssess))
+      .catch((err) => res.json(err));
+  });
+});
+
+router.put(
+  "/assessment/updateAssessment/:assessmentId/:name/:visibility",
+  upload.array("documents", 10),
+  (req, res) => {
+    const { assessmentId, name, visibility } = req.params;
+
+    Assessment.findById(assessmentId).then((newAssess) => {
+      newAssess.files = newAssess.files.concat(
+        req.files.map((file) => {
+          return {
+            name: file.filename,
+            id: file.id,
+          };
+        })
+      );
+
+      newAssess.visibility = visibility;
+      newAssess.name = name;
+
+      newAssess
+        .save()
+        .then(() => res.json(newAssess))
+        .catch((err) => res.json(err));
+    });
+  }
+);
+
 // router.put(
 //   "/assessment/updateAssessment",
 //   upload.array("documents", 10),

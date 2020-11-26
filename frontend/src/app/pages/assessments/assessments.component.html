@@ -26,7 +26,11 @@
 
     <div class="box-shadow-2" id="addout" *ngFor="let assess of assessArr">
       <div class="trash">
-        <clr-icon class="editt" shape="note"></clr-icon>
+        <clr-icon
+          class="editt"
+          shape="note"
+          (click)="onEdit(assess)"
+        ></clr-icon>
         <clr-icon
           class="nono"
           shape="trash"
