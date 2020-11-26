@@ -109,19 +109,33 @@
       </middle>
     </button>
 
-    <button class="box-shadow-3" [ngStyle]="{ width: '24rem' }">
+    <button
+      class="box-shadow-3"
+      [ngStyle]="{ width: '24rem' }"
+      (click)="studentAnalysisHandler()"
+    >
       <middle>
         <img src="../../../assets/icons/84.png" width="26.12" height="24.53" />
         <strong>Student Performance Analysis</strong>
       </middle>
     </button>
 
-    <button class="box-shadow-3" [ngStyle]="{ width: '16rem' }">
-      <middle>
-        <img src="../../../assets/icons/30.png" width="26.12" height="24.33" />
-        <strong>Request Survey</strong>
-      </middle>
-    </button>
+    <div *ngIf="!surveyRequest">
+      <button
+        class="box-shadow-3"
+        [ngStyle]="{ width: '16rem' }"
+        (click)="openedSurveyRequest = true"
+      >
+        <middle>
+          <img
+            src="../../../assets/icons/30.png"
+            width="26.12"
+            height="24.33"
+          />
+          <strong>Request Survey</strong>
+        </middle>
+      </button>
+    </div>
   </div>
 
   <div
