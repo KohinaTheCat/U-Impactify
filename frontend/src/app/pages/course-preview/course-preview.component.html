@@ -191,7 +191,7 @@
         <clr-wizard-button [type]="'finish'" (click)="submitSurvey()"
           >Finish</clr-wizard-button
         >
-        <clr-wizard-page>
+        <clr-wizard-page [clrWizardPageNextDisabled]="!(surveyAnswer[0] && surveyAnswer[1] && surveyAnswer[2] && surveyAnswer[3] && surveyAnswer[4])">
           <ng-template clrPageNavTitle>Question 1</ng-template>
           <ng-template clrPageTitle
             >Please rate from 1-5 how much you agree with the following
@@ -200,13 +200,14 @@
           <clr-select-container
             *ngFor="let question of surveyQuestions; let i = index"
           >
-            <select clrSelect name="answer" [(ngModel)]="surveyAnswer[i]">
+            <select clrSelect name="answer" [(ngModel)]="surveyAnswer[i]" required>
               <option value="1">1</option>
               <option value="2">2</option>
               <option value="3">3</option>
               <option value="4">4</option>
               <option value="5">5</option>
             </select>
+            <clr-control-error>This field is required!</clr-control-error>
             <label class="surveyQuestion">{{ question }}</label>
           </clr-select-container>
         </clr-wizard-page>

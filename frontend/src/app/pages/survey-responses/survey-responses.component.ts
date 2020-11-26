@@ -18,6 +18,7 @@ export class SurveyResponsesComponent implements OnInit {
   valid: boolean;
   showSurveys: true;
   loading: boolean = true;
+  averageAnswers: number[] = [0, 0, 0, 0, 0];
 
   constructor(
     private userService: UserService,
@@ -35,6 +36,17 @@ export class SurveyResponsesComponent implements OnInit {
         this.valid = true;
       }
       this.course = course;
+      for(let i = 0; i < course.instructorReview.length; i++){
+        for(let j = 0 ; j < 5; j++){
+          if(Number(course.instructorReview[i].surveyAnswers[j]) !== NaN){
+            this.averageAnswers[j] = this.averageAnswers[j] + Number(course.instructorReview[i].surveyAnswers[j]);
+          }
+        }
+      }
+      for(let k = 0; k < this.averageAnswers.length; k++){
+        this.averageAnswers[k] = this.averageAnswers[k] / course.instructorReview.length;
+      }
+      console.log(this.averageAnswers)
       this.course.img =
         !this.course.img || this.course.img === ''
           ? (this.course.img = '../../../../assets/courseimage.png')
