@@ -1,57 +1,167 @@
 <div class="dashboard">
-  <div class="card">
-    <h6>Personal Information</h6>
-    <div class="clr-row">
-      <div class="sub-card">
-        <div class="heading">Name</div>
-        <div class="sub-heading">{{user.profile.fullName}}</div>
-      </div>
-      <div class="sub-card">
-        <div class="heading">User Name</div>
-        <div class="sub-heading">{{ user._id }}</div>
-      </div>
-    </div>
-    <div class="clr-row">
-      <div class="sub-card">
-        <div class="heading">Email</div>
-        <div class="sub-heading">{{ user.email }}</div>
-      </div>
-      <div class="sub-card">
-        <div class="heading">Phone Number</div>
-        <div class="sub-heading">{{user.profile.phone}}</div>
+  <div
+    class="alert alert-primary"
+    role="alert"
+    *ngIf="!sameUser && !isProfileComplete"
+  >
+    <div class="alert-items">
+      <div class="alert-item static">
+        <div class="alert-icon-wrapper">
+          <clr-icon class="alert-icon" shape="info-circle"></clr-icon>
+        </div>
+        <span class="alert-text">
+          This User's profile is incomplete, some information may be missing.
+        </span>
       </div>
     </div>
-    <div class="clr-row">
-      <div class="sub-card">
-        <div class="heading">Photo</div>
-        <div class="sub-heading">
-          <div class="row">
-            <clr-icon class="image" shape="image"></clr-icon>
-
-            <div class="col" *ngIf="sameUser">
-              <button class="btn btn-primary">
-                <clr-icon shape="upload"></clr-icon> upload
-              </button>
-              <button class="btn btn-primary">
-                <clr-icon shape="pencil"></clr-icon> edit
-              </button>
-              <button class="btn btn-primary">
-                <clr-icon shape="trash"></clr-icon>delete
-              </button>
-            </div>
+  </div>
+  <div
+    class="alert alert-warning"
+    role="alert"
+    *ngIf="sameUser && !isProfileComplete"
+  >
+    <div class="alert-items">
+      <div class="alert-item static">
+        <div class="alert-icon-wrapper">
+          <clr-icon class="alert-icon" shape="exclamation-triangle"></clr-icon>
+        </div>
+        <span class="alert-text">
+          Your profile is missing information. Press <strong>EDIT</strong> to
+          complete it.
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="profile-card">
+    <div class="edit-button" *ngIf="sameUser">
+      <button class="btn btn-primary" (click)="shouldEditShow = true;">Edit</button>
+    </div>
+    <div class="name-container">
+      <div class="profile-picture">
+        <clr-icon *ngIf="!user.img" shape="user"></clr-icon>
+      </div>
+      <div class="names">
+        <h3>{{ user.profile.fullName || user._id }}</h3>
+        <h5 *ngIf="user.profile.fullName">{{ user._id }}</h5>
+      </div>
+    </div>
+    <div class="info-container">
+      <h6>Personal Information</h6>
+      <div class="clr-row">
+        <div class="sub-card">
+          <div class="heading">Email</div>
+          <div class="sub-heading">{{ user.email }}</div>
+        </div>
+        <div class="sub-card" *ngIf="user.profile.phone">
+          <div class="heading">Phone Number</div>
+          <div class="sub-heading">{{ user.profile.phone }}</div>
+        </div>
+        <div class="sub-card">
+          <div class="heading">Linked Accounts</div>
+          <div class="accounts">
+            <div id="facebook" (click)="goTo(user.profile.facebook)"><img class="icon" [ngClass]="{'disabled': !user.profile.facebook}" src="../../../../assets/facebook.svg" alt="facebook"></div>
+            <div id="linkedin" (click)="goTo(user.profile.linkedIn)"><img class="icon" [ngClass]="{'disabled': !user.profile.linkedIn}" src="../../../../assets/linkedin.svg" alt="linkedin"></div>
+            <div id="twitter" (click)="goTo(user.profile.twitter)"><img  class="icon" [ngClass]="{'disabled': !user.profile.twitter}" src="../../../../assets/twitter.svg" alt="twitter"></div>
           </div>
         </div>
       </div>
-      <div class="sub-card">
-        <div class="heading">Linked Accounts</div>
-        <div class="sub-heading">placeholder</div>
-      </div>
-    </div>
-    
-    <div class="edit-container" *ngIf="sameUser">
-      <button class="btn btn-primary">
-        <clr-icon shape="pencil"></clr-icon>Edit Profile
-      </button>
     </div>
   </div>
 </div>
+
+<clr-modal *ngIf="sameUser" [(clrModalOpen)]="shouldEditShow" [clrModalSize]="'xl'">
+  <div class="modal-body edit-profile">
+    <h3>Edit Profile</h3>
+    <div class="image-upload">
+      <ngx-file-drop
+        dropZoneLabel="Drop files here"
+        (onFileDrop)="droppedProfileImage($event)"
+        accept=".jpg, .png, .jpeg"
+      >
+        <ng-template
+          ngx-file-drop-content-tmp
+          let-openFileSelector="openFileSelector"
+        >
+          <label>Upload Profile Picture (.jpg and .png)</label>
+          <button
+            class="btn btn-primary right"
+            style="height: auto"
+            (click)="openFileSelector()"
+          >
+            Browse Files
+          </button>
+        </ng-template>
+      </ngx-file-drop>
+      <div class="uploadedImage imageError">
+        {{ imageError }}
+      </div>
+      <div class="uploadedImage" *ngIf="img[0]">
+        Uploaded "{{ img[0].fileEntry.name }}"
+      </div>
+    </div>
+    <form clrForm class="profile-form">
+      <clr-input-container class="side">
+        <label>Registered Number</label>
+        <input
+          clrInput
+          placeholder="{{ user.profile.fullName }}"
+          [(ngModel)]="fullName"
+          name="Full Name"
+        />
+      </clr-input-container>
+      <clr-input-container class="side">
+        <label>Phone Number</label>
+        <input
+          clrInput
+          placeholder="{{ user.profile.phone }}"
+          [(ngModel)]="phone"
+          name="Phone Number"
+
+        />
+      </clr-input-container>
+      <clr-input-container class="side">
+        <label>Linkedin Profile URL</label>
+        <input
+          clrInput
+          placeholder="{{ user.profile.linkedIn }}"
+          [(ngModel)]="linkedIn"
+          name="linkedIn"
+        />
+      </clr-input-container>
+      <clr-input-container class="side">
+        <label>Facebook Profile URL</label>
+        <input
+          clrInput
+          placeholder="{{ user.profile.facebook }}"
+          [(ngModel)]="facebook"
+          name="facebook"
+        />
+      </clr-input-container>
+      <clr-input-container class="side">
+        <label>Twitter Profile URL</label>
+        <input
+          clrInput
+          placeholder="{{ user.profile.twitter }}"
+          [(ngModel)]="twitter"
+          name="twitter"
+        />
+      </clr-input-container>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-ok btn-outline btn-cancel"
+      (click)="shouldEditShow = false"
+    >
+      Cancel
+    </button>
+    <button
+      type="button"
+      class="btn btn-ok btn-outline"
+      (click)="shouldEditShow = false"
+    >
+      Ok
+    </button>
+  </div>
+</clr-modal>

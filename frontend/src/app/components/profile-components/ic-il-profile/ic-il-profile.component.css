@@ -6,19 +6,19 @@ h6 {
   color: #a78ec3;
 }
 
-.edit-container{
+.edit-container {
   display: flex;
   justify-content: flex-end;
 }
 
-.card {
+.profile-card {
   background: #ffffff;
   box-shadow: 0px 8px 24px #eff3f9;
   border-radius: 25px;
-  padding: 1rem;
-  padding-bottom: 2rem;
+  padding: 1rem 2rem 2rem 2rem;
   display: flex;
   flex-direction: column;
+  margin-top: 2rem;
 }
 
 .sub-card {
@@ -56,25 +56,33 @@ h6 {
   min-height: 150px;
 }
 
-.btn {
-  background: var(--purple-base);
-  border-radius: 4px;
+
+.alert {
+  font-size: 1rem;
   display: flex;
-  flex-direction: row;
   align-items: center;
-  width: 150px;
+  border-radius: 10px;
+  width: 100%;
+  margin-right: 2rem;
+  padding: 0.5rem 0;
 }
 
-.btn:hover {
-  background: var(--purple-smooth);
-  color: var(--purple-base);
+.alert-item {
+  display: flex;
+  align-items: center;
 }
 
-clr-icon{
-  margin-right: 10px;
+.alert-icon-wrapper,
+.alert-icon {
+  width: 1.5rem;
 }
 
-@media (max-width: 1100px) {
+.alert-icon {
+  transform: scale(1.25);
+  margin-right: 0.5rem;
+}
+
+@media (max-width: 1200px) {
   .card {
     flex-direction: column;
   }
@@ -82,4 +90,87 @@ clr-icon{
   .sub-card {
     flex-grow: 1;
   }
+}
+
+.name-container {
+  display: flex;
+  width: calc(100% - 6rem);
+}
+
+.profile-picture {
+  border-radius: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 12rem;
+  height: 12rem;
+  background-color: var(--gray20);
+  margin-right: 1rem;
+}
+
+.profile-picture clr-icon {
+  width: 4rem;
+  height: 4rem;
+  color: var(--purple-base);
+}
+
+.names {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.names h3 {
+  margin: 0;
+  font-size: 3rem;
+  height: max-content;
+  font-weight: 300;
+  color: var(--gray80);
+}
+
+.names h5 {
+  font-size: 1.5rem;
+  font-weight: 400;
+  color: var(--gray60);
+  margin: 0;
+}
+
+.accounts {
+  display: flex;
+  column-gap: 0.5rem;
+}
+
+.accounts * {
+  cursor: pointer;
+}
+
+.icon {
+  width: 3.5rem;
+  height: 3.5rem;
+}
+
+.disabled {
+  cursor: not-allowed !important;
+  filter: opacity(50%);
+}
+
+
+.edit-button {
+  display: flex;
+  flex-direction: row-reverse;
+  margin-bottom: -3.25rem;
+}
+
+.edit-button button {
+  height: 3rem;
+  box-shadow: 0px 4px 12px rgba(120, 98, 188, 0.16);
+
+  border-radius: 7px;
+  border: 0;
+  font-size: 1rem;
+  /* White Base */
+  color: #ffffff;
+
+  width: 5rem;
+  background-color: var(--purple-base);
 }
