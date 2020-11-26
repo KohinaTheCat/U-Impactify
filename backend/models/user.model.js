@@ -15,6 +15,7 @@ const saltFactor = 10;
  * @property {[Object]}   classesTeaching   array to store course _id, name, img
  * @property {[[String]]} questionaire      for the user questionnaire
  * @property {Object}     socialInitiative  for SI Profile
+ * @property {Object}     socialInitiative  for IC/IL Profile
  * @property {Number}     credit            mock money
  * @property {[String]}   chats             ids of chats that the user is in
  */
@@ -60,6 +61,13 @@ const userSchema = new Schema({
   },
   img: {
     type: String,
+  },
+  profile: {
+    fullName: String,
+    phone: String,
+    linkedIn: String,
+    facebook: String,
+    twitter: String,
   },
   socialInitiative: {
     registeredNumber: {

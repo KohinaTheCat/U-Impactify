@@ -181,6 +181,19 @@ export class UserService {
     });
   }
 
+  /**
+   * PUT user profile
+   * @param _id id of the user
+   * @param profile {fullName, phone, linkedIn, facebook, twitter}
+   * @return user
+   */
+  updateProfile(_id: string, profile: any): Observable<User> {
+    return this.http.put<User>(`/api/user/updateProfile`, {
+      _id,
+      profile,
+    });
+  }
+
   getAllSI(): Observable<any> {
     return this.http.get(`/api/user/getAllSI`);
   }
@@ -327,6 +340,9 @@ export class UserService {
    * @param opportunity updated opportunity
    */
   updateOpportunity(opportunity: Opportunity): Observable<Opportunity> {
-    return this.http.put<Opportunity>(`/api/user/opportunity/updateOpportunity`, {opportunity});
+    return this.http.put<Opportunity>(
+      `/api/user/opportunity/updateOpportunity`,
+      { opportunity }
+    );
   }
 }
