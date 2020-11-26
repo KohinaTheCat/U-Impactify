@@ -34,7 +34,9 @@
   </div>
   <div class="profile-card">
     <div class="edit-button" *ngIf="sameUser">
-      <button class="btn btn-primary" (click)="shouldEditShow = true;">Edit</button>
+      <button class="btn btn-primary" (click)="shouldEditShow = true">
+        Edit
+      </button>
     </div>
     <div class="name-container">
       <div class="profile-picture">
@@ -59,9 +61,30 @@
         <div class="sub-card">
           <div class="heading">Linked Accounts</div>
           <div class="accounts">
-            <div id="facebook" (click)="goTo(user.profile.facebook)"><img class="icon" [ngClass]="{'disabled': !user.profile.facebook}" src="../../../../assets/facebook.svg" alt="facebook"></div>
-            <div id="linkedin" (click)="goTo(user.profile.linkedIn)"><img class="icon" [ngClass]="{'disabled': !user.profile.linkedIn}" src="../../../../assets/linkedin.svg" alt="linkedin"></div>
-            <div id="twitter" (click)="goTo(user.profile.twitter)"><img  class="icon" [ngClass]="{'disabled': !user.profile.twitter}" src="../../../../assets/twitter.svg" alt="twitter"></div>
+            <div id="facebook" (click)="goTo(user.profile.facebook)">
+              <img
+                class="icon"
+                [ngClass]="{ disabled: !user.profile.facebook }"
+                src="../../../../assets/facebook.svg"
+                alt="facebook"
+              />
+            </div>
+            <div id="linkedin" (click)="goTo(user.profile.linkedIn)">
+              <img
+                class="icon"
+                [ngClass]="{ disabled: !user.profile.linkedIn }"
+                src="../../../../assets/linkedin.svg"
+                alt="linkedin"
+              />
+            </div>
+            <div id="twitter" (click)="goTo(user.profile.twitter)">
+              <img
+                class="icon"
+                [ngClass]="{ disabled: !user.profile.twitter }"
+                src="../../../../assets/twitter.svg"
+                alt="twitter"
+              />
+            </div>
           </div>
         </div>
       </div>
@@ -69,7 +92,11 @@
   </div>
 </div>
 
-<clr-modal *ngIf="sameUser" [(clrModalOpen)]="shouldEditShow" [clrModalSize]="'xl'">
+<clr-modal
+  *ngIf="sameUser"
+  [(clrModalOpen)]="shouldEditShow"
+  [clrModalSize]="'lg'"
+>
   <div class="modal-body edit-profile">
     <h3>Edit Profile</h3>
     <div class="image-upload">
@@ -92,34 +119,15 @@
           </button>
         </ng-template>
       </ngx-file-drop>
-      <div class="uploadedImage imageError">
+      <div class="imageError">
         {{ imageError }}
       </div>
       <div class="uploadedImage" *ngIf="img[0]">
         Uploaded "{{ img[0].fileEntry.name }}"
       </div>
     </div>
-    <form clrForm class="profile-form">
-      <clr-input-container class="side">
-        <label>Registered Number</label>
-        <input
-          clrInput
-          placeholder="{{ user.profile.fullName }}"
-          [(ngModel)]="fullName"
-          name="Full Name"
-        />
-      </clr-input-container>
-      <clr-input-container class="side">
-        <label>Phone Number</label>
-        <input
-          clrInput
-          placeholder="{{ user.profile.phone }}"
-          [(ngModel)]="phone"
-          name="Phone Number"
-
-        />
-      </clr-input-container>
-      <clr-input-container class="side">
+    <form clrForm class="row">
+      <clr-input-container class="modal-input">
         <label>Linkedin Profile URL</label>
         <input
           clrInput
@@ -128,7 +136,7 @@
           name="linkedIn"
         />
       </clr-input-container>
-      <clr-input-container class="side">
+      <clr-input-container class="modal-input">
         <label>Facebook Profile URL</label>
         <input
           clrInput
@@ -137,7 +145,7 @@
           name="facebook"
         />
       </clr-input-container>
-      <clr-input-container class="side">
+      <clr-input-container class="modal-input">
         <label>Twitter Profile URL</label>
         <input
           clrInput
