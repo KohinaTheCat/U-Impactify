@@ -587,8 +587,9 @@ li {
 .courseHeader {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
   width: 100%;
+  margin-bottom: 1rem;
   transform: translateY(-2rem);
 }
 
@@ -598,10 +599,12 @@ li {
   align-self: center;
   justify-content: center;
   height: 3.5rem;
-  font-size: 1.2rem;
+  font-size: 0.9rem;
   color: rgb(97, 97, 97);
   border-radius: 1rem;
   border-color: none;
+
+  margin: 0 0.6rem 0 0.6rem;
   border: none;
 }
 
@@ -619,5 +622,5 @@ li {
 }
 
 .box-shadow-3:hover {
-  background-color: var(--blue2-smooth);
+  background-color: var(--purple-smooth);
 }
