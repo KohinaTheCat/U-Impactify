@@ -296,4 +296,8 @@ export class AssessmentsComponent implements OnInit {
       return true;
     }
   }
+
+  back() {
+    this.router.navigate([`../../../course/${this.courseId}/`]);
+  }
 }
