@@ -135,6 +135,7 @@ export class AssessmentsComponent implements OnInit {
     this.name = '';
     this.visibility = false;
     this.visualError = false;
+    this.editOption = false;
     this.createNewAssessmentModal = false;
   }
 
