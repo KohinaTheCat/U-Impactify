@@ -453,12 +453,16 @@
     <div class="btn-container">
       <button
         type="button"
-        class="btn btn-outline"
+        class="btn btn-ok btn-outline"
         (click)="openedRateCourse = false"
       >
         Cancel
       </button>
-      <button type="button" class="btn btn-primary" (click)="onSubmitReview()">
+      <button
+        type="button"
+        class="btn btn-ok btn-outline btn-cancel"
+        (click)="onSubmitReview()"
+      >
         Submit
       </button>
     </div>
@@ -497,7 +501,11 @@
     </table>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-primary" (click)="showSurveys = false">
+    <button
+      type="button"
+      class="btn btn-ok btn-outline btn-cancel"
+      (click)="showSurveys = false"
+    >
       Done
     </button>
   </div>

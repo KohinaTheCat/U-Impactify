@@ -24,15 +24,18 @@
         <div class="messages" #messages>
           <div *ngIf="!selectedChat.messages.length" class="no-messages-found">
             <h5>No Messages Found</h5>
-            <p>Start a conversation with <strong>{{selectedChat.members[0]}}</strong></p>
+            <p>
+              Start a conversation with
+              <strong>{{ selectedChat.members[0] }}</strong>
+            </p>
           </div>
           <div
             class="message-blip-container"
             *ngFor="let message of selectedChat.messages"
             [ngClass]="{
-                'left-align': message.from !== user._id,
-                'right-align': message.from === user._id
-              }"
+              'left-align': message.from !== user._id,
+              'right-align': message.from === user._id
+            }"
           >
             <div
               class="message-blip"
@@ -47,7 +50,13 @@
           </div>
         </div>
         <div class="message-input">
-            <input #messageInput type="text" autocomplete="off" placeholder="Type a message..." (keyup.enter)="onSendMessage(selectedChat, messageInput.value)">
+          <input
+            #messageInput
+            type="text"
+            autocomplete="off"
+            placeholder="Type a message..."
+            (keyup.enter)="onSendMessage(selectedChat, messageInput.value)"
+          />
         </div>
       </div>
       <ng-template #noChatSelected>
@@ -80,13 +89,17 @@
     </form>
   </div>
   <div class="modal-footer">
-    <div class="error" *ngIf="error else spacer">
-      {{error}}
+    <div class="error" *ngIf="error; else spacer">
+      {{ error }}
     </div>
     <ng-template #spacer>
-      <div style="flex: 1 1 auto;"></div>
+      <div style="flex: 1 1 auto"></div>
     </ng-template>
-    <button type="button" class="btn btn-primary" (click)="onComposeNewChat(userSearchQuery)">
+    <button
+      type="button"
+      class="btn btn-ok btn-outline btn-cancel"
+      (click)="onComposeNewChat(userSearchQuery)"
+    >
       Send
     </button>
   </div>
