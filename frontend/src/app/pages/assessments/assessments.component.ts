@@ -129,7 +129,7 @@ export class AssessmentsComponent implements OnInit {
         );
       });
   }
-
+  //
   cancel() {
     this.files = [];
     this.name = '';
