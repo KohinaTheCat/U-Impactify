@@ -580,3 +580,7 @@ h3 {
   justify-content: center;
   color: rgb(248, 144, 144);
 }
+
+.addBottom {
+  margin-bottom: 2rem;
+}
