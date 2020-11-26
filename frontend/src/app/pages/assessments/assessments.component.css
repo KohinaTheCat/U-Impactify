@@ -70,6 +70,11 @@ input {
   background: rgb(250, 243, 252);
 }
 
+.add {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
 .edit {
   /* Edit */
   justify-content: flex-start;
@@ -566,4 +571,12 @@ h3 {
   background-color: var(--purple-base);
   margin-left: 2rem;
   margin-bottom: 1.5rem;
+}
+
+.error {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+  color: rgb(248, 144, 144);
 }

@@ -30,6 +30,7 @@ export class AssessmentsComponent implements OnInit {
   files: NgxFileDropEntry[] = [];
   imageError: string = '';
   visibility: boolean = false;
+  visualError: boolean = false;
   error: string = '';
   basic: boolean = true;
   selectedAss: Assessment;
@@ -67,6 +68,7 @@ export class AssessmentsComponent implements OnInit {
     this.submissionsModal = false;
     this.name = '';
     this.visibility = false;
+    this.visualError = false;
     this.viewSelfSubmissions = [];
     this.assessArr = [];
     this.courseService
@@ -129,6 +131,7 @@ export class AssessmentsComponent implements OnInit {
     this.files = [];
     this.name = '';
     this.visibility = false;
+    this.visualError = false;
     this.createNewAssessmentModal = false;
   }
 
@@ -203,44 +206,49 @@ export class AssessmentsComponent implements OnInit {
       files,
     };
 
-    this.courseService.postNewAssessment(assessment).subscribe(
-      (ass) => {
-        const formData = new FormData();
+    if (this.name.length != 0 && this.files.length != 0) {
+      this.visualError = false;
+      this.courseService.postNewAssessment(assessment).subscribe(
+        (ass) => {
+          const formData = new FormData();
 
-        for (const droppedFile of assessment.files) {
-          if (droppedFile.fileEntry.isFile) {
-            const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
-            fileEntry.file((file: File) => {
-              formData.append('documents', file, droppedFile.relativePath);
-            });
-          } else {
-            // It was a directory (empty directories are added, otherwise only files)
-            const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
+          for (const droppedFile of assessment.files) {
+            if (droppedFile.fileEntry.isFile) {
+              const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
+              fileEntry.file((file: File) => {
+                formData.append('documents', file, droppedFile.relativePath);
+              });
+            } else {
+              // It was a directory (empty directories are added, otherwise only files)
+              const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
+            }
           }
-        }
 
-        this.courseService
-          .postAssessmentCourse(this.courseId, ass._id)
-          .subscribe((res) => {
-            this.courseService
-              .postNewAssessmentFile(formData, ass._id)
-              .subscribe(
-                (res) => {
-                  console.log(res);
-                  this.ngOnInit();
-                },
-                (err) => {
-                  console.log(err);
-                }
-              );
-          });
-      },
-      (err) => {
-        this.error = err.message;
-        this.basic = true;
-      }
-    );
-    this.cancel();
+          this.courseService
+            .postAssessmentCourse(this.courseId, ass._id)
+            .subscribe((res) => {
+              this.courseService
+                .postNewAssessmentFile(formData, ass._id)
+                .subscribe(
+                  (res) => {
+                    console.log(res);
+                    this.ngOnInit();
+                  },
+                  (err) => {
+                    console.log(err);
+                  }
+                );
+            });
+        },
+        (err) => {
+          this.error = err.message;
+          this.basic = true;
+        }
+      );
+      this.cancel();
+    } else {
+      this.visualError = true;
+    }
   }
 
   submitHandler() {

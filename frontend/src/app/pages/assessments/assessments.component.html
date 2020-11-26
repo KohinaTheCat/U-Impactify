@@ -66,11 +66,10 @@
     </div>
 
     <button
-      class="box-shadow-2"
+      class="box-shadow-2 add"
       id="add2"
       [ngStyle]="{
         border: '2px var(--gray40) dashed',
-        margin: '3rem',
         width: 'calc(100% - 4rem)'
       }"
       (click)="createNewAssessmentModal = true"
@@ -280,6 +279,9 @@
           </ng-template>
         </ngx-file-drop>
       </div>
+      <div class="error" *ngIf="visualError">
+        Assessment name and files must be filled
+      </div>
     </form>
   </div>
 
@@ -296,7 +298,6 @@
       type="button"
       class="btn btn-ok btn-outline"
       (click)="registerHandler()"
-      (click)="createNewAssessmentModal = false"
     >
       Create Assessment
     </button>
