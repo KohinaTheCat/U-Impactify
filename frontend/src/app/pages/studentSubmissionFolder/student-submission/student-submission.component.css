@@ -149,7 +149,10 @@
   align-items: center;
 }
 
-h6 {
+.h6 {
   font-size: larger;
-  color: rgb(255, 255, 255);
+}
+
+h6 {
+  color: white;
 }
