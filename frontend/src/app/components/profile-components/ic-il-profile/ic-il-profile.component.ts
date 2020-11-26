@@ -33,6 +33,14 @@ export class IcIlProfileComponent implements OnInit {
 
   profileImage: string = '';
 
+  model = {
+    name: '',
+    creditCardNumber: '',
+    CVV: '',
+    exp: '',
+    credit: ''
+  };
+
   linkedIn: string = '';
   facebook: string = '';
   twitter: string = '';
@@ -43,13 +51,6 @@ export class IcIlProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.ngOnChanges();
-
-    if (this.sameUser) {
-      this.user = this.userService.getCurrentUser();
-      this.linkedIn = this.user.profile.linkedIn;
-      this.facebook = this.user.profile.facebook;
-      this.twitter = this.user.profile.twitter;
-    }
   }
 
   ngOnChanges(): void {
@@ -63,6 +64,13 @@ export class IcIlProfileComponent implements OnInit {
               ? ''
               : `http://localhost:5000/api/user/documents/${res}`)
       );
+
+    if (this.sameUser) {
+      this.user = this.userService.getCurrentUser();
+      this.linkedIn = this.user.profile.linkedIn;
+      this.facebook = this.user.profile.facebook;
+      this.twitter = this.user.profile.twitter;
+    }
   }
 
   /**
@@ -103,7 +111,23 @@ export class IcIlProfileComponent implements OnInit {
     }
   }
 
-  // UPDATING PROFILE DATA DOES NOT WROK
+  addCredit() {
+    var val = parseFloat(this.model.credit)
+    if (!isNaN(val) && val > 0 && this.sameUser) {
+      this.userService
+        .updateCredit(this.user._id, val)
+        .subscribe(
+          (res) => {
+            this.userService.setUser(res);
+            this.ngOnChanges();
+          },
+          (err) => console.log(err)
+        );
+    }
+    this.model.credit = '';
+    this.addMoneyShow = false;
+  }
+
   onChangeImage() {
     if (this.sameUser) {
       var profile = {

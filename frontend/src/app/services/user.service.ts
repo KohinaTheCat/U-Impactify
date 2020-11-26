@@ -128,7 +128,7 @@ export class UserService {
   updateCredit(_id: string, credit: number): Observable<any> {
     return this.http.put('api/user/updateCredit', {
       _id,
-      credit,
+      credit, 
     });
   }
 

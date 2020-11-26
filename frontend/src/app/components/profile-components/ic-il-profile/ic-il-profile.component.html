@@ -102,7 +102,7 @@
     <div class="profile-card-body">
       <div class="displayCredit">
         <h3>Amount in your Account:</h3>
-        ${{ user.credit }}
+        ${{ user.credit.toFixed(2) }}
       </div>
       <div class="edit-button">
         <button class="btn btn-primary" (click)="addMoneyShow = true">
@@ -202,27 +202,59 @@
 <clr-modal [(clrModalOpen)]="addMoneyShow">
   <h3 class="modal-title">Enter Payment Information</h3>
   <div class="center modal-body">
+
     <form clrForm class="payment-modal">
       <clr-input-container class="item">
         <label>Name</label>
-        <input clrInput placeholder="Name on Card" type="text" />
+        <input
+          clrInput
+          [(ngModel)]="model.name"
+          name="model.name"
+          placeholder="Name on Card"
+          type="text"
+        />
       </clr-input-container>
       <clr-input-container class="item">
         <label>Credit Card Number</label>
-        <input clrInput placeholder="9999 9999 9999 9999" type="text" />
+        <input
+          clrInput
+          [(ngModel)]="model.creditCardNumber"
+          name="model.creditCardNumber"
+          placeholder="9999 9999 9999 9999"
+          type="text"
+        />
       </clr-input-container>
       <clr-input-container class="item">
         <label>Expiration Date</label>
-        <input clrInput placeholder="MM/YYYY" type="text" />
+        <input
+          clrInput
+          [(ngModel)]="model.exp"
+          name="model.exp"
+          placeholder="MM/YYYY"
+          type="text"
+        />
       </clr-input-container>
       <clr-input-container class="item">
         <label>CVC</label>
-        <input clrInput placeholder="XXX" type="text" />
+        <input
+          clrInput
+          [(ngModel)]="model.CVV"
+          name="model.CVV"
+          placeholder="XXX"
+          type="text"
+        />
       </clr-input-container>
-      <img class="item cc" src="../../../../assets/profile/credit-card.svg"/>
+      <img class="item cc" src="../../../../assets/profile/credit-card.svg" />
       <clr-input-container class="item">
         <label>Payment Amount</label>
-        <input clrInput placeholder="10.00" class="full-width" type="text" />
+        <input
+          clrInput
+          [(ngModel)]="model.credit"
+          name="model.credit"
+          placeholder="10.00"
+          class="full-width"
+          type="text"
+        />
       </clr-input-container>
     </form>
   </div>
@@ -234,11 +266,7 @@
     >
       Cancel
     </button>
-    <button
-      type="button"
-      class="btn btn-primary"
-      (click)="addMoneyShow = false"
-    >
+    <button type="button" class="btn btn-primary" (click)="addCredit()">
       Ok
     </button>
   </div>
