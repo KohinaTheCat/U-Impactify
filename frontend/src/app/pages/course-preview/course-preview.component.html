@@ -76,37 +76,49 @@
     class="courseHeader"
     *ngIf="!!user && course.teachers.includes(user._id)"
   >
-    <button class="box-shadow-3" [ngStyle]="{ width: '12rem' }">
+    <button
+      class="box-shadow-3"
+      [ngStyle]="{ width: '14rem' }"
+      (click)="assessmentsHandler()"
+    >
       <middle>
         <img src="../../../assets/icons/136.png" width="25.52" height="31.19" />
         <strong>Assessments</strong>
       </middle>
     </button>
 
-    <button class="box-shadow-3" [ngStyle]="{ width: '18rem' }">
+    <button
+      class="box-shadow-3"
+      [ngStyle]="{ width: '20rem' }"
+      (click)="editDocumentsHandler()"
+    >
       <middle>
-        <img src="../../../assets/icons/136.png" width="25.52" height="31.19" />
+        <img src="../../../assets/icons/41.png" width="26.12" height="25.84" />
         <strong>Upload/Edit Documents</strong>
       </middle>
     </button>
 
-    <button class="box-shadow-3" [ngStyle]="{ width: '17rem' }">
+    <button
+      class="box-shadow-3"
+      [ngStyle]="{ width: '19rem' }"
+      (click)="updateCourseContentHandler()"
+    >
       <middle>
-        <img src="../../../assets/icons/136.png" width="25.52" height="31.19" />
+        <img src="../../../assets/icons/58.png" width="26.12" height="26.19" />
         <strong>Update Course Content</strong>
       </middle>
     </button>
 
-    <button class="box-shadow-3" [ngStyle]="{ width: '22rem' }">
+    <button class="box-shadow-3" [ngStyle]="{ width: '24rem' }">
       <middle>
-        <img src="../../../assets/icons/136.png" width="25.52" height="31.19" />
+        <img src="../../../assets/icons/84.png" width="26.12" height="24.53" />
         <strong>Student Performance Analysis</strong>
       </middle>
     </button>
 
-    <button class="box-shadow-3" [ngStyle]="{ width: '14rem' }">
+    <button class="box-shadow-3" [ngStyle]="{ width: '16rem' }">
       <middle>
-        <img src="../../../assets/icons/136.png" width="25.52" height="31.19" />
+        <img src="../../../assets/icons/30.png" width="26.12" height="24.33" />
         <strong>Request Survey</strong>
       </middle>
     </button>
