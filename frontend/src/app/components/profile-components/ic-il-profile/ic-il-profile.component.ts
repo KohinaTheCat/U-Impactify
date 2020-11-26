@@ -38,7 +38,7 @@ export class IcIlProfileComponent implements OnInit {
     creditCardNumber: '',
     CVV: '',
     exp: '',
-    credit: ''
+    credit: '',
   };
 
   linkedIn: string = '';
@@ -112,17 +112,15 @@ export class IcIlProfileComponent implements OnInit {
   }
 
   addCredit() {
-    var val = parseFloat(this.model.credit)
+    var val = parseFloat(this.model.credit);
     if (!isNaN(val) && val > 0 && this.sameUser) {
-      this.userService
-        .updateCredit(this.user._id, val)
-        .subscribe(
-          (res) => {
-            this.userService.setUser(res);
-            this.ngOnChanges();
-          },
-          (err) => console.log(err)
-        );
+      this.userService.updateCredit(this.user._id, val).subscribe(
+        (res) => {
+          this.userService.setUser(res);
+          this.ngOnChanges();
+        },
+        (err) => console.log(err)
+      );
     }
     this.model.credit = '';
     this.addMoneyShow = false;
