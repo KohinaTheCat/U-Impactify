@@ -7,7 +7,7 @@
       <div class="top-header">
         <h5>Volunteer Opportunities</h5>
         <button
-        *ngIf="user.type === 'SI'"
+          *ngIf="user.type === 'SI'"
           id="volunteer-button"
           class="btn button"
           (click)="onNewOpportunity('volunteer')"
@@ -15,23 +15,28 @@
           New
         </button>
       </div>
-      <div class="list-container">
+      <div class="list-container" *ngIf="volunteers.length; else noVolunteers">
         <app-opportunity-accordian-card
-        (onEdit)="onEdit($event)"
-        (onApproveHire)="onApproveHire($event)"
-        (onDelete)="onDelete($event)"
-        (onApply)="onApply($event)"
+          (onEdit)="onEdit($event)"
+          (onApproveHire)="onApproveHire($event)"
+          (onDelete)="onDelete($event)"
+          (onApply)="onApply($event)"
           *ngFor="let opportunity of volunteers"
           [opportunity]="opportunity"
           [type]="'volunteer'"
         ></app-opportunity-accordian-card>
       </div>
+      <ng-template #noVolunteers>
+        <div class="none">
+          <h6>No Volunteer Opportunities Found</h6>
+        </div>
+      </ng-template>
     </div>
     <div class="opportunity-container employment-container">
       <div class="top-header">
         <h5>Employment Opportunities</h5>
         <button
-        *ngIf="user.type === 'SI'"
+          *ngIf="user.type === 'SI'"
           id="employment-button"
           class="btn button"
           (click)="onNewOpportunity('employment')"
@@ -39,26 +44,42 @@
           New
         </button>
       </div>
-      <div class="list-container">
+      <div class="list-container" *ngIf="employments.length; else noEmployments">
         <app-opportunity-accordian-card
-        (onEdit)="onEdit($event)"
-        (onApproveHire)="onApproveHire($event)"
-        (onDelete)="onDelete($event)"
-        (onApply)="onApply($event)"
+          (onEdit)="onEdit($event)"
+          (onApproveHire)="onApproveHire($event)"
+          (onDelete)="onDelete($event)"
+          (onApply)="onApply($event)"
           *ngFor="let opportunity of employments"
           [opportunity]="opportunity"
           [type]="'employment'"
         ></app-opportunity-accordian-card>
       </div>
+      <ng-template #noEmployments>
+        <div class="none">
+          <h6>No Employment Opportunities Found</h6>
+        </div>
+      </ng-template>
     </div>
   </div>
   <ng-template #newOpportunity>
     <div class="main" *ngIf="opportunityType">
       <div class="top">
-        <button (click)="onReturn()" type="button" id="back-button" class="btn button">
+        <button
+          (click)="onReturn()"
+          type="button"
+          id="back-button"
+          class="btn button"
+        >
           Back
         </button>
-        <button (click)="onSubmit()" type="button" id="submit-button" class="btn button" [disabled]="shouldShowSubmitButton">
+        <button
+          (click)="onSubmit()"
+          type="button"
+          id="submit-button"
+          class="btn button"
+          [disabled]="shouldShowSubmitButton"
+        >
           Submit
         </button>
       </div>
