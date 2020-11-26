@@ -26,6 +26,7 @@ export class IcIlProfileComponent implements OnInit {
   isProfileComplete: boolean = false;
 
   shouldEditShow: boolean = false;
+  addMoneyShow: boolean = false;
 
   img: NgxFileDropEntry[] = [];
   imageError: string = 'No Image Has Been Selected';

@@ -95,7 +95,7 @@ h6 {
   color: #7a7a7a;
 }
 
-.profile-card-body{
+.profile-card-body {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
@@ -172,6 +172,34 @@ label {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+}
+
+.payment-modal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.center{
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.item {
+  width: 48%;
+  height: 100px;
+  margin-bottom: 2%;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.cc{
+  height: 5rem;
 }
 
 .profile-picture clr-icon {

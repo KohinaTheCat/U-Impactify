@@ -71,7 +71,7 @@
               <img
                 class="icon"
                 [ngClass]="{ disabled: !user.profile.facebook }"
-                src="../../../../assets/facebook.svg"
+                src="../../../../assets/profile/facebook.svg"
                 alt="facebook"
               />
             </div>
@@ -79,7 +79,7 @@
               <img
                 class="icon"
                 [ngClass]="{ disabled: !user.profile.linkedIn }"
-                src="../../../../assets/linkedin.svg"
+                src="../../../../assets/profile/linkedin.svg"
                 alt="linkedin"
               />
             </div>
@@ -87,7 +87,7 @@
               <img
                 class="icon"
                 [ngClass]="{ disabled: !user.profile.twitter }"
-                src="../../../../assets/twitter.svg"
+                src="../../../../assets/profile/twitter.svg"
                 alt="twitter"
               />
             </div>
@@ -105,11 +105,15 @@
         ${{ user.credit }}
       </div>
       <div class="edit-button">
-        <button class="btn btn-primary">Add Credit</button>
+        <button class="btn btn-primary" (click)="addMoneyShow = true">
+          Add Credit
+        </button>
       </div>
     </div>
   </div>
 </div>
+
+<!-- EDIT PROFILE MODAL -->
 
 <clr-modal
   *ngIf="sameUser"
@@ -187,6 +191,53 @@
       type="button"
       class="btn btn-ok btn-outline"
       (click)="onChangeImage()"
+    >
+      Ok
+    </button>
+  </div>
+</clr-modal>
+
+<!-- PAYMENT MODAL -->
+
+<clr-modal [(clrModalOpen)]="addMoneyShow">
+  <h3 class="modal-title">Enter Payment Information</h3>
+  <div class="center modal-body">
+    <form clrForm class="payment-modal">
+      <clr-input-container class="item">
+        <label>Name</label>
+        <input clrInput placeholder="Name on Card" type="text" />
+      </clr-input-container>
+      <clr-input-container class="item">
+        <label>Credit Card Number</label>
+        <input clrInput placeholder="9999 9999 9999 9999" type="text" />
+      </clr-input-container>
+      <clr-input-container class="item">
+        <label>Expiration Date</label>
+        <input clrInput placeholder="MM/YYYY" type="text" />
+      </clr-input-container>
+      <clr-input-container class="item">
+        <label>CVC</label>
+        <input clrInput placeholder="XXX" type="text" />
+      </clr-input-container>
+      <img class="item cc" src="../../../../assets/profile/credit-card.svg"/>
+      <clr-input-container class="item">
+        <label>Payment Amount</label>
+        <input clrInput placeholder="10.00" class="full-width" type="text" />
+      </clr-input-container>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-outline"
+      (click)="addMoneyShow = false"
+    >
+      Cancel
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary"
+      (click)="addMoneyShow = false"
     >
       Ok
     </button>
