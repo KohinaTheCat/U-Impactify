@@ -499,6 +499,7 @@ h3 {
   align-items: center;
   flex-direction: column;
   cursor: pointer;
+  padding: 1rem;
 }
 
 .fileUpload h6 {
@@ -515,6 +516,10 @@ h3 {
   margin: 0;
   font-size: 0.75rem;
   color: var(--gray60);
+}
+
+.yes:hover {
+  background: var(--purple-smooth);
 }
 
 .uploadedImage {
