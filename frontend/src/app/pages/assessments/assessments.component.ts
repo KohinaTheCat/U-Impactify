@@ -125,15 +125,20 @@ export class AssessmentsComponent implements OnInit {
       });
   }
 
+  cancel() {
+    console.log(this.visibility);
+    this.files = [];
+    this.name = '';
+    this.visibility = false;
+    this.createNewAssessmentModal = false;
+    console.log(this.visibility);
+  }
+
   showStudentSubmission(assessment: any) {
     this.router.navigate([
       `course/${this.course._id}/assessments/studentSubmissions/${assessment._id}`,
     ]);
     console.log('asdfasd');
-  }
-
-  cancel() {
-    this.createNewAssessmentModal = false;
   }
 
   // onEdit(assess: Assessment) {
@@ -237,6 +242,7 @@ export class AssessmentsComponent implements OnInit {
         this.basic = true;
       }
     );
+    this.cancel();
   }
 
   submitHandler() {

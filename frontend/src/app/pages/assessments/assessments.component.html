@@ -244,6 +244,7 @@
                   (click)="visibility = !visibility"
                 />
                 <label for="toggle1">Student Visibility</label>
+                <span>{{ visibility }}</span>
               </div>
             </div>
           </div>
@@ -287,8 +288,8 @@
     <button
       type="button"
       class="btn btn-ok btn-outline btn-cancel"
-      (click)="createNewAssessmentModal = false"
       (click)="cancel()"
+      (click)="createNewAssessmentModal = false"
     >
       Cancel
     </button>
