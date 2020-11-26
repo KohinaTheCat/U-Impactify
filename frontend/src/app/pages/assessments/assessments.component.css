@@ -419,7 +419,7 @@ h3 {
   /* Shadow Black Dark */
   box-shadow: 0px 8px 24px #eff3f9;
   border-radius: 40px;
-
+  margin-bottom: 1rem;
   padding: 2rem;
   margin-top: 1rem;
 }
@@ -472,10 +472,12 @@ h3 {
   filter: initial;
 }
 
-.difficulty {
-  margin: 1.5rem 0 1rem 0;
+.visi {
+  margin-left: 0.1rem;
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: row;
+  width: 100%;
+  justify-content: center;
 }
 
 #easy {
@@ -487,4 +489,38 @@ h3 {
   background-color: var(--blue2-smooth);
   border-color: var(--blue2-base);
   color: #00f;
+}
+
+.fileUpload {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.fileUpload h6 {
+  margin: 0;
+  margin-top: 0.25rem;
+  font-size: 1.25rem;
+}
+
+.fileUpload clr-icon {
+  width: 2rem;
+}
+
+.fileUpload p {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--gray60);
+}
+
+.uploadedImage {
+  margin-top: 0.5rem;
+}
+
+#imageError {
+  color: #f00;
 }
