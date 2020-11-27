@@ -28,47 +28,88 @@
       </button>
     </div>
   </div>
+
   <div
-    id="settings-dropdown"
+    class="courseHeader"
     *ngIf="!!user && course.teachers.includes(user._id)"
   >
-    <div class="dropdown" style="float: left">
-      <div class="settings-circle">
-        <clr-icon shape="cog" size="36"></clr-icon>
-      </div>
-      <div class="dropdown-content">
-        <div (click)="assessmentsHandler()">
-          <a>Assessments</a>
-        </div>
-        <div (click)="editDocumentsHandler()">
-          <a>Upload/Edit Documents</a>
-        </div>
-        <div (click)="updateCourseContentHandler()">
-          <a>Update Course Content</a>
-        </div>
-        <div (click)="studentAnalysisHandler()">
-          <a>Student Performance Analysis</a>
-        </div>
-        <div *ngIf="!surveyRequest">
-          <div (click)="openedSurveyRequest = true">
-            <a>Request Survey</a>
-          </div>
-        </div>
-      </div>
+    <button
+      class="box-shadow-3"
+      [ngStyle]="{ width: '14rem' }"
+      (click)="assessmentsHandler()"
+    >
+      <middle>
+        <img src="../../../assets/icons/136.png" width="25.52" height="31.19" />
+        <strong>Assessments</strong>
+      </middle>
+    </button>
+
+    <button
+      class="box-shadow-3"
+      [ngStyle]="{ width: '20rem' }"
+      (click)="editDocumentsHandler()"
+    >
+      <middle>
+        <img src="../../../assets/icons/41.png" width="26.12" height="25.84" />
+        <strong>Upload/Edit Documents</strong>
+      </middle>
+    </button>
+
+    <button
+      class="box-shadow-3"
+      [ngStyle]="{ width: '19rem' }"
+      (click)="updateCourseContentHandler()"
+    >
+      <middle>
+        <img src="../../../assets/icons/58.png" width="26.12" height="26.19" />
+        <strong>Update Course Content</strong>
+      </middle>
+    </button>
+
+    <button
+      class="box-shadow-3"
+      [ngStyle]="{ width: '24rem' }"
+      (click)="studentAnalysisHandler()"
+    >
+      <middle>
+        <img src="../../../assets/icons/84.png" width="26.12" height="24.53" />
+        <strong>Student Performance Analysis</strong>
+      </middle>
+    </button>
+
+    <div *ngIf="!surveyRequest">
+      <button
+        class="box-shadow-3"
+        [ngStyle]="{ width: '16rem' }"
+        (click)="openedSurveyRequest = true"
+      >
+        <middle>
+          <img
+            src="../../../assets/icons/30.png"
+            width="26.12"
+            height="24.33"
+          />
+          <strong>Request Survey</strong>
+        </middle>
+      </button>
     </div>
   </div>
 
-  <div id="settings-dropdown" *ngIf="user.type == 'IL' && alreadyEnrolled">
-    <div class="dropdown" style="float: left">
-      <div class="settings-circle">
-        <clr-icon shape="cog" size="36"></clr-icon>
-      </div>
-      <div class="dropdown-content">
-        <div (click)="assessmentsHandler()">
-          <a>Assessments</a>
-        </div>
-      </div>
-    </div>
+  <div
+    class="courseHeader"
+    id="bug"
+    *ngIf="user.type == 'IL' && alreadyEnrolled"
+  >
+    <button
+      class="box-shadow-3"
+      [ngStyle]="{ width: '14rem' }"
+      (click)="assessmentsHandler()"
+    >
+      <middle>
+        <img src="../../../assets/icons/136.png" width="25.52" height="31.19" />
+        <strong>Assessments</strong>
+      </middle>
+    </button>
   </div>
 
   <div
@@ -174,7 +215,7 @@
             Rate this course
           </button>
           <button
-          *ngIf="this.averageScore"
+            *ngIf="this.averageScore"
             class="btn btn-success-outline"
             id="change"
             (click)="openedAllReviews = true"
@@ -451,12 +492,16 @@
     <div class="btn-container">
       <button
         type="button"
-        class="btn btn-outline"
+        class="btn btn-ok btn-outline"
         (click)="openedRateCourse = false"
       >
         Cancel
       </button>
-      <button type="button" class="btn btn-primary" (click)="onSubmitReview()">
+      <button
+        type="button"
+        class="btn btn-ok btn-outline btn-cancel"
+        (click)="onSubmitReview()"
+      >
         Submit
       </button>
     </div>
@@ -609,10 +654,14 @@
     </form>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline" (click)="cancel()">
+    <button type="button" class="btn btn-ok btn-outline" (click)="cancel()">
       Cancel
     </button>
-    <button type="button" class="btn btn-primary" (click)="registerHandler()">
+    <button
+      type="button"
+      class="btn btn-ok btn-outline btn-cancel"
+      (click)="registerHandler()"
+    >
       Update Course
     </button>
   </div>
