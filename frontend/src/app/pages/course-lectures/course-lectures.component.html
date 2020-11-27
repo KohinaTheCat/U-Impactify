@@ -1,4 +1,12 @@
 <div class="container">
+  <button
+    type="button"
+    id="back-button"
+    class="btn button"
+    (click)="skrrtback()"
+  >
+    Back
+  </button>
   <div class="video-container">
     <video controls>
       <source [src]="videoId" type="video/mp4" />
