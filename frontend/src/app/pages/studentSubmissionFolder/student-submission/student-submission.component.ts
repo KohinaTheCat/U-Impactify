@@ -58,6 +58,12 @@ export class StudentSubmissionComponent implements OnInit {
   back() {
     this.router.navigate([`../../../course/${this.courseId}/assessments/`]);
   }
+
+  goToSubmission(submission: any) {
+    console.log(submission);
+    this.router.navigate([`course/${this.courseId}/assessments/studentSubmissions/${this.assessmentId}/${submission.id}`])
+  }
+
 }
 
 // @Pipe({

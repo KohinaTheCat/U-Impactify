@@ -36,6 +36,7 @@ import { SiOpportunitiesComponent } from './pages/si-opportunities/si-opportunit
 import { OpportunityAccordianCardComponent } from './components/opportunity-accordian-card/opportunity-accordian-card.component';
 import { CourseLecturesComponent } from './pages/course-lectures/course-lectures.component';
 import { SurveyResponsesComponent } from './pages/survey-responses/survey-responses.component';
+import { ViewStudentSubmissionsComponent } from './pages/view-student-submissions/view-student-submissions.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { SurveyResponsesComponent } from './pages/survey-responses/survey-respon
     OpportunityAccordianCardComponent,
     CourseLecturesComponent,
     SurveyResponsesComponent,
+    ViewStudentSubmissionsComponent,
   ],
   imports: [
     BrowserModule,

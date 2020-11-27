@@ -23,6 +23,8 @@ import { CourseLecturesComponent } from './pages/course-lectures/course-lectures
 import { TypeGuard } from './guards/type.guard';
 import { CoursesComponent } from './components/dashboard-components/courses/courses.component';
 import { SurveyResponsesComponent } from './pages/survey-responses/survey-responses.component';
+import { ViewStudentSubmissionsComponent } from './pages/view-student-submissions/view-student-submissions.component'
+
 
 const routes: Routes = [
   { path: 'signup', component: LoginSignupComponent },
@@ -46,7 +48,11 @@ const routes: Routes = [
     component: StudentSubmissionComponent,
     canActivate: [AuthGuard, TypeGuard],
   },
-
+  {
+    path: 'course/:id/assessments/studentSubmissions/:assessment/:submission',
+    component: ViewStudentSubmissionsComponent,
+    canActivate: [AuthGuard, TypeGuard]
+  },
   {
     path: 'questionaire',
     component: SignupQuestionaireComponent,

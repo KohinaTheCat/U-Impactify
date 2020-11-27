@@ -1,0 +1,18 @@
+<div class="container">
+  <button type="button" id="back-button" class="btn button" (click)="back()">
+    Back
+  </button>
+  <!--<button type="button" id="mark-button" class="btn button" (click)="mark()">
+    Mark
+  </button>
+  -->
+
+  
+  <div class="pdf-container">
+    <pdf-viewer
+      [src]="viewSubmission"
+      [render-text]="true"
+      style="display: block"
+    ></pdf-viewer>
+  </div>
+</div>

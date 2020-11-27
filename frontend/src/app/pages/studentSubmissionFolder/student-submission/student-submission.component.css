@@ -156,3 +156,9 @@
 h6 {
   color: white;
 }
+
+button.link {
+  background:none;
+  border:none;
+  color: blue; 
+}
