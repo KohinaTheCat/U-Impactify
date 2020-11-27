@@ -181,15 +181,6 @@ export class CourseService {
   }
 
   /**
-   * PUT update assessment
-   */
-  updateAssessment(courseId: string, assessment: any): Observable<Assessment> {
-    return this.http.put<Assessment>(`/api/course/assessment/${courseId}`, {
-      assessment,
-    });
-  }
-
-  /**
    *
    * @param courseId
    * @param assessmentId
@@ -212,6 +203,65 @@ export class CourseService {
   deleteAssessment(courseId: string, assessmentId: string): Observable<any> {
     return this.http.delete(
       `/api/course/assessment/deleteAssessment/${courseId}/${assessmentId}`
+    );
+  }
+
+  // updateAssessment(
+  //   files: FormData,
+  //   assessment: any,
+  //   assessmentId: string
+  // ): Observable<Assessment> {
+  //   const { name, visibility, studentSubmission } = assessment;
+  //   return this.http.put<Assessment>(
+  //     `/api/course/assessment/updateAssessment`,
+  //     {
+  //       files,
+  //       name,
+  //       visibility,
+  //       studentSubmission,
+  //       assessmentId,
+  //     }
+  //   );
+  // }
+
+  // deleteFiles(assessmentId: string): Observable<Assessment> {
+  //   return this.http.put<Assessment>(`api/course/assessment/deleteFiles`, {
+  //     assessmentId,
+  //   });
+  // }
+
+  /**
+   * DELETE assessment
+   * @param {string} assessmentId id of assessment
+   */
+  deleteFiles(assessmentId: string): Observable<any> {
+    return this.http.delete(
+      `/api/course/assessment/deleteFiles/${assessmentId}`
+    );
+  }
+
+  /**
+   * DELETE assessment
+   * @param {string} assessmentId id of assessment
+   * @param {string} name Name of assessment
+   * @param {string} visibility visibility
+   * @param {FormData} files files that come alongside
+   */
+  updateAssessment(
+    assessmentId: string,
+    name: string,
+    visibility: boolean,
+    files: FormData
+  ) {
+    return this.http.put<Assessment>(
+      `/api/course/assessment/updateAssessment/${assessmentId}/${name}/${visibility}`,
+      files
+    );
+  }
+
+  deleteStudentSubmission(assessmentId: string, studentId: string) {
+    return this.http.delete(
+      `/api/course/assessment/deleteStudentSubmission/${assessmentId}/${studentId}`
     );
   }
 

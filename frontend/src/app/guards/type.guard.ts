@@ -30,14 +30,14 @@ export class TypeGuard implements CanActivate {
         '/lectures/',
         '/enroll',
         '/socialinitiatives',
-        '/course/',
+        '/course',
       ],
       IC: [
         '/assessments',
         '/lectures/',
         '/create',
         '/opportunities',
-        '/course/',
+        '/course',
         '/socialinitiatives',
         '/surveyresponses/'
       ],
@@ -62,8 +62,7 @@ export class TypeGuard implements CanActivate {
       isAllowed = user.type !== 'SI';
     }
 
-    if (!isAllowed) 
-      this.router.navigateByUrl('/about');
+    if (!isAllowed) this.router.navigateByUrl('/about');
     return isAllowed;
   }
 }

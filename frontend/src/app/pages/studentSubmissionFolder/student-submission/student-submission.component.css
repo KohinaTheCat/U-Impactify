@@ -1,0 +1,158 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.button {
+  /* Shadow Dark · 16dp */
+  box-shadow: 0px 4px 12px rgba(120, 98, 188, 0.16);
+
+  border-radius: 7px;
+  border: 0;
+  font-size: 1rem;
+  width: 5rem;
+  height: 2.5rem;
+  /* White Base */
+  color: #ffffff;
+}
+
+#back-button {
+  width: 5rem;
+  background-color: var(--purple-base);
+  margin-left: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.child {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  transform: translateY(-0.5rem);
+  width: 100%;
+  justify-content: center;
+}
+
+#header {
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: #a78ec3;
+  width: calc(100% - 4rem);
+}
+
+.translate {
+  color: white;
+  transform: translateY(-0.5rem);
+}
+
+.courseimage {
+  height: 20rem;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+
+  filter: blur(3px) brightness(0.9);
+}
+
+.outer {
+  align-self: center;
+  height: 20rem;
+  border-radius: 20px;
+  overflow: hidden;
+  width: calc(100% - 4rem);
+  margin-bottom: 2rem;
+}
+
+#title2 {
+  font-size: 4rem;
+  color: white;
+  margin-top: 0rem;
+  transform: translateY(-12rem);
+  display: flex;
+  justify-content: center;
+  text-shadow: 0px 0px 2px var(--gray80);
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2.5rem;
+  margin-top: 2.5rem;
+  /* background-color: #923af7; */
+  height: 100%;
+  width: 45%;
+
+  /* margin-right: 2rem;
+  margin-left: 2rem; */
+}
+
+#addout {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-top: 1rem;
+  height: 100%;
+  width: calc(100% - 4rem);
+
+  /* background-color: #c21d00; */
+}
+
+#add1 {
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  align-items: center;
+  justify-content: space-evenly;
+
+  background-color: #a78ec3;
+
+  width: calc(100% - 4rem);
+}
+
+.test {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* background-color: aqua; */
+}
+
+#add2 {
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+
+  /* background-color: #c21d00; */
+}
+
+.loading {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.h6 {
+  font-size: larger;
+}
+
+h6 {
+  color: white;
+}

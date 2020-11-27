@@ -13,6 +13,7 @@ import {
 
 import { ROOT_DROPDOWN_PROVIDER } from '@clr/angular/popover/dropdown/providers/dropdown.service';
 import { FiltersProvider } from '@clr/angular/data/datagrid/providers/filters';
+import { FindValueSubscriber } from 'rxjs/internal/operators/find';
 
 @Component({
   selector: 'app-assessments',
@@ -22,15 +23,21 @@ import { FiltersProvider } from '@clr/angular/data/datagrid/providers/filters';
 export class AssessmentsComponent implements OnInit {
   course: Course;
   user: User;
-  createNewAssessmentModal: boolean;
+  title: string = 'Create an assignment';
+  createText: string = 'CREATE ASSESSMENT';
+  createNewAssessmentModal: boolean = false;
   submissionsModal: boolean;
-  name: String = '';
+  name: string = '';
   files: NgxFileDropEntry[] = [];
   imageError: string = '';
   visibility: boolean = false;
+  visualError: boolean = false;
   error: string = '';
   basic: boolean = true;
   selectedAss: Assessment;
+  assessmentTracker: Assessment;
+  editOption: boolean = false;
+  selectedAssessment: Assessment;
 
   identification: Object[];
 
@@ -64,6 +71,8 @@ export class AssessmentsComponent implements OnInit {
     this.submissionsModal = false;
     this.name = '';
     this.visibility = false;
+    this.editOption = false;
+    this.visualError = false;
     this.viewSelfSubmissions = [];
     this.assessArr = [];
     this.courseService
@@ -75,12 +84,11 @@ export class AssessmentsComponent implements OnInit {
             ? (this.course.img = '../../../../assets/courseimage.png')
             : // TODO: REMOVE LOCALHOST FROM PROD BUILD AFTER
               `http://localhost:5000/api/course/documents/${this.course.img}`;
-
         this.courseService.getAllAssessments(incomingCourse._id).subscribe(
           (incomingArray: Assessment[]) => {
             this.assessArr = incomingArray.sort((a, b) => {
               if (a.name < b.name) {
-                return -1; //nameA comes first
+                return -1; //nameA comes
               }
               if (a.name > b.name) {
                 return 1; // nameB comes first
@@ -102,8 +110,6 @@ export class AssessmentsComponent implements OnInit {
                 (sub: any) => sub.studentId === this.user._id
               );
               if (studentSub) {
-                console.log('HERE: ' + studentSub['studentId']);
-
                 this.viewSelfSubmissions = this.viewSelfSubmissions.concat([
                   studentSub['files'],
                 ]);
@@ -113,8 +119,6 @@ export class AssessmentsComponent implements OnInit {
                 ]);
               }
             });
-
-            console.log(this.viewSelfSubmissions);
           },
           (err) => {
             console.log(err);
@@ -122,17 +126,33 @@ export class AssessmentsComponent implements OnInit {
         );
       });
   }
-
-  showStudentSubmission($event) {
-    this.selectedAss = $event;
-    this.submissionsModal = true;
+  //
+  cancel() {
+    this.files = [];
+    this.name = '';
+    this.visibility = false;
+    this.visualError = false;
+    this.editOption = false;
+    this.createNewAssessmentModal = false;
   }
 
-  onEdit(assess: Assessment) {}
+  showStudentSubmission(assessment: any) {
+    this.router.navigate([
+      `course/${this.course._id}/assessments/studentSubmissions/${assessment._id}`,
+    ]);
+  }
 
-  // Ask about this. Not working :(
+  onEdit(assess: Assessment) {
+    this.title = 'Edit: ' + assess.name;
+    this.createText = 'MODIFY';
+    this.name = assess.name;
+    this.visibility = assess.visibility;
+    this.createNewAssessmentModal = true;
+    this.editOption = true;
+    this.selectedAssessment = assess;
+  }
+
   onDelete(assess: Assessment) {
-    console.log('courseId: ' + this.courseId + 'assess.id ' + assess._id);
     this.courseService
       .deleteAssessment(this.courseId, assess._id)
       .subscribe((res) => {
@@ -141,6 +161,7 @@ export class AssessmentsComponent implements OnInit {
   }
 
   registerHandler() {
+    console.log(this.assessArr);
     const { name, visibility, studentSubmissions, files } = this;
     const assessment = {
       name,
@@ -149,8 +170,8 @@ export class AssessmentsComponent implements OnInit {
       files,
     };
 
-    this.courseService.postNewAssessment(assessment).subscribe(
-      (ass) => {
+    if (this.name.length != 0 && this.files.length != 0) {
+      if (this.editOption) {
         const formData = new FormData();
 
         for (const droppedFile of assessment.files) {
@@ -165,27 +186,68 @@ export class AssessmentsComponent implements OnInit {
           }
         }
 
+        if (this.selectedAssessment.files) {
+          this.courseService
+            .deleteFiles(this.selectedAssessment._id)
+            .subscribe((newAssessment) => {});
+        }
+
         this.courseService
-          .postAssessmentCourse(this.courseId, ass._id)
-          .subscribe((res) => {
-            this.courseService
-              .postNewAssessmentFile(formData, ass._id)
-              .subscribe(
-                (res) => {
-                  console.log(res);
-                  this.ngOnInit();
-                },
-                (err) => {
-                  console.log(err);
-                }
-              );
+          .updateAssessment(
+            this.selectedAssessment._id,
+            this.name,
+            this.visibility,
+            formData
+          )
+          .subscribe((newAssess) => {
+            this.ngOnInit();
           });
-      },
-      (err) => {
-        this.error = err.message;
-        this.basic = true;
+
+        this.editOption = false;
+      } else {
+        this.visualError = false;
+        this.courseService.postNewAssessment(assessment).subscribe(
+          (ass) => {
+            const formData = new FormData();
+
+            for (const droppedFile of assessment.files) {
+              if (droppedFile.fileEntry.isFile) {
+                const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
+                fileEntry.file((file: File) => {
+                  formData.append('documents', file, droppedFile.relativePath);
+                });
+              } else {
+                // It was a directory (empty directories are added, otherwise only files)
+                const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
+              }
+            }
+
+            this.courseService
+              .postAssessmentCourse(this.courseId, ass._id)
+              .subscribe((res) => {
+                this.courseService
+                  .postNewAssessmentFile(formData, ass._id)
+                  .subscribe(
+                    (res) => {
+                      console.log(res);
+                      this.ngOnInit();
+                    },
+                    (err) => {
+                      console.log(err);
+                    }
+                  );
+              });
+          },
+          (err) => {
+            this.error = err.message;
+            this.basic = true;
+          }
+        );
       }
-    );
+      this.cancel();
+    } else {
+      this.visualError = true;
+    }
   }
 
   submitHandler() {
@@ -201,10 +263,14 @@ export class AssessmentsComponent implements OnInit {
         const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
       }
     }
+
+    this.courseService
+      .deleteStudentSubmission(this.selectedAss._id, this.user._id)
+      .subscribe((res) => {});
+
     this.courseService
       .postStudentSubmission(this.selectedAss._id, this.user._id, formData)
       .subscribe((res) => {
-        console.log('Did I make it');
         this.submissionsModal = false;
         this.selectedAss = null;
         this.ngOnInit();
@@ -236,21 +302,19 @@ export class AssessmentsComponent implements OnInit {
     );
 
     if (this.identification.length) {
-      console.log(this.identification[0]['studentId']);
-
       this.viewSelfSubmissions = this.identification[0]['files'];
       this.ngOnInit();
       return true;
     }
+  }
 
-    // if (temp2.length) {
-    //   this.viewSelfSubmissions = temp2[0].files;
-    //   return true;
-    // }
+  back() {
+    this.router.navigate([`../../../course/${this.courseId}/`]);
+  }
 
-    // if (assess.studentSubmissions.includes(this.user._id)) {
-    // } else {
-    //   return false;
-    // }
+  modifyName() {
+    this.createNewAssessmentModal = true;
+    this.title = 'Create an assignment';
+    this.createText = 'CREATE ASSESSMENT';
   }
 }

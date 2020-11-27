@@ -1,0 +1,50 @@
+<div class="loading" *ngIf="loading">
+  <span class="spinner"></span>
+</div>
+
+<div class="page" *ngIf="!loading">
+  <div class="outer" *ngIf="course && assessment">
+    <div
+      class="courseimage"
+      style="background-image: url('{{ course.img }}')"
+    ></div>
+    <h4 id="title2">{{ assessment.name }}</h4>
+  </div>
+
+  <button type="button" id="back-button" class="btn button" (click)="back()">
+    Back
+  </button>
+
+  <div class="box-shadow-2" id="add1">
+    <h6 class="child">Name</h6>
+    <h6 class="child">Submission</h6>
+    <h6 class="child">Evaluation</h6>
+  </div>
+  <!-- *ngFor="let assess of assessArr" -->
+  <div
+    class="box-shadow-2"
+    id="addout"
+    *ngFor="let submission of assessment.studentSubmissions"
+  >
+    <div id="add2">
+      <div class="content">
+        <span class="h6">{{ submission.studentId }}</span>
+      </div>
+
+      <div class="content">
+        <div *ngFor="let file of submission.files">
+          <a
+            *ngIf="file"
+            download="{{ file.name }}"
+            href="http://localhost:5000/api/course/documents/{{ file.id }}"
+            >{{ file.name }}</a
+          >
+        </div>
+      </div>
+
+      <div class="content">
+        <span class="h6">Enter grade over here!</span>
+      </div>
+    </div>
+  </div>
+</div>
