@@ -36,3 +36,15 @@
     padding-right: 2rem;
     padding-bottom: 2rem;
   }
+
+  .left {
+      font-size: 0.72rem;
+  }
+
+  .title { 
+      font-size: 1.5rem;
+  }
+
+  .mid {
+      font-size: 0.72rem;
+  }
