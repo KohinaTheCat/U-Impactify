@@ -33,14 +33,12 @@ export class GlobalSearchComponent implements OnInit, AfterViewInit {
             break;
           default:
             this.title = event.url.substring(1).split('/')[0];
-            if(this.title === 'surveyresponses') {
-              this.title = "Survey Responses"
-            }
             break;
         } this.isUserProfile =
           this.userService.getCurrentUser() &&
           event.url === `/user/${this.userService.getCurrentUser()._id}`;
           this.isChat = event.url === '/chat';
+          if(event.url.includes('surveyresponses')) this.title = 'Survey Responses'
       });
   }
 
