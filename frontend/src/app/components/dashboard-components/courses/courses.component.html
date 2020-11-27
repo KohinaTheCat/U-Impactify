@@ -11,7 +11,11 @@
           <clr-icon shape="image"></clr-icon>
         </ng-template>
       </div>
-      {{ course.name }}
+      {{
+        course.name.length <= 16
+          ? course.name
+          : (course.name | slice: 0:14) + "..."
+      }}
     </div>
 
     <div class="course-card" (click)="addNewCourse()" id="new-course">
