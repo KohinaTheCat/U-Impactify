@@ -1,0 +1,68 @@
+<div *ngIf="!loading && valid" class="container">
+  <div class="image">
+    <div
+      class="courseimage"
+      style="background-image: url('{{ course.img }}')"
+    ></div>
+    <h4 id="title">{{ course.name }}</h4>
+  </div>
+
+  <h3 class = "title">
+    Average results for the following questions below (0 - lowest, 5 - highest)
+  </h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="mid">I found the course very fun and exciting</th>
+        <th class="mid">
+          This course gave me a good understanding of this subject
+        </th>
+        <th class="mid">
+          The impact consultant designed the course so it was easy to access
+          resources
+        </th>
+        <th class="mid">
+          Course assessments allowed me to better improve my understanding with
+          the course material
+        </th>
+        <th class="mid">The overall course quality was great</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="mid">{{ averageAnswers[0] }}</td>
+        <td class="mid">{{ averageAnswers[1] }}</td>
+        <td class="mid">{{ averageAnswers[2] }}</td>
+        <td class="mid">{{ averageAnswers[3] }}</td>
+        <td class="mid">{{ averageAnswers[4] }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <br><br>
+  <h3 class = "title">
+    Completed survey responses from students for the following questions below
+  </h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="left">Student Name</th>
+        <th class="left">
+          Describe the typical course workload in a week span
+        </th>
+        <th class="left">Would you recommend this course to others?</th>
+        <th class="left">
+          Are you more interested in this subject after taking this course?
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let survey of course.instructorReview">
+        <td class="left">{{ survey._id }}</td>
+        <td class="left">{{ survey.surveyAnswers[5] }}</td>
+        <td class="left">{{ survey.surveyAnswers[6] }}</td>
+        <td class="left">{{ survey.surveyAnswers[7] }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

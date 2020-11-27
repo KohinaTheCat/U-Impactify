@@ -39,6 +39,7 @@ export class TypeGuard implements CanActivate {
         '/opportunities',
         '/course/',
         '/socialinitiatives',
+        '/surveyresponses/'
       ],
       SI: ['/opportunities'],
     };

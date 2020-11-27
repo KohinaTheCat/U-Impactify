@@ -34,6 +34,7 @@ import { AssessmentsComponent } from './pages/assessments/assessments.component'
 import { SiOpportunitiesComponent } from './pages/si-opportunities/si-opportunities.component';
 import { OpportunityAccordianCardComponent } from './components/opportunity-accordian-card/opportunity-accordian-card.component';
 import { CourseLecturesComponent } from './pages/course-lectures/course-lectures.component';
+import { SurveyResponsesComponent } from './pages/survey-responses/survey-responses.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +65,7 @@ import { CourseLecturesComponent } from './pages/course-lectures/course-lectures
     SiOpportunitiesComponent,
     OpportunityAccordianCardComponent,
     CourseLecturesComponent,
+    SurveyResponsesComponent,
   ],
   imports: [
     BrowserModule,

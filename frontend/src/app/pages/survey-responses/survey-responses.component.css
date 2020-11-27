@@ -1,0 +1,50 @@
+.image {
+    height: 20rem;
+    width: 100%;
+    border-radius: 20px;
+    overflow: hidden;
+  }
+
+  .courseimage {
+    height: 20rem;
+    width: 100%;
+  
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  
+    filter: blur(3px) brightness(0.9);
+  }
+
+  
+#title {
+    font-size: 4rem;
+    color: white;
+    margin-top: 0rem;
+    transform: translateY(-12rem);
+    display: flex;
+    justify-content: center;
+    text-shadow: 0px 0px 2px var(--gray80);
+  }
+  
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  .left {
+      font-size: 0.72rem;
+  }
+
+  .title { 
+      font-size: 1.5rem;
+  }
+
+  .mid {
+      font-size: 0.72rem;
+  }
