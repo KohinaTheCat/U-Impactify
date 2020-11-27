@@ -44,7 +44,7 @@ export class SurveyResponsesComponent implements OnInit {
         }
       }
       for(let k = 0; k < this.averageAnswers.length; k++){
-        this.averageAnswers[k] = this.averageAnswers[k] / course.instructorReview.length;
+        this.averageAnswers[k] = (Math.round((this.averageAnswers[k] / course.instructorReview.length) * 100)) / 100;
       }
       console.log(this.averageAnswers)
       this.course.img =
