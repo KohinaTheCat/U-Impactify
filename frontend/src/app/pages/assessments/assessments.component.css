@@ -66,6 +66,10 @@ input {
   background: var(--purple-base);
 }
 
+.shapes {
+  size: 10rem;
+}
+
 .box-shadow-2:hover {
   background: rgb(250, 243, 252);
 }

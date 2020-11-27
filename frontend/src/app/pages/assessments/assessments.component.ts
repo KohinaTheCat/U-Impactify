@@ -110,9 +110,6 @@ export class AssessmentsComponent implements OnInit {
                 (sub: any) => sub.studentId === this.user._id
               );
               if (studentSub) {
-                if (studentSub['files'].length > 0) {
-                }
-
                 this.viewSelfSubmissions = this.viewSelfSubmissions.concat([
                   studentSub['files'],
                 ]);

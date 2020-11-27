@@ -438,9 +438,10 @@ router.delete("/assessment/deleteFiles/:assessmentId", (req, res) => {
   const { assessmentId } = req.params;
 
   Assessment.findById(assessmentId).then((newAssess) => {
-    for (i = 0; i < newAssess.files.length; i++) {
-      gfs.delete(new mongoose.Types.ObjectId(newAssess.files[i].id));
-    }
+    newAssess.files.forEach((file) => {
+      gfs.delete(new mongoose.Types.ObjectId(file.id));
+    });
+
     newAssess.files = [];
 
     newAssess
