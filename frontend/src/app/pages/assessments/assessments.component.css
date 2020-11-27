@@ -523,10 +523,6 @@ h3 {
   color: var(--gray60);
 }
 
-.yes:hover {
-  background: var(--purple-smooth);
-}
-
 .uploadedImage {
   margin-top: 0.5rem;
 }
