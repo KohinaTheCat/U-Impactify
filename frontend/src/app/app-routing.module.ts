@@ -76,7 +76,7 @@ const routes: Routes = [
     canActivate: [AuthGuard, TypeGuard],
   },
   {
-    path: 'course/lectures/:title/:id/:date',
+    path: 'course/lectures/:courseId/:title/:id/:date',
     component: CourseLecturesComponent,
     canActivate: [AuthGuard, TypeGuard],
   },

@@ -21,6 +21,7 @@ import { ClrWizard } from '@clr/angular';
 export class CoursePreviewComponent implements OnInit {
   course: Course;
   user: User;
+  courseId: string;
 
   valid: boolean;
   alreadyEnrolled: boolean = false;
@@ -79,6 +80,8 @@ export class CoursePreviewComponent implements OnInit {
   ngOnInit(): void {
     this.user = this.userService.getCurrentUser();
     const id = this.activatedRouter.snapshot.params['id'];
+    this.courseId = id;
+
     this.courseService.getCourse(id).subscribe(
       (incomingCourse: Course) => {
         this.valid = true;
@@ -276,7 +279,9 @@ export class CoursePreviewComponent implements OnInit {
   }
 
   goToLecture(id, title, date) {
-    this.router.navigate([`course/lectures/${title}/${id}/${date}`]);
+    this.router.navigate([
+      `course/lectures/${this.courseId}/${title}/${id}/${date}`,
+    ]);
   }
 
   uploadLecture() {
