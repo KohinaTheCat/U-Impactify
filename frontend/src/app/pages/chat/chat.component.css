@@ -218,11 +218,28 @@
   font-size: 2rem;
   margin: 0;
   color: var(--gray70);
-
 }
 
 .no-messages-found p {
   margin: 0 0 1rem 0;
   color: var(--gray70);
   font-size: 0.75rem;
+}
+
+.btn-ok {
+  background: #ffffff;
+  opacity: 0.48;
+  border: 1px solid var(--purple-base);
+  box-shadow: 0px 8px 16px rgba(120, 98, 188, 0.2);
+  border-radius: 7px;
+  height: 2.5rem;
+  font-size: initial;
+}
+
+.btn:hover {
+  background: var(--purple-smooth);
+}
+
+.btn-cancel {
+  color: red;
 }

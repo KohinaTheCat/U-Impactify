@@ -426,7 +426,7 @@ clr-control-error {
   width: 100%;
 }
 
-.stack-block-label{
+.stack-block-label {
   background: #9ed9d9;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
   border-radius: 15px 15px 0px 0px;
@@ -582,4 +582,22 @@ li {
 .answerLabel {
   font-size: 0.65rem;
   color: var(--gray60);
+}
+
+.btn-ok {
+  background: #ffffff;
+  opacity: 0.48;
+  border: 1px solid var(--purple-base);
+  box-shadow: 0px 8px 16px rgba(120, 98, 188, 0.2);
+  border-radius: 7px;
+  height: 2.5rem;
+  font-size: initial;
+}
+
+.btn:hover {
+  background: var(--purple-smooth);
+}
+
+.btn-cancel {
+  color: red;
 }
