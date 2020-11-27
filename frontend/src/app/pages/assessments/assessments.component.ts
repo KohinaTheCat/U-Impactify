@@ -311,4 +311,10 @@ export class AssessmentsComponent implements OnInit {
   back() {
     this.router.navigate([`../../../course/${this.courseId}/`]);
   }
+
+  modifyName() {
+    this.createNewAssessmentModal = true;
+    this.title = 'Create an assignment';
+    this.createText = 'CREATE ASSESSMENT';
+  }
 }

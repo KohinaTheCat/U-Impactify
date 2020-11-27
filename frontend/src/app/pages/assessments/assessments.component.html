@@ -78,11 +78,7 @@
         border: '2px var(--gray40) dashed',
         width: 'calc(100% - 4rem)'
       }"
-      (click)="
-        createNewAssessmentModal = true;
-        title = 'Create an assignment';
-        createText = 'CREATE ASSESSMENT'
-      "
+      (click)="modifyName()"
     >
       <h5 class="new">Create New Assessment</h5>
     </button>
