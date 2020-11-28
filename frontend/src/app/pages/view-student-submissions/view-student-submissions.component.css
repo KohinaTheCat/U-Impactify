@@ -3,19 +3,6 @@
   padding-right: 2rem;
 }
 
-video {
-  border-radius: 1rem;
-  user-select: none;
-  border-width: 0px;
-  height: 70vh;
-}
-
-.video-container {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-}
-
 .row {
   display: flex;
   flex-direction: row;
@@ -48,3 +35,10 @@ button {
   margin-bottom: 1rem;
 }
 */
+
+img {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 150px;
+}

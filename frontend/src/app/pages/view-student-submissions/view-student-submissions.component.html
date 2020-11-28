@@ -2,17 +2,29 @@
   <button type="button" id="back-button" class="btn button" (click)="back()">
     Back
   </button>
-  <!--<button type="button" id="mark-button" class="btn button" (click)="mark()">
-    Mark
-  </button>
-  -->
 
-  
-  <div class="pdf-container">
-    <pdf-viewer
-      [src]="viewSubmission"
-      [render-text]="true"
-      style="display: block"
-    ></pdf-viewer>
+  <h4 id="title1"> {{ submissionName }} </h4>
+
+  <div *ngIf="pdfView">
+
+    <h6 id="title2"> Download  <a download="{{ submissionName }}" href="{{ viewSubmission }}"> here </a>.</h6>
+
+    <div class="pdf-container">
+      <pdf-viewer
+        [src]="viewSubmission"
+        [render-text]="true"
+        style="display: block"
+      ></pdf-viewer>
+    </div>
   </div>
+
+  <div *ngIf="docxView">
+    <h6 id="title2"> No preview available. Download</h6><h6> <a download="{{ submissionName }}" href="{{ viewSubmission }}"> here </a>.</h6>
+  </div>
+
+  <div *ngIf="pngView">
+    <h6 id="title2"> No preview available. Download</h6><h6>  <a download="{{ submissionName }}" href="{{ viewSubmission }}"> here </a>.</h6>
+  </div>
+  
+
 </div>

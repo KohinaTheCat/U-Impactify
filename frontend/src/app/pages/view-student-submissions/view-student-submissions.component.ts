@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
+import { CourseService } from 'src/app/services/course.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-view-student-submissions',
@@ -16,37 +18,51 @@ export class ViewStudentSubmissionsComponent implements OnInit {
   submissionId: string;
   title: string;
   viewSubmission: string;
+  submissionName: string;
+  pdfView: boolean = false;
+  docxView: boolean = false;
+  pngView: boolean = false;
 
   constructor(
-    private router: Router, private route: ActivatedRoute) {
+    private router: Router,
+    private courseService: CourseService,
+    private UserService: UserService,
+    private route: ActivatedRoute) {
 
       const id = this.route.snapshot.params['id'];
       const assessmentId = this.route.snapshot.params['assessment'];
-      const submissionId = this.route.snapshot.params['submission'];
+      const submissionId = this.route.snapshot.params['submissionId'];
+      const submissionName = this.route.snapshot.params['submissionName'];
       this.assessmentId = assessmentId;
       this.courseId = id;
       this.submissionId = submissionId;
+      this.submissionName = submissionName;
   }
 
   ngOnInit(): void {
 
+    if (this.submissionName.match(new RegExp('.*\.pdf$'))) {
+      this.pdfView = true;
+    } else if (this.submissionName.match(new RegExp('.*\.docx$'))) {
+      this.docxView = true;
+    } else if (this.submissionName.match(new RegExp('.*\.png$'))) {
+      this.pngView = true;
+    }
+
     console.log("Course: " + this.courseId);
     console.log("Assessment: " + this.assessmentId);
     console.log("Submission: " + this.submissionId);
-
-    console.log('http://localhost:5000/api/course/documents/' + this.route.snapshot.paramMap.get('submission'));
     
+
     this.viewSubmission =
-    'http://localhost:5000/api/course/documents/' + this.route.snapshot.paramMap.get('submission');
+    'http://localhost:5000/api/course/documents/' + this.route.snapshot.paramMap.get('submissionId');
+
+    console.log(this.viewSubmission);
 
   }
 
   back() {
 
     this.router.navigate([`course/${this.courseId}/assessments/studentSubmissions/${this.assessmentId}`]);
-  }
-
-  mark() {
-    
   }
 }

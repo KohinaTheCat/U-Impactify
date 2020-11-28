@@ -5,6 +5,7 @@ import { UserService } from 'src/app/services/user.service';
 import { Assessment } from 'src/app/models/assessment.model';
 import { Course } from 'src/app/models/course.model';
 import { Pipe, PipeTransform } from '@angular/core';
+import { logging } from 'protractor';
 
 @Component({
   selector: 'app-student-submission',
@@ -17,6 +18,8 @@ export class StudentSubmissionComponent implements OnInit {
   assessmentId: string;
   assessment: Assessment;
   loading: boolean = true;
+  mark: number;
+  markStudentModel: boolean = false;
 
   constructor(
     private courseService: CourseService,
@@ -61,7 +64,7 @@ export class StudentSubmissionComponent implements OnInit {
 
   goToSubmission(submission: any) {
     console.log(submission);
-    this.router.navigate([`course/${this.courseId}/assessments/studentSubmissions/${this.assessmentId}/${submission.id}`])
+    this.router.navigate([`course/${this.courseId}/assessments/studentSubmissions/${this.assessmentId}/${submission.id}/${submission.name}`])
   }
 
 }
