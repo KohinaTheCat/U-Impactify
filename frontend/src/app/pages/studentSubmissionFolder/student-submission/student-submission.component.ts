@@ -20,6 +20,7 @@ export class StudentSubmissionComponent implements OnInit {
   loading: boolean = true;
   mark: number;
   markStudentModel: boolean = false;
+  studentId: string;
 
   constructor(
     private courseService: CourseService,
@@ -65,6 +66,25 @@ export class StudentSubmissionComponent implements OnInit {
   goToSubmission(submission: any) {
     console.log(submission);
     this.router.navigate([`course/${this.courseId}/assessments/studentSubmissions/${this.assessmentId}/${submission.id}/${submission.name}`])
+  }
+
+  openMarkModel(studentId, mark) {
+    this.markStudentModel = true;
+    this.studentId = studentId;
+    if (mark > 0) this.mark = mark;
+  }
+
+  cancel() {
+    this.markStudentModel = false;
+  }
+
+  registerHandler() {
+    const { mark } = this;
+    this.courseService.updateMark(this.studentId, this.assessmentId, mark.toString())
+    .subscribe((incomingCourse: Course) => {
+      this.ngOnInit();
+    })
+
   }
 
 }

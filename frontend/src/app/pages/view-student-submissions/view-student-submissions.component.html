@@ -7,7 +7,7 @@
 
   <div *ngIf="pdfView">
 
-    <h6 id="title2"> Download  <a download="{{ submissionName }}" href="{{ viewSubmission }}"> here </a>.</h6>
+    <h6 id="title2"> <a download=" {{ submissionName }}" href="{{ viewSubmission }}"> Download here </a>.</h6>
 
     <div class="pdf-container">
       <pdf-viewer
@@ -19,11 +19,11 @@
   </div>
 
   <div *ngIf="docxView">
-    <h6 id="title2"> No preview available. Download</h6><h6> <a download="{{ submissionName }}" href="{{ viewSubmission }}"> here </a>.</h6>
+    <h6 id="title2"> No preview available. <a download=" {{ submissionName }}" href="{{ viewSubmission }}"> Download here </a>.</h6>
   </div>
 
   <div *ngIf="pngView">
-    <h6 id="title2"> No preview available. Download</h6><h6>  <a download="{{ submissionName }}" href="{{ viewSubmission }}"> here </a>.</h6>
+    <h6 id="title2"> No preview available. <a download=" {{ submissionName }}" href="{{ viewSubmission }}"> Download here </a>.</h6>
   </div>
   
 

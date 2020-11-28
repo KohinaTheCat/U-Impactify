@@ -17,8 +17,28 @@
   color: #ffffff;
 }
 
+.eval-button {
+  /* Shadow Dark · 16dp */
+  box-shadow: 0px 4px 12px rgba(120, 98, 188, 0.16);
+
+  border-radius: 7px;
+  border: 0;
+  font-size: 0.5rem;
+  width: 15rem;
+  height: 2.5rem;
+  /* White Base */
+  color: #ffffff;
+}
+
 #back-button {
   width: 5rem;
+  background-color: var(--purple-base);
+  margin-left: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+#mark-student-btn {
+  width: 15rem;
   background-color: var(--purple-base);
   margin-left: 2rem;
   margin-bottom: 1.5rem;
@@ -163,8 +183,3 @@ button.link {
   color: blue; 
 }
 
-#submitMark {
-  box-shadow: 0px 4px 12px rgba(120, 98, 188, 0.16);
-  background-color: #a78ec3;
-  color: white;
-}

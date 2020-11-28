@@ -348,4 +348,22 @@ export class CourseService {
   postUploadLecture(video: FormData, courseId: string) {
     return this.http.post(`/api/course/${courseId}/uploadLecture`, video);
   }
+
+  /**
+   * PUT update mark by student id and assessment
+   */
+  updateMark(assessmentId: string, studentId: string, mark: string) {
+    console.log("b");
+    console.log(assessmentId);
+    console.log(studentId);
+    console.log(mark);
+    /*
+    return this.http.put(`/api/course/assessment/updateMark`,
+     assessmentId,
+     studentId,
+     mark
+    );
+    */
+  }
+
 }

@@ -42,8 +42,52 @@
       </div>
 
       <div class="content">
+        <div *ngIf="submission.mark > 0"> Current Mark: {{ submission.mark }} </div>
+        <div *ngIf="submission.mark < 0"> Current Mark: Ungraded </div>
 
+        <button type="button" class="btn eval-button" id="mark-student-btn" (click)="openMarkModel(submission.studentId, submission.mark)">
+          Update Student Mark
+        </button>
       </div>
     </div>
   </div>
 </div>
+
+<clr-modal
+  [(clrModalOpen)]="markStudentModel"
+  [clrModalSize]="'lg'"
+  [clrModalClosable]="false"
+>
+  <h3 class="modal-title" *ngIf="assessment">
+    {{ studentId }}'s submission to {{ assessment.name }} </h3>
+  <div class="modal-body">
+    <form clrForm>
+      <clr-input-container>
+        <label
+          >Student Mark
+          <input
+            clrInput
+            type="number"
+            placeholder="{{ mark }}"
+            [(ngModel)]="mark"
+            name="mark"
+            required
+          />
+        </label>
+        <clr-control-error>This field is required!</clr-control-error>
+      </clr-input-container>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-ok btn-outline" (click)="cancel()">
+      Cancel
+    </button>
+    <button
+      type="button"
+      class="btn btn-ok btn-outline btn-cancel"
+      (click)="registerHandler()"
+    >
+      Update Mark
+    </button>
+  </div>
+</clr-modal>

@@ -593,9 +593,10 @@ router.put(
 
 /**
  * PUT update mark by student id and assessment
- * @param req{assesmentId, studentId}
+ * @param req{assessmentId, studentId, mark}
  */
-router.put("/assessment/updateMark/:assessmentId/:studentId", (req, res) => {
+router.put("/assessment/updateMark", (req, res) => {
+  console.log("a");
   const { assessmentId, studentId, mark } = req.body;
   Assessment.findById(assessmentId)
     .then((assessment) => {
