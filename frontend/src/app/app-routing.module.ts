@@ -1,5 +1,6 @@
 import { ChatComponent } from './pages/chat/chat.component';
 import { NgModule } from '@angular/core';
+import { ChartsModule } from 'ng2-charts';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
 import { CreateCourseComponent } from './pages/create-course/create-course.component';
@@ -23,7 +24,8 @@ import { CourseLecturesComponent } from './pages/course-lectures/course-lectures
 import { TypeGuard } from './guards/type.guard';
 import { CoursesComponent } from './components/dashboard-components/courses/courses.component';
 import { SurveyResponsesComponent } from './pages/survey-responses/survey-responses.component';
-import { ViewStudentSubmissionsComponent } from './pages/view-student-submissions/view-student-submissions.component'
+import { ViewStudentSubmissionsComponent } from './pages/view-student-submissions/view-student-submissions.component';
+import { StudentAnalyticsComponent } from './pages/student-analytics/student-analytics.component';
 
 
 const routes: Routes = [
@@ -51,6 +53,11 @@ const routes: Routes = [
   {
     path: 'course/:id/assessments/studentSubmissions/:assessment/:submissionId/:studentId/:submissionName',
     component: ViewStudentSubmissionsComponent,
+    canActivate: [AuthGuard, TypeGuard]
+  },
+  {
+    path: 'course/:id/studentAnalytics',
+    component: StudentAnalyticsComponent,
     canActivate: [AuthGuard, TypeGuard]
   },
   {
@@ -120,7 +127,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes), ChartsModule],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

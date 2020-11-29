@@ -8,6 +8,7 @@ import { ClarityModule } from '@clr/angular';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { NgxFileDropModule } from 'ngx-file-drop';
 import { AppRoutingModule } from './app-routing.module';
+import { ChartsModule } from 'ng2-charts';
 import { AppComponent } from './app.component';
 import { CoursesComponent } from './components/dashboard-components/courses/courses.component';
 import { IcUpcomingEventsComponent } from './components/dashboard-components/ic-upcoming-events/ic-upcoming-events.component';
@@ -80,6 +81,7 @@ import { ViewStudentSubmissionsComponent } from './pages/view-student-submission
     HttpClientModule,
     PdfViewerModule,
     NgxFileDropModule,
+    ChartsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
