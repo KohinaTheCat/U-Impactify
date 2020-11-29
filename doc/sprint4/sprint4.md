@@ -64,7 +64,7 @@
 
 > BOUN-18: As a Instructor, I want to upload pre-recorded lectures so that I can share it with the course
 
-`Story Points: 8`
+`Story Points: 5`
 
 - Frontend
   - Add an uploading UI where instructor can post prerecorded lectures 
@@ -76,7 +76,7 @@
 
 > Team Capacity
 
-`TOTAL STORY POINTS: 34`
+`TOTAL STORY POINTS: 31`
 
 ### Details About Tasks Per Member
 
