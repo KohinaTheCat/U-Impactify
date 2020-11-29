@@ -177,7 +177,7 @@
 
 17. **As a User, I want to be able to donate to the giving garden so that I can support those in need.**
 
-    Story Points: 5/8 depending on implementation
+    Story Points: 8
     Priority: 1
 
     ###### Acceptance Criteria:
