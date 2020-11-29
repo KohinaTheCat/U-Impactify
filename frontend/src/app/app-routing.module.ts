@@ -49,7 +49,7 @@ const routes: Routes = [
     canActivate: [AuthGuard, TypeGuard],
   },
   {
-    path: 'course/:id/assessments/studentSubmissions/:assessment/:submissionId/:submissionName',
+    path: 'course/:id/assessments/studentSubmissions/:assessment/:submissionId/:studentId/:submissionName',
     component: ViewStudentSubmissionsComponent,
     canActivate: [AuthGuard, TypeGuard]
   },

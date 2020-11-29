@@ -22,6 +22,7 @@ export class ViewStudentSubmissionsComponent implements OnInit {
   pdfView: boolean = false;
   docxView: boolean = false;
   pngView: boolean = false;
+  studentId: string;
 
   constructor(
     private router: Router,
@@ -33,10 +34,12 @@ export class ViewStudentSubmissionsComponent implements OnInit {
       const assessmentId = this.route.snapshot.params['assessment'];
       const submissionId = this.route.snapshot.params['submissionId'];
       const submissionName = this.route.snapshot.params['submissionName'];
+      const studentId = this.route.snapshot.params['studentId'];
       this.assessmentId = assessmentId;
       this.courseId = id;
       this.submissionId = submissionId;
       this.submissionName = submissionName;
+      this.studentId = studentId;
   }
 
   ngOnInit(): void {

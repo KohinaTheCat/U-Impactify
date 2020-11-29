@@ -35,7 +35,7 @@
         <div *ngFor="let file of submission.files">
           <button class="link"
             *ngIf="file"
-            (click)="goToSubmission(file)"
+            (click)="goToSubmission( submission.studentId, file)"
             >{{ file.name }}</button
           >
         </div>

@@ -3,11 +3,24 @@
   padding-right: 2rem;
 }
 
+#title1 {
+  margin: 0rem;
+  font-size: 1.75rem;
+}
+
+.top {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .row {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
+
 
 button {
   /* Shadow Dark · 16dp */

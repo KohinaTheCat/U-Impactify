@@ -1,10 +1,12 @@
 <div class="container">
-  <button type="button" id="back-button" class="btn button" (click)="back()">
-    Back
-  </button>
-  <a href="{{ viewSubmission }}" download="{{ submissionName }}" > <button class="btn button" id="download-button">  Download </button> </a>
+  <div class="top">
+    <button type="button" id="back-button" class="btn button" (click)="back()">
+      Back
+    </button>
+    <h4 id="title1"> {{ studentId }} / {{ submissionName }} </h4>
 
-  <h4 id="title1"> {{ submissionName }} </h4>
+    <a href="{{ viewSubmission }}" download="{{ submissionName }}" > <button class="btn button" id="download-button">  Download </button> </a>
+  </div>
 
   <div *ngIf="pdfView">
     <div class="pdf-container">

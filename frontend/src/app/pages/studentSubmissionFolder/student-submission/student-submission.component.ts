@@ -63,8 +63,8 @@ export class StudentSubmissionComponent implements OnInit {
     this.router.navigate([`../../../course/${this.courseId}/assessments/`]);
   }
 
-  goToSubmission(submission: any) {
-    this.router.navigate([`course/${this.courseId}/assessments/studentSubmissions/${this.assessmentId}/${submission.id}/${submission.name}`])
+  goToSubmission(studentId: any, submission: any) {
+    this.router.navigate([`course/${this.courseId}/assessments/studentSubmissions/${this.assessmentId}/${submission.id}/${studentId}/${submission.name}`])
   }
 
   openMarkModel(studentId, mark) {
