@@ -452,7 +452,7 @@ router.delete("/assessment/deleteFiles/:assessmentId", (req, res) => {
 });
 
 router.put(
-  "/assessment/updateAssessment/:assessmentId/:name/:visibility",
+  "/assessment/updateAssessment/:assessmentId/:name/:visibility", 
   upload.array("documents", 10),
   (req, res) => {
     const { assessmentId, name, visibility } = req.params;
@@ -596,8 +596,8 @@ router.put(
  * @param req{assessmentId, studentId, mark}
  */
 router.put("/assessment/updateMark", (req, res) => {
-  console.log("a");
   const { assessmentId, studentId, mark } = req.body;
+
   Assessment.findById(assessmentId)
     .then((assessment) => {
       const submissiontemp = assessment.studentSubmissions.filter(
@@ -607,10 +607,12 @@ router.put("/assessment/updateMark", (req, res) => {
         assessment.studentSubmissions[
           assessment.studentSubmissions.indexOf(submissiontemp[0])
         ].mark = mark;
+        assessment.markModified("studentSubmissions");
         assessment
           .save()
           .then(() => res.json(assessment))
           .catch((err) => res.json(err));
+
       } else {
         res.status(404).json(`Error: Submission not found`);
       }

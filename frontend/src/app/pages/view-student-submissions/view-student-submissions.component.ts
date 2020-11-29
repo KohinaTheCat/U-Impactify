@@ -48,12 +48,7 @@ export class ViewStudentSubmissionsComponent implements OnInit {
     } else if (this.submissionName.match(new RegExp('.*\.png$'))) {
       this.pngView = true;
     }
-
-    console.log("Course: " + this.courseId);
-    console.log("Assessment: " + this.assessmentId);
-    console.log("Submission: " + this.submissionId);
     
-
     this.viewSubmission =
     'http://localhost:5000/api/course/documents/' + this.route.snapshot.paramMap.get('submissionId');
 

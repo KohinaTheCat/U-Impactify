@@ -57,6 +57,8 @@ export class StudentSubmissionComponent implements OnInit {
             }
           });
       });
+
+    this.markStudentModel = false;
   }
 
   back() {
@@ -78,26 +80,12 @@ export class StudentSubmissionComponent implements OnInit {
     this.markStudentModel = false;
   }
 
+  
   registerHandler() {
     const { mark } = this;
-    this.courseService.updateMark(this.studentId, this.assessmentId, mark.toString())
-    .subscribe((incomingCourse: Course) => {
+    this.courseService.updateMark(this.assessmentId, this.studentId, mark)
+    .subscribe((incomingAssessment: Assessment) => {
       this.ngOnInit();
-    })
-
+    });
   }
-
 }
-
-// @Pipe({
-//   name: 'appProperties',
-// })
-// export class PropertiesPipe implements PipeTransform {
-//   transform(value: {}): string[] {
-//     if (!value) {
-//       return [];
-//     }
-
-//     return Object.keys(value);
-//   }
-// }
