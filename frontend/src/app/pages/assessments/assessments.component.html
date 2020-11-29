@@ -148,10 +148,13 @@
         </div>
 
         <div class="content">
-          <span class="markLabel" *ngIf="studentGrades[i] == -1"> Ungraded </span>
-          <span class="markLabel" *ngIf="studentGrades[i] > -1">{{ studentGrades[i] }}</span>
+          <span class="markLabel" *ngIf="studentGrades[i] == -1">
+            Ungraded
+          </span>
+          <span class="markLabel" *ngIf="studentGrades[i] > -1">{{
+            studentGrades[i]
+          }}</span>
         </div>
-
       </div>
     </div>
 
@@ -186,6 +189,7 @@
                     <h3>Upload Documents</h3>
                     <p>.png, .docx, .pdf</p>
                     <p>Drag and drop, or click to browse</p>
+
                     <div class="uploadedImage">
                       <div *ngFor="let item of files; let i = index">
                         <strong> Uploaded: "{{ item.relativePath }}"</strong>
@@ -280,6 +284,9 @@
               <h3>Upload Documents</h3>
               <p>.png, .docx, .pdf</p>
               <p>Drag and drop, or click to browse</p>
+              <p *ngIf="editOption">
+                If files uploaded, will overwrite current ones
+              </p>
               <div class="uploadedImage">
                 <div *ngFor="let item of files; let i = index">
                   <strong> Uploaded: "{{ item.relativePath }}"</strong>

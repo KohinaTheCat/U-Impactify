@@ -108,18 +108,17 @@ export class AssessmentsComponent implements OnInit {
               );
             }
             this.assessArr.forEach((assess) => {
-
               const studentSub = assess.studentSubmissions.find(
                 (sub: any) => sub.studentId === this.user._id
               );
-
-              
 
               if (studentSub) {
                 this.viewSelfSubmissions = this.viewSelfSubmissions.concat([
                   studentSub['files'],
                 ]);
-                this.studentGrades = this.studentGrades.concat(studentSub["mark"]);
+                this.studentGrades = this.studentGrades.concat(
+                  studentSub['mark']
+                );
               } else {
                 this.viewSelfSubmissions = this.viewSelfSubmissions.concat([
                   [{}],
@@ -169,7 +168,6 @@ export class AssessmentsComponent implements OnInit {
   }
 
   registerHandler() {
-    console.log(this.assessArr);
     const { name, visibility, studentSubmissions, files } = this;
     const assessment = {
       name,
@@ -178,7 +176,7 @@ export class AssessmentsComponent implements OnInit {
       files,
     };
 
-    if (this.name.length != 0 && this.files.length != 0) {
+    if (this.name.length != 0) {
       if (this.editOption) {
         const formData = new FormData();
 
@@ -193,8 +191,8 @@ export class AssessmentsComponent implements OnInit {
             const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
           }
         }
-
-        if (this.selectedAssessment.files) {
+        console.log('Here: ' + this.files);
+        if (this.files.length != 0) {
           this.courseService
             .deleteFiles(this.selectedAssessment._id)
             .subscribe((newAssessment) => {});
@@ -212,7 +210,7 @@ export class AssessmentsComponent implements OnInit {
           });
 
         this.editOption = false;
-      } else {
+      } else if (this.files.length != 0) {
         this.visualError = false;
         this.courseService.postNewAssessment(assessment).subscribe(
           (ass) => {
@@ -251,6 +249,8 @@ export class AssessmentsComponent implements OnInit {
             this.basic = true;
           }
         );
+      } else {
+        this.visualError = true;
       }
       this.cancel();
     } else {
