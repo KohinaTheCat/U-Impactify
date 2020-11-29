@@ -16,10 +16,6 @@ export class StudentAnalyticsComponent implements OnInit {
 
   courseId: string
 
-
-
-  
-  
   constructor(
     private router: Router,
     private courseService: CourseService,
@@ -62,6 +58,12 @@ export class StudentAnalyticsComponent implements OnInit {
         },
         options: {
             scales: {
+              yAxes: [{
+                ticks: {
+                  beginAtZero: true,
+                  suggestedMax: 100,
+                }
+              }]
             }
         }
     });

@@ -34,7 +34,27 @@ button {
 
 #divChart{
   display: block;
-  width: 400px;
-  height: 400px;
+  width: 90%;
+}
 
+.viewButtons {
+  width: 100%;
+
+}
+
+.graph-button {
+  background-color: var(--purple-base);
+  margin-right: 1rem;
+}
+
+.graph-button#student-view {
+  width: 7rem;
+}
+
+.graph-button#assessment-view {
+  width: 9rem;
+}
+
+.graph-button#overview-view {
+  width: 5rem;
 }
