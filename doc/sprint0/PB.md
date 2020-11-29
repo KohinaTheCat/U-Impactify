@@ -79,7 +79,7 @@
    - Instructor should be able to see every student’s individual progress and submission
    - Instructor should be able to adjust the visibility of the assessment to the student after it is completed
 
-8.  **As a Student, I want to watch Pre-recorded lectures by the instructor, so that I can learn and progress in the course.**
+8. **As a Student, I want to watch Pre-recorded lectures by the instructor, so that I can learn and progress in the course.**
 
     Story Points: 8
     Priority: 3

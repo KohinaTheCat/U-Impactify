@@ -3,7 +3,7 @@
 ### Goal
 
 - To complete the user stories assigned on Jira for sprint 4
-- To test and bug fix and refine previous implementation 
+- To test and bug fix and refine previous implementations
 
 ### User Stories to be Completed, and Task Break Down
 
@@ -94,14 +94,13 @@
 
 ### Blockers / Spikes
 
-> Time
-
-- Everyone's availability is different
-  - hard to find time to collectively discuss important parts of our project
-
 > Other Course Load
 
 - Finals coming up in addition to other course load, so members may not be able to allocate as much time on the project 
+
+> Laziness 
+
+- Everyone is tired of a long semester and may not be willing to work as much
 
 ### **Participants **
 
