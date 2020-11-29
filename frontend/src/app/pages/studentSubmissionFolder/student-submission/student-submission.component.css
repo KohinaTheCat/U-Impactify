@@ -24,10 +24,39 @@
   border-radius: 7px;
   border: 0;
   font-size: 0.5rem;
-  width: 15rem;
+  width: 10rem;
   height: 2.5rem;
   /* White Base */
   color: #ffffff;
+}
+
+.markLabel {
+  font-size: 1rem;
+}
+
+#mark-student-btn {
+  width: 10rem;
+  background-color: var(--purple-base);
+  margin-left: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.btn-ok {
+  background: #ffffff;
+  opacity: 0.48;
+  border: 1px solid var(--purple-base);
+  box-shadow: 0px 8px 16px rgba(120, 98, 188, 0.2);
+  border-radius: 7px;
+  height: 2.5rem;
+  font-size: initial;
+}
+
+.btn:hover {
+  background: var(--purple-smooth);
+}
+
+.btn-cancel {
+  color: red;
 }
 
 #back-button {
@@ -37,12 +66,6 @@
   margin-bottom: 1.5rem;
 }
 
-#mark-student-btn {
-  width: 15rem;
-  background-color: var(--purple-base);
-  margin-left: 2rem;
-  margin-bottom: 1.5rem;
-}
 
 .child {
   display: flex;
@@ -137,7 +160,7 @@
   align-self: center;
   align-items: center;
   justify-content: space-evenly;
-
+  text-align: center;
   background-color: #a78ec3;
 
   width: calc(100% - 4rem);
@@ -171,10 +194,12 @@
 
 .h6 {
   font-size: larger;
+  text-align: center;
 }
 
 h6 {
   color: white;
+  text-align: center;
 }
 
 button.link {

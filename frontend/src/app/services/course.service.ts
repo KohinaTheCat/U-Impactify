@@ -354,7 +354,7 @@ export class CourseService {
    */
   updateMark(assessmentId: string, studentId: string, mark: number): Observable<any> {
     
-    return this.http.put<any>(`api/course/assessment/updateMark`, {
+    return this.http.put<any>(`/api/course/assessment/updateMark`, {
       assessmentId,
       studentId,
       mark

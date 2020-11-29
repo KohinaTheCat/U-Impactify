@@ -23,7 +23,10 @@
   </div>
 
   <div *ngIf="pngView">
-    <h6 id="title2"> No preview available. <a download=" {{ submissionName }}" href="{{ viewSubmission }}"> Download here </a>.</h6>
+    <h6 id="title2"> <a download=" {{ submissionName }}" href="{{ viewSubmission }}"> Download here </a>.</h6>
+    
+    <img src="{{ viewSubmission }}" width="100%" height="100%">
+
   </div>
   
 

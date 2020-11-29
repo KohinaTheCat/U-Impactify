@@ -362,6 +362,7 @@ clr-control-error {
   transform: translateY(-0.5rem);
   width: 100%;
   justify-content: center;
+  text-align: center;
 }
 
 .h6 {
@@ -583,4 +584,8 @@ h3 {
 
 .addBottom {
   margin-bottom: 2rem;
+}
+
+.markLabel {
+  font-size: 1rem;
 }

@@ -42,8 +42,8 @@
       </div>
 
       <div class="content">
-        <div *ngIf="submission.mark > 0"> Current Mark: {{ submission.mark }} </div>
-        <div *ngIf="submission.mark < 0"> Current Mark: Ungraded </div>
+        <div *ngIf="submission.mark > 0" class="markLabel"> Current Mark: {{ submission.mark }} </div>
+        <div *ngIf="submission.mark < 0" class="markLabel"> Current Mark: Ungraded </div>
 
         <button type="button" class="btn eval-button" id="mark-student-btn" (click)="openMarkModel(submission.studentId, submission.mark)">
           Update Student Mark

@@ -52,8 +52,6 @@ export class ViewStudentSubmissionsComponent implements OnInit {
     this.viewSubmission =
     'http://localhost:5000/api/course/documents/' + this.route.snapshot.paramMap.get('submissionId');
 
-    console.log(this.viewSubmission);
-
   }
 
   back() {
