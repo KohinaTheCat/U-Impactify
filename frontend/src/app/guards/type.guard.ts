@@ -57,6 +57,13 @@ export class TypeGuard implements CanActivate {
       ).some((course: any) => state.url.includes(course._id));
     }
 
+    if (isAllowed && state.url.includes('studentSubmissions')) {
+      isAllowed = (user.type === 'IL' && state.url.includes(user._id)
+        ? user.classesEnrolled
+        : user.classesTeaching
+        ).some((course: any) => state.url.includes(course._id));
+    }
+
     // check if route is just '/course'
     if (state.url === '/course') {
       isAllowed = user.type !== 'SI';
