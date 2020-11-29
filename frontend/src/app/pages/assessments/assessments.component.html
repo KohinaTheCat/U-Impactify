@@ -91,6 +91,7 @@
       <h6 class="child">Assessment</h6>
       <h6 class="child">File Upload</h6>
       <h6 class="child">View submission(s)</h6>
+      <h6 class="child">Grade</h6>
     </div>
 
     <div
@@ -103,7 +104,7 @@
         width: 'calc(100% - 4rem)'
       }"
     >
-      <h5 class="new">Horay no Assessment(s)</h5>
+      <h5 class="new">Hooray no Assessment(s)</h5>
     </div>
     <div
       class="box-shadow-2"
@@ -145,6 +146,12 @@
             </a>
           </div>
         </div>
+
+        <div class="content">
+          <span class="markLabel" *ngIf="studentGrades[i] == -1"> Ungraded </span>
+          <span class="markLabel" *ngIf="studentGrades[i] > -1">{{ studentGrades[i] }}</span>
+        </div>
+
       </div>
     </div>
 

@@ -346,6 +346,19 @@ export class CourseService {
    * @param {string}   courseId id of course
    */
   postUploadLecture(video: FormData, courseId: string) {
-    return this.http.post(`/api/course/${courseId}/uploadLecture`, video);
+    return this.http.post(`api/course/${courseId}/uploadLecture`, video);
   }
+
+  /**
+   * PUT update mark by student id and assessment
+   */
+  updateMark(assessmentId: string, studentId: string, mark: number): Observable<any> {
+    
+    return this.http.put<any>(`/api/course/assessment/updateMark`, {
+      assessmentId,
+      studentId,
+      mark
+    });
+  }
+
 }

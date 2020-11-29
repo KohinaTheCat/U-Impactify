@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { Assessment } from 'src/app/models/assessment.model';
 import { Course } from 'src/app/models/course.model';
-import { Pipe, PipeTransform } from '@angular/core';
 
 @Component({
   selector: 'app-student-submission',
@@ -17,6 +16,9 @@ export class StudentSubmissionComponent implements OnInit {
   assessmentId: string;
   assessment: Assessment;
   loading: boolean = true;
+  mark: number;
+  markStudentModel: boolean = false;
+  studentId: string;
 
   constructor(
     private courseService: CourseService,
@@ -53,22 +55,34 @@ export class StudentSubmissionComponent implements OnInit {
             }
           });
       });
+
+    this.markStudentModel = false;
   }
 
   back() {
     this.router.navigate([`../../../course/${this.courseId}/assessments/`]);
   }
+
+  goToSubmission(studentId: any, submission: any) {
+    this.router.navigate([`course/${this.courseId}/assessments/studentSubmissions/${this.assessmentId}/${submission.id}/${studentId}/${submission.name}`])
+  }
+
+  openMarkModel(studentId, mark) {
+    this.markStudentModel = true;
+    this.studentId = studentId;
+    if (mark > 0) this.mark = mark;
+  }
+
+  cancel() {
+    this.markStudentModel = false;
+  }
+
+  
+  registerHandler() {
+    const { mark } = this;
+    this.courseService.updateMark(this.assessmentId, this.studentId, mark)
+    .subscribe((incomingAssessment: Assessment) => {
+      this.ngOnInit();
+    });
+  }
 }
-
-// @Pipe({
-//   name: 'appProperties',
-// })
-// export class PropertiesPipe implements PipeTransform {
-//   transform(value: {}): string[] {
-//     if (!value) {
-//       return [];
-//     }
-
-//     return Object.keys(value);
-//   }
-// }

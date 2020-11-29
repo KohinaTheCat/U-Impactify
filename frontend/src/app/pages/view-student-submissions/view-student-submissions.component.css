@@ -1,0 +1,66 @@
+.container {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+#title1 {
+  margin: 0rem;
+  font-size: 1.75rem;
+}
+
+.top {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+
+button {
+  /* Shadow Dark · 16dp */
+  box-shadow: 0px 4px 12px rgba(120, 98, 188, 0.16);
+
+  border-radius: 7px;
+  border: 0;
+  font-size: 1rem;
+  width: 5rem;
+  height: 2.5rem;
+  /* White Base */
+  color: #ffffff;
+}
+
+#back-button {
+  width: 5rem;
+  background-color: var(--purple-base);
+}
+
+#download-button {
+  width: 9rem;
+  background-color: var(--red-base);
+}
+
+img {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+}
+
+.button {
+  /* Shadow Dark · 16dp */
+  box-shadow: 0px 4px 12px rgba(120, 98, 188, 0.16);
+
+  border-radius: 7px;
+  border: 0;
+  font-size: 1rem;
+    width: 5rem;
+    height: 2.5rem;
+  /* White Base */
+  color: #ffffff;
+}
+

@@ -33,18 +33,61 @@
 
       <div class="content">
         <div *ngFor="let file of submission.files">
-          <a
+          <button class="link"
             *ngIf="file"
-            download="{{ file.name }}"
-            href="http://localhost:5000/api/course/documents/{{ file.id }}"
-            >{{ file.name }}</a
+            (click)="goToSubmission( submission.studentId, file)"
+            >{{ file.name }}</button
           >
         </div>
       </div>
 
       <div class="content">
-        <span class="h6">Enter grade over here!</span>
+        <div *ngIf="submission.mark > 0" class="markLabel"> Current Mark: {{ submission.mark }} </div>
+        <div *ngIf="submission.mark < 0" class="markLabel"> Current Mark: Ungraded </div>
+
+        <button type="button" class="btn eval-button" id="mark-student-btn" (click)="openMarkModel(submission.studentId, submission.mark)">
+          Update Student Mark
+        </button>
       </div>
     </div>
   </div>
 </div>
+
+<clr-modal
+  [(clrModalOpen)]="markStudentModel"
+  [clrModalSize]="'lg'"
+  [clrModalClosable]="false"
+>
+  <h3 class="modal-title" *ngIf="assessment">
+    {{ studentId }}'s submission to {{ assessment.name }} </h3>
+  <div class="modal-body">
+    <form clrForm>
+      <clr-input-container>
+        <label
+          >Student Mark
+          <input
+            clrInput
+            type="number"
+            placeholder="{{ mark }}"
+            [(ngModel)]="mark"
+            name="mark"
+            required
+          />
+        </label>
+        <clr-control-error>This field is required!</clr-control-error>
+      </clr-input-container>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-ok btn-outline" (click)="cancel()">
+      Cancel
+    </button>
+    <button
+      type="button"
+      class="btn btn-ok btn-outline btn-cancel"
+      (click)="registerHandler()"
+    >
+      Update Mark
+    </button>
+  </div>
+</clr-modal>

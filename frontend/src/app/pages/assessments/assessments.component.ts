@@ -38,6 +38,7 @@ export class AssessmentsComponent implements OnInit {
   assessmentTracker: Assessment;
   editOption: boolean = false;
   selectedAssessment: Assessment;
+  studentGrades: Number[] = [];
 
   identification: Object[];
 
@@ -75,6 +76,7 @@ export class AssessmentsComponent implements OnInit {
     this.visualError = false;
     this.viewSelfSubmissions = [];
     this.assessArr = [];
+    this.studentGrades = [];
     this.courseService
       .getCourse(this.courseId)
       .subscribe((incomingCourse: Course) => {
@@ -106,17 +108,23 @@ export class AssessmentsComponent implements OnInit {
               );
             }
             this.assessArr.forEach((assess) => {
+
               const studentSub = assess.studentSubmissions.find(
                 (sub: any) => sub.studentId === this.user._id
               );
+
+              
+
               if (studentSub) {
                 this.viewSelfSubmissions = this.viewSelfSubmissions.concat([
                   studentSub['files'],
                 ]);
+                this.studentGrades = this.studentGrades.concat(studentSub["mark"]);
               } else {
                 this.viewSelfSubmissions = this.viewSelfSubmissions.concat([
                   [{}],
                 ]);
+                this.studentGrades = this.studentGrades.concat([-1]);
               }
             });
           },

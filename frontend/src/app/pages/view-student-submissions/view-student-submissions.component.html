@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="top">
+    <button type="button" id="back-button" class="btn button" (click)="back()">
+      Back
+    </button>
+    <h4 id="title1"> {{ studentId }} / {{ submissionName }} </h4>
+
+    <a href="{{ viewSubmission }}" download="{{ submissionName }}" > <button class="btn button" id="download-button">  Download </button> </a>
+  </div>
+
+  <div *ngIf="pdfView">
+    <div class="pdf-container">
+      <pdf-viewer
+        [src]="viewSubmission"
+        [render-text]="true"
+        style="display: block"
+      ></pdf-viewer>
+    </div>
+  </div>
+
+  <div *ngIf="docxView">
+  </div>
+
+  <div *ngIf="pngView">
+    <img src="{{ viewSubmission }}" width="100%" height="100%">
+  </div>
+  
+
+
+</div>
