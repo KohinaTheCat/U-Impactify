@@ -82,10 +82,11 @@ export class CreateCourseComponent implements OnInit {
             const formData = new FormData();
             formData.append('document', file, droppedFile.relativePath);
             this.courseService.postCourseImage(formData, course._id).subscribe(
-              (res) => {
-                // TODO: ADD A THINGY FOR BULK UPDATING THE COURSE IMAGE FOR ALL TEACHERS AND STUDENTS
-                this.submitBtnState = ClrLoadingState.SUCCESS;
-                this.router.navigate([`course/${course._id}`]);
+              (res: Course) => {
+                this.courseService.bulkUpdateCourseImage(res._id, res.img).subscribe(res => {
+                  this.submitBtnState = ClrLoadingState.SUCCESS;
+                  this.router.navigate([`course/${course._id}`]);
+                });
               },
               (err) => {
                 console.log(err);
