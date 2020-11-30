@@ -52,6 +52,8 @@ export class CoursePreviewComponent implements OnInit {
   courseStars: number[] = [1, 2, 3, 4, 5];
   averageScore: number = 0;
 
+  uploadFileName: string;
+
   @ViewChild('reviewStars') stars;
   @ViewChild('wizardxl') wizardExtraLarge: ClrWizard;
   xlOpen: boolean = false;
@@ -277,8 +279,8 @@ export class CoursePreviewComponent implements OnInit {
       });
   }
 
-  goToSurveyResponses(){
-    this.router.navigate([`surveyresponses/${this.course._id}`])
+  goToSurveyResponses() {
+    this.router.navigate([`surveyresponses/${this.course._id}`]);
   }
 
   goToLecture(id, title, date) {
@@ -290,6 +292,9 @@ export class CoursePreviewComponent implements OnInit {
   uploadLecture() {
     if (this.videoTitle === '') {
       this.videoUploadError = 'No Title Entered!';
+      return;
+    } else if (this.video.length == 0) {
+      this.videoUploadError = 'No Lectures Imported!';
       return;
     }
 
@@ -313,6 +318,7 @@ export class CoursePreviewComponent implements OnInit {
           );
       });
     }
+    this.reset();
   }
 
   public droppedLecture(video: NgxFileDropEntry[]) {
@@ -324,7 +330,7 @@ export class CoursePreviewComponent implements OnInit {
           this.video = [];
           this.videoUploadError = 'Bad Lecture Type!';
         } else {
-          this.videoUploadError = 'Uploaded ' + file.name;
+          this.uploadFileName = file.name;
         }
       });
     }
@@ -333,5 +339,13 @@ export class CoursePreviewComponent implements OnInit {
   public dateToString(date) {
     var d = new Date(date);
     return d.toDateString();
+  }
+
+  public reset() {
+    this.uploadVideo = false;
+    this.video = [];
+    this.videoUploadError = '';
+    this.videoTitle = '';
+    this.uploadFileName = '';
   }
 }
