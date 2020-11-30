@@ -1,0 +1,74 @@
+.container {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+p {
+  font-family: Lato;
+}
+
+.top {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+button {
+  /* Shadow Dark · 16dp */
+  box-shadow: 0px 4px 12px rgba(120, 98, 188, 0.16);
+
+  border-radius: 7px;
+  border: 0;
+  font-size: 1rem;
+  width: 5rem;
+  height: 2.5rem;
+  /* White Base */
+  color: #ffffff;
+}
+
+#back-button {
+  width: 5rem;
+  background-color: var(--purple-base);
+}
+
+#divChart{
+  display: block;
+  width: 100%;
+}
+
+
+.viewButtons {
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.graph-button {
+  background-color: var(--purple-base);
+  margin-right: 1rem;
+}
+
+.graph-button#student-view {
+  width: 7rem;
+}
+
+.graph-button#assessment-view {
+  width: 9rem;
+}
+
+.graph-button#overview-view {
+  width: 5rem;
+}
+
+.targetButtonsView {
+  display: inline-block;
+}
+
+.target-Btns {
+  float: left;
+}
+
+.target-Btn {
+  background-color: rgb(160, 39, 39);
+  margin-right: 1rem;
+}

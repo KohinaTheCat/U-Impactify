@@ -167,7 +167,9 @@ export class CoursePreviewComponent implements OnInit {
     this.router.navigate([`course/${this.course._id}/assessments`]);
   }
 
-  studentAnalysisHandler() {}
+  studentAnalysisHandler() {
+    this.router.navigate([`course/${this.course._id}/studentAnalytics`]);
+  }
 
   registerSurveyRequest() {
     this.openedSurveyRequest = false;

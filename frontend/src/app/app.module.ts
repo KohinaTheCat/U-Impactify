@@ -37,6 +37,7 @@ import { OpportunityAccordianCardComponent } from './components/opportunity-acco
 import { CourseLecturesComponent } from './pages/course-lectures/course-lectures.component';
 import { SurveyResponsesComponent } from './pages/survey-responses/survey-responses.component';
 import { ViewStudentSubmissionsComponent } from './pages/view-student-submissions/view-student-submissions.component';
+import { StudentAnalyticsComponent } from './pages/student-analytics/student-analytics.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,7 @@ import { ViewStudentSubmissionsComponent } from './pages/view-student-submission
     CourseLecturesComponent,
     SurveyResponsesComponent,
     ViewStudentSubmissionsComponent,
+    StudentAnalyticsComponent,
   ],
   imports: [
     BrowserModule,
