@@ -1,4 +1,5 @@
 let Course = require("../models/course.model");
+let User = require("../models/user.model");
 let assessmentSchema = require("../models/assessment.model");
 
 const router = require("express").Router();
@@ -171,17 +172,9 @@ router.route("/search/:query").get((req, res) => {
 
 // PUT updates course content given the course id
 router.put("/update", (req, res) => {
-  const { _id, name, description, tags, level } = req.body.course;
-
-  Course.findById(_id)
-    .then((course) => {
-      course = { ...course, name, description, tags, level };
-      course
-        .save()
-        .then(() => res.json(course))
-        .catch((err) => res.status(400).json("Error: " + err));
-    })
-    .catch((err) => res.status(404).json(err));
+  Course.findByIdAndUpdate(req.body.course._id, req.body.course, () =>
+    res.json(req.body.course)
+  ).catch((err) => res.status(404).json(err));
 });
 
 /**
@@ -452,7 +445,7 @@ router.delete("/assessment/deleteFiles/:assessmentId", (req, res) => {
 });
 
 router.put(
-  "/assessment/updateAssessment/:assessmentId/:name/:visibility", 
+  "/assessment/updateAssessment/:assessmentId/:name/:visibility",
   upload.array("documents", 10),
   (req, res) => {
     const { assessmentId, name, visibility } = req.params;
@@ -612,7 +605,6 @@ router.put("/assessment/updateMark", (req, res) => {
           .save()
           .then(() => res.json(assessment))
           .catch((err) => res.json(err));
-
       } else {
         res.status(404).json(`Error: Submission not found`);
       }
@@ -762,6 +754,29 @@ router.put("/surveyRequest/:id", (req, res) => {
         .catch((err) => res.status(400).json("Error: " + err));
     })
     .catch((err) => res.status(404).json(err));
+});
+
+router.put("/bulkUpdateCourseImage", async (req, res) => {
+  const {_id, img} = req.body;
+  const course = await Course.findById(_id);
+  course.teachers.forEach(async (teacherId) => {
+    const teacher = await User.findById(teacherId);
+    teacher.classesTeaching.forEach(c => {
+      if(c._id === _id) {
+        c.img = img;
+      }
+    });
+    await teacher.save();
+  });
+  course.students.forEach(async (studentId) => {
+    const student = await User.findById(studentId);
+    student.classesEnrolled.forEach(c => {
+      if(c._id === _id)
+        c.img = img;
+    });
+    await student.save();
+  });
+  res.json(course);
 });
 
 module.exports = router;

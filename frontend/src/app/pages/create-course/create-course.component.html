@@ -67,7 +67,7 @@
       ></textarea>
     </div>
   </div>
-  <div class="items-container">
+  <div class="items-container" [ngClass]="{ 'is-single': courseId}" >
     <div class="add-overlay">
       <div class="diff-container">
         <h6>Course Difficulty</h6>
@@ -108,7 +108,7 @@
         ></textarea>
       </div>
     </div>
-    <div class="add-overlay">
+    <div class="add-overlay" *ngIf="!courseId.length">
       <ngx-file-drop
         dropZoneLabel="Drop files here"
         contentClassName="fileUploadContent"
