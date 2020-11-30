@@ -6,8 +6,10 @@ import {
   FileSystemFileEntry,
   FileSystemDirectoryEntry,
 } from 'ngx-file-drop';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ClrLoadingState } from '@clr/angular';
+import { Location } from '@angular/common';
+import { Course } from 'src/app/models/course.model';
 
 @Component({
   selector: 'app-create-course',
@@ -18,8 +20,12 @@ export class CreateCourseComponent implements OnInit {
   constructor(
     private courseService: CourseService,
     private userService: UserService,
-    private router: Router
-  ) {}
+    private activatedRouter: ActivatedRoute,
+    private router: Router,
+    private location: Location
+  ) {
+    this.courseId = this.activatedRouter.snapshot.params['id'];
+  }
 
   name: string = '';
   description: string = '';
@@ -30,12 +36,24 @@ export class CreateCourseComponent implements OnInit {
   error: string = '';
   imageError: string = '';
 
-  submitBtnState: ClrLoadingState = ClrLoadingState.DEFAULT;
+  courseId: string = '';
+  course: Course;
 
+  submitBtnState: ClrLoadingState = ClrLoadingState.DEFAULT;
 
   shouldShowSubmit: boolean = true;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.courseId.length) {
+      this.courseService.getCourse(this.courseId).subscribe((course) => {
+        this.course = course;
+        this.name = course.name;
+        this.description = course.description;
+        this.level = course.level;
+        this.tags = course.tags;
+      });
+    }
+  }
 
   ngDoCheck(): void {
     this.shouldShowSubmit =
@@ -43,10 +61,57 @@ export class CreateCourseComponent implements OnInit {
   }
 
   cancel() {
-    this.router.navigate(['dashboard']);
+    this.location.back();
+  }
+
+  updateHandler() {
+    this.submitBtnState = ClrLoadingState.LOADING;
+    const { name, description, level, tags, files } = this;
+    this.course = {
+      ...this.course,
+      name: name.trim(),
+      description: description.trim(),
+      level,
+      tags: tags.trim(),
+    };
+    this.courseService.updateCourse(this.course).subscribe((course) => {
+      for (const droppedFile of this.img) {
+        if (droppedFile.fileEntry.isFile) {
+          const fileEntry = droppedFile.fileEntry as FileSystemFileEntry;
+          fileEntry.file((file: File) => {
+            const formData = new FormData();
+            formData.append('document', file, droppedFile.relativePath);
+            this.courseService.postCourseImage(formData, course._id).subscribe(
+              (res: Course) => {
+                this.courseService.bulkUpdateCourseImage(res._id, res.img).subscribe(res => {
+                  this.submitBtnState = ClrLoadingState.SUCCESS;
+                  this.router.navigate([`course/${course._id}`]);
+                });
+              },
+              (err) => {
+                console.log(err);
+              }
+            );
+          });
+        } else {
+          // It was a directory (empty directories are added, otherwise only files)
+          const fileEntry = droppedFile.fileEntry as FileSystemDirectoryEntry;
+          console.log(droppedFile.relativePath, fileEntry);
+        }
+      }
+      if (!this.img.length) {
+        this.submitBtnState = ClrLoadingState.SUCCESS;
+        this.router.navigate([`course/${course._id}`]);
+      }
+    }, err => console.log(err));
   }
 
   registerHandler() {
+    if (this.course && this.courseId.length) return this.updateHandler();
+    return this.newCourseHandler();
+  }
+
+  newCourseHandler() {
     this.submitBtnState = ClrLoadingState.LOADING;
     const { name, description, level, tags, files } = this;
     const course = {

@@ -352,13 +352,26 @@ export class CourseService {
   /**
    * PUT update mark by student id and assessment
    */
-  updateMark(assessmentId: string, studentId: string, mark: number): Observable<any> {
-    
+  updateMark(
+    assessmentId: string,
+    studentId: string,
+    mark: number
+  ): Observable<any> {
     return this.http.put<any>(`/api/course/assessment/updateMark`, {
       assessmentId,
       studentId,
-      mark
+      mark,
     });
   }
 
+  /**
+   * PUT bulk update Course Image
+   * @param _id id of course
+   * @param img img id of new img
+   */
+  bulkUpdateCourseImage(_id: string, img: string): Observable<Course> {
+    return this.http.put<Course>(`/api/course/bulkUpdateCourseImage`, {
+      _id, img
+    })
+  }
 }

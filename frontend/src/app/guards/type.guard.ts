@@ -39,7 +39,8 @@ export class TypeGuard implements CanActivate {
         '/opportunities',
         '/course',
         '/socialinitiatives',
-        '/surveyresponses/'
+        '/surveyresponses/',
+        '/edit',
       ],
       SI: ['/opportunities'],
     };
@@ -62,6 +63,10 @@ export class TypeGuard implements CanActivate {
         ? user.classesEnrolled
         : user.classesTeaching
         ).some((course: any) => state.url.includes(course._id));
+    }
+
+    if(isAllowed && state.url.includes('/edit')) {
+      isAllowed = user.type === 'IC' && user.classesTeaching.some((course: any) => state.url.includes(course._id));
     }
 
     // check if route is just '/course'

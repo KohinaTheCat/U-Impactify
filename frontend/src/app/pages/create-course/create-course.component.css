@@ -80,10 +80,14 @@ h6 {
 
 .items-container {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(2, 1fr);
   column-gap: 2vw;
   margin-top: 1rem;
   height: max-content;
+}
+
+.is-single {
+  grid-template-columns: auto !important;
 }
 
 .difficulty {

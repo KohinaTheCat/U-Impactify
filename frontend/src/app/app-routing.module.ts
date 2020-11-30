@@ -54,6 +54,11 @@ const routes: Routes = [
     canActivate: [AuthGuard, TypeGuard]
   },
   {
+    path: 'course/:id/edit',
+    component: CreateCourseComponent,
+    canActivate: [AuthGuard, TypeGuard]
+  },
+  {
     path: 'questionaire',
     component: SignupQuestionaireComponent,
     canDeactivate: [AuthGuard],

@@ -616,7 +616,7 @@ li {
   align-items: center;
   width: 100%;
   padding-top: 2rem;
-  margin-bottom: 3rem;
+  margin-bottom: 5rem;
 }
 
 #bug {
@@ -656,6 +656,10 @@ li {
   background-color: var(--purple-smooth);
 }
 
+button {
+  cursor: pointer;
+}
+  
 .btn-ok {
   background: #ffffff;
   opacity: 0.48;
