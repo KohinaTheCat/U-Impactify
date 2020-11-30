@@ -34,12 +34,13 @@ button {
 
 #divChart{
   display: block;
-  width: 90%;
+  width: 100%;
 }
+
 
 .viewButtons {
   width: 100%;
-
+  margin-bottom: 2rem;
 }
 
 .graph-button {
@@ -57,4 +58,17 @@ button {
 
 .graph-button#overview-view {
   width: 5rem;
+}
+
+.targetButtonsView {
+  display: inline-block;
+}
+
+.target-Btns {
+  float: left;
+}
+
+.target-Btn {
+  background-color: rgb(160, 39, 39);
+  margin-right: 1rem;
 }

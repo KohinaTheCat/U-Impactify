@@ -1,6 +1,5 @@
 import { ChatComponent } from './pages/chat/chat.component';
 import { NgModule } from '@angular/core';
-import { ChartsModule } from 'ng2-charts';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
 import { CreateCourseComponent } from './pages/create-course/create-course.component';
@@ -127,7 +126,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes), ChartsModule],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
