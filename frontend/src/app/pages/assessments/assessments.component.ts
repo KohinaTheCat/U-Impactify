@@ -21,9 +21,10 @@ import { FindValueSubscriber } from 'rxjs/internal/operators/find';
   styleUrls: ['./assessments.component.css'],
 })
 export class AssessmentsComponent implements OnInit {
+  _;
   course: Course;
   user: User;
-  title: string = 'Create an assignment';
+  title: string = 'Create An Assessment';
   createText: string = 'CREATE ASSESSMENT';
   createNewAssessmentModal: boolean = false;
   submissionsModal: boolean;
