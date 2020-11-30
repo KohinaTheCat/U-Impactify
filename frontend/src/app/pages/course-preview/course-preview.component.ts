@@ -298,8 +298,8 @@ export class CoursePreviewComponent implements OnInit {
       return;
     }
 
-    var video = this.video;
     this.uploadVideo = false;
+    var video = this.video;
     if (video[0].fileEntry.isFile) {
       const fileEntry = video[0].fileEntry as FileSystemFileEntry;
       fileEntry.file((file: File) => {
@@ -330,7 +330,7 @@ export class CoursePreviewComponent implements OnInit {
           this.video = [];
           this.videoUploadError = 'Bad Lecture Type!';
         } else {
-          this.uploadFileName = file.name;
+          this.uploadFileName = 'Uploaded: "' + file.name + '"';
         }
       });
     }
