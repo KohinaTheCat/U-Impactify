@@ -76,6 +76,7 @@ clr-stack-label {
   width: 100%;
   border-radius: 20px;
   overflow: hidden;
+  text-align: center;
 }
 
 h3 {
