@@ -56,7 +56,7 @@ const routes: Routes = [
   {
     path: 'course/:id/edit',
     component: CreateCourseComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard, TypeGuard]
   },
   {
     path: 'questionaire',

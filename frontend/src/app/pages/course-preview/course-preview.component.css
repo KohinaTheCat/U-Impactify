@@ -655,6 +655,10 @@ li {
 .box-shadow-3:hover {
   background-color: var(--purple-smooth);
 }
+
+button {
+  cursor: pointer;
+}
   
 .btn-ok {
   background: #ffffff;
