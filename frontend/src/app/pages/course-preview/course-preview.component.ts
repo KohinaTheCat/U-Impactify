@@ -294,7 +294,7 @@ export class CoursePreviewComponent implements OnInit {
       this.videoUploadError = 'No Title Entered!';
       return;
     } else if (this.video.length == 0) {
-      this.videoUploadError = 'No Lectures Imported!';
+      this.videoUploadError = 'No Lecture Imported!';
       return;
     }
 
