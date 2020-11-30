@@ -171,17 +171,9 @@ router.route("/search/:query").get((req, res) => {
 
 // PUT updates course content given the course id
 router.put("/update", (req, res) => {
-  const { _id, name, description, tags, level } = req.body.course;
-
-  Course.findById(_id)
-    .then((course) => {
-      course = { ...course, name, description, tags, level };
-      course
-        .save()
-        .then(() => res.json(course))
-        .catch((err) => res.status(400).json("Error: " + err));
-    })
-    .catch((err) => res.status(404).json(err));
+  Course.findByIdAndUpdate(req.body.course._id, req.body.course, () =>
+    res.json(req.body.course)
+  ).catch((err) => res.status(404).json(err));
 });
 
 /**
@@ -452,7 +444,7 @@ router.delete("/assessment/deleteFiles/:assessmentId", (req, res) => {
 });
 
 router.put(
-  "/assessment/updateAssessment/:assessmentId/:name/:visibility", 
+  "/assessment/updateAssessment/:assessmentId/:name/:visibility",
   upload.array("documents", 10),
   (req, res) => {
     const { assessmentId, name, visibility } = req.params;
@@ -612,7 +604,6 @@ router.put("/assessment/updateMark", (req, res) => {
           .save()
           .then(() => res.json(assessment))
           .catch((err) => res.json(err));
-
       } else {
         res.status(404).json(`Error: Submission not found`);
       }

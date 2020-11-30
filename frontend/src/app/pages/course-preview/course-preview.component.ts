@@ -156,7 +156,7 @@ export class CoursePreviewComponent implements OnInit {
   }
 
   updateCourseContentHandler() {
-    this.openedUpdateCourse = true;
+    this.router.navigate([`course/${this.course._id}/edit`]);
   }
 
   editDocumentsHandler() {}
