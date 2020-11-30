@@ -425,14 +425,14 @@
   <div class="modal-footer">
     <button
       type="button"
-      class="btn btn-outline"
+      class="btn btn-ok btn-outline btn-cancel"
       (click)="openedSurveyRequest = false"
     >
       Cancel
     </button>
     <button
       type="button"
-      class="btn btn-primary"
+      class="btn btn-ok btn-outline"
       (click)="registerSurveyRequest()"
     >
       Ok
@@ -665,46 +665,62 @@
   <h3 class="modal-title">Upload a Lecture</h3>
   <div class="modal-body">
     <form clrForm>
-      <ngx-file-drop
-        dropZoneLabel="Drop files here"
-        (onFileDrop)="droppedLecture($event)"
-      >
-        <ng-template
-          ngx-file-drop-content-tmp
-          let-openFileSelector="openFileSelector"
-        >
-          <label>Upload Video File (.mp4)</label>
-          <button class="btn btn-primary" (click)="openFileSelector()">
-            Browse Files
-          </button>
-        </ng-template>
-      </ngx-file-drop>
-      <div class="imageError">
-        <clr-control-error>{{ videoUploadError }}</clr-control-error>
-      </div>
-      <div class="uploadedImage" *ngIf="img[0]">
-        Uploaded "{{ video[0].fileEntry.name }}"
-      </div>
-      <clr-input-container>
-        <label
-          >Course Title
+      <div class="add-overlay">
+        <div class="position-top">
           <input
-            clrInput
             type="text"
-            placeholder=""
+            placeholder="Title of Lecture"
+            name="name"
+            id="name"
             [(ngModel)]="videoTitle"
-            name="title"
+            class="text-area"
           />
-        </label>
-        <clr-control-error>This field is required!</clr-control-error>
-      </clr-input-container>
+        </div>
+      </div>
+
+      <div class="add-overlay">
+        <ngx-file-drop
+          dropZoneLabel="Drop files here"
+          (onFileDrop)="droppedLecture($event)"
+          contentClassName="fileUploadContent"
+          dropZoneClassName="dropZone"
+        >
+          <ng-template
+            ngx-file-drop-content-tmp
+            let-openFileSelector="openFileSelector"
+          >
+            <div class="fileUpload" (click)="openFileSelector()">
+              <clr-icon shape="picture"></clr-icon>
+              <h3 class="h3ok">Upload Video File</h3>
+              <p>.mp4</p>
+              <p>Drag and drop, or click to browse</p>
+              <div class="uploadedImage">
+                <Strong>{{ uploadFileName }}</Strong>
+              </div>
+            </div>
+          </ng-template>
+        </ngx-file-drop>
+      </div>
+      <div class="error">
+        {{ videoUploadError }}
+      </div>
     </form>
   </div>
+
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline" (click)="uploadVideo = false">
+    <button
+      type="button"
+      class="btn btn-ok btn-outline"
+      (click)="uploadVideo = false"
+      (click)="reset()"
+    >
       Cancel
     </button>
-    <button type="button" class="btn btn-primary" (click)="uploadLecture()">
+    <button
+      type="button"
+      class="btn btn-ok btn-outline btn-cancel"
+      (click)="uploadLecture()"
+    >
       Upload
     </button>
   </div>

@@ -234,8 +234,6 @@
   <h3 class="modal-title">{{ title }}</h3>
   <div class="modal-body">
     <form clrForm>
-      <clr-control-error>{{ error }}</clr-control-error>
-
       <div class="add-overlay">
         <div class="position-top">
           <input
@@ -266,7 +264,7 @@
         </div>
       </div>
 
-      <div class="add-overlay yes">
+      <div class="add-overlay">
         <ngx-file-drop
           dropZoneLabel="Drop files here"
           (onFileDrop)="dropped($event)"
