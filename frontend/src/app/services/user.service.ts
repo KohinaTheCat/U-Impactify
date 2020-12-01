@@ -273,8 +273,8 @@ export class UserService {
    * @param {userId} userId the userid
    * @param {opportunityId} opportunityId the opportunity id
    */
-  addNewEmploymentOpportunity(userId: string, opportunityId: string) {
-    return this.http.put(`/api/user/addEmploymentOpportunity`, {
+  addNewEmploymentOpportunity(userId: string, opportunityId: string): Observable<User> {
+    return this.http.put<User>(`/api/user/addEmploymentOpportunity`, {
       userId,
       opportunityId,
     });

@@ -73,21 +73,15 @@ export class SiOpportunitiesComponent implements OnInit {
         applicants: [],
       };
 
-      if (this.opportunityType === 'volunteer') {
-        // 8th value is salary, sketchy fix
-        this.shouldShowSubmitButton =
-          Object.values(this.newOpportunity).every((o, i) => !!o || i === 7) &&
-          !!this.responsibilites.length &&
-          !!this.requirements.length &&
-          this.numberOfHires > 0;
-      } else if (this.opportunityType === 'employment') {
-        this.shouldShowSubmitButton =
-          Object.values(this.newOpportunity).every((o) => !!o) &&
-          !!this.responsibilites.length &&
-          !!this.requirements.length &&
-          this.salary > 0 &&
-          this.numberOfHires > 0;
-      }
+      this.shouldShowSubmitButton =
+        !!this.name &&
+        !!this.description &&
+        !!this.location &&
+        this.dateNeeded &&
+        (this.opportunityType === 'employment' ? this.salary > 0 : true) &&
+        this.numberOfHires > 0 &&
+        !!this.responsibilites.length &&
+        !!this.requirements.length;
     }
   }
 
@@ -115,13 +109,18 @@ export class SiOpportunitiesComponent implements OnInit {
           if (this.newOpportunity.type === 'volunteer') {
             this.userService
               .addNewVolunteerOpportunity(this.user._id, res._id)
-              .subscribe();
+              .subscribe((user: User) => {
+                this.userService.setUser(user);
+                this.ngOnInit();
+              });
           } else if (this.newOpportunity.type === 'employment') {
             this.userService
               .addNewEmploymentOpportunity(this.user._id, res._id)
-              .subscribe();
+              .subscribe((user: User) => {
+                this.userService.setUser(user);
+                this.ngOnInit();
+              });
           }
-          this.ngOnInit();
         },
         (err) => console.log(err)
       );
