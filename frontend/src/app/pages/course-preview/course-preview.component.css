@@ -69,6 +69,8 @@ clr-stack-label {
 
 .alert-icon-wrapper,
 .alert-icon {
+  margin: 0 1rem 0 0;
+  padding: 0;
   width: 1.5rem;
 }
 
