@@ -39,7 +39,8 @@ export class GlobalSearchComponent implements OnInit, AfterViewInit {
           event.url === `/user/${this.userService.getCurrentUser()._id}`;
           this.isChat = event.url === '/chat';
           if(event.url.includes('surveyresponses')) this.title = 'Survey Responses';
-          if(event.url.includes('edit')) this.title = 'Edit Course'
+          if(event.url.includes('edit')) this.title = 'Edit Course';
+          if(event.url.includes('studentAnalytics')) this.title = 'Student Analytics';
 
       });
   }
