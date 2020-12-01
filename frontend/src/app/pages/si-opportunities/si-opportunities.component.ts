@@ -77,14 +77,14 @@ export class SiOpportunitiesComponent implements OnInit {
         // 8th value is salary, sketchy fix
         this.shouldShowSubmitButton =
           Object.values(this.newOpportunity).every((o, i) => !!o || i === 7) &&
-          !!this.responsibilites.trim().length &&
-          !!this.requirements.trim().length &&
+          !!this.responsibilites.length &&
+          !!this.requirements.length &&
           this.numberOfHires > 0;
       } else if (this.opportunityType === 'employment') {
         this.shouldShowSubmitButton =
           Object.values(this.newOpportunity).every((o) => !!o) &&
-          !!this.responsibilites.trim().length &&
-          !!this.requirements.trim().length &&
+          !!this.responsibilites.length &&
+          !!this.requirements.length &&
           this.salary > 0 &&
           this.numberOfHires > 0;
       }

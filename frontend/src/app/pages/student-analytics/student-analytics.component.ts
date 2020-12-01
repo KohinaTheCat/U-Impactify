@@ -35,8 +35,6 @@ export class StudentAnalyticsComponent implements OnInit {
       this.assessments = res;
 
       this.marksMap = new Map<string, Map<string, number>>();
-
-
       
       for (var i=0; i < this.assessments.length; i++) {
 
@@ -55,14 +53,13 @@ export class StudentAnalyticsComponent implements OnInit {
 
         this.marksMap.set(assessmentName, studentMarksMap);
       }
-
-      console.log(this.marksMap);
       
       var assessmentNames = [];
       var studentNames = [];
 
+      this.marksMap = new Map([...this.marksMap.entries()].sort());
       // Get all student names first
-
+  
       for (let assessment of this.marksMap) {
         assessmentNames.push(assessment[0]);
 
@@ -73,9 +70,6 @@ export class StudentAnalyticsComponent implements OnInit {
         }
 
       }
-
-      console.log(assessmentNames);
-      console.log(studentNames);
       
       // for each student, populate their dataset with their grades according to the assessment
 
@@ -108,6 +102,7 @@ export class StudentAnalyticsComponent implements OnInit {
 
         var barFill = [];
         var barOutline = [];
+        var hoverColor = [];
         
         for (var k=0; k < assessmentNames.length; k++) {
           barFill.push(['rgba(' + r.toString() + ',' + g.toString() + ',' + b.toString() + ',' + '0.2)'])
@@ -123,10 +118,10 @@ export class StudentAnalyticsComponent implements OnInit {
           borderWidth: 1,
           backgroundColor: barFill,
           borderColor: barOutline,
+          hoverBackgroundColor: barFill,
+          hoverBorderColor: barOutline
         };
       }
-
-      console.log(dataSetValue);
 
       var myChart = new Chart('myChart', {
         type: 'bar',

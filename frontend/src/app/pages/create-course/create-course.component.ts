@@ -44,7 +44,7 @@ export class CreateCourseComponent implements OnInit {
   shouldShowSubmit: boolean = true;
 
   ngOnInit(): void {
-    if (this.courseId.length) {
+    if (!!this.courseId) {
       this.courseService.getCourse(this.courseId).subscribe((course) => {
         this.course = course;
         this.name = course.name;
