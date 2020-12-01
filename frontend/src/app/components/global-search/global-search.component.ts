@@ -41,7 +41,8 @@ export class GlobalSearchComponent implements OnInit, AfterViewInit {
           if(event.url.includes('surveyresponses')) this.title = 'Survey Responses';
           if(event.url.includes('edit')) this.title = 'Edit Course';
           if(event.url.includes('studentAnalytics')) this.title = 'Student Analytics';
-
+          if(event.url.includes('assessments')) this.title = 'Assessments';
+          if(event.url.includes('studentSubmissions')) this.title = 'Submissions';
       });
   }
 
