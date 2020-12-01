@@ -77,7 +77,7 @@
           ngx-file-drop-content-tmp
           let-openFileSelector="openFileSelector"
         >
-          <label>Upload Course Image (.jpg and .png)</label>
+          <label>Upload Profile Picture (.jpg and .png)</label>
           <button
             class="btn btn-primary right"
             style="height: auto"
@@ -87,10 +87,10 @@
           </button>
         </ng-template>
       </ngx-file-drop>
-      <div class="uploadedImage imageError">
+      <div class="imageError">
         {{ imageError }}
       </div>
-      <div class="uploadedImage" *ngIf="img[0]">
+      <div class="imageError" *ngIf="img[0]">
         Uploaded "{{ img[0].fileEntry.name }}"
       </div>
     </div>

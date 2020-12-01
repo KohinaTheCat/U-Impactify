@@ -262,4 +262,8 @@ label {
   font-size: 1rem;
   color: #ffffff;
   background-color: var(--purple-base);
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
