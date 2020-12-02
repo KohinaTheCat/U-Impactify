@@ -117,14 +117,14 @@ System Design - (PDF or MD file or another suitable format) (Max 10 marks)
   [2 marks: both are present]
   [1 mark: at least one is present]
   [0 marks: None present]
-  Marks: 0/2
+  Marks: 2/2
 - CRC Cards [or equivalent, if the team is not using CRC)
   [4 marks: Class names and Collaborators have matching names and responsibilities are stated clearly]
   [3 marks: At least one of the class names does not match the collaborator names or the responsibilities for at least one class are unclear]
   [2 marks: Two class names do not match the collaborator names or the responsibilities of two or more classes are not stated or are unclear]
   [1 mark: The majority of class names do not match the collaborator names or the responsibilities of the majority of the classes are not stated or are unclear]
   [0 marks: No CRC provided or the provided document does not match the CRC model]
-  Marks: 3/4
+  Marks: 4/4
 - Software Architecture Diagram 
   [4 marks: The Architecture Diagram is present, it is formatted using proper graphic symbols, and it follows a known Architecture diagram.
   If the system architecture does not follow the MVC (studied in class), a web link or reference has been provided to support the used architecture]
@@ -135,9 +135,9 @@ System Design - (PDF or MD file or another suitable format) (Max 10 marks)
   [1 mark: The Architecture Diagram is present, it is not formatted well, and it is unclear what Architecture it follows.
   There is no web link or other reference lending support to the presented diagram.
   [0 marks: No diagram present or the presented document does not look like a software architecture diagram]
-  Marks: 3/4
-Total: 6/10 (it's missing! but I think sprint 1's design should be similar and gives me a good understanding of what's in the project during sprint 2 so I've given marks for that)
+  Marks: 4/4
+Total: 10/10
 
 Demo: 10/10
 
-Overall: 80/85
+Overall: 84/85
