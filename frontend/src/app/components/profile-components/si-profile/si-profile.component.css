@@ -44,7 +44,7 @@ h2 {
   margin: 1rem;
 }
 
-.modal-body{
+.modal-body {
   align-items: center;
 }
 
@@ -92,7 +92,7 @@ h2 {
   padding-bottom: 2rem;
 }
 
-.edit-profile *{
+.edit-profile * {
   width: 100%;
   padding: 0 1rem;
 }
@@ -102,7 +102,7 @@ h2 {
   justify-content: center;
 }
 
-.profile-form clr-input-container label{
+.profile-form clr-input-container label {
   padding: 0;
   font-size: 0.875rem;
   display: flex;
@@ -241,4 +241,119 @@ input {
 
 .col {
   align-items: center;
+}
+
+clr-icon {
+  height: 1.5rem;
+  width: 1.5rem;
+  margin-right: 1rem;
+}
+
+.add-overlay {
+  /* White Base */
+  background: #ffffff;
+  /* Gray · 20% */
+  border: 5px solid #f5f7fa;
+  box-sizing: border-box;
+  /* Shadow Black Dark */
+  box-shadow: 0px 8px 24px #eff3f9;
+  border-radius: 40px;
+  margin-bottom: 1rem;
+  padding: 2rem;
+  margin-top: 1rem;
+}
+
+.text-area {
+  /* Rectangle 1637 */
+  width: 80%;
+  height: 50px;
+
+  /* Gray · 10% */
+  background: #fafafa;
+  /* Gray · 20% */
+  border: 3px solid #f5f7fa;
+  border-radius: 11px;
+
+  font-size: 1rem;
+  font-weight: 300;
+
+  padding: 1rem;
+
+  /* Gray · 60% */
+  color: var(--gray80);
+}
+
+.fileUpload {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  cursor: pointer;
+  padding: 1rem;
+}
+
+.fileUpload h6 {
+  margin: 0;
+  margin-top: 0.25rem;
+  font-size: 1.25rem;
+}
+
+.fileUpload clr-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+.fileUpload p {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--gray60);
+}
+
+.uploadedImage {
+  width: 100%;
+  text-align: center;
+}
+
+.h3ok {
+  padding: 0rem;
+  color: rgb(112, 112, 112);
+}
+
+.error {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: center;
+  color: rgb(248, 144, 144);
+}
+
+.modal-title {
+  margin-top: 1rem;
+  font-size: 1.75rem;
+  color: #a78ec3;
+}
+
+.modal-body,
+#rating,
+.anon-review,
+.clr-form,
+.clr-control-container,
+.clr-textarea {
+  width: 100%;
+}
+
+.position-top {
+  display: flex;
+  align-items: center;
+  align-content: center;
+  justify-content: space-between;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  flex-direction: row;
+}
+
+strong {
+  font-size: large;
 }
