@@ -54,23 +54,27 @@ export class IcIlProfileComponent implements OnInit {
   }
 
   ngOnChanges(): void {
-    this.initProfile();
     this.userService
       .getUserImage(this.user._id)
       .subscribe(
-        (res) =>
+        (res) => (
           (this.profileImage =
             res === '' || res === null
               ? ''
-              : `http://localhost:5000/api/user/documents/${res}`)
+              : `http://localhost:5000/api/user/documents/${res}`),
+          this.initProfile()
+        )
       );
 
     if (this.sameUser) {
       this.user = this.userService.getCurrentUser();
+      this.fullName = this.user.profile.fullName;
+      this.phone = this.user.profile.phone;
       this.linkedIn = this.user.profile.linkedIn;
       this.facebook = this.user.profile.facebook;
       this.twitter = this.user.profile.twitter;
     }
+    this.initProfile();
   }
 
   /**
@@ -81,9 +85,26 @@ export class IcIlProfileComponent implements OnInit {
     this.isProfileComplete = !!fullName && !!phone;
   }
 
-  goTo(url: string): void {
+  goTo(url: string, type: number): void {
     if (!url) return;
-    window.open(url, '_blank');
+    try {
+      let link = new URL(url);
+      window.open(link.href, '_blank');
+    } catch {
+      switch (type) {
+        case 0:
+          window.open('https://facebook.com', '_blank');
+          break;
+        case 1:
+          window.open('https://linkedin.com', '_blank');
+          break;
+        case 2:
+          window.open('https://twitter.com', '_blank');
+          break;
+        default:
+          return;
+      }
+    }
   }
 
   public droppedProfileImage(image: NgxFileDropEntry[]) {
@@ -129,8 +150,8 @@ export class IcIlProfileComponent implements OnInit {
   onChangeImage() {
     if (this.sameUser) {
       var profile = {
-        fullName: '',
-        phoneNumber: '',
+        fullName: this.fullName,
+        phone: this.phone,
         linkedIn: this.linkedIn,
         facebook: this.facebook,
         twitter: this.twitter,

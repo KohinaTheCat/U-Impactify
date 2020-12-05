@@ -65,90 +65,103 @@
 </div>
 
 <clr-modal *ngIf="sameUser" [(clrModalOpen)]="basic" [clrModalSize]="'xl'">
-  <div class="modal-body edit-profile">
-    <h3>Edit Profile</h3>
-    <div class="image-upload">
-      <ngx-file-drop
-        dropZoneLabel="Drop files here"
-        (onFileDrop)="droppedProfileImage($event)"
-        accept=".jpg, .png, .jpeg"
-      >
-        <ng-template
-          ngx-file-drop-content-tmp
-          let-openFileSelector="openFileSelector"
+  <h3 class="modal-title">Edit Profile</h3>
+  <div class="modal-body">
+    <form clrForm>
+      <div class="add-overlay">
+        <div class="position-top">
+          <strong>Registered Number</strong>
+          <input
+            type="text"
+            placeholder="{{ registeredNumber }}"
+            [(ngModel)]="registeredNumber"
+            name="registered number"
+            class="text-area"
+          />
+        </div>
+        <div class="position-top">
+          <strong>Business Number</strong>
+          <input
+            type="text"
+            placeholder="{{ businessNumber }}"
+            [(ngModel)]="businessNumber"
+            name="business number"
+            class="text-area"
+          />
+        </div>
+        <div class="position-top">
+          <strong>Location</strong>
+          <input
+            type="text"
+            placeholder="{{ location }}"
+            [(ngModel)]="location"
+            name="location"
+            class="text-area"
+          />
+        </div>
+        <div class="position-top">
+          <strong>Hours</strong>
+          <input
+            type="text"
+            placeholder="{{ hours }}"
+            [(ngModel)]="hours"
+            name="hours"
+            class="text-area"
+          />
+        </div>
+        <div class="position-top">
+          <strong>Phone Number</strong>
+          <input
+            type="text"
+            placeholder="{{ phone }}"
+            [(ngModel)]="phone"
+            name="phone"
+            class="text-area"
+          />
+        </div>
+        <div class="position-top">
+          <strong>Email Address</strong>
+          <input
+            type="text"
+            placeholder="Title of Lecture"
+            placeholder="{{ email }}"
+            [(ngModel)]="email"
+            name="email"
+            class="text-area"
+          />
+        </div>
+      </div>
+
+      <div class="add-overlay">
+        <ngx-file-drop
+          dropZoneLabel="Drop files here"
+          (onFileDrop)="droppedProfileImage($event)"
+          accept=".jpg, .png, .jpeg"
+          contentClassName="fileUploadContent"
+          dropZoneClassName="dropZone"
         >
-          <label>Upload Profile Picture (.jpg and .png)</label>
-          <button
-            class="btn btn-primary right"
-            style="height: auto"
-            (click)="openFileSelector()"
+          <ng-template
+            ngx-file-drop-content-tmp
+            let-openFileSelector="openFileSelector"
           >
-            Browse Files
-          </button>
-        </ng-template>
-      </ngx-file-drop>
-      <div class="imageError">
+            <div class="fileUpload" (click)="openFileSelector()">
+              <clr-icon shape="picture"></clr-icon>
+              <h3 class="h3ok">Upload Photo</h3>
+              <p>.jpg, .png, .jpeg</p>
+              <p>Drag and drop, or click to browse</p>
+              <div class="uploadedImage">
+                <Strong>{{ uploadFileName }}</Strong>
+              </div>
+              <div class="uploadedImage" *ngIf="img[0]">
+                Uploaded "{{ img[0].fileEntry.name }}"
+              </div>
+            </div>
+          </ng-template>
+        </ngx-file-drop>
+      </div>
+      <div class="error">
         {{ imageError }}
       </div>
-      <div class="imageError" *ngIf="img[0]">
-        Uploaded "{{ img[0].fileEntry.name }}"
-      </div>
-    </div>
-    <form clrForm class="profile-form">
-      <clr-input-container class="side">
-        <label>Registered Number</label>
-        <input
-          clrInput
-          placeholder="{{ registeredNumber }}"
-          [(ngModel)]="registeredNumber"
-          name="registered number"
-        />
-      </clr-input-container>
-      <clr-input-container class="side">
-        <label>Business Number</label>
-        <input
-          clrInput
-          placeholder="{{ businessNumber }}"
-          [(ngModel)]="businessNumber"
-          name="business number"
-        />
-      </clr-input-container>
-      <clr-input-container class="side">
-        <label>Location</label>
-        <input
-          clrInput
-          placeholder="{{ location }}"
-          [(ngModel)]="location"
-          name="location"
-        />
-      </clr-input-container>
-      <clr-input-container class="side">
-        <label>Hours</label>
-        <input
-          clrInput
-          placeholder="{{ hours }}"
-          [(ngModel)]="hours"
-          name="hours"
-        />
-      </clr-input-container>
-      <clr-input-container class="side">
-        <label>Phone Number</label>
-        <input
-          clrInput
-          placeholder="{{ phone }}"
-          [(ngModel)]="phone"
-          name="phone"
-        />
-      </clr-input-container>
-      <clr-input-container class="side">
-        <label>Email Address</label>
-        <input
-          clrInput
-          placeholder="{{ email }}"
-          [(ngModel)]="email"
-          name="email"
-        />
-      </clr-input-container>
     </form>
   </div>
   <div class="modal-footer">
