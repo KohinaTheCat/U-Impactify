@@ -12,7 +12,7 @@ export class ChatService {
   socket: any;
 
   constructor(private http: HttpClient) {
-    this.socket = io('http://localhost:5000', {
+    this.socket = io('http://uimpactify.herokuapp.com', {
       autoConnect: false,
     });
   }

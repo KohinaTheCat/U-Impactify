@@ -59,7 +59,7 @@ export class SearchResultsComponent implements OnInit {
             course.img =
               res === '' || res === null
                 ? ''
-                : `http://localhost:5000/api/course/documents/${res}`;
+                : `http://uimpactify.herokuapp.com/api/course/documents/${res}`;
           });
         });
         this.results = this.courses.length;

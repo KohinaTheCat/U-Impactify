@@ -50,7 +50,7 @@ export class SurveyResponsesComponent implements OnInit {
         !this.course.img || this.course.img === ''
           ? (this.course.img = '../../../../assets/courseimage.png')
           : // TODO: REMOVE LOCALHOST FROM PROD BUILD AFTER
-            `http://localhost:5000/api/course/documents/${this.course.img}`;
+            `http://uimpactify.herokuapp.com/api/course/documents/${this.course.img}`;
       this.loading = false;
     });
   }

@@ -19,7 +19,7 @@ export class GivingGardenComponent implements OnInit {
   ngOnInit(): void {
     this.userService.getAllSI().subscribe((res) => {
       this.si = res;
-      this.si_imgs = res.map((s) => s.img === '' || s.img === undefined ? '' : `http://localhost:5000/api/user/documents/${s.img}`);
+      this.si_imgs = res.map((s) => s.img === '' || s.img === undefined ? '' : `http://uimpactify.herokuapp.com/api/user/documents/${s.img}`);
       console.log(this.si_imgs);
     });
   }

@@ -38,7 +38,7 @@ export class CoursesComponent implements OnInit {
     this.courses.forEach((course) => {
       this.courseService.getCourseImageId(course._id).subscribe((res) => {
         course.img =
-          res === '' || res === null ? '' : `http://localhost:5000/api/course/documents/${res}`; // TODO REMOVE LOCALHOST FROM PRODUCTION BUILD
+          res === '' || res === null ? '' : `http://uimpactify.herokuapp.com/api/course/documents/${res}`; // TODO REMOVE LOCALHOST FROM PRODUCTION BUILD
       });
     });
   }

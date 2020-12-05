@@ -17,7 +17,7 @@ export class CourseLecturesComponent implements OnInit {
 
   ngOnInit(): void {
     this.videoId =
-      'http://localhost:5000/api/course/documents/' +
+      'http://uimpactify.herokuapp.com/api/course/documents/' +
       this.route.snapshot.paramMap.get('id');
 
     this.courseId = this.route.snapshot.paramMap.get('courseId');

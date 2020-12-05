@@ -97,7 +97,7 @@ export class CoursePreviewComponent implements OnInit {
           !this.course.img || this.course.img === ''
             ? (this.course.img = '../../../../assets/courseimage.png')
             : // TODO: REMOVE LOCALHOST FROM PROD BUILD AFTER
-              `http://localhost:5000/api/course/documents/${this.course.img}`;
+              `http://uimpactify.herokuapp.com/api/course/documents/${this.course.img}`;
         for (let i = 0; i < this.course.students.length; i++) {
           if (this.course.students[i] == this.user._id) {
             this.alreadyEnrolled = true;
