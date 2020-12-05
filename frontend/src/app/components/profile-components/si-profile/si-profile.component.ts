@@ -62,7 +62,7 @@ export class SiProfileComponent implements OnInit {
           (this.profileImage =
             res === '' || res === null
               ? ''
-              : `http://uimpactify.herokuapp.com/api/user/documents/${res}`)
+              : `https://uimpactify.herokuapp.com/api/user/documents/${res}`)
       );
   }
 
@@ -84,7 +84,7 @@ export class SiProfileComponent implements OnInit {
           (this.profileImage =
             res === '' || res === null
               ? ''
-              : `http://uimpactify.herokuapp.com/api/user/documents/${res}`)
+              : `https://uimpactify.herokuapp.com/api/user/documents/${res}`)
       );
   }
 
