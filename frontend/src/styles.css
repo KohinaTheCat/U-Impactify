@@ -8,6 +8,10 @@ body {
   font-family: "Open Sans", sans-serif;
 }
 
+html {
+  font-size: 95% !important;
+}
+
 /*        CSS FROM UIMPACTIFY FIGMA         */
 
 :root {
