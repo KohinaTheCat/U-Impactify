@@ -1,1 +1,1 @@
-web: npm install -g @angular/cli@latest ; cd frontend ; npm ci ; ng build ; cd ../backend ; npm ci ; npm run start
+web: npm install -g @angular/cli@latest ; cd frontend ; npm ci ; ng build --prod ; cd ../backend ; npm ci ; npm run start
