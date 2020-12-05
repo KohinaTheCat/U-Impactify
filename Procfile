@@ -1,0 +1,1 @@
+web: cd frontend && npm i && ng build && cd ../backend && npm i && npm run start
