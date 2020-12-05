@@ -21,6 +21,10 @@ h6 {
   margin-top: 2rem;
 }
 
+.names h5 {
+  padding-left: 1rem;
+}
+
 .sub-card {
   margin: 1rem;
   padding: 10px;
@@ -266,6 +270,7 @@ label {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 1.25rem;
 }
 
 .add-overlay {

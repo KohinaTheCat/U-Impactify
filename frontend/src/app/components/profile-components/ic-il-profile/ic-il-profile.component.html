@@ -51,7 +51,7 @@
         <div class="sub-card">
           <div class="heading">Linked Accounts</div>
           <div class="accounts">
-            <div id="facebook" (click)="goTo(user.profile.facebook)">
+            <div id="facebook" (click)="goTo(user.profile.facebook, 0)">
               <img
                 class="icon"
                 [ngClass]="{ disabled: !user.profile.facebook }"
@@ -59,7 +59,7 @@
                 alt="facebook"
               />
             </div>
-            <div id="linkedin" (click)="goTo(user.profile.linkedIn)">
+            <div id="linkedin" (click)="goTo(user.profile.linkedIn, 1)">
               <img
                 class="icon"
                 [ngClass]="{ disabled: !user.profile.linkedIn }"
@@ -67,7 +67,7 @@
                 alt="linkedin"
               />
             </div>
-            <div id="twitter" (click)="goTo(user.profile.twitter)">
+            <div id="twitter" (click)="goTo(user.profile.twitter, 2)">
               <img
                 class="icon"
                 [ngClass]="{ disabled: !user.profile.twitter }"
@@ -109,6 +109,26 @@
     <div class="image-upload">
       <form clrForm>
         <div class="add-overlay">
+          <div class="position-top">
+            <strong>Full Name</strong>
+            <input
+              type="text"
+              placeholder="{{ user.profile.fullName }}"
+              [(ngModel)]="fullName"
+              name="fullName"
+              class="text-area"
+            />
+          </div>
+          <div class="position-top">
+            <strong>Phone Number</strong>
+            <input
+              type="text"
+              placeholder="{{ user.profile.phone }}"
+              [(ngModel)]="phone"
+              name="phone"
+              class="text-area"
+            />
+          </div>
           <div class="position-top">
             <strong>Linkedin Profile URL</strong>
             <input
