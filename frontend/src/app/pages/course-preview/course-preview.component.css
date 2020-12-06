@@ -9,7 +9,7 @@ h3 {
   font-size: 2rem;
 }
 
-clr-icon{
+clr-icon {
   height: 1.5rem;
   width: 1.5rem;
   margin-right: 1rem;
@@ -253,7 +253,7 @@ h3-special {
   height: 100%;
   margin-bottom: 2rem;
   display: grid;
-  grid-template-columns: 1fr 2fr;
+  grid-template-columns: 1fr 1fr;
 }
 
 h4 {
@@ -481,7 +481,6 @@ clr-control-error {
   padding: 1.5rem;
 }
 
-
 .box-shadow-4 {
   display: flex;
   flex-direction: column;
@@ -661,7 +660,7 @@ li {
 button {
   cursor: pointer;
 }
-  
+
 .btn-ok {
   background: #ffffff;
   opacity: 0.48;
