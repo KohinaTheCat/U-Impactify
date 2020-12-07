@@ -2,7 +2,7 @@
 <br />
 
 <p align="center">
-  <a href="https://github.com/navn-r/uimpactify">
+  <a href="https://github.com/KohinaTheCat/U-Impactify">
     <img src="readme_imgs/uLogo.png" alt="Logo" width="80" height="80">
   </a>
 
@@ -18,9 +18,9 @@
        <br/>
     <a href="https://uimpactify.herokuapp.com/dashboard">View Demo</a>
     ·
-    <a href="https://github.com/navn-r/uimpactify/issues">Report Bug</a>
+    <a href="https://github.com/KohinaTheCat/U-Impactify/issues">Report Bug</a>
     ·
-    <a href="https://github.com/navn-r/uimpactify/issues">Request Feature</a>
+    <a href="https://github.com/KohinaTheCat/U-Impactify/issues">Request Feature</a>
   </p>
 
 </p>
@@ -145,7 +145,7 @@ This is an example of how to list things you need to use the software and how to
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/navn-r/uimpactify
+   git clone https://github.com/KohinaTheCat/U-Impactify/
    ```
 2. Install and Start the Project
    ```sh
