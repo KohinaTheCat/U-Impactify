@@ -253,7 +253,6 @@ export class AssessmentsComponent implements OnInit {
       } else {
         this.visualError = true;
       }
-      this.cancel();
     } else {
       this.visualError = true;
     }
