@@ -4,8 +4,7 @@ h2 {
 }
 
 .inner {
-  width: min(60rem, 90%);
-  height: 30rem;
+  width: min(75rem, 90%);
 
   margin-top: 1.5rem;
 
@@ -23,10 +22,15 @@ h2 {
   border-radius: 35px;
 }
 
+
 .dates {
   height: 100%;
-  padding: 2rem;
+  padding: 0.5rem;
   width: calc(100% - 25rem);
+}
+
+.dates h6 {
+  margin-bottom: 2rem;
 }
 
 @media (max-width: 1000px) {
