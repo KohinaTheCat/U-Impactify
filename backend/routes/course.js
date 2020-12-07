@@ -350,7 +350,6 @@ router.route("/assessment").post((req, res) => {
 
 //
 router.route("/assessment/addAssessment").put((req, res) => {
-  console.log("Am I in the right one?");
   const { courseId, assessmentId } = req.body;
   Course.findById(courseId).then((newCourse) => {
     newCourse.assessments = newCourse.assessments.concat(assessmentId);
@@ -621,7 +620,6 @@ router.put("/assessment/updateMark", (req, res) => {
 router.get("/assessment/getAssessment/:assessmentId", (req, res) => {
   Assessment.findById(req.body.assessmentId)
     .then((assessment) => {
-      console.log(assessment);
       if (!assessment) return res.status(404).json("Assessment Not Found");
       return res.json(assessment);
     })
@@ -696,7 +694,6 @@ router.delete(
   (req, res) => {
     const { assessmentId, studentId } = req.params;
     Assessment.findById(assessmentId).then((newAssessment) => {
-      console.log("Assessment: " + newAssessment);
       for (i = 0; i < newAssessment.studentSubmissions.length; i++) {
         if (newAssessment.studentSubmissions[i].studentId === studentId) {
           if (newAssessment.studentSubmissions[i].files) {
@@ -757,12 +754,12 @@ router.put("/surveyRequest/:id", (req, res) => {
 });
 
 router.put("/bulkUpdateCourseImage", async (req, res) => {
-  const {_id, img} = req.body;
+  const { _id, img } = req.body;
   const course = await Course.findById(_id);
   course.teachers.forEach(async (teacherId) => {
     const teacher = await User.findById(teacherId);
-    teacher.classesTeaching.forEach(c => {
-      if(c._id === _id) {
+    teacher.classesTeaching.forEach((c) => {
+      if (c._id === _id) {
         c.img = img;
       }
     });
@@ -770,9 +767,8 @@ router.put("/bulkUpdateCourseImage", async (req, res) => {
   });
   course.students.forEach(async (studentId) => {
     const student = await User.findById(studentId);
-    student.classesEnrolled.forEach(c => {
-      if(c._id === _id)
-        c.img = img;
+    student.classesEnrolled.forEach((c) => {
+      if (c._id === _id) c.img = img;
     });
     await student.save();
   });
