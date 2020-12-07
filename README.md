@@ -47,7 +47,7 @@
                 </li>
       </ul>
     </li>
-      <li><a href="#deployment-:rocket:">Deployment</a></li>
+      <li><a href="#deployment">Deployment</a></li>
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
@@ -56,7 +56,7 @@
       </ul>
     </li>
     <li><a href="#acknowledgements">Acknowledgements</a></li>
-      <li><a href="#:smile:-memorable-quotes">Memorable Quotes</a></li>
+      <li><a href="#memorable-quotes">Memorable Quotes</a></li>
   </ol>
 </details>
 
@@ -123,7 +123,7 @@
 
 <br/>
 
-## Deployment :rocket:
+## Deployment 
 
 ### with Heroku at https://uimpactify.herokuapp.com/
 
@@ -179,7 +179,7 @@ This is an example of how to list things you need to use the software and how to
 
 <br/>
 
-## :smile: Memorable Quotes 
+## Memorable Quotes 
 
 > ##### Navinn: This could be done in an hour
 
